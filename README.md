@@ -4,12 +4,20 @@ This repo contains the textbook PDF files and sources for a book and a set of le
 
 The material was developed for the Business 4720 (Business Analytics) course in the undergraduate [Bachelor of Commerce (BComm)](https://www.mun.ca/business/undergraduate/undergraduate-programs/) degree at [Memorial University of Newfoundland](https://www.mun.ca/). The course is a practical introduction to the very broad area of business analytics, data science, big data analytics, machine learning and related disciplines. It is based on experiential learning and students are required to use a number of software packages for course assignments.
 
+### License 
+
 The material is available under a [CC-BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/), except where sources are used under license, with permission, or under fair dealing, as indicated.
+
+### Feedback
 
 Please drop me a quick note by email to [jevermann@mun.ca](mailto:jevermann@mun.ca) if:
 * You have adopted this book for a course
 * You found an error or mistake
 * You found the book helpful for your personal study
+
+### Required Software
+
+The examples and exercises in the book are mainly based on R and Python, but use a number of specific packages, as well as other software applications. See the [software requirements page](software.md) for details. 
 
 # Why write a textbook?
 
