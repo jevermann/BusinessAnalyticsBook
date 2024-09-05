@@ -1,0 +1,130 @@
+%
+% Unless otherwise indicated, the copyright in this material is 
+% owned by Joerg Evermann. This material is licensed to you under the 
+% Creative Commons by-attribution non-commercial license (CC BY-NC 4.0)}
+%
+\documentclass{book}
+
+\input{common.preamble.tex}
+
+\title{Business Analytics}
+\author{Joerg Evermann\\
+Memorial University of Newfoundland}
+\titlepic{\includegraphics[width=\textwidth]{cover1a.png}}
+
+\begin{document}
+
+\frontmatter 
+
+\maketitle
+
+\vfill
+\begin{center}
+\includegraphics[height=.5in]{by-nc.png}
+
+Unless otherwise indicated, the copyright in this material is owned by Joerg Evermann. This material is licensed to you under the \href{https://creativecommons.org/licenses/by-nc/4.0/}{Creative Commons by-attribution non-commercial license (CC BY-NC 4.0)}
+\end{center}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\chapter{Preface}
+\input{foreword.tex}
+
+\mainmatter
+
+\graphicspath{{class01/}}
+\chapter{Introduction}
+\input{class01/class01.chapter.tex}
+
+\graphicspath{{class02/}}
+\chapter{Data, Data Types, Data Quality}
+\input{class02/class02.chapter.tex}
+
+\graphicspath{{class03/}}
+\chapter{Managing Tabular Data with Relational Databases}
+\input{class03/class03.chapter.tex}
+
+\graphicspath{{class04/}}
+\chapter{Managing Graph Data with Graph Databases}
+\input{class04/class04.chapter.tex}
+
+\graphicspath{{class05/}}
+\chapter{Introduction to Data Management with R}
+\input{class05/class05.chapter.tex}
+
+\graphicspath{{class06/}}
+\chapter{Introduction to Data Management with Python}
+\input{class06/class06.chapter.tex}
+
+\graphicspath{{class07/}}
+\chapter{Data Visualization in R and Python}
+\input{class07/class07.chapter.tex}
+
+\graphicspath{{class09/}}
+\chapter{Business Process Analytics}
+\input{class09/class09.chapter.tex}
+
+\graphicspath{{class11/}}
+\chapter{Introduction to Supervised Machine Learning}
+\input{class11/class11.chapter.tex}
+
+\graphicspath{{class12/}}
+\chapter{Regression and Classification Models}
+\input{class12/class12.chapter.tex}
+
+\graphicspath{{class13/}}
+\chapter{Introduction to Unsupervised Machine Learning}
+\input{class13/class13.chapter.tex}
+
+\graphicspath{{class14/}}
+\chapter{Time Series Analysis}
+\input{class14/class14.chapter.tex}
+
+\graphicspath{{class15/}}
+\chapter{Introduction to Neural Networks and Deep Learning}
+\input{class15/class15.chapter.tex}
+
+\graphicspath{{class16/}}
+\chapter{Convolutional Neural Networks}
+\input{class16/class16.chapter.tex}
+
+\graphicspath{{class17/}}
+\chapter{Recurrent Neural Networks}
+\input{class17/class17.chapter.tex}
+
+\graphicspath{{class19/}}
+\chapter{Intepretable Machine Learning}
+\input{class19/class19.chapter.tex}
+
+\graphicspath{{class20/}}
+\chapter{Analytics at Industrial Scale}
+\input{class20/class20.chapter.tex}
+
+\graphicspath{{class21/}}
+\chapter{Reinforcement Learning -- Tabular Methods}
+\input{class21/class21.chapter.tex}
+
+\graphicspath{{class22/}}
+\chapter{Reinforcement Learning -- Function Approximation}
+\input{class22/class22.chapter.tex}
+
+\graphicspath{{class23/}}
+\chapter{Managing Machine Learning Operations (MLOps)}
+\input{class23/class23.chapter.tex}
+
+%\graphicspath{{class24/}}
+%\chapter{Legal and Ethical Issues in Business Analytics}
+%\input{class24/class24.chapter.tex}
+
+\appendix
+\graphicspath{{vm/}}
+\chapter{Installing and Using a Virtual Machine}
+\input{vm/vm.chapter.tex}
+
+%\backmatter
+%\chapter{Figure and Table Sources}
+%\input{sources.tex}
+
+\end{document}

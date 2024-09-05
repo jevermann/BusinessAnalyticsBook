@@ -1,0 +1,109 @@
+\definecolor{mun}{RGB}{134,38,51}
+\definecolor{mun2}{RGB}{99,102,106}
+%\definecolor{mun}{cmyk}{0,.3922,.2392,.1686}
+\definecolor{code}{RGB}{0, 0, 128}
+\definecolor{code}{gray}{0.95}
+
+\mode<presentation>
+{
+%  \usetheme{boxes}
+%  \usetheme{default}
+%  \usetheme{Montpellier}
+%  \usetheme{Singapore}
+%   \usetheme{Rochester}
+%  \usecolortheme{crane}
+%  \usecolortheme{dolphin}
+%  \usecolortheme{lily}
+%  \usecolortheme{orchid}
+  \usecolortheme{rose}
+  \setbeamercovered{transparent}
+%  \usefonttheme[onlymath]{serif}
+  \setbeamercolor*{structure}{bg=mun,fg=mun}
+  \setbeamercolor*{palette primary}{use=structure,fg=white,bg=structure.fg}
+  \setbeamercolor*{palette secondary}{use=structure,fg=white,bg=structure.fg}
+  \setbeamercolor*{palette tertiary}{use=structure,fg=white,bg=black}
+  \setbeamercolor*{palette quaternary}{fg=white,bg=black}
+  \setbeamercolor{section in toc}{fg=black,bg=white}
+  \setbeamercolor{alerted text}{use=structure,fg=structure.fg!50!black!80!black}
+  \setbeamercolor{titlelike}{parent=palette primary,fg=structure.fg!50!black}
+  \setbeamercolor{frametitle}{bg=mun,fg=white}
+  \setbeamercolor*{titlelike}{parent=palette primary}
+
+  \setbeamercolor{normal text}{fg=black!90}
+  \setbeamercolor{math text}{fg=black}
+  \setbeamercolor{quote}{bg=gray!20}
+  \setbeamercolor{quotation}{bg=gray!20}
+  \setbeamerfont{cite}{size=\scriptsize}
+  \setbeamerfont{quote}{size=\footnotesize}
+  \setbeamerfont{quotation}{size=\footnotesize}
+  \setbeamercolor{red text}{fg=red!75!black}
+  \setbeamertemplate{bibliography item}[triangle]
+  \setbeamertemplate{enumerate item}[square]
+  \setbeamertemplate{blocks}[rounded][shadow=true]
+  \setbeamertemplate{navigation symbols}{}
+  \setbeamertemplate{footline}[frame number]
+}
+\usepackage{tcolorbox}
+\usepackage{amsmath}
+\usepackage{physics}
+\usepackage{pgf}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{fancyvrb}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{bbm}
+\usepackage{alltt}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{minted}
+\newminted{cypher}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{R}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{text}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{sql}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{bash}{autogobble,bgcolor=code,breakbytoken,python3,frame=single,framesep=3pt}
+\newminted{xml}{autogobble,bgcolor=code,breakbytoken,python3,frame=single,framesep=3pt}
+\newminted{python}{bgcolor=code,breakbytoken,python3,frame=single,framesep=3pt}
+\newminted{html}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{js}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\AtBeginEnvironment{minted}{%
+  \renewcommand{\fcolorbox}[4][]{#4} \scriptsize}
+\AtEndEnvironment{minted}{%
+  \normalsize}
+
+%\newcommand{\Pr}{\operatorname{Pr}}
+\newcommand{\argmax}{\operatorname*{argmax}}
+\newcommand{\argmin}{\operatorname*{argmin}}
+\newcommand{\Ident}{\operatorname{I}}
+
+\author % (optional, use only with lots of authors)
+{Joerg Evermann}
+% - Give the names in the same order as the appear in the paper.
+% - Use the \inst{?} command only if the authors have different
+%   affiliation.
+
+\institute%[Universities of Somewhere and Elsewhere] % (optional, but mostly needed)
+{
+  Faculty of Business Administration\\
+  Memorial University of Newfoundland \\ 
+  \texttt{jevermann@mun.ca} 
+}
+
+\date{}
+
+\pgfdeclareimage[width=1.5cm]{university-logo}{../MUN_LOGO_CMYK}
+\logo{\pgfuseimage{university-logo}}
+
+% If you wish to uncover everything in a step-wise fashion, uncomment
+% the following command: 
+
+%\beamerdefaultoverlayspecification{<+->}

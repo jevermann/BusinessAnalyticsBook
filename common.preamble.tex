@@ -1,0 +1,64 @@
+\usepackage[x11names]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{physics}
+\usepackage{wrapfig}
+\usepackage{pgf}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage{fancyvrb}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bbm}
+\usepackage{alltt}
+\usepackage{placeins}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage{gensymb}
+\usepackage{titlepic}
+\usepackage{parskip}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+\usepackage{subcaption}
+%\usepackage{subfigure}
+\usepackage{placeins}
+\usepackage{minted}
+%\usepackage{graphicx}
+\newminted{cypher}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{R}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{xml}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{bash}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{html}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{js}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{sql}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{text}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
+\newminted{json}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt,escapeinside=||}
+\newminted{python}{autogobble,bgcolor=code,breakbytoken,python3,frame=single,framesep=3pt}
+\AtBeginEnvironment{minted}{%
+  \renewcommand{\fcolorbox}[4][]{#4} \footnotesize}
+\AtEndEnvironment{minted}{%
+  \normalsize}
+
+\definecolor{code}{gray}{0.95}
+\definecolor{alert}{RGB}{238,224,229} % LavenderBlush2 
+
+\renewcommand\floatpagefraction{.95}
+\renewcommand\topfraction{.95}
+\renewcommand\bottomfraction{.95}
+\renewcommand\textfraction{.05}   
+
+\newcommand{\argmax}{\operatorname*{argmax}}
+\newcommand{\argmin}{\operatorname*{argmin}}
+\newcommand{\Ident}{\operatorname{I}}
+
+\author{Joerg Evermann}
+\date{}
