@@ -12,12 +12,13 @@ The material was developed for the Business 4720 (Business Analytics) course in 
 
 The material is available under a [CC-BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/), except where sources are used under license, with permission, or under fair dealing, as indicated.
 
-### Feedback
+### Feedback is Welcome
 
 Please drop me a quick note by email to [jevermann@mun.ca](mailto:jevermann@mun.ca) if:
 * You have adopted this book for a course
 * You found an error or mistake
 * You found the book helpful for your personal study
+* You have suggestions for improvements
 
 ### Required Software
 
