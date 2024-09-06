@@ -4,7 +4,7 @@ This repo contains the textbook PDF files and sources for a book and a set of le
 
 **Download the [book](https://github.com/jevermann/BusinessAnalyticsBook/blob/92deb1e9d108f51539100f1306637120bdb199e6/busi4720.book.pdf).**
 
-**Download the [slides archive](release.tar.gz).**
+**Download the [slides archive](https://github.com/jevermann/BusinessAnalyticsBook/blob/e2e2ee9862b1cb58321b570b7c49e84f0458e7c4/busi4720.slides.tar.gz).**
 
 The material was developed for the Business 4720 (Business Analytics) course in the undergraduate [Bachelor of Commerce (BComm)](https://www.mun.ca/business/undergraduate/undergraduate-programs/) degree at [Memorial University of Newfoundland](https://www.mun.ca/). The course is a practical introduction to the very broad area of business analytics, data science, big data analytics, machine learning and related disciplines. It is based on experiential learning and students are required to use a number of software packages for course assignments.
 
