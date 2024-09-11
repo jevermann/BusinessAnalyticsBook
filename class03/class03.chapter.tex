@@ -58,16 +58,16 @@ timestamp with time zone, (\emph{timestamptz}) & date and time, including time z
 Columns constraints are rules that are applied to individual columns, while table constraints apply to combinations of columns or the entire table. Many constraints can be specified both for a single column as well as a combination of columns. 
 
 \begin{itemize}
-\item The \emph{NOT NULL} constraint can only be applied to individual columns and prevents NULL values from being entered into a column, ensuring that every record has a value for that column. 
-\item The \emph{UNIQUE} constraint ensures that all values in a column are distinct, preventing duplicate entries. The UNIQUE constraint can also be used at the table level to ensure that a specific combination of values across different columns is unique for all records in the table. 
-\item The \emph{CHECK} constraint can be applied at the column level or at the table level. The CHECK constraint allows specifying a condition that each value in a column must satisfy. At the table level, it allows for more complex conditions that involve multiple columns. 
-\item The \emph{PRIMARY KEY} constraint is a combination of NOT NULL and UNIQUE, uniquely identifying each record in a table. The PRIMARY KEY constraints can also be applied at the table level to specify that a combination of columns uniquely identifies each record. 
-\item The \emph{FOREIGN KEY} constraint is used to link columns in different tables, establishing a relationship between them. It ensures that values in a column or combination of columns must exist in the referenced colum or combination of columns. The referenced columns may be in the same table, so that the constraint expresses a \emph{unary} relationship, or in another table, so that the constraint expresses a \emph{binary} relationship. Together with NOT NULL constraints, this allows the repsentation of optional or mandatory relationships. 
+\item The \emph{NOT NULL}\index{Constraint!Not null}\index{Not null constraint|see{Constraint!Not null}} constraint can only be applied to individual columns and prevents NULL values from being entered into a column, ensuring that every record has a value for that column. 
+\item The \emph{UNIQUE}\index{Constraint!Unique}\index{Unique constraint|see{Constraint!Unique}} constraint ensures that all values in a column are distinct, preventing duplicate entries. The UNIQUE constraint can also be used at the table level to ensure that a specific combination of values across different columns is unique for all records in the table. 
+\item The \emph{CHECK}\index{Constraint!Check}\index{Check constraint|see{Constraint!Check}} constraint can be applied at the column level or at the table level. The CHECK constraint allows specifying a condition that each value in a column must satisfy. At the table level, it allows for more complex conditions that involve multiple columns. 
+\item The \emph{PRIMARY KEY}\index{Constraint!Primary key}\index{Primary key constraint|see{Constraint!Primary key}} constraint is a combination of NOT NULL and UNIQUE, uniquely identifying each record in a table. The PRIMARY KEY constraints can also be applied at the table level to specify that a combination of columns uniquely identifies each record. 
+\item The \emph{FOREIGN KEY}\index{Constraint!Foreign key}\index{Foreign key constraint|see{Constraint!Foreign key}} constraint is used to link columns in different tables, establishing a relationship between them. It ensures that values in a column or combination of columns must exist in the referenced colum or combination of columns. The referenced columns may be in the same table, so that the constraint expresses a \emph{unary} relationship\index{Unary relationship}, or in another table, so that the constraint expresses a \emph{binary} relationship\index{Binary relationship}. Together with NOT NULL constraints, this allows the repsentation of optional or mandatory relationships. 
 \end{itemize}
 
 \section{Introduction to SQL and PostgreSQL}
 
-Despite its name, SQL serves as a language not only for querying but for data definition, data manipulation, data access control, transaction control, and querying. SQL has been standardized by the American National Standards Institute (ANSI) and the International Organization for Standardization (ISO), ensuring a consistent syntax and set of features across different database systems. However, many database systems extend standard SQL with proprietary extensions to enhance functionality and performance. Despite these variations, the core elements of SQL remain widely consistent, contributing to its status as the lingua franca of database management. 
+Despite its name, SQL\index{Structured query language}\index{SQL|see{Structured query language}} serves as a language not only for querying but for data definition, data manipulation, data access control, transaction control, and querying. SQL has been standardized by the American National Standards Institute (ANSI) and the International Organization for Standardization (ISO), ensuring a consistent syntax and set of features across different database systems. However, many database systems extend standard SQL with proprietary extensions to enhance functionality and performance. Despite these variations, the core elements of SQL remain widely consistent, contributing to its status as the lingua franca of database management. 
 
 This section covers only the most basic aspects of SQL, insofar as they are necessary to understand the relational database schema and to use SQL to query data for descriptive data analytics. The most important SQL commands are listed in Table~\ref{tab:sql}. For more further information, consult the relevant sections of the PostgreSQL documentation on data definition\footnote{\url{https://www.postgresql.org/docs/current/ddl.html}}, data manipulation\footnote{\url{https://www.postgresql.org/docs/current/dml.html}}, data queries\footnote{\url{https://www.postgresql.org/docs/current/queries.html}} and primitive data types\footnote{\url{https://www.postgresql.org/docs/current/datatype.html}}.
 
@@ -92,15 +92,15 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 \end{center}
 \end{wrapfigure}
 
-The PostgreSQL RDBMS (relational database management system) is installed in the course virtual machine or can be downloaded from the PostgreSQL website\footnote{\url{https://www.postgresql.org/download/}}. A DBMS is a background computer application without a user interface. It is typically used by other computer applications, such as accounting software to store financial information, a logistics management software to store information about shipments, a customer relationship management system to store information about customers and marketing campaigns, etc. 
+The PostgreSQL RDBMS (relational database management system) is installed in the course virtual machine or can be downloaded from the PostgreSQL website\footnote{\url{https://www.postgresql.org/download/}}. A DBMS is typically a background computer application without a user interface. It is typically used by other computer applications, such as accounting software to store financial information, a logistics management software to store information about shipments, a customer relationship management system to store information about customers and marketing campaigns, etc. 
 
 End users can interact with a DBMS using administration software, such as the basic ''psql'' command line software or a graphical application like ''pgAdmin'' or ''DBeaver''. The desktop version of pgAdmin and DBeaver are installed in the course virtual machine, or can be downloaded from their websites\footnote{\url{https://www.pgadmin.org/download/}, \url{https://dbeaver.io/download/}}. They provide easy-to-use tools for creating tables and querying data, but this section focuses on using the SQL language instead.
 
 A DBMS runs on a single computer (''server'') or, if the amount of data is very large, distributes the data across a cluster of multiple computers. Different DBMS differ in their performance, the ease with which data can be distributed, and the scalability to very large clusters. However, from the users perspective, these technical considerations are largely invisible. \emph{When connecting to a DBMS that runs on your own computer, use the computer name ''localhost''}.
 
-A DBMS can manage multiple databases. \emph{A database named ''busi4720'' has already been created in your course virtual machine, using the CREATE DATABASE command}. pgAdmin and DBeaver also have the ability to show the SQL command that creates every element in a DBMS, including databases, tables, and constraints. This is useful to understand exactly what elements are contained in a database or in a table and any constraints imposed upon them.
+A DBMS can manage multiple databases\index{Database management system}\index{DBMS|see{Database management system}}. \emph{A database named ''busi4720'' has already been created in your course virtual machine, using the CREATE DATABASE command}. pgAdmin and DBeaver also have the ability to show the SQL command that creates every element in a DBMS, including databases, tables, and constraints. This is useful to understand exactly what elements are contained in a database or in a table and any constraints imposed upon them.
 
-Every database can have multiple schema. A schema is a collection of tables with their columns and constraints, as well as related elements such as functions, procedures, triggers, views and others. In PostgreSQL, every database contains the schema ''public''. This is the default schema and is used when no other schema is specified. 
+Every database can have multiple schema\index{Schema!in relational database}. A schema is a collection of tables with their columns and constraints, as well as related elements such as functions, procedures, triggers, views and others. In PostgreSQL, every database contains the schema ''public''. This is the default schema and is used when no other schema is specified. 
 
 \begin{figure}
 \centering
@@ -118,7 +118,7 @@ When the pgAdmin application is initially launched, it will connect to the DBMS 
 \label{fig:dbeaver}
 \end{figure}
 
-Similarly, when the DBeaver application is first started, it will also conncect to the DBMS that is running on the local machine and will show a ''Datbase Navigator'' in the left part of the application window (Figure\ref{fig:dbeaver}. Navigate the contents of the DBMS to the ''busi4720'' database and the ''public'' schema.
+Similarly, when the DBeaver application is first started, it will also conncect to the DBMS that is running on the local machine and will show a ''Database Navigator'' in the left part of the application window (Figure\ref{fig:dbeaver}. Navigate the contents of the DBMS to the ''busi4720'' database and the ''public'' schema.
 
 \begin{figure}
 \centering
@@ -139,7 +139,7 @@ The basic ''psql'' command line tool can be started by by typing \texttt{psql} i
 \paragraph*{Tip:} SQL commands are traditionally written in upper case letters and this is done here as well. However, SQL is not case sensitive, so that capitalization does not actuallly matter. Traditionally, an SQL command must end with a semicolon. This is done here as well, although some DBMS may no longer require this. 
 \end{tcolorbox}
 
-For this example, assume that your database will be used to store information about products. The CREATE TABLE data definition command in SQL is used to create tables, their columns, and constraints. This first example creates a simple table with three columns to store product data.
+For this example, assume that your database will be used to store information about products. The CREATE TABLE data definition command in SQL\index{Data definition language!SQL} is used to create tables, their columns, and constraints. This first example creates a simple table with three columns to store product data.
 
 \begin{tcolorbox}[colback=code]
 Enter the SQL commands in the code block below.
@@ -304,7 +304,7 @@ CREATE TABLE supplies (
 
 Note that the tables must be dropped in the right order: ''products'' first, then ''suppliers'' because the products depend on the suppliers due to the foreign key constraint\footnote{Use the CASCADE keyword to drop dependent tables automatically but use with care.}. The IF EXISTS part is a safeguard to prevent an error if the table does not exist when attempting to drop it.
 
-The primary key of the supplies table is a \emph{compound key}, that is, it consists of a combination of columns. The supplies table is related by two FOREIGN KEY constraints both to the products and suppliers table so that only products and suppliers that already exist can be recorded here (and thereby related to each other). The price column is no longer in the products table, but has been moved to the supplies table, because each supplier may supply a product at a different price. The following example data shows this:
+The primary key of the supplies table is a \emph{compound key}\index{Compound key}, that is, it consists of a combination of columns. The supplies table is related by two FOREIGN KEY constraints both to the products and suppliers table so that only products and suppliers that already exist can be recorded here (and thereby related to each other). The price column is no longer in the products table, but has been moved to the supplies table, because each supplier may supply a product at a different price. The following example data shows this:
 
 \begin{samepage}
 \begin{sqlcode}
@@ -357,7 +357,7 @@ In fact, this type of relationship can be extended in a straightforward way to t
 
 \section{SQL Queries}
 
-The previous section has presented the basics of the relational database model, focusing on how tables are related by foreign key relationships. Tables and their relationships are often graphically shown in a \emph{relational diagram}. Such diagrams are often called ''\emph{ER Diagrams}\footnote{Technically, the two are not quite the same.}''. A graphical representation of the database structure is useful for understanding the data and for writing queries to extract data from the table or tables of the database. 
+The previous section has presented the basics of the relational database model, focusing on how tables are related by foreign key relationships. Tables and their relationships are often graphically shown in a \emph{relational diagram}\index{Relational diagram}. Such diagrams are often called ''\emph{ER Diagrams}\footnote{Technically, the two are not quite the same.}''\index{ER diagram|see{Entity-relationship diagram}} or ''Entity-Relationship Diagrams''\index{Entity-relationship diagram}. A graphical representation of the database structure is useful for understanding the data and for writing queries to extract data from the table or tables of the database. 
 
 In many software tools, including in pgAdmin, the database developer can use relational diagrams to create tables, instead of writing CREATE TABLE statements. In the reverse, relational diagrams can also be automatically created from an existing database and its tables. 
 
@@ -452,7 +452,7 @@ The \texttt{SELECT} clause specifies only a few columns to retrieve. Note that c
 
 The \texttt{FROM} clause specifies a single table ''film\_actor'' to which other tables are joined using the \texttt{INNER JOIN} keyword. The \texttt{JOIN} clause specifies the common join column with the \texttt{USING} keyword. The join columns typically correspond to the columns related by a foreign key relationship. In the Pagila database, foreign keys are always single columns, as are primary keys. However, one can imagine that combinations of two or more columns serve as primary keys and as foreign keys. Then, multiple columns are specified in the USING clause.
 
-An \texttt{INNER JOIN} is a type of join that matches records from two tables if they both have the same value in their join columns, and only if they both have non-null values in their join columns. In contrast, a \texttt{LEFT OUTER JOIN} would also include records from the left table that have a NULL value in their join columns, a \texttt{RIGHT OUTER JOIN} would also includes records from the right table that have a NULL value in their join columns, and a \texttt{FULL OUT JOIN} is the combination of a \texttt{LEFT OUTER JOIN} and a \texttt{RIGHT OUTER JOIN}.
+An \texttt{INNER JOIN}\index{Join (in SQL)} is a type of join that matches records from two tables if they both have the same value in their join columns, and only if they both have non-null values in their join columns. In contrast, a \texttt{LEFT OUTER JOIN} would also include records from the left table that have a NULL value in their join columns, a \texttt{RIGHT OUTER JOIN} would also includes records from the right table that have a NULL value in their join columns, and a \texttt{FULL OUT JOIN} is the combination of a \texttt{LEFT OUTER JOIN} and a \texttt{RIGHT OUTER JOIN}.
 
 Compare the \texttt{FROM} and \texttt{JOIN} clauses to the relational diagram in Figure~\ref{fig:pagila} and notice how it allows you to ''navigate'' from one table to another table along the foreign key relationships that link each table.
 
@@ -564,7 +564,7 @@ SELECT category.name AS category_name,
 
 This query will return 33 records from the Pagila database.
 
-This complex query is actually two queries as it includes a \emph{subquery} within the \texttt{HAVING} clause! Starting in the \texttt{FROM} clause, notice that some tables are included twice in this query, under different \emph{aliases} or names, using the \texttt{AS} keyword. This is because the query retrieves the city that the customers live in, as well as the city that the store is located in. As cities are linked to addresses, the address table is also included twice. 
+This complex query is actually two queries as it includes a \emph{subquery}\index{Subquery} within the \texttt{HAVING} clause! Starting in the \texttt{FROM} clause, notice that some tables are included twice in this query, under different \emph{aliases} or names, using the \texttt{AS} keyword. This is because the query retrieves the city that the customers live in, as well as the city that the store is located in. As cities are linked to addresses, the address table is also included twice. 
 
 Some joins are done using the \texttt{JOIN} keyword on common columns, while joining the address and city tables is done in the \texttt{WHERE} clause because the column names ''city\_id'' and ''address\_id'' are ambiguous as the tables are included multiple times. 
 

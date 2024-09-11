@@ -44,7 +44,7 @@ In unsupervised machine learning, there are no known correct outputs that can be
 
 \section{Principal Components Analysis}
 
-The aim of \emph{principal component analysis} (PCA) is to create linear combinations of the input variables, the principal components (PC), that satisfy two conditions:
+The aim of \emph{principal component analysis} (PCA)\index{Principal components analysis}\index{PCA|see{Principal components analysis}} is to create linear combinations of the input variables, the principal components (PC), that satisfy two conditions:
 
 \begin{enumerate}
 \item They are maximally variable, that is, their variance is maximal, and
@@ -53,7 +53,7 @@ The aim of \emph{principal component analysis} (PCA) is to create linear combina
 
 There are as many principal components as there are input variables. Generally, only a few of the principal components, the ones with the greatest variance, are retained for further analysis. It is not uncommon to reduce hundreds of variables to five or ten principal components for further analysis.
 
-These principal components are considered summaries of the original data and can be used, for example, instead of the original input variables in a regression or classification model. This makes the model smaller and therefore easier to understand, interpret, and verify. Using fewer inputs for a regression or classification can also serve as a regularization method, that is, a way to make the model less susceptible to overfitting. This is because models with fewer inputs generally have fewer parameters, all other things being equal. Additionally, the principal components are useful for data visualization. It is much easier to show a 2D or 3D summary of the data when the data has been summarized in two or three principal components, rather than visually depicting dozens or hundreds of variables. 
+These principal components\index{Principal component|see{Principal components analysis}} are considered summaries of the original data and can be used, for example, instead of the original input variables in a regression or classification model. This makes the model smaller and therefore easier to understand, interpret, and verify. Using fewer inputs for a regression or classification can also serve as a regularization method, that is, a way to make the model less susceptible to overfitting. This is because models with fewer inputs generally have fewer parameters, all other things being equal. Additionally, the principal components are useful for data visualization. It is much easier to show a 2D or 3D summary of the data when the data has been summarized in two or three principal components, rather than visually depicting dozens or hundreds of variables. 
 
 Figure~\ref{fig:pca1} shows an example visualization of a scatterplot of data on two variables and the two principal components. Technically, the two arrows shown are the \emph{eigenvectors} of the covariance matrix of the data, scaled in length by the square root of the corresponding \emph{eigenvalue} and then shifted to the mean of the data, details that will become clear below.
 
@@ -75,7 +75,7 @@ Or, simpler, in matrix form:
 Z_1 = X w_1
 \end{align*}
 
-\noindent The \emph{weight vector} or \emph{loading vector} $w_1 = (w_{11}, \ldots , w_{p1})$ is a $p \times 1$ column vector that is scaled to unit length, that is, $||w_1||_2 = 1$. $X$ is a $n \times p$ data matrix and $Z_1$ is the first principal component of size $n \times 1$. 
+\noindent The \emph{weight vector} or \emph{loading vector}\index{Loading vector} $w_1 = (w_{11}, \ldots , w_{p1})$ is a $p \times 1$ column vector that is scaled to unit length, that is, $||w_1||_2 = 1$. $X$ is a $n \times p$ data matrix and $Z_1$ is the first principal component of size $n \times 1$. 
 
 Assuming zero-centered variables, the variance of $Z_1$ and the optimization criterion can be expressed as follows:
 
@@ -109,7 +109,7 @@ There are two important considerations when working with PCA. First, the input d
 Variables in the data set should be scaled to identical standard deviations prior to PCA.
 \end{tcolorbox}
 
-To give an applied example, consider four input variables extracted from a data set of police arrest data in the US for violent crimes in each of the 50 states of the US. While four principal components can be computed, the four input variables can be summarized pretty well by just the first two principal components that together explain more than 80\% of the total variance. Figure~\ref{fig:pca2} shows a plot of the data along the first two components which form the horizontal and vertical axis. This is known as a \emph{biplot}. Overlayed are the four original variables. Table~\ref{tab:pca} shows the \emph{component loadings}, that is the $\phi$ in the above formulas, for the first two principal components. 
+To give an applied example, consider four input variables extracted from a data set of police arrest data in the US for violent crimes in each of the 50 states of the US. While four principal components can be computed, the four input variables can be summarized pretty well by just the first two principal components that together explain more than 80\% of the total variance. Figure~\ref{fig:pca2} shows a plot of the data along the first two components which form the horizontal and vertical axis. This is known as a \emph{biplot}\index{Biplot}. Overlayed are the four original variables. Table~\ref{tab:pca} shows the \emph{component loadings}, that is the $\phi$ in the above formulas, for the first two principal components. 
 
 \begin{table}[b]
 \renewcommand{\arraystretch}{1.2}
@@ -138,12 +138,12 @@ Rape      & .543 & 0.167 \\ \hline
 
 Interpretation of the principal components, which is important in explanation but less so in prediction, focuses on the loadings. For example, looking at the columns of the loadings in Table~\ref{tab:pca} shows that the first PC has high loadings on the variables ''Murder'', ''Assault'', and ''Rape'', and a much smaller loading on ''UrbanPop''. This suggests that PC1 expresses the overall prevalance of violent crime, as a summary of those three variables. In contrast, the second PC has a high loading on ''UrbanPop'', but a much lower (absolute) loading on the other three variables, indicating that it expresses primarily the one variable ''UrbanPop''. This interpretation is supported by Figure~\ref{fig:pca2}, which examines the rows of Table~\ref{tab:pca}, plotting each variable as a two-component vector in the space spanned by PC1 and PC2 (recall that the principal components are by definition orthogonal). Here, the row vector for the variable ''UrbanPop'' is visually distinct and separate from the row vectors for the other three variables. 
 
-While the iterative description of principal components above illustrates the properties of the components in terms of their variance, actual PCA is done by means of \emph{eigendecomposition}. It turns out that the solution to the maximization problem in Equations~\ref{eq:pca1} and \ref{eq:pca2} are the principal components of the data correlation matrix. Each principal component is an \emph{eigenvector} of the data correlation matrix such that:
+While the iterative description of principal components above illustrates the properties of the components in terms of their variance, actual PCA is done by means of \emph{eigendecomposition}. It turns out that the solution to the maximization problem in Equations~\ref{eq:pca1} and \ref{eq:pca2} are the principal components of the data correlation matrix. Each principal component is an \emph{eigenvector}\index{Eigenvector} of the data correlation matrix such that:
 
 \begin{align*}
  V^{-1} X^T X V = V^{-1}CV = \Lambda
 \end{align*}
-\noindent where $V$ is the matrix whose columns are the \emph{eigenvectors}, $C$ is the data correlation matrix, and $\Lambda$ is a diagonal matrix of \emph{eigenvalues}.
+\noindent where $V$ is the matrix whose columns are the \emph{eigenvectors}, $C$ is the data correlation matrix, and $\Lambda$ is a diagonal matrix of \emph{eigenvalues}\index{Eigenvalue}.
 
 \noindent The \emph{proportion of variance explained} $f_k$ by each PC $k$ is proportional to the corresponding \emph{eigenvalue} $\lambda_k$, that is, the k-th entry of $\Lambda$:
 \begin{align*}
@@ -163,7 +163,7 @@ There are different criteria for selecting the number of principal components to
   \item The analyst retains those principal components whose eigenvalue $\lambda > 1$
   \item The analyst retains principal components until the cumulative proportion of variance explained by the components surpasses a given threshold, e.g. 80\%. For example, the right panel in Figure~\ref{fig:pca3} shows a plot of the cumulative variance explained. The first two principal components are necessary to explain 80\% or more of the total variance in the original data.
   \item When used in subsequent regression or classification models, cross-validation may be used to identify the optimal $K$ that shows the lowest test error.
-  \item The analyst examines the ''\emph{scree plot}'', that is, the plot of the eigenvalues or proportion of variance explained by each component. Oftentimes, there will be a clear point of inflection in this plot, indicating a useful cutoff. The left panel in Figure~\ref{fig:pca3} shows such a scree plot. The proportion of variance explained diminishes for each additional principal component.
+  \item The analyst examines the ''\emph{scree plot}''\index{Scree plot}, that is, the plot of the eigenvalues or proportion of variance explained by each component. Oftentimes, there will be a clear point of inflection in this plot, indicating a useful cutoff. The left panel in Figure~\ref{fig:pca3} shows such a scree plot. The proportion of variance explained diminishes for each additional principal component.
 \end{itemize}
 
 In practice, the number of principal components to retain is often subjective, and analysts use a combination of considerations and criteria to make their decision.
@@ -306,13 +306,13 @@ There are a many different types of clustering. This chapter focuses on two simp
 
 \subsection{K-Means Clustering}
 
-In k-means clustering, the number of clusters $K$ is assumed given, determined by the analysts knowledge of the data or the requirements of the analysis. The aim of k-means clustering is to minimize the \emph{within-cluster variation} $W(C_i)$ in each cluster $C_i$:
+In k-means clustering\index{Cluster analysis!k-means}\index{K-means cluster analysis|see{Cluster analysis!k-means}}, the number of clusters $K$ is assumed given, determined by the analysts knowledge of the data or the requirements of the analysis. The aim of k-means clustering is to minimize the \emph{within-cluster variation} $W(C_i)$ in each cluster $C_i$:
 
 \begin{align*}
 \min_{C_i} \left\{ \sum_{k=1}^K W(C_k) \right\}
 \end{align*}
 
-\noindent This within-cluster variation is defined as the squared Euclidean distance between every pair of observations in the cluster (Equation~\ref{eq:cluster1}) or between every observation and the cluster \emph{centroid} of the cluster it is assigned to, that is, its corresponding cluster mean $\bar{\mu}$ (Equation~\ref{eq:cluster2}).
+\noindent This within-cluster variation is defined as the squared Euclidean distance between every pair of observations in the cluster (Equation~\ref{eq:cluster1}) or between every observation and the cluster \emph{centroid}\index{Centroid} of the cluster it is assigned to, that is, its corresponding cluster mean $\bar{\mu}$ (Equation~\ref{eq:cluster2}).
 
 \begin{align}
 W(C_k) &= \frac{1}{|C_k|} \sum_{i,i' \in C_k} \sum_{j=1}^p (x_{ij} - x_{i'j})^2 \label{eq:cluster1} \\
@@ -447,7 +447,7 @@ The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary o
 
 \subsection{Hierarchical Clustering}
 
-Hierarchical clustering is either \emph{agglomerative}, that is, it constructs clusters ''bottom-up'' by joining observations or small clusters to larger clusters, or it may be \emph{divisive}, that is, in ''top-down'' fashion, starting from the whole set of observations, it iteratively divides the set into clusters. This section examines the use of agglomerative clustering, which is widely used because of its intuitive process and its flexibility.
+Hierarchical clustering\index{Cluster analysis!hierarchical}\index{Hierarchical cluster analysis|see{Cluster analysis!hierarchical}} is either \emph{agglomerative}\index{Agglomerative cluster analysis|see{Hierarchical cluster analysis}}, that is, it constructs clusters ''bottom-up''\index{Bottom-up cluster analysis|see{Hierarchical cluster analysis}} by joining observations or small clusters to larger clusters, or it may be \emph{divisive}\index{Divisive cluster analysis|see{Hierarchical cluster analysis}}, that is, in ''top-down''\index{Top-down cluster analysis|see{Hierarchical cluster analysis}} fashion, starting from the whole set of observations, it iteratively divides the set into clusters. This section examines the use of agglomerative clustering, which is widely used because of its intuitive process and its flexibility.
 
 Agglomerative clustering begins with $n$ observations and a distance (or, alternatively, a similarity metric, which is just the inverse of distance -- a large distance means a small similarity). The process is then as follows:
 
@@ -470,7 +470,7 @@ Agglomerative clustering begins with $n$ observations and a distance (or, altern
 \label{fig:dendro1}
 \end{figure}
 
-The process is usually visualized with a \emph{dendrogram}, which literally means ''tree graph'', such as the one shown in the left panel of in Figure~\ref{fig:dendro1}. A dendrogram is read bottom-up, showing which clusters are merged in which order. The vertical axis shows the distance between clusters as they are merged. Consider the observations on two variables shown in the right panel of Figure~\ref{fig:dendro1}. In the example, clusters 5 and 7 are merged first, from a distance of $\approx 0.3$. This distance is the smallest distance between all clusters, indicated as the lowest merging point in the dendrogram in the left panel of Figure~\ref{fig:dendro1}. Cluster 5 is just observation 5, and cluster 7 is just observation 7. The two together form a new cluster. Next, clusters 1 and 6 are merged, from a distance of $\approx 0.4$, the second lowest merging point in the dendrogram. Then, cluster 8 (which is observation 8) is added to the cluster consisting of observations 5 and 7, at a distance of $\approx 0.8$. After this, observation 4 is added to the cluster consisting of observations 1 and 6, etc. The final two clusters are at a distance of $\approx 3$ when they are merged into a single cluster. 
+The process is usually visualized with a \emph{dendrogram}\index{Dendrogram}, which literally means ''tree graph'', such as the one shown in the left panel of in Figure~\ref{fig:dendro1}. A dendrogram is read bottom-up, showing which clusters are merged in which order. The vertical axis shows the distance between clusters as they are merged. Consider the observations on two variables shown in the right panel of Figure~\ref{fig:dendro1}. In the example, clusters 5 and 7 are merged first, from a distance of $\approx 0.3$. This distance is the smallest distance between all clusters, indicated as the lowest merging point in the dendrogram in the left panel of Figure~\ref{fig:dendro1}. Cluster 5 is just observation 5, and cluster 7 is just observation 7. The two together form a new cluster. Next, clusters 1 and 6 are merged, from a distance of $\approx 0.4$, the second lowest merging point in the dendrogram. Then, cluster 8 (which is observation 8) is added to the cluster consisting of observations 5 and 7, at a distance of $\approx 0.8$. After this, observation 4 is added to the cluster consisting of observations 1 and 6, etc. The final two clusters are at a distance of $\approx 3$ when they are merged into a single cluster. 
 
 The follwing key decisions need to be made by the analyst for agglomerative clustering:
 
@@ -480,7 +480,7 @@ The follwing key decisions need to be made by the analyst for agglomerative clus
    \item How many clusters should there be?
 \end{itemize}
 
-Table~\ref{tab:distance} shows a set of common distance metrics or vector norms that are frequently used in agglomerative clustering. Figure~\ref{fig:distance} is a visualization of the intuition behind some of these distance metrics. For example, the Chebyshev distance allows diagonal ''moves'' to count as a single step with a distance of 1, wheres the taxicab metric counts a ''move'' in each direction as a single step, so that diagonal ''moves'' have a distance of 2. In principle, any of these distance metrics could also be used in k-means clustering, but this is rarely done.
+Table~\ref{tab:distance} shows a set of common distance metrics\index{Distance metric (in hierarchical cluster analysis)} or vector norms that are frequently used in agglomerative clustering. Figure~\ref{fig:distance} is a visualization of the intuition behind some of these distance metrics. For example, the Chebyshev distance allows diagonal ''moves'' to count as a single step with a distance of 1, wheres the taxicab metric counts a ''move'' in each direction as a single step, so that diagonal ''moves'' have a distance of 2. In principle, any of these distance metrics could also be used in k-means clustering, but this is rarely done.
 
 Because the distance function is heavily influenced by the measurement scale of the variables, when these are not equal, it is possible for one variable to dominate others, simply because it is measured on a different scale. As with PCA and k-means clustering, it is therefore important to scale the variables in the data set to identical standard deviation (typically, unit standard deviation, i.e. 1). 
 
@@ -512,7 +512,7 @@ Chebyshev & $||q-p||_\infty$ & $\displaystyle \lim_{p \rightarrow \infty} \left(
 \label{fig:distance}
 \end{figure}
 
-Table~\ref{tab:linkages} shows a set of the most commonly used \emph{linkage functions}, that is, functions that express the distance between two clusters $G$ and $H$. The \emph{single linkage} is based on the minimum distance of any pair of observations where one observation is in cluster $G$ and the other in cluster $H$. In other words, the distance of two clusters is the distance between the two closest observations from each cluster. In contrast, \emph{complete linkage} uses the maximum; the distance between clusters is the maximal distance between any of their member observations. Finally, \emph{average linkage} uses the mean distance between all pairs of observations. There are many other, less commonly used linkage functions available\footnote{\url{https://en.wikipedia.org/wiki/Hierarchical_clustering}}.
+Table~\ref{tab:linkages}\index{Linkage function (in hierarchical cluster analysis)} shows a set of the most commonly used \emph{linkage functions}, that is, functions that express the distance between two clusters $G$ and $H$. The \emph{single linkage} is based on the minimum distance of any pair of observations where one observation is in cluster $G$ and the other in cluster $H$. In other words, the distance of two clusters is the distance between the two closest observations from each cluster. In contrast, \emph{complete linkage} uses the maximum; the distance between clusters is the maximal distance between any of their member observations. Finally, \emph{average linkage} uses the mean distance between all pairs of observations. There are many other, less commonly used linkage functions available\footnote{\url{https://en.wikipedia.org/wiki/Hierarchical_clustering}}.
 
 \begin{table}
 \renewcommand{\arraystretch}{1.5}

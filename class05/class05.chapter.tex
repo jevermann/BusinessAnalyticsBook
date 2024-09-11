@@ -79,7 +79,7 @@ The following R code example introduces the R function called \texttt{print()} t
 \end{Rcode}
 \end{samepage}
 
-A common structured data type in R is a \emph{vector}. A vector in R contains elements of the same data type and is ordered. When assigning elements of different datatypes to a vector, R will coerce the types of all elements to a common datatype.
+A common structured data type in R is a \emph{vector}\index{Vector (in R)}. A vector in R contains elements of the same data type and is ordered. When assigning elements of different datatypes to a vector, R will coerce the types of all elements to a common datatype.
 
 \begin{samepage}
 \begin{Rcode}
@@ -130,7 +130,7 @@ The most common way to select elements from vectors is by \emph{indexing} with a
 \end{Rcode}
 \end{samepage}
 
-Vectors can also be indexed numerically, selecting elements by their position. R allows you to specify a sequence using the \texttt{:} operator and exclusion of elements using \texttt{-}. The first line in the following example selects elements at positions 3 through 7, the second line selects elemtns \emph{except} those at positions 3 through 7.
+Vectors can also be indexed numerically, selecting elements by their position. R allows you to specify a sequence using the \texttt{:} operator and exclusion of elements using \texttt{-}, sometimes called slicing\index{Slicing}. The first line in the following example selects elements at positions 3 through 7, the second line selects elemtns \emph{except} those at positions 3 through 7.
 
 \begin{samepage}
 \begin{Rcode}
@@ -202,7 +202,7 @@ Character strings in R are enclosed in single or double quotes (but not mixed qu
 \end{Rcode}
 \end{samepage}
 
-Because you can assign arbitrary values to variables in R, R provides functions to test the value type and to change or coerce the value type. A \emph{factor} data type in R represents categorical data, encoded as different character strings or different numbers. Categorical data is treated different from numerical or character string data in many statistical analyses.
+Because you can assign arbitrary values to variables in R, R provides functions to test the value type and to change or coerce the value type. A \emph{factor}\index{Factor (in R)} data type in R represents categorical data, encoded as different character strings or different numbers. Categorical data is treated different from numerical or character string data in many statistical analyses.
 
 \begin{samepage}
 \begin{Rcode}
@@ -308,7 +308,7 @@ Finally, the \texttt{quit()} function ends an R session. When using \texttt{quit
 
 \section{Arrays, Matrices, Lists, and DataFrames}
 
-R \emph{arrays} are multi-dimensional objects that can hold any primitive data type, usually numerical. A \emph{matrix} is simply a two-dimensional array. The following example shows how indexing generalizes from vectors to matrices and arrays simply by indexing each dimension with the same syntax as used for vectors. The \texttt{array()} creates multi-dimensional arrays from existing data, the \texttt{dim()} function returns the number of dimensions of an array.
+R \emph{arrays}\index{Array (in R)} are multi-dimensional objects that can hold any primitive data type, usually numerical. A \emph{matrix}\index{Matrix (in R)} is simply a two-dimensional array. The following example shows how indexing generalizes from vectors to matrices and arrays simply by indexing each dimension with the same syntax as used for vectors. The \texttt{array()} creates multi-dimensional arrays from existing data, the \texttt{dim()} function returns the number of dimensions of an array.
 
 A few important things to note in the following R code block example:
 \begin{itemize}
@@ -359,7 +359,7 @@ Constructing a \emph{matrix} with the \texttt{matrix()} function is similar to c
 \end{Rcode}
 \end{samepage}
 
-A \emph{list} in R is an ordered collection of elements that, in contrast to vectors, \emph{may be of different types}. Lists are created using the \texttt{lis()} function. Note the difference in selecting elements: The \texttt{[[]]} operator returns the element at that position in the list, whereas the \texttt{[]} operator contains a list that contains the element at that position in the list. 
+A \emph{list}\index{List} in R is an ordered collection of elements that, in contrast to vectors, \emph{may be of different types}. Lists are created using the \texttt{list()} function. Note the difference in selecting elements: The \texttt{[[]]} operator returns the element at that position in the list, whereas the \texttt{[]} operator contains a list that contains the element at that position in the list. 
 
 \begin{samepage}
 \begin{Rcode}
@@ -373,7 +373,7 @@ A \emph{list} in R is an ordered collection of elements that, in contrast to vec
 \end{Rcode}
 \end{samepage}
 
-A \emph{data frames} are the most widely used data structure for data analytics and statistics in basic R. It is essentially a table with a set of columns whose elements are of the same type. Columns are named and columns can be selected using the \texttt{\$} symbol. Useful functions on data frames are \texttt{summary()}, \texttt{head()} and \texttt{tail()}. The following R code block creates a variable \texttt{x} as a vector of 50 normally distributed random values using the \texttt{rnorm()} function. The variable \texttt{y} is created from vector \texttt{x} and additional normally distributed random variables. The two are then combined into a data frame. The \texttt{colnames()} function can retrieve the column names, but can also be used to change/update the column names. The \texttt{nrow()} and \texttt{ncol()} functions return the number of rows and columns, \texttt{head()} and \texttt{tail()} return the first few or last few rows, and \texttt{cov()} is an example of a statistical function that returns the covariance matrix of all columns in the data frame.
+A \emph{data frames}\index{Data frame!in R} are the most widely used data structure for data analytics and statistics in basic R. It is essentially a table with a set of columns whose elements are of the same type. Columns are named and columns can be selected using the \texttt{\$} symbol. Useful functions on data frames are \texttt{summary()}, \texttt{head()} and \texttt{tail()}. The following R code block creates a variable \texttt{x} as a vector of 50 normally distributed random values using the \texttt{rnorm()} function. The variable \texttt{y} is created from vector \texttt{x} and additional normally distributed random variables. The two are then combined into a data frame. The \texttt{colnames()} function can retrieve the column names, but can also be used to change/update the column names. The \texttt{nrow()} and \texttt{ncol()} functions return the number of rows and columns, \texttt{head()} and \texttt{tail()} return the first few or last few rows, and \texttt{cov()} is an example of a statistical function that returns the covariance matrix of all columns in the data frame.
 
 \begin{samepage}
 \begin{Rcode}
@@ -448,7 +448,7 @@ This section can give only a very brief outline of the capabilities of the tidyv
 \url{https://github.com/devrimgunduz/pagila/blob/master/LICENSE.txt}} is a demonstration database originally developed for teaching and development of the MySQL RDBMS under the name Sakila\footnote{\url{https://dev.mysql.com/doc/sakila/en/}, \\
 \url{https://dev.mysql.com/doc/sakila/en/sakila-license.html}}. Pagila is designed as a sample database to illustrate database concepts and is based on a fictional DVD rental store. It originally consists of several tables organized into categories like film and actor information, customer data, store inventory, and rental transactions. For this section, the Pagila data was summarized in a few related CSV files. 
 
-When reading CSV files with readr, the data is stored in a \emph{tibble}, not a data frame. A tibble provides a number of extensions and convenience operations that make it significantly more capable than a data frame. When using data frames with dplyr, they are automatically converted to tibbles. 
+When reading CSV files with readr, the data is stored in a \emph{tibble}\index{Tibble}, not a data frame. A tibble provides a number of extensions and convenience operations that make it significantly more capable than a data frame. When using data frames with dplyr, they are automatically converted to tibbles. 
 
 The following R code reads a CSV file using the \texttt{read\_csv()} function and prints the first few lines and a summary. The output looks slightly different than that for data frames, but accomplishes essentially the same things.
 
@@ -478,7 +478,7 @@ summary(rentals)
 \end{Rcode}
 \end{samepage}
 
-The tidyverse libraries make extensive use of the \emph{pipe} operator in R. The pipe operator allows chaining of function calls and plugs the result of one function as the first argument into the next function. Originally, tidyverse used the \texttt{\%>\%} pipe operator from the \texttt{magrittr} library, but can now also be used with the new (since R version 4.1), native R pipe operator \texttt{|>}. For simple usage, the two behave identically and can be intermixed. 
+The tidyverse libraries make extensive use of the \emph{pipe}\index{Pipe} operator in R. The pipe operator allows chaining of function calls and plugs the result of one function as the first argument into the next function. Originally, tidyverse used the \texttt{\%>\%} pipe operator from the \texttt{magrittr} library, but can now also be used with the new (since R version 4.1), native R pipe operator \texttt{|>}. For simple usage, the two behave identically and can be intermixed. 
 
 The following R code block demonstrates a simple sequence of data manipulation operations using functions from the dplyr library. It begins with the data tibble which is piped into the first function. The outputs of each function are piped into the following function, ending with \texttt{print()}. Note that print output can also be piped into other functions, allowing printing of intermediate results. 
 
@@ -687,7 +687,7 @@ The code for this query works with nested data, that is, data with columns that 
 
 \section{SQL and R}
 
-The ''sqldf'' library in R allows users to perform SQL queries on R data frames. Essentially, it provides a bridge between SQL and R. This integration allows users who are familiar with SQL to leverage its powerful querying capabilities directly on R data structures, without the need to switch between different tools or environments.
+The ''sqldf'' library in R allows users to perform SQL queries on R data frames. Essentially, it provides a bridge between SQL and R\index{SQL!in R}. This integration allows users who are familiar with SQL to leverage its powerful querying capabilities directly on R data structures, without the need to switch between different tools or environments.
 
 One of the main advantages of ''sqldf'' is its ability to handle large data frames more efficiently than some of R's native functions. By utilizing SQL queries, users can perform complex data manipulations and aggregations with ease. The package supports various SQL commands including SELECT, JOIN, ORDER BY, and GROUP BY, among others, enabling a wide range of data operations that are familiar to SQL users.
 

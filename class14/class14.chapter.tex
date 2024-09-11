@@ -65,7 +65,7 @@ Time series statistical models are essential tools used to analyze and forecast 
 
 \subsubsection*{Moving Average Model}
 
-The \emph{Moving Average} model is a fundamental time series model that expresses the current value of the time series as a function of past errors or deviations, with the assumption that these errors are white noise, that is, random. An example model is given by: 
+The \emph{Moving Average}\index{Moving average} model is a fundamental time series model that expresses the current value of the time series as a function of past errors or deviations, with the assumption that these errors are white noise, that is, random. An example model is given by: 
 
 \begin{align*}v_t = \frac{1}{3} ( w_{t-1} + w_t + w_{t+1})
 \end{align*}
@@ -101,7 +101,7 @@ tsplot(v, ylim=c(-3,3), main="moving average", col=4, gg=T)
 
 \subsubsection*{Autoregressive Model}
 
-The \emph{Autoregressive (AR) model} is based on the concept that current values of a series can be forecasted from previous values. An example model is:
+The \emph{Autoregressive (AR) model}\index{Autoregression} is based on the concept that current values of a series can be forecasted from previous values. An example model is:
 
 \begin{align*}x_t = x_{t-1} - 0.9 x_{t-2} + w_t\end{align*}
 
@@ -130,7 +130,7 @@ tsplot(x, main="autoregression", col=4, gg=T)
 
 \subsubsection*{Random Walk with Drift}
 
-A \emph{random walk with drift} adds a constant to the standard random walk, allowing the series to drift upwards or downwards over time. An example model is given by:
+A \emph{random walk with drift}\index{Random walk} adds a constant to the standard random walk, allowing the series to drift upwards or downwards over time. An example model is given by:
 
 \begin{align*}x_t &= \delta + x_{t-1} + w_t \\
 &= \delta t + \sum_{j=1}^t w_j
@@ -167,7 +167,7 @@ abline(h=0, col=4, lty=2)
 
 \subsubsection*{Signal in Noise Model}
 
-The \emph{Signal in noise} model views the time series as a combination of a true signal and random noise. An example model with a sinusoidal signal characterized by its amplitude, frequency and phase shift is:
+The \emph{Signal in noise}\index{Signal-in-noise} model views the time series as a combination of a true signal and random noise. An example model with a sinusoidal signal characterized by its amplitude, frequency and phase shift is:
 
 \begin{align*}
 x_t &= A \cos (2 \pi \omega t + \phi) 
@@ -219,7 +219,7 @@ tail(ts_data)
 \end{Rcode}
 \end{samepage}
 
-Missing values in a time series cannot be imputed in the usual manner because the observations are not independent of each other. Two simple ways of ''filling in'' missing data are either to simply carry the last observation forward, which assumes there are negligible changes in the value over time, or to interpolate the missing values. In linear interpolation, a line is imagined between the last observation before a series of missing values and the first observation after such a series of missing values. Missing values are then assumed to be on that line. This assumes that the time series is approximately linear, at least for short gaps. 
+Missing values in a time series cannot be imputed in the usual manner because the observations are not independent of each other. Two simple ways of ''filling in'' missing data are either to simply carry the last observation forward\index{Last observation carried forward}\index{LOCF|see{Last observation carried forward}}, which assumes there are negligible changes in the value over time, or to interpolate the missing values. In linear interpolation, a line is imagined between the last observation before a series of missing values and the first observation after such a series of missing values. Missing values are then assumed to be on that line. This assumes that the time series is approximately linear, at least for short gaps. 
 
 The \texttt{zoo} library for R contains the functions \texttt{na.locf()} and \texttt{na.approx()} that implement these methods of handling missing values. Missing values at the beginning or end of a time series can be removed with the \texttt{na.trim()} function. The following R code block illustrates the use of all three functions:
 
@@ -268,7 +268,7 @@ Time series smoothing is a technique used to remove noise and reveal signals or 
 
 \subsubsection*{Moving Average Smoothing}
 
-\emph{Moving average smoothing} is one of the simplest and most widely used methods for smoothing time series data. It involves calculating the weighted mean of the consecutive data points within a specified window that moves along with the data:
+\emph{Moving average smoothing}\index{Time series smoothing!Moving average} is one of the simplest and most widely used methods for smoothing time series data. It involves calculating the weighted mean of the consecutive data points within a specified window that moves along with the data:
 
 \begin{align*}m_t = \sum_{j=-k}^k a_j x_{t-j} \quad \text{where} \quad
 \sum_{j=-k}^k a_j = 1
@@ -298,7 +298,7 @@ filter(soi, sides=2, filter=f, method='convolution')
 
 \subsubsection*{Kernel Smoothing or Kernel Regression}
 
-Instead of a filter with simple weights as in moving average smoothing, \emph{kernel smoothing} uses a weighted average of neighbouring points where the weights are determined by a function known as the \emph{kernel}. A common choice is a Gaussian kernel that uses the normal distribution density function, which produces a weighted average with a bell-shaped curve of weights around each data point. The weights for averaging the time series values are determined as follows:
+Instead of a filter with simple weights as in moving average smoothing, \emph{kernel smoothing}\index{Time series smoothing!Kernel smoothing}\index{Kernel smoothing|see{Time series smoothing!Kernel smoothing}} uses a weighted average of neighbouring points where the weights are determined by a function known as the \emph{kernel}. A common choice is a Gaussian kernel\index{Gaussian kernel} that uses the normal distribution density function, which produces a weighted average with a bell-shaped curve of weights around each data point. The weights for averaging the time series values are determined as follows:
 
 \begin{align*}
 a_i(t) &= \frac{K\left(\frac{t-i}{b}\right)}{\sum_{j=1}^n K \left(\frac{t-j}{b}\right) }
@@ -332,7 +332,7 @@ ksmooth(time(soi), soi, kernel='normal', bandwidth=1)
 
 \subsubsection*{Lowess Regression}
 
-\emph{Lowess Regression} (locally weighted scatterplot smoothing) combines a multiple regression model with a k-nearest-neighbour-based model. Each point on the smoothed time series is estimated by a weighted least squares regression over a local neighbourhood of $f$ observations that are closest in time to the target point. The weights decrease with distance from the target observation, thereby providing robustness against outliers and yielding a smooth curve that closely follows the data. 
+\emph{Lowess Regression}\index{Time series smoothing!Lowess smoothing}\index{Lowess smoothing|see{Time series smoothing!Lowess smoothing}} (locally weighted scatterplot smoothing) combines a multiple regression model with a k-nearest-neighbour-based model. Each point on the smoothed time series is estimated by a weighted least squares regression over a local neighbourhood of $f$ observations that are closest in time to the target point. The weights decrease with distance from the target observation, thereby providing robustness against outliers and yielding a smooth curve that closely follows the data. 
 
 The R function \texttt{lowess()} uses the \texttt{f} parameter for specifying the proportion of observations used for the regressions. An example result is shown in Figure~\ref{fig:figure16}.
 
@@ -350,7 +350,7 @@ lowess(soi, f=0.1)
 
 \subsubsection*{Smoothing Splines}
 
-\emph{Smoothing splines} are a method that fits a smooth, flexible ''spline'' function to the data. Smoothing splines balance the fit of the spline to the data against the smoothness of the spline curve and are essentially penalized polynomial regression models that fit the model:
+\emph{Smoothing splines}\index{Time series smoothing!Smoothing splines}\index{Smoothing splines|see{Time series smoothing!Smoothing splines}} are a method that fits a smooth, flexible ''spline'' function to the data. Smoothing splines balance the fit of the spline to the data against the smoothness of the spline curve and are essentially penalized polynomial regression models that fit the model:
 
 \begin{align*}
 m_t = \beta_0 + \beta_1 t + \beta_2 t^2 + \beta_3 t^3
@@ -439,13 +439,13 @@ summary(lm(cmort ~ time.cmort. + temp + temp.2 +
 
 \section{Stationarity}
 
-The concept of \emph{stationarity} is central to time series analysis. Stationarity means that the statistical characteristics of a time series do not change over time. That is, its mean, variance, and autocorrelation (the correlation of a time series with a lagged copy of itself) remain constant over time. Understanding and ensuring stationarity in a time series is important for the effective application of many statistical forecasting methods and models.
+The concept of \emph{stationarity}\index{Stationarity (of time series)} is central to time series analysis. Stationarity means that the statistical characteristics of a time series do not change over time. That is, its mean, variance, and autocorrelation (the correlation of a time series with a lagged copy of itself) remain constant over time. Understanding and ensuring stationarity in a time series is important for the effective application of many statistical forecasting methods and models.
 
 Stationary data with a constant mean and variance is more predictable and therefore easier to model. Changes in mean and variance can lead to forecasts that are biased or that degrade in accuracy over time. Stationarity ensures that the properties of the series used to generate forecasts will be similar in the future, which is crucial for planning and decision-making. If a time series is non-stationary, the behavior of the data could change over time, leading to models that are invalid or inaccurate when applied to future data points.
 
 Statistical inference in time series analysis relies heavily on the assumption of stationarity. Many time series statistical models, including linear regression and ARMA models, are based on the assumption of stationarity. These models provide meaningful and reliable results only if the stationarity assumption is satisfied. 
 
-\emph{Strict stationarity} is defined as the requirement that the probabilistic behaviour of every set of values of the series
+\emph{Strict stationarity}\index{Stationarity (of time series)!strict} is defined as the requirement that the probabilistic behaviour of every set of values of the series
 \begin{align*}\{x_{t1}, x_{t2}, \ldots, x_{tk} \} \end{align*}
 \noindent is identical to that of the set of values shifted by time $h$:
 \begin{align*}
@@ -456,7 +456,7 @@ Statistical inference in time series analysis relies heavily on the assumption o
 &\Pr \{ x_{t1} \leq c_1, \ldots, x_{tk} \leq c_k \} = \Pr \{ x_{t1+h}\leq c_1, \ldots , x_{tk+h} \leq c_k \}
 \end{align*}
 
-Because strong stationarity is hard to test, a more commonly used and practical form of stationarity is \emph{weak stationarity}, which requires only that the the mean, variance, and the \emph{autocovariance} (the covariance of the series with a lagged version itself) are constant over time. Most statistical tests and models assume weak stationarity. In summary, a weakly stationary time series is a finite variance process such that:
+Because strong stationarity is hard to test, a more commonly used and practical form of stationarity is \emph{weak stationarity}\index{Stationarity (of time series)!weak}, which requires only that the the mean, variance, and the \emph{autocovariance} (the covariance of the series with a lagged version itself) are constant over time. Most statistical tests and models assume weak stationarity. In summary, a weakly stationary time series is a finite variance process such that:
 
 \begin{enumerate}
 \item The mean and variance are constant and do not depend on time: $\mu_t = \mu$, $\sigma_t = \sigma$
@@ -474,7 +474,7 @@ Let $s = t + h$, then under the assumption of weak stationarity:
 %\rho_{xy}(h) &= \frac{\gamma_{xy}(h)}{\sqrt{\gamma_x(0)\gamma_y(0)}}
 \end{align*}
 
-The \emph{autocovariance} and \emph{autocorrelations} are measures of dependence of the time series on lagged versions of itself. For a weakly stationary time series, the theoretical autocovariance for a lag $h$ is defined as the covariance between two points $t, t+h$ on time series $x$
+The \emph{autocovariance} and \emph{autocorrelations} are measures of dependence of the time series on lagged versions of itself. For a weakly stationary time series, the theoretical autocovariance for a lag $h$ is defined as the covariance between two points $t, t+h$ on time series $x$\index{Autocovariance}
 \begin{align*}
 \gamma(h) = cov(x, x_{t+h}) = E [ (x_t - \mu)(x_{t+h} - \mu)] 
 \end{align*}
@@ -483,13 +483,13 @@ Note that this definition implies weak stationarity because a constant term for 
 
 A large autocovariance indicates a ''smooth'' time series, as each future value is strongly dependent on the previous value(s). In contrast, a small autocovariance indicates the ''choppy'' time series, as there is less dependence on prior values and values of the time series are less constrained and allowed to vary more. 
 
-The sample autocovariance that can be estimated from a finite sample for lag $h$ is defined as  
+The sample autocovariance\index{Autocovariance!sample} that can be estimated from a finite sample for lag $h$ is defined as  
 
 \begin{align*}
 \hat{\gamma}(h)  = \frac{1}{n} \sum_{t=1}^{n-h} (x_t - \bar{x})(x_{t+h} - \bar{x})
 \end{align*}
 
-The \emph{autocorrelation function} (ACF) for lag $h$ is defined as usual as the autocovariance divided by the root of the product of the variances of the two time series:
+The \emph{autocorrelation function} (ACF)\index{Autocorrelation function}\index{ACF|see{Autocorrelation function}} for lag $h$ is defined as usual as the autocovariance divided by the root of the product of the variances of the two time series:
 
 \begin{align*}
 \rho_x(h) = \frac{\gamma (t+h,t)}{\sqrt{\gamma (t+h,t+h) \gamma(t, t)}} = \frac{\gamma(h)}{\gamma(0)}  \quad \text{\small (weak stationarity)}
@@ -497,7 +497,7 @@ The \emph{autocorrelation function} (ACF) for lag $h$ is defined as usual as the
 
 Note that this assumes weak stationarity. The time series properties at any time $t$ are the same as at time $0$ so that the above equation can be reduced to the right-most term.
 
-Similar to the sample autocovariance, the sample ACF for lag $h$ is defined as
+Similar to the sample autocovariance, the sample ACF for lag $h$ is defined as\index{Autocorrelation function!sample}
 
 \begin{align*}
 \hat\rho_x(h) = \frac{\hat\gamma(h)}{\sqrt{\hat\gamma(h) \hat\gamma(0)}} = \frac{\hat\gamma(h)}{\hat\gamma(0)} \quad \text{\small (weak stationarity)}
@@ -562,7 +562,7 @@ lag1.plot(soi, max.lag = 6, gg=T, col=4, lwl=3)
 \label{fig:figure8a}
 \end{figure}
 
-The \emph{partial autocorrelation function} (PACF) of a time series is a measure of the correlation between observations at two points in time, accounting for the correlations of the observations at all shorter intervals. Essentially, it reflects the direct effect of past data points on the future data point, after removing the effects of intermediate data points. PACF can be thought of as the correlation between a variable and its lag $h$ that is not explained by correlations at all lower-order lags. It is formally defined as the correlation between $x_{t+h}$ and $x_t$ with the linear dependence of $\{x_{t+1}, \ldots, x_{t+h-1}\}$ on each removed:
+The \emph{partial autocorrelation function} (PACF)\index{Autocorrelation function!partial}\index{PACF|see{Autocorrelation function!partial}} of a time series is a measure of the correlation between observations at two points in time, accounting for the correlations of the observations at all shorter intervals. Essentially, it reflects the direct effect of past data points on the future data point, after removing the effects of intermediate data points. PACF can be thought of as the correlation between a variable and its lag $h$ that is not explained by correlations at all lower-order lags. It is formally defined as the correlation between $x_{t+h}$ and $x_t$ with the linear dependence of $\{x_{t+1}, \ldots, x_{t+h-1}\}$ on each removed:
 
 \begin{align*}
 \phi_{hh} = \begin{cases}\rho(1) &\quad h = 1 \\
@@ -614,7 +614,7 @@ Popular \emph{time series transformations} are the log transformation, the squar
 
 \subsubsection*{Detrending}
 
-\emph{Detrending} a time series involves removing the trend component from the data, thereby isolating the non-trend components such as seasonality and irregular fluctuations. This is particularly useful in time series analysis because many statistical methods assume stationarity (constant mean and variance), and a trend violates these assumptions.
+\emph{Detrending}\index{Detrending} a time series involves removing the trend component from the data, thereby isolating the non-trend components such as seasonality and irregular fluctuations. This is particularly useful in time series analysis because many statistical methods assume stationarity (constant mean and variance), and a trend violates these assumptions.
 
 A common detrending method is to fit a regression model to the trend component and then subtract the fitted values, that is, the trend, from the original series. Linear regression is widely used for linear trends, but polynomial or more complex models can be fitted depending on the nature of the trend.
 
@@ -658,7 +658,7 @@ tsplot(detrended_series, type="l", main="detrend",col=2,gg=T)
 
 \subsubsection*{Differencing}
 
-\emph{Differencing} involves computing the differences between consecutive observations in the original time series. The primary goal of differencing is to remove trends and seasonality in order to stabilize the mean of the time series by reducing changes in the level of a time series over time. Assume again that 
+\emph{Differencing}\index{Differencing} involves computing the differences between consecutive observations in the original time series. The primary goal of differencing is to remove trends and seasonality in order to stabilize the mean of the time series by reducing changes in the level of a time series over time. Assume again that 
 
 \begin{align*}x_t = \mu_t + y_t\end{align*}
 
@@ -754,7 +754,7 @@ Consider the two weekly time series \texttt{oil} and \texttt{gas} in the  \textt
 
 ARIMA models, which stands for Autoregressive Integrated Moving Average, are a type of statistical models for analyzing and forecasting time series data. ARIMA is particularly suited to time series data that show non-stationarities, such as trends and seasonal patterns, and it has become a standard tool in econometrics, finance, and other fields.
 
-ARIMA models can be divided into the following model classes:
+ARIMA models can be divided into the following model classes\index{Autoregressive integrated moving average model}\index{ARiMA model|see{Autoregressive integrated moving average model}}:
 \begin{itemize}
   \item \textbf{AR}: pure AutoRegressive models
   \item \textbf{MA}: pure Moving average models
@@ -1004,7 +1004,7 @@ ARIMA model diagnostics focus on the residuals of the fitted model and typically
    \item Standardized residuals should be Gaussian ($\mu=0$, $sd=1$)
    \item Residuals should not be autocorrelated
    \item Residual ACF should be Gaussian with $\mu=0$ and $sd=1/\sqrt{n}$
-   \item Ljung-Box statistic $Q$ of the error ACF $\hat\rho_e$ for different maximum lags $H$ should be larger than the $1-\alpha$ quantile of the $\chi^2_{H-p-q}$ distribution (i.e. the test statistic is not statistically signifantly different from $0$)
+   \item Ljung-Box statistic $Q$ of the error ACF $\hat\rho_e$ for different maximum lags $H$ should be larger than the $1-\alpha$ quantile of the $\chi^2_{H-p-q}$ distribution (i.e. the test statistic is not statistically signifantly different from $0$)\index{Ljung-Box statistic}
    \begin{align*}
    Q = n(n+2) \sum_{h=1}^H \frac{\hat\rho_e^2(h)}{n-h}
    \end{align*}
@@ -1015,9 +1015,9 @@ The diagnostic plots in Figure~\ref{fig:figure24} and \ref{fig:figure25} shows t
 Because fitting a model typically uses maximum-likelihood estimation (MLE), the model choice is often based on information criteria that are based on the log-likelihood $L$ of the model. Because more complex models naturally achieve a better fit to the training data, that is, they have a smaller bias, the log-likelihood is adjusted (penalized) for model complexity, that is, the number of parameters $k$, and is also adjusted for sample size $n$. All information-theoretic criteria express a \emph{relative} quality of fit with \emph{smaller values being better}. There are no absolute cut-off values that would indicate a well-fitting model.
 
 \begin{align*}
-\operatorname{AIC} &= -2 \log L + 2k  \qquad \text{\footnotesize Akaike Information Criterion}\\
+\operatorname{AIC} &= -2 \log L + 2k  \qquad \text{\footnotesize Akaike Information Criterion}\index{Akaike information criterion}\index{AIC|see{Akaike information criterion}}\\
 \operatorname{AICc} &= AIC + \frac{2k(k+1)}{n-k-1} \qquad \text{\footnotesize Akaike Information Criterion, corrected}\\
-\operatorname{BIC} &= -2 \log L + k \log n \qquad \text{\footnotesize Bayesian Information Criterion}
+\operatorname{BIC} &= -2 \log L + k \log n \qquad \text{\footnotesize Bayesian Information Criterion}\index{Bayesian information criterion}\index{BIC|see{Bayesian information criterion}}
 \end{align*}
 
 \noindent The R output of the \texttt{sarima()} function shows very similar model fit values:
@@ -1055,13 +1055,13 @@ forecasts <- sarima.for(gnpgr, n.ahead=10, p=1,d=0,q=0)
 
 \section{GARCH Models}
 
-General Autoregressive Conditional Heteroscedasticity (GARCH) models are a family of time series models that are used to estimate the volatility and conditional variance of time series data, particularly of financial time series that exhibit time-varying volatility and volatility clustering. GARCH models are fundamental in the field of financial econometrics for modeling financial time series data.
+General Autoregressive Conditional Heteroscedasticity (GARCH)\index{General autoregressive conditional heteroscedasticity model}\index{GARCH model|see{General autoregressive conditional hterescedasticity model}} models are a family of time series models that are used to estimate the volatility and conditional variance of time series data, particularly of financial time series that exhibit time-varying volatility and volatility clustering. GARCH models are fundamental in the field of financial econometrics for modeling financial time series data.
 
 GARCH models predict the current variance (that is, the volatility or variability, not the actual values) as a function of past squared ''innovations'' (which represent unexpected shocks or news in the data) and past conditional variances. In other words, the variance at any time depends on the information available up to the previous period. GARCH models are particularly effective at modeling volatility clustering, a phenomenon common in financial time series where high-volatility events tend to cluster together.
 
 GARCH models are extensively used in risk management, asset pricing, and financial forecasting. They help in estimating the volatility of asset returns for pricing derivatives, calculating the value at risk for risk management, or forecasting volatility for portfolio optimization. 
 
-An ARCH model considers a series of ''returns'', which are defined as deviations from the prior value:
+An ARCH model considers a series of ''returns''\index{Return (in time series)}, which are defined as deviations from the prior value:
 
 \begin{align*}
 r_t = \frac{x_t - x_{t-1}}{x_{t-1}} \qquad \text{(''Return'')}

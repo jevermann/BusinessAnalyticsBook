@@ -45,19 +45,19 @@ The project can be cloned from this URL:
 
 In tabular RL methods the value of each state or state-action pair is represented explicitly in a table. However, as the complexity of environments grows, particularly with a high number of states or continuous state spaces, tabular methods become infeasible due to their extensive memory requirements. 
 
-To address these scalability issues, function approximation methods are employed. Function approximation techniques involve using a parameterized function to represent the value functions or the policy, rather than storing them explicitly for each state or state--action pair. In addition to addressing the scalability problem, this approach also facilitates generalization across states thereby improving learning efficiency and enabling RL to be applied to more complex and realistic problems. The types of function approximators commonly used in RL are linear functions and neural networks. 
+To address these scalability issues, function approximation methods are employed. Function approximation\index{Function approximation} techniques involve using a parameterized function to represent the value functions or the policy, rather than storing them explicitly for each state or state--action pair. In addition to addressing the scalability problem, this approach also facilitates generalization across states, thereby improving learning efficiency and enabling RL to be applied to more complex and realistic problems. The types of function approximators commonly used in RL are linear functions, because they can be theoretically analyzed, and neural networks, because they are powerful and flexible. 
 
 Function approximation can be applied to the state values $v$, the action values $q$ and directly to the policy $\pi$:
 \begin{itemize}
-\item Approximate the state value $v(s)$ by a parameterized function $\hat{v}(s)$ with a parameter vector $\theta$:\\
+\item Approximate the state value\index{State value function}\index{Value function|see{State value function}} $v(s)$ by a parameterized function $\hat{v}(s)$ with a parameter vector $\theta$:\\
 \begin{align*}
 \hat{v}(s) = \hat{v}(s, \theta) \approx v_{\pi}(s)
 \end{align*}
-\item Approximate the action-value function $q(s, a)$ by a parameterized function $\hat{q}(s, a)$ with a parameter vector $\theta$:
+\item Approximate the action-value function\index{Action value function} $q(s, a)$ by a parameterized function $\hat{q}(s, a)$ with a parameter vector $\theta$:
 \begin{align*}
 \hat{q}(s, a) = \hat{q}(s, a, \theta) \approx q_{\pi}(s, a)
 \end{align*}
-\item Approximate the policy $\pi(a, s)$ by a parameterized function $\hat{\pi}(a, s)$ with a parameter vector $\theta$:
+\item Approximate the policy\index{Policy} $\pi(a, s)$ by a parameterized function $\hat{\pi}(a, s)$ with a parameter vector $\theta$:
 \begin{align*}
 \hat{\pi}(a | s) = \hat{\pi}(a | s, \theta) \approx \pi(a | s)
 \end{align*}
@@ -81,7 +81,7 @@ Despite their advantages, function approximation methods introduce new challenge
 
 \section{Value-Based Methods and Stochastic Gradient Descent}
 
-Function approximation aims to minimize the differences between the true state or action value function and the approximated function. Assuming a MSE loss, the \emph{value error} VE can be expressed as follows:
+Function approximation aims to minimize the differences between the true state or action value function and the approximated function. Assuming a MSE loss, the \emph{value error} VE\index{Value error} can be expressed as follows:
 
 \begin{align*}
 \operatorname{VE} = \sum_{s \in \mathcal{S}} \mu(s) \left[ q_\pi(s, a) - \hat{q}(s, a, \theta) \right]^2
@@ -133,7 +133,7 @@ While tabular methods update the value of $Q$ for a state--action pair directly,
 \label{fig:gradientsarsa}
 \end{figure}
 
-Figure~\ref{fig:gradientsarsa} shows how the tabular SARSA method can be readily adapted to function approxmation using SGD. \emph{The only change to the tabular SARSA algorithm is the update step}. Whereas tabular SARSA updates $q(s, a)$, semi-gradient SARSA updates the parameters $\theta$ of $\hat{q}$. 
+Figure~\ref{fig:gradientsarsa} shows how the tabular SARSA method can be readily adapted to function approxmation using SGD. \emph{The only change to the tabular SARSA algorithm is the update step}. Whereas tabular SARSA updates $q(s, a)$, semi-gradient SARSA updates the parameters $\theta$ of $\hat{q}$\index{SARSA!semi-gradient}. 
 
 \section{Deep Q Network (DQN)}
 
@@ -149,15 +149,15 @@ To address these problems, RL implementations use experience replay and separate
 
 \subsubsection*{Experience replay} 
 
-Experience replay is a technique to break the auto-correlation between the $q$ values of successive training batches by smoothing changes in the data distribution between mini-batches, thus making training more stable. Rather than using the generated tuple of $(S, A, R, S', A')$ immediately in an update as in Figure~\ref{fig:gradientsarsa}, these tuples are stored in a \emph{replay buffer}. The replay buffer is a FIFO (first-in, first-out) queue of fixed size; when it is full, older elements are removed from the front of the queue as new elements are added to the back of the queue. For every parameter update step, a sample is randomly taken from the replay buffer to fill a training batch for the SGD update step. 
+Experience replay\index{Experience replay} is a technique to break the auto-correlation between the $q$ values of successive training batches by smoothing changes in the data distribution between mini-batches, thus making training more stable. Rather than using the generated tuple of $(S, A, R, S', A')$ immediately in an update as in Figure~\ref{fig:gradientsarsa}, these tuples are stored in a \emph{replay buffer}. The replay buffer is a FIFO (first-in, first-out) queue of fixed size; when it is full, older elements are removed from the front of the queue as new elements are added to the back of the queue. For every parameter update step, a sample is randomly taken from the replay buffer to fill a training batch for the SGD update step. 
 
 \subsubsection*{Target network}
 
 Working with two different sets of parameters $\theta_T$ and $\theta_M$, one for computing the udpdate targets $R + \gamma \hat{q}(S', A', \theta_T)$, called the ''\emph{target parameters}'' and one for computing the current estimates $\hat{q}(S, A, \theta_M)$, called the \emph{''main parameters''}, has the advantage that stable update targets are provided for multiple SGD update steps. This also stabilizes training. Periodically, the target parameters are updated with the main parameters.
 
-Because the approximation functions are typically neural networks, target parameters and main parameters are the weights and biases of two neural networks with identical architecture. Hence, one uses the terms ''\emph{target network}'' and ''\emph{main network}''.
+Because the approximation functions are typically neural networks, target parameters and main parameters are the weights and biases of two neural networks with identical architecture. Hence, one uses the terms ''\emph{target network}'' and ''\emph{main network}''\index{Target network}.
 
-Taking the two ideas of experience replay and target networks and adapting the gradient SARSA algorithm in Figure~\ref{fig:gradientsarsa} leads directly to the DQN algorithm shown in Figure~\ref{fig:dqn}.
+Taking the two ideas of experience replay and target networks and adapting the gradient SARSA algorithm in Figure~\ref{fig:gradientsarsa} leads directly to the DQN algorithm shown in Figure~\ref{fig:dqn}\index{Double Q Network}\index{DQN|see{Double Q Network}}.
 
 \begin{figure}
 \small
@@ -361,7 +361,7 @@ for episode in range(max_episodes):
 
 \subsubsection*{Double DQN}
 
-An extension to the DQN algorithm is the Double DQN (DDQN). It is based on the idea of Double-Q learning for tabular methods and uses the the target network $\hat{q}_T$ as a second $Q$ function. This removes the upward bias from using the \emph{max()} function as target estimator. The only change to be made is in the definition of the target, which, for a DDQN is: 
+An extension to the DQN algorithm is the Double DQN (DDQN)\index{Double DQN} \index{DDQN|see{Double DQN}}. It is based on the idea of Double-Q learning for tabular methods and uses the the target network $\hat{q}_T$ as a second $Q$ function. This removes the upward bias from using the \emph{max()} function as target estimator. The only change to be made is in the definition of the target, which, for a DDQN is: 
 
 \begin{align*}
 & \text{Target}\;y_j \leftarrow \begin{cases} r_j & \qquad \text{if $S_{j+1}$ is terminal} \\
@@ -377,11 +377,11 @@ def target_DDQN(Q_m, Q_t, a, r, sprime):
 
 \subsubsection*{Prioritized Replay}
 
-Another extension to the basic DQN algorithm is the use of \emph{prioritized replay}. In the DQN algorithm above, sampling from the experience replay buffer was done with uniform probability for all elements in the buffer. However, there are some some elements that are more informative than others, that is, more can be learned from them than from others. In particular, these are the elements that have a large absolute TD error, that is, the elements for which $|y_j - \hat{q}_M (S_j, A_j, \theta_M)|$ is large, where $y_j$ is either the DQN or DDQN target. Intuitively, elements that have a small prediction error are not very informative, as not much can be learned from them. When using prioritized experience replay, the TD errors are calculated when experience tuples are added to the replay buffer. Sampling from the buffer takes the priorities into account. 
+Another extension to the basic DQN algorithm is the use of \emph{prioritized replay}\index{Prioritized replay}. In the DQN algorithm above, sampling from the experience replay buffer was done with uniform probability for all elements in the buffer. However, there are some some elements that are more informative than others, that is, more can be learned from them than from others. In particular, these are the elements that have a large absolute TD error, that is, the elements for which $|y_j - \hat{q}_M (S_j, A_j, \theta_M)|$ is large, where $y_j$ is either the DQN or DDQN target. Intuitively, elements that have a small prediction error are not very informative, as not much can be learned from them. When using prioritized experience replay, the TD errors are calculated when experience tuples are added to the replay buffer. Sampling from the buffer takes the priorities into account. 
 
 \subsubsection*{Dueling DQN}
 
-The Dueling DQN is another extension of the basic DQN algorithm. It is based on the \emph{advantage function}, which is the difference between the action value function and the state value function:
+The Dueling DQN is another extension of the basic DQN algorithm\index{Dueling DQN}. It is based on the \emph{advantage function}, which is the difference between the action value function and the state value function\index{Advantage function}:
 
 
 \begin{align*}
@@ -405,7 +405,7 @@ Here, $\theta$ are shared neural-network parameters, $\beta$ are parameters only
 
 Policy gradient methods optimize the policy directly. Unlike value-based methods, which first estimate the action value function and derive a policy based on these estimates, policy gradient methods adjust the policy parameters $\theta$ directly in response to the received reward. This direct approach enables more nuanced strategies and behaviors, particularly in environments with high-dimensional or continuous action spaces.
 
-Policy gradient methods rely on optimizing parameterized policies with respect to the expected return by gradient ascent. The policy is typically represented as 
+Policy gradient methods\index{Policy gradient method} rely on optimizing parameterized policies with respect to the expected return by gradient ascent. The policy is typically represented as 
 
 \begin{align*}
 \pi(s, a) = \pi(s, a, \theta) = \Pr(A_t = a | S_t = s, \theta_t = \theta)
@@ -435,7 +435,7 @@ On the other hand, policy gradient methods also have disadvantages, such as:
 \item The performance of the policy can be heavily dependent on the initial parameter settings.
 \end{itemize}
 
-A simple policy gradient method is REINFORCE. The REINFORCE method uses the following parameter update method. The update is proportional to the return $G_t$ and inversely proportional to the action probability $\pi$. 
+A simple policy gradient method is REINFORCE\index{REINFORCE|see{Policy gradient method}}. The REINFORCE method uses the following parameter update method. The update is proportional to the return $G_t$ and inversely proportional to the action probability $\pi$. 
 
 \begin{align}
 \theta_{t+1} = \theta_t + \alpha G_t \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)} \label{eq:reinforce}
@@ -463,7 +463,7 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 
 \subsubsection*{REINFORCE with Baseline}
 
-An extension to the basic REINFORCE method is to use ''baselines'', values relative to which the return $G_t$ is evaluated. This reduces the variance of the updates but leaves the expected values unchanged, that is, it is unbiased. Additionally, this has been shown to improve the speed of learning. 
+An extension to the basic REINFORCE method is to use ''baselines''\index{Baseline (in reinforcement learning)}, values relative to which the return $G_t$ is evaluated. This reduces the variance of the updates but leaves the expected values unchanged, that is, it is unbiased. Additionally, this has been shown to improve the speed of learning. 
 
 The main idea is to use the following update that includes a ''baseline'' return $b(S_t)$ for state $S_t$:
 
@@ -510,7 +510,7 @@ The policy gradient methods in Figures~\ref{fig:reinforce} and \ref{fig:reinforc
 &= \theta_t + \alpha \delta_t \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)}
 \end{align*}
 
-Here, $\delta_t$ is the TD error. The resulting ''\emph{One-Step Actor-Critic}'' method uses bootstrapping to estimate the state value function, that is, it uses estimated values rather than actual returns. Just like TD, SARSA and Q-learning for tabular methods, actor-critic methods can improve on the slow learning of Monte Carlo methods and are also useful for non-episodic, continuous problems. Figure~\ref{fig:actorcritic} shows the complete algorithm for the one-step actor-critic method.
+Here, $\delta_t$ is the TD error. The resulting ''\emph{One-Step Actor-Critic}'' method uses bootstrapping to estimate the state value function, that is, it uses estimated values rather than actual returns. Just like TD, SARSA and Q-learning for tabular methods, actor-critic methods\index{Actor-critic method} can improve on the slow learning of Monte Carlo methods and are also useful for non-episodic, continuous problems. Figure~\ref{fig:actorcritic} shows the complete algorithm for the one-step actor-critic method.
 
 \begin{figure}
 \small
@@ -591,7 +591,7 @@ The environments in Farama Gymnasium can be categorized into several types, each
 
 \subsubsection*{AlphaGo}
 
-AlphaGo is a significant achievement in the field of artificial intelligence, developed by Google DeepMind. It was designed to play the ancient board game Go, which is known for its deep strategic complexity.  AlphaGo's architecture showcases the potential of deep learning and reinforcement learning techniques. AlphaGo combines advanced machine learning techniques, including deep neural networks and Monte Carlo tree search (MCTS). Its design consists of several key components:
+AlphaGo\index{AlphaGo} is a significant achievement in the field of artificial intelligence, developed by Google DeepMind. It was designed to play the ancient board game Go, which is known for its deep strategic complexity.  AlphaGo's architecture showcases the potential of deep learning and reinforcement learning techniques. AlphaGo combines advanced machine learning techniques, including deep neural networks and Monte Carlo tree search (MCTS). Its design consists of several key components:
 
 \begin{itemize}
 \item \emph{Policy Networks:} These networks were used to predict the next move during a game. AlphaGo was trained on both human expert games and games it played against itself.

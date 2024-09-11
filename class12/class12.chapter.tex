@@ -44,7 +44,7 @@ This chapter is an introduction to supervised machine learning using R and inclu
 
 \section{Linear Regression}
 
-Linear regression fits a simple statistical model to a set of input and output variables. The true model is assumed to take the form:
+Linear regression\index{Linear regression|see{Regression!linear}}\index{Regression!linear} fits a simple statistical model to a set of input and output variables. The true model is assumed to take the form:
 
 \begin{align*}
 f(X) &= Y = \beta_0 + \beta_1 X + \epsilon
@@ -52,7 +52,7 @@ f(X) &= Y = \beta_0 + \beta_1 X + \epsilon
 \hat{f}(X) &= \hat{Y} = \hat{\beta}_0 + \hat{\beta}_1 X
 \end{align*}
 
-The values of $\hat{f}(X) = \hat{Y}$ are called the \emph{fitted values} in statistics or the \emph{predicted values} in machine learning. The difference in terminology reflects the fact that traditional statistics looks back at the training data for the output values determined by the model after it has been fit to the training data, whereas machine learning emphasizes prediction of output values for new inputs.
+The values of $\hat{f}(X) = \hat{Y}$ are called the \emph{fitted values}\index{Fitted values|see{Predicted values}} in statistics or the \emph{predicted values}\index{Predicted values} in machine learning. The difference in terminology reflects the fact that traditional statistics looks back at the training data for the output values determined by the model after it has been fit to the training data, whereas machine learning emphasizes prediction of output values for new inputs.
 
 This equation shows the form of the assumed functional relationship between $X$ and $Y$ is linear in the parameters $\beta$. In other words, there are no polynomials or other transformations of $\beta$, such as $\beta_1^2$ or $\log \beta_1$. It is the linearity of the parameters that makes a regression linear, \emph{not} the linearity of the predictors. For example, adding a polynomial term $\beta_2 X^2$ to the right-hand side of this regression equation would still make this a linear regression. 
 
@@ -94,7 +94,7 @@ It is also insufficient to fit a model that is linear in $X$ and use the fit as 
 \label{fig:murphy31}
 \end{figure}
 
-The objective for estimating the parameters $\beta_0$ and $\beta_1$ from the data set is to minimize the residual or error, that is, the difference between $f$ and $\hat{f}$. So that positive and negative differences do not compensate for each other, the difference is either squared or the absolute value is taken. The former is called \emph{mean squared error} (MSE) while the latter is called \emph{mean absolute error} (MAE). In statistics, a closely related concept is the \emph{residual sum of squares} (RSS). The MSE is the RSS divided by the number of observations $n$, and minimizing one also minimizes the other. While the discussion in the previous chapter indicated that the MAE is more robust in that outliers, i.e. observations with large errors, have less influence on the estimated values of the parameters, it is customary to fit linear regression models using the RSS or the MSE.
+The objective for estimating the parameters $\beta_0$ and $\beta_1$ from the data set is to minimize the residual or error, that is, the difference between $f$ and $\hat{f}$. So that positive and negative differences do not compensate for each other, the difference is either squared or the absolute value is taken. The former is called \emph{mean squared error} (MSE) while the latter is called \emph{mean absolute error} (MAE). In statistics, a closely related concept is the \emph{residual sum of squares} (RSS). The MSE is the RSS divided by the number of observations $n$, and minimizing one also minimizes the other\index{Residual sum of squares}\index{RSS|see{Residual sum of squares}}. While the discussion in the previous chapter indicated that the MAE is more robust in that outliers, i.e. observations with large errors, have less influence on the estimated values of the parameters, it is customary to fit linear regression models using the RSS or the MSE.
 
 \begin{align*}
 RSS &= \sum_i \left( y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i \right)^2 \\
@@ -111,7 +111,7 @@ The linear regression model is simple enough that an optimal solution can be der
 
 The parameter value estimates have \emph{standard errors} associated with them that indicate the uncertainty of these estimates. This is based on the idea that the training data set is a small random sample from the overall population, and taking other random samples may well yield slightly different parameter values. 
 
-Using the standard errors of the estimates, a \emph{t statistic} can be calculated from the difference of the estimate of a parameter $\hat{beta}$ and some value $V$.
+Using the standard errors of the estimates, a \emph{t statistic}\index{t-test} can be calculated from the difference of the estimate of a parameter $\hat{beta}$ and some value $V$.
 
 \begin{align*}
 t = \frac{\hat{\beta} - V}{SE(\hat{\beta})}
@@ -144,7 +144,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \epsilon
 \label{fig:plane}
 \end{figure}
 
-Qualitative predictors (called \emph{factors} in statistics) wich multiple, exclusive \emph{levels} or categories can be included using \emph{dummy variables}. A categorical variable that can take on $k$ values requires $k-1$ binary dummy variables. For example, a factor $x$ that has four levels ''a'', ''b'', ''c'', and ''d'' might be encoded using three dummy variables as follows:
+Qualitative predictors (called \emph{factors} in statistics)\index{Factor} wich multiple, exclusive \emph{levels}\index{Factor level} or categories can be included using \emph{dummy variables}\index{Dummy variable}. A categorical variable that can take on $k$ values requires $k-1$ binary dummy variables. For example, a factor $x$ that has four levels ''a'', ''b'', ''c'', and ''d'' might be encoded using three dummy variables as follows:
 
 \begin{align*}
 x_{i1} = \begin{cases}
@@ -161,7 +161,7 @@ x_{i3} = \begin{cases}
 \end{cases}
 \end{align*}
 
-\noindent Note that $x_{i1} = x_{i2} = x_{i3} = 0$ represents level ''d''. Such \emph{contrasts} determine how factor levels are coded using dummy variables.
+\noindent Note that $x_{i1} = x_{i2} = x_{i3} = 0$ represents level ''d''. Such \emph{contrasts}\index{Contrast (for categorical predictor)} determine how factor levels are coded using dummy variables.
 
 Earlier, it was noted that a linear model is linear in its parameters, not necessarily in its input variables. Hence, it is possible to include transformations of input variables in a linear regression model, such as polynomials, products, or other functional transformations like logarithms, square roots, etc. For example, the model
 
@@ -169,7 +169,7 @@ Earlier, it was noted that a linear model is linear in its parameters, not neces
 Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \epsilon
 \end{align*}
 
-\noindent is still linear in its parameters $\beta_i$. This model also shows the difference between \emph{input variables} and \emph{predictors} or \emph{features} that was alluded to in the previous chater. This model has two input variables $X_1$ and $X_2$ but has four predictors or features, $X_1$, $X_1^2$, $X_2$, and $X_1 X_2$. In statistics terminology, the coefficients of single input variables, here $\beta_1$ and $\beta_3$, are said to represent \emph{main effects}, while the parameters of products of two or more input variables, here $\beta_4$ are said to represent \emph{interaction effects}. Interaction effects can include the product of a numerical variable and a dummy binary variable. This results in different regression slopes for different categories or factor levels, as shown in the example in Figure~\ref{fig:groupinteraction} where the left panel shows no interaction effect, that is, the lines are parallel with the same slopes. The right panel shows an interaction effect where the slopes for different categories are different.
+\noindent is still linear in its parameters $\beta_i$. This model also shows the difference between \emph{input variables} and \emph{predictors} or \emph{features} that was alluded to in the previous chater. This model has two input variables $X_1$ and $X_2$ but has four predictors or features, $X_1$, $X_1^2$, $X_2$, and $X_1 X_2$. In statistics terminology, the coefficients of single input variables, here $\beta_1$ and $\beta_3$, are said to represent \emph{main effects}\index{Main effect}, while the parameters of products of two or more input variables, here $\beta_4$ are said to represent \emph{interaction effects}{Interaction effect}. Interaction effects can include the product of a numerical variable and a dummy binary variable. This results in different regression slopes for different categories or factor levels, as shown in the example in Figure~\ref{fig:groupinteraction} where the left panel shows no interaction effect, that is, the lines are parallel with the same slopes. The right panel shows an interaction effect where the slopes for different categories are different.
 
 \begin{figure}
 \centering
@@ -347,7 +347,7 @@ The following example uses the \texttt{Auto} data set from the \texttt{ISLR2} pa
 
 Randomly splitting the data set is accomplished using the \texttt{sample()} function in R which returns a boolean vector with values \texttt{TRUE} or \texttt{FALSE} that can be used to select the appropriate data from the data frame. 
 
-To make the example repeatable, the initial seed of the pseudo-random number generator (RNG) is set to a fixed value with \texttt{set.seed()}. Computers cannot generate truly random number; they are deterministic machines. The pseudo-random numbers they generate are computed by a deterministic algorithm, the ''random number generator'' (RNG), based on a given start value. With the same start value, the algorithm produces the same sequence of numbers. A good RNG produces numbers that are effectively indistinguishable from true trandom numbers.
+To make the example repeatable, the initial seed of the pseudo-random number generator (RNG)\index{Random number generator}\index{RNG|see{Random number generator}} is set to a fixed value with \texttt{set.seed()}. Computers cannot generate truly random number; they are deterministic machines. The pseudo-random numbers they generate are computed by a deterministic algorithm, the ''random number generator'' (RNG), based on a given start value. With the same start value, the algorithm produces the same sequence of numbers. A good RNG produces numbers that are effectively indistinguishable from true trandom numbers.
 
 \begin{samepage}
 \begin{Rcode}
@@ -437,11 +437,11 @@ print(cv.err)
 
 \section{Shrinkage Methods}
 
-Shrinkage methods are so-called because their aim is shrink the magnitude of the regression parameter values $\hat{\beta}_i$. This is primarily to avoid overfitting a model to one specific data set. In other words, they are a kind of \emph{regularization}. Shrinkage methods for linear regression model works by \emph{penalizing} the model for large regression parameter values, that is, by performing \emph{penalized regression}. There are three frequently used types of penalized regression or linear regression regularization: L1 regularization penalizes large absolute parameter values (that is, the L1 norm of the vector of parameters $\hat{\beta}$), L2 regularization penalizes large squared parameter values (that is, the L2 norm of the vector of parameters $\hat{\beta}$, and Elastic Net regularization is a combination of both. L1 regularization is also known as the \emph{LASSO} (''least absolute shrinkage and selection operator'') while L2 regularization is known as \emph{ridge regression} or Tikhonov regularization. 
+Shrinkage methods are so-called because their aim is shrink the magnitude of the regression parameter values $\hat{\beta}_i$. This is primarily to avoid overfitting a model to one specific data set. In other words, they are a kind of \emph{regularization}. Shrinkage methods for linear regression model works by \emph{penalizing} the model for large regression parameter values, that is, by performing \emph{penalized regression}\index{Shrinkage methods}\index{Penalized regression|see{Shrinkage methods}}\index{Regularization}. There are three frequently used types of penalized regression or linear regression regularization: L1 regularization penalizes large absolute parameter values (that is, the L1 norm of the vector of parameters $\hat{\beta}$), L2 regularization penalizes large squared parameter values (that is, the L2 norm of the vector of parameters $\hat{\beta}$, and Elastic Net regularization is a combination of both. L1 regularization is also known as the \emph{LASSO} (''least absolute shrinkage and selection operator'') while L2 regularization is known as \emph{ridge regression} or Tikhonov regularization. 
 
 \subsection{Ridge Regression}
 
-The loss function or minimization objective of ridge regression is the usual RSS that now also includes a term that penalizes large values of $\beta$. 
+The loss function or minimization objective of ridge regression\index{Ridge regression}\index{L1 regularization|see{Ridge regression}} is the usual RSS that now also includes a term that penalizes large values of $\beta$. 
 
 \begin{align*}
 \text{Minimize} \quad RSS + \lambda \sum_{j=1}^p \beta_j^2 = RSS + \lambda ||\beta||_2^2
@@ -478,7 +478,7 @@ Figure~\ref{fig:ridgemultiple} shows this effect for a polynomial of degree 14 t
 
 In contrast to the ridge regression, where the model parameter values are shrunk towards zero, but are never forced to equal zero, the LASSO does just that. In this form of penalized regression, as the degree of penalty is increased, model parameter values are set to 0, effectively making the LASSO a model or \emph{predictor selection method} as well, that is, it can be used to select only important predictors. This is reflected in its name: ''Least Absolute Shrinkage and Selection Operator''. The advantage over ridge regression is that this results in more parsminious, that is, smaller, models that are easier to interpret.
 
-The loss function or minimization objective of the LASSO is the RSS but penalized for the L1 norm of the vector of parameters $\beta$. As in ridge regression, the amount of shrinkage is controlled by a parameter $\lambda$.
+The loss function or minimization objective of the LASSO\index{Least absolute shrinkage and selection operator}\index{LASSO|see{Least absolute shrinkage and selection operator}}\index{L2 regularization|see{Least absolute shrinkage and selection operator}} is the RSS but penalized for the L1 norm of the vector of parameters $\beta$. As in ridge regression, the amount of shrinkage is controlled by a parameter $\lambda$.
 
 \begin{align*}
 \text{Minimize} \quad RSS + \lambda \sum_{j=1}^p |\beta_j| = RSS + \lambda ||\beta||_1
@@ -497,7 +497,7 @@ The loss function or minimization objective of the LASSO is the RSS but penalize
 
 The model selection property of the LASSO are shown in Figure~ref{fig:lasso1}. The left panel shows the value of different model parameters as a function of the penalization parameter $\lambda$. As $\lambda$ increases, fewer and fewer parameters are allowed to retain absolute values larger than 0. The same is shown in the right panel of Figure~\ref{fig:lasso1}, but now as a function of the relative size of the restricted L1 norm of $\beta$ compared to the L1 norm of the unconstrained $\beta$.
 
-The LASSO and ridge regression shrinkage or penalty parameter $\lambda$ is typically chosen through cross-validation to minimize the cross-validation or test error. For cross-validation, a ''grid'' or range of possible values of $\lambda$ is defined. A model is fitted for each value of $\lambda$ and its cross-validation or test error is calculated. The final model is then fitted using the optimal value of $\lambda$, the is, the value that results in the lowest cross-validation or test error.
+The LASSO and ridge regression shrinkage or penalty parameter $\lambda$ is typically chosen through cross-validation to minimize the cross-validation or test error. For cross-validation, a ''grid'' or range of possible values of $\lambda$ is defined. A model is fitted for each value of $\lambda$ and its cross-validation or test error is calculated. The final model is then fitted using the optimal value of $\lambda$, that is, the value that results in the lowest cross-validation or test error.
 
 \begin{figure}
 \centering
@@ -512,7 +512,7 @@ This is illustrated in Figure~\ref{fig:lasso2} for a LASSO, where the left panel
 
 \subsection{Elastic Net}
 
-The Elactic Net is a combination of rigde regression and LASSO, controlled by the parameter $\alpha$. The Elastic Net penalty is defined as
+The Elactic Net\index{Elastic net} is a combination of rigde regression and LASSO, controlled by the parameter $\alpha$. The Elastic Net penalty is defined as
 
 \begin{align*}
 \lambda \left( \alpha ||\beta||_1  + (1-\alpha)||\beta||_2^2 \right)
@@ -704,7 +704,7 @@ Linear models, as used in regression, are not suitable for classification withou
 \label{fig:classification1}
 \end{figure}
 
-There are many transformation or link functions that may be used, but a popular one is the \emph{logistic function}, a type of \emph{sigmoid function} (''s-shaped'') (often the two terms are equated), defined as follows:
+There are many transformation or link functions that may be used, but a popular one is the \emph{logistic function}, a type of \emph{sigmoid function} (''s-shaped'')\index{Sigmoid function}\index{Logistic function|see{Sigmoid function}} (often the two terms are equated), defined as follows:
 
 \begin{minipage}{.4\textwidth}
 \begin{align*}
@@ -720,7 +720,7 @@ There are many transformation or link functions that may be used, but a popular 
 \tiny \url{https://commons.wikimedia.org/wiki/File:Logistic-curve.svg} \normalsize
 \end{minipage}
 
-For the binary case, this leads to \emph{binary logistic regression}, expressed by the following equalitites:
+For the binary case, this leads to \emph{binary logistic regression}\index{Logistic regression!binary}, expressed by the following equalitites:
 
 \begin{align}
 p(X) &= \sigma( \beta_0 + \beta_1 X) \nonumber \\ 
@@ -729,7 +729,7 @@ p(X) &= \sigma( \beta_0 + \beta_1 X) \nonumber \\
 \Rightarrow \quad \log \left( \frac{p(X)}{1 - p(X)} \right) &= \beta_0 + \beta_1 X \qquad \text{''Log-Odds'', ''Logits''} \label{eq:logits}
 \end{align}
 
-Equation~\ref{eq:logistic} defines the probability of an observation being ''true'' as just the logistic transformation of the linear combination of predictors. Dividing and a little algebraic rearrangement yields equation~\ref{eq:odds} which represents the \emph{odds} as the exponential of the linear combination of predictors. Taking the natural logarithm yields equation~\ref{eq:logits} which shows that the linear combination of predictors are equal to the \emph{log-odds}, also called \emph{logits}.
+Equation~\ref{eq:logistic} defines the probability of an observation being ''true'' as just the logistic transformation of the linear combination of predictors. Dividing and a little algebraic rearrangement yields equation~\ref{eq:odds} which represents the \emph{odds} as the exponential of the linear combination of predictors. Taking the natural logarithm yields equation~\ref{eq:logits} which shows that the linear combination of predictors are equal to the \emph{log-odds}\index{Log odds}, also called \emph{logits}\index{Logit}.
 
 Once estimates of the model parameters $\beta_0$ and $\beta_1$ have been calculated, predictions of the class probability can be made using the logistic link function:
 
@@ -739,7 +739,7 @@ Once estimates of the model parameters $\beta_0$ and $\beta_1$ have been calcula
 
 From there, a \emph{threshold value} can be used to predict class membership, for example based on $\hat{p}(X) > 0.5$, but other decision rules and threshold values may be used, depending on the desired proportion or cost of false positives and true positives.
 
-The binary logistic regression can be extended to \emph{mutinomial logistic regression}, where there are more than two classes for the output or target. The form of the equations is similar for $K$ classes, starting from the log-odds. In this derivation, the last class $K$ plays the role of reference class. As classes are not ordered, this choice is arbitrary.
+The binary logistic regression can be extended to \emph{mutinomial logistic regression}\index{Logistic regression!multinomial}, where there are more than two classes for the output or target. The form of the equations is similar for $K$ classes, starting from the log-odds. In this derivation, the last class $K$ plays the role of reference class. As classes are not ordered, this choice is arbitrary.
 
 \begin{align}
 \log \left( \frac{\Pr(Y=k | X=x)}{\Pr(Y=K | X=x)}\right) &= \beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p \; , k<K \nonumber \\
@@ -904,7 +904,7 @@ The naive Bayes classifier is based on \emph{Bayes' theorem} of conditional prob
 &= \frac{p(X|Y=c)\,p(Y=c) }{\sum_{l=1}^K p(X|Y=l)\,p(Y=l)}  \label{eq:bayes1}
 \end{align}
 
-The \emph{naive Bayes assumption} is that within each class $c$, the $D$ different input features that make up $X$ are independently distributed of each other. With this assumption, one can write:
+The \emph{naive Bayes assumption}\index{Naive Bayes assumption} is that within each class $c$, the $D$ different input features that make up $X$ are independently distributed of each other. With this assumption, one can write:
 
 \begin{align}
 p(X | Y=c ) &= p(x_1 | Y=c) \times p(x_2 | Y=c) \times \cdots \times p(x_D | Y=c) \nonumber \\
@@ -917,7 +917,7 @@ p(X | Y=c ) &= p(x_1 | Y=c) \times p(x_2 | Y=c) \times \cdots \times p(x_D | Y=c
 p(Y=c|X) &= \frac{\left(\prod_{d=1}^D p(x_d | Y=c)\right) \, p(Y=c)}{\left(\sum_{l=1}^K \prod_{d=1}^D p(x_d | Y=l)\right) \, p(Y=l) } 
 \end{align*}
 
-The probabilities in the product of Equation~\ref{eq:bayes2} can be trivially estimated from the data, simply as the proportion of each $x_d$ for each class $c$. However, the assumption of independence is violated when features are correlated. In other words, the naive Bayes classifier can be expected to perform best for independent features.
+The probabilities in the product of Equation~\ref{eq:bayes2} can be trivially estimated from the data, simply as the proportion of each $x_d$ for each class $c$. However, the assumption of independence is violated when features are correlated. In other words, the naive Bayes classifier can be expected to perform best for independent features\index{Naive Bayes classifier}.
 
 \subsection{Naive Bayes Classifier in R}
 
@@ -975,7 +975,7 @@ performance(nb.pred.obj, 'auc')@y.values[[1]]
 
 \subsection{KNN Classification}
 
-K-Nearest Neighbour classification is a non-parametric classification technique. It identifies the $k$ nearest neighbours of a new observation, typically using the Euclidean distance or the L2-norm of the vector differences. It then estimates the class membership probabilities as the class membership proportions among the $k$ nearest neighbours of the new observations. Details can be found in the previous chapter. 
+K-Nearest Neighbour classification\index{k-nearest neighbour}\index{kNN|see{k-nearest neighbour}} is a non-parametric classification technique. It identifies the $k$ nearest neighbours of a new observation, typically using the Euclidean distance or the L2-norm of the vector differences. It then estimates the class membership probabilities as the class membership proportions among the $k$ nearest neighbours of the new observations. Details can be found in the previous chapter. 
 
 One important requirement in KNN classification is \emph{scaling of inputs} to have similar standard deviations or variance to avoid the distance metric being dominated by the input on the largest scale. For example, if one input ranges between 1 and 10 million, while another input ranges between 1 and 10, the first input is clearly most important in determining the distance between two observations.
 

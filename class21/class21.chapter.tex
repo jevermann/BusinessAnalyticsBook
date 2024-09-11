@@ -43,12 +43,12 @@ What makes RL challenging is both the incomplete knowledge of the environment as
 The core elements of an RL problem are the following:
 
 \begin{itemize}
-    \item \textbf{Policy} $\pi$: A deterministic policy $\pi$ specifies for each state $s$ the action to take, whereas a stochastic policy $\pi$ specifies for each state $s$  a probability distribution over the possible actions $a$ in state $s$.
-    \item \textbf{Reward} $R$: The reward is received from the environment after each action. The reward may be positive, negative, or zero. In designing RL problems, the reward function is critical to inducing the correct learning behaviour and having the RL agent solve the right problem. 
-    \item \textbf{Return} $G$: The return is the possibly discounted sum of future rewards. The discount factor $0 < \gamma \leq 1$ expresses the fact that immediate rewards are worth more than future rewards. This is due to the uncertain nature of future rewards. In a stochastic environment of which the agent has incomplete knowledge, future rewards may or may not accrue as expected.
-    \item \textbf{State value function} $v$: This function expresses how valuable it is for an agent to be in any particular state $s$. It is defined as the expected return for each state.
-    \item \textbf{Action value function} $q$: This function expresses how valuable it is for an agent in a particular state $s$ to take a specific action $a$. It is defined as the expected return for each state and action taken in that state.
-    \item \textbf{Model} $p$: This is a set of probability distributions over rewards and new states for every pair of current state $s$ and action $a$. It expresses the stochastic behaviour of the environment. If an RL agent had such a model of the environment, an optimal policy can be found using dynamic programming, a type of optimization. RL agents typically do not try to build such a model, but instead focus on learning the state value function, the action value function, or the policy directly.
+    \item \textbf{Policy} $\pi$\index{Policy}: A deterministic policy $\pi$ specifies for each state $s$ the action to take, whereas a stochastic policy $\pi$ specifies for each state $s$  a probability distribution over the possible actions $a$ in state $s$.
+    \item \textbf{Reward} $R$\index{Reward}: The reward is received from the environment after each action. The reward may be positive, negative, or zero. In designing RL problems, the reward function is critical to inducing the correct learning behaviour and having the RL agent solve the right problem. 
+    \item \textbf{Return} $G$\index{Return (in reinforcement learning}: The return is the possibly discounted sum of future rewards. The discount factor $0 < \gamma \leq 1$ expresses the fact that immediate rewards are worth more than future rewards. This is due to the uncertain nature of future rewards. In a stochastic environment of which the agent has incomplete knowledge, future rewards may or may not accrue as expected.
+    \item \textbf{State value function} $v$\index{State value function}: This function expresses how valuable it is for an agent to be in any particular state $s$. It is defined as the expected return for each state.
+    \item \textbf{Action value function} $q$\index{Action value function}: This function expresses how valuable it is for an agent in a particular state $s$ to take a specific action $a$. It is defined as the expected return for each state and action taken in that state.
+    \item \textbf{Model} $p$\index{Model (in reinforcement learning)}: This is a set of probability distributions over rewards and new states for every pair of current state $s$ and action $a$. It expresses the stochastic behaviour of the environment. If an RL agent had such a model of the environment, an optimal policy can be found using dynamic programming, a type of optimization. RL agents typically do not try to build such a model, but instead focus on learning the state value function, the action value function, or the policy directly.
 \end{itemize}
 
 \subsubsection*{Introductory Example}
@@ -84,7 +84,7 @@ After each greedy action from state $s_t$, the RL agent updates its value functi
 V(S_t) \leftarrow V(S_t) + \alpha \left[ V(S_{t+1}) - V(S_t)\right] \label{eq:1}
 \end{align}
 
-Here, $V$ is the value function, and $\alpha$ is a \emph{step size} that determines the rate of update or learning. The term $V(S_{t+1}) - V(S_t)$ is called the \emph{error} and the term $V(S_{t+1})$ is called the \emph{update target}.
+Here, $V$ is the value function, and $\alpha$ is a \emph{step size} that determines the rate of update or learning. The term $V(S_{t+1}) - V(S_t)$ is called the \emph{error} and the term $V(S_{t+1})$ is called the \emph{update target}\index{Update target}.
 
 \subsubsection*{Applications in Business and Management}
 
@@ -104,7 +104,7 @@ There are many applications for reinforcement learning in business and managemen
 
 \section{K-Armed Bandits}
 
-To introduce RL learning, consider the k-armed bandit problem. It is named after the nickname of early slot machines (Figure~\ref{fig:bandit}). The RL agent is faced with $k$ such slot machines that give different stochastic rewards. The rewards given by each of the $k$ bandits are initially unknown to the agent. The goal of the agent is to find a policy of which bandit to play in order to maximize the return, that is, the sum of future rewards.
+To introduce RL learning, consider the k-armed bandit problem\index{K-armed bandit}. It is named after the nickname of early slot machines (Figure~\ref{fig:bandit}). The RL agent is faced with $k$ such slot machines that give different stochastic rewards. The rewards given by each of the $k$ bandits are initially unknown to the agent. The goal of the agent is to find a policy of which bandit to play in order to maximize the return, that is, the sum of future rewards.
 
 \begin{figure}
 \centering
@@ -124,7 +124,7 @@ Formally, there are $k$ possible actions $A_t$ at time $t$ with stochastic rewar
 
 Here $\mathbbm{1}_a$ is 1 when action $a$ has been taken and 0 when another action has been taken. 
 
-A suitable policy that balances exploitation of existing knowledge and exploration for gathering new knowledge is the \emph{$\epsilon$-greedy policy}. An $\epsilon$-greedy policy is one that with probability $\epsilon$ takes a random action and with probability $1-\epsilon$ takes the optimal action:
+A suitable policy that balances exploitation of existing knowledge and exploration for gathering new knowledge is the \emph{$\epsilon$-greedy policy}. An $\epsilon$-greedy policy\index{Policy!Epsilon-greedy} is one that with probability $\epsilon$ takes a random action and with probability $1-\epsilon$ takes the optimal action:
 
 \begin{align*}
 A_t = \operatorname*{arg max}_a Q_t(a)
@@ -229,7 +229,7 @@ Figure~\ref{fig:banditresults} shows a comparison of learning behaviour for agen
 
 \section{Markov Decision Processes and Dynamic Programming}
 
-This section introduces the concept of \emph{Markov decision processes}, that is, a sequence of decisions or actions and states that has the Markov property: the reward and next state depend only on the current state and action, not on the state history.
+This section introduces the concept of \emph{Markov decision processes}\index{Markov decision process}, that is, a sequence of decisions or actions and states that has the Markov property: the reward and next state depend only on the current state and action, not on the state history.
 
 \begin{figure}[h]
 \centering
@@ -247,25 +247,25 @@ One can think of RL learning as a Markov decision process. Figure~\ref{fig:sb31}
 
 \subsection{Definitions}
 
-The behaviour of the environment is stochastic and can be described through the ''p-function'' which expresses the state transition and reward probabilities. This is known as the \emph{dynamics} of the environment: 
+The behaviour of the environment\index{Environment} is stochastic and can be described through the ''p-function'' which expresses the state transition and reward probabilities. This is known as the \emph{dynamics} of the environment: 
 \begin{align}p(s', r | s, a) = \operatorname{Pr}\{S_t = s', R_t =r | S_{t-1} = s, A_{t-1} = a \} \label{eq:dynamics}
 \end{align}
 
-The \emph{return} is formally defined as the possibly discounted sum of future rewards:
+The \emph{return}\index{Return (in reinfocement learning)} is formally defined as the possibly discounted sum of future rewards:
 
 \begin{align}
 G_t &= R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \nonumber \\
     &= R_{t+1} + \gamma G_{t+1} \label{eq:return}
 \end{align}
 
-The \emph{state value function} of state $s$ under a policy $\pi$ is defined as the expected value of the return in that state where $\mathbbm{E}_{\pi}$ is the expection when acting according to policy $\pi$:
+The \emph{state value function}\index{State value function} of state $s$ under a policy $\pi$ is defined as the expected value of the return in that state where $\mathbbm{E}_{\pi}$ is the expection when acting according to policy $\pi$:
 
 \begin{align}
 v_\pi(s) &= \mathbbm{E}_\pi [ G_t | S_t = s]  \label{eq:statevalue1} \\
 &= \mathbbm{E}_\pi \left[ \sum_{k=0}^\infty \gamma^k R_{t + k + 1} | S_t = s \right] \nonumber
 \end{align}
 
-Similarly, the \emph{action value function} of state $s$ and action $a$ for policy $\pi$ is defined as the expected return of being in state $s$ and taking action $a$:
+Similarly, the \emph{action value function}\index{Action value function} of state $s$ and action $a$ for policy $\pi$ is defined as the expected return of being in state $s$ and taking action $a$:
 
 \begin{align}
 q_\pi(s, a) &= \mathbbm{E}_\pi [ G_t | S_t = s, A_t = a] \label{eq:actionvalue} \\
@@ -287,7 +287,7 @@ v_\pi(s)  &= \sum_a \pi(a | s) \sum_{s'} \sum_r p(s', r | s, a) \left[ r + \gamm
 v_\pi(s) &= \sum_a \pi(a | s) \sum_{s', r} p(s', r | s, a) \left[r + \gamma v_\pi(s') \right] \quad \text{for all} \, s \in \mathcal{S} \label{eq:bellman}
 \end{align}
 
-Equation~\ref{eq:bellman} is called the \emph{Bellman equation} for the state value function. A similar equation can be derived for the action value function, beginning with Equation~\ref{eq:actionvalue} and following the same steps. 
+Equation~\ref{eq:bellman} is called the \emph{Bellman equation}\index{Bellman equation} for the state value function. A similar equation can be derived for the action value function, beginning with Equation~\ref{eq:actionvalue} and following the same steps. 
 
 To illustrate the concept of the state value function, consider the gridworld example in Figure~\ref{fig:sb32}. An agent is placed on the grid in the left panel of the figure. The agent can take four possible actions; it can move up, down, left or right. Moving off the grid, for example taking action ''up'' when in the top row, results in a reward of $-1$ and the state is unchanged. All other actions yield a reward of $0$ with state changes as indicated by the action, except when states $A$ or $B$ are reached. When reaching state $A$, the agent receives a reward of $+10$ and the next state is $A'$. When reaching state $B$, the agent receives a reward of $+5$ and the next state is $B'$.
 
@@ -304,7 +304,7 @@ The state values for this problem under the random policy are shown in the right
 \label{fig:sb32}
 \end{figure}
 
-The Bellman equations (Equation~\ref{eq:bellman}, and its equivalent for the action value function) express the fact that the value of a state (or state-action pair) is a function of the values of all other states (or state-action pairs). This suggests an intuitive way to compute the state values iteratively. Beginning with random values for each state, calculate updated values for all states using Equation~\ref{eq:bellman}. Then, consider the updated values as the current values, and calculate updated values based on these\footnote{In fact, it is not even necessary to wait until all states have been iterated over and updated before using updated state values as current ones.}. Iterate like this until the values do not change any more. It can be proven that this procedure converges to the correct solution and terminates. 
+The Bellman equation (Equation~\ref{eq:bellman} and its equivalent for the action value function) express the fact that the value of a state (or state-action pair) is a function of the values of all other states (or state-action pairs). This suggests an intuitive way to compute the state values iteratively. Beginning with random values for each state, calculate updated values for all states using Equation~\ref{eq:bellman}. Then, consider the updated values as the current values, and calculate updated values based on these\footnote{In fact, it is not even necessary to wait until all states have been iterated over and updated before using updated state values as current ones.}. Iterate like this until the values do not change any more. It can be proven that this procedure converges to the correct solution and terminates. 
 
 
 \begin{figure}
@@ -325,7 +325,7 @@ The Bellman equations (Equation~\ref{eq:bellman}, and its equivalent for the act
 \label{fig:policyiteration}
 \end{figure}
 
-This process is called \emph{iterative policy evaluation}. Figure~\ref{fig:policyiteration} shows this in pseudocode and the following Python code block shows the straightforward implementation, beginning with initial values of $0$ for each state.
+This process is called \emph{iterative policy evaluation}\index{Iterative policy evaluation}. Figure~\ref{fig:policyiteration} shows this in pseudocode and the following Python code block shows the straightforward implementation, beginning with initial values of $0$ for each state.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -380,7 +380,7 @@ q_*(s, a) &= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') | S_t
 &= \sum_{s', r} p(s', r | s, a) [ r + \gamma \max_{a'} q_* (s', a') ] \nonumber
 \end{align}
 
-These final expressions are known as the \emph{Bellman optimality} equations for the state and action value functions.
+These final expressions are known as the \emph{Bellman optimality}\index{Bellman optimality} equations for the state and action value functions.
 
 A simple, intuitive way of finding the optimal policy is to find the optimal state value function. The optimal policy is then to take that action that will yield the best following state. However, changing the policy will change the state value function. This intuitive procedure shows that state value function calculation and policy updates should happen alternatingly, until the policy no longer changes. 
 
@@ -405,7 +405,7 @@ A simple, intuitive way of finding the optimal policy is to find the optimal sta
 \label{fig:policyimprovement}
 \end{figure}
 
-Because the state value computation was already demonstrated using iterative policy evaluation above, the procedure for \emph{iterative policy improvement} is simple, expressed in Figure~\ref{fig:policyimprovement}. The following Python code block illustrates the straightforward implementation:
+Because the state value computation was already demonstrated using iterative policy evaluation above, the procedure for \emph{iterative policy improvement}\index{Iterative policy improvement} is simple, expressed in Figure~\ref{fig:policyimprovement}. The following Python code block illustrates the straightforward implementation:
 
 \begin{samepage}
 \begin{pythoncode}
@@ -478,9 +478,9 @@ Figure~\ref{fig:jackscars} shows the policies after each iteration of the iterat
 
 The previous section illustrates how optimal policies and their state value and action value function can be computed \emph{under the assumption that the dynamics of the environment, that is Equation~\ref{eq:dynamics}, are known}. In practice, this is not the case --- the $p(s', r | s, a)$ are unknown, there is no model of the environment. The RL agent must learn $V$ and $Q$ from \emph{experience}, that is, it must act in an environment and generate trajectories (sequences of states, actions, and rewards). 
 
-This section assumes \emph{episodic tasks}, that is problems with a terminal state, a finite trajectory, and finite returns. The agent acts in an environment according to a policy $\pi$ until it arrives in a terminal state and the episode ends. At that point, the entire sequence of states, actions, and rewards is known and state value functions can be estimated or approximated. Recall that the value of a state is the expected return, that is the expected sum of discounted future rewards. State values can then be approximated as the average of the returns in that state. 
+This section assumes \emph{episodic tasks}\index{Episodic task}, that is, problems with a terminal state, a finite trajectory, and finite returns. The agent acts in an environment according to a policy $\pi$ until it arrives in a terminal state and the episode ends. At that point, the entire sequence of states, actions, and rewards is known and state value functions can be estimated or approximated. Recall that the value of a state is the expected return, that is the expected sum of discounted future rewards. State values can then be approximated as the average of the returns in that state. 
 
-A problem arises because the agent can be in the same state multiple times before the episode terminates. Different assumptions can be made. For example, one can assume that it is the first visit of a state that is most influential in determining the outcome of the episode and therefore the state value should be updated with the return at the time of the first visit of a state. Alternatively, one could assume that the last visit of a state is most important, and the value function is updated with the returns at the last time that the state is visited. Yet another alternative is to update the value function for all visits of a state. Figure~\ref{fig:firstvisitmc} shows the pseudocode for this process when the state value function is updated only for the first visit of a state, known as \emph{First-Visit Monte Carlo Prediction}.
+A problem arises because the agent can be in the same state multiple times before the episode terminates. Different assumptions can be made. For example, one can assume that it is the first visit of a state that is most influential in determining the outcome of the episode and therefore the state value should be updated with the return at the time of the first visit of a state. Alternatively, one could assume that the last visit of a state is most important, and the value function is updated with the returns at the last time that the state is visited. Yet another alternative is to update the value function for all visits of a state. Figure~\ref{fig:firstvisitmc} shows the pseudocode for this process when the state value function is updated only for the first visit of a state, known as \emph{First-Visit Monte Carlo Prediction}\index{Monte Carlo prediction!first visit}.
 
 \begin{figure}
 \begin{tcolorbox}[colback=code]
@@ -509,9 +509,9 @@ Note the computation of the return $G$ backwards from the end of the episode. Th
 
 \subsubsection*{Monte Carlo Control}
 
-While Monte Carlo prediction is useful in approximating the state value function, obtaining the optimal policy is done with \emph{Monte Carlo control}. Instead of approximating $V(S)$ from the returns of an episode, MC control approximates $Q(S, A)$. Figure~\ref{fig:firstvisitcontrol} shows the first-visit MC control algorithm is pseudocode. It is very similar to the first-visit MC prediction algorithm in Figure~\ref{fig:firstvisitmc}. Consider the final three lines: The main change is that returns are assigned not to states, but to pairs of states and actions. The action value function for a state-action pair is approximated as the average over all the returns assigned to it. The optimal policy in some state is that action for wich the action value is maximal. 
+While Monte Carlo prediction is useful in approximating the state value function, obtaining the optimal policy is done with \emph{Monte Carlo control}\index{Monte Carlo control!first visit}. Instead of approximating $V(S)$ from the returns of an episode, MC control approximates $Q(S, A)$. Figure~\ref{fig:firstvisitcontrol} shows the first-visit MC control algorithm as pseudocode. It is very similar to the first-visit MC prediction algorithm in Figure~\ref{fig:firstvisitmc}. Consider the final three lines: The main change is that returns are assigned not to states, but to pairs of states and actions. The action value function for a state-action pair is approximated as the average over all the returns assigned to it. The optimal policy in some state is that action for wich the action value is maximal. 
 
-There is one additional difference between Figures~\ref{fig:firstvisitmc} and \ref{fig:firstvisitcontrol} in that the initial states and actions of each episode are chosen randomly. This is necessary because the policy $\pi$ in Figure~\ref{fig:firstvisitcontrol} is deterministic and greedy. Without any random influence, there would be no exploration. Forcing episodes to begin with random states and actions is called \emph{exploring starts} and it ensures that every state-action pair is visited at least once (assuming sufficiently many episodes are generated).
+There is one additional difference between Figures~\ref{fig:firstvisitmc} and \ref{fig:firstvisitcontrol} in that the initial states and actions of each episode are chosen randomly. This is necessary because the policy $\pi$ in Figure~\ref{fig:firstvisitcontrol} is deterministic and greedy. Without any random influence, there would be no exploration. Forcing episodes to begin with random states and actions is called \emph{exploring starts}\index{Exploring starts} and it ensures that every state-action pair is visited at least once (assuming sufficiently many episodes are generated).
 
 \begin{figure}
 \begin{tcolorbox}[colback=code]
@@ -641,7 +641,7 @@ Figure~\ref{fig:blackjack} shows the resulting policy (left panels) and state va
 \label{fig:blackjack}
 \end{figure}
 
-For the game of Blackjack, exploring starts with a deterministic policy are a good way to ensure exploration. However, exploring starts are not always possible or realistic. Instead of using a greedy policy, in those cases an $\epsilon$-soft policy can be used to ensure exploration. The policy $\pi$ now represents not the action to be taken (greedily, deterministically) but the probability with which each action should be chosen. Consequently, $\pi$ is updated with $\epsilon$-soft probabilities, as shown in the following Python code fragment\footnote{An implementation of the Blackjack problem with an $\epsilon$-soft policy is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/blackjack_eps.py}.}:
+For the game of Blackjack, exploring starts with a deterministic policy is a good way to ensure exploration. However, exploring starts are not always possible or realistic. Instead of using a greedy policy, in those cases an $\epsilon$-soft policy\index{Policy!Epsilon-soft} can be used to ensure exploration. The policy $\pi$ now represents not the action to be taken (greedily, deterministically) but the probability with which each action should be chosen. Consequently, $\pi$ is updated with $\epsilon$-soft probabilities, as shown in the following Python code fragment\footnote{An implementation of the Blackjack problem with an $\epsilon$-soft policy is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/blackjack_eps.py}.}:
 
 \begin{pythoncode}
 Q[(S[t], A[t])] = mean(Returns[(S[t], A[t])])
@@ -749,11 +749,11 @@ Figure~\ref{fig:racetrackresults} shows visualizations of the trajectory of a ca
 
 \section{Off-Policy MC Learning}
 
-In the MC methods described above, the policy used to generate behaviour (''\emph{behaviour policy}''), and the policy that is learned (''\emph{target policy}'') are the same. However, the need to keep exploring, that is, to behave sub-optimally, when a better, greedy policy could be available, means that the agent's performance is reduced. \emph{Off-policy learning} is motivated by the need for efficiency and flexibility in learning optimal policies. The main motivation is the ability to learn about the optimal policy independently of the agent's actions. This is useful in environments where exploring all actions is either potentially damaging or costly.
+In the MC methods described above, the policy used to generate behaviour (''\emph{behaviour policy}'')\index{Policy!Behaviour}\index{Behaviour policy|see{Policy!Behaviour}}, and the policy that is learned (''\emph{target policy}'')\index{Policy!Target}\index{Target policy|see{Policy!Target}} are the same. However, the need to keep exploring, that is, to behave sub-optimally, when a better, greedy policy could be available, means that the agent's performance is reduced. \emph{Off-policy learning}\index{Off-policy learning} is motivated by the need for efficiency and flexibility in learning optimal policies. The main motivation is the ability to learn about the optimal policy independently of the agent's actions. This is useful in environments where exploring all actions is either potentially damaging or costly.
 
 In on-policy methods, the agent learns from the actions it evaluates and takes, meaning the behaviour policy is the same as the target policy. In contrast, off-policy methods allow the agent to learn a policy different from the one it follows. This is beneficial as it permits the use of historical data from other policies, or data generated from exploratory or less optimal policies, to improve a potentially different and more optimal target policy. 
 
-One important requirement in off-policy learning is that the behaviour policy must \emph{cover} the target policy. That is, all behaviour possible under the target policy must be (eventually) generated by the behaviour policy. This requirement is intuitive, as the target policy cannot learn about behaviour, that is, the effects of actions in states, that is never encountered in a generated episode.
+One important requirement in off-policy learning is that the behaviour policy must \emph{cover}\index{Policy coverage} the target policy. That is, all behaviour possible under the target policy must be (eventually) generated by the behaviour policy. This requirement is intuitive, as the target policy cannot learn about behaviour, that is, the effects of actions in states, that is never encountered in a generated episode.
 
 Figure~\ref{fig:offpolicymc} shows pseudocode for off-policy MC control. In this learning method, the behaviour policy $b$ is typically an $\epsilon$-soft policy, as presented above, that allows exploratory behaviour. The target policy $\pi$ is a deterministic, greedy policy, as can be seen in the third-to-last line of Figure~\ref{fig:offpolicymc}.
 
@@ -847,7 +847,7 @@ for e in range(0, 10000+1):
 
 \section{Temporal-Difference (TD) Learning}
 
-Temporal Difference (TD) learning is an RL approach that combines ideas from both Monte Carlo (MC) methods and dynamic programming. The primary motivation for temporal difference learning stems from its ability to learn predictions based on other learned predictions, a concept referred to as bootstrapping. Unlike Monte Carlo methods, which wait until the completion of an episode to update the value estimates based on actual returns, TD learning updates estimates based on estimate returns, thus not requiring the episode to terminate before updates can be made. This allows TD learning to make more frequent updates, which can accelerate learning, and to be applied in continuing (non-episodic) environments.
+Temporal Difference (TD) learning\index{Temporal difference learning}\index{TD learning|see{Temporal difference learning}} is an RL approach that combines ideas from both Monte Carlo (MC) methods and dynamic programming. The primary motivation for temporal difference learning stems from its ability to learn predictions based on other learned predictions, a concept referred to as bootstrapping. Unlike Monte Carlo methods, which wait until the completion of an episode to update the value estimates based on actual returns, TD learning updates estimates based on estimate returns, thus not requiring the episode to terminate before updates can be made. This allows TD learning to make more frequent updates, which can accelerate learning, and to be applied in continuing (non-episodic) environments.
 
 Recall that in MC control, the updates to the action value function use the actual return $G_t$ at time $t$ as the target, which can only be computed at the end of an episode:
 
@@ -859,10 +859,9 @@ Q(S_t, a) &\leftarrow Q(S_t, a) + \alpha \left[ R_{t+1} + \gamma G_{t+1} - Q(S_t
 Q(S_t, a) &\leftarrow Q(S_t, a) + \alpha \left[ R_{t+1} + \gamma Q(S_{t+1}, a_{t+1}^*) - Q(S_t, a) \right] \label{eq:sarsaupdate}
 \end{align}
 
+In other words, there is no need to wait until the actual return $G_t$ is known at the end of an episode, as TD learning uses the current approximation or estimate of $G_t$ as the update target. This idea of using estimates to update or compute better estimates is called \emph{bootstrapping}\index{Bootstrapping}. 
 
-In other words, there is no need to wait until the actual return $G_t$ is known at the end of an episode, as TD learning uses the current approximation or estimate of $G_t$ as the update target. This idea of using estimates to update or compute better estimates is called \emph{bootstrapping}. 
-
-Figure~\ref{fig:sarsa} shows the pseudocode of a method called ''\emph{SARSA}'', so-called because it uses information of the current state $S$, current action $A$, reward $R$, next state $S'$ and next action $A'$ in its update. SARSA uses the update function defined in Equation~\ref{eq:sarsaupdate}. SARSA is an on-policy method, typically using an $\epsilon$-greedy policy based on $Q$ to generate behaviour and ensure exploration.
+Figure~\ref{fig:sarsa} shows the pseudocode of a method called ''\emph{SARSA}''\index{SARSA}, so-called because it uses information of the current state $S$, current action $A$, reward $R$, next state $S'$ and next action $A'$ in its update. SARSA uses the update function defined in Equation~\ref{eq:sarsaupdate}. SARSA is an on-policy method, typically using an $\epsilon$-greedy policy based on $Q$ to generate behaviour and ensure exploration.
 
 \begin{figure}
 \small
@@ -971,7 +970,7 @@ This can be generalized by applying Equations~\ref{eq:return} and \ref{eq:action
 \delta_{TDn} = R_{t+1} + \gamma R_{t+2} + \cdots + \gamma^{n-1} R_{t+n} + \gamma^n Q(S_{t+n}, a_{t+1}) - Q(S_t, a)
 \end{align*}
 
-The n-step update can only be performend after $n$ steps have passed so that $n$ actual rewards are available, with the remainder of $G_{t+1}$ being approximated. As an alternative interpretation, the n-step update changes the values of the last $n$ state-action pairs in the trajectory. Figure~\ref{fig:sarsa10step} shows an illustration of this for 10-step SARSA.
+The n-step update can only be performend after $n$ steps have passed so that $n$ actual rewards are available, with the remainder of $G_{t+1}$ being approximated. As an alternative interpretation, the n-step update changes the values of the last $n$ state-action pairs in the trajectory. Figure~\ref{fig:sarsa10step} shows an illustration of this for 10-step SARSA\index{n-step TD learning}.
 
 
 \begin{figure}
@@ -987,7 +986,7 @@ Source: SB Figure 7.4
 
 \section{Off-Policy TD Learning}
 
-Temporal Difference learning can be combined with off-policy learning as well. A popular method for this is Q-learning. Q-learning updates the action values in a greedy way, that is, of a greedy policy, regardless of the action taken by the policy being followed (the behavior policy). The differences between SARSA and Q-learning are minor. Importantly, it is not necessary to explicitly encode the behaviour and target policies.
+Temporal Difference learning can be combined with off-policy learning as well. A popular method for this is Q-learning\index{Q-learning}. Q-learning updates the action values in a greedy way, that is, of a greedy policy, regardless of the action taken by the policy being followed (the behavior policy). The differences between SARSA and Q-learning are minor. Importantly, it is not necessary to explicitly encode the behaviour and target policies.
 
 Consider the following aspects of SARSA. The next action $A'$ that is carried out is determined using a (behaviour) policy based on $Q$ and $Q$ is being learned (updated) based on the actually taken action $A'$ (target policy). This makes SARSA an on-policy method.
 

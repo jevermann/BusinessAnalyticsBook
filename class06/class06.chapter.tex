@@ -174,7 +174,7 @@ print(thelist)
 \paragraph{Important:} Note the use of leading whitespace or indentation in the lines after the \texttt{if} statement in the above code. In Python, this \emph{whitespace is required for defining the program logic}! In the above example, the indented lines indicate the extent of the program block to be executed after the \texttt{if} statement. The normal leading whitespace is four spaces. 
 \end{tcolorbox}
 
-\emph{Lists} in Python are ordered collections of items, and use square brackets \texttt{[]} as delimiters. Lists are mutable, i.e. their contents can be changed. Lists may contain items of different data types, including other lists or structured data types. Useful list functions are \texttt{len()} which returns the number of items in a list, \texttt{append()}, which adds items to the end of the list, and \texttt{sort()}, which sorts by value (only for compatible data types in the list). Items can be removed by position using the \texttt{del()} or by value using the \texttt{remove()} functions.
+\emph{Lists}\index{List} in Python are ordered collections of items, and use square brackets \texttt{[]} as delimiters. Lists are mutable, i.e. their contents can be changed. Lists may contain items of different data types, including other lists or structured data types. Useful list functions are \texttt{len()} which returns the number of items in a list, \texttt{append()}, which adds items to the end of the list, and \texttt{sort()}, which sorts by value (only for compatible data types in the list). Items can be removed by position using the \texttt{del()} or by value using the \texttt{remove()} functions.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -205,7 +205,7 @@ print('The list is now', gods)
 
 \noindent The above example also shows the use of Python comments, beginning with \texttt{\#} to the end of the line. The example also shows iteration (''repeating'') with the \texttt{for} statement. Similar to the earlier example illustrating the \texttt{if} statement, note the required indentation (leading whitespace) in the line(s) after the \texttt{for} statement to indicate the extent of the code block that is repeated.
 
-\emph{Tuples} in Phython are also ordered collections of items, but they are immutable, i.e. their contents cannot be changed. Tuples use round brackets \texttt{()} as delimiters.
+\emph{Tuples}\index{Tuple (in Python)} in Phython are also ordered collections of items, but they are immutable, i.e. their contents cannot be changed. Tuples use round brackets \texttt{()} as delimiters.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -227,7 +227,7 @@ print('Number of all Inuit regions is', \
 \paragraph*{Important:} Indexing in Python is zero based, that is, the first element in a list or tuple is number 0, while the last element is number \texttt{len()} - 1. This is in contrast to R, where indexing starts at 1.
 \end{tcolorbox}
 
-\emph{Dictionaries} (or short, ''dicts'') in Python are key-value pairs that map one element to another. In other programming languages, this data structure is also called a \emph{map} or an \emph{associative array} (because it associates keys with their values). Python uses curly brackets \texttt{\{\}} as delimiters; the keys and values are separated using \texttt{:}. The value for a key is retrieved using the square bracket operator \texttt{[]}. Keys and values may be any data type.
+\emph{Dictionaries}\index{Dictionary (in Python)}\index{Dict|see{Dictionary (in Python)}} (or short, ''dicts'') in Python are key-value pairs that map one element to another. In other programming languages, this data structure is also called a \emph{map} or an \emph{associative array}\index{Associative array|see{Dictionary (in Python)}} (because it associates keys with their values). Python uses curly brackets \texttt{\{\}} as delimiters; the keys and values are separated using \texttt{:}. The value for a key is retrieved using the square bracket operator \texttt{[]}. Keys and values may be any data type.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -274,9 +274,9 @@ print(pop_by_town)
 \end{pythoncode}
 \end{samepage}
 
-In Python, lists, tuples, and character strings are examples of \emph{sequences}. All sequences provide membership tests using \texttt{in} or \texttt{not in} operators, as shown in some of the examples above. Sequences also provide integer indexing and slicing.  Note that the end index in a slicing expression is \emph{not inclusive}, that is, the slice extends up to but does not include the final index. This makes it easy to write a slice like \texttt{[:len(a)]} where \texttt{a} is some sequence (rather than having to write \texttt{[:len(a)-1]} as one would in R or other programming languages where the end index is inclusive).
+In Python, lists, tuples, and character strings are examples of \emph{sequences}\index{Sequence (in Python)}. All sequences provide membership tests using \texttt{in} or \texttt{not in} operators, as shown in some of the examples above. Sequences also provide integer indexing and slicing.  Note that the end index in a slicing expression is \emph{not inclusive}, that is, the slice extends up to but does not include the final index. This makes it easy to write a slice like \texttt{[:len(a)]} where \texttt{a} is some sequence (rather than having to write \texttt{[:len(a)-1]} as one would in R or other programming languages where the end index is inclusive).
 
-The following code shows some examples for slicing tuples. Note the negative end index in the third example. A negative end index iterates from the end of a sequence forwards''. The slice \texttt{regions[1:-1]} extends from the second element to the third of the four elements. 
+The following code shows some examples for slicing\index{Slicing} tuples. Note the negative end index in the third example. A negative end index iterates from the end of a sequence forwards''. The slice \texttt{regions[1:-1]} extends from the second element to the third of the four elements. 
 
 \begin{samepage}
 \begin{pythoncode}
@@ -315,7 +315,6 @@ print('characters start to end is', language[:])
 \end{pythoncode}
 \end{samepage}
 
-
 \noindent In the above example, pay careful attention to the use of negative indices in the slicing expressions, both for the index as well as the step size.
 
 \begin{tcolorbox}[colback=code]
@@ -352,7 +351,7 @@ print('characters start to end is', language[:])
 
 \section{NumPy}
 
-NumPy, short for Numerical Python, is an essential package for the Python programming language, widely used for scientific computing and data analysis. It provides powerful numerical arrays and matrices, along with a large collection of high-level mathematical functions to operate on these arrays. The cornerstone of NumPy is its ''ndarray'' (n-dimensional array) object. These arrays are more efficient than Python's built-in lists, especially for numerical operations, due to their fixed type and contiguous memory allocation.
+NumPy, short for Numerical Python, is an essential package for the Python programming language, widely used for scientific computing and data analysis. It provides powerful numerical arrays and matrices, along with a large collection of high-level mathematical functions to operate on these arrays. The cornerstone of NumPy is its ''ndarray'' (n-dimensional array)\index{Array (in Python)} object. These arrays are more efficient than Python's built-in lists, especially for numerical operations, due to their fixed type and contiguous memory allocation.
 
 NumPy arrays facilitate advanced mathematical and statistical operations, including linear algebra, Fourier transform, and random number generation. The ndarray object supports vectorized operations, broadcasting, and indexing capabilities. This means that operations can be applied to entire arrays without the need for explicit loops, leading to cleaner and faster code.
 
@@ -370,7 +369,7 @@ NumPy ndarrays have a set of useful properties or attributes, summarized in in T
 \renewcommand{\arraystretch}{1.25}
 \begin{tabularx}{\linewidth}{l|X} \hline
 \texttt{ndarray.ndim} & Number of axes \\
-\texttt{ndarray.shape} & Typle describing the size of each axis (dimension) \\
+\texttt{ndarray.shape} & Typle describing the size of each axis (dimension)\index{Shape (of array)} \\
 \texttt{ndarray.size} & Total number of elements \\
 \texttt{ndarray.dtype} & The datatype of the elements, for example \texttt{numpy.int32}, \texttt{numpy.int16}, \texttt{numpy.float32}, or \texttt{numpy.float64} \\
 \texttt{ndarray.itemsize} & Number of bytes for each element \\ \hline
@@ -434,7 +433,7 @@ print(y)
 \end{pythoncode}
 \end{samepage}
 
-In a generalization of the slicing expressions for Python sequences, each axis of a NumPy array can be sliced using the \texttt{[:]} or \texttt{[::]} expressions, as shown in the following example of a two-dimensional array. The slicing expressions for different dimensions are separated by commas.
+In a generalization of the slicing expressions for Python sequences, each axis of a NumPy array can be sliced using the \texttt{[:]} or \texttt{[::]} expressions, as shown in the following example of a two-dimensional array\index{Slicing}. The slicing expressions for different dimensions are separated by commas.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -479,7 +478,7 @@ for element in b.flat:
 \end{pythoncode}
 \end{samepage}
 
-NumPy provides an easy way to reshape arrays to any dimension. However, it is important to be aware of where and how the elements move during such a reshape. The order can be specified using an optional argument to \texttt{rehshape}; consult the NumPy documentation for details. The following example also demonstrates the use of the default random number generator\footnote{A random number generator in computer science is always a pseudo-random number generator that creates a sequence of numbers according to a deterministic formula (because computers are deterministic), starting from an initial ''seed'' number. The sequence is repeatable when beginning with the same seed. A good pseudo-random number generate will create sequences that are indistinguishable from true random numbers, for example, those created by rolling dice.} (rng) in NumPy to create an array of shape \texttt{(3, 4)} filled with random numbers between 0 and 1.
+NumPy provides an easy way to reshape arrays to any dimension. However, it is important to be aware of where and how the elements move during such a reshape. The order can be specified using an optional argument to \texttt{rehshape}; consult the NumPy documentation for details. The following example also demonstrates the use of the default random number generator\footnote{A random number generator in computer science is always a pseudo-random number generator that creates a sequence of numbers according to a deterministic formula (because computers are deterministic), starting from an initial ''seed'' number. The sequence is repeatable when beginning with the same seed. A good pseudo-random number generate will create sequences that are indistinguishable from true random numbers, for example, those created by rolling dice.} (rng)\index{Random number generator} in NumPy to create an array of shape \texttt{(3, 4)} filled with random numbers between 0 and 1.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -569,7 +568,7 @@ The Pandas website provides very good \href{http://pandas.pydata.org/docs/user_g
 
 Central to Pandas are two primary data structures: the DataFrame and the Series. A Series in Pandas is a one-dimensional array-like object that can hold any data type, including integers, floats, strings, and Python objects. A DataFrame in Pandas is a two-dimensional, size-mutable, and potentially heterogeneous tabular data structure with labeled axes (rows and columns).
 
-The following Python code constructs a Pandas Series of random numbers. The axis labels of a Series (and a DataFrame) are called ''index'' and allow one to name the elements. The example also shows how a Python dict can be converted into a series with named elements.
+The following Python code constructs a Pandas Series of random numbers\index{Series (in Pandas)}. The axis labels of a Series (and a DataFrame) are called ''index'' and allow one to name the elements. The example also shows how a Python dict can be converted into a series with named elements.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -618,7 +617,7 @@ print(s.dtype)
 \end{pythoncode}
 \end{samepage}
 
-Pandas \emph{DataFrames} are two-dimensional objects. Their columns may have different data types. Conceptually, DataFrames can be considered as a dict of Pandas Series, as the following example demonstrates. 
+Pandas \emph{DataFrames} are two-dimensional objects\index{Data frame!in Pandas}. Their columns may have different data types. Conceptually, DataFrames can be considered as a dict of Pandas Series, as the following example demonstrates. 
 
 \begin{samepage}
 \begin{pythoncode}

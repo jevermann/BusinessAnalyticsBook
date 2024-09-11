@@ -58,13 +58,13 @@ RNNs are employed in a variety of applications, handling different types of data
 
 \section{Sequence Models}
 
-Recurrent Neural Networks (RNNs) are called ''recurrent'' because they perform the same task for every element of a sequence, with the output being dependent on the previous computations. RNNs can pass information from one (time or sequence) step of the network to the next. This mechanism is what makes RNNs ''recurrent'' -- they recur or repeat the same process over each part of the input, while maintaining some memory of what has happened before. This memory is maintained through internal or ''hidden'' states of the network, which capture information about earlier elements in the sequence, thereby providing a form of memory. This allows RNNs to process not just individual data points, but entire sequences of data (such as a sentence or a time series), making them effective for tasks where context and order are important.
+Recurrent Neural Networks (RNNs)\index{Recurrent neural network} are called ''recurrent'' because they perform the same task for every element of a sequence, with the output being dependent on the previous computations. RNNs can pass information from one (time or sequence) step of the network to the next. This mechanism is what makes RNNs ''recurrent'' -- they recur or repeat the same process over each part of the input, while maintaining some memory of what has happened before. This memory is maintained through internal or ''hidden'' states of the network\index{Hidden state (in recurrent network)}, which capture information about earlier elements in the sequence, thereby providing a form of memory. This allows RNNs to process not just individual data points, but entire sequences of data (such as a sentence or a time series), making them effective for tasks where context and order are important.
 
 In using RNNs with sequence data, one can distinguish three types of general model architectures that are useful for different tasks.
 
 \subsubsection*{Seq2Vec}
 
-The sequence-to-vector (''\emph{Seq2Vec}'') model predicts a single outcome or target from a sequence of inputs. This type of model can be a regression or classification model. The general model architecture is shown in Figure~\ref{fig:seqclassification}. The hidden states $h_i$ are connected to model the memory through time. The state of the network depends not only on the current input but also on the previous state, and therefore implicitly on all prior inputs. In practical applications, the inputs, outputs, and hidden state can be high-dimensional vectors or arrays.
+The sequence-to-vector (''\emph{Seq2Vec}'')\index{Seq2Vec model} model predicts a single outcome or target from a sequence of inputs. This type of model can be a regression or classification model. The general model architecture is shown in Figure~\ref{fig:seqclassification}. The hidden states $h_i$ are connected to model the memory through time. The state of the network depends not only on the current input but also on the previous state, and therefore implicitly on all prior inputs. In practical applications, the inputs, outputs, and hidden state can be high-dimensional vectors or arrays.
 
 \begin{figure}[b]
 \centering
@@ -79,7 +79,7 @@ This type of architecture is useful for example in sentiment analysis, where it 
 
 \subsubsection*{Vec2Seq}
 
-The vector-to-sequence (''\emph{Vec2Seq}'') models are designed to generate a sequence from a fixed-length input vector. This approach is commonly used in tasks where a sequence needs to be generated from a compact representation. Figure~\ref{fig:vec2seq} shows an example of such an architecture. A single input $x$ gives rise to multiple outputs $y$ with the hidden states $h$ mainting information about the history. Here, the state of the network depends not only on the single input but also on the previous state and previous output. 
+The vector-to-sequence (''\emph{Vec2Seq}'')\index{Vec2Seq model} models are designed to generate a sequence from a fixed-length input vector. This approach is commonly used in tasks where a sequence needs to be generated from a compact representation. Figure~\ref{fig:vec2seq} shows an example of such an architecture. A single input $x$ gives rise to multiple outputs $y$ with the hidden states $h$ mainting information about the history. Here, the state of the network depends not only on the single input but also on the previous state and previous output. 
 
 \begin{figure}
 \centering
@@ -94,7 +94,7 @@ The Vec2Seq architecture is useful for example in image captioning, generating a
 
 \subsubsection*{Seq2Seq}
 
-Sequence-to-sequence (''\emph{Seq2seq}'') models are designed to transform an input sequence into an output sequence. These models are useful for tasks that involve translation or conversion from one sequence to another, maintaining the context from the input to the output. The general architecture is shown in Figure~\ref{fig:seq2seq}. For each input $x$, one output $y$ is generated and the hidden state $h$ maintains information about the history. The state of the network depends not only on the current input, but also on the previous state. Depending on the application, Seq2Seq networks may also employ \emph{bi-directional connections} between hidden layers, as shown in the right panel of Figure~\ref{fig:seq2seq}.
+Sequence-to-sequence (''\emph{Seq2seq}'')\index{Seq2Seq model} models are designed to transform an input sequence into an output sequence. These models are useful for tasks that involve translation or conversion from one sequence to another, maintaining the context from the input to the output. The general architecture is shown in Figure~\ref{fig:seq2seq}. For each input $x$, one output $y$ is generated and the hidden state $h$ maintains information about the history. The state of the network depends not only on the current input, but also on the previous state. Depending on the application, Seq2Seq networks may also employ \emph{bi-directional connections} between hidden layers, as shown in the right panel of Figure~\ref{fig:seq2seq}.
 
 \begin{figure}
 \centering
@@ -118,7 +118,7 @@ A typical use case for Seq2Seq models is machine translation from one language t
 
 \section{Unrolling an RNN}
 
-The concept of ''\emph{unfolding}'' or ''\emph{unrolling}'' in recurrent neural networks (RNNs) is a fundamental technique used not only to visualize but more importantly, to implement these networks for sequence processing. Unrolling an RNN refers to the process of expanding the recurrent network through time, transforming it into an equivalent feedforward neural network that represents each time or sequence step explicitly. This helps in understanding and analyzing the behavior of RNNs, especially in training.
+The concept of ''\emph{unfolding}'' or ''\emph{unrolling}''\index{Unrolling}\index{Unfolding|see{Unrolling}} in recurrent neural networks (RNNs) is a fundamental technique used not only to visualize but more importantly, to implement these networks for sequence processing. Unrolling an RNN refers to the process of expanding the recurrent network through time, transforming it into an equivalent feedforward neural network that represents each time or sequence step explicitly. This helps in understanding and analyzing the behavior of RNNs, especially in training.
 
 An RNN is designed to handle sequences by recursively processing each element of the sequence, maintaining a hidden state that captures information about the past elements of the sequence. When RNN is unrolled, each recurrence becomes a separate, but identical, unit of the network. Each unit corresponds to a time step in the input sequence.
 
@@ -130,7 +130,7 @@ An RNN is designed to handle sequences by recursively processing each element of
 \label{fig:unrolling}
 \end{figure}
 
-Consider the example in Figure~\ref{fig:unrolling}. The recursive network on the left feeds back information to itself by vector $v$. This information updates the hidden layer's state $h$ from one recurrence (time or sequence step) to the next. This recursive network is unrolled to separate instances of input, hidden layers, and output for each sequence step or time step as shown in the right part of Figure~\ref{fig:unrolling}. The hidden state $h$ and output $o$ in Figure~\ref{fig:unrolling} can be described using basic neural network units:
+Consider the example in Figure~\ref{fig:unrolling}. The recurrent network on the left feeds back information to itself by vector $v$. This information updates the hidden layer's state $h$ from one recurrence (time or sequence step) to the next. This recurrent network is unrolled to separate instances of input, hidden layers, and output for each sequence step or time step as shown in the right part of Figure~\ref{fig:unrolling}. The hidden state $h$ and output $o$ in Figure~\ref{fig:unrolling} can be described using basic neural network units:
 
 \begin{align}
 h_t &= \sigma ( W_{x} \cdot x_t + W_{h} \cdot h_{t-1} + B_{h}) \label{eq:rnn1} \\
@@ -145,7 +145,7 @@ Unrolling an RNN over many time steps can lead to practical challenges. In parti
 
 \section{LSTM Cells}
 
-Long Short-Term Memory (LSTM) cells are a special kind of unit used in recurrent neural networks (RNNs) that are designed to address some of the limitations of traditional RNNs. In particular, they enable networks to learn long-term dependencies that are critical in many sequential tasks such as language modeling or time series prediction. LSTMs were introduced in 1997 as a solution to the vanishing gradient problem commonly encountered in traditional RNNs. Traditional RNNs could perform well on short sequences but struggled with longer ones.
+Long Short-Term Memory (LSTM)\index{Long short-term memory cell}\index{LSTM cell|see{Long short-term memory cell}} cells are a special kind of unit used in recurrent neural networks (RNNs) that are designed to address some of the limitations of traditional RNNs. In particular, they enable networks to learn long-term dependencies that are critical in many sequential tasks such as language modeling or time series prediction. LSTMs were introduced in 1997 as a solution to the vanishing gradient problem commonly encountered in traditional RNNs. Traditional RNNs could perform well on short sequences but struggled with longer ones.
 
 \begin{figure}
 \centering
@@ -159,21 +159,21 @@ Long Short-Term Memory (LSTM) cells are a special kind of unit used in recurrent
 An LSTM cell, shown schematically in Figure~\ref{fig:lstm}, is complex and contains multiple ''gates'' that regulate the flow of information. LSTM networks have two components to their state. The \emph{cell memory} is represented by $c_t$ and the hidden state is represented by $h_t$ in Figure~\ref{fig:lstm}. Each LSTM cell consists of the following components:
 
 \begin{itemize}
-\item \emph{Forget Gate:} This gate decides which information is discarded from the cell memory $c$. It looks at the previous hidden state and the current input and passes its output through a sigmoid function, which outputs numbers between 0 (''forget this vector element completely'') and 1 (''keep this vector element entirely''). The forget gate is represented by $F_t$ in Figure~\ref{fig:lstm} and formally defined as:
+\item \emph{Forget Gate:}\index{Forget gate (in LSTM)} This gate decides which information is discarded from the cell memory $c$. It looks at the previous hidden state and the current input and passes its output through a sigmoid function, which outputs numbers between 0 (''forget this vector element completely'') and 1 (''keep this vector element entirely''). The forget gate is represented by $F_t$ in Figure~\ref{fig:lstm} and formally defined as:
 \begin{align}
 F_t &= \sigma (W_f \cdot [ x_t, h_{t-1}] + b_f) \label{eq:forget}
 \end{align}
-\item \emph{Input Gate:} This gate updates the cell memory $c$ by adding new information. It looks at the previous hidden state and the current input and includes a sigmoid layer which decides which values to update. It outputs numbers between 0 (''do not update this vector element'') and 1 (''update this vector element completely''). This input gate is represented by $I_t$ in Figure~\ref{fig:lstm} and formally defined as:
+\item \emph{Input Gate:}\index{Input gate (in LSTM)} This gate updates the cell memory $c$ by adding new information. It looks at the previous hidden state and the current input and includes a sigmoid layer which decides which values to update. It outputs numbers between 0 (''do not update this vector element'') and 1 (''update this vector element completely''). This input gate is represented by $I_t$ in Figure~\ref{fig:lstm} and formally defined as:
 \begin{align}
 I_t &= \sigma (W_i \cdot [ x_t, h_{t-1}] + b_i) \label{eq:input}
 \end{align}
-\item \emph{Output Gate:} The output gate examines the prior hidden state and current input. It includes a sigmoid layer which decides which values of the new cell memory to output and pass on to the next cell as the new hidden state. It outputs numbers between 0 (''do not include this vector element in the output'') and 1 (''include this vector element in the output''). The output gate is shown as $O_t$ in Figure~\ref{fig:lstm} and formally defined as:
+\item \emph{Output Gate:} The output gate\index{Output gate (in LSTM)} examines the prior hidden state and current input. It includes a sigmoid layer which decides which values of the new cell memory to output and pass on to the next cell as the new hidden state. It outputs numbers between 0 (''do not include this vector element in the output'') and 1 (''include this vector element in the output''). The output gate is shown as $O_t$ in Figure~\ref{fig:lstm} and formally defined as:
 \begin{align}
 O_t &= \sigma (W_o \cdot [ x_t, h_{t-1}] + b_o) \label{eq:output}
 \end{align}
 \end{itemize}
 
-The outputs of these three gates are used to manipulate the cell memory $c_{t-1}$ that was received from the previous LSTM unit. First, a tanh unit creates a new candidate vector cell memory vector (not explicitly labeled in Figure~\ref{fig:lstm}), formally defined as:
+The outputs of these three gates are used to manipulate the cell memory $c_{t-1}$ that was received from the previous LSTM unit. First, a tanh unit creates a new candidate cell memory vector (not explicitly labeled in Figure~\ref{fig:lstm}), formally defined as:
 \begin{align}
 \tilde{c}_t &= \phi (W_c \cdot [ x_t, h_{t-1}] + b_c) \label{eq:candidate}
 \end{align}
@@ -194,7 +194,7 @@ In Equations~\ref{eq:forget} to \ref{eq:state}, $\cdot$ denotes the dot-product 
 
 \section{GRU Cells}
 
-Gated Recurrent Unit (GRU) cells are a type of recurrent neural network (RNN) architecture introduced as an alternative to Long Short-Term Memory (LSTM) cells. The motivation behind the development of GRUs was to simplify the LSTM architecture, which, although powerful, is also quite complex due to its multiple gates and states. By reducing the number of gates from three to two, GRUs aim to offer a model that can train faster and require fewer computational resources, while still capturing long-range dependencies within the data. GRUs also do not have an internal memory unit separate from the hidden state. While GRUs tend to train faster due to their simpler structure, in some cases LSTMs outperform GRUs in predictive performance, if the additional complexity of LSTMs are appropriate to the data set and task.
+Gated Recurrent Unit (GRU)\index{Gated recurrent unit}\index{GRU cell|see{Gated recurrent unit}} cells are a type of recurrent neural network (RNN) architecture introduced as an alternative to Long Short-Term Memory (LSTM) cells. The motivation behind the development of GRUs was to simplify the LSTM architecture, which, although powerful, is also quite complex due to its multiple gates and states. By reducing the number of gates from three to two, GRUs aim to offer a model that can train faster and require fewer computational resources, while still capturing long-range dependencies within the data. GRUs also do not have an internal memory unit separate from the hidden state. While GRUs tend to train faster due to their simpler structure, in some cases LSTMs outperform GRUs in predictive performance, if the additional complexity of LSTMs are appropriate to the data set and task.
 
 \begin{figure}
 \centering
@@ -208,11 +208,11 @@ Gated Recurrent Unit (GRU) cells are a type of recurrent neural network (RNN) ar
 A GRU cell, schematically shown in Figure~\ref{fig:gru} consists of only two gates, the \emph{reset gate} and the \emph{update gate}. It also merges the cell memory and the hidden state.
 
 \begin{itemize}
-\item \emph{Reset Gate:} This gate, represented as $R_t$ in Figure~\ref{fig:gru}, determines how much past information to forget, which is important for making the model more adaptable to changes in the data sequence. It examines the previous state and current input and applies a sigmoid function. It outputs values between 0 (''reset this vector element completely'') and 1 (''retain this vector element completely'').
+\item \emph{Reset Gate:}\index{Reset gate (in GRU)} This gate, represented as $R_t$ in Figure~\ref{fig:gru}, determines how much past information to forget, which is important for making the model more adaptable to changes in the data sequence. It examines the previous state and current input and applies a sigmoid function. It outputs values between 0 (''reset this vector element completely'') and 1 (''retain this vector element completely'').
 \begin{align}
 R_t &= \sigma (W_r \cdot [x_t, h_{t-1}] + b_r) \label{eq:reset}
 \end{align}
-\item \emph{Update Gate:} This gate, represented as $Z_t$ in Figure~\ref{fig:gru}, decides how much of the past information (from previous time or sequence steps) needs to be passed along to the future. It is similar to the combination of the forget and input gates in an LSTM. It examines the previous state and current input, applies a sigmoid function and outputs values between 0 (''do not update this vector element, retain the old state'') and 1 (''update this vector element, discard the old state''). 
+\item \emph{Update Gate:}\index{Update gate (in GRU)} This gate, represented as $Z_t$ in Figure~\ref{fig:gru}, decides how much of the past information (from previous time or sequence steps) needs to be passed along to the future. It is similar to the combination of the forget and input gates in an LSTM. It examines the previous state and current input, applies a sigmoid function and outputs values between 0 (''do not update this vector element, retain the old state'') and 1 (''update this vector element, discard the old state''). 
 \begin{align}
 Z_t &= \sigma (W_z \cdot [x_t, h_{t-1}] + b_z) \label{eq:update}
 \end{align}
@@ -237,7 +237,7 @@ Recurrent Neural Networks (RNNs) are designed to handle sequence data. One of th
 
 In \emph{stateless RNNs}, the internal state is reset for each batch of training data. This means that the learning and predictions are independent of the previous batch. The network starts with a clean slate for every input sequence, making no assumptions based on past data points within the same batch. Since stateless RNNs treat each input sequence as independent, training can be simpler and faster. There is no need to maintain and manage state continuity across batches, and batches can be assembled from the input sequences in arbitrary order and randomly shuffled. Stateless RNNs are typically used when sequences are short enough to fit within the number of unrolled RNN steps and the context within a single sequence is sufficient for the prediction task.
 
-\emph{Stateful RNNs} maintain the internal state between batches, allowing the network to retain information across different input batches. This is useful when sequences are longer than the number of unrolled steps. Training stateful RNNs requires careful management of the state so that it is carried over appropriately across batches. Batches cannot be randomly drawn and cannot be shuffled. The state must be reset manually at the start of each epoch or when starting a new sequence. Stateful RNNs are advantageous for tasks involving long sequences where the context needs to be maintained over long periods, such as in time-series analysis or long-form text processing.
+\emph{Stateful RNNs}\index{Statefulness} maintain the internal state between batches, allowing the network to retain information across different input batches. This is useful when sequences are longer than the number of unrolled steps. Training stateful RNNs requires careful management of the state so that it is carried over appropriately across batches. Batches cannot be randomly drawn and cannot be shuffled. The state must be reset manually at the start of each epoch or when starting a new sequence. Stateful RNNs are advantageous for tasks involving long sequences where the context needs to be maintained over long periods, such as in time-series analysis or long-form text processing.
 
 \section{Example -- Stock Market Prediction}
 

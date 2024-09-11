@@ -50,7 +50,7 @@ SHAP is a Python package to compute Shapley Additive Explanations (a local model
 
 \section{Introduction}
 
-Many machine learning models, in particular non-linear, deep neural network models, are too complex for humans to comprehend or grasp. Such models can have millions or even billions of trainable parameters in complex architectures that may include convolutions, LSTM cells, and other complex elements. These kinds of models are known as ''black box'' models, because their inner workings are essentially inscrutable.
+Many machine learning models, in particular non-linear, deep neural network models, are too complex for humans to comprehend or grasp. Such models can have millions or even billions of trainable parameters in complex architectures that may include convolutions, LSTM cells, and other complex elements. These kinds of models are known as ''black box'' models\index{Black-box model}, because their inner workings are essentially inscrutable.
 
 Interpretable machine learning refers to the techniques and models where the processes and results they produce can be understood by human beings. The aim of interpretable machine learning is to ensure human understanding of how the machine learning models work and how they arrive at their results, that is, their decisions or predictions. In other words, it is about \emph{why} a decision or prediction is made, in understandable terms. 
 
@@ -86,9 +86,9 @@ This interpretability is crucial for various aspects from debugging models to co
 
 \subsection*{Intrinsic and Post-Hoc Interpretability}
 
-Interpretability in machine learning can be broadly classified into two categories: intrinsic interpretability and post-hoc interpretability. These two types represent different approaches and philosophies in making machine learning models understandable to humans. 
+Interpretability\index{Interpretability} in machine learning can be broadly classified into two categories: intrinsic interpretability and post-hoc interpretability. These two types represent different approaches and philosophies in making machine learning models understandable to humans. 
 
-\emph{Intrinsic interpretability} refers to the use of machine learning models that are naturally understandable due to their simple structure and the simplicity of their decision-making process. These models are known as ''white box'' models and are designed to be interpretable from the ground up, with the following important characteristics:
+\emph{Intrinsic interpretability}\index{Interpretability!intrinsic} refers to the use of machine learning models that are naturally understandable due to their simple structure and the simplicity of their decision-making process. These models are known as ''white box'' models\index{White-box model} and are designed to be interpretable from the ground up, with the following important characteristics:
 
 \begin{itemize}
 \item \emph{Simplicity:} Models such as linear regression, decision trees, or logistic regression are considered intrinsically interpretable because their decisions can be easily traced to their input features and understood without requiring additional tools or techniques.
@@ -96,17 +96,17 @@ Interpretability in machine learning can be broadly classified into two categori
 \item \emph{Limited Complexity:} These models typically involve fewer parameters and simpler relationships, which aids in direct human comprehension.
 \end{itemize}
 
-Post-hoc interpretability involves techniques and methods applied after model training to explain or clarify how a model makes decisions. This is often necessary for complex models like neural networks or ensemble methods that combine multiple classifiers, where intrinsic interpretability is not feasible. Methods such as LIME (Local Interpretable Model-agnostic Explanations), SHAP (SHapley Additive exPlanations), or feature importance metrics are commonly used to provide insights into model decisions. These methods do not depend on the model type; they can be applied to any model type. Post-hoc methods are designed to be used externally to the original black box model, making them versatile in application and providing flexibility in model choice and deployment.
+Post-hoc interpretability\index{Interpretability!post-hoc} involves techniques and methods applied after model training to explain or clarify how a model makes decisions. This is often necessary for complex models like neural networks or ensemble methods that combine multiple classifiers, where intrinsic interpretability is not feasible. Methods such as LIME (Local Interpretable Model-agnostic Explanations), SHAP (SHapley Additive exPlanations), or feature importance metrics are commonly used to provide insights into model decisions. These methods do not depend on the model type; they can be applied to any model type. Post-hoc methods are designed to be used externally to the original black box model, making them versatile in application and providing flexibility in model choice and deployment.
 
-The choice between intrinsic and post-hoc interpretability depends on the balance between the need for prediction accuracy and the requirement for transparency or understandability. While intrinsic interpretability is preferable for clarity and ease of understanding, the simplicity and limited complexity often (but not always) means that these models have lower predictive performance. Post-hoc interpretability provides critical insights into complex models, ensuring that even the most sophisticated algorithms can be scrutinized and understood. However, the understanding is often limited to the output only, rather than the method by which a model generates output. That is, the interpreted model remains a somewhat opaque black box model.
+The choice between intrinsic and post-hoc interpretability depends on the balance between the need for prediction accuracy and the requirement for transparency or understandability. While intrinsic interpretability is preferable for clarity and ease of understanding, the simplicity and limited complexity often (but not always) means that these models have lower predictive performance. Post-hoc interpretability provides critical insights into complex models, ensuring that even the most sophisticated algorithms can be scrutinized and understood. However, the understanding is often limited to the output only, rather than the method by which a model generates output. That is, the interpreted model remains a somewhat opaque black-box model.
 
 \subsection*{Local and Global Interpretation}
 
 Interpretation methods are often categorized into local and global methods. Each type provides different insights into the functioning of machine learning models, tailored to specific needs and scenarios.
 
-\emph{Local interpretation methods} focus on explaining individual predictions made by a machine learning model. These methods aim to clarify why a model made a specific classification decision or regression prediction for a particular instance. These methods provide explanations for individual data points, helping to understand the model's behavior at a granular level. Examples include LIME (Local Interpretable Model-agnostic Explanations) and counterfactual explanations, which explain how changes in input features could alter the prediction. Local interpretations are particularly useful in applications like healthcare or finance, where understanding specific decisions is crucial for trust and verification. Typically, local methods focus on the impact of specific feature values.
+\emph{Local interpretation methods}\index{Interpretation method!local} focus on explaining individual predictions made by a machine learning model. These methods aim to clarify why a model made a specific classification decision or regression prediction for a particular instance. These methods provide explanations for individual data points, helping to understand the model's behavior at a granular level. Examples include LIME (Local Interpretable Model-agnostic Explanations) and counterfactual explanations, which explain how changes in input features could alter the prediction. Local interpretations are particularly useful in applications like healthcare or finance, where understanding specific decisions is crucial for trust and verification. Typically, local methods focus on the impact of specific feature values.
 
-\emph{Global interpretation methods} seek to explain the overall behavior or logic of a model across all instances. They provide a holistic view of how the model operates in general. These methods explain the model's general decision-making process rather than focusing on individual predictions. Examples include feature importance and partial dependence plots, which show the effect of each feature on the model's predictions across the entire dataset. Global interpretations are beneficial when stakeholders need to validate the model's overall logic and ensure it aligns with domain knowledge and objectives. In contrast to local methods, global methods focus on the impact of features, not the impact of specific feature values.
+\emph{Global interpretation methods}\index{Interpretation method!global} seek to explain the overall behavior or logic of a model across all instances. They provide a holistic view of how the model operates in general. These methods explain the model's general decision-making process rather than focusing on individual predictions. Examples include feature importance and partial dependence plots, which show the effect of each feature on the model's predictions across the entire dataset. Global interpretations are beneficial when stakeholders need to validate the model's overall logic and ensure it aligns with domain knowledge and objectives. In contrast to local methods, global methods focus on the impact of features, not the impact of specific feature values.
 
 The choice between local and global interpretation methods depends on the specific needs for transparency in a given application. Local methods are best suited for cases requiring detailed explanations of individual decisions, while global methods are ideal for understanding and validating the overall behavior of a model. 
 
@@ -171,7 +171,7 @@ k-NN & No & No & No  \\ \hline
 
 \subsection{Linear Regression}
 
-Linear regression is one of the simplest prediction methods available and is intrinsically interpretable. Consider the following example linear regression model for predicting bicycle rental count (variable \texttt{cnt}) from the season (\texttt{season}) and the temperate (\texttt{cnt}).
+Linear regression is one of the simplest prediction methods available and is intrinsically interpretable\index{Linear regression}. Consider the following example linear regression model for predicting bicycle rental count (variable \texttt{cnt}) from the season (\texttt{season}) and the temperature (\texttt{cnt}) (using R).
 
 \begin{Rcode}
 # Load the bike rental data set
@@ -202,7 +202,7 @@ Multiple R-squared: 0.4558, Adjusted R-squared: 0.4528
 
 The $R^2$ is an easily understood metric to assess the quality of the model. It explains the proportion of variance in the target variable that is explained by the predictors. A good model has an $R^2$ close to 1, while an $R^2$ close to 0 indicates a poor model. 
 
-Finally, the \emph{relative feature importance} is given by the $t=\frac{\hat{\beta}}{SE(\hat{\beta})}$ value. Because it divides the coefficient estimate by its standard error, the t-value is scale invariant and can be used to compare the importance of features on different scales. In the above example, it is clear that temperature is the most important features.
+Finally, the \emph{relative feature importance} is given by the $t=\frac{\hat{\beta}}{SE(\hat{\beta})}$ value. Because it divides the coefficient estimate by its standard error, the t-value is scale invariant and can be used to compare the importance of features on different scales. In the above example, it is clear that temperature is the most important features\index{Feature importance by t-test}.
 
 In summary, it is easy to understand which features are most or least important in making a prediction and how features interact or do not interact (consider what ''ceteris paribus'' implies for interactions). 
 
@@ -212,7 +212,7 @@ Linear regression also has high local interpretability; predictions for individu
 \hat{c} = 3151.02 - 852.68 + 20 \times 132.79 = 4954.14
 \end{align*}
 
-Finally, the ordinary least squares algorithm that is used to compute the model parameters is simple and well-understood and is proven to produce optimal parameter values. This means that linear regression has high \emph{algorithmic transparency}. In other words, it is clear what the optimization objective is, and how it is achieved. 
+Finally, the ordinary least squares algorithm that is used to compute the model parameters is simple and well-understood and is proven to produce optimal parameter values. This means that linear regression has high \emph{algorithmic transparency}\index{Algorithmic transparency}. In other words, it is clear what the optimization objective is, and how it is achieved. 
 
 To further improve the interpretability of linear regression models, one may try to reduce the number of features or input dimensions, using methods such as:
 
@@ -227,7 +227,7 @@ In general, the analyst must consider the bias and variance implications of thes
 
 \subsection{Decision Trees}
 
-\emph{Decision trees} are another relatively simple and easy to understand predictive machine learning technique. Decision trees can be used both for regression (''regression trees'') and for classification (''classification trees''). Decision trees are a popular choice in interpretable machine learning due to their strengths:
+\emph{Decision trees}\index{Decision tree} are another relatively simple and easy to understand predictive machine learning technique. Decision trees can be used both for regression (''regression trees'') and for classification (''classification trees''). Decision trees are a popular choice in interpretable machine learning due to their strengths:
 
 \begin{itemize}
 \item \emph{Algorithmic Transparency:} The procedure to construct a decision tree and the optimization criteria are easy to understand and verify. The optimization criterion to derive the decision rules is simple and intuitive. 
@@ -266,7 +266,7 @@ Figure~\ref{fig:decisiontree} shows the intuition behind binary decision trees. 
 
 Consider the top right panel in Figure~\ref{fig:decisiontree} as an example. Here, the feature space is first split on feature $x_1$ at value $t_1$ creating two rectangular regions, one to the left of $t_1$ where $x_1 \leq t_1$ and the other to the right where $x_1 > t_1$. The left region is then split on feature $x_2$ at value $t_2$ creating the regions labelled $R_1$ where $x_1 \leq t_1 \wedge x_2 \leq t_2$ and $R_2$ where $x_1 \leq t_1 \wedge x_2 > t_2$. These two regions are not split any further, and are called the ''leafs'' or ''leaf nodes'' of the tree. The region to the right of $t_1$, that is the region where $x_1 > t_1$, is split again on feature $x_1$ at value $t_3$, yielding the region $R_3$ where $x_1 > t_1 \wedge x_1 \leq t_3$ and the region where $x_1 > t_1 \wedge x_1 > t_3$. The latter region is split on feature $x_2$ at value $t_4$, yielding regions $R_4$ and $R_5$. 
 
-The bottom left panel in Figure~\ref{fig:decisiontree} shows how these split or divisions of the feature space form a (upside down) decision tree with root, decision nodes, and the resulting leaf nodes. The bottom right panel in Figure~\ref{fig:decisiontree} shows what a prediction of a target variable (here, a numerical target), might look like. For a regression tree, the predicted value for each region is simply the average of the observed target values in each region, leading to the flat plateaus shown in the bottom right panel, that is, piece-wise constant predictions for small regions of the feature space. For a classfication tree, the predicted class for a leaf node is simply the majority class of observations in each region. 
+The bottom left panel in Figure~\ref{fig:decisiontree} shows how these split or divisions of the feature space form a (upside down) decision tree with root, decision nodes, and the resulting leaf nodes. The bottom right panel in Figure~\ref{fig:decisiontree} shows what a prediction of a target variable (here, a numerical target), might look like. For a regression tree\index{Regression tree}, the predicted value for each region is simply the average of the observed target values in each region, leading to the flat plateaus shown in the bottom right panel, that is, piece-wise constant predictions for small regions of the feature space. For a classfication tree\index{Classification tree}, the predicted class for a leaf node is simply the majority class of observations in each region. 
 
 For binary decision trees, the choice on which feature to split on next and which specific feature value to split on is decided as follows:
 \begin{enumerate}
@@ -287,7 +287,7 @@ For binary decision trees, the choice on which feature to split on next and whic
 	  \begin{align*}
 	   H(Y) = - \sum_{y \in Y} p(y) \log p(y)
 	   \end{align*}
-       where $p(y)$ represents the proportion of each class $y$ in a child node. The information gain obtained by splitting on a feature $j$ at feature value $s$ and forming regions $R_1$ and $R_2$ is then defined as:
+       where $p(y)$ represents the proportion of each class $y$ in a child node. The information gain\index{Information gain (in decision trees)} obtained by splitting on a feature $j$ at feature value $s$ and forming regions $R_1$ and $R_2$ is then defined as:
 	   \begin{align*}
 	   IG(Y, a) = H(Y) - p(R_1) H(Y | R_1) - p( R_2) H(Y | R_2) 
 	   \end{align*}
@@ -295,7 +295,7 @@ For binary decision trees, the choice on which feature to split on next and whic
        
        Intuitively, the entropy $H$ expresses the uncertainty in the distribution of $Y$. Knowing or assuming a value (or range of values) for some feature $j$ should decrease the uncertainty, that is, lead to a gain in information. The decision tree algorithm will calculate the information gain resulting from each split and will choose the split with the highest gain.
    \item \emph{Minimize Gini index (classification trees)}:
-   The Gini impurity of a dataset is defined as:
+   The Gini impurity\index{Gini impurity index} of a dataset is defined as:
 \begin{align*}
 Gini = 1 - \sum_{i=1}^k p(y)^2
 \end{align*}
@@ -303,7 +303,7 @@ where $p(y)$ is the probability of an observation being classified to a particul
 \end{itemize}
 \end{enumerate}
 
-The above process is recursively iterated for each region, resulting in a tree that is growing new leaf nodes and gaining depth. Without any stopping, the tree will grow, that is, nodes will be split, until every leaf node contains only a single observations. It is clear that such a fully-grown tree is overfitted to the training data set, and not easily interpretable. 
+The above process is recursively repeated for each region, resulting in a tree that is growing new leaf nodes and gaining depth. Without any stopping, the tree will grow, that is, nodes will be split, until every leaf node contains only a single observations. It is clear that such a fully-grown tree is overfitted to the training data set, and not easily interpretable. 
 
 In practice, to prevent overfitting and ensure the tree remains interpretable, the splitting process is stopped using one many options for \emph{stopping criteria}:
 
@@ -438,11 +438,11 @@ How does the training MSE change? What can you observe from the plots of predict
 
 \section{Global Model-Agnostic Methods}
 
-Global model-agnostic methods focus on the understanding the overall impact of features in determining the prediction. They are applicable to different models and focus only on the input features and predictions, while ignoring the specific model or algorithm. This section presents a few of the many methods that have been proposed and developed in recent years. 
+Global model-agnostic interpretation methods\index{Global model-agnostic interpretation method} focus on the understanding the overall impact of features in determining the prediction. They are applicable to different models and focus only on the input features and predictions, while ignoring the specific model or algorithm. This section presents a few of the many methods that have been proposed and developed in recent years. 
 
 \subsection{Partial Dependence Plots (PDP)}
 
-Partial Dependence Plots (PDPs) provide insights into the relationship between a feature and the predicted outcome, averaged over the distribution of values of the other features in the dataset. By isolating the effect of one or two features, PDPs can show how changes in these features impact the predicted outcome, irrespective of the values of other variables, offering a global view of the model's mechanics.
+Partial Dependence Plots (PDPs)\index{Partial dependence plot}\index{PDP|see{Partial dependence plot}} provide insights into the relationship between a feature and the predicted outcome, averaged over the distribution of values of the other features in the dataset. By isolating the effect of one or two features, PDPs can show how changes in these features impact the predicted outcome, irrespective of the values of other variables, offering a global view of the model's mechanics.
 
 Formally, a PDP shows the marginal effect of one or a few features $X_S$ on the predicted output, marginalized over all other (''complement'') features $X_C$. Recall that marginalization is the summing, or integration for continuous features, weighted by probabilities:
 
@@ -494,7 +494,7 @@ plt.show()
 
 \subsection{Individual Conditional Expectation (ICE) Curves}
 
-Individual Conditional Expectation (ICE) curves extend the idea of PDPs by disaggregating the effects for individual observations. Instead of an average effect over all observations or feature values, an ICE plot displays one curve per instance in the dataset, showing how predictions change for that instance if the feature of interest is varied. This essentially means that no summation in Equation~\ref{eq:pdp} takes place; the ICE curves are simply the individual summands of that sum. Thus, averaging all ICE curves yields the PDP curve. This allows identification of outlier cases or heterogeneous data. 
+Individual Conditional Expectation (ICE)\index{Individual conditional expectation curve}\index{ICE curve|see{Individual conditional expectation curve}} curves extend the idea of PDPs by disaggregating the effects for individual observations. Instead of an average effect over all observations or feature values, an ICE plot displays one curve per instance in the dataset, showing how predictions change for that instance if the feature of interest is varied. This essentially means that no summation in Equation~\ref{eq:pdp} takes place; the ICE curves are simply the individual summands of that sum. Thus, averaging all ICE curves yields the PDP curve. This allows identification of outlier cases or heterogeneous data. 
 
 ICE plots can created in Python using the same way as PDPs. The result of the following Python code block is shown in Figure~\ref{fig:ice}. While the bike rental data set in this example has 731 observations, the ICE plot in Figure~\ref{fig:ice} shows fewer lines because of the piece-wise constant predictions (the fitted tree has 31 leaf nodes), that is, the predictions for multiple observations are identical and the lines are overlaid on top of each other in the ICE plot. From Figure~\ref{fig:ice} it is clear that not all observations follow the same, average pattern and that there is significant heterogeneity in the data set.
 
@@ -513,7 +513,7 @@ PartialDependenceDisplay.from_estimator(regr, x, [0, 1], kind='both')
 
 \subsection{Accumulated Local Effects (ALE) Plot}
 
-Accumulated Local Effects (ALE) plots address some limitations of PDPs by focusing on local rather than global average effects of features. ALE plots calculate the contributions of features to predictions by accumulating localized average partial effects, helping to avoid misleading interpretations in the presence of correlated features. 
+Accumulated Local Effects (ALE) plots\index{Accumulated local effect plot}\index{ALE plot|see{Accumulated local effect plot}} address some limitations of PDPs by focusing on local rather than global average effects of features. ALE plots calculate the contributions of features to predictions by accumulating localized average partial effects, helping to avoid misleading interpretations in the presence of correlated features. 
 
 Specifically, ALE plots do not construct unrealistic feature combinations as they average over the complement feature values. For example, the temperature and humidity features are mildly correlated in the running example, and not all combinations are realistic. Instead, effects are computed for a grid of intervals, that is, a ''local window'', instead of the entire domain of a features, as in PDPDs.
 
@@ -523,7 +523,7 @@ Formally, the ALE is defined as:
 \hat{\tilde{f}}_{j, ALE}(X) &= \sum_{k=1}^{k_j(x)} \frac{1}{n_j(k)} \sum_{i:x_j^{(i)} \in N_j(k)} \left[\hat{f}(z_{k, j}, x^{(i)}_j) - \hat{f} (z_{k-1, j},x^{(i)}_j) \right] \label{eq:ale}
 \end{align}
 
-The range of values for feature $j$ is divided into $k$ equal size intervals. $N_j(k)$ is the $k$-th such local neighbourhood for a feature $j$ with $Z_{k,j}$ being the lower boundary of that interval. The summands in the inner sum of Equation~\ref{eq:ale} are differences in prediction between the lower and upper boundary of a local neighbourhood (specifically, between the lower bound of interval $k-1$ and that of the next interval $k$). The inner sum is taken over all observations in the neighbourhood. This is termed the ''local effect''. The outer sum in Equation~\ref{eq:ale} is taken over all local neighbourhoods $k$, each one weighed by the number of observations $n_j(k)$ in that neighbourhood. In other words, the outer sum \emph{accumulates} the local effects, leading to the ALE.
+The range of values for feature $j$ is divided into $k$ equal size intervals. $N_j(k)$ is the $k$-th such local neighbourhood for a feature $j$ with $Z_{k,j}$ being the lower boundary of that interval. The summands in the inner sum of Equation~\ref{eq:ale} are differences in prediction between the lower and upper boundary of a local neighbourhood (specifically, between the lower bound of interval $k-1$ and that of the next interval $k$). The inner sum is taken over all observations in the neighbourhood. This is termed the ''local effect''\index{Local effect}. The outer sum in Equation~\ref{eq:ale} is taken over all local neighbourhoods $k$, each one weighed by the number of observations $n_j(k)$ in that neighbourhood. In other words, the outer sum \emph{accumulates} the local effects, leading to the ALE.
 
 \begin{figure}
 \centering
@@ -583,7 +583,7 @@ Notably, ALE plots also remove the ''ceteris paribus'' assumption that all other
 \FloatBarrier
 \subsection{Permutation Feature Importance}
 
-Permutation feature importance assesses the importance of each feature by observing the effect on predictive accuracy when the values of that feature are randomly shuffled. This disrupts the relationship between the feature and the outcome, and a significant drop in model performance indicates that the feature is important for model predictions. The intuition is simple: A feature that has no effect on the prediction outcome can be randomly reshuffled without consequence for the predictive performance of the model.
+Permutation feature importance\index{Permutation feature importance} assesses the importance of each feature by observing the effect on predictive accuracy when the values of that feature are randomly shuffled. This disrupts the relationship between the feature and the outcome, and a significant drop in model performance indicates that the feature is important for model predictions. The intuition is simple: A feature that has no effect on the prediction outcome can be randomly reshuffled without consequence for the predictive performance of the model.
 
 Permutation feature importance begins by estimating the prediction error (loss function) for the model $L$ on the original data $X$. Permutation feature importance should be calculated on test data, not training data.
 
@@ -658,7 +658,7 @@ plt.show()
 
 \subsection{Global Surrogate Models}
 
-Global surrogate models are interpretable models that are trained to approximate the predictions of a complex model. By training a simpler model (like a decision tree or linear regression model) to mimic the behavior of a more complex model, insights can be gained into how the complex model makes decisions, providing an interpretable approximation of its decision-making process. Intuitively, the predictions of the complex model are the prediction targets of the simpler surrogate model, that is, the simple surrogate model should predict the predictions (rather than the original target values).
+Global surrogate interpretation models\index{Global surrogate interpretation model} are interpretable models that are trained to approximate the predictions of a complex model. By training a simpler model (like a decision tree or linear regression model) to mimic the behavior of a more complex model, insights can be gained into how the complex model makes decisions, providing an interpretable approximation of its decision-making process. Intuitively, the predictions of the complex model are the prediction targets of the simpler surrogate model, that is, the simple surrogate model should predict the predictions (rather than the original target values).
 
 Doing this in practice is simple. For example, the following Python code trains a neural network regression model with two hidden layers and ReLU activation function on the bicycle rental data set. The model is then used to predict values for the training observations.
 
@@ -713,11 +713,11 @@ Table~\ref{tab:summaryglobalmethods} summarizes the strengths and weaknesses of 
 
 \section{Local Model-Agnostic Interpretation Methods}
 
-Local model-agnostic interpretable methods aim to provide explanations for individual predictions or cases, regardless of the overall model's complexity or opacity, offering insights into specific decision points rather than a model's global behavior. This section presents two widely-used methods that each address the challenge of interpretability from a different perspective.
+Local model-agnostic interpretable methods\index{Local model-agnostic interpretable method} aim to provide explanations for individual predictions or cases, regardless of the overall model's complexity or opacity, offering insights into specific decision points rather than a model's global behavior. This section presents two widely-used methods that each address the challenge of interpretability from a different perspective.
 
 \subsection{Local Interpretable Model-agnostic Explanations (LIME)}
 
-The intuition behind LIME is that while it may be difficult or impossible to explain an entire complex model globally, it is possible to approximate and explain its behavior locally. LIME generates these local explanations by perturbing (''shuffling'') the feature values of the input observations to create a new dataset consisting of ''synthetic'' observations around an observation of interest. The responses of the complex model to these synthetic observations are then used to train a simpler, interpretable model, such as a linear regression or decision tree. This local surrogate model aims to capture how the original complex model behaves in the vicinity of the specified observation, providing insights into which features significantly influence the output and how they do so. LIME can be applied to any model type without any changes to the underlying algorithms. 
+The intuition behind LIME\index{Local interpretable model-agnostic explanations}\index{LIME|see{Local interpretable model-agnostic explanations}} is that while it may be difficult or impossible to explain an entire complex model globally, it is possible to approximate and explain its behavior locally. LIME generates these local explanations by perturbing (''shuffling'') the feature values of the input observations to create a new dataset consisting of ''synthetic'' observations around an observation of interest. The responses of the complex model to these synthetic observations are then used to train a simpler, interpretable model, such as a linear regression or decision tree. This local surrogate model aims to capture how the original complex model behaves in the vicinity of the specified observation, providing insights into which features significantly influence the output and how they do so. LIME can be applied to any model type without any changes to the underlying algorithms. 
 
 LIME follows these steps:
 
@@ -757,7 +757,7 @@ Figure~\ref{fig:molnar95} illustrates the principles behind LIME. The top left p
 
 The top right panel highlights the target observation $x$ in yellow and shows the observations created by perturbing the feature values as black dots. 
 
-The bottom left panel indicates the weighting of observations in the neighbourhood, bigger dots indicate higher weights. This weighting is induced by the distance function and the weight kernel. The distance function specifies how distances in the feature space are measured, for example Euclidean, Chebyshev or other metrics. The weight kernel uses the distances to assign weights. For example, a Gaussian kernel will assign weights according to a normal distribution density function, and an exponential kernel will assign weights according to the exponential of the distance, with higher weights for smaller distances and lower weights for larger distances. 
+The bottom left panel indicates the weighting of observations in the neighbourhood, bigger dots indicate higher weights. This weighting is induced by the distance function\index{Distance function} and the weight kernel\index{Weight kernel}. The distance function specifies how distances in the feature space are measured, for example Euclidean, Chebyshev or other metrics. The weight kernel uses the distances to assign weights. For example, a Gaussian kernel will assign weights according to a normal distribution density function, and an exponential kernel will assign weights according to the exponential of the distance, with higher weights for smaller distances and lower weights for larger distances. 
 
 The bottom right panel shows the class predictions of the simple surrogate model that has been fitted to the weighted samples. The white line shows the linear decision boundary of the surrogate model, the superimposed plus and minus signs the predictions of the surrogate model. The local surrogate model is quite accurate for values in the vicinity of the focal observation, but not very good for points far away from it.
 
@@ -869,15 +869,15 @@ Further information on LIME, including many examples, can be found at the websit
 
 Developed from the Shapley value -- a concept from cooperative game theory originally used to determine the fair distribution of payoffs among players -- SHAP applies this framework to the domain of machine learning, offering a theoretically sound approach to understanding model behavior. SHAP treats each feature value as a ''player'' in a game where the ''payout'' is the prediction itself. The Shapley value calculates the average contribution of each feature value across all possible combinations of feature values, providing a detailed view of how features interact and influence the model's output. This approach not only yields a measure of global feature importance and local feature value importance, but also provides a way to understand the direction and magnitude of each feature's impact on the prediction. SHAP is model-agnostic and can be applied to any machine learning model, from simple linear regressors to deep neural networks. 
 
-The main motivation in SHAP is the question of how much does a specific value $x_j$ of feature $j$ contribute to the overall prediction, when compared to the average prediction. As in LIME, the focus is on values of features, not the features themselves. In cooperative game theory, players cooperate in a coalition with other players and receive a certain profit from this cooperation. Shapley values are named after Lloyd Shapley who developed this concept in 1951 and received the Nobel prize in Economics for his work in 2012. Shapley values are a method for assigning fair payouts to the coalition's players depending on their contribution to the total payout. 
+The main motivation in SHAP is the question of how much does a specific value $x_j$ of feature $j$ contribute to the overall prediction, when compared to the average prediction. As in LIME, the focus is on values of features, not the features themselves. In cooperative game theory, players cooperate in a coalition\index{Coalition} with other players and receive a certain profit from this cooperation. Shapley values are named after Lloyd Shapley who developed this concept in 1951 and received the Nobel prize in Economics for his work in 2012. Shapley values are a method for assigning fair payouts to the coalition's players depending on their contribution to the total payout. 
 
-Formally, the Shapley value $\phi_i$ of player $i$ is defined as:
+Formally, the Shapley value $\phi_i$ of player $i$ is defined as\index{Shapley value}:
 
 \begin{align*}
 \phi_i(v) = \frac{1}{n} \sum_{S \subseteq N \setminus \{i\}} \binom{n-1}{|S|}^{-1} \left[ v(S \cup \{i\}) - v(S)\right]
 \end{align*}
 
-where $v(.)$ is the value function that describes the payout received in a game. The term $v(S \cup \{i\}) - v(S)$ is the marginal contribution of player $i$ to a coalition of players $S$, that is, the difference in payout received by the coalition $S$ plus the player $i$ and the payout received only by the coalition $S$, without player $i$. 
+where $v(.)$ is the value function that describes the payout received in a game\index{Payout}. The term $v(S \cup \{i\}) - v(S)$ is the marginal contribution of player $i$ to a coalition of players $S$, that is, the difference in payout received by the coalition $S$ plus the player $i$ and the payout received only by the coalition $S$, without player $i$. 
 
 The binomial coefficient $\binom{n-1}{|S|}$ represents the number of possible ways to form a coalition of size $|S|$ of the set $N \setminus \{i\}$ of $n-1$ players (set $N$ without player $i$). The marginal contribution is divided by this term. 
 

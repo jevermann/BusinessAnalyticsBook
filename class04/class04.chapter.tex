@@ -10,7 +10,7 @@ Graph databases are one type of \emph{NoSQL} databases, an acronym for ''Not Onl
 
 The rise of the internet and web applications in the 1990s and 2000s led to unprecedented amounts of data and new types of data that did not fit neatly into the rows and columns of relational databases. Companies like Google and Amazon faced challenges in scaling their databases to meet the demands of huge amounts of web traffic and large, unstructured data sets. This led to the development of new database systems like Google's Bigtable and Amazon's Dynamo, which laid the groundwork for NoSQL databases.
 
-NoSQL databases were designed to overcome the scalability, performance, and flexibility limitations of traditional relational databases. Unlike relational databases that use a fixed table structure, NoSQL databases utilize a variety of data models, including key-value, document, and graph formats. This diversity allows them to handle a wide array of data types and structures efficiently.
+NoSQL\index{NoSQL database} databases were designed to overcome the scalability, performance, and flexibility limitations of traditional relational databases. Unlike relational databases that use a fixed table structure, NoSQL databases utilize a variety of data models, including key-value, document, and graph formats. This diversity allows them to handle a wide array of data types and structures efficiently.
 
 Key benefits of NoSQL databases include their ability to scale horizontally across many servers, offering significant advantages in handling large-scale, high-volume applications and big data. They also deliver high performance, particularly with large volumes of data and concurrent read/write operations, due in part to their typical emphasis on eventual data consistency over strict ACID compliance (atomicity, consistency, isolation, and durability of database transactions).
 
@@ -20,7 +20,7 @@ Moreover, many NoSQL databases natively support modern data formats like JSON, a
 
 However, the strenghts of NoSQL databases also bring some drawbacks. The lack of a fixed schema means that data integrity cannot be ensured using typing of columns, primary keys on unique identifiers, or referential integrity with foreign keys. NoSQL databases also do not typically make correctness guarantees for concurrent transactions that come from the ACID properties of relational databases. Instead, they guarantee that eventually the data will be consistent, but applications and users may occasionally see inconsistent data. Generally NoSQL databases are less suitable for high-volume concurrent update transaction processing; these application types are better supported by relational databases. Instead, NoSQL databases are better suited for applications that may require complex queries but relatively infrequent updates, few concurrent update transactions, and updates of single data elements at a time.
 
-Graph databases are designed to store and query relationships in data. They represent data as nodes, akin to entities in a relational database, and relationships between these nodes. This structure is particularly suited for handling complex, interconnected data and is highly efficient in scenarios where relationships are as important as the data itself. Graph databases gained significant traction driven by the increasing complexity of data and the limitations of relational databases in efficiently handling highly connected or networked data. The proliferation of social networks, recommendation systems, and other applications dealing with complex relationships between data entities spurred the development of graph databases.
+Graph databases\index{Graph database} are designed to store and query relationships in data. They represent data as nodes, akin to entities in a relational database, and relationships between these nodes. This structure is particularly suited for handling complex, interconnected data and is highly efficient in scenarios where relationships are as important as the data itself. Graph databases gained significant traction driven by the increasing complexity of data and the limitations of relational databases in efficiently handling highly connected or networked data. The proliferation of social networks, recommendation systems, and other applications dealing with complex relationships between data entities spurred the development of graph databases.
 
 Unlike relational databases that require computationally intensive join operations to establish connections between data in different tables, graph databases are designed to store relationships as first-class objects. This means that queries on interconnected data are faster and more efficient, as they exploit the direct connections between nodes. Additionally, graph databases are schema-less or have flexible schemas, allowing for more agility in adapting to changing data requirements.
 
@@ -46,17 +46,17 @@ In each of these domains, the key advantage of graph databases lies in their abi
 
 \section{Graph Database Languages}
 
-In contrast to the standardized SQL language for relational databases, graph databases use various query languages designed to leverage their unique structure and efficiently handle complex queries that involve interconnected data. One of the more prominent ones is the Cypher language, introduced and primarily used in the Neo4j graph database system since 2011 but opened for use in other systems in 2015 as the openCypher project. It is a declarative language\footnote{A declarative query language allows the user to specify \emph{what} data to retrieve. In contrast, an imperative/procedural query language requires the user to specify \emph{how} to retrieve data.}, known for its expressive and readable syntax tailored for describing patterns in graphs. Cypher allows for easy querying of nodes, relationships, and paths and includes powerful features for filtering, pattern matching, and aggregating data.
+In contrast to the standardized SQL language for relational databases, graph databases use various query languages designed to leverage their unique structure and efficiently handle complex queries that involve interconnected data. One of the more prominent ones is the Cypher language\index{Cypher (query language)}, introduced and primarily used in the Neo4j graph database system since 2011 but opened for use in other systems in 2015 as the openCypher project. It is a declarative language\footnote{A declarative query language allows the user to specify \emph{what} data to retrieve. In contrast, an imperative/procedural query language requires the user to specify \emph{how} to retrieve data.}, known for its expressive and readable syntax tailored for describing patterns in graphs. Cypher allows for easy querying of nodes, relationships, and paths and includes powerful features for filtering, pattern matching, and aggregating data.
 
-Another notable query language is Gremlin, part of the Apache TinkerPop graph computing framework. Development began in 2009 and is ongoing. Gremlin is versatile and functional, allowing for imperative and declarative querying across different graph databases. It is known for its flexibility and ability to execute both simple and complex traversals, making it suitable for a wide range of applications.
+Another notable query language is Gremlin\index{Gremlin (query language)}, part of the Apache TinkerPop graph computing framework. Development began in 2009 and is ongoing. Gremlin is versatile and functional, allowing for imperative and declarative querying across different graph databases. It is known for its flexibility and ability to execute both simple and complex traversals, making it suitable for a wide range of applications.
 
-SPARQL (a recursive acronym for ''SPARQL Protocol and RDF Query Language'') is a query language used primarily for querying RDF (Resource Description Framework) data, often found in semantic web applications. Its development is overseen and standardized by the W3C (World Wide Web Consortium), beginning in 2008 with a major update in 2013. It is particularly suited to querying and manipulating data stored in RDF format, and is widely used in applications that require linking diverse data sources, such as knowledge graphs.
+SPARQL\index{SPARQL protocol and RDF query language} (a recursive acronym for ''SPARQL Protocol and RDF Query Language'') is a query language used primarily for querying RDF (Resource Description Framework) data, often found in semantic web applications. Its development is overseen and standardized by the W3C (World Wide Web Consortium), beginning in 2008 with a major update in 2013. It is particularly suited to querying and manipulating data stored in RDF format, and is widely used in applications that require linking diverse data sources, such as knowledge graphs.
 
 Additionally, some graph databases support SQL-like query languages with extensions to handle graph-specific structures. These languages make it easier for users familiar with SQL to transition to graph databases. An example is GraphQL, developed by Facebook in 2015. 
 
-The lack of a standard query language in the graph database realm has led to fragmentation. This fragmentation can pose challenges for users and developers, such as a steeper learning curve and difficulty in transitioning between different graph database systems. In response, the forthcoming standardized GQL (Graph Query Language) is a new graph query language specifically designed for interacting with graph databases. The development of GQL is overseen by ISO/IEC JTC 1, the same joint technical committee responsible for the SQL standard. Its design is expected to draw on the strengths of existing languages, offering robust features for graph traversal, pattern matching, and manipulation of graph structures while maintaining readability and ease of use. A first version of the GQL standard was expected for 2023.
+The lack of a standard query language in the graph database realm has led to fragmentation. This fragmentation can pose challenges for users and developers, such as a steeper learning curve and difficulty in transitioning between different graph database systems. In response, the forthcoming standardized GQL\index{Graph query language}\index{GQL|see{Graph query language}} (Graph Query Language) is a new graph query language specifically designed for interacting with graph databases. The development of GQL is overseen by ISO/IEC JTC 1, the same joint technical committee responsible for the SQL standard. Its design is expected to draw on the strengths of existing languages, offering robust features for graph traversal, pattern matching, and manipulation of graph structures while maintaining readability and ease of use. A first version of the GQL standard was expected for 2023.
 
-\section{The Neo4J Graph Database Management System}
+\section{The Neo4j Graph Database Management System}
 
 Cypher is the query language for Neo4j, one of the most popular graph database systems. It was specifically designed for querying the graph data in Neo4j, making it easy to work with complex graph structures. Cypher's syntax is intuitive and expressive, focusing on the clarity of graph patterns and drawing inspiration from SQL and other declarative query languages. Its pattern matching approach was styled after the SPARQL language. Key characteristics and features of Cypher include:
 
@@ -76,10 +76,10 @@ Cypher is the query language for Neo4j, one of the most popular graph database s
 
 Similar to SQL queryies, Cypher queries have multiple clauses, specifying a ''query pipeline'' for selecting, filtering, and sorting data. Unlike SQL, Cypher queries allow graph reading and graph updating in the same Cypher statement. 
 
-Neo4J offers a number of options for running the Neo4J database management, among them a limited developer version called ''Neo4J Desktop'' and a free, open-source community edition that is usually accessed through a web interface (''Neo4J Browser''). Table~\ref{tab:neo4jinfo} provides links to useful documentation of the Neo4J database and the Cypher language.
+Neo4j offers a number of options for running the Neo4j database management system, among them a limited developer version called ''Neo4j desktop'' and a free, open-source community edition that is usually accessed through a web interface (''Neo4j browser''). Table~\ref{tab:neo4jinfo} provides links to useful documentation of the Neo4j database and the Cypher language.
 
 \begin{tcolorbox}[colback=alert]
-The community edition is installed in the course virtual machine and enabled to run when the machine is started. You can access Neo4J Browser (Figure~\ref{fig:neo4jbrowser}) at \url{http://localhost:7474} with the username ''\textbf{neo4j}'' and the password ''\textbf{busi4720}''. 
+The community edition is installed in the course virtual machine and enabled to run when the machine is started. You can access Neo4j Browser (Figure~\ref{fig:neo4jbrowser}) at \url{http://localhost:7474} with the username ''\textbf{neo4j}'' and the password ''\textbf{busi4720}''. 
 \end{tcolorbox}
 
 \begin{table}
@@ -95,21 +95,21 @@ Use Cases & \url{https://neo4j.com/use-cases/} \\
 Resources & \url{https://neo4j.com/resources/} \\
 \hline
 \end{tabular}
-\caption{Neo4J Documentation}
+\caption{Neo4j Documentation}
 \label{tab:neo4jinfo}
 \end{table}
 
 \begin{figure}
 \centering
 \includegraphics[width=.75\textwidth]{screen1.png}
-\caption{Neo4J Browser interface}
+\caption{Neo4j Browser interface}
 \label{fig:neo4jbrowser}
 \end{figure}
 
 \section{Introduction to Cypher}
 
 \paragraph*{Nodes}
-Figure~\ref{fig:sample-cypher} shows how nodes and relationships are represented in the Cypher syntax. In Neo4J, nodes may be labelled with zero, one, or more labels. Labels are not types; a label does not specify anything about the information associated with a node, it merely serves to categorize or classify nodes. Nodes may have properties, specified as key--value pairs in JSON syntax. Graph nodes are written with normal round parentheses, with the set of their properties in curly brackets. Both the variable name for the node and the node labels are optional.
+Figure~\ref{fig:sample-cypher} shows how nodes and relationships are represented in the Cypher syntax. In Neo4j, nodes\index{Node (in Neo4j)} may be labelled with zero, one, or more labels. Labels\index{Label (in Neo4j)} are not types; a label does not specify anything about the information associated with a node, it merely serves to categorize or classify nodes. Nodes may have properties\index{Property (in Neo4j)}, specified as key--value pairs in JSON syntax. Graph nodes are written with normal round parentheses, with the set of their properties in curly brackets. Both the variable name for the node and the node labels are optional.
 
 \begin{cyphercode}
 (variable : Label1:Label2:Label3 ... {k1:v1, k2:v2, k3:v3 ....})
@@ -124,7 +124,7 @@ Figure~\ref{fig:sample-cypher} shows how nodes and relationships are represented
 \label{fig:sample-cypher}
 \end{figure}
 
-\paragraph*{Relationships} Relationships are directed connections between two nodes. Unlike nodes, relationships only have a single label. But like nodes, they can have properties specified as key--value pairs in JSON syntax. Relationships are written as ''lines'' between nodes, directed or undirected, with an optional variable name and relationship label in square brackets. 
+\paragraph*{Relationships} Relationships\index{Relationship (in Neo4j)} are directed connections between two nodes. Unlike nodes, relationships only have a single label. But like nodes, they can have properties specified as key--value pairs in JSON syntax. Relationships are written as ''lines'' between nodes, directed or undirected, with an optional variable name and relationship label in square brackets. 
 
 \begin{samepage}
 \begin{cyphercode}
@@ -142,17 +142,17 @@ Figure~\ref{fig:sample-cypher} shows how nodes and relationships are represented
 \end{samepage}
 
 \begin{tcolorbox}[colback=alert]
-\emph{Only directed relationships can be created in a Neo4J graph, but undirected relationships can be used in a pattern to query a graph}. \\
+\emph{Only directed relationships can be created in a Neo4j graph, but undirected relationships can be used in a pattern to query a graph}. \\
 
 Directionality of relationships is important and matters for querying a graph. A directed relationship \texttt{-->} will match a directed pattern \texttt{-->} or an undirected pattern \texttt{--} but not \texttt{<--}. 
 \end{tcolorbox}
 
 \paragraph*{Path}
-A path in Neo4J is a sequence of alternating nodes and relationships, beginning and ending with a node.
+A path\index{Path (in Neo4j)} in Neo4j is a sequence of alternating nodes and relationships, beginning and ending with a node.
 
 \paragraph*{Patterns and Querying}
 
-Graph patterns are used with the MATCH query keyword and describe either a node or a path that is to be searched for in the graph. When an instance of a pattern is found, any variable names in the pattern are bound to the corresponding nodes and relationship in the graph and the bound pattern is returned in the result set.
+Graph patterns\index{Pattern (in Cypher)} are used with the MATCH query keyword and describe either a node or a path that is to be searched for in the graph. When an instance of a pattern is found, any variable names in the pattern are bound to the corresponding nodes and relationship in the graph and the bound pattern is returned in the result set.
 
 For example, consider the following simple pattern matching query. The \texttt{MATCH} clause specifies the pattern to match. The pattern here is a node, indicated by the use of round parentheses, and only a variable name \texttt{n} is specified, no labels or property values. This means that this pattern matches all nodes in the graph database and returns them in the variable names \texttt{n}.
 
@@ -223,12 +223,12 @@ MATCH (n1)-[r]-(n2) RETURN n1, r, n2
 \end{cyphercode}
 \end{samepage}
 
-\noindent The Neo4J Browser interface allows graph visualization and visual exploration of nodes, relationships, and their properties, as shown in Figure~\ref{fig:neo4jgraphviz}.
+\noindent The Neo4j Browser interface allows graph visualization and visual exploration of nodes, relationships, and their properties, as shown in Figure~\ref{fig:neo4jgraphviz}.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=.8\textwidth]{screen2.png}
-\caption{Graph Visualization and Exploration in Neo4J Browser}
+\caption{Graph Visualization and Exploration in Neo4j Browser}
 \label{fig:neo4jgraphviz}
 \end{figure}
 
@@ -403,10 +403,10 @@ Applying these heuristics to the example in Figure~\ref{fig:relationalgraph1} le
 
 Applying these heuristics should only be considered as an initial translation. As seen above, some or all properties may well be represented as nodes in their own right (Figure~\ref{fig:equivalentmodels}) or be modelled as relationship labels (Figure~\ref{fig:airportmodels}), depending on the type of queries expected to be run against the graph data.
 
-\paragraph*{Pagila Database Example} As an example, each table of the Pagila relational database from the previous chapter was exported from PostgreSQL to a CSV file. These CSV files can be imported into Neo4J with the following set of Cypher expressions. Note that not all data is imported in this example, and a more compact representation of the statements is possible. 
+\paragraph*{Pagila Database Example} As an example, each table of the Pagila relational database from the previous chapter was exported from PostgreSQL to a CSV file. These CSV files can be imported into Neo4j with the following set of Cypher expressions. Note that not all data is imported in this example, and a more compact representation of the statements is possible. 
 
 \begin{tcolorbox}[colback=alert]
-The Pagila database is already imported into the Neo4J Community Edition in the course virtual machine.
+The Pagila database is already imported into the Neo4j Community Edition in the course virtual machine.
 \end{tcolorbox}
 
 \FloatBarrier
@@ -553,7 +553,7 @@ match (category:Category {categoryID: row.category_id} )
 merge (film)-[r:FILM_CATEGORY]->(category);
 \end{cyphercode}
 
-Importing the Pagila database takes about 10 minutes and will yield a graph that can be explored visually using Neo4J Browser using the following Cypher command that calls a built-in function for visualizing the database schema. A screen shot of the visual explorer is shown in Figure~\ref{fig:pagilagraph}.
+Importing the Pagila database takes about 10 minutes and will yield a graph that can be explored visually using Neo4j Browser using the following Cypher command that calls a built-in function for visualizing the database schema. A screen shot of the visual explorer is shown in Figure~\ref{fig:pagilagraph}.
 
 \begin{cyphercode}
 CALL db.schema.visualization()
@@ -562,12 +562,12 @@ CALL db.schema.visualization()
 
 \begin{figure}
 \includegraphics[width=\textwidth]{screen13.png}
-\caption{The Pagila database in Neo4J Browser}
+\caption{The Pagila database in Neo4j Browser}
 \label{fig:pagilagraph}
 \end{figure}
 
 \begin{tcolorbox}[colback=alert]
-When importing from files, or exporting to files, Neo4J Community Edition uses the the \texttt{/var/lib/neo4j/import/} directory on the server. Files to import must be placed in that directory, and exported files will be created there. Additionally, any scripts to be run by calling \texttt{CALL apoc.cypher.runFile()} must be located in that directory.
+When importing from files, or exporting to files, Neo4j Community Edition uses the the \texttt{/var/lib/neo4j/import/} directory on the server. Files to import must be placed in that directory, and exported files will be created there. Additionally, any scripts to be run by calling \texttt{CALL apoc.cypher.runFile()} must be located in that directory.
 \end{tcolorbox}
 
 \section{Graph Queries with Cypher}
@@ -623,7 +623,7 @@ This example introduces matching of paths that contain multiple nodes and multip
 Write a Cypher query to find all customers that have rented a film with rating ''PG'':
 
 \begin{enumerate}
-  \item Explore the graph visually in Neo4J browser, note the relationship types (see Figure~\ref{fig:explorerelationships})
+  \item Explore the graph visually in Neo4j browser, note the relationship types (see Figure~\ref{fig:explorerelationships})
   \item Consider the path from customer to film via rental and inventory
   \item Design a pattern that starts with a customer node and ends with a film node
   \item Define an appropriate \texttt{WHERE} clause of property restrictions in node patterns
@@ -632,7 +632,7 @@ Write a Cypher query to find all customers that have rented a film with rating '
 
 \begin{figure}
 \includegraphics[width=\textwidth]{screen14.png}
-\caption{Exploring relationships among nodes in Neo4J Browser}
+\caption{Exploring relationships among nodes in Neo4j Browser}
 \label{fig:explorerelationships}
 \end{figure}
 
@@ -654,7 +654,7 @@ ORDER BY amountMean DESC LIMIT 5
 \end{cyphercode}
 \end{samepage}
 
-This example introduces \textbf{aggregation}. In contrast to aggregation in SQL where grouping variables must be declared in the \texttt{GROUP BY} cluase, grouping in Cypher is implicit and uses all non-aggregated variables. In the following example, the non-aggregated variables is \texttt{ct} (the country). The query also introduces the aggregation functions \texttt{avg()} and \texttt{stDev()} that compute the average and standard deviation, respectively. More information of aggregation functions can be found in the Neo4J documentation\footnote{\url{https://neo4j.com/docs/cypher-manual/current/functions/aggregating/}}.
+This example introduces \textbf{aggregation}. In contrast to aggregation in SQL where grouping variables must be declared in the \texttt{GROUP BY} cluase, grouping in Cypher is implicit and uses all non-aggregated variables. In the following example, the non-aggregated variables is \texttt{ct} (the country). The query also introduces the aggregation functions \texttt{avg()} and \texttt{stDev()} that compute the average and standard deviation, respectively. More information of aggregation functions can be found in the Neo4j documentation\footnote{\url{https://neo4j.com/docs/cypher-manual/current/functions/aggregating/}}.
 
 \paragraph*{Example:} Find the sets of last names of the movie cast, and the total number of actors.
 

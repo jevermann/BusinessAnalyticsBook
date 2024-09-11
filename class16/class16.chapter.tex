@@ -46,11 +46,11 @@ CNNs represent a significant advancement in the ability to automatically interpr
 
 \section{Convolutional Layers}
 
-A \emph{convolutional layer} is a fundamental building block of a Convolutional Neural Network (ConvNet). It performs the primary operations that allow a ConvNet to capitalize on the spatial structure of input data, such as images, by extracting features that become increasingly complex and high-level as data progresses through deeper layers of the network.
+A \emph{convolutional layer}\index{Convolutional layer} is a fundamental building block of a Convolutional Neural Network (ConvNet)\index{Convolutional neural network}\index{ConvNet|see{Convolutional neural network}}. It performs the primary operations that allow a ConvNet to capitalize on the spatial structure of input data, such as images, by extracting features that become increasingly complex and high-level as data progresses through deeper layers of the network.
 
-A convolutional layer applies a set of learnable \emph{convolution filters} (also known as \emph{convolution kernels}) to the input. Each filter is small spatially (along width and height), but extends through the full depth of the input volume.
+A convolutional layer applies a set of learnable \emph{convolution filters} (also known as \emph{convolution kernels})\index{Convolution filter}\index{Convolution kernel|see{Convolutional filter}} to the input. Each filter is small spatially (along width and height), but extends through the full depth of the input volume.
 
-The convolution operation involves sliding each filter across the width and height of the input image and computing dot products between the filter and the local regions of the input image. As the filter slides over the input image, a 2-dimensional activation map (or feature map) is created as output that gives the responses of that filter at every spatial position. Intuitively, the network learns filters that activate when they see some specific type of feature at some spatial position in the input.
+The convolution operation involves sliding each filter across the width and height of the input image and computing dot products between the filter and the local regions of the input image. As the filter slides over the input image, a 2-dimensional activation map (or feature map)\index{Feature map}\index{Activation map|see{Feature map}} is created as output that gives the responses of that filter at every spatial position. Intuitively, the network learns filters that activate when they see some specific type of feature at some spatial position in the input.
 
 Figure~\ref{fig:screen1_chap16} shows an example in one dimension. The kernel vector $[1, 2]$ is first multiplied element-wise with the first two elements of the input, yielding $[0,1] \dot [1, 2] = [0, 2]$. The result is then summed, yielding $2$. This is the first element of the output. The kernel is then moved one position to the right. Multiplication with that input portion yields $[1, 2] \dot [1, 2] = [1, 4]$ and summing yields $5$, the second element of the output or activation/feature map. This is done until the kernel is multiplied with the two right-most elements of the input in Figure~\ref{fig:screen1_chap16}. Note that the kernel of length 2 can be applied 6 times to the input of length 7 in Figure~\ref{fig:screen1_chap16}, yielding an output of length 6.
 
@@ -74,7 +74,7 @@ Figure~\ref{fig:screen2_chap16} shows an example in two dimensions. Here, the fi
 \label{fig:screen2_chap16}
 \end{figure}
 
-Figure~\ref{fig:screen3} shows a mulit-channel 2D convolution. The kernel consists of two channels that are applied to two channels of the input. There are as many channels in the kernel as there channels in the input. The two channels are then summed to product a single output channel. As a realistic example, consider an RGB image with three ''depth'' channels, one each for the red, green, and blue color components. A kernel might then have a size of $3\times 3 \times 3$ (3 width, 3 height, and 3 for the three color channels).
+Figure~\ref{fig:screen3} shows a mulit-channel 2D convolution. The kernel consists of two channels that are applied to two channels of the input. There are as many channels in the kernel as there channels in the input\index{Channel (convolution filter)}. The two channels are then summed to product a single output channel. As a realistic example, consider an RGB image with three ''depth'' channels, one each for the red, green, and blue color components. A kernel might then have a size of $3\times 3 \times 3$ (3 width, 3 height, and 3 for the three color channels).
 
 \begin{figure}[b]
 \centering
@@ -97,7 +97,7 @@ While the examples show fixed numbers in the kernels, the kernel elements are ac
 Verifying the shape/dimensions of inputs, kernels, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
 \end{tcolorbox}
 
-There are two key considerations when defining a convolutional network layer, \emph{stride} and \emph{padding}. When moving the kernel over the input, the \emph{stride} controls the size of the steps in each direction. A stride of $1$ means the kernel moves one column or row at a time. A larger stride results in downsizing of the feature map, in removing redundancy in the output feature map (it avoids an input element being processed multiple times by a filter) and in increasing the efficiency of the data representation in the neural network.
+There are two key considerations when defining a convolutional network layer, \emph{stride}\index{Striding (in convolutional network)} and \emph{padding}\index{Padding (in convolutional layer)}. When moving the kernel over the input, the \emph{stride} controls the size of the steps in each direction. A stride of $1$ means the kernel moves one column or row at a time. A larger stride results in downsizing of the feature map, in removing redundancy in the output feature map (it avoids an input element being processed multiple times by a filter) and in increasing the efficiency of the data representation in the neural network.
 
 Second, the input is often \emph{padded} with zeros around the edges (''zero-padding''). This allows control over the shape of the output feature map and it also increases the weight or emphasis given to edge values, which are otherwise captured only once by a filter, in contrast to interior values, which are captured multiple times as the kernel moves over the input. Inputs may be padded by one ''frame'' of zeros or by multiple zero-frames, limited only by the size of the convolution kernel.
 
@@ -116,7 +116,7 @@ While the convolution layer may look complicated and complex, it essentially pro
 
 \section{Pooling Layers}
 
-Pooling layers within ConvNets are used to reduce the spatial dimensions (width and height) of the convolution output for the next convolutional layers or for subsequent dense, fully-connected layers. This reduction in dimensions serves several purposes. It decreases the computational load and the memory usage, helps prevent overfitting by providing an abstracted form of the representation, and makes the network invariant to small transformations, distortions, and translations in the input. Pooling is applied separately to each output channel of a convolution.
+Pooling layers\index{Pooling layer (in convolutional network)} within ConvNets are used to reduce the spatial dimensions (width and height) of the convolution output for the next convolutional layers or for subsequent dense, fully-connected layers. This reduction in dimensions serves several purposes. It decreases the computational load and the memory usage, helps prevent overfitting by providing an abstracted form of the representation, and makes the network invariant to small transformations, distortions, and translations in the input. Pooling is applied separately to each output channel of a convolution.
 
 The most common types of pooling include \emph{max pooling} and \emph{average pooling}. Max pooling partitions the convolution output into a set of overlapping or non-overlapping regions, and outputs the maximum value for each such region. For instance, a $2 \times 2$ max-pooling layer applied with a stride of 2 reduces the size of the input by a factor of four (halving the height and width separately). Instead of taking the maximum value from each distinct region, average pooling computes the average of the values in each patch on a feature map. 
 
@@ -194,10 +194,10 @@ Verifying the shape/dimensions of inputs, kernels, and outputs, and understandin
 
 
 \begin{tcolorbox}[colback=alert]
-This term ''feature map'' may be used in various ways. Some authors use it to describe the convolution output before the application of activation function and pooling, some authors use it to describe the convolution output after application of the activation function but prior to pooling, some authors use it to describe the output after pooling and some authors use it to describe any of the three. Hence, when the term ''feature map'' is used, it is important to identify the precise meaning in a particular context.
+This term ''feature map''\index{Feature map} may be used in various ways. Some authors use it to describe the convolution output before the application of activation function and pooling, some authors use it to describe the convolution output after application of the activation function but prior to pooling, some authors use it to describe the output after pooling and some authors use it to describe any of the three. Hence, when the term ''feature map'' is used, it is important to identify the precise meaning in a particular context.
 \end{tcolorbox}
 
-To understand how convolutional networks perform feature extraction or feature learning, it is instructive to visualize the feature maps. There are multiple ways of doing this. One of the earliest techniques developed for this is the ''\emph{DeconvNet}\footnote{Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}}''. The general architecture of a DeconvNet is shown in Figure~\ref{fig:screen13}. Using an unpooling operation, a DeconvNet successively reconstructs the image input for a feature map. 
+To understand how convolutional networks perform feature extraction or feature learning, it is instructive to visualize the feature maps. There are multiple ways of doing this. One of the earliest techniques developed for this is the ''\emph{DeconvNet}\footnote{Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}}''. The general architecture of a DeconvNet is shown in Figure~\ref{fig:screen13}. Using an unpooling operation, a DeconvNet successively reconstructs the image input for a feature map\index{DeconvNet}. 
 
 \begin{figure}
 \centering
@@ -409,7 +409,7 @@ Explore how does the choice of pooling strategy (max vs average) affects the fea
 
 Two additional tasks that CNNs are useful for are object detection and semantic segmentation. These two tasks are the basis of a wide array of applications including autonomous driving, medical image analysis, and surveillance. 
 
-\paragraph*{Object Detection} is the task of identifying and localizing objects within an image or a video. The task is not just to classify whether certain objects are present (as in image classification) but also to find their boundaries or ''bounding boxes'' within the image. Object detection is crucial in scenarios where the context provided by the location of an object within a scene affects the decision-making process, such as in security for detecting suspicious activities or in retail for counting products.
+\paragraph*{Object Detection}\index{Object detection} is the task of identifying and localizing objects within an image or a video. The task is not just to classify whether certain objects are present (as in image classification) but also to find their boundaries or ''bounding boxes'' within the image. Object detection is crucial in scenarios where the context provided by the location of an object within a scene affects the decision-making process, such as in security for detecting suspicious activities or in retail for counting products.
 
 \begin{figure}
 \centering
@@ -430,7 +430,7 @@ f_\theta: R^{H\times W \times K} \rightarrow [0,1]^{A \times A} \times \{1, \ldo
 
 Early approaches like R-CNN (Regions with CNN features) generated potential bounding boxes in an image and then ran a classifier on these regions to detect objects. More advanced models like YOLO (You Only Look Once) and SSD (Single Shot Detector) view this as a single regression problem, straight from image pixels to bounding box coordinates and class probabilities.
 
-\paragraph*{Semantic Segmentation} is the task of classifying each pixel of an image into a predefined category. This is more granular than object detection, which only discerns objects at the bounding box level. Semantic segmentation is used extensively in medical imaging (e.g., to delineate different types of tissue), road segmentation for autonomous vehicles, and landscape classification in geographic information systems.
+\paragraph*{Semantic Segmentation}\index{Semantic segmentation} is the task of classifying each pixel of an image into a predefined category. This is more granular than object detection, which only discerns objects at the bounding box level. Semantic segmentation is used extensively in medical imaging (e.g., to delineate different types of tissue), road segmentation for autonomous vehicles, and landscape classification in geographic information systems.
 
 Figure~\ref{fig:screen11_chap16} shows an example input image on the left. The task is to identify the road surface, sidewalks, background objects, and the sky. An example output is shown on the right of that figure with different colors indicating the different classes of image pixels. One way to tackle the problem is with a convolutional encoder-decoder network as shown in the center of the figure.
 
@@ -535,14 +535,14 @@ raw_test_ds=utils.text_dataset_from_directory(test_dir, batch_size=32)
 The first step in applying neural networks to text data is to pre-process and standardize the text representation itself. This includes at least the following activities:
 
 \begin{itemize}
-   \item \emph{Standardization} converts text to lower-case, repairs spelling errors, removes stop words (such as ''if'', ''the'' etc.), removes punctuation (commas, periods), HTML code, and other special characters, and stems words (for example, turning ''programming'' into ''program'')
-   \item \emph{Tokenization} splits character strings into separate tokens, for example splitting sentences into words on whitespace (spaces, tab characters, etc.), or splitting words into subwords (for example, ''subword'' is split to ''sub'' and ''word'').
-   \item \emph{Vectorization} converts tokens into numberical values for input to the neural network. It uses methods such as one-hot encoding, word embeddings, or relative word frequencies.
+   \item \emph{Standardization}\index{Standardization (of text)} converts text to lower-case, repairs spelling errors, removes stop words (such as ''if'', ''the'' etc.), removes punctuation (commas, periods), HTML code, and other special characters, and stems words (for example, turning ''programming'' into ''program'')
+   \item \emph{Tokenization}\index{Tokenization (of text)} splits character strings into separate tokens, for example splitting sentences into words on whitespace (spaces, tab characters, etc.), or splitting words into subwords (for example, ''subword'' is split to ''sub'' and ''word'').
+   \item \emph{Vectorization}\index{Vectorization (of text)} converts tokens into numberical values for input to the neural network. It uses methods such as one-hot encoding, word embeddings, or relative word frequencies.
 \end{itemize}
 
 \subsection[Bag-ofWord encoding]{Text classification using Bag-of-Word encoding without a CNN}
 
-This example uses the ''Bag-of-Words'' word frequency model that encodes the input as the number of times that a word occurs. Consider the following example where the input sentence is represented as a dictionary of word counts. 
+This example uses the ''Bag-of-Words'' \index{Bag-of-words model} word frequency model that encodes the input as the number of times that a word occurs. Consider the following example where the input sentence is represented as a dictionary of word counts. 
 
 \begin{samepage}
 \begin{textcode}
@@ -690,7 +690,7 @@ shape=(), dtype=string)
 
 \paragraph*{Word Embeddings}
 
-However, these word numbers should not be treated as numerical data; they are categorical with no implicit ordering. Each word number is entirely abitrary and the numbers could be permuted in any way. So rather than operate on token numbers this example uses \emph{word embeddings} to generate an \emph{embedding vector} of numbers of length $k$ that maps each word to a point in a $k$ dimensional space. That is, the set of numbers in the embedding vector characterizes or describes each word. The dimensionality of the space $k$ can be chosen arbitrarily. Larger $k$ can provide a better separation of many different unique words in the vector space, but require more computation, more memory, and may be more prone to overfitting. Smaller $k$ may provide a poorer separation of words in the vector space, that is, multiple words are close together and difficult to differentiate. Essentially, word embeddings function as a \emph{lookup table} where each row represents one word and the data in that row forms the embedding vector. Figure~\ref{fig:embedding} shows a simple example of a word embedding table with $k=4$ dimensions, that is, each word is represented by an embedding vector of length $4$. In practice, dimensionality is often chosen as $\operatorname{log}_{10}$ or a similar function of the input vocabulary size. 
+However, these word numbers should not be treated as numerical data; they are categorical with no implicit ordering. Each word number is entirely abitrary and the numbers could be permuted in any way. So rather than operate on token numbers this example uses \emph{word embeddings}\index{Embedding}\index{Word embedding|see{Embedding}} to generate an \emph{embedding vector}\index{Embedding vector|see{Embedding}} of numbers of length $k$ that maps each word to a point in a $k$ dimensional space. That is, the set of numbers in the embedding vector characterizes or describes each word. The dimensionality of the space $k$ can be chosen arbitrarily. Larger $k$ can provide a better separation of many different unique words in the vector space, but require more computation, more memory, and may be more prone to overfitting. Smaller $k$ may provide a poorer separation of words in the vector space, that is, multiple words are close together and difficult to differentiate. Essentially, word embeddings function as a \emph{lookup table} where each row represents one word and the data in that row forms the embedding vector. Figure~\ref{fig:embedding} shows a simple example of a word embedding table with $k=4$ dimensions, that is, each word is represented by an embedding vector of length $4$. In practice, dimensionality is often chosen as $\operatorname{log}_{10}$ or a similar function of the input vocabulary size. 
 
 \begin{figure}
 \centering

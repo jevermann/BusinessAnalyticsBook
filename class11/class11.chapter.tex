@@ -40,11 +40,11 @@ Murphy's book is available under a creative commons license. It is a somewhat mo
 
 \section{Introduction}
 
-\emph{Supervised machine learning} is the training or fitting of statistical models for prediction tasks when the correct target outcome is known. It is called ''training'' because we train a statistical model to make predictions for future observations based on past data. It is also called ''fitting'' because, for parametric models, that is models with parameters, we adjust the model parameters to ensure the model output is a good fit with the known, correct target outcome; that is, we fit the model to the data. 
+\emph{Supervised machine learning}\index{Supervised machine learning} is the training or fitting of statistical models for prediction tasks when the correct target outcome is known. It is called ''training'' because we train a statistical model to make predictions for future observations based on past data. It is also called ''fitting'' because, for parametric models, that is models with parameters, we adjust the model parameters to ensure the model output is a good fit with the known, correct target outcome; that is, we fit the model to the data. 
 
-Depending on the application area and research discipline, different terminology may be used. In this chapter, the term \emph{inputs} is used for variables used to make a prediction, and the term \emph{outputs} is used for the predicted variables. Other terms for inputs are \emph{predictors}, \emph{independent variables}, and \emph{features} although there are fine but important distinctions that are covered later. Other terms for outputs are \emph{targets}, \emph{responses}, and \emph{dependent variables}.
+Depending on the application area and research discipline, different terminology may be used. In this chapter, the term \emph{inputs}\index{Input (of prediction model)} is used for variables used to make a prediction, and the term \emph{outputs}\index{Output} is used for the predicted variables. Other terms for inputs are \emph{predictors}\index{Predictor}, \emph{independent variables}\index{Independent variable|see{Predictor}}, and \emph{features}\index{Feature|see{Predictor}} although there are fine but important distinctions that are covered later. Other terms for outputs are \emph{targets}\index{Target|see{Output}}, \emph{responses}\index{Response|see{Output}}, and \emph{dependent variables}\index{Dependent variable|see{Output}}.
 
-Many methods in supervised learning are \emph{parametric methods} that assume a functional relationship of the form 
+Many methods in supervised learning are \emph{parametric methods} that assume a functional relationship of the form\index{Parametric model} 
 
 \begin{align*}
 y = f(x) + \epsilon
@@ -54,7 +54,7 @@ y = f(x) + \epsilon
 
 On the other hand, \emph{non-parametric methods} do not assume a functional form. They can therefore be more flexible. 
 
-Depending on the type of output, one distinguishes regression from classification. In \emph{regression analysis}, the output is quantitative, typically real-valued. The quality of a model is measured by the numeric differences between actual and predicted output. Figure~\ref{fig:regression_chap11} shows an example of a regression model that predicts the output ''Wage'' from the inputs ''Age'', ''Year'', and ''Education Level''. Note that one of the inputs is quantitative while the other two are categorical (although both ''Year'' and ''Education Level'' could conceivably be treated also as quantitative in another model).
+Depending on the type of output, one distinguishes regression from classification. In \emph{regression analysis}\index{Regression}, the output is quantitative, typically real-valued. The quality of a model is measured by the numeric differences between actual and predicted output. Figure~\ref{fig:regression_chap11} shows an example of a regression model that predicts the output ''Wage'' from the inputs ''Age'', ''Year'', and ''Education Level''. Note that one of the inputs is quantitative while the other two are categorical (although both ''Year'' and ''Education Level'' could conceivably be treated also as quantitative in another model).
 
 \begin{figure}
 \centering
@@ -85,7 +85,7 @@ There are many different regression metrics, some parametric, some non-parametri
 \end{itemize}
 \end{itemize}
 
-In contrast, the output of \emph{classification} is categorical or qualitative. The quality of a model is measured by the proportion of correct classifications (accuracy) and related metrics. Figure~\ref{fig:classification} shows an example of a classification model where the binary output ''Today's Direction'' (of the stock market) is to be predicted from the inputs ''Yesterday'', ''Two Days Previous'', and ''Three Days Previous''. Note that all three inputs are qualitative, although quantitative inputs can also be used in classification.
+In contrast, the output of \emph{classification} is categorical or qualitative\index{Classification}. The quality of a model is measured by the proportion of correct classifications (accuracy) and related metrics. Figure~\ref{fig:classification} shows an example of a classification model where the binary output ''Today's Direction'' (of the stock market) is to be predicted from the inputs ''Yesterday'', ''Two Days Previous'', and ''Three Days Previous''. Note that all three inputs are qualitative, although quantitative inputs can also be used in classification.
 
 \begin{figure}
 \centering
@@ -151,7 +151,7 @@ For each of the following problems, decide if it is a prediction or inference/ex
 
 \section{Bias and Variance in Regression Analysis}
 
-The predictive quality of a regression model is typically evaluated by the \emph{mean squared error} (MSE) or the \emph{mean absolute error} (MAE). The error of the model in predicting the correct output, that is, the difference between prediction and true output, is often called the \emph{loss function}, which is to be minimized for optimal fit. The mean absolute error is sometimes preferred because it is more robust to the presence of outliers as it does not square the difference between prediction and target; other \emph{loss functions} are the \emph{mean absolute percentage error} or the \emph{Huber loss}. The Huber loss function, shown in Figure~\ref{fig:huber}, combines a square error for small values with an absolute error for larger values, making it also robust to outliers. 
+The predictive quality of a regression model is typically evaluated by the \emph{mean squared error} (MSE)\index{Mean squared error}\index{MSE|see{Mean squared error}} or the \emph{mean absolute error} (MAE)\index{Mean absolute error}\index{MAE|see{Mean absolute error}}. The error of the model in predicting the correct output, that is, the difference between prediction and true output, is often called the \emph{loss function}\index{Loss function}, which is to be minimized for optimal fit. The mean absolute error is sometimes preferred because it is more robust to the presence of outliers as it does not square the difference between prediction and target; other \emph{loss functions} are the \emph{mean absolute percentage error}\index{Mean absolute percentage error}\index{MAPE|see{Mean absolute percentage error}} or the \emph{Huber loss}\index{HUber loss}\index{Loss function!Huber}. The Huber loss function, shown in Figure~\ref{fig:huber}, combines a square error for small values with an absolute error for larger values, making it also robust to outliers. 
 
 \begin{align*}
 \operatorname{MSE} &= \frac{1}{n}\sum_{i=1}^n (y_i - \hat{f}(x_i))^2 \\
@@ -179,7 +179,7 @@ A typical strategy is then to separate \emph{test data} from the \emph{training 
 Low error on training data does NOT imply low errors on test data.
 \end{tcolorbox}
 
-Consider the regression model shown in Figure~\ref{fig:freedom}. The left panel shows a set of observed $x$ and $y$ values generated from the true relationship (black line) by adding some random error. The left panel also shows three different functions that are fitted to this data. The diagonal orange line represents a simple linear regression model with only $x$ and an intercept as predictors, that is it only has two parameters. The blue and green lines represent smoothing regression splines with different levels of flexibility.
+Consider the regression model shown in Figure~\ref{fig:freedom}. The left panel shows a set of observed $x$ and $y$ values generated from the true relationship (black line) by adding some random error. The left panel also shows three different functions that are fitted to this data. The diagonal orange line represents a simple linear regression model with only $x$ and an intercept as predictors, that is, it only has two parameters. The blue and green lines represent smoothing regression splines with different levels of flexibility.
 
 \begin{figure}[b]
 \centering
@@ -190,9 +190,9 @@ Consider the regression model shown in Figure~\ref{fig:freedom}. The left panel 
 \label{fig:freedom}
 \end{figure}
 
-It is evident that the orange line fits neither the observed data very well, nor is it close to the true function, the black line. It lacks sufficient \emph{flexibility} to both approximate the data and the true model. It has been \emph{underfitted}.
+It is evident that the orange line fits neither the observed data very well, nor is it close to the true function, the black line. It lacks sufficient \emph{flexibility} to both approximate the data and the true model. It has been \emph{underfitted}\index{Underfitting}.
 
-It is evident from the left panel in Figure~\ref{fig:freedom} that the green line fits the observed data better than the blue line, but it is also clear that the green line does not fit the true model, represented by the black line, as well as the blue line does. If one were to generate another sample of observations from the black line by adding random errors, the green line is unlikely to fit this new sample very well. In other words, the green line model has been fitted to the particular characteristics, or idiosyncrasies of this one set of training data: the model has been \emph{overfitted}.
+It is evident from the left panel in Figure~\ref{fig:freedom} that the green line fits the observed data better than the blue line, but it is also clear that the green line does not fit the true model, represented by the black line, as well as the blue line does. If one were to generate another sample of observations from the black line by adding random errors, the green line is unlikely to fit this new sample very well. In other words, the green line model has been fitted to the particular characteristics, or idiosyncrasies of this one set of training data: the model has been \emph{overfitted}\index{Overfitting}.
 
 The right panel of Figure~\ref{fig:freedom} shows the training data error (gray line) and the test data error (red line) for the three models indicated by the coloured squares (and others in between). The underfitting orange model shows both a large training error as well as a large test error on a holdout sample. In contrst, the green overfitted model shows a very small training error but a large test error on the independent test or holdout data set. The blue model does not show the smallest training error but it does show the smallest testing error.
 
@@ -207,7 +207,7 @@ While Figure~\ref{fig:freedom} has been created with non-parametric smoothing sp
 \label{fig:polynomial_chap11}
 \end{figure}
 
-Closely related to flexibility is concept of \emph{degrees of freedom}. In parametric models, the degrees of freedom are defined as the difference between the number of observations and the number of parameters of the model:
+Closely related to flexibility is concept of \emph{degrees of freedom}\index{Degrees of freedom}. In parametric models, the degrees of freedom are defined as the difference between the number of observations and the number of parameters of the model:
 
 \begin{align*}
 \operatorname{DF} = n - p
@@ -218,7 +218,7 @@ Closely related to flexibility is concept of \emph{degrees of freedom}. In param
 To better understand the concepts of underfitting and overfitting, it is useful to consider the MSE regression loss in more detail. This requires the concepts of expected value and variance of a random variable $X$ from basic statistics.
 
 \begin{tcolorbox}[colback=alert]
-\paragraph*{Expected Value} 
+\paragraph*{Expected Value}\index{Expected value} 
 \begin{align*}
 E[X] &= \sum_{i=1}^{\infty} x_i p_i \qquad \text{discrete random variable}\\
 E[X] &= \int_{-\infty}^{\infty} x p(x) dx \qquad \text{continuous random variable}
@@ -227,7 +227,7 @@ For uniform distributions or unweighted observations $p_i=p_j \; \forall i, j \;
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=alert]
-\paragraph*{Variance} 
+\paragraph*{Variance}\index{Variance!of a random variable} 
 \begin{align*}
 Var[X] &= E[(X - E[X])^2] = E[X^2] - E[X]^2 
 \end{align*}
@@ -264,11 +264,11 @@ MSE &= f^2 + \sigma^2 - 2 f E[\hat{f}] + Var[\hat{f}] + E[\hat{f}]^2 \\
     &= Bias[\hat{f}]^2 + \sigma^2 + Var[\hat{f}] \\
 \end{align*}
 
-The \emph{bias} of an estimated model $\hat{f}$ expresses how far the expected value of the estimated model $\hat{f}$ is away from the true target value $f$, while the \emph{variance} of an estimated model $\hat{f}$ expresses how much the expected value of the estimated model varies with different inputs or data sets. The final part of the MSE is the \emph{irreducible error} $\sigma^2$ that represents the random variations of the data around the true target value $f$.
+The \emph{bias}\index{Bias (in prediction)} of an estimated model $\hat{f}$ expresses how far the expected value of the estimated model $\hat{f}$ is away from the true target value $f$, while the \emph{variance}\index{Variance!of a predictive model} of an estimated model $\hat{f}$ expresses how much the expected value of the estimated model varies with different inputs or data sets. The final part of the MSE is the \emph{irreducible error}\index{Irreducible error} $\sigma^2$ that represents the random variations of the data around the true target value $f$.
 
-An underfitting model will necessarily have a large bias as it is not close to the true model. This was illustrated by the orange line model in Figure~\ref{fig:freedom}. As underfitting models are often models that are too simple, they tend to have small variance, but this is not necessarily true for all models. 
+An underfitting model\index{Underfitting} will necessarily have a large bias as it is not close to the true model. This was illustrated by the orange line model in Figure~\ref{fig:freedom}. As underfitting models are often models that are too simple, they tend to have small variance, but this is not necessarily true for all models. 
 
-In contrast, overfitting models necessarily have a large variance. Because they are fitted to the idiosyncratic specific values of the training data, they do not generalize well to new, unseen test data. New data, even if it is drawn from the same probability distribution or population, will lead to very different predicted outputs. Thus, a large variance of a model is manifested by a large test error. A severely overfitted model may also have a large bias. An example of this is the overfitted green model in Figure~\ref{fig:freedom}, or the degree 20 polynomial model in Figure~\ref{fig:polynomial_chap11}. Neither of these are close to the true model. 
+In contrast, overfitting\index{Overfitting} models necessarily have a large variance. Because they are fitted to the idiosyncratic specific values of the training data, they do not generalize well to new, unseen test data. New data, even if it is drawn from the same probability distribution or population, will lead to very different predicted outputs. Thus, a large variance of a model is manifested by a large test error. A severely overfitted model may also have a large bias. An example of this is the overfitted green model in Figure~\ref{fig:freedom}, or the degree 20 polynomial model in Figure~\ref{fig:polynomial_chap11}. Neither of these are close to the true model. 
 
 A well-fitting model is one that does not minimize the bias or the variance but finds the overall optimum by minimizing the joint error. To estimate the variance, it is necessary to apply the model to independent test data. In other words, a well-fitting model is one that minimizes the test error. This central idea is known as the \emph{bias and variance trade-off} and is illustrated in Figure~\ref{fig:biasvariancetradeoff}. Note that the total error also includes the \emph{irreducible error} which cannot be removed but is independent of model complexity.
 
@@ -288,7 +288,7 @@ While this section has derived the concepts of bias and variance using regressio
 
 \section{Model Quality in Classification}
 
-In classification models, the primary quality criterion is the \emph{error rate}, which can be calculated both for training and for test data as the proportion where the predicted class $\hat{y}_i$ is not the true class $y_i$:
+In classification models, the primary quality criterion is the \emph{error rate}\index{Error rate}, which can be calculated both for training and for test data as the proportion where the predicted class $\hat{y}_i$ is not the true class $y_i$:
 
 \begin{align*}
 \frac{1}{n}\sum^n_{i=1} \Ident(y_i \neq \hat{y}_i)
@@ -307,11 +307,11 @@ Classification methods typically produce as output the probability of an observa
 1 - E \left( \argmax_j \Pr (Y=j | X) \right)
 \end{align*}
 
-The most common type of classification is \emph{binary classification}, which assigns observations to one of two classes, e.g. true or false, normal or abnormal, good or bad, zero or one, etc. \emph{Multinomial classification} , also called \emph{multi-class classification} assigns observations to one of more than two classes. This section first considers binary classification before moving to multinomial classification.
+The most common type of classification is \emph{binary classification}, which assigns observations to one of two classes, e.g. true or false, normal or abnormal, good or bad, zero or one, etc. \emph{Multinomial classification}, also called \emph{multi-class classification} assigns observations to one of more than two classes. This section first considers binary classification before moving to multinomial classification.
 
-A Bayes classifier is an \emph{ideal classifier}. The Bayes classifier error rate is the irreducible error and forms the lower bound of practically achievable classification error rates. The Bayes classifier is an ideal classifier because in practice the probabilities of class membership, conditional on the observed predictor values, are unknown and must be estimated from data using a statistical model. However, estimation introduces error.
+A Bayes classifier is an \emph{ideal classifier}. The Bayes classifier\index{Bayes classifier} error rate is the irreducible error and forms the lower bound of practically achievable classification error rates. The Bayes classifier is an ideal classifier because in practice the probabilities of class membership, conditional on the observed predictor values, are unknown and must be estimated from data using a statistical model. However, estimation introduces error.
 
-A simple, non-parametric classifier is the k-Nearest Neighbour (KNN) method. This classifier identifies a set of $k$ observations closest to an observation $x_0$ whose class is to be predicted, called the neighbourhood $N_0$. The class membership probabilities are then estimated as the proportions of observations in the neighbourhood that belong to the different classes $j$:
+A simple, non-parametric classifier is the k-Nearest Neighbour (KNN) method\index{k-nearest neighbour!classfication}. This classifier identifies a set of $k$ observations closest to an observation $x_0$ whose class is to be predicted, called the neighbourhood $N_0$. The class membership probabilities are then estimated as the proportions of observations in the neighbourhood that belong to the different classes $j$:
 
 \begin{align*}
 \Pr (Y=j|X=x_0) = \frac{1}{K} \sum_{i \in N_0} \Ident (y_i=j) 
@@ -329,9 +329,9 @@ Here, $\Ident(\cdot)$ is the identity function that is 1 if its argument is true
 \label{fig:knn1}
 \end{figure}
 
-Figure~\ref{fig:knn1} provides an example for $k=3$. The left panel in this figure shows points for which the classes, blue or orange, are known. When predicting the class for a new point, marked by the ''$\times$'', the three nearest neighbours are identified. Of these, two are blue and one is yellow. Thus, the probability of the new point being yellow is estimated as $1/3$ and that of it being blue is estimated as $2/3$. The Bayes decision rule would classify the new point as blue. The right panel shows the result of classifying a large set of points as blue or yellow. The panel clearly shows the \emph{decision boundary} of the classifier that separates the predicted class memberships, represented by the black line.
+Figure~\ref{fig:knn1} provides an example for $k=3$. The left panel in this figure shows points for which the classes, blue or orange, are known. When predicting the class for a new point, marked by the ''$\times$'', the three nearest neighbours are identified. Of these, two are blue and one is yellow. Thus, the probability of the new point being yellow is estimated as $1/3$ and that of it being blue is estimated as $2/3$. The Bayes decision rule would classify the new point as blue. The right panel shows the result of classifying a large set of points as blue or yellow. The panel clearly shows the \emph{decision boundary}\index{Decision boundary} of the classifier that separates the predicted class memberships, represented by the black line.
 
-When KNN is used for regression, the predicted output value is usually estimated as the mean output values of the $k$ neighbours in the neighbourhood $N_0$.
+When KNN is used for regression\index{k-nearest neighbour!regression}, the predicted output value is usually estimated as the mean output values of the $k$ neighbours in the neighbourhood $N_0$.
 
 \begin{figure}
 \centering
@@ -389,7 +389,7 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_1=X_2=
 \vspace{.5\baselineskip}\scriptsize Adapted from ISLR Exercise 2.7
 \end{tcolorbox}
 
-In binary classification, the \emph{confusion matrix} is a useful tool for summarizing the performance of a classifier. It tabulates the number of positive and negative predictions that match the true values. The following confusion matrix shows the results of a hypothetical binary classifier for credit card defaults that assigns classes by highest probability:
+In binary classification, the \emph{confusion matrix}\index{Confusion matrix} is a useful tool for summarizing the performance of a classifier. It tabulates the number of positive and negative predictions that match the true values. The following confusion matrix shows the results of a hypothetical binary classifier for credit card defaults that assigns classes by highest probability:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
@@ -427,7 +427,7 @@ $\Pr(\text{default=Yes} | X=x) > 0.2$ \\ \vspace{2mm}
 
 More of the true defaulters are correctly predicted and the sensitivity has improved to $58.6\%$ while the error rate for true defaulters has been reduced to $51.4\%$. On the other hand, the specificity has decreased to $97.6\%$ and the overall error rate has increased to $3.73\%$. 
 
-In general, a confusion matrix shows four different values, the \emph{true negatives} (TN), \emph{true positives} (TP), \emph{false negatives} (FN) and \emph{false positives} (FP) as shown in the following table:
+In general, a confusion matrix shows four different values, the \emph{true negatives} (TN)\index{True negative}, \emph{true positives} (TP)\index{True positive}, \emph{false negatives} (FN)\index{False negative} and \emph{false positives} (FP)\index{False positive} as shown in the following table:
 
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
@@ -444,15 +444,15 @@ In general, a confusion matrix shows four different values, the \emph{true negat
 From these four values, a number of model quality statistics can be computed. Frequently used are the recall, specificity, precision, accruacy, and F1 score, which are highlighted in the following list:
 
 \begin{itemize}
-   \item Sensitivity, \textbf{Recall}, Hit Rate, True Positive Rate:
+   \item Sensitivity\index{Sensitivity|see{Recall}}, \textbf{Recall}\index{Recall}, Hit Rate, True Positive Rate:
 \begin{align*}
 TPR = \frac{TP}{P} = \frac{TP}{TP+FN} = 1 - FNR
 \end{align*}
-   \item \textbf{Specificity}, Selectivity, True Negative Rate:
+   \item \textbf{Specificity}\index{Specificity}, Selectivity\index{Selectivity|see{Specificity}}, True Negative Rate:
 \begin{align*}
 TNR = \frac{TN}{N} = \frac{TN}{TN+FP} = 1 - FPR
 \end{align*}
-   \item \textbf{Precision}, Positive Predictive Value:
+   \item \textbf{Precision}\index{Precision!in classification}, Positive Predictive Value:
 \begin{align*}
 PPV = \frac{TP}{TP+FP} = 1 - FDR
 \end{align*}
@@ -476,11 +476,11 @@ FDR = \frac{FP}{FP+TP} = 1 - PPV
 \begin{align*}
 FOR = \frac{FN}{FN+TN} = 1 - NPV
 \end{align*}
-   \item \textbf{Accuracy} (= 1 - Error Rate):
+   \item \textbf{Accuracy}\index{Accuracy (in classification)} (= 1 - Error Rate):
 \begin{align*}
 ACC = \frac{TP+TN}{P+N} = \frac{TP + TN}{TP + TN + FP + FN}
 \end{align*}
-   \item \textbf{F1 Score} (harmonic mean of precision and recall):
+   \item \textbf{F1 Score}\index{F1 score} (harmonic mean of precision and recall):
 \begin{align*}
 F1 = 2 \times \frac{PPV \times TPR}{PPV + TPR} = \frac{2 TP}{2TP + FP + FN}
 \end{align*}
@@ -494,7 +494,7 @@ FOR = \frac{FN}{FN+TN} = 1 - NPV
 \end{align*}
 \end{itemize}
 
-The above example demonstrated that the true positive rate and the false positive rate (or the true negative rate and false negative rate) are not independent of each other. Generally, increasing the true positive rate will also increase the false positive rate, because one is overall more likely to conclude that an observation is the true class (by adjusting the probability threshold). This suggests that a graph of the true positive rate against the false positive rate as shown in Figure~\ref{fig:roc} can summarize the classifier performance and allows the user to pick a desirable combination of true and false positive rates. The graph in Figure~\ref{fig:roc} is called a \emph{Receiver Operating Characteristics} chart, or ROC chart for short. The terminology stems from early experiments with aircraft detection through radar during the 2nd world war. As shown in the figure, a random classifier is characterized by a diagonal line, and good classifiers have curves towards the upper left. Thus, the classifier shown in the green line dominates the one in the orange line, and is in turn dominated by the one represented by the blue line. All three perform better than a random classifier.
+The above example demonstrated that the true positive rate and the false positive rate (or the true negative rate and false negative rate) are not independent of each other. Generally, increasing the true positive rate will also increase the false positive rate, because one is overall more likely to conclude that an observation is the true class (by adjusting the probability threshold). This suggests that a graph of the true positive rate against the false positive rate as shown in Figure~\ref{fig:roc} can summarize the classifier performance and allows the user to pick a desirable combination of true and false positive rates. The graph in Figure~\ref{fig:roc} is called a \emph{Receiver Operating Characteristics}\index{Receiver operating characteristic}\index{ROC|see{Receiver operating characteristic}} chart, or ROC chart for short. The terminology stems from early experiments with aircraft detection through radar during the 2nd world war. As shown in the figure, a random classifier is characterized by a diagonal line, and good classifiers have curves towards the upper left. Thus, the classifier shown in the green line dominates the one in the orange line, and is in turn dominated by the one represented by the blue line. All three perform better than a random classifier.
 
 \begin{figure}
 \centering
@@ -504,7 +504,7 @@ The above example demonstrated that the true positive rate and the false positiv
 \label{fig:roc}
 \end{figure}
 
-Because the ROC curve of a perfect classifier runs though the top-left corner of the ROC chart, it is natural to define the overall performance of classifier for various combinations of true and false positive rate by the area under the curve. This also allows easy comparisons of classifiers that do not dominate one another, i.e. whose ROC lines cross each other. The area-under-the-curve, or AUC for short, summarizes the classifier performance in a single number. For the classifier in Figure~\ref{fig:auc}, the AUC is $0.834$, indicated by the green and read areas. A random classifier has an AUC of $0.5$ and a perfect classifier has an AUC of $1$. 
+Because the ROC curve of a perfect classifier runs though the top-left corner of the ROC chart, it is natural to define the overall performance of classifier for various combinations of true and false positive rate by the area under the curve. This also allows easy comparisons of classifiers that do not dominate one another, i.e. whose ROC lines cross each other. The \emph{area-under-the-curve}, or AUC\index{Area under curve}\index{AUC|see{Area under curve}} for short, summarizes the classifier performance in a single number. For the classifier in Figure~\ref{fig:auc}, the AUC is $0.834$, indicated by the green and read areas. A random classifier has an AUC of $0.5$ and a perfect classifier has an AUC of $1$. 
 
 \begin{figure}
 \centering
@@ -592,9 +592,9 @@ Multinomial or multi-class classification assigns each observation to one of mor
 
 While the concept of a confusion matrix remains applicable, it is not immediately obvious what the true negative, true positive, false negative, and false positive values are.  One way to overcome this is to reduce the classification results to a binomial case by treating each class in turn as the ''positive class'' and all others as ''negative''. This is called ''one-versus-rest'' (OvR), ''one-versus-all'' (OvA), or ''one-against-all'' (OaA). 
 
-In \emph{micro-averaging}, the TP, TN, FP, and FN values are counted for all classes using OvR, and then summed. These total TP, TN, FP, and FN values are then used to compute precision, recall and other metrics. This gives equal weight to each instance but may overemphasize the classification for a dominant majority class. Importantly, for micro-averaging, precision equals recall equals accuracy.
+In \emph{micro-averaging}\index{Micro averaging}, the TP, TN, FP, and FN values are counted for all classes using OvR, and then summed. These total TP, TN, FP, and FN values are then used to compute precision, recall and other metrics. This gives equal weight to each instance but may overemphasize the classification for a dominant majority class. Importantly, for micro-averaging, precision equals recall equals accuracy.
 
-In \emph{macro-averaging}, the TP, TN, FP, and FN values are counted for all classes, but instead of summing these values, precision and recall are calculated for each class. These precision and recall values are then averaged over all classes, optionally weighting each class by its true count of instances. Macro-averaging is appropriate when all classes are equally important. It is also appropriate for an imbalanced data set and ensures that all classes contribute equally. However, it may mask poor performance of important minority classes, and it may lower overall performance measures due to low classifier performance on small or unimportant classes that nonetheless contribute equally to larger or important classes. 
+In \emph{macro-averaging}\index{Macro averaging}, the TP, TN, FP, and FN values are counted for all classes, but instead of summing these values, precision and recall are calculated for each class. These precision and recall values are then averaged over all classes, optionally weighting each class by its true count of instances. Macro-averaging is appropriate when all classes are equally important. It is also appropriate for an imbalanced data set and ensures that all classes contribute equally. However, it may mask poor performance of important minority classes, and it may lower overall performance measures due to low classifier performance on small or unimportant classes that nonetheless contribute equally to larger or important classes. 
 
 \begin{tcolorbox}[colback=code]
 \subsubsection*{Hands-On Exercise}
@@ -609,7 +609,7 @@ For the multi-class confusion matrix above,
 
 While precision, recall, and accuracy are useful metrics for evaluating a binary or multinomial classifer, they do not lend themselves to be used directly as loss functions in fitting a model. This is because the assignment of an observation to a class is a function of the probability of its class membership and the actual class assignment may depend on the chosen threshold probability or other decision rule. Thus, a desirable loss function is a function that expresses how close or how different the predicted class membership probabilities are from the true class membership probabilities. 
 
-There are two commonly used metrics that quantify such a difference. Both have their origin in information theory and the two are closely related to each other. First, the \emph{cross-entropy} of two probability distributions $p_i$ and $q_i$ over the same set of classes $i$ is defined as:
+There are two commonly used metrics that quantify such a difference. Both have their origin in information theory and the two are closely related to each other. First, the \emph{cross-entropy}\index{Cross-entropy} of two probability distributions $p_i$ and $q_i$ over the same set of classes $i$ is defined as:
 
 \begin{align*}
 H(p, q) = - \sum_i p_i \log q_i \qquad \text{Cross-entropy}
@@ -617,7 +617,7 @@ H(p, q) = - \sum_i p_i \log q_i \qquad \text{Cross-entropy}
 
 \noindent Here, $p_i$ is the true probability of belonging to class $i$ whereas $q_i$ is the predicted probability of belonging to class $i$. The cross-entropy captures the similarity or difference of the two probability distributions.
 
-The second metric is the \emph{Kullback-Leibler (KL) divergence}. It is effectively the cross-entroy minus the entropy of the true probability distribution, as the following derivation shows:
+The second metric is the \emph{Kullback-Leibler (KL) divergence}\index{Kullback-Leibler divergence}\index{KL divergence|see{Kullback-Leibler divergence}}. It is effectively the cross-entroy minus the entropy of the true probability distribution, as the following derivation shows:
 
 \begin{align*}
 D_{KL}(P || Q) &= \sum_i p_i \log \left( \frac{p_i}{q_i} \right) \qquad \text{Kullback-Leibler (KL) divergence}\\
@@ -667,11 +667,11 @@ Calculate the cross-entropy loss for this scenario.
 \end{enumerate}
 \end{tcolorbox}
 
-\section{Resampling Methods}
+\section{Crossvalidation Methods}
 
-Recall that the goal in prediction is to have an unbiased assessment of the true classification or regression error, and to generalize to prediction of future, yet unseen observations. Finding a suitable prediction model involves two separate steps, that of \emph{model selection}, and that of \emph{model assessment}. Model selection estimates the predictive performance, that is, the error or loss, of different models in order to choose the best one. After having chosen the final model, its prediction error must again be estimated on new data. This is to avoid model selection capitalizing on specific idiosyncrasies of the test data, which may not hold for new, as yet unseen data.
+Recall that the goal in prediction is to have an unbiased assessment of the true classification or regression error, and to generalize to prediction of future, yet unseen observations. Finding a suitable prediction model involves two separate steps, that of \emph{model selection}, and that of \emph{model assessment}. Model selection estimates the predictive performance, that is, the error or loss, of different models in order to choose the best one. After having chosen the final model, its prediction error must again be estimated on new data. This is to avoid model selection capitalizing on specific idiosyncrasies of the test data, which may not hold for new, as yet unseen data\index{Cross-validation}.
 
-The \emph{validation set approach}, or ''holdout'' method, then requires not only a training and test data set, but a third set, the validation set. The training data is used to train each of a set of candidate models, the validation data is used to test each candidate model, and the test data is used to evaluate the finally selected model. Typically, the data set is randomly split into 50\% training data, 25\% validation data, and 25\% test data, but other splits are used as well. 
+The \emph{validation set approach}, or ''holdout'' method\index{Holdout sample}, then requires not only a training and test data set, but a third set, the validation set. The training data is used to train each of a set of candidate models, the validation data is used to test each candidate model, and the test data is used to evaluate the finally selected model. Typically, the data set is randomly split into 50\% training data, 25\% validation data, and 25\% test data, but other splits are used as well. 
 
 One potential problem with this approach is that the validation error can be highly variable and depends critically on the way the data is split. One random split can show very different characteristics than another random split. A second potential problem is that the validation error may overestimate the actual error, because the training set is small, only half of the full data set. Figure~\ref{fig:holdout} illustrates the first problem. A single split of the data results in the validation error shown in the left panel. However, repeating the random splitting ten times results in ten different validation errors that may be very different from each other, as shown in the right panel of that figure.
 
@@ -684,7 +684,7 @@ One potential problem with this approach is that the validation error can be hig
 \label{fig:holdout}
 \end{figure}
 
-One way to deal with both problems is to use \emph{leave-one-out cross-validation} (LOOCV). In LOOCV, each observation is designated as test observation in turn, while the remaining $n-1$ observations form the training data set. The model is trained on the training data and tested on the single test observation. This procedure is repeated $n$ times as each observation becomes the test observation in turn. The cross-validation error is simply the mean of the $n$ training errors:
+One way to deal with both problems is to use \emph{leave-one-out cross-validation} (LOOCV)\index{Leave-one-out cross-validation}\index{LOOCV|see{Leave-one-out cross-validation}}. In LOOCV, each observation is designated as test observation in turn, while the remaining $n-1$ observations form the training data set. The model is trained on the training data and tested on the single test observation. This procedure is repeated $n$ times as each observation becomes the test observation in turn. The cross-validation error is simply the mean of the $n$ training errors:
 
 \begin{align*}
 CV = \frac{1}{n} \sum\nolimits_{i=1}^n \operatorname{Err}_i
@@ -692,7 +692,7 @@ CV = \frac{1}{n} \sum\nolimits_{i=1}^n \operatorname{Err}_i
 
 The advantage to LOOCV is that it addresses the two potential problems with the holdout sample approach. Additionally, it is deterministic as there is no randomness to the resulting validation error estimate, because there are no random splits of the data set. Finally, LOOCV shows less overstimation of the validation error rate than the holdout approach. However, a significant drawback is that this approach is computationally expensive, because the model must be fit or trained $n$ times to $n$ different training data sets. 
 
-As a compromise between the holdout sample approach and LOOCV, business analysts often use k-fold cross-validation. In this approach, the data set is randomly divided into $k$ sub-samples (''folds''). Each fold is selected as the test data set in turn, with the remaining $k-1$ folds combining to form the training data set. The cross-validation error is simply the mean of the $k$ cross-validation errors for each of the $k$ test folds. Typically, $k$ is chosen as $5$ or $10$.
+As a compromise between the holdout sample approach and LOOCV, business analysts often use \emph{k-fold cross-validation}\index{k-fold cross-validation}. In this approach, the data set is randomly divided into $k$ sub-samples (''folds''). Each fold is selected as the test data set in turn, with the remaining $k-1$ folds combining to form the training data set. The cross-validation error is simply the mean of the $k$ cross-validation errors for each of the $k$ test folds. Typically, $k$ is chosen as $5$ or $10$.
 
 \begin{align*}
 CV = \frac{1}{k} \sum\nolimits_{i=1}^k \operatorname{Err}_i
@@ -709,7 +709,7 @@ k-fold cross-validation is computationally less expensive and less stable than L
 \label{fig:kfold}
 \end{figure}
 
-One important consideration in splitting the data is preventing \emph{information leakage} from training to test or validation data set, in order to ensure that the test and validation data sets are truly independent of the training data. One way in which information could be leaked is when selection of input variables or predictors is done based on characteristics of the entire data set, for example the variance of a variable or the correlation between variables in the entire data set. This selection affects both the training and the test data, essentially leaking some information from the training data to the test data, and thereby making the test data set not truly independent. Another way in which information can leak is by pre-processing variables, like centering around the mean or scaling them to have unit variance. When this is based on the mean or variance of the full data set, information from the training set leaks to the test or validation set, making those data sets not fully independent. As a general rule, any predictor or feature selection and data pre-processing must be done independently for each training set, \emph{after} the split or splits (in the case of k-fold CV) have been made. 
+One important consideration in splitting the data is preventing \emph{information leakage}\index{Information leakage} from training to test or validation data set, in order to ensure that the test and validation data sets are truly independent of the training data. One way in which information could be leaked is when selection of input variables or predictors is done based on characteristics of the entire data set, for example the variance of a variable or the correlation between variables in the entire data set. This selection affects both the training and the test data, essentially leaking some information from the training data to the test data, and thereby making the test data set not truly independent. Another way in which information can leak is by pre-processing variables, like centering around the mean or scaling them to have unit variance. When this is based on the mean or variance of the full data set, information from the training set leaks to the test or validation set, making those data sets not fully independent. As a general rule, any predictor or feature selection and data pre-processing must be done independently for each training set, \emph{after} the split or splits (in the case of k-fold CV) have been made. 
 
 \section{Review Questions}
 \paragraph*{Supervised and unsupervised learning}
