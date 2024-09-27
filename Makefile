@@ -4,7 +4,7 @@ book:
 
 .PHONY: zip
 zip:
-	tar -c -f busi4720.slides.tar.gz -z -v class01/class01.beamer.pdf class02/class02.beamer.pdf class03/class03.beamer.pdf class04/class04.beamer.pdf class05/class05.beamer.pdf class06/class06.beamer.pdf class07/class07.beamer.pdf class08/class08.beamer.pdf class09/class09.beamer.pdf class11/class11.beamer.pdf class12/class12.beamer.pdf class13/class13.beamer.pdf class14/class14.beamer.pdf class15/class15.beamer.pdf class16/class16.beamer.pdf class17/class17.beamer.pdf class19/class19.beamer.pdf class20/class20.beamer.pdf class21/class21.beamer.pdf class22/class22.beamer.pdf class23/class23.beamer.pdf
+	tar -c -f busi4720.slides.tar.gz -z -v class01/class01.beamer.pdf class02/class02.beamer.pdf class03/class03.beamer.pdf class04/class04.beamer.pdf class05/class05.beamer.pdf class06/class06.beamer.pdf class07/class07.beamer.pdf class08/class08.beamer.pdf class09/class09.beamer.pdf class11/class11.beamer.pdf class12/class12.beamer.pdf class13/class13.beamer.pdf class14/class14.beamer.pdf class15/class15.beamer.pdf class16/class16.beamer.pdf class17/class17.beamer.pdf class19/class19.beamer.pdf class20/class20.beamer.pdf class21/class21.beamer.pdf class22/class22.beamer.pdf class23/class23.beamer.pdf class24/class24.beamer.pdf
 	
 clean:
 	find . -type d -name "_minted*" -prune -exec rm -rf {} \;
@@ -20,6 +20,9 @@ clean:
 	find . -name "*.snm" -exec rm {} \;
 	find . -name "*.blg" -exec rm {} \;
 	find . -name "*.bbl" -exec rm {} \;
+	find . -name "*.idx" -exec rm {} \;
+	find . -name "*.ilg" -exec rm {} \;
+	find . -name "*.ind" -exec rm {} \;
 
 squeaky: clean
 	find . -name "*.tex.bak" -exec rm {} \;
