@@ -169,15 +169,15 @@ Long Short-Term Memory (LSTM)\index{Long short-term memory cell}\index{LSTM cell
 An LSTM cell, shown schematically in Figure~\ref{fig:lstm}, is complex and contains multiple ''gates'' that regulate the flow of information. LSTM networks have two components to their state. The \emph{cell memory} is represented by $c_t$ and the hidden state is represented by $h_t$ in Figure~\ref{fig:lstm}. Each LSTM cell consists of the following components:
 
 \begin{itemize}
-\item \emph{Forget Gate:}\index{Forget gate (in LSTM)} This gate decides which information is discarded from the cell memory $c$. It looks at the previous hidden state and the current input and passes its output through a sigmoid function, which outputs numbers between 0 (''forget this vector element completely'') and 1 (''keep this vector element entirely''). The forget gate is represented by $F_t$ in Figure~\ref{fig:lstm} and formally defined as:
+\item \emph{Forget Gate:}\index{Forget gate (in LSTM)} This gate decides which information is discarded from the cell memory $c$. It looks at the previous hidden state and the current input and passes its output through a sigmoid function, which outputs a number between 0 (''forget this vector element completely'') and 1 (''keep this vector element entirely''). The forget gate is represented by $F_t$ in Figure~\ref{fig:lstm} and formally defined as:
 \begin{align}
 F_t &= \sigma (W_f \cdot [ x_t, h_{t-1}] + b_f) \label{eq:forget}
 \end{align}
-\item \emph{Input Gate:}\index{Input gate (in LSTM)} This gate updates the cell memory $c$ by adding new information. It looks at the previous hidden state and the current input and includes a sigmoid layer which decides which values to update. It outputs numbers between 0 (''do not update this vector element'') and 1 (''update this vector element completely''). This input gate is represented by $I_t$ in Figure~\ref{fig:lstm} and formally defined as:
+\item \emph{Input Gate:}\index{Input gate (in LSTM)} This gate updates the cell memory $c$ by adding new information. It looks at the previous hidden state and the current input and includes a sigmoid layer which decides which values to update. It outputs a number between 0 (''do not update this vector element'') and 1 (''update this vector element completely''). This input gate is represented by $I_t$ in Figure~\ref{fig:lstm} and formally defined as:
 \begin{align}
 I_t &= \sigma (W_i \cdot [ x_t, h_{t-1}] + b_i) \label{eq:input}
 \end{align}
-\item \emph{Output Gate:} The output gate\index{Output gate (in LSTM)} examines the prior hidden state and current input. It includes a sigmoid layer which decides which values of the new cell memory to output and pass on to the next cell as the new hidden state. It outputs numbers between 0 (''do not include this vector element in the output'') and 1 (''include this vector element in the output''). The output gate is shown as $O_t$ in Figure~\ref{fig:lstm} and formally defined as:
+\item \emph{Output Gate:} The output gate\index{Output gate (in LSTM)} examines the prior hidden state and current input. It includes a sigmoid layer which decides which values of the new cell memory to output and pass on to the next cell as the new hidden state. It outputs a number between 0 (''do not include this vector element in the output'') and 1 (''include this vector element in the output''). The output gate is shown as $O_t$ in Figure~\ref{fig:lstm} and formally defined as:
 \begin{align}
 O_t &= \sigma (W_o \cdot [ x_t, h_{t-1}] + b_o) \label{eq:output}
 \end{align}
@@ -188,7 +188,7 @@ The outputs of these three gates are used to manipulate the cell memory $c_{t-1}
 \tilde{c}_t &= \phi (W_c \cdot [ x_t, h_{t-1}] + b_c) \label{eq:candidate}
 \end{align}
 
-The new cell memory $c_t$ is created by first multiplying the old cell memory $c_{t-1}$ with the output of the forget gate $O_t$ (Eq.~\ref{eq:forget}), thus removing some information. Second, information from the candidate cell memory (Eq.~\ref{eq:candidate}) is selected by multiplying it with the values of the input gate $I_t$ (Eq.~\ref{eq:input}) and is then added to the new cell memory. Formally:
+The new cell memory $c_t$ is created by first multiplying the old cell memory $c_{t-1}$ with the output of the forget gate $F_t$ (Eq.~\ref{eq:forget}), thus removing some information. Second, information from the candidate cell memory (Eq.~\ref{eq:candidate}) is selected by multiplying it with the values of the input gate $I_t$ (Eq.~\ref{eq:input}) and is then added to the new cell memory. Formally:
 
 \begin{align}
 c_t &= F_t \otimes c_{t-1} + I_t \otimes \tilde{c}_t \label{eq:memory}
@@ -201,6 +201,11 @@ h_t &= O_t \otimes \phi(c_t) \label{eq:state}
 \end{align}
 
 In Equations~\ref{eq:forget} to \ref{eq:state}, $\cdot$ denotes the dot-product (vector product), $\otimes$ denotes element-wise multiplication, and $[.]$ denotes vector concatenation. $\sigma$ is the sigmoid/logistic function and $\phi$ is the hyperbolic tangent (tanh).
+
+The parameters in an LSTM layer are ''re-used'' for each time step. In other words, there is only one set of weights and biases that is applied recurrently for each time step. That means that the number of time steps has no effect on the number of parameters. 
+
+Examining the dimensionality of the inputs and outputs to an LSTM cell allows calculating the number of trainable parameters in an LSTM layer. As equations~\ref{eq:forget} to \ref{eq:candidate} are identical in form, it suffices to focus on one and multiply the resulting number of parameters by four. Consider an LSTM cell with hidden state $h_t$ and cell memory $c_t$ sizes of $n=16$ and an input size $x_t$ of $m=10$. This means that the weights of the forget gate $W_f$ in equation \ref{eq:forget} must be of dimensionality $m+n=26$ to which the bias term is added for a total of $m+n+1=27$ parameters. However, the forget gate must be replicated $n$ times because a vector of size $n$ is needed for the element-wise multiplication and addition operations in Equations~\ref{eq:memory} and \ref{eq:state}. Also note that the descriptions of the gates above speak of forgetting or updating vector \emph{elements}. That is, each equation~\ref{eq:forget} is responsible for determining whether one element of the memory is forgotten. For $n$ elements of the memory state, one therefore needs $n$ replicates of this equation. In other words, the real number of parameters for the forget gate (and hence for the other gates as well) is $(n+m+1) \times n$. For the total LSTM cell, the number of trainable parameters is therefore $4 \times (n + m + 1) \times n$.
+
 
 \section{GRU Cells}
 
@@ -218,11 +223,11 @@ Gated Recurrent Unit (GRU)\index{Gated recurrent unit}\index{GRU cell|see{Gated 
 A GRU cell, schematically shown in Figure~\ref{fig:gru} consists of only two gates, the \emph{reset gate} and the \emph{update gate}. It also merges the cell memory and the hidden state.
 
 \begin{itemize}
-\item \emph{Reset Gate:}\index{Reset gate (in GRU)} This gate, represented as $R_t$ in Figure~\ref{fig:gru}, determines how much past information to forget, which is important for making the model more adaptable to changes in the data sequence. It examines the previous state and current input and applies a sigmoid function. It outputs values between 0 (''reset this vector element completely'') and 1 (''retain this vector element completely'').
+\item \emph{Reset Gate:}\index{Reset gate (in GRU)} This gate, represented as $R_t$ in Figure~\ref{fig:gru}, determines how much past information to forget, which is important for making the model more adaptable to changes in the data sequence. It examines the previous state and current input and applies a sigmoid function. It outputs  value between 0 (''reset this vector element completely'') and 1 (''retain this vector element completely'').
 \begin{align}
 R_t &= \sigma (W_r \cdot [x_t, h_{t-1}] + b_r) \label{eq:reset}
 \end{align}
-\item \emph{Update Gate:}\index{Update gate (in GRU)} This gate, represented as $Z_t$ in Figure~\ref{fig:gru}, decides how much of the past information (from previous time or sequence steps) needs to be passed along to the future. It is similar to the combination of the forget and input gates in an LSTM. It examines the previous state and current input, applies a sigmoid function and outputs values between 0 (''do not update this vector element, retain the old state'') and 1 (''update this vector element, discard the old state''). 
+\item \emph{Update Gate:}\index{Update gate (in GRU)} This gate, represented as $Z_t$ in Figure~\ref{fig:gru}, decides how much of the past information (from previous time or sequence steps) needs to be passed along to the future. It is similar to the combination of the forget and input gates in an LSTM. It examines the previous state and current input, applies a sigmoid function and outputs a value between 0 (''do not update this vector element, retain the old state'') and 1 (''update this vector element, discard the old state''). 
 \begin{align}
 Z_t &= \sigma (W_z \cdot [x_t, h_{t-1}] + b_z) \label{eq:update}
 \end{align}
@@ -240,6 +245,8 @@ h_t &= (1 - Z_t) \otimes h_{t-1} + Z_t \otimes \hat{h}_t \label{eq:gruoutput}
 \end{align}
 
 In Equations~\ref{eq:reset} to \ref{eq:gruoutput}, $\cdot$ denotes the dot-product (vector product), $\otimes$ denotes element-wise multiplication, and $[.]$ denotes vector concatenation.  $\sigma$ is the sigmoid/logistic function and $\phi$ is the hyperbolic tangent.
+
+The number of trainable parameters for a GRU layer is determined analogously to that for an LSTM layer, except by noting that there is one less gate to consider. In other words, for a hidden state $h_t$ size $n$ and input size $m$, the number of trainable parameters is $3 \times (n+m+1) \times n$.
 
 \section{Statefulness}
 
