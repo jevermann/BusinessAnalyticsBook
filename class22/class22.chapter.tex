@@ -165,7 +165,7 @@ Experience replay\index{Experience replay} is a technique to break the auto-corr
 
 \subsubsection*{Target network}
 
-Working with two different sets of parameters $\theta_T$ and $\theta_M$, one for computing the udpdate targets $R + \gamma \hat{q}(S', A', \theta_T)$, called the ''\emph{target parameters}'' and one for computing the current estimates $\hat{q}(S, A, \theta_M)$, called the \emph{''main parameters''}, has the advantage that stable update targets are provided for multiple SGD update steps. This also stabilizes training. Periodically, the target parameters are updated with the main parameters.
+Working with two different sets of parameters $\theta_T$ and $\theta_M$, one for computing the update targets $R + \gamma \hat{q}(S', A', \theta_T)$, called the ''\emph{target parameters}'' and one for computing the current estimates $\hat{q}(S, A, \theta_M)$, called the \emph{''main parameters''}, has the advantage that stable update targets are provided for multiple SGD update steps. This also stabilizes training. Periodically, the target parameters are updated with the main parameters.
 
 Because the approximation functions are typically neural networks, target parameters and main parameters are the weights and biases of two neural networks with identical architecture. Hence, one uses the terms ''\emph{target network}'' and ''\emph{main network}''\index{Target network}.
 
