@@ -342,7 +342,6 @@ DROP TABLE suppliers;
 \end{sqlcode}
 \end{samepage}
 
-
 \paragraph*{Summary} In summary, a \emph{one-to-many relationships} requires a foreign key from the ''many'' table that references the ''one'' table and its primary key. In the first example above, a supplier supplies many products but a product has one supplier (or none, depending on whether a NOT NULL constraint has been specified). In contrast, a \emph{many-to-many relationship} requires a table that explicitly represents the relationship. Foreign keys from this table reference the participating, original, ''main'' tables and their primary keys. In the second example above, a supplier supplies many products and a product can be supplied by many suppliers. 
 
 In fact, this type of relationship can be extended in a straightforward way to three or more tables. For example, a supplier supplies many products from many warehouses, a product may be supplied by many suppliers from many warehouses, and a warehouse may contain many products from many suppliers. 
@@ -367,6 +366,231 @@ In fact, this type of relationship can be extended in a straightforward way to t
 \end{tcolorbox}
 
 \section{SQL Queries}
+
+\subsection*{Basic Queries with the SELECT Statement}
+
+The SELECT statement in SQL is used to query and retrieve data from one or more tables in a database. The basic structure of a SELECT statement allows specification of which columns of data you want to retrieve and from which tables. A SELECT statement has multiple clauses or parts that are used to specific different characteristics of the information to retrieve:
+
+\begin{samepage}
+\begin{itemize}
+ \item \texttt{SELECT}: Which columns to query (use the asterisk ''\texttt{*}'' to select all).
+ \item \texttt{FROM}: Which tables to query from.
+ \item \texttt{JOIN}: How to combine data from multiple tables based on related columns.
+ \item \texttt{WHERE}: Conditions on field values used to filter the retrieved records.
+ \item \texttt{GROUP BY}: Groups within which to aggregate data using an aggregate function such as \texttt{sum()}, \texttt{count()}, or \texttt{max()}.
+ \item \texttt{HAVING}: Conditions on group aggregate values. Similar to WHERE but for aggregates within each group.
+ \item \texttt{ORDER BY}: How to sort the resulting records in either ascending or descending order.
+ \item \texttt{LIMIT}: Limit on how many results to return.
+\end{itemize}
+\end{samepage}
+
+To demonstrate the basic use of SQL queries to retrieve information from a relational database, it is best to begin with a simple example, that of the 1:Many relationship between products and suppliers set up earlier. The following SQL commands (re-)create this example with a few more rows of data in the products table:
+
+\begin{samepage}
+\begin{sqlcode}
+-- Drop tables if they exist
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS suppliers;
+
+-- Set up tables with 1:Many relationship:
+CREATE TABLE suppliers (
+scode integer,
+name varchar(100),
+city varchar(100),
+PRIMARY KEY (scode) );
+
+CREATE TABLE products (
+pcode	integer,
+name	varchar(100),
+price	float4,
+scode   integer,
+PRIMARY KEY (pcode),
+FOREIGN KEY (scode) REFERENCES suppliers );
+\end{sqlcode}
+\end{samepage}
+
+\begin{samepage}
+\begin{sqlcode}
+-- Insert some data:
+INSERT INTO SUPPLIERS VALUES (1, 'Bolts Inc', 'HVGB');
+INSERT INTO SUPPLIERS VALUES (2, 'Hardware Co', 'Cartwright');
+
+INSERT INTO products VALUES(1, 'Hex Bolt A', 1.99, 1);
+INSERT INTO products VALUES(2, 'Round Bolt 1', 2.99, 1);
+INSERT INTO products VALUES(3, 'Square Bolt B', 3.99, 1);
+INSERT INTO products VALUES(4, 'Hex Bolt B', 2.99, 1);
+INSERT INTO products VALUES(5, 'Round Bolt 2', 1.99, 2);
+INSERT INTO products VALUES(6, 'Square Bolt 7', 3.49, 2);
+\end{sqlcode}
+\end{samepage}
+
+With this data, the simplest SQL query contains only the SELECT and the FROM clauses to retrieve a set of columns from a single table. The following SQL code uses the asterisk (''\texttt{*}'') to select all columns and returns all rows from the products table:
+
+\begin{sqlcode}
+SELECT * FROM products;
+\end{sqlcode}
+
+The WHERE clause filters the selected rows. The next example returns only products for supplier 1, that is, those rows in the products table where ''scode=1''. Multiple conditions can be surrounded in parentheses and combined with the keywords AND and OR.
+
+\begin{sqlcode}
+SELECT * FROM products WHERE scode = 1;
+\end{sqlcode}
+
+The following SQL code selects only a few named columns from the products table and also filters the retrieved rows by price:
+
+\begin{sqlcode}
+SELECT name, supplier FROM products WHERE price < 3;
+\end{sqlcode}
+
+The ORDER BY clause is used to order the result, possibly by using multiple columns and with specified ascending or descending direction. The following SQL code block selects all columns and returns all rows from the products table ordered first ascending by price, and then, when the price is the same, descending by name:
+
+\begin{sqlcode}
+SELECT * FROM products ORDER BY price ASC, name DESC;
+\end{sqlcode}
+
+The LIMIT clause can be used to limit the number of returned rows. This is often useful in combination with the ORDER BY clause to select the largest or smallest values. The following example demonstrates this by retrieving the name of the cheapest three products from the products table:
+
+\begin{sqlcode}
+SELECT name FROM products ORDER BY price ASC LIMIT 3;
+\end{sqlcode}
+
+The JOIN clause combines information from two or more tables. This is done by specifying either a common column, or an explicit join condition if the corresponding column names in the two tables are different. The following SQL code shows an example of retrieving all columns from the products table and their corresponding rows from the suppliers table using an INNER JOIN clause USING the common column ''scode'':
+
+\begin{sqlcode}
+SELECT * FROM products INNER JOIN suppliers USING (scode);
+\end{sqlcode}
+
+If multiple common columns are needed to find corresponding rows, they can be specified in parentheses simply be expanding the above example of the USING clause.
+
+The following two SQL expressions are essentially equivalent to the one above and to each other. Instead of the USING clause for common columns, the first expression explicitly specifies the join condition with the ON clause, while the second expression completely omits the JOIN clause and instead specifies both tables in the FROM clause and uses a condition in a WHERE clause to select corresponding rows in the two tables:
+
+\begin{samepage}
+\begin{sqlcode}
+-- (Almost) Equivalent:
+SELECT * FROM products 
+    INNER JOIN suppliers ON products.scode=suppliers.scode;
+
+SELECT * FROM products, suppliers 
+    WHERE products.scode=suppliers.scode;
+\end{sqlcode}
+\end{samepage}
+
+In the above JOIN examples, both the products and suppliers table contain a column ''name''. It is often useful to rename columns for clarity. The following example shows how this can be done using the AS keyword. It also demonstrates how the ambiguity of columns with the same name in different tables can be resolved by using the form ''table.column'' to select columns:
+
+\begin{samepage}
+\begin{sqlcode}
+-- Rename columns for clarity:
+SELECT products.name AS "Product", 
+       price AS "Price", 
+       suppliers.name AS "Supplier", 
+       city AS "Location"
+    FROM products INNER JOIN suppliers USING (scode);
+\end{sqlcode}
+\end{samepage}
+
+The previous two examples used the ''INNER JOIN'', the most commonly used type of join between two tables. Table~\ref{tab:sqljoins} shows a list of other possible join types. 
+
+The INNER JOIN selects only those rows that have a corresponding row or rows in the other table, and vice versa. The LEFT OUTER join selects all rows from table T1, even those that do not have a corresponding row in table T2. For the missing corresponding rows, it simply returns NULL values. The RIGHT OUTER join does the same thing but from the perspective of table T2. That is, it returns all rows of T2, but for those rows that do not have a corresponding entry in table T1, it returns NULL values. The FULL OUTER join is a combination of the LEFT OUTER and RIGHT OUTER joins.
+
+\begin{table}
+\centering
+
+\renewcommand{\arraystretch}{1.5}
+\small
+\begin{tabularx}{.8\textwidth}{l|X} \hline
+INNER & Selects only rows from T1 that have corresponding row in T2 and vice versa. \\
+LEFT OUTER & Selects all rows from T1, if T2 does not have a corresponding row, NULL values are inserted. \\
+RIGHT OUTER & Select all rows from T2, if T1 does not have a corresponding row, NULL values are inserted. \\
+FULL OUTER & Selects all rows from T1, T2. If the other table is missing corresponding row, NULL values are inserted. \\ \hline
+\end{tabularx}
+
+\caption{Types of Joins between two tables T1 and T2 in SQL}
+\label{tab:sqljoins}
+\end{table}
+
+The GROUP BY clause of an SQL query is used in combination with aggregate functions for grouping information and calculating aggregate values. The easiest aggregation is to simply count the number of rows or entries for each group using the ''count(.)'' function, shown in the first example that selects the number of products for each supplier, that is, the count of rows in table products grouped by supplier code:
+
+\begin{samepage}
+\begin{sqlcode}
+-- Select the number of products for each supplier
+SELECT scode, count(*) from products GROUP BY scode;
+\end{sqlcode}
+\end{samepage}
+
+To also include the names of the suppliers requires joining the suppliers table, as shown below:
+\begin{samepage}
+\begin{sqlcode}
+-- Add the name of suppliers by joining suppliers table
+SELECT suppliers.name, count(*)
+    FROM suppliers INNER JOIN products USING (scode)
+    GROUP BY scode;
+\end{sqlcode}
+\end{samepage}
+
+The SQL code below illustrates another aggregate function, the average (''AVG'') and also shows that the aggregates can be used in the ORDER BY clause. The query returns the mean price of products for each suppliers, ordered descending by mean price:
+
+\begin{samepage}
+\begin{sqlcode}
+-- Mean price of products for each supplier, ordered descending
+SELECT suppliers.name, AVG(price)
+    FROM suppliers INNER JOIN products USING (scode)
+    GROUP BY scode
+    ORDER BY AVG(price) DESC;
+\end{sqlcode}
+\end{samepage}
+
+Finally, the HAVING clause is a filter clause like the WHERE clause, but instead of filtering the rows in a table, it filters the groups in a GROUP BY clause. The following SQL query returns only suppliers for which the average price of their products is less than 2.8:
+
+\begin{samepage}
+\begin{sqlcode}
+-- Find only suppliers for which average price less than 2.80:
+SELECT suppliers.name, AVG(price)
+    FROM suppliers INNER JOIN products USING (scode)
+    GROUP BY scode
+    HAVING AVG(price) < 2.8;
+\end{sqlcode}
+\end{samepage}
+
+Besides COUNT() and AVG() functions, SQL provides other aggregate functions, shown in Table~\ref{tab:sqlaggregates}. However, many of these are specific to various relational database management systems, like PostgreSQL. 
+
+\begin{table}
+\centering
+
+\renewcommand{\arraystretch}{1.5}
+Standard SQL: \\
+
+\small
+\begin{tabular}{l|l|l|l|l} \hline
+\
+MIN() & MAX() & COUNT() & SUM() & AVG() \\ \hline
+\end{tabular}
+
+\normalsize
+
+\vspace{\baselineskip}
+PostgreSQL (excerpt):\\
+
+\small
+\begin{tabular}{l|l|l} \hline
+CORR() & STDDEV() & VARIANCE() \\
+MODE() & PERCENTILE() & REGR\_SLOPE() \\
+REGR\_R2() & RANK() & DENSE\_RANK() \\ \hline
+\end{tabular}
+
+\caption{Frequently Used Aggregation Functions}
+\label{tab:sqlaggregates}
+\end{table}
+
+\noindent To clean up after these exercises, drop all tables if they are no longer required:
+
+\begin{samepage}
+\begin{sqlcode}
+DROP TABLE products;
+DROP TABLE suppliers;
+\end{sqlcode}
+\end{samepage}
+
+\subsection*{Relational Diagrams}
 
 The previous section has presented the basics of the relational database model, focusing on how tables are related by foreign key relationships. Tables and their relationships are often graphically shown in a \emph{relational diagram}\index{Relational diagram}. Such diagrams are often called ''\emph{ER Diagrams}\footnote{Technically, the two are not quite the same.}''\index{ER diagram|see{Entity-relationship diagram}} or ''Entity-Relationship Diagrams''\index{Entity-relationship diagram}. A graphical representation of the database structure is useful for understanding the data and for writing queries to extract data from the table or tables of the database. 
 
@@ -417,20 +641,7 @@ The diagram shows the structure of the \emph{Pagila} database\footnote{\url{http
 
 Each table is designed with primary keys for unique identification and foreign keys to establish relationships with other tables. This structure allows for complex queries across multiple tables, facilitating a wide range of analyses, from inventory management to customer behavior tracking. The Pagila database is a good example of a real-world database schema and offers a good data set for practicing SQL queries.
 
-\subsection*{The SELECT Statement}
-
-The SELECT statement in SQL is used to query and retrieve data from one or more tables in a database. The basic structure of a SELECT statement allows specification of which columns of data you want to retrieve and from which tables. A SELECT statement has multiple clauses or parts that are used to specific different characteristics of the information to retrieve:
-
-\begin{itemize}
- \item \texttt{SELECT}: Which columns to query (use the asterisk ''*'' to select all).
- \item \texttt{FROM}: Which tables to query from.
- \item \texttt{JOIN}: How to combine data from multiple tables based on related columns.
- \item \texttt{WHERE}: Conditions on field values used to filter the retrieved records.
- \item \texttt{GROUP BY}: Groups within which to aggregate data using an aggregate function such as \texttt{sum()}, \texttt{count()}, or \texttt{max()}.
- \item \texttt{HAVING}: Conditions on group aggregate values. Similar to WHERE but for aggregates within each group.
- \item \texttt{ORDER BY}: How to sort the resulting records in either ascending or descending order.
- \item \texttt{LIMIT}: Limit on how many results to return.
-\end{itemize}
+\subsection*{Advanced SQL Query Examples}
 
 The following examples show queries for the Pagila database to illustrate different features of the SELECT statement. Instead of describing every option in detail, to understand SQL it is useful to execute the queries and learn by modifying the queries and observing changes in the results. 
 

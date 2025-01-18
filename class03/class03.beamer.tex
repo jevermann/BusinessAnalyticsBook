@@ -396,12 +396,175 @@ INSERT INTO supplies VALUES(2, 2, 1.79);
 \end{enumerate}
 \end{frame}
 
+\begin{frame}{Querying Data with SQL}
+\begin{block}{Parts of the SELECT statement}
+  \begin{itemize}
+     \item \textbf{SELECT}: which columns to query
+     \item \textbf{FROM}: which tables to query from
+     \item \textbf{JOIN}: how to combine data from multiple tables
+     \item \textbf{WHERE}: conditions on field values
+     \item \textbf{GROUP BY}: groups within which to aggregate data
+     \item \textbf{HAVING}: conditions on group aggregate values
+     \item \textbf{ORDER BY}: how to sort the result
+     \item \textbf{LIMIT}: how many results to return
+   \end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Querying -- Simple Example}
+Set up tables with 1:Many relationship:
+\footnotesize
+\begin{sqlcode}
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS suppliers;
+
+CREATE TABLE suppliers (
+scode integer,
+name varchar(100),
+city varchar(100),
+PRIMARY KEY (scode) );
+
+CREATE TABLE products (
+pcode	integer,
+name	varchar(100),
+price	float4,
+scode   integer,
+PRIMARY KEY (pcode),
+FOREIGN KEY (scode) REFERENCES suppliers );
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Querying -- Simple Example}
+Insert some data:
+\footnotesize
+\begin{sqlcode}
+INSERT INTO SUPPLIERS VALUES (1, 'Bolts Inc', 'HVGB');
+INSERT INTO SUPPLIERS VALUES (2, 'Hardware Co', 'Cartwright');
+
+INSERT INTO products VALUES(1, 'Hex Bolt A', 1.99, 1);
+INSERT INTO products VALUES(2, 'Round Bolt 1', 2.99, 1);
+INSERT INTO products VALUES(3, 'Square Bolt B', 3.99, 1);
+INSERT INTO products VALUES(4, 'Hex Bolt B', 2.99, 1);
+INSERT INTO products VALUES(5, 'Round Bolt 2', 1.99, 2);
+INSERT INTO products VALUES(6, 'Square Bolt 7', 3.49, 2);
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Querying -- Simple Example}
+Select all columns from products table:
+\begin{sqlcode}
+SELECT * FROM products;
+\end{sqlcode}
+Select all columns from products table for supplier 1:
+\begin{sqlcode}
+SELECT * FROM products WHERE scode = 1;
+\end{sqlcode}
+Select some columns from products table with price < 3:
+\begin{sqlcode}
+SELECT name, supplier FROM products WHERE price < 3;
+\end{sqlcode}
+Select all columns from products, ordered by ascending price and then descending name:
+\begin{sqlcode}
+SELECT * FROM products ORDER BY price ASC, name DESC;
+\end{sqlcode}
+Select the names of the 3 cheapest products:
+\begin{sqlcode}
+SELECT name FROM products ORDER BY price ASC LIMIT 3;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Querying -- Join Tables}
+Select products and the names of their suppliers:
+\begin{sqlcode}
+SELECT * FROM products INNER JOIN suppliers USING (scode);
+
+-- (Almost) Equivalent:
+SELECT * FROM products 
+    INNER JOIN suppliers ON products.scode=suppliers.scode;
+
+SELECT * FROM products, suppliers 
+    WHERE products.scode=suppliers.scode;
+\end{sqlcode}
+Rename columns for clarity:
+\begin{sqlcode}
+SELECT products.name AS "Product", 
+       price AS "Price", 
+       suppliers.name AS "Supplier", 
+       city AS "Location"
+    FROM products INNER JOIN suppliers USING (scode);
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}{Types of Joins}
+\renewcommand{\arraystretch}{1.5}
+Types of joins between tables T1 and T2: \\
+
+\small
+\begin{tabularx}{\textwidth}{l|X} \hline
+INNER & Selects only rows from T1 that have corresponding row in T2 and vice versa. \\
+LEFT OUTER & Selects all rows from T1, if T2 does not have a corresponding row, NULL values are inserted. \\
+RIGHT OUTER & Select all rows from T2, if T1 does not have a corresponding row, NULL values are inserted. \\
+FULL OUTER & Selects all rows from T1, T2. If the other table is missing corresponding row, NULL values are inserted. \\ \hline
+\end{tabularx}
+\end{frame}
+
+
+\begin{frame}[fragile]{Querying -- Groups and Aggregates}
+Select the number of products for each supplier:
+\begin{sqlcode}
+SELECT scode, count(*) from products GROUP BY scode;
+\end{sqlcode}
+Add the name of suppliers by joining suppliers table:
+\begin{sqlcode}
+SELECT suppliers.name, count(*)
+    FROM suppliers INNER JOIN products USING (scode)
+    GROUP BY scode;
+\end{sqlcode}
+Mean price of products for each supplier, ordered descending:
+\begin{sqlcode}
+SELECT suppliers.name, AVG(price)
+    FROM suppliers INNER JOIN products USING (scode)
+    GROUP BY scode
+    ORDER BY AVG(price) DESC;
+\end{sqlcode}
+Find only suppliers for which average price less than 2.80:
+\begin{sqlcode}
+SELECT suppliers.name, AVG(price)
+    FROM suppliers INNER JOIN products USING (scode)
+    GROUP BY scode
+    HAVING AVG(price) < 2.8;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}{Frequently Used Aggregation Functions}
+\renewcommand{\arraystretch}{1.5}
+Standard SQL: \\
+
+\small
+\begin{tabular}{l|l|l|l|l} \hline
+MIN() & MAX() & COUNT() & SUM() & AVG() \\ \hline
+\end{tabular}
+\normalsize
+
+\vspace{\baselineskip}
+PostgreSQL (excerpt):\\
+
+\small
+\begin{tabular}{l|l|l} \hline
+CORR() & STDDEV() & VARIANCE() \\
+MODE() & PERCENTILE() & REGR\_SLOPE() \\
+REGR\_R2() & RANK() & DENSE\_RANK() \\ \hline
+\end{tabular}
+
+\end{frame}
+
+
 \begin{frame}{Relational Diagrams}
 \begin{itemize}
   \item Graphically show the relationships in a database model
   \item Often called ''\emph{Entity-Relationship diagram}'' (but that is not quite correct)
   \item Useful for understanding the structure of the data
-  \item Useful for writing queries
+  \item Useful for writing queries with many JOINs
   \item Can be automatically created from an existing database
   \begin{itemize}
      \item In the \textbf{pgAdmin} Object Explorer, right-click on the ''busi4720'' database, select ''ERD for Database''
@@ -434,21 +597,6 @@ INSERT INTO supplies VALUES(2, 2, 1.79);
 	\item \textbf{Address}: Stores, customers, and staff have an addresses
   \end{itemize}
 \end{itemize}
-\end{frame}
-
-\begin{frame}{Querying Data with SQL}
-\begin{block}{Parts of the SELECT statement}
-  \begin{itemize}
-     \item \textbf{SELECT}: which columns to query
-     \item \textbf{FROM}: which tables to query from
-     \item \textbf{JOIN}: how to combine data from multiple tables
-     \item \textbf{WHERE}: conditions on field values
-     \item \textbf{GROUP BY}: groups within which to aggregate data
-     \item \textbf{HAVING}: conditions on group aggregate values
-     \item \textbf{ORDER BY}: how to sort the result
-     \item \textbf{LIMIT}: how many results to return
-   \end{itemize}
-\end{block}
 \end{frame}
 
 \begin{frame}[fragile]{Querying Data with SQL}
@@ -487,8 +635,7 @@ SELECT concat(left(actor.first_name, 1),
   WHERE actor.actor_id = film_actor.actor_id AND
         film.film_id = film_actor.film_id AND
         film_category.film_id = film.film_id AND
-        category.category_id = 
-            film_category.category_id AND
+        category.category_id = film_category.category_id AND
         film.rating = 'PG'
   ORDER BY actor.last_name, 
            actor.first_name, 
@@ -642,10 +789,6 @@ ORDER BY dollars DESC;
 \begin{frame}{Tips on Querying Data with SQL}
 \begin{itemize}
   \item Subqueries are intuitive but not efficient
-  \begin{itemize}
-    \item Use CTEs (common table expressions) (WITH) in order to simplify queries
-    \item Resursive CTEs (WITH RECURSIVE) for self-referencing queries
-  \end{itemize}
   \item Use set operations to combine results from multiple queries (UNION, INTERSECT, EXCEPT)
   \item Use DISTINCT to query unique values
   \item Postgres can import/export from/to CSV and JSON files
