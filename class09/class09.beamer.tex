@@ -141,7 +141,6 @@
    \item Improve operational processes
    \item External compliance analysis and reporting
    \item Identify implicit or de-facto organizational groups and relationships 
-   \item Support, reinforce, or break organizational relationships
 \end{itemize}
 \end{block}
 \end{frame}
@@ -206,8 +205,7 @@ import pm4py
 # Load the event log and parse date columns
 log = pd.read_csv('https://evermann.ca/busi4720/\
    PurchasingExample.csv', 
-   parse_dates=['Start Timestamp', \
-      'Complete Timestamp'], 
+   parse_dates=['Start Timestamp', 'Complete Timestamp'], 
    infer_datetime_format=True)
 
 # Tell PM4PY about which columns represent case ID,
@@ -288,11 +286,13 @@ pm4py.get_trace_attributes(log)
 \end{itemize}
 \footnotesize
 \begin{pythoncode}
-pm4py.get_variants(log)
+varients = pm4py.get_variants(log)
+# Returns a dict with keys and values
+list(variants.keys())
+list(variants.values())
 
 # Split the log into sub-logs
-for variant, subdf in \
-pm4py.split_by_process_variant(log):
+for variant, subdf in pm4py.split_by_process_variant(log):
     print(variant)
     print(subdf)  
 \end{pythoncode}
@@ -322,6 +322,19 @@ pm4py.save_vis_dfg(dfg=dfg,
 \includegraphics[width=\textwidth]{dfg.png}
 \end{frame}
 
+\begin{frame}{Hands-On Exercises}
+
+\footnotesize
+Use the event log from \url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}
+\begin{enumerate}
+   \item Read the data into a Pandas data frame using \texttt{read\_csv()}. Parse the \texttt{Start Timestamp} and \texttt{Complete Timestamp} columns as dates.
+   \item Create the \texttt{case:concept:name}, \texttt{concept:name}, \texttt{time:timestamp}, \texttt{org:resource} columns as in the example above.
+   \item Create and visualize a directly-follows-graph (DFG)
+   \item How many variants are there? What is the most frequent variant?
+\end{enumerate}
+\end{frame}
+
+
 \begin{frame}{Process Discovery -- Inductive Miner}
 \begin{block}{Principles}
 \begin{itemize}
@@ -342,8 +355,7 @@ Source: Leemans, S.J.J., Fahland, D., van der Aalst, W.M.P. (2013). Discovering 
 \footnotesize
 \begin{pythoncode}
 bpmn_model = \
-    pm4py.discover_bpmn_inductive(log, 
-        noise_threshold=0.5)
+    pm4py.discover_bpmn_inductive(log, noise_threshold=0.5)
 
 pm4py.view_bpmn(bpmn_model, rankdir='LR')
 
@@ -391,8 +403,7 @@ bpmn_model2 = pm4py.convert_to_bpmn(
     petri_net, initial_marking, final_marking)
     
 pm4py.view_bpmn(bpmn_model2)
-pm4py.save_vis_bpmn(bpmn_model2, 
-    'bpmn2.png', rankdir='TB')
+pm4py.save_vis_bpmn(bpmn_model2, 'bpmn2.png', rankdir='TB')
 \end{pythoncode}
 \end{frame}
 
@@ -487,6 +498,8 @@ print(precision_tbr)
 \end{frame}
 
 \begin{frame}{Hands-On Exercises}
+\footnotesize
+Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} and answer the following questions:
 \begin{enumerate}
     \item What are the types of activities in the log?
     \begin{itemize}
@@ -532,7 +545,7 @@ print(precision_tbr)
    \item What is the activity with the longest mean time?
    \begin{itemize}
        \item Activities taking a long time may be bottle-neck in the process flow
-       \item Create a new column as the difference between the 'Complete Timestamp' and 'start\_timestamp' columns
+       \item Create a new column as the difference between the 'Complete Timestamp' and 'Start Timestamp' columns
        \item Use \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}} and \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html}{\texttt{mean()}} on the data frame
    \end{itemize}
    \item What is the mean number of activities for each case?
@@ -641,8 +654,7 @@ pm4py.view_events_distribution_graph(log, 'weeks')
 \footnotesize
 \begin{pythoncode}
 pm4py.view_events_per_time_graph(log)
-pm4py.save_vis_events_per_time_graph(
-    log, 'eventspertime.png')
+pm4py.save_vis_events_per_time_graph(log, 'eventspertime.png')
 \end{pythoncode}
 \end{frame}
 
@@ -685,8 +697,7 @@ pm4py.save_vis_sna(sna_graph, 'ressimilarity.png',
 \end{block}
 \footnotesize
 \begin{pythoncode}
-dfg, start, end = pm4py.discover_dfg(log,
-    activity_key='Role')
+dfg, start, end = pm4py.discover_dfg(log, activity_key='Role')
 pm4py.view_dfg(dfg, start, end, rankdir='LR')
 
 pm4py.save_vis_dfg(dfg=dfg,

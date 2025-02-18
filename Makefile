@@ -35,7 +35,7 @@ all: class1 class2 class3 class4 class5 class6 class7 class8 class9 class11 clas
 chapters: class1chapter class2chapter class3chapter class4chapter class5chapter class6chapter class7chapter class9chapter class11chapter class12chapter class13chapter class14chapter class15chapter class16chapter class17chapter class19chapter class20chapter class21chapter class22chapter class23chapter class24chapter vmchapter
 
 .PHONY: slides
-slides: class1slides class2slides class3slides class4slides class5slides class6slides class7slides class8slides class9slides class11slides class12slides class13slides class14slides class15slides class16slides class17slides class19slides class20slides class21slides class22slides class23slides class24slides vmslides
+slides: class1slides class2slides class3slides class4slides class5slides class6slides class7slides class8slides class9slides class11slides class12slides class13slides class14slides class15slides class16slides class17slides class19slides class20slides class21slides class22slides class23slides class24slides
 
 .PHONY: class1
 class1:

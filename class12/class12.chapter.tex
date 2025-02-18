@@ -121,17 +121,17 @@ The linear regression model is simple enough that an optimal solution can be der
 \end{align*}
 \noindent where $\bar{x}$ and $\bar{y}$ are the sample means.
 
-The parameter value estimates have \emph{standard errors} associated with them that indicate the uncertainty of these estimates. This is based on the idea that the training data set is a small random sample from the overall population, and taking other random samples may well yield slightly different parameter values. 
+%The parameter value estimates have \emph{standard errors} associated with them that indicate the uncertainty of these estimates. This is based on the idea that the training data set is a small random sample from the overall population, and taking other random samples may well yield slightly different parameter values. 
 
-Using the standard errors of the estimates, a \emph{t statistic}\index{t-test} can be calculated from the difference of the estimate of a parameter $\hat{beta}$ and some value $V$.
+%Using the standard errors of the estimates, a \emph{t statistic}\index{t-test} can be calculated from the difference of the estimate of a parameter $\hat{beta}$ and some value $V$.
 
-\begin{align*}
-t = \frac{\hat{\beta} - V}{SE(\hat{\beta})}
-\end{align*}
+%\begin{align*}
+%t = \frac{\hat{\beta} - V}{SE(\hat{\beta})}
+%\end{align*}
 
-The statistic $t$ is a random variable whose values are distributed according to a student-t probability distribution. This allows one to calculate the probability of observing a value of $t$ or larger under the assumption that $\hat{\beta} = V$, that is, there is no difference between $V$ and the estimate of the parameter $\hat{\beta}$. If the calculated probabily is very small, it is unlikely that this assumption holds and one might conclude that $\hat{\beta} \neq V$. This procedure is called the \emph{t-test}. In most applications of this test to regression model parameters, $V$ is set to $0$. Because for large sample sizes the student-t distribution approaches the normal (Gaussian) probability distribution, the probability is sometimes calculated from this distribution, the statistic is called the $z$ statistic and the test is then called a \emph{z-test}.
+%The statistic $t$ is a random variable whose values are distributed according to a student-t probability distribution. This allows one to calculate the probability of observing a value of $t$ or larger under the assumption that $\hat{\beta} = V$, that is, there is no difference between $V$ and the estimate of the parameter $\hat{\beta}$. If the calculated probabily is very small, it is unlikely that this assumption holds and one might conclude that $\hat{\beta} \neq V$. This procedure is called the \emph{t-test}. In most applications of this test to regression model parameters, $V$ is set to $0$. Because for large sample sizes the student-t distribution approaches the normal (Gaussian) probability distribution, the probability is sometimes calculated from this distribution, the statistic is called the $z$ statistic and the test is then called a \emph{z-test}.
 
-Another important statistic in linear regression analysis is the proportion of explained variance, designated as $R^2$. It is defined as:
+An important statistic in linear regression analysis is the proportion of explained variance, designated as $R^2$. It is defined as:
 
 \begin{align*}
 R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
@@ -343,9 +343,7 @@ summary(lm(Sales ~ . , data=Carseats))
      \item Perform a linear regression with \texttt{Price}, \texttt{Urban} and \texttt{US} as predictors
      \item Interpret the coefficients. Tip: Some variables are categorical
      \item Remove non-significant predictors
-     \item How well do the two models fit the data?
-     \item Determine the 95\% confidence intervals for the coefficients of each model.
-     \item (How) does the importance of predictors change?
+     \item How well do the two models fit the data in terms of their $R^2$?
   \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 3.7}
@@ -363,8 +361,7 @@ To make the example repeatable, the initial seed of the pseudo-random number gen
 
 \begin{samepage}
 \begin{Rcode}
-# Set the seed for the pseudo-random
-# number generator (RNG)
+# Set the seed for the pseudo-random number generator (RNG)
 set.seed(1)
 
 # Randomly use half the Auto data as training sample
@@ -439,11 +436,10 @@ print(cv.err)
      \item Predict the target for the testing data
      \item Compute the test error
   \end{enumerate}
-  \item Repeat the previous step 3 times, using different splits. How do the results change?
+  \item Repeat the previous step 2 times, using different splits. How do the results change?
   \item Calculate the mean and the variance of the test errors of the four splits. 
-  \item Include \texttt{dis} as predictor in the model. Does it reduce the test error?
   \item Calculate the test error estimate using LOOCV. Compare your result to the mean that you computed in step 4.
-  \item Calculate the test error estimate using 4-fold cross-validation. Compare the estimate to the mean that you computed in step 4
+  \item Calculate the test error estimate using 10-fold cross-validation. Compare the estimate to the mean that you computed in step 4
 \end{enumerate}
 \end{tcolorbox}
 

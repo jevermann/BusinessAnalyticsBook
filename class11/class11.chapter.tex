@@ -87,7 +87,7 @@ There are many different regression metrics, some parametric, some non-parametri
    \item \textbf{Ridge and Lasso Regression}
    \item Principal components regression
    \item Non-linear regression
-   \item Neural network regression
+   \item \textbf{Neural networks}
 \end{itemize}
 \item \textbf{Non-Parametric Methods}
 \begin{itemize}
@@ -116,7 +116,7 @@ There are many different classification methods, most of which are parametric, e
    \item Random forests
    \item Bayesian networks
    \item Support vector machines
-   \item Neural networks
+   \item \textbf{Neural networks}
    \item \textbf{Logistic regression}
    \item \textbf{Naive Bayes}
    \item Probit model
@@ -395,7 +395,7 @@ Obs. & $X_1$ & $X_2$ & $X_3$ & $Y$ \\ \hline
 Suppose we wish to use this data set to make a prediction for $Y$ when $X_1=X_2=X_3=0$ using K-nearest neighbours.
 \vspace{.5\baselineskip}
 \begin{enumerate}
-  \item Compute the Euclidean distance (''l2-norm'' or ''Euclidean norm'' of the vector difference) between each observation and the test point. The l2-norm is the root of the sum of squared differences.
+  \item Compute the Euclidean distance (''L2-norm'' or ''Euclidean norm'' of the vector difference) between each observation and the test point. The L2-norm is the root of the sum of squared differences.
   \item What are your predictions for $K=1$ and for $K=3$? Why?
   \item If the Bayes decision boundary is highly non-linear, would you expect the best value for $K$ to be large or small? Why?
 \end{enumerate}
@@ -408,7 +408,7 @@ In binary classification, the \emph{confusion matrix}\index{Confusion matrix} is
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
 
-$\Pr(\text{default=Yes} | X=x) > 0.5$ (Bayes) \\ \vspace{2mm}
+Decision rule: $\Pr(\text{default=Yes} | X=x) > 0.5$ (Bayes) \\ \vspace{2mm}
 \begin{tabular}{cc|cc|c} \hline
      & & \multicolumn{2}{c|}{\emph{True default status}} \\
      & & No & Yes & Total \\ \hline
@@ -427,7 +427,7 @@ While a Bayes classification rule of choosing the highest probability class is e
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
 
-$\Pr(\text{default=Yes} | X=x) > 0.2$ \\ \vspace{2mm}
+Decision rule: $\Pr(\text{default=Yes} | X=x) > 0.2$ \\ \vspace{2mm}
 \begin{tabular}{cc|cc|c} \hline
      & & \multicolumn{2}{c|}{\emph{True default status}} \\
      & & No & Yes & Total \\ \hline

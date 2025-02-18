@@ -101,6 +101,7 @@ Chapters 4, 6, 9, 10, 11
    \item \textbf{Ridge and Lasso Regression}
    \item Principal components regression
    \item Non-linear regression
+   \item Neural networks
 \end{itemize}
 \end{block}
 
@@ -121,9 +122,9 @@ Chapters 4, 6, 9, 10, 11
    \item Random forests
    \item Bayesian networks
    \item Support vector machines
-   \item Neural networks
+   \item \textbf{Neural networks}
    \item \textbf{Logistic regression}
-   \item \textbf{Naive Bayes}
+   \item Naive Bayes
    \item Probit model
    \item Genetic programming
    \item \textbf{K-Nearest-Neighbours (KNN)}
@@ -181,23 +182,29 @@ For each of the following problems, decide if it is a prediction or inference/ex
 \end{frame}
 
 \begin{frame}{Model Quality --- Regression}
+Optimization Objectives:
+
 \begin{itemize}
-   \item MSE (mean squared error) or MAE (mean absolute error)
-\end{itemize}
+   \item MSE (mean squared error)
 \begin{align*}
 MSE = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{f}(x_i))^2 \qquad \qquad
+\end{align*} \hspace{.75in}{\footnotesize(MSE is susceptible to outliers)}
+   \item MAE (mean absolute error)
+\begin{align*}
 MAE = \frac{1}{n}\sum_{i=1}^n |y_i - \hat{f}(x_i)|
 \end{align*}
-\begin{itemize}
-   \item Evaluation focus is on unseen test data, not training data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Model Quality --- Regression}
+Evaluation focus is on unseen test data, not training data
    \begin{itemize}
       \item Train on past stock market info, but predict future stock performance
       \item Train on previous patient info, but predict future patient outcomes
       \item Train on past real estate prices, but predict future prices
    \end{itemize}
-   \item \emph{Separate \textbf{training data} from \textbf{test data} to evaluate model quality (''holdout sample'')}
-   \item Low training error does NOT imply low testing error
-\end{itemize}
+\vspace{\baselineskip}
+\emph{Separate \textbf{training data} from \textbf{test data} to evaluate model quality (''holdout sample'')}
 \end{frame}
 
 \begin{frame}{Quality of Fit}{Between model and data}
@@ -348,29 +355,29 @@ MSE &= f^2 + \sigma^2 - 2 f E[\hat{f}] + Var[\hat{f}] + E[\hat{f}]^2 \\
 %\end{columns}
 %\end{frame}
 
-\begin{frame}{Review Questions -- Bias and Variance}
-\begin{enumerate}
-  \item Define bias and variance in the context of machine learning models.
-  \item Explain the bias-variance tradeoff with an example. You may use a simple regression model as a reference.
-  \item Describe a scenario where a high-bias model would be more appropriate than a low-bias model.
-  \item Given the following scenarios, identify whether the model is likely suffering from high bias, high variance, or is well-balanced:
-	\begin{itemize}
-	  \item A model that performs well on training data but poorly on unseen test data.
-	  \item A simple linear regression model that is unable to capture the complexities of the data, resulting in poor performance on both training and test data.
-	  \item A model that performs equally well on training and test data.
-	\end{itemize}
-\end{enumerate}
-\end{frame}
+%\begin{frame}{Review Questions -- Bias and Variance}
+%\begin{enumerate}
+  %\item Define bias and variance in the context of machine learning models.
+  %\item Explain the bias-variance tradeoff with an example. You may use a simple regression model as a reference.
+  %\item Describe a scenario where a high-bias model would be more appropriate than a low-bias model.
+  %\item Given the following scenarios, identify whether the model is likely suffering from high bias, high variance, or is well-balanced:
+	%\begin{itemize}
+	  %\item A model that performs well on training data but poorly on unseen test data.
+	  %\item A simple linear regression model that is unable to capture the complexities of the data, resulting in poor performance on both training and test data.
+	  %\item A model that performs equally well on training and test data.
+	%\end{itemize}
+%\end{enumerate}
+%\end{frame}
 
-\begin{frame}{Review Questions -- Bias and Variance \small [cont'd]}
-\begin{enumerate}
-  \setcounter{enumi}{4}
-  \item Describe techniques to reduce bias in a machine learning model.
-  \item Given a dataset where the relationship between features and target is non-linear and complex, propose a strategy to improve a model that initially has high bias (e.g., linear regression).
-  \item List and explain strategies to reduce variance in a machine learning model.
-  \item Imagine you have a deep learning model that performs exceptionally well on the training data but poorly on the validation data. What steps would you take to address this issue?
-\end{enumerate}
-\end{frame}
+%\begin{frame}{Review Questions -- Bias and Variance \small [cont'd]}
+%\begin{enumerate}
+  %\setcounter{enumi}{4}
+  %\item Describe techniques to reduce bias in a machine learning model.
+  %\item Given a dataset where the relationship between features and target is non-linear and complex, propose a strategy to improve a model that initially has high bias (e.g., linear regression).
+  %\item List and explain strategies to reduce variance in a machine learning model.
+  %\item Imagine you have a deep learning model that performs exceptionally well on the training data but poorly on the validation data. What steps would you take to address this issue?
+%\end{enumerate}
+%\end{frame}
 
 \section{Classification}
 
@@ -487,7 +494,7 @@ Obs. & $X_1$ & $X_2$ & $X_3$ & $Y$ \\ \hline
 Suppose we wish to use this data set to make a prediction for $Y$ when $X_1=X_2=X_3=0$ using K-nearest neighbours.
 
 \begin{enumerate}
-  \item Compute the Euclidean distance (''l2-norm'') between each observation and the test point
+  \item Compute the Euclidean distance (''L2-norm'') between each observation and the test point
   \item What are your prediction with $K=1$? With $K=3$? Why?
   \item If the Bayes decision boundary is highly non-linear, would you expect the best value for K to be large or small? Why?
 \end{enumerate}
@@ -496,13 +503,13 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_1=X_2=
 \end{frame}
 
 
-\begin{frame}{Binary Classification Model Quality --- Confusion Matrix}
+\begin{frame}{Binary Classification Quality --- Confusion Matrix}
 
 \begin{block}{}
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
 
-$\Pr(\text{default=Yes} | X=x) > 0.5$ (Bayes) \\ \vspace{2mm}
+Decision rule: $\Pr(\text{default=Yes} | X=x) > 0.5$ (Bayes) \\ \vspace{2mm}
 \begin{tabular}{cc|cc|c} \hline
      & & \multicolumn{2}{c|}{\emph{True default status}} \\
      & & No & Yes & Total \\ \hline
@@ -526,7 +533,7 @@ $\Pr(\text{default=Yes} | X=x) > 0.5$ (Bayes) \\ \vspace{2mm}
 \begin{center}
 \renewcommand{\arraystretch}{1.25}
 
-$\Pr(\text{default=Yes} | X=x) > 0.2$ \\ \vspace{2mm}
+Decision rule: $\Pr(\text{default=Yes} | X=x) > 0.2$ \\ \vspace{2mm}
 \begin{tabular}{cc|cc|c} \hline
      & & \multicolumn{2}{c|}{\emph{True default status}} \\
      & & No & Yes & Total \\ \hline

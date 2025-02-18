@@ -1235,93 +1235,6 @@ Determine the Levenshtein distances between the following:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Internal Data Sources}
-\begin{block}{Examples}
-\begin{itemize}
-	\item Operational computer systems (HR, Payroll, Accounting, Logistics, Manufacturing, Sales, etc.)
-	\item Data-rich products (IoT; e.g. sensors in sold products)
-	\item Computer system technical logs (including web servers)
-	\item Message data (from/to suppliers, customers, etc.; e-mails, customer service chat, call center audio, etc.)
-	\item Surveys (employee surveys, customer surveys, etc.)
-	\item \ldots
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}[allowframebreaks]{Public External Data Sources (Examples)}
-\begin{block}{Government Agencies}
-\begin{itemize}
-	\item Statistics Canada \url{https://www.statcan.gc.ca/en/start}
-	\item Open Government Canada \url{https://search.open.canada.ca/opendata/}
-	\item US Census Bureau \url{https://www.census.gov/}
-	\item US Bureau of Labor Statistics \url{https://www.bls.gov/}
-	\item \ldots
-\end{itemize}
-\end{block}
-\begin{block}{International Institutions}
-\begin{itemize}
-	\item OECD \url{https://data.oecd.org/}
-	\item Worldbank \url{https://data.worldbank.org/}
-	\item EU \url{https://data.europa.eu/en}
-	\item WHO \url{https://www.who.int/data}
-\end{itemize}
-\end{block}
-\begin{block}{Data Set Searches}
-\begin{itemize}
-	\item Google Dataset Search \url{https://datasetsearch.research.google.com/}
-	\item GitHub Data Set Search \url{https://github.com/search?q=datasets&type=repositories}
-\end{itemize}
-\end{block}
-\begin{block}{Social Media Companies}
-\begin{itemize}
-	\item X \url{https://help.twitter.com/en/rules-and-policies/x-api}
-	\item Google \url{https://developers.google.com/gdata}
-	\item Facebook/Meta \url{https://developers.facebook.com/docs/graph-api/overview/}
-\end{itemize}
-\end{block}
-\begin{block}{ML/AI Project Communities}
-\begin{itemize}
-	\item Kaggle \url{https://www.kaggle.com/}
-	\item HuggingFace \url{https://huggingface.co/datasets}
-	\item Google Cloud \url{https://console.cloud.google.com/marketplace/browse?filter=solution-type:dataset&hl=en&pli=1}
-	\item Google Research \url{https://research.google/resources/datasets/}
-	\item AWS Data Sets \url{https://registry.opendata.aws/}
-	\item Azure Data Sets \url{https://azure.microsoft.com/en-ca/products/open-datasets}
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}{Private External Data Sources (Examples)}
-\small
-\begin{block}{Services Companies}
-\begin{itemize}
-	\item Financial services institutions, e.g. Bloomberg {\footnotesize \url{https://www.bloomberg.com/professional/product/data/}}
-	\item Telecommunications providers, e.g. Telus Insights {\footnotesize \url{https://www.telus.com/en/business/medium-large/enterprise-solutions/big-data-analytics}}
-	\item Mobile applications, e.g. The Weather Network {\footnotesize \url{https://www.pelmorex.com/en/data/}}
-\end{itemize}
-\end{block}
-
-\begin{block}{Data Brokers}
-\begin{itemize}
-	\item LiveRamp (formerly Acxiom) {\footnotesize \url{http://www.liveramp.com/}}
-	\item Experian {\footnotesize \url{https://www.experian.com/}}
-	\item CoreLogic {\footnotesize \url{http://corelogic.com/}}
-	\item Nielsen {\footnotesize \url{http://nielsen.com/}}
-	\item DataAxleCanada {\footnotesize \url{https://www.dataaxlecanada.ca/}}
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}{Data Licensing}
-\begin{itemize}
-	\item {\color{red}Always ensure you are allowed to use the data for the intended purpose}
-	\item Do not assume permission
-	\item Check meta-data or web-site
-	\item Request permission
-	\item Purchase license
-	\item Negotiate custom data licensing agreement
-\end{itemize}
-\end{frame}
 
 \begin{frame}{Hands-On Exercises}
 \begin{enumerate}
@@ -1341,6 +1254,115 @@ Determine the Levenshtein distances between the following:
 		\item How would you assess the quality of the data?
 	\end{itemize}
 \end{enumerate}
+\end{frame}
+
+
+\begin{frame}{Data Cleaning}
+
+\begin{block}{Overview}
+\begin{itemize}
+  \item Critical step in the data analysis process
+  \item Identification and rectification of errors and inconsistencies
+  \item Improve data quality
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Data Cleaning}
+\begin{itemize}
+  \item Critical step in the data analysis process
+  \item Identify and ''fix'' errors and inconsistencies
+  \item Improve data quality
+\end{itemize}
+
+\begin{block}{Activities}
+\begin{enumerate}
+    \item \textbf{Auditing}: Identify anomalies and inconsistencies
+
+    \item \textbf{Validation}: Ensure data conforms to rules and constraints
+
+    \item \textbf{Cleaning:} Transform and correct data
+
+    \item \textbf{Duplicate Removal:} Ensure uniqueness of data.
+
+    \item \textbf{Harmonization:} Merge datasets from different sources and ensure consistent formats and scales.
+
+    \item \textbf{Standardization:} Bring data into a standard format.
+
+    \item \textbf{Quality Assessment:} Ensure cleaning has been effective.
+\end{enumerate}
+\end{block}
+\end{frame}
+
+\begin{frame}{Data Validation}
+\begin{itemize}
+ \item Coding/serialization rules, e.g. with Regex 
+ \begin{itemize}
+   \item \textbf{Example} Are all phone numbers of the format: 
+   \colorbox{code}{\texttt{\footnotesize \Verb_^([0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}$_}}
+ \end{itemize}
+ \item Data type constraints
+ \begin{itemize}
+   \item \emph{Example}: Are all sales prices numbers?
+ \end{itemize}
+ \item Range constraints
+ \begin{itemize}
+   \item \emph{Examples}: Are prices $> 0$? Are sales number $< 1000$?
+ \end{itemize}
+ \item Cross-field validation
+ \begin{itemize}
+   \item \emph{Example}: If province is NL, then area code must be 709
+ \end{itemize}
+ \item Uniformity of measures/scales
+ \begin{itemize}
+   \item \emph{Example}: All weights must be in kg, not pounds
+ \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Validation \small [cont'd]}
+\begin{itemize}
+ \item Uniqueness constraints
+ \begin{itemize}
+   \item Real duplicates and synonyms
+   \item \emph{Example}: Rebekah Uqi Williams \\ (Commissioner of Nunavut (2020--2021)
+   \item \textbf{Abbreviations}: \\ Rebekah U. Williams; Rebekah Williams, R.U. Williams
+   \item \textbf{Order}: \\ Williams, Rebekah Uqi; Williams, Rebekah U.; Williams, R.
+   \item \textbf{Spelling}: \\ Rebekah; Rebecca; Rebeccah; Rebeckah; Rebecka
+   \item \textbf{Misspellings}: \\ Reebkah, Rebkah, Wililams, Willaims, \ldots
+   \item \ldots
+ \end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data cleaning}
+\begin{itemize}
+	\item \textbf{Data Transformation,} into proper format or structure.
+	\begin{itemize}
+	  \item One row for each observation, case, event, \ldots
+	  \item Requires case or event identifiers
+	\end{itemize}
+	\item \textbf{Data Imputation,} replacing missing values with estimated or default values, or removing missing values
+	\begin{itemize}
+	  \item Different meanings of missing values
+	  \item Removal may bias data
+	  \item Estimating values may be error-prone
+	\end{itemize}
+	\item \textbf{Data Correction,} or removal of erroneous data.
+	\begin{itemize}
+	  \item Requires access to correct data
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Cleaning}
+\begin{block}{Important}
+Cleaning, transformation, and correction of data is \emph{subjective} and requires \emph{expert knowledge} of the data, the validation rules, the metadata, and the application domain.
+\end{block}
+\vspace{5mm}
+\begin{block}{The 80/20 Rule of Data Science}
+Cleaning, transformation, and correction of data takes 80\% of of the time, data analysis takes 20\% of the time.
+\end{block}
 \end{frame}
 
 

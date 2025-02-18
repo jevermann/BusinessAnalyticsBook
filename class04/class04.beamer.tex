@@ -38,6 +38,7 @@
   \item Financial services
   \item Life sciences
 \end{itemize}
+
 \end{frame}
 
 
@@ -102,6 +103,21 @@
   \item Queries must return data
 \end{itemize}
 \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Cyper and Graph Concepts}
+\centering
+\includegraphics[width=\textwidth]{graph_simple-arr.png}
+\tiny{\url{https://neo4j.com/docs/getting-started/_images/graph_simple-arr.svg}} \\
+\vspace{\baselineskip}
+
+\begin{cyphercode}
+CREATE (:Person:Actor)
+         -[:ACTED_IN {roles: ['Forrest']}]->
+       (:Movie {title: 'Forrest Gump', released: 1994})
+         <-[:DIRECTED]-
+       (:Person {name: 'Robert Zemeckis', born: 1951})
+\end{cyphercode}
 \end{frame}
 
 \begin{frame}{Cypher and Graph Concepts}
@@ -317,10 +333,10 @@ RETURN m1, m2, g
 
 \begin{frame}[fragile]{The Pagila Database for Neo4J}
 Import the Pagila Datase (This may take ten or more minutes; already done in the course Virtual Machine):
-\small
+\scriptsize
 \begin{cyphercode}
-CALL apoc.cypher.readFile(
-       'file:///import-pagila-from-csv.cypher')
+CALL apoc.cypher.runFile(
+'https://evermann.ca/busi4720/neo4j/import_pagila_from_csv.cypher')
 \end{cyphercode}
 \normalsize
 Verify some data

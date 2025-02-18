@@ -128,6 +128,7 @@ The standardized interchange format for event log data is the XES file format\in
 
 The file below is an excerpt of a CSV file that contains event log information (line breaks have been added to fit this into the width of the page but are not in the actual file). Note how ''Start Timestamp'' and ''Complete Timestamp'' exist for each row. This means that one row captures two events, the starting and the completion of an activity instance. 
 
+\begin{samepage}
 \begin{textcode}
 Case ID,Start Timestamp,Complete Timestamp,Activity,Resource,Role
 339,2011/02/16 14:31:00.000,2011/02/16 15:23:00.000,
@@ -139,6 +140,7 @@ Case ID,Start Timestamp,Complete Timestamp,Activity,Resource,Role
 339,2011/02/18 17:24:00.000,2011/02/18 17:30:00.000,
     Analyze Purchase Requisition,Heinz Gutschmidt,Requester Manager
 \end{textcode}
+\end{samepage}
 
 \section{Types and Goals of Process Analytics}
 
@@ -267,6 +269,9 @@ To perform a variant analysis, the log must be separated into sets of traces (''
 \begin{samepage}
 \begin{pythoncode}
 pm4py.get_variants(log)
+# Returns a dict with keys and values
+list(variants.keys())
+list(variants.values())
 
 # Split the log into sub-logs
 for variant, subdf in pm4py.split_by_process_variant(log):
@@ -305,6 +310,17 @@ Third, note that there are 10 cases where the activity ''Release Supplier's Invo
 \end{figure}
 
 A DFG is not a process model in the sense of the example BPMN model in Figure~\ref{fig:bpmn}, as it is missing gateways and decisions. A range of algorithms have been developed over the years to discover BPMN models from event logs. PM4Py provides the Inductive Miner and the Heuristics Net Miner. 
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise}
+Use the event log from \url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}
+\begin{enumerate}
+   \item Read the data into a Pandas data frame using \texttt{read\_csv()}. Parse the \texttt{Start Timestamp} and \texttt{Complete Timestamp} columns as dates.
+   \item Create the \texttt{case:concept:name}, \texttt{concept:name}, \texttt{time:timestamp}, \texttt{org:resource} columns as in the example above.
+   \item Create and visualize a directly-follows-graph (DFG)
+   \item How many variants are there? What is the most frequent variant?
+\end{enumerate}
+\end{tcolorbox}
 
 The Inductive Miner\index{Inductive miner} works by repeatedly ''cutting'' the DFG for an event log to identify subsets of activities that represent exclusive choice, parallelism, sequence, or loops. For example, as Figure~\ref{fig:inductive} shows, when there are sets of activities that are not connected by each other, and have distinct pre- and post-sets of activities, then this may indicate an exclusive choice between these sets. Similarly, a sequence of activities is characterized by the absence of ''backwards'' connections in the DFG, and parallelism is indicated by a set of arrows that fully connects two sets of activities with a common post-set. 
 
@@ -497,7 +513,7 @@ The following exercises are designed to be used with the event log in the runnin
 \begin{enumerate}
    \item What is the activity with the longest mean time? Activities taking a long time may be a bottleneck in the process flow.
    \begin{itemize}
-       \item Create a new column as the difference between the 'Complete Timestamp' and 'start\_timestamp' columns.
+       \item Create a new column as the difference between the 'Complete Timestamp' and 'Start Timestamp' columns.
        \item Use the Pandas \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}} and \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html}{\texttt{mean()}} functions to group the data frame by activity.
    \end{itemize}
    \item What is the mean number of activities for each case? Long cases with many activities may indicate problems or overly complex processes.

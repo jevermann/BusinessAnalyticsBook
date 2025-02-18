@@ -23,13 +23,13 @@ The purpose of visualization is to simplify, summarize and abstract complex info
 
 The recent history of data visualization is marked by rapid advancements fueled by technology. In the last few decades, the advent of powerful computing and sophisticated software tools has revolutionized this field. Where once it was the domain of experts and specialists, data visualization has become accessible to a broader audience. Tools ranging from simple spreadsheet applications to advanced data visualization software have democratized the creation and interpretation of visual data. The rise of big data and machine learning has further escalated the importance of data visualization. As data sets have grown in size and complexity, the need for effective visualization tools has become more pronounced, leading to innovative methods and approaches. Interactive visualizations, real-time data mapping, and the use of virtual and augmented reality are some of the cutting-edge trends redefining how we see and interact with data today. This evolution continues as we find new ways to visually interpret the vast and growing ocean of data that characterizes the digital age.
 
-Visualization is important because humans are very good at visual pattern recognition. In fact, humans are too good at this, as they tend to also recognize patterns where none exist. This makes it easy to deceive oneself or others with data visualizations. Hence, visualization should always be undertaken with and supported by statistical data analysis.
+Visualization is important because humans are very good at visual pattern recognition. In fact, humans are too good at this, as they tend to also recognize patterns where none exist. This makes it easy to deceive oneself or others with data visualizations. Hence, visualization should normally be undertaken with and supported by statistical data analysis to verify the existence of trends or differences.
 
 \subsection*{Visual Discovery}
 
-Visual discovery\index{Visual discovery} refers to the use of interactive visualization tools to uncover hidden patterns, trends, and insights in data. This approach is a crucial aspect of modern data analysis, emphasizing the power of human visual perception. Visual discovery leverages the human brain's innate ability to process visual information rapidly. By translating complex data sets into graphical representations, it enables quicker and more intuitive understanding. Users can spot trends, outliers, and patterns more easily than they could through rows of numbers or text.
+Visual discovery\index{Visual discovery} is the use of interactive visualization tools to uncover patterns, trends, and insights from data. This approach is a crucial aspect of modern data analysis, emphasizing the power of human visual perception. Visual discovery leverages the human brain's innate ability to process visual information rapidly. By translating complex data sets into graphical representations, it enables quicker and more intuitive understanding. Users can spot trends, outliers, differences, and patterns more easily than they could through rows of numbers or text.
 
-Visual discovery is a highly iterative and dynamic process. Analysts rapidly create or change data visualizations, such as charts, graphs, and maps, to explore different aspects of the data. This interactivity allows for real-time exploration and analysis, making it easier to drill down into specifics or zoom out for a broader view.
+Visual discovery is a highly iterative and dynamic process. Analysts rapidly create or change data visualizations, such as charts, graphs, and maps, to explore different aspects of the data. This interactivity allows for real-time exploration and analysis, making it easier to drill down into specifics, zoom out for a broader view or change the perspective one takes in examining data.
 
 Visual discovery may be purely exploratory, without any prior knowledge by the data analyst, or it may seek to confirm or verify the beliefs or hypotheses that the data analyst has formed about the particular domain. However, even this confirmation is never final, but only a way to new insights and exploration. In this process, the analyst explores the data, forms some beliefs or hypotheses based on the exploration, tries to support it with a different visualization, and updates their beliefs or hypotheses based on the later visualization.
 
@@ -39,7 +39,7 @@ In contrast to visual discovery, declarative visualization\index{Declarative vis
 
 \subsection*{Operational Visualization (Monitoring)}
 
-In operational visualization, graphs and charts are used for supervision or monitoring of the operation of a system\index{Operational visualization}. They provide system supervisors or controllers with a real-time view of the state of key system properties and are used to spot situations or trends that require intervention in the system's operation, that is, operational decision making. 
+In operational visualization, graphs and charts are used for supervision or monitoring of the operation of a system\index{Operational visualization}. They provide supervisors or controllers with a real-time view of the state of key system properties and are used to spot situations or trends that require intervention in the system's operation, that is, operational decision making. 
 
 \subsection*{Quantitative Messages} 
 
@@ -47,7 +47,7 @@ Good visualizations are focused on the quantitative message they are intended to
 
 \section{Honesty in Visualization}
 
-For a number of reasons, it is easy to deceive with misleading visualizations. Humans are prone to see trends or patterns where none exist. A misleading visualization can use exploit this propensity in order to suggest relationships between objects or variables that do not exist. Humans recognize some aspects of visualization better, earlier, and easier than others. For example, humans recognize the length of a line easier than the area of a surface, and recognize variations in color better than they interpret textual labels. A misleading visualization can exploit these cognitive effects to make the interpreter focus on particular, misleading aspects in the visualization. Finally, because visualizations are intended to abstract from the data itself and provide a summary, visualizations may not include sufficient information about the data or its processing to allow the reader to understand what is shown, making it easy to suggest interpretations that are misleading.
+For a number of reasons, it is easy to deceive with misleading visualizations. Humans are prone to see trends or patterns where none exist. A misleading visualization can exploit this propensity to suggest relationships between objects or variables that do not exist. Humans recognize some aspects of visualization better, earlier, and easier than others. For example, humans recognize the length of a line easier than the area of a surface, and recognize variations in color better than they interpret textual labels. A misleading visualization can exploit these cognitive effects to make the interpreter focus on particular, misleading aspects in the visualization. Finally, because visualizations are intended to abstract from the data itself and provide a summary, visualizations may not include sufficient information about the data or its processing to allow the reader to understand what is shown, making it easy to suggest interpretations that are misleading.
 
 Here are some general guidelines for using visualizations:
 \begin{itemize}
@@ -57,7 +57,7 @@ Here are some general guidelines for using visualizations:
    \item Do not obfuscate, confuse, or hide information
 \end{itemize}
 
-The term ''dark pattern'' has been coined to describe the opposite of best practices in a field, practices intended to deceive, mislead, or frustrate others. There are many of such dark patterns in visualizations:
+The term ''dark pattern'' has been coined to describe the opposite of best practices in a field; in this case practices that are intended to deceive, mislead, or frustrate others. There are many of such dark patterns in visualizations:
 
 \begin{itemize}
 	\item Use an inappropriate graph or chart type to hide or obfuscate relationships or trends. As noted above, different types of graph are suitable to convey different types of messages. An example is shown in Figure~\ref{fig:comparingpies} that illustrates that a bar or column chart is more useful for comparisons of objects than pie charts, so the use of a pie chart could hide or obfuscate trends that may otherwise be prominent.
@@ -73,7 +73,7 @@ The term ''dark pattern'' has been coined to describe the opposite of best pract
 
 	\item \emph{Graph unrelated data to suggest non-existent relationships.} The viewer of a visualization expects that data that is graphed together has a meaningful relationship. Simply by graphing data together, the analyst suggests a relationship where none may exist.
 	\item \emph{Scale multiple vertical axes to suggest correlations.} Scaling a graph with multiple vertical axes so that lines better align shows visual similarities that are not borne out by the data.
-	\item \emph{Use confusing colors.} For example, a color palette whose perceived color differences do not map linearly to the actual differences in the data may be misleading. For another example, using different shades of the same color for values that are very different will visually diminish the difference.
+	\item \emph{Use confusing colors.} For example, a color palette whose perceived color differences do not map linearly to the actual differences in the data (that is, it is not ''\emph{perceptually uniform}'') may be misleading. For another example, using different shades of the same color for values that are very different will visually diminish the difference.
 	\item \emph{Omit summary statistics.} For example, showing only the mean or median values, e.g. in a line or bar chart, omits the uncertainty in the data. It is better to also include error bars, information about quartiles or outliers in the chart to show variability or uncertainty, especially when there is significant uncertainty about differences or absolute values.
 	\item \emph{Truncate or scale axes to hide or exaggerate trend.} Truncating or scaling axes leads to increased slopes of lines or perceived differences between points or levels. This exaggerates differences or trends. Figure~\ref{fig:truncated} shows an example of how small differences (right) can be exaggerated (left) in a bar chart. Similarly, Figure~\ref{fig:aspectratios} shows how scaling or the use of different aspect ratios can be used to visually exaggerate or diminish trends or relationships between variables.
 \begin{figure}
@@ -86,13 +86,13 @@ The term ''dark pattern'' has been coined to describe the opposite of best pract
 \end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{screen4.png}
+\includegraphics[width=.85\textwidth]{screen4.png}
 
 \scriptsize\url{https://en.wikipedia.org/wiki/Misleading_graph}
 \caption{Scaling Axes and Aspect Ratios}
 \label{fig:aspectratios}
 \end{figure}
-	\item \emph{Scale in multiple dimensions.} The relative change or difference should be represented by a single dimension only. For example, in a bar or column chart, only the height or length of bar/column should change, not its width or area as well. This issue is often connected to the use of 3-dimensional graphics. While visually appealing, they exaggerate the apparent visual area of a foreground object, as illustrated in Figure~\ref{fig:3dpie}. A related issue is the use of images in graphs, shown in Figure~\ref{fig:imagesgraphs}. In the improper scaling, the image is enlarged in two dimensions, suggesting a larger difference than there actually exists in the data.
+	\item \emph{Scale in multiple dimensions.} The relative change or difference should be represented by a single dimension only. For example, in a bar or column chart, only the height or length of bar/column should change, not its width or area as well. This issue is often connected to the use of 3-dimensional graphics. While visually appealing, they exaggerate the apparent visual area of a foreground object, as illustrated in Figure~\ref{fig:3dpie}. A related issue is the use of images in graphs, shown in Figure~\ref{fig:imagesgraphs}. In the improper scaling, the image is enlarged in two dimensions, visually suggesting a larger difference than there actually exists in the data.
 \begin{figure}
 \centering
 \includegraphics[width=.8\textwidth]{screen6.png}
@@ -180,7 +180,7 @@ In summary, misleading charts and visualizations can be particularly problematic
  \\ 
 \tiny \scriptsize{XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed under CC-BY-NC}
 
-\caption{Visualization Comics by XKCD}
+\caption{Misleading Visualizations, Comics by XKCD}
 \label{fig:xkcd}
 \end{figure}
 
@@ -191,7 +191,7 @@ In summary, misleading charts and visualizations can be particularly problematic
 
 Visualizing streaming data, also known as real-time data visualization, involves the dynamic representation of data that is continuously updated as new data arrives. This type of visualization is essential in contexts where timely and rapid data interpretation is critical, such as in financial trading, or network monitoring. 
 
-Streaming data presents some specific challenges for visualization. One of the primary challenges is managing the high velocity and volume of streaming data. The system must process and visualize data quickly enough to keep up with the incoming stream. Typically, only a limited window of data is available while older data is discarded. This means that, since the focus is on real-time data, it can be challenging to provide sufficient historical context for users to understand the current data in a broader temporal perspective. Moreover, due to the highly dynamic nature of the data, presenting streaming data in a way that is not overwhelming to the user is challenging. The visualization must strike a balance between providing enough detail and overloading the user with information, in particular information about changes, and between providing responsive graphs and overloading the user with such rapid changes they lose the ability to understand the data.
+Streaming data presents some specific challenges for visualization. One of the primary challenges is managing the high velocity and volume of streaming data. The system must process and visualize data quickly enough to keep up with the incoming stream. Typically, only a limited window of data is available while older data is discarded. This means that, since the focus is on real-time data, it can be challenging to provide sufficient historical context for users to understand the current data in a broader temporal perspective. Moreover, due to the highly dynamic nature of the data, presenting streaming data in a way that is not overwhelming to the user is challenging. The visualization must strike a balance between providing enough detail and overloading the user with information, in particular information about changes, and also a balance between providing responsive graphs and overloading the user with such rapid changes they lose the ability to understand the data.
 
 \subsection*{Spatial Data}
 
@@ -246,13 +246,11 @@ Another particular challenge with spatial data is mapping the three-dimensional 
 
 Visualizing network or graph data involves representing entities as nodes and the relationships between them as edges in a graphical format. This type of visualization is crucial for understanding complex structures in various fields like social network analysis, biology, computer science, and more. Typically, nodes are represented as boxes, circles, or textual labels, while edges are represented as lines or curves. Directed graphs use arrowheads on lines or curves to indicate the directionality of an edge. 
 
-Network visualization poses several unique challenges. Networks, especially large ones, can become very complex and cluttered when visualized. As the number of nodes and edges increases, the visualization can quickly become a tangled mess, making it difficult to discern meaningful patterns or relationships.
+As the number of nodes and edges increases, the visualization can quickly become a tangled mess, making it difficult to discern meaningful patterns or relationships. To effectively explore graph data interactive features like zooming, panning, and highlighting are essential. Graphs may also contain large sets of attributes for nodes and edges. Representing these attributes effectively without cluttering the visualization or overwhelming the viewer is challenging. Techniques like color coding, sizing, or shaping nodes and edges are commonly used techniques, but require careful design.
 
-To effectively explore graph data, especially large graphs, interactive features like zooming, panning, and highlighting are essential. Finally, graphs often contain large sets of attributes for nodes and edges. Representing these attributes effectively without cluttering the visualization or overwhelming the viewer is challenging. Techniques like color coding, sizing, or shaping nodes and edges are commonly used but require careful design.
+In densely connected networks, edges can overlap, and nodes can occlude each other, leading to a loss of information and making it difficult to trace relationships or identify individual elements. There exist many different ways to visually layout a graph to make it visually clear and easy to understand. 
 
-In densely connected networks, edges can overlap, and nodes can occlude each other, leading to a loss of information and making it difficult to trace relationships or identify individual elements. Choosing an appropriate layout algorithm is therefore crucial for network visualization. There exist many different ways to visually layout a graph to make it visually clear and easy to understand and generally of high quality. 
-
-One of the most commonly-used types of algorithms position graph vertices based on physical metaphors of attractive and repulsive forces, for example an imaginary system of physical springs, sometimes called a force-directed graph layout\index{Force-directed graph layout}. Adjacent vertices are modelled with an attractive force, while all vertices have a repulsive force. The graph layout algorithm then tries to produce a layout in which an overall energy function is minimized. Figure~\ref{fig:sna_viz} shows an example of such a graph layout.
+One of the most commonly-used types of algorithms positions graph vertices based on the physical metaphors of attractive and repulsive forces, for example an imaginary system of physical springs, sometimes called a force-directed graph layout\index{Force-directed graph layout}. Adjacent vertices are modelled with an attractive force, while all vertices have a repulsive force. The graph layout algorithm then tries to produce a layout in which an overall energy function is minimized. Figure~\ref{fig:sna_viz} shows an example of such a graph layout.
 
 Another commonly used graph layout algorithm is the simple circular layout, where nodes are arranged equidistantly around a circle with edges drawn as lines or arrows. Figure~\ref{fig:circular} shows an example this type of graph layout.
 
@@ -296,16 +294,15 @@ A common type of layout for directed and acyclic graphs is the layered graph, ty
 \label{fig:layered}
 \end{figure}
 
-\noindent When assessing the quality of the graph layout, a number of considerations are important:
+%\noindent When assessing the quality of the graph layout, a number of considerations are important:
 
-\begin{itemize}
-  \item \emph{Number of crossings of lines or curves}. Such crossings are visually confusing and should be minimized. In fact, this is such an important criterion that graph theory has defined a planar graph as one that can be visualized in two dimensions without any line crossings. Another qual
-  \item \emph{Area of the graph}. Graphs should be drawn in the minimal amount of space while still being easy to read and understand.
-  \item \emph{Symmetries}. Being able to exploit symmetries in the underlying graph data and represent or highlight them in the graphical layout makes the graph visualization easier to understand. 
-  \item \emph{Shape homogeneity}. A particular problem when using node labels, e.g. for names or node attributes, is the size of the node shape in the graph visualization. It is preferrable to maintain equal size, despite differences in label length. Lines should have the lowest or an equal number of bends.
-  \item \emph{Angular resolution}. In graphs with many edges from nodes, it is important to draw lines in such a way that the edges can be clearly differentiated. This is very important in circular layouts, but also plays a large role in other types of graph layouts.
-\end{itemize}
-  
+%\begin{itemize}
+  %\item \emph{Number of crossings of lines or curves}. Such crossings are visually confusing and should be minimized. In fact, this is such an important criterion that graph theory has defined a planar graph as one that can be visualized in two dimensions without any line crossings. Another qual
+  %\item \emph{Area of the graph}. Graphs should be drawn in the minimal amount of space while still being easy to read and understand.
+  %\item \emph{Symmetries}. Being able to exploit symmetries in the underlying graph data and represent or highlight them in the graphical layout makes the graph visualization easier to understand. 
+  %\item \emph{Shape homogeneity}. A particular problem when using node labels, e.g. for names or node attributes, is the size of the node shape in the graph visualization. It is preferrable to maintain equal size, despite differences in label length. Lines should have the lowest or an equal number of bends.
+  %\item \emph{Angular resolution}. In graphs with many edges from nodes, it is important to draw lines in such a way that the edges can be clearly differentiated. This is very important in circular layouts, but also plays a large role in other types of graph layouts.
+%\end{itemize}
 
 \section{Color Palettes}
 
@@ -329,7 +326,7 @@ Sequential color palettes\index{Colour palette!sequential}, like the one in Figu
 
 \subsubsection*{Diverging color palettes}
 
-Diverging color palettes\index{Colour palette!diverging}, like the one in Figure~\ref{fig:diverging}, on the other hand, use two colors as anchors and use gradations either through white, as in Figure~\ref{fig:diverging}, or through black. They are ideal for emphasizing deviations from a median or mean value, or for highlighting extremes on either side of a critical midpoint. However, these palettes may be misleading if used for data without a meaningful center.
+Diverging color palettes\index{Colour palette!diverging}, like the one in Figure~\ref{fig:diverging} use two colors as anchors and use gradations either through white, as in Figure~\ref{fig:diverging}, or through black. They are ideal for emphasizing deviations from a median or mean value, or for highlighting extremes on either side of a critical midpoint. However, these palettes may be misleading if used for data without a meaningful center.
 
 \subsubsection*{Spectral color palettes}
 
@@ -425,7 +422,7 @@ Realizing the prevalence and the effects of CVD means that the color palette tha
 \centering
   \includegraphics[width=.75\textwidth]{brewer.paired.cvd.pdf}
 
-\caption{Example: Colourbrewer Palette ''Paired''}
+\caption{Colourbrewer ''Paired'' Colour Palette}
 \label{fig:paired}
 \end{figure}
 
@@ -552,7 +549,7 @@ Each of these libraries serves different needs within the web development and da
 
 \section{Mapping Data to Plot Elements}
 
-Creating a basic visualization in two dimensions, such as  bar chart, a line chart, or a bubble chart, means that data elements or data series must be mapped to visualization elements. This is the core of the visualization task, and the most fundamental choice the data analyst has to make. Table~\ref{tab:elements} shows plot elements that data variables can be mapped to. In principle, a different data variable can be mapped to each of these, resulting in potentially being able to represent more than a dozen variables in one diagram. However, in practice, the number of concurrent variables to represent should be limited to no more than 3, in order for the visualization to remain interpretable and not to require too much cognitive effort on the part of the reader.
+Creating a basic visualization in two dimensions, such as  bar chart, a line chart, or a bubble chart, means that data variables or data series must be mapped to visualization elements. This is the core of the visualization task, and the most fundamental choice the data analyst has to make. Table~\ref{tab:elements} shows plot elements that data variables can be mapped to. In principle, a different data variable can be mapped to each of these, resulting in potentially being able to represent more than a dozen variables in one diagram. However, in practice, the number of concurrent variables to represent should be limited to no more than 3, in order for the visualization to remain interpretable and not to require too much cognitive effort on the part of the reader. The next sections show examples of mapping different variables to different plot element. 
 
 \begin{table}[h]
 \centering
@@ -572,7 +569,7 @@ Shape, Style (of points and lines) \\ \hline
 
 \section{Visualization in R using ggplot2}
 
-This section provides an introduction to data visualization using the ggplot library in R. The example dataset for this section is the Fuel Consumption Ratings for battery electric vehicles, provided the Government of Canada through its Open Government Portal\footnote{\scriptsize\url{https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64}}. At the time of writing, the dataset was last updated on October 10, 2023. The dataset contains the variables shown in Table~\ref{tab:fueldata}.
+This section provides an introduction to data visualization using the ggplot2 library in R. The example dataset for this section is the Fuel Consumption Ratings for battery electric vehicles, provided the Government of Canada through its Open Government Portal\footnote{\scriptsize\url{https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64}}. At the time of writing, the dataset was last updated on October 10, 2023. The dataset contains the variables shown in Table~\ref{tab:fueldata}.
 
 \begin{table}[h]
 \centering
@@ -597,20 +594,14 @@ This section provides an introduction to data visualization using the ggplot lib
 
 \begin{samepage}
 \begin{Rcode}
-# Import libraries
+# Load tidyverse package
 library(tidyverse)
-# Read CSV
-e <- read.csv('https://evermann.ca/busi4720/fuel.csv')
-# Pre-process for data types
-e$Year <- as.numeric(e$Year)
-e$Category <- as.factor(e$Category)
-e$Fuel <- as.factor(e$Fuel)
-e$City <- as.numeric(e$City)
-e$Hwy <- as.numeric(e$Hwy)
-e$Comb <- as.numeric(e$Comb)
-e$Range <- as.numeric(e$Range)
-e$Annual <- as.numeric(e$Annual)
-e.clean <- e
+
+# Read the data set to a Tibble
+data <- read_csv('https://evermann.ca/busi4720/fuel.csv')
+
+# Ensure vehicle category is a factor (categorical)
+data$Fuel <- as.factor(data$Fuel)
 \end{Rcode}
 \end{samepage}
 
@@ -628,18 +619,21 @@ library(ggradar)
 \end{Rcode}
 \end{samepage}
 
-The core \texttt{ggplot()} function can be used in a dplyr pipeline and accepts the processed data tibble. The core argument to \texttt{ggplot()} is the ''aesthetic'' that maps plot elements to data variables. The actual plots themselves are then added through the use of various ''geoms''. Such geoms respresent commonly used plot types. The geoms ''inherit'' the aesthetic specified in \texttt{ggplot()} and can add to it by including more variables mapped to different plot elements. More than one geom can be added to a plot, allowing the analyst to overlay plot types or combine plots for multiple data series or data sets. The final graph can be saved in a variety of different image formats.
+The core \texttt{ggplot()} function can be used in a dplyr pipeline and accepts the processed data tibble. The core argument to \texttt{ggplot()} is the ''\emph{aesthetic}'' that maps plot elements to data variables. The actual plots themselves are then added through the use of various ''\texttt{geoms}''. Such geoms respresent commonly used plot types. The geoms ''inherit'' the aesthetic specified in \texttt{ggplot()} and can add to it by including more variables mapped to different plot elements. More than one geom can be added to a plot, allowing the analyst to overlay plot types or combine plots for multiple data series or data sets. The final graph can be saved in a variety of different image formats. The following examples are intentionally kept simple and are not intended to show the full capabilities of the ggplot package. Many of the functions used below have a multitude of options to customize the output and a wide variety of ways, but this section focuses on the default visualizations they produce.
 
-The first example below introduces the histogram geom. Histograms\index{Plot!Histogram} show the count of values in a certain range. The \texttt{ggplot()} function's aesthetic maps the ''Range'' variable of the tibble to the x axis of the plot. The argument to the \texttt{geom\_histogram()} function indcates that 50 bins should be formed, i.e. the data is divided in 50 separate regions for counting and plotting. The \texttt{ggsave()} function saves the last plot in a file with the specified height and width.
+The first example below introduces the histogram geom. Histograms\index{Plot!Histogram} show the count of values in a certain range. The \texttt{ggplot()} function's aesthetic maps the ''Range'' variable of the data tibble to the x axis of the plot. The argument to the \texttt{geom\_histogram()} function indcates that 50 bins should be formed, i.e. the data is divided in 50 separate regions for counting and plotting.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean |>
+data |> 
   ggplot(aes(x=Range)) + 
     geom_histogram(bins=50)
-    
-ggsave("histogram.pdf", 
-       height=5, width=7.5, units='in')
+\end{Rcode}
+
+The \texttt{ggsave()} function saves the last plot in a file with the specified height and width. The function attempts to automatically determine the output format, such as JPEG or PNG raster images, PDF files, etc. from the file name ending. See the manual (\texttt{?ggsave}) for further options. 
+
+\begin{Rcode}
+ggsave("histogram.pdf", height=5, width=7.5, units='in')
 \end{Rcode}
 \end{samepage}
 
@@ -647,74 +641,83 @@ ggsave("histogram.pdf",
 \includegraphics[width=.8\textwidth]{histogram.pdf}
 \end{center}
 
-A density plot\index{Plot!Density} using the \texttt{geom\_density()} function, is similar to a histogram in that it indicates the frequency of values. However, a density plot shows a continuous probability distribution of the data values, and as such is limited in range between 0 and 1.
-
-The example below adds a number of elements to the basic density plot. The function \texttt{labs()} allows specification of labels for all plot elements. The \texttt{geom\_vline()} geoms add vertical lines. Note that these geoms do not receive the data from the pipe, but the data is specified using the \texttt{data} argument. The aesthetics of a vertical line map the x axis intercept to a data variable. Different line types are used for the different lines. The \texttt{annotate()} function adds text annotations to the plot. Each annotation prints a label at a set of x and y coordinates in the plot, with a specific size and horizontal justification. For example, \texttt{hjust=0} means the text is left-justified. Consult the documentation for further details. 
+A density plot\index{Plot!Density} using the \texttt{geom\_density()} function, is similar to a histogram in that it indicates the frequency of values. However, a density plot shows a continuous \emph{probability distribution} of the data values, and as such the vertical axis is limited in range between 0 and 1. The \texttt{kernel} option for the \texttt{geom\_density} geom specifies how the line is smoothed to produce the curve in the plot below. 
 
 \begin{Rcode}
-# Prepare summary statistics
-
-mean_v <- e.clean |>
-   summarize(mean_v = mean(Range), 
-             median_v = median(Range), 
-             lower95=quantile(Range, .025), 
-             upper95=quantile(Range, .975), 
-             maxdensity = max(density(Range)$y))
-
-e.clean |>
+data |> 
   ggplot(aes(Range)) + 
-    geom_density(kernel='gaussian', 
-                 fill='lightblue') + 
-    labs(x = 'Range (km)', 
-         y = 'Proportion of Vehicles', 
-         title='Density Plot - Electric Vehicle Range', 
-         subtitle='Years 2012 to 2024', 
-         caption='Lower and Upper 95 percentile, \
-                  median and mean') +
-    geom_vline(data=mean_v, 
-               aes(xintercept=mean_v), 
-               linetype='dashed') +
-    geom_vline(data=mean_v, 
-               aes(xintercept=median_v), 
-               linetype='dotdash') +
-    geom_vline(data=mean_v, 
-               aes(xintercept=lower95), 
-               linetype='dotted') +
-    geom_vline(data=mean_v, 
-               aes(xintercept=upper95), 
-               linetype='dotted') + 
-	annotate('text', 
-	   label=paste(' L95=\n ',round(mean_v$lower95),sep=''), 
-	   x = mean_v$lower95, y = mean_v$maxdensity/2, 
-	   size=3.5, hjust=0) +
-	annotate('text', 
-	   label=paste(' Med=\n ',round(mean_v$median_v),sep=''), 
-	   x = mean_v$median_v, y = mean_v$maxdensity*3/4, 
-	   size=3.5, hjust=0) +
-	annotate('text',
-	   label=paste(' Mean=\n ',round(mean_v$mean_v),sep=''), 
-	   x = mean_v$mean_v, y = mean_v$maxdensity*5/8, 
-	   size=3.5, hjust=0) + 
-	annotate('text',
-	   label=paste(' U95=\n ',round(mean_v$upper95),sep=''), 
-	   x = mean_v$upper95, y = mean_v$maxdensity/2, 
-	   size=3.5, hjust=0)
+    geom_density(kernel='gaussian', fill='lightblue')
 \end{Rcode}
 
 \begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.density.pdf}
+\includegraphics[width=.8\textwidth]{fuel.density.simple.pdf}
 \end{center}
 
-The next example shows how histograms and density plots can be combined. The R code fragment below indicates only the relevant changes to the previous example.
+%The example below adds a number of elements to the basic density plot. The function \texttt{labs()} allows specification of labels for all plot elements. The \texttt{geom\_vline()} geoms add vertical lines. Note that these geoms do not receive the data from the pipe, but the data is specified using the \texttt{data} argument. The aesthetics of a vertical line map the x axis intercept to a data variable. Different line types are used for the different lines. The \texttt{annotate()} function adds text annotations to the plot. Each annotation prints a label at a set of x and y coordinates in the plot, with a specific size and horizontal justification. For example, \texttt{hjust=0} means the text is left-justified. Consult the documentation for further details. 
+
+%\begin{Rcode}
+%# Prepare summary statistics
+
+%mean_v <- e.clean |>
+   %summarize(mean_v = mean(Range), 
+             %median_v = median(Range), 
+             %lower95=quantile(Range, .025), 
+             %upper95=quantile(Range, .975), 
+             %maxdensity = max(density(Range)$y))
+
+%e.clean |>
+  %ggplot(aes(Range)) + 
+    %geom_density(kernel='gaussian', 
+                 %fill='lightblue') + 
+    %labs(x = 'Range (km)', 
+         %y = 'Proportion of Vehicles', 
+         %title='Density Plot - Electric Vehicle Range', 
+         %subtitle='Years 2012 to 2024', 
+         %caption='Lower and Upper 95 percentile, \
+                  %median and mean') +
+    %geom_vline(data=mean_v, 
+               %aes(xintercept=mean_v), 
+               %linetype='dashed') +
+    %geom_vline(data=mean_v, 
+               %aes(xintercept=median_v), 
+               %linetype='dotdash') +
+    %geom_vline(data=mean_v, 
+               %aes(xintercept=lower95), 
+               %linetype='dotted') +
+    %geom_vline(data=mean_v, 
+               %aes(xintercept=upper95), 
+               %linetype='dotted') + 
+	%annotate('text', 
+	   %label=paste(' L95=\n ',round(mean_v$lower95),sep=''), 
+	   %x = mean_v$lower95, y = mean_v$maxdensity/2, 
+	   %size=3.5, hjust=0) +
+	%annotate('text', 
+	   %label=paste(' Med=\n ',round(mean_v$median_v),sep=''), 
+	   %x = mean_v$median_v, y = mean_v$maxdensity*3/4, 
+	   %size=3.5, hjust=0) +
+	%annotate('text',
+	   %label=paste(' Mean=\n ',round(mean_v$mean_v),sep=''), 
+	   %x = mean_v$mean_v, y = mean_v$maxdensity*5/8, 
+	   %size=3.5, hjust=0) + 
+	%annotate('text',
+	   %label=paste(' U95=\n ',round(mean_v$upper95),sep=''), 
+	   %x = mean_v$upper95, y = mean_v$maxdensity/2, 
+	   %size=3.5, hjust=0)
+%\end{Rcode}
+
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.density.pdf}
+%\end{center}
+
+The next example shows how histograms and density plots can be combined simply by adding them to the plot using the ''+'' sign. Both geoms specify an \texttt{alpha} option that determines their transparency. This allows both to be seen. Note also that the y axis of the histogram is adjusted to match the values calculated and visualized by the density geom. 
 
 \begin{samepage}
 \begin{Rcode}
-...
-geom_histogram(aes(y=..density..), bins=50, 
-     alpha=0.5, fill='white', color='black', ) +
-geom_density(kernel='gaussian', 
-     alpha=0.25, fill='lightblue') + 
-...
+data |> ggplot(aes(Range)) +
+    geom_density(kernel='gaussian', 
+        alpha=0.25, fill='lightblue') +
+    geom_histogram(aes(y=after_stat(density)), bins=50, 
+        alpha=0.5, fill='white', color='black')
 \end{Rcode}
 \end{samepage}
 
@@ -722,151 +725,172 @@ geom_density(kernel='gaussian',
   \includegraphics[width=.8\textwidth]{fuel.histogram.pdf}
 \end{center}
 
-An area plot\index{Plot!Area} is essentially a line plot where the area under the line filled. However, in contrast to a line plot, when plotting multiple data variables in an area plot, the area plot is cumulative, that is, data are stacked on top of each other. The following example first uses dplyr functions to compute a summary statistic, and then pipes the result into the \texttt{ggplot()} function. \texttt{geom\_text()} is another way to add annotations to the data. This geom uses its own aesthetic in the example below. Note that \texttt{position='jitter'} indicates that overlapping points (i.e. points with the same data values) should be randomly moved a little bit to show them separately. 
+A plot can be labelled. The ggplot2 package offers labels for the x and the y axes, as well as a title, a subtitle, and a caption for the figure. By default, the x and y axis labels are the data columns mapped to them. Labelling is done by adding the \texttt{labs} geom to the plot.
+
+\begin{samepage}
+\begin{Rcode}
+data |>  ggplot(aes(x=Range)) + 
+    geom_histogram(bins=50) +
+    labs(x = 'Range in km',
+         y = 'Number of vehicle models',
+         title='Number of Vehicle Models by Vehicle Range',
+         subtitle='Years 2012 to 2024',
+         caption='From NRCAN Data')
+\end{Rcode}
+\end{samepage}
+
+\begin{center}
+  \includegraphics[width=.8\textwidth]{fuel.histogram.labels.pdf}
+\end{center}
+
+
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise}
+\begin{enumerate}
+    \item Read the EV fuel efficiency data set into R
+    \item Create a blue histogram of highway fuel efficiency with 10 bins.
+    \item Add labels for the axes, and add a title
+\end{enumerate}
+
+\paragraph*{Tips:}
+    \begin{itemize} 
+		\item Use the \texttt{read\_csv()} function from the tidyverse library
+       \item The column name is \texttt{Hwy}
+       \item Use the \texttt{geom\_histogram} geom
+       \item Use the \texttt{bins=\ldots} option
+       \item Use the \texttt{fill='\ldots'} option
+       \item Use the \texttt{labs} geom for labels
+    \end{itemize}
+\end{tcolorbox}
+
+An area plot\index{Plot!Area} is essentially a line plot where the area under the line is filled. The following example first uses dplyr functions to compute a summary statistic (the mean vehicle range by year), and then pipes that into the \texttt{ggplot()} function. The call to the \texttt{ggplot()} function is typically the last element in such a data processing pipeline. \texttt{geom\_text()} is a way to add annotations to the data. This geom uses its own \texttt{label} aesthetic, as shown in the example below. 
 
 \begin{Rcode}
-e.clean %>%
+data %>% 
   group_by(Year) %>%
-  summarize(meanRange = mean(Range)) %>%
+  summarize(meanRange = mean(Range)) %>% 
   ungroup() %>%
   ggplot(aes(Year, meanRange)) + 
-    geom_area(fill='purple') +
-    geom_text(aes(label=round(meanRange)), 
-              size=5, position='jitter') +
-    labs(x='Year', y='Mean Range (km)', 
-         title='Vehicle Range by Year', 
-         subtitle='Years 2012-2024')
+    geom_area(fill='lightgreen') +
+    geom_text(aes(label=round(meanRange)), size=5)
 \end{Rcode}
 
 \begin{center}
   \includegraphics[width=.8\textwidth]{fuel.areaOneSeries.pdf}
 \end{center}
 
-The next example shows a column chart\index{Plot!Column chart}. Again, dplyr functions are used to create suitable summary statistics to plot, and the summarized data is then piped to \texttt{ggplot()}. The variable ''metric'' is mapped to the ''fill'' element of the plot, that is the color with which columns are filled. The \texttt{position='dodge'} argument to the the \texttt{geom\_col()} function indicates that columns are located next to each other, instead of being stacked on top of each other. 
+The next example shows a column chart\index{Plot!Column chart}. The data needs to be in ''long'' format, so dplyr functions are used to create suitable summary statistics and then reshape the data. 
 
-This example also shows customization of the scales. Here, the fill scale (that is, the colour) is customized, first by specifying a colour palette, and then by providing labels for the different categories. The legend is automatically added to the right of the column plot.
-
-\newpage
 \begin{Rcode}
-e.clean %>%
+col.data <- data %>%
    group_by(Year) %>%
    summarize(meanCity = mean(City), meanHwy = mean(Hwy)) %>%
    ungroup() %>%
-   pivot_longer(cols=c('meanCity', 'meanHwy'), 
-                names_to='metric', 
-                values_to='consumption') |>
-   ggplot(aes(Year, consumption, fill=metric)) +
-      geom_col(position='dodge') +
-      scale_fill_brewer(palette="Paired") +
-      scale_fill_discrete(labels=c("City", "Highway")) + 
-      labs(x = 'Year', 
-           y='Mean Fuel Consumption\n(l/100km equivalent)', 
-           fill='', 
-           title='Electric Vehicle Range', 
-           subtitle='Years 2012 to 2024')
+   pivot_longer(
+     cols=c('meanCity', 'meanHwy'), 
+     names_to='metric', 
+     values_to='consumption')
+\end{Rcode}
+
+The two boxes below illustrate what the \texttt{pivot\_longer()} function does. The first data tibble contains the summary statistics prepared by \texttt{group\_by()} and \texttt{summarize()}. The two summaries are in two separate colums. This is called a ''wide'' format. 
+
+\begin{samepage}
+\begin{textcode}
+   Year meanCity meanHwy
+  <dbl>    <dbl>   <dbl>
+1  2012     2.05    2.5 
+2  2013     2.27    2.5 
+3  2014     2.16    2.43
+\end{textcode}
+\end{samepage}
+
+The data tibble in the box below shows the result after the \texttt{pivot\_longer()} function is applied. Each of the two specified columns is transformed into a spearate row entry. The column names are transformed to be values of the new column ''metric'' and the column values are moved to the new column ''consumption''. This format is called a ''long'' format.
+
+\begin{samepage}
+\begin{textcode}
+   Year metric   consumption
+  <dbl> <chr>          <dbl>
+1  2012 meanCity        2.05
+2  2012 meanHwy         2.5 
+3  2013 meanCity        2.27
+4  2013 meanHwy         2.5 
+5  2014 meanCity        2.16
+6  2014 meanHwy         2.43
+\end{textcode}
+\end{samepage}
+
+Producing the column chart itself is simple with the \texttt{geom\_col()} geom. The variable ''metric'' is mapped to the ''fill'' element of the plot, that is, the color with which columns are filled. The \texttt{position='dodge'} argument to the \texttt{geom\_col()} function indicates that columns are located next to each other, instead of being stacked on top of each other. 
+
+\begin{Rcode}
+col.data |> 
+   ggplot(aes(x=Year, y=consumption, fill=metric)) +
+      geom_col(position='dodge')
 \end{Rcode}
 
 \begin{center}
   \includegraphics[width=.8\textwidth]{fuel.columns.pdf}
 \end{center}
 
-When it is clear that a plot is likely to be printed in black and white, it may be useful to omit the use of colours and instead use different fill patterns. They are provided by the \texttt{ggpattern} package that provides the \texttt{geom\_col\_pattern} geom. As shown in the code below, the aesthetics for this geom can map data values to different aspects of a fill pattern, such as the pattern type and the pattern angle.
+When it is clear that a plot is likely to be printed in black and white, it may be useful to omit the use of colours and instead use different fill patterns. The \texttt{ggpattern} package provides the \texttt{geom\_col\_pattern} geom. As shown in the code below, the aesthetics for this geom can map data values to different aspects of a fill pattern, such as the pattern type and the pattern angle. In the example below, the metric variable is mapped to the pattern type. The other options to the geom specify how the patterns are applied (angle, fill, etc.).
 
-This example also customizes the scale for the ''pattern'' geom to provide values for the different pattern types and labels for the two data series. Note that more then the required two values for patterns are listed in the example to showcase the different options provided by the \texttt{ggpattern} package. Additionally, the \texttt{guides()} function is used to omit the legend for the pattern angle (because the same data is mapped to pattern type and pattern angle) and the \texttt{theme()} function customizes the layout of the legend.
+This example also customizes the scale for the ''pattern'' geom using  \texttt{scale\_pattern\_type\_manual()} to provide values for the different pattern types and to provide labels for the two data series. 
 
+\begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-   group_by(Year) %>%
-   summarize(meanCity = mean(City), 
-             meanHwy = mean(Hwy)) %>%
-   ungroup() %>%
-   pivot_longer(
-        cols=c('meanCity', 'meanHwy'), 
-        names_to='metric', 
-        values_to='consumption') %>%
-ggplot(aes(Year, consumption)) +
-  geom_col_pattern(
-         aes(pattern_type=metric, pattern_angle=metric),
-     pattern='polygon_tiling',
-     pattern_fill='white', 
-     pattern_scale=0.5,
-     position='dodge',
-     pattern_key_scale_factor=0.4) +
-  scale_pattern_type_manual(
-     values = c('hexagonal', 'rhombille', 'pythagorean', 
-                'truncated_square', 'rhombitrihexagonal', 
-                'truncated_trihexagonal'), 
-     labels=c("City", "Highway")) + 
-  labs(x = 'Year', y='Mean Fuel Consumption', 
-       pattern_type='', 
-       title='Electric Vehicle Range', 
-       subtitle='Years 2012 to 2024') +
-  guides(pattern_angle=FALSE, 
-         pattern_type=guide_legend(nrow=1)) + 
-  theme(legend.key.size=unit(1.5, 'cm'), 
-		legend.position='bottom')
+col.data |> 
+  ggplot(aes(x=Year, y=consumption)) +
+    geom_col_pattern(aes(pattern_type=metric),
+          pattern='polygon_tiling', pattern_angle=45, 
+          pattern_fill='white', position='dodge') +
+    scale_pattern_type_manual(
+       values = c('hexagonal', 'rhombille'), 
+       labels=c("City", "Highway"))
 \end{Rcode}
+\end{samepage}
 
 \begin{center}
   \includegraphics[width=.8\textwidth]{fuel.columnsPatterns.pdf}
 \end{center}
 
-A box plot\index{Plot!Box plot}, also known as a box-and-whisker plot\index{Plot!Box-and-whisker plot|see{Plot!Bos plot}}, is a way of displaying the distribution of data based on 5 summary statistics: the minimum, first quartile (Q1), median, third quartile (Q3), and the maximum. A box plot provides a visual summary of the spread, central tendency, and symmetry of the data. Boxplots contain the following elements:
+A box plot\index{Plot!Box plot}, also known as a box-and-whisker plot\index{Plot!Box-and-whisker plot|see{Plot!Bos plot}}, is a way of displaying the distribution of data based on 5 summary statistics: lower bounds, first quartile (Q1), median, third quartile (Q3), and upper bounds. A box plot therefore provides a visual summary of the spread, central tendency, and symmetry of the data. Boxplots contain the following elements:
 
 \begin{itemize}
-\item \emph{The Box:}'index{Box (in Box plot)} The bottom and top edges of the box represent the first quartile (Q1, the 25th percentile) and the third quartile (Q3, the 75th percentile), respectively. The box therefore describes the interquartile range (IQR), i.e. the distance between the first and third quartiles.
-\item \emph{The Median:} Inside the box, there is usually a line that denotes the median (the 50th percentile) of the dataset. By comparing the placement of the median line to the extent of the first and third quartiles, one can judge whether the data is skewed.
-\item \emph{Whiskers:}\index{Whiskers (in Box plot)} Extending from the box are lines called whiskers. One common method is to extend the whiskers to the furthest data point within 1.5 times the IQR from the quartiles. This means that the lower whisker extends to the smallest data point greater than Q1 - 1.5 * IQR and the upper whisker extends to the largest data point less than Q3 + 1.5 * IQR.
+\item \emph{The Box:}'index{Box (in Box plot)} The bottom and top edges of the box represent the first quartile (Q1, the 25th percentile) and the third quartile (Q3, the 75th percentile), respectively. The height of the box therefore describes the interquartile range (IQR), i.e. the distance between the first and third quartiles.
+\item \emph{The Median:} The line inside the box denotes the median (the 50th percentile) of the dataset. By comparing the placement of the median line to the first and third quartiles, one can judge whether the data is skewed upwards or downwards.
+\item \emph{Whiskers:}\index{Whiskers (in Box plot)} Extending from the box are lines called whiskers, indicating upper and lower bounds. Typically, the lower whisker extends to the smallest data point greater than $Q1 - 1.5 * IQR$ and the upper whisker extends to the largest data point less than $Q3 + 1.5 * IQR$.
 \item \emph{Outliers:}\index{Outlier (in Box plot)} Data points that fall outside of the whiskers are often considered outliers and may be plotted as individual points.
 \end{itemize}
 
 Box plots are particularly useful for displaying the distribution of data, comparing multiple distributions, and identifying outliers.
 
-The following example introduces the \texttt{stat\_summary()} function to add a summary statistic in the form of a text label to the plot. The label is computed by the \texttt{stat(y)} function, which in turn calls \texttt{fun.y} specified within the \texttt{stat\_summary()} function itself. The function as used in this example determines how to label the outlier points in the box plot, using the \emph{text} geom and its label.
+The following example of a box plot also requires reshaping the data from ''wide'' to ''long'' format using the \texttt{pivot\_longer()} function, as was done for the column plot above.
 
+\begin{samepage}
 \begin{Rcode}
-e.clean %>% 
+data |>
   pivot_longer(cols=c('City', 'Hwy'), 
                names_to='metric', 
-               values_to='consumption') %>%
-ggplot(aes(x=as.factor(Year), y=consumption, fill=metric)) +
-  geom_boxplot() +
-  stat_summary(
-    aes(label = round(stat(y), 1)),
-    geom = "text", 
-    size=2,
-    fun.y = function(y) {
-	          o<-boxplot.stats(y)$out; 
-              if(length(o)==0) NA else o}) + 
-  scale_fill_brewer(palette="Paired") +
-  labs(x = 'Year', 
-    y='Mean Fuel Consumption\n(l/100km equivalent)', 
-    fill='', 
-    title='Electric Vehicle Range', 
-    subtitle='Years 2012 to 2024') +
-  theme(legend.key.size=unit(1, 'cm'), 
-        legend.position='top')
+               values_to='consumption') |>
+  ggplot(aes(x=as.factor(Year), y=consumption, fill=metric)) +
+    geom_boxplot()
 \end{Rcode}
+\end{samepage}
 
 \begin{center}
   \includegraphics[width=.8\textwidth]{fuel.box.pdf}
 \end{center}
 
-Violin plots\index{Plot!Violin} are another way to visualize the spread and distribution of the data. Their width is determined by the frequency/distribution of data points. The following example introduces the \texttt{geom\_violin} geom and the \texttt{geom\_jitter} geom. As the name suggests, the jitter geom plots and ''jitters'' the data points, by moving them slightly to avoid overlap. The arguments provided to \texttt{geom\_jitter()} set the width, the color and size of the points, the fill color and the transparency level (''alpha''). the plot indicates the distribution of data, which is reinforced by the visual ''density'' of the individual data points in the plot.
+Violin plots\index{Plot!Violin} are another way to visualize the spread and distribution of the data. Their width is determined by the frequency or distribution of data points. One can think of them as ''sideways symmetric density plots''. The following example introduces the \texttt{geom\_violin} geom. In contrast to the box plot, the violing plot shows a density. For comparison to the box plots above, the example below plots the same data as the box plot example.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  ggplot(aes(x=as.factor(Year), y=Comb)) +
-    geom_violin(fill='lightblue') +
-    geom_jitter(width=0.15, color='black', 
-                size=1, fill=NA, alpha=0.5) + 
-    scale_fill_brewer(palette="Paired") +
-    labs(x = 'Year', 
-         y='Mean Fuel Consumption\n(l/100km equivalent)', 
-         fill='', 
-         title='Electric Vehicle Range', 
-         subtitle='Years 2012 to 2024')
+data |>
+  pivot_longer(cols=c('City', 'Hwy'), 
+               names_to='metric', 
+               values_to='consumption') |>
+  ggplot(aes(x=as.factor(Year), y=consumption, fill=metric)) +
+    geom_violin()
 \end{Rcode}
 \end{samepage}
 
@@ -874,82 +898,71 @@ e.clean %>%
   \includegraphics[width=.8\textwidth]{fuel.violin.pdf}
 \end{center}
 
-A dot plot\index{Plot!Dot} is useful for showing individual data points. In this example, the data are binned along the y axis (that is, by combined fuel economy). The stack ratio determines the horizontal separation of points.
+%A dot plot\index{Plot!Dot} is useful for showing individual data points. In this example, the data are binned along the y axis (that is, by combined fuel economy). The stack ratio determines the horizontal separation of points.
 
-\begin{Rcode}
-e.clean %>% 
-  ggplot(aes(x=as.factor(Year), y=Comb)) +
-    geom_dotplot(binaxis='y', 
-                 stackdir='center', 
-                 stackratio=0.5,
-                 binpositions='all',
-                 dotsize=0.5, 
-                 color='black', 
-                 fill='orange') +
-    scale_fill_brewer(palette="Paired") +
-    labs(x = 'Year', 
-         y='Mean Fuel Consumption\n(l/100km equiv)', 
-         fill='', 
-         title='Electric Vehicle Range', 
-         subtitle='Years 2012 to 2024')
-\end{Rcode}
+%\begin{Rcode}
+%e.clean %>% 
+  %ggplot(aes(x=as.factor(Year), y=Comb)) +
+    %geom_dotplot(binaxis='y', 
+                 %stackdir='center', 
+                 %stackratio=0.5,
+                 %binpositions='all',
+                 %dotsize=0.5, 
+                 %color='black', 
+                 %fill='orange') +
+    %scale_fill_brewer(palette="Paired") +
+    %labs(x = 'Year', 
+         %y='Mean Fuel Consumption\n(l/100km equiv)', 
+         %fill='', 
+         %title='Electric Vehicle Range', 
+         %subtitle='Years 2012 to 2024')
+%\end{Rcode}
 
-\begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.dotplot.pdf}
-\end{center}
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.dotplot.pdf}
+%\end{center}
 
-Instead of using a jitter plot with a violin plot, it is sometimes better to combine a violin plot with a dot plot, as in the following example.
+%Instead of using a jitter plot with a violin plot, it is sometimes better to combine a violin plot with a dot plot, as in the following example.
+
+%\begin{samepage}
+%\begin{Rcode}
+%e.clean %>% 
+  %filter(Year > 2019) %>%
+  %ggplot(aes(x=as.factor(Year), y=Comb)) +
+    %geom_dotplot(binaxis='y', 
+                 %stackdir='center', stackratio=0.5,
+                 %binpositions='all', dotsize=0.5, 
+                 %color='black', fill='orange') +
+    %geom_violin(color='black', fill=NA) + 
+    %stat_summary(fun.data=mean_sdl, 
+                 %fun.args=list(mult=1), 
+                 %size=1, color='blue', 
+                 %geom="pointrange") +
+    %scale_fill_brewer(palette="Paired") +
+    %labs(x = 'Year', 
+         %y='Mean Fuel Consumption\n(l/100km equiv)', 
+         %fill='', 
+         %title='Electric Vehicle Range', 
+         %subtitle='Years 2020 to 2024') +
+     %theme(legend.position='none')
+%\end{Rcode}
+%\end{samepage}
+
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.dotplotjviolinsummary.pdf}
+%\end{center}
+
+A count plot\index{Plot!Count} is useful to show the count of data values as the size of a point. The message conveyed by this plot is similar to that of a histogram. Whereas the histogram shows the frequency or counts for one variable, a count plot does this for two variable. In the following example, the point size is determined by the count of values in each combination of ''Year'' and ''Category''. All points have the same color. Additionally, the example shows customized axis labels for the discrete y axis. 
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  filter(Year > 2019) %>%
-  ggplot(aes(x=as.factor(Year), y=Comb)) +
-    geom_dotplot(binaxis='y', 
-                 stackdir='center', stackratio=0.5,
-                 binpositions='all', dotsize=0.5, 
-                 color='black', fill='orange') +
-    geom_violin(color='black', fill=NA) + 
-    stat_summary(fun.data=mean_sdl, 
-                 fun.args=list(mult=1), 
-                 size=1, color='blue', 
-                 geom="pointrange") +
-    scale_fill_brewer(palette="Paired") +
-    labs(x = 'Year', 
-         y='Mean Fuel Consumption\n(l/100km equiv)', 
-         fill='', 
-         title='Electric Vehicle Range', 
-         subtitle='Years 2020 to 2024') +
-     theme(legend.position='none')
-\end{Rcode}
-\end{samepage}
-
-\begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.dotplotjviolinsummary.pdf}
-\end{center}
-
-A count plot\index{Plot!Count} is useful to show the count of data values as the size of a point. In the following example, the point size is determined by the count of values in each combination of ''Year'' and ''Category''. All points have the same color, and the area is scaled to a maximum size of 10 using 6 different sizes. Additionally, this examples shows further customization of the plot legend using the \texttt{theme()} function, by surrounding the legend with a black rectangle without fill (transparent). The \texttt{guides()} function omits a legend for the color. 
-
-\begin{samepage}
-\begin{Rcode}
-e.clean %>% 
-  ggplot(aes(as.factor(Year), as.factor(Category))) +
-    geom_count(color='darkolivegreen4')+
-    scale_size_area(max_size=10, n.breaks=6) + 
-    scale_color_brewer(palette="Paired") +
+data %>% 
+ggplot(aes(as.factor(Year), as.factor(Category))) +
+    geom_count(color='darkolivegreen4') +
     scale_y_discrete(
       labels=c('Compact', 'Large', 'Mid-Size', 'Pickup truck', 
                'Subcompact', 'Two-seater', 'SUV (standard)', 
-               'SUV (small)', 'Station Wagon (small)')) + 
-    guides(color=FALSE) +
-    labs(x = 'Year',
-         y='Category', 
-         fill='', 
-         title='Electric Vehicle Models by Category', 
-         subtitle='Years 2012 to 2024') +
-    theme(legend.background=element_blank(), 
-          legend.box.background=element_rect(color='black',fill=NA),
-          legend.key.size=unit(1, 'cm'))
+               'SUV (small)', 'Station Wagon (small)'))
 \end{Rcode}
 \end{samepage}
 
@@ -957,27 +970,16 @@ e.clean %>%
   \includegraphics[width=.8\textwidth]{fuel.count.pdf}
 \end{center}
 
-A similar effect can be achieved with jitter plot, where the size of the points ''cloud'' indicates is used analogous to the size of the point. Visually, the following plot achieves a similar goal as the previous dot plot. Here, the same variable is mapped to both the x axis as well as the color element, but the \texttt{guides} function omits a legend for the colour element.
+A similar message can be conveyed with a jitter plot, which shows all data points. ''Jitter'' describes slightly, randomly changing the position of plot elements (points) so they do not overlap. This generates a point ''cloud'' in the following example, where the size of the ''cloud'' is used analogously to the size of the point. Visually, the following plot achieves a similar goal as the previous dot plot. Note that the same variable is mapped to both the x axis as well as the color element. Because of this, the plot omits the guides (that is, the legend) for the color because this information is shown in the x axis labels.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  ggplot(aes(x=as.factor(Year), 
-             y=as.factor(Category), 
+data |> 
+  filter(Year >= 2020) |>
+  ggplot(aes(x=as.factor(Year), y=as.factor(Category), 
              color=as.factor(Year))) +
     geom_jitter(width=0.2, height=0.2) +
-    scale_color_manual(values=c25) +
-    scale_y_discrete(
-      labels=c('Compact', 'Large', 'Mid-Size', 
-               'Pickup truck', 'Subcompact',
-               'Two-seater', 'SUV (std)', 
-               'SUV (sm)', 'Station Wagon (sm)')) + 
-    guides(color=FALSE) +
-    labs(x = 'Year', 
-         y='Category', 
-         fill='Make', 
-         title='Electric Vehicle Models by Category', 
-         subtitle='Years 2012 to 2024')
+    guides(color='none')
 \end{Rcode}
 \end{samepage}
 
@@ -985,35 +987,20 @@ e.clean %>%
   \includegraphics[width=.8\textwidth]{fuel.jitterdiscrete.pdf}
 \end{center}
 
-A points plot\index{Plot!Points|see{Plot!Bubble chart}}, sometimes called a bubble chart\index{Plot!Bubble chart}, generalizes the count plot. Whereas the count plot uses the number of data values to determine the size of the point, the points plot allows one to provide an explicit mapping for the point size. However, the following example also maps the size of the point to the count of values by ''Year'' and ''Category'', while the colour is mapped to the ''Category'' variable. 
+A points plot\index{Plot!Points|see{Plot!Bubble chart}}, sometimes called a bubble chart\index{Plot!Bubble chart}, generalizes the count plot. Whereas the count plot uses the number of data values to determine the size of the point, the points plot allows one to map a variable to the point size. 
 
-The point size scale is continuous in the range from 0 to 20, the color scale is set to the ''tron'' colour palette, while the y axis is continuous. The colous are mapped to specific labels for displaying in the legend. Note that the legend contains information both for the size as well as the colour of the points.
+The following example summarizes grouped data and maps four variables to plot elements, pushing the limits of interpretability of the plot. The total count of observations for each year and vehicle category is assigned to the point size, the vehicle category to the point colour, and the year and mean vehicle range to the x and y axis respectively. The points are made slightly transparent (\texttt{alpha=0.8}) so they remain visible when they overlap, and their size is scaled to be between 0 and 20. Note that the legend contains information both for the size as well as the colour of the points.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  group_by(Year, Category) %>%
-  summarize(totalcount=n(), meanRange=mean(Range)) %>%
-  ungroup () %>%
-ggplot(aes(x=as.factor(Year), y=meanRange, 
-           size=totalcount, color=Category)) +
-  geom_point(alpha=0.8) +
-  scale_size_continuous(range=c(0, 20)) +
-  scale_color_tron() + 
-  scale_y_continuous(labels=scales::comma) + 
-  scale_color_discrete(
-     labels=c('Compact', 'Large', 'Mid-Size', 'Pickup truck', 
-              'Subcompact', 'Two-seater', 'SUV (dtd)', 
-              'SUV (sm)', 'Station Wagon (sm)')) + 
-  labs(x = 'Year', y='Range', 
-       fill='Make', size='Number of Models', 
-       title='Electric Vehicles by Year and Category', 
-       subtitle='Years 2012 to 2024', ) +
-  guides(color=guide_legend(position='right'), 
-         size=guide_legend(position='right')) +
-  theme(legend.background=element_blank(), 
-        legend.box.background=element_rect(color='black', fill=NA),
-        legend.key.size=unit(1, 'cm')) 
+data |> 
+  group_by(Year, Category) |>
+  summarize(totalcount=n(), meanRange=mean(Range)) |>
+  ungroup () |>
+  ggplot(aes(x=as.factor(Year), y=meanRange, 
+             size=totalcount, color=Category)) +
+    geom_point(alpha=0.8) +
+    scale_size_continuous(range=c(0, 20))
 \end{Rcode}
 \end{samepage}
 
@@ -1021,34 +1008,21 @@ ggplot(aes(x=as.factor(Year), y=meanRange,
   \includegraphics[width=.8\textwidth]{fuel.pointsSize.pdf}
 \end{center}
 
-The next example uses two geoms, \texttt{geom\_line()} to show a line plot\index{Plot!Line} and \texttt{geom\_point()} to also include the data points themselves. While visually not very informative in this case, the example illustrates an aesthetic that maps variables to five different plot elements. However, the same variable ''Category'' is here mapped to three different plot elements, the colour (of both points and lines), the shape of a point, and the style or type of the line. The code R fragment below omits specification of labels and theme information for the legend, which may be assumed similar to the above example.  
+The next example uses two geoms: \texttt{geom\_line()} to show a line plot\index{Plot!Line} and \texttt{geom\_point()} to also include the data points themselves. While visually not very informative in this case, the example illustrates an aesthetic that maps variables to five different plot elements. Vehicle category is mapped to three different plot elements, the colour (of both points and lines), the shape of a point, and the style or type of the line.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  filter(Year >= 2022 & Year <= 2023) %>%
-  filter(Comb <= 4) %>%
-  filter(Category != 'PL') %>%
-  filter(Category != 'T') %>%
-ggplot(aes(Comb, Range, 
-           color=Category, 
-           shape=Category, 
-           linetype=Category)) +
-  geom_line(size=1) + 
-  geom_point(size=4) + 
-  scale_color_manual(values=c25, 
-    labels=c('Compact', 'Large', 'Mid-Size', 
-             'Subcompact', 'SUV (std)', 
-             'SUV (sn)', 'Station Wagon (sm)')) + 
-  scale_linetype(
-    labels=c('Compact', 'Large', 'Mid-Size', 
-             'Subcompact', 'SUV (std)', 
-             'SUV (sm)', 'Station Wagon (sm)')) + 
-  scale_shape(
-    labels=c('Compact', 'Large', 'Mid-Size', 
-             'Subcompact', 'SUV (std)', 
-             'SUV (small)', 'Station Wagon (sm)')) + 
-...
+data |> 
+  filter(Category %in% c('C','L','M','S','US','UL')) |>
+  group_by(Year, Category) |>
+  summarize(meanRange = mean(Range)) |>
+  ungroup() |>
+  ggplot(aes(x=Year, y=meanRange, 
+             color=Category, 
+             shape=Category, 
+             linetype=Category)) +
+    geom_line(size=1) + 
+    geom_point(size=4)  
 \end{Rcode}
 \end{samepage}
 
@@ -1056,44 +1030,42 @@ ggplot(aes(Comb, Range,
   \includegraphics[width=.8\textwidth]{fuel.linesPoints.pdf}
 \end{center}
 
-To add ''steps'' to the line, one can use the \texttt{geom\_step()} instead of \texttt{geom\_line()}, as in the following example.
+%To add ''steps'' to the line, one can use the \texttt{geom\_step()} instead of \texttt{geom\_line()}, as in the following example.
+
+%\begin{samepage}
+%\begin{Rcode}
+%...
+     %geom_step(size=1) + 
+%... 
+%\end{Rcode}
+%\end{samepage}
+
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.steps.pdf}
+%\end{center}
+
+Pie charts are useful to show how different values add up to the whole. A pie chart\index{Plot!Pie chart} is produced in ggplot2 by taking a stacked bar chart, and ''bending'' it by plotting it on a polar coordinate system. 
+
+The following example uses the \texttt{coord\_polar()} function to specify a coordinate system where the ''y'' axis is mapped to the angle of rotation, \texttt{direction=-1} indicates clock-wise rotation and \texttt{start=0} indicates to begin the chart at the top of the ''pie''. 
+
+The \texttt{geom\_text()} geom is used to specify labels and compute their position in the pie chart. It provides its own aesthetic for the label's color and position. Note that it assumes a stacked bar chart so that \texttt{position\_stack(vjust=0.5)} positions the label vertically in the center of the area. When plotted in the polar coordinate system, this translates to the label centered in the pie slice. 
+
+Finally, the \texttt{theme\_void()} function removes the usual chart elements like minor and major lines, the grey background, and axis ticks. 
 
 \begin{samepage}
 \begin{Rcode}
-...
-     geom_step(size=1) + 
-... 
-\end{Rcode}
-\end{samepage}
-
-\begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.steps.pdf}
-\end{center}
-
-A pie chart\index{Plot!Pie chart} is produced in ggplot2 by taking a stacked bar chart, and ''bending'' it by plotting on a polar coordinate system. The following example uses the \texttt{coord\_polar()} function to specify a coordinate system where the ''y'' axis is mapped to the angle of rotation, \texttt{direction=-1} indicates clock-wise rotation and \texttt{start=0} indicates to begin the chart at the top of the ''pie''. The \texttt{geom\_text()} geom is used to specify labels and compute their position in the pie chart. It provides its own aesthetic for the label's color and position. Note that it assumes a stacked bar chart so that \texttt{position\_stack(vjust=0.5)} positions the label vertically in the center of the area. When plotted in the polar coordinate system, this translates to the label centered in the pie slice. 
-
-\begin{samepage}
-\begin{Rcode}
-e.clean %>% 
-  filter(Year==2023) %>%
-  group_by(Make) %>% summarize(totalcount = n()) %>%
-  filter(totalcount >= 5) %>%
-  ungroup() %>%
-ggplot(aes(x='', y=totalcount, fill=Make)) +
-  geom_bar(stat='identity', 
-           color='black', size=0.25, width=1) + 
-  coord_polar('y', direction=-1, start=0) +
-  geom_text(aes(
-     label=ifelse(totalcount >= 5,totalcount,'')), 
-     color='lightgrey', 
-     position = position_stack(vjust=0.5)) +
-  scale_y_continuous(labels=NULL) + 
-  scale_color_brewer(palette="Paired") +
-  labs(x = '', y = '',  fill='Make', 
-       title='Electric Vehicle Offerings by Make', 
-       subtitle='2023, Makes with >= 5 models') +
-  theme_void() +
-  theme(legend.key.size=unit(1, 'cm'))
+data |>
+  filter(Year==2023) |>
+  group_by(Make) |>
+  summarize(totalcount = n()) |>
+  filter(totalcount >= 5) |>
+  ungroup() |>
+  ggplot(aes(x='', y=totalcount, fill=Make)) +
+    geom_bar(stat='identity', color='black', size=0.25, width=1) + 
+    coord_polar('y', direction=-1, start=0) +
+    geom_text(aes(label=ifelse(totalcount >= 5, totalcount,'')), 
+                  position = position_stack(vjust=0.5)) +
+    theme_void()
 \end{Rcode}
 \end{samepage}
 
@@ -1101,105 +1073,117 @@ ggplot(aes(x='', y=totalcount, fill=Make)) +
   \includegraphics[width=.5\textwidth]{fuel.pie.pdf}
 \end{center}
 
-A donut chart\index{Plot!Donut chart} is simply a pie chart with a hole in the center. As the pie chart in ggplot2 is a ''bent'' bar chart, the hole is achieved by adding ''whitespace'' to the right of the stacked bars (that is, by moving the x axis limits), which will end up getting ''bent'' into the hole in the center (recall that the \texttt{coord\_polar()} function bends clock-wise).
+%A donut chart\index{Plot!Donut chart} is simply a pie chart with a hole in the center. As the pie chart in ggplot2 is a ''bent'' bar chart, the hole is achieved by adding ''whitespace'' to the right of the stacked bars (that is, by moving the x axis limits), which will end up getting ''bent'' into the hole in the center (recall that the \texttt{coord\_polar()} function bends clock-wise).
 
-\begin{samepage}
-\begin{Rcode}
-holesize <- 2
+%\begin{samepage}
+%\begin{Rcode}
+%holesize <- 2
 
-....
+%....
 
- ggplot(aes(x=holesize, y=totalcount, fill=Make)) +
-   geom_col() + 
-   xlim(c(0.2, holesize+0.5)) +
+ %ggplot(aes(x=holesize, y=totalcount, fill=Make)) +
+   %geom_col() + 
+   %xlim(c(0.2, holesize+0.5)) +
      
-...
+%...
 
-\end{Rcode}
-\end{samepage}
+%\end{Rcode}
+%\end{samepage}
 
-\begin{center}
-  \includegraphics[width=.5\textwidth]{fuel.donut.pdf}
-\end{center}
+%\begin{center}
+  %\includegraphics[width=.5\textwidth]{fuel.donut.pdf}
+%\end{center}
 
-A radar plot\index{Plot!Radar}, sometimes called a spiderweb plot, is useful to show a comparison of different objects on a range of variables. In R, the radar plot is produced by its own library, \texttt{ggradar}. In contrast to \texttt{ggplot}, \texttt{ggradar} requires its data in ''wide'' format, that is, rather than a single column that provides values for different categories, the values for each category must be provided in their own column. 
-
-The following example computes some summary statistics, and scales the resulting variables to a range between 0 and 1, i.e. it standardizes them using the \texttt{mutate\_at()} function. The radar plot does not require an aesthetic specification, as it is based on the number of columns in the data frame or tibble provided from the pipe.
+A radar plot\index{Plot!Radar}, sometimes called a spiderweb plot, is useful to show a comparison of different objects on a range of variables. In R, the radar plot is produced by the \texttt{ggradar} library and requires its data in ''wide'' format. Rather than a single column that provides values for different categories, the values for each category must be provided in their own column. The following example computes summary statistics grouped by vehicle makes, and filters the data to retain only a few vehicle makes. All variables except the vehicle make are then scaled to a range between 0 and 1, i.e. standardized, using \texttt{mutate\_at()} with the \texttt{rescale} function.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  filter(Year == 2023) %>% group_by(Make) %>%
+radardata <- data |>
+  filter(Year == 2023) |> group_by(Make) |>
   summarize(meanCity = 1/mean(City), 
             meanHwy = 1/mean(Hwy), 
             meanRange = mean(Range)/100, 
-            nModels = n()) %>%
-  filter(nModels >= 5) %>% ungroup() %>%
-  select(-nModels) %>%
-  mutate_at(vars(-Make), rescale) %>%
-  ggradar(axis.labels=
-             c('City', 'Highway', 'Range (100km)'), 
-          values.radar='', 
-          group.line.width=0.75, 
-          group.point.size=3) +
-  scale_color_ucscgb() +
-  labs(x = '', y = '',  fill='Make', 
-       title='Canadian Fuel Consumption Data', 
-       subtitle='2023, Makes with more than 5 models')
+            nModels = n()) |>
+  filter(nModels >= 5) |> ungroup() |>
+  select(-nModels) |>
+  mutate(across(-Make, rescale))
 \end{Rcode}
 \end{samepage}
+
+The box below shows an excerpt of the resulting data tibble. Note the ''wide'' format and the scaled, standardized values. 
+
+\begin{samepage}
+\begin{textcode}
+# A tibble: 10 x 4
+   Make          meanCity meanHwy meanRange
+   <chr>            <dbl>   <dbl>     <dbl>
+ 1 Audi            0.122    0.270    0.0357
+ 2 BMW             0.202    0.360    0.219 
+ 3 Ford            0.287    0.182    0.220 
+ 4 Hyundai         1        0.630    0.260 
+\end{textcode}
+\end{samepage}
+
+The radar plot does not require an aesthetic specification because it is based on the number of columns in the data frame or tibble that is provided. Note the change of colour palette in the example below:
+
+\begin{samepage}
+\begin{Rcode}
+radardata |>  
+  ggradar(
+    axis.labels=c('City', 'Highway', 'Range'), 
+    values.radar='', 
+    group.line.width=0.75, 
+    group.point.size=3) +
+  scale_color_ucscgb()
+\end{Rcode}
+\end{samepage}
+
 
 \begin{center}
   \includegraphics[width=.75\textwidth]{fuel.radar.pdf}
 \end{center}
 
-Sometimes, it is useful to compare trends of variables that use different scales. However, beware of the potential for misuse; that is, it is easy to visually suggest correlations where none exist. The following example includes three line plots (\texttt{geom\_line()}) and specifies a secondary y axis\index{Secondary axis}\index{Axis!secondary|see{Secondary axis}} using \texttt{sec.axis=sec\_axis(\ldots)}. In ggplot2, the secondary axis cannot be arbitrary but must be a scaled version of the primary axis. In this example, it is scaled by multiplying by one hundred using the formulat \texttt{~ .*100}. Accordingly the data is provided by dividing by a hundred using \texttt{mutate()}.
+Sometimes, it is useful to compare trends of variables that use different scales. However, beware of the potential for misuse; that is, it is easy to visually suggest correlations where none exist. The following example first groups the data by year and computes mean fuel consumption and range values for the plot. The plot includes three line plots (\texttt{geom\_line()}) and specifies a secondary y axis\index{Secondary axis}\index{Axis!secondary|see{Secondary axis}} using \texttt{sec.axis=sec\_axis(\ldots)}. In ggplot2, the secondary axis cannot be arbitrary but must be a scaled version of the primary axis. In this example, it is scaled by multiplying by one hundred using the formulat \texttt{~ .*100}. Accordingly the data is provided by dividing by a hundred using \texttt{mutate()}. 
 
+Colour values are set explicitly using the \texttt{scale\_color\_manual()} function rather than the \texttt{geom\_line} geoms so that they appear in the legend of the plot. The labels for the continuous x axis are set explicitly to include labels for all years. 
+
+\begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-   group_by(Year) %>%
+data |>
+   group_by(Year) |>
    summarize(meanCity = mean(City), 
              meanHwy = mean(Hwy), 
-             meanRange = mean(Range)) %>%
-   ungroup() %>%
-   mutate(meanRange2 = meanRange/100) %>%
+             meanRange = mean(Range)/100) |>
+   ungroup() |>
 ggplot(aes(x=Year)) +
-  scale_color_manual(name='Region', 
-     values=c('Mean City' = 'red', 
-              'Mean Highway' = 'blue', 
-              'Mean Range' = 'orange')) +
   geom_line(aes(y=meanCity, color='Mean City')) + 
-  geom_line(aes(y=meanHwy, color='Mean Highway')) +
-  geom_line(aes(y=meanRange2, color='Mean Range')) +
+  geom_line(aes(y=meanHwy, color='Mean Hwy')) +
+  geom_line(aes(y=meanRange, color='Mean Range')) +
+  scale_color_manual(name='Data Series', 
+     values=c('Mean City' = 'red', 
+              'Mean Hwy' = 'blue', 
+              'Mean Range' = 'green')) +
   scale_y_continuous(labels=scales::comma, 
       name="Fuel Consumption\n(l/100km equiv)", 
       sec.axis=sec_axis(~ .*100, 
                         labels=scales::comma, 
                         name="Mean Range (km)")) + 
-  scale_x_continuous(breaks=seq(from=2012,to=2024,by=1)) + 
-  labs(x = 'Year', color='',
-       title='Canadian Fuel Consumption Data', 
-       subtitle='2012 to 2024') +
-  theme(legend.key.size=unit(1.5, 'cm'), 
-        axis.text.x = element_text(angle=45, hjust=1))
+  scale_x_continuous(breaks=seq(from=2012,to=2024,by=1))
 \end{Rcode}
+\end{samepage}
 
 \begin{center}
   \includegraphics[width=.8\textwidth]{fuel.linesTwoScales.pdf}
 \end{center}
 
-So called ''trendlines'' \index{Trendline} can be added to plots easily with the \texttt{geom\_smooth} geom. Different options to compute the trendlines exist, but the most frequently used one is the local polynomial regression, where the slope of the line is determined by a regression that uses data points in the vicinity of the line, weighted by their proximity. As with any regression, there is uncertainty around the estimated slope parameter (standard deviation or variance) and this uncertainty can be visualized as well, as shown in the plot below by the gray area around the trendline. Note that the uncertainty is greater in areas where there are fewer data points, as would be expected.
+So called ''trendlines'' \index{Trendline} can be added to plots easily with the \texttt{geom\_smooth} geom. Different options to compute the trendlines exist, but the most frequently used one is the local polynomial regression, where the slope of the line is determined by a regression that uses data points in the vicinity of the line, weighted by their proximity. As with any regression, there is uncertainty around the estimated slope parameters (standard deviation or variance) and this uncertainty can be visualized as well, shown in the plot below by the gray area around the trendline. Note that the uncertainty is greater in areas where there are fewer data points, as would be expected.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  ggplot(aes(Year, Range)) +
+data |>
+  ggplot(aes(City, Hwy)) +
     geom_point() +
-    geom_smooth() +
-    scale_y_continuous(labels=scales::comma) + 
-    labs(x = 'Year', color='', y = 'Mean Range (km)', 
-         title='Canadian Fuel Consumption Data', 
-         subtitle='2012 to 2024')
+    geom_smooth()
 \end{Rcode}
 \end{samepage}
 
@@ -1207,77 +1191,70 @@ e.clean %>%
   \includegraphics[width=.8\textwidth]{fuel.linesSmooth.pdf}
 \end{center}
 
-The next three examples augment the previous plot with indicators for the variability or spread of the data. First, a red point range indication is overlayed (\texttt{geom="pointrange"}) using the \texttt{stat\_summary()} function. This shows mean and standard deviation. Another way to visualize variability is with the error bars\index{Error bars} or cross bars. All show the same information, but in different ways: 
+%The next three examples augment the previous plot with indicators for the variability or spread of the data. First, a red point range indication is overlayed (\texttt{geom="pointrange"}) using the \texttt{stat\_summary()} function. This shows mean and standard deviation. Another way to visualize variability is with the error bars\index{Error bars} or cross bars. All show the same information, but in different ways: 
+
+%\begin{samepage}
+%\begin{Rcode}
+%e.clean %>% 
+  %ggplot(aes(Year, Range)) +
+    %geom_point() +
+    %geom_smooth() +
+    %stat_summary(
+       %fun.data=mean_sdl, 
+       %fun.args=list(mult=1), 
+       %color='red', 
+       %geom="pointrange") +
+%...
+%\end{Rcode}
+%\end{samepage}
+
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.linesSmoothPointRange.pdf}
+%\end{center}
+
+
+%\begin{samepage}
+%\begin{Rcode}
+%...
+    %stat_summary(
+        %fun.data=mean_sdl, 
+        %fun.args=list(mult=1), 
+        %color='red', 
+        %geom="errorbar") +
+%...
+%\end{Rcode}
+%\end{samepage}
+
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.linesSmoothErrorBar.pdf}
+%\end{center}
+
+%\begin{samepage}
+%\begin{Rcode}
+%...
+    %stat_summary(
+        %fun.data=mean_sdl, 
+        %fun.args=list(mult=1), 
+        %color='red', 
+        %geom="crossbar",
+        %width=0.4) +
+%...
+%\end{Rcode}
+%\end{samepage}
+
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.linesSmoothCrossBar.pdf}
+%\end{center}
+
+The one-dimensional density plots\index{Plot!Density} seen earlier can be generalized to show the two-dimensional joint probability density (co-distribution) of values of two variables. The following example uses three geoms. The \texttt{geom\_density\_2d\_filled()} provides the colour fill for areas of same density. The \texttt{geom\_density\_2d} overlays this with the density lines, and the \texttt{geom\_point} plots the actual data points, slightly jittered. Note that the order in which the geoms are specified matters so that the fill does not obscure the points or lines. Alternatively, transparency can be used for the colour fill using the option \texttt{alpha=0.5} or some suitable value.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  ggplot(aes(Year, Range)) +
-    geom_point() +
-    geom_smooth() +
-    stat_summary(
-       fun.data=mean_sdl, 
-       fun.args=list(mult=1), 
-       color='red', 
-       geom="pointrange") +
-...
-\end{Rcode}
-\end{samepage}
-
-\begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.linesSmoothPointRange.pdf}
-\end{center}
-
-
-\begin{samepage}
-\begin{Rcode}
-...
-    stat_summary(
-        fun.data=mean_sdl, 
-        fun.args=list(mult=1), 
-        color='red', 
-        geom="errorbar") +
-...
-\end{Rcode}
-\end{samepage}
-
-\begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.linesSmoothErrorBar.pdf}
-\end{center}
-
-\begin{samepage}
-\begin{Rcode}
-...
-    stat_summary(
-        fun.data=mean_sdl, 
-        fun.args=list(mult=1), 
-        color='red', 
-        geom="crossbar",
-        width=0.4) +
-...
-\end{Rcode}
-\end{samepage}
-
-\begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.linesSmoothCrossBar.pdf}
-\end{center}
-
-The one-dimensional density plots\index{Plot!Density} seen earlier can be generalized to show the two-dimensional joint distribution of values of two variables. The following example uses two geoms for this, one to show the density lines (\texttt{geom\_density\_2d()}), and one to fill the lines in shades of color (\texttt{geom\_density\_2d\_filled()}). Additionally, individual data points are plotted using the point geom. 
-
-\begin{samepage}
-\begin{Rcode}
-e.clean %>% 
+data |>
   ggplot(aes(x=Hwy, y=City)) + 
-    geom_point(color="black", size=1, 
-               position='jitter') +
-    geom_density_2d_filled(alpha=0.5) + 
-    geom_density_2d(linewidth=0.25, colour='black') + 
-    scale_x_continuous(labels=scales::comma) +
-    labs(x = 'Highway Consumption\n(l/100km equiv)', 
-         y = 'City Consumption\n(l/100km equiv)', 
-         title='Density Plot-Fuel Consumption Ratings', 
-         subtitle='Years 2015 to 2024') +
-    theme(legend.position='none')
+    geom_density_2d_filled() + 
+    geom_density_2d() +
+    geom_point(position='jitter')
 \end{Rcode}
 \end{samepage}
 
@@ -1285,21 +1262,14 @@ e.clean %>%
   \includegraphics[width=.8\textwidth]{fuel.density2d.pdf}
 \end{center}
 
-When one is interested in discretizing the two variables, one may show the frequencies or counts in a two-dimensional bin plot\index{Plot!Bin}. Again, individual data points are shown using the point geom. A somewhat different version is shown below in two-dimensional hex plot, using hexagonal tiles and a different color scale. However, the same information is visualized.
+When one is interested in discretizing or ''binning'' the two variables, one can show the frequencies or counts in a two-dimensional bin plot\index{Plot!Bin}. Again, individual data points are shown using the \texttt{geom\_point} geom. The bin plot is essentially a generalization of a 1D histogram to two variables/dimensions and conveys a similar quantitative message. It is also similar to the the point plot above that used point size to indicate the frequency of observations, whereas the bin plot uses colour. However, whereas that point plot could be used for two discrete variables on the x and y axis, the bin plot here is be used for two continuous variables on the x and y axis.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
+data %>% 
   ggplot(aes(x=Hwy, y=City)) + 
-    geom_point(color="black", size=1, 
-               position='jitter') +
-    geom_bin2d(alpha=0.5, bins=5) + 
-    scale_x_continuous(labels=scales::comma) +
-    labs(x = 'Highway Consumption\n(l/100km equiv)', 
-         y = 'City Consumption\n(l/100km equiv)', 
-         fill='Count', 
-         title='Density Plot-Fuel Consumption Ratings', 
-         subtitle='Years 2012 to 2024') 
+    geom_bin2d(alpha=0.5, bins=10) +
+    geom_point(color="black", size=1, position='jitter')
 \end{Rcode}
 \end{samepage}
 
@@ -1307,36 +1277,26 @@ e.clean %>%
   \includegraphics[width=.8\textwidth]{fuel.bin2d.pdf}
 \end{center}
 
+%\begin{samepage}
+%\begin{Rcode}
+%...
+    %geom_hex(alpha=0.5, bins=5) + 
+    %scale_fill_distiller(palette=4, direction=-1) +
+%...
+%\end{Rcode}
+%\end{samepage}
+
+%\begin{center}
+  %\includegraphics[width=.8\textwidth]{fuel.hex2d.pdf}
+%\end{center}
+
+The previous two plots are plots of two variables even though they used the x and y axes and additionally used colour. However, colour was used only to indicate frequency or probability density information. If, instead of count or density, values of a third variable are to be shown, one can use the raster\index{Plot!Raster} plot using the geom \texttt{geom\_tile()}. This requires the aesthetic to specify a data variable mapping for the color element of the plot, as in the following example. Again, individual data points are included with the point geom.
+
 \begin{samepage}
 \begin{Rcode}
-...
-    geom_hex(alpha=0.5, bins=5) + 
-    scale_fill_distiller(palette=4, direction=-1) +
-...
-\end{Rcode}
-\end{samepage}
-
-\begin{center}
-  \includegraphics[width=.8\textwidth]{fuel.hex2d.pdf}
-\end{center}
-
-Note that the above two plots are essentially plots of two variables. If, instead of count or density, a third variable is to be shown, one can use the raster\index{Plot!Raster} geom \texttt{geom\_raster()}. This requires the aesthetic to specify a data variable mapping for the color element of the plot, as in the following example. Again, individual data points are included with the point geom.
-
-\begin{samepage}
-\begin{Rcode}
-e.clean %>% 
-  ggplot(aes(x=Hwy, y=City)) + 
-    geom_point(color="black", size=0.5, 
-               position='jitter') +
-    geom_raster(aes(fill=Range), alpha=0.7, 
-                interpolate=TRUE) + 
-    scale_fill_distiller(palette=4, direction=-1) +
-    scale_x_continuous(labels=scales::comma) +
-    labs(x = 'Highway Consumption\n(l/100km equiv)', 
-         y = 'City Consumption\n(l/100km equiv)', 
-         fill='Range', 
-         title='Raster Plot-Fuel Consumption Ratings', 
-         subtitle='Years 2012 to 2024') 
+data |>
+  ggplot(aes(x=Hwy, y=City, fill=Range)) + 
+    geom_tile() 
 \end{Rcode}
 \end{samepage}
 
@@ -1344,24 +1304,16 @@ e.clean %>%
   \includegraphics[width=.8\textwidth]{fuel.raster.pdf}
 \end{center}
 
-The last example shows the use of so-called ''rugs'' that show marginal distributions of the plot variables\index{Rugs (in plots)}. They can be added to different types of plots, including 3D raster plots as done here, as well as 2D bin and hex plots, or one-dimensional histograms. Rugs are added by using the \texttt{geom\_rug()} function.
+The last example shows the use of so-called ''rugs'' that show marginal distributions of the plot variables\index{Rugs (in plots)}. They can be added to different types of plots, including 3D raster plots as done here, as well as 2D bin and hex plots, or one-dimensional histograms. Rugs are added by using the \texttt{geom\_rug()} function. Note the use of a non-standard fill colour scale to make the plot ''prettier''.
 
 \begin{samepage}
 \begin{Rcode}
-e.clean %>% 
-  ggplot(aes(x=Hwy, y=City)) + 
-    geom_point(color="black", size=0.5, 
-               position='jitter') +
-    geom_raster(aes(fill=Range), alpha=0.7, 
-                interpolate=TRUE) + 
+data |>
+  ggplot(aes(x=Hwy, y=City, fill=Range)) + 
+    geom_tile() + 
+    geom_point(size=0.5, position='jitter') +
     geom_rug(position='jitter') + 
-    scale_fill_distiller(palette=4, direction=-1) +
-    scale_x_continuous(labels=scales::comma) +
-    labs(x = 'Highway Consumption\n(l/100km equiv)', 
-         y = 'City Consumption\n(l/100km equiv)', 
-         fill='Range', 
-         title='Raster Plot-Fuel Consumption Ratings', 
-         subtitle='Years 2012 to 2024') 
+    scale_fill_distiller(palette=4, direction=-1)
 \end{Rcode}
 \end{samepage}
 
@@ -1377,9 +1329,6 @@ Using the Pagila database files from the previous chapter on data analysis with 
 \begin{enumerate}
    \item A histogram and/or density chart of film length by film category
    \item A column chart of the mean rental payments for films by film category
-   \begin{itemize}
-      \item Add error bars to this chart
-   \end{itemize}
    \item A scatter plot of total rental payments by week
    \begin{itemize}
       \item Add a local regression line to this plot
@@ -1392,9 +1341,11 @@ Using the Pagila database files from the previous chapter on data analysis with 
 
 \section{Visualization in Python using Plotly Express}
 
-This section demonstrates visualization in Python using Plotly Express. Plotly Express by default produces web-based, i.e. JavaScript based, interactive plots. On the Python side, the diagram is expressed in more primitive graphical descriptions, serialized in a JSON document, which is sent to the web browser, where the Plotly JavaScript library renders them. Interactivity includes the ability to zoom and pan the plot, and to hover over plot elements to get tooltip overlays, e.g. specific values of points or lines in the plots.  
+This section demonstrates visualization in Python using Plotly Express. Plotly Express by default produces web-based, i.e. JavaScript based, interactive plots. On the Python side, the diagram is expressed in more primitive graphical descriptions, serialized in a JSON document, which is sent to the web browser, where the Plotly JavaScript library renders them. Interactivity includes the ability to zoom and pan the plot, and to hover over plot elements to get tooltip overlays, e.g. specific values of points or lines in the plots. Figures can also be saved in a variety of image file formats.
 
-The examples in this section use the same data set as the R examples above, and as much as possible try to provide similar diagrams. The first Python code fragment imports the required packages and loads the data set. 
+The examples in this section use the same data set as the R examples above, and as much as possible try to provide similar diagrams. As in the previous section, the code is kept simple, relying on default options, to help understanding and does not show the full capabilities or extent of customizability of the Plotly Express package. 
+
+The first Python code fragment imports the required packages and loads the data set. 
 
 \begin{samepage}
 \begin{pythoncode}
@@ -1408,7 +1359,7 @@ fuel = pd.read_csv('https://evermann.ca/busi4720/fuel.csv')
 \end{pythoncode}
 \end{samepage}
 
-\noindent The \texttt{histogram} function does as its name suggests, and produces a histogram\index{Plot!Histogram}. The figure must the shown and can be written to a file using a variety of format. By default \texttt{show()} opens the standard web browser to show the figure. In this mode, the figures are interactive, and can be manually saved to a PNG file.
+\noindent The \texttt{histogram()} function does as its name suggests, and creates a histogram\index{Plot!Histogram}, that is, shows the frequency of values. After creating the figure, it can be shown or written as image to a file using a variety of format. By default, the \texttt{show()} function opens the standard web browser to show the figure in an interactive mode.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -1427,71 +1378,63 @@ fig.write_image("px.histogram.pdf", height=500, width=750)
     \includegraphics[width=.8\textwidth]{px.histogram.pdf}
 \end{center}
 
-Similar to the R example earlier, summary information can be added to figures. This is done using the \texttt{add\_vline()} functions, in the example below with different line styles, annotation text, and annotation positions. The example below also uses \texttt{update\_layout()} for adding a plot title and providing more informative labels for the x and y axes.
+The next example creates a column chart, showing different data variables or series. As with the R example in the previous section, the data must be provided in ''long'' format. The Pandas function \texttt{melt()} is analogous to the \texttt{pivot\_long()} function in R.
+
+The following Python code block groups the data by Year and calculates the mean city and highway fuel efficiency for each year. 
 
 \begin{samepage}
 \begin{pythoncode}
-# Calculating summary statistics
-mean_v = fuel['Range'].mean()
-median_v = fuel['Range'].median()
-lower95 = fuel['Range'].quantile(0.025)
-upper95 = fuel['Range'].quantile(0.975)
+data_grouped = \
+    data.groupby('Year') \
+        .agg(
+             meanCity=('City','mean'),
+             meanHwy=('Hwy','mean')) \
+        .reset_index()
 
-# Creating the density plot
-fig = px.histogram(fuel, x='Range', 
-         color_discrete_sequence=['pink'])
-
-# Adding vertical lines and annotations
-fig.add_vline(x=mean_v, line_dash='dash', 
-      annotation_text=f'Mean = {round(mean_v)}', 
-      annotation_position='top right')
-fig.add_vline(x=median_v, line_dash='dot', 
-      annotation_text=f'Median = {round(median_v)}', 
-      annotation_position='bottom right')
-fig.add_vline(x=lower95, line_dash='dot', 
-      annotation_text=f'L95 = {round(lower95)}', 
-      annotation_position='top left')
-fig.add_vline(x=upper95, line_dash='dot', 
-      annotation_text=f'U95 = {round(upper95)}', 
-      annotation_position='bottom left')
-
-fig.update_layout(
-    title='Density Plot - Years 2012 to 2024',
-    xaxis_title='Range (km)',
-    yaxis_title='Proportion of Vehicles')
+data_long = \
+    pd.melt(data_grouped, 
+            id_vars=['Year'], 
+            value_vars=['meanCity', 'meanHwy'], 
+            var_name='metric', 
+            value_name='consumption')
 \end{pythoncode}
 \end{samepage}
 
-\begin{center}
-    \includegraphics[width=.8\textwidth]{px.histogram2.pdf}
-\end{center}
+The first code block below shows the result of the grouping and aggregation. The data frame is in ''wide'' format, with each variable in its own column.
 
-The following column chart\index{Plot!Column chart} example uses the mean fuel consumption information. The \texttt{fuel\_grouped} DataFrame is prepared by aggregating within groups using the \texttt{NamedAgg()} function of Pandas dataframes, forming new columns in the DataFrame for the aggregated information. These columns are then ''melted'' using the \texttt{melt} function so that instead they become rows with names ''metric'' and ''consumption'' instead, where ''metric'' contains they type of value (city or highway fuel consumption) and ''consumption'' contains the actual numeric value.  The values in the ''metric'' column are then mapped to new values using the \texttt{map()} function on the DataFrame column. This is done so that the chart legend shows ''nice'' labels. The resulting DataFrame is then used in the \texttt{px.bar()} function to produce a bar chart with columns next to each other (\texttt{barmode='group'}), informative labels and a title. Note that labels are set in \texttt{px.bar} to ensure that tooltip labels on hover are displayed nicely. Finally the figure layout is updated with x and y axes titles.
+\begin{samepage}
+\begin{textcode}
+>>> data_grouped
+    Year  meanCity   meanHwy
+0   2012  2.050000  2.500000
+1   2013  2.266667  2.500000
+2   2014  2.155556  2.433333
+3   2015  2.178571  2.392857
+4   2016  2.318519  2.388889
+\end{textcode}
+\end{samepage}
+
+The \texttt{melt()} function transforms the data into a ''long'' format, shown below. The values for the two values variables are moved to a new columns ''consumption'' and the names of the columns are moved to a new column ''metric''. 
+
+\begin{samepage}
+\begin{textcode}
+>>> data_long
+    Year    metric  consumption
+0   2012  meanCity     2.050000
+1   2013  meanCity     2.266667
+2   2014  meanCity     2.155556
+3   2015  meanCity     2.178571
+4   2016  meanCity     2.318519
+\end{textcode}
+\end{samepage}
+
+The column chart itself is produced using the \texttt{bar()} function. The function option \texttt{barmode='group'} indicates that the different data series are shown next to each other, rather than stacked on top of each others.
 
 \begin{samepage}
 \begin{pythoncode}
-fuel_grouped = fuel.groupby('Year').agg(
-       meanCity=pd.NamedAgg('City', 'mean'),
-       meanHwy=pd.NamedAgg('Hwy', 'mean')).reset_index()
-
-fuel_long = pd.melt(fuel_grouped, 
-                id_vars=['Year'], 
-                value_vars=['meanCity', 'meanHwy'], 
-                var_name='metric', 
-                value_name='consumption')
-
-fuel_long['metric'] = fuel_long['metric'] \
-       .map({'meanCity': 'City', 'meanHwy': 'Highway'})
-
-fig = px.bar(fuel_long, x='Year', y='consumption', 
-   color='metric', barmode='group',
-   labels={'consumption': 'Mean Cons\n(l/100km equiv)', 'metric': ''},
-   title='Electric Vehicle Range (2012 to 2024)',
-   color_discrete_map={'City': 'blue', 'Highway': 'green'})
-
-fig.update_layout(
-    xaxis_title='Year', 
-    yaxis_title='Mean Cons\n(l/100km equiv)')
+fig = px.bar(data_long, 
+   x='Year', y='consumption', color='metric', 
+   barmode='group')
 \end{pythoncode}
 \end{samepage}
 
@@ -1499,22 +1442,33 @@ fig.update_layout(
   \includegraphics[width=.8\textwidth]{px.fuel.columns.pdf}
 \end{center}
 
-Patterns are easier to do in Plotly Express than in R. Below is the same plot, but using the \texttt{pattern\_shape} attribute for the fuel efficiency metric. As for the R example earlier, the sequence of pattern shapes for different categories is provided. Here too, more than the required two are shown to demonstrate the full set of options. The template is set to \texttt{simple\_white} so as not to show the grid lines or filled background that can be seen in the above plots. The \texttt{update\_yaxes()} function sets the tick labels to two significant digits, right justified. The \texttt{update\_traces()} function sets the pattern to black, the fillmode to transparent and 
+A Plotly Express figure has a title and labels for each axis or graph element that is used (such as colour or pattern). The following example shows the same column plot but adds explicit labels and a figure title using the \texttt{labels} and \texttt{title} options that are available in all Plotly Express figure creation functions.
 
 \begin{samepage}
 \begin{pythoncode}
-fig = px.bar(fuel_long, x='Year', y='consumption',
-   pattern_shape = 'metric', barmode='group',
-   pattern_shape_sequence = ['.', 'x', '+', '|', '-', '/'],
-   title = 'Electric Vehicle Range {2012 to 2024)',
-   text_auto=True,
-   template="simple_white",
-   labels={'consumption': 'Mean Cons\n(l/100km equiv)', 'metric': ''})
+fig = px.bar(data_long,
+  x='Year', y='consumption', color='metric', 
+  barmode='group',
+  text_auto=True,
+  title = 'Electric Vehicle Range',
+  labels={'consumption': 'Mean Consumption (l/100km)', 
+          'Year': 'Calendar Year', 
+          'metric': 'Drive Mode'})
+\end{pythoncode}
+\end{samepage}
 
-fig.update_yaxes(tickformat=',.2r')
-fig.update_traces(
-      marker=dict(color='black', line_color='black', 
-                  pattern_fillmode='replace'))
+\begin{center}
+  \includegraphics[width=.8\textwidth]{px.fuel.columns.labels.pdf}
+\end{center}
+
+When colour is not appropriate, for example because it is known the figure is reproduced or printed in grayscale, patterns can be used to distinguish the different data variables or data series. The following example shows how the \texttt{bar()} function in Plotly Express can produce patterned column charts simply by mapping a data variable to the \texttt{pattern\_shape} graph element. The example also shows how the sequence of patterns that is to be used is specified.
+
+\begin{samepage}
+\begin{pythoncode}
+fig = px.bar(data_long, 
+   x='Year', y='consumption', pattern_shape = 'metric', 
+   pattern_shape_sequence = ['.', 'x', '+', '|', '-', '/'],
+   barmode='group')
 \end{pythoncode}
 \end{samepage}
 
@@ -1522,27 +1476,37 @@ fig.update_traces(
   \includegraphics[width=.8\textwidth]{px.fuel.columnsPatterns.pdf}
 \end{center}
 
-A box plot\index{Plot!Box} is created using the \texttt{px.box()} function. Again, the DataFrame is first ''melted'' from wide format to long format to be able to compare city and highway fuel consumption numbers in the box plot. The example below uses the \texttt{update\_layout()} function to provide extra information for placing the legend in horizontal format at the top of the plot and centered along the x axis.
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise}
+\begin{enumerate}
+    \item Read the EV fuel efficiency data set into a Pandas data frame
+    \item Create a histogram of highway fuel efficiency with 25 bins.
+    \item Add labels for the axes, and add a title
+\end{enumerate}
+
+\paragraph*{Tips:}
+    \begin{itemize} 
+	   \item Use the \texttt{pd.read\_csv()} function from the tidyverse library
+       \item The column name is \texttt{Hwy}
+       \item Use the \texttt{px.histogram()} function
+       \item Use the \texttt{title=\ldots} option
+       \item Use the \texttt{labels=[\ldots]} option
+    \end{itemize}
+\end{tcolorbox}
+
+A box plot\index{Plot!Box} is created using the \texttt{px.box()} function. Box plots show the distribution of values of a variable, indicating the 1st quartile (Q1, 25th quantile) and the 3rd quartile (Q3, 75th quantile) by the extent of the box, with the median (50th quantile) shown as a line across the box. The whiskers extend to $1.5 \times IQR$ above and below the 1st and 3rd quartile, where $IQR = Q3-Q1$. Outliers beyond the whiskers are typically shown as individual points. 
+
+The data for a box plot must be provided in ''long'' format and the example below again uses the \texttt{melt()} function in Pandas to reshape the data appropriately. The box plot itself is created using the \texttt{box()} function in Plotly Express. 
 
 \begin{samepage}
 \begin{pythoncode}
-fuel_long = pd.melt(fuel, 
-    id_vars=['Year'], value_vars=['City', 'Hwy'], 
-    var_name='metric', value_name='consumption')
-
-fig = px.box(fuel_long, 
-         x=fuel_long['Year'].astype(str), 
-         y='consumption', color='metric', 
-         labels={'consumption': 'Mean Cons\n(l/100km)', 'metric': ''},
-         title='Electric Vehicles (2012 to 2024)')
-
-fig.update_layout(
-         xaxis_title='Year', 
-         yaxis_title='Mean Cons\n(l/100km equiv)',
-         legend_title_text='', 
-         legend=dict(orientation="h", 
-                     yanchor="top", y=1, 
-                     xanchor="center", x=0.5))
+data_long = pd.melt(data, 
+    id_vars=['Year'], 
+    value_vars=['City', 'Hwy'], 
+    var_name='metric', 
+    value_name='consumption')
+fig = px.box(data_long, x='Year', y='consumption', color='metric')
 \end{pythoncode}
 \end{samepage}
 
@@ -1550,22 +1514,16 @@ fig.update_layout(
   \includegraphics[width=.8\textwidth]{px.fuel.box.pdf}
 \end{center}
 
-A violin plot\index{Plot!Violin} is constructed similarly to a box plot. Because only the combined fuel consumption numbers are to be shown, there is no variable to be mapped to the ''color'' plot attribute, and the DataFrame does not need to be transformed first. The \texttt{update\_traces()} function is used to set the color of the ''violins'' to black and make them somewhat transparent (\texttt{opacity=0.5}). Individual points are shown with a slight jitter to make them distinguishable.
+A violin plot\index{Plot!Violin} is constructed similarly to a box plot. Using the same ''long'' data shape, the following example shows a violin plot. Violin plots also communicate the distribution of the data, but do not provide the summary information that box plots provide. Instead, they can be read as a ''sideways density'' plot indicating the probability distribution of the data values.
 
 \begin{samepage}
 \begin{pythoncode}
-fig = px.violin(fuel, 
-       x=fuel['Year'].astype(str), 
-       y='Comb', box=True, 
-       points='all')
-
-fig.update_traces(jitter=0.15, pointpos=0, 
-       marker=dict(color='black', size=1, opacity=0.5))
-
-fig.update_layout(xaxis_title='Year',
-       yaxis_title='Mean Consumption\n(l/100km)',
-       title='Electric Vehicle (2012 to 2024)',
-       legend_title_text='')
+data_long = pd.melt(data, 
+    id_vars=['Year'], 
+    value_vars=['City', 'Hwy'], 
+    var_name='metric', 
+    value_name='consumption')
+fig = px.violin(data_long, x='Year', y='consumption', color='metric')
 \end{pythoncode}
 \end{samepage}
 
@@ -1573,18 +1531,16 @@ fig.update_layout(xaxis_title='Year',
   \includegraphics[width=.8\textwidth]{px.fuel.violin.pdf}
 \end{center}
 
-For a count plot\index{Plot!Count}, the data frame is first grouped, and the size (that is, the count of values) of each group is recorded in a new column ''counts''. This transformed data frame is then used for a scatter plot that maps the ''counts'' variable to the size of the points in the \texttt{px.scatter()} function.
+A count plot\index{Plot!Count} communicates the number of observations in the size of a point. For the following example, the data frame is first grouped by year and vehicle category, and the size (that is, the count of values) of each group is recorded in a new column ''counts''. This transformed data frame is then used for a scatter plot that maps the ''counts'' variable to the size of the points in the \texttt{scatter()} function.
 
 \begin{samepage}
 \begin{pythoncode}
-count_df = fuel.groupby(['Year', 'Category']) \
-   .size().reset_index(name='counts')
+count_data = data \
+   .groupby(['Year', 'Category']) \
+   .agg(counts = ('Range', 'size')) \
+   .reset_index()
 
-fig = px.scatter(count_df, 
-   x='Year', y='Category', size='counts',
-   color_discrete_sequence=['darkolivegreen'],
-   labels={'Category': '', 'Year': 'Year', 'counts': 'Count'},
-   title='EV Models by Category (2012 to 2024)')
+fig = px.scatter(count_data, x='Year', y='Category', size='counts')
 \end{pythoncode}
 \end{samepage}
 
@@ -1592,27 +1548,19 @@ fig = px.scatter(count_df,
   \includegraphics[width=.8\textwidth]{px.fuel.count.pdf}
 \end{center}
 
-The following points \index{Plot!Points} plot is another example of the use of the \texttt{px.scatter()} function, which adds a fourth variable to the plot: The vehicle category is mapped to the color plot element. Note also that \texttt{update\_layout()} is used to provide axis title, create a legend for the ''Category'' variable (that is mapped to colour), and make the legend horizontal at the top of the plot, right-justified above the x axis.
+The following points plot \index{Plot!Points} is another example of the use of the \texttt{scatter()} function, which adds a fourth variable to the plot: The vehicle category is mapped to the color plot element. Grouping and aggregtation now produces two aggregates, the count and the mean vehicle range.  
 
 \begin{samepage}
 \begin{pythoncode}
-grouped_fuel = fuel.groupby(['Year', 'Category']).agg(
-    totalcount=pd.NamedAgg('Range', 'size'),
-    meanRange =pd.NamedAgg('Range', 'mean')).reset_index()
-
-fig = px.scatter(grouped_fuel, 
-    x='Year', y='meanRange', size='totalcount', 
-    color='Category', hover_name='Category', 
-    labels={'meanRange': 'Range', 'totalcount': 'Number of Models'},
-    title='EV by Year and Category (2012 to 2024)',
-    size_max=20, opacity=0.8)
-
-fig.update_layout(
-    xaxis_title='Year',
-    yaxis_title='Range',
-    legend_title_text='Category',
-    legend=dict(orientation="h", yanchor="bottom", 
-                y=1.02, xanchor="right", x=1))
+grouped_data = data \
+    .groupby(['Year', 'Category']) \
+    .agg(totalcount=('Range', 'size'),
+         meanRange=('Range', 'mean')) \
+    .reset_index()
+    
+fig = px.scatter(grouped_data, 
+           x='Year', y='meanRange', 
+           size='totalcount', color='Category')
 \end{pythoncode}
 \end{samepage}
 
@@ -1620,28 +1568,21 @@ fig.update_layout(
   \includegraphics[width=.8\textwidth]{px.fuel.pointsSize.pdf}
 \end{center}
 
-To reduce the amount of information in the following line plot\index{Plot!Line}, the data frame is filtered to limit the data set. The \texttt{px.line()} function creates the line plot, the option \texttt{markers=True} adds the points to the lines. Again, the horizontal legend for the ''Category'' variable is moved to the top of the plot, right-justified above the x axis.
+A line plot\index{Plot!Line} shows can show trends or progression of data values over time or some other ordered metric. The following example computes mean vehicle range for different years and vehicle categories, and then selects a subset of categories to keep the resulting figure clear and interpretable. 
+
+The line plot includes points as well, specified by the option \texttt{markers=True} and mapping the vehicle category variable to the \texttt{symbol} plot element. 
 
 \begin{samepage}
 \begin{pythoncode}
-filtered_fuel = \
-    fuel[(fuel['Year'] >= 2022) & (fuel['Year'] <= 2023)]
-filtered_fuel = filtered_fuel[filtered_fuel['Comb'] <= 4]
-filtered_fuel = \
-    filtered_fuel[~filtered_fuel['Category'].isin(['PL', 'T'])]
-
-fig = px.line(filtered_fuel, 
-    x='Comb', y='Range', color='Category', 
-    line_group='Category', markers=True, 
-    labels={'Range': 'Range', 'Comb': 'Combined Fuel Consumption'},
-    title='EV (2012 to 2024)')
-
-fig.update_layout(
-    xaxis_title='Combined Fuel Consumption',
-    yaxis_title='Range',
-    legend_title_text='Category',
-    legend=dict(orientation="h", yanchor="bottom", 
-                y=1.02, xanchor="right", x=1))
+filtered_data = 
+    data.groupby(['Year', 'Category']) \
+       .agg(meanRange=('Range', 'mean')) \
+       .reset_index() \
+       [data['Category'].isin(['C','L','M','S','US','UL'])] 
+       
+fig = px.line(filtered_data, 
+    x='Year', y='meanRange', color='Category', 
+    symbol='Category', markers=True)
 \end{pythoncode}
 \end{samepage}
 
@@ -1649,28 +1590,20 @@ fig.update_layout(
   \includegraphics[width=.8\textwidth]{px.fuel.linesPoints.pdf}
 \end{center}
 
-Pie charts\index{Plot!Pie chart} in Plotly Express are created using the \texttt{px.pie()} function. To reduce the number of pie slices to show, the data frame is first filtered for those vehicle makes with 5 or more models and limited to the 2023 model year. The pie chart then shows the number of models for each manufacturer. Labels in the pie chart must be set individually for each pie slice using a \texttt{for} loop over the grouped DataFrame rows. For each group (row), an annotation is added to the figure using \texttt{add\_annotation} that shows the ''totalcount'' value. Finally, the figure layout is updated to show the legend at the top, right-justified above the x axis.
+Pie charts\index{Plot!Pie chart} show the contribution of individual components or aspects to a whole. In Plotly Express they are created using the \texttt{px.pie()} function. The following example calculates the number of vehicle models for each make for the year 2023. The results are reduced to those makes with more than 5 models in order to limit the number of pie slices. The option \texttt{hole=0.4} transforms the pie chart into a donut chart by leaving a hole of the specified radius in the center.
 
 \begin{samepage}
 \begin{pythoncode}
-fuel_2023 = fuel[fuel['Year'] == 2023]
-fuel_grouped = \
-    fuel_2023.groupby('Make').size().reset_index(name='totalcount')
-fuel_grouped = fuel_grouped[fuel_grouped['totalcount'] >= 5]
+data_pie = \
+  data[data['Year'] == 2023] \
+    .groupby('Make') \
+    .agg(totalcount=('Model', 'size')) \
+    .reset_index() \
+    .query('totalcount >= 5')
 
-fig = px.pie(fuel_grouped, 
-    names='Make', values='totalcount', hole=0,
-    title='EV Offerings by Make (2023, >= 5 models)',
-    labels={'totalcount': 'Number of Models'})
-
-for i, row in fuel_grouped.iterrows():
-    fig.add_annotation(text=str(row['totalcount']),
-            x=row['Make'], y=row['totalcount'], 
-            showarrow=False, font_color='lightgrey')
-
-fig.update_layout(legend=dict(orientation="h", yanchor="bottom", 
-    y=1.02, xanchor="right", x=1),
-    showlegend=True, legend_title_text='Make')
+fig = px.pie(data_pie, 
+             names='Make', values='totalcount', 
+             hole=0.4)
 \end{pythoncode}
 \end{samepage}
 
@@ -1678,52 +1611,40 @@ fig.update_layout(legend=dict(orientation="h", yanchor="bottom",
   \includegraphics[width=.6\textwidth]{px.fuel.pie.pdf}
 \end{center}
 
-A donut chart\index{Plot!Donut chart} is easily created simply by providing the \texttt{hole} argument to \texttt{px.pie()}, as in the following example:
+A radar plot\index{Plot!Radar} can be used to compare observations on multiple variables. In Plotly Express, it is created as a line plot on a polar coordinate system, using the \texttt{px.line\_polar()} function. 
 
-\begin{samepage}
-\begin{pythoncode}
-...
-fig = px.pie(fuel_grouped, 
-    names='Make', values='totalcount', hole=0.4,
-    title='EV Offerings by Make (2023, >= 5 models)',
-    labels={'totalcount': 'Number of Models'})
-...
-\end{pythoncode}
-\end{samepage}
+The following example first groups the data for the year 2023 by vehicle make and computes aggregate statistics for the comparison of vehicle makes. The grouped data is then filtered to reduce the amount of information shown in the radar plot in order to keep it readable and understandable. 
 
-\begin{center}
-  \includegraphics[width=.6\textwidth]{px.fuel.donut.pdf}
-\end{center}
-
-A radar plot\index{Plot!Radar} is created as a line plot on a polar coordinate system, using the \texttt{px.line\_polar()} function. First, the data frame is grouped by vehicle make and aggregate statistics are computed. The grouped data is then filtered to reduce the number of information shown in the radar plot. The aggregate values are then scaled to values between 0 and 1, using the \texttt{MinMaxScaler} from the \texttt{sklearn} package. Finally, the data frame is ''melted'' into long format and then used for creating the radar plot shown below. 
+The aggregate values are then scaled to values between 0 and 1, using the \texttt{MinMaxScaler} from the \texttt{sklearn} package. Finally, the data frame is reshaped into ''long'' format using \texttt{melt()} where the values are moved to a column \texttt{value} and the variable names are moved to a column ''variable''. The radar plot maps the value column to the radius (that is, how far from the center) and the variable column to the angle around the plot (theta). The vehicle Make is mapped to colour and lines are closed. 
 
 \begin{samepage}
 \begin{pythoncode}
 from sklearn.preprocessing import MinMaxScaler
 
-fuel_2023 = fuel[fuel['Year'] == 2023]
-grouped = fuel_2023.groupby('Make').agg(
-    meanCity =pd.NamedAgg('City',lambda x: 1/x.mean()),
-    meanHwy  =pd.NamedAgg('Hwy',lambda x: 1/x.mean()),
-    meanRange=pd.NamedAgg('Range',lambda x: x.mean()/100),
-    nModels  =pd.NamedAgg('Make','size'))
-grouped = grouped[grouped['nModels'] >= 5]
+grouped = data \
+  .query('Year == 2023') \
+  .groupby('Make') \
+  .agg(
+      Cty=('City',lambda x: 1/x.mean()),
+      Hwy=('Hwy',lambda x: 1/x.mean()),
+      Rng=('Range',lambda x: x.mean()/100),
+      nModels=('Make','size')) \
+  .query('nModels >= 5')
+  
+grouped[['Cty', 'Hwy', 'Rng']] = \
+  MinMaxScaler().fit_transform(
+    grouped[['Cty', 'Hwy', 'Rng']])
 
-grouped[['meanCity', 'meanHwy', 'meanRange']] = \
-   MinMaxScaler().fit_transform(
-      grouped[['meanCity', 'meanHwy', 'meanRange']])
-
-melted = grouped.reset_index().melt(
-    id_vars='Make', var_name='metric',
-    value_vars=['meanCity', 'meanHwy', 'meanRange'])
-
+melted = grouped \
+  .reset_index() \
+  .melt(id_vars='Make', 
+        value_vars=['Cty', 'Hwy', 'Rng'],
+        value_name = 'value',
+        var_name = 'variable')
+  
 fig = px.line_polar(melted, 
-     r='value', 
-     theta='metric', 
-     color='Make', 
-     line_close=True,
-     labels={'metric': '', 'value': '', 'Make': 'Make'},
-     title='EV Data (Makes with more than 5 models)')
+     r='value', theta='variable', 
+     color='Make', line_close=True)
 \end{pythoncode}
 \end{samepage}
 
@@ -1731,38 +1652,47 @@ fig = px.line_polar(melted,
   \includegraphics[width=.8\textwidth]{px.fuel.radar.pdf}
 \end{center}
 
-A scatter plot\index{Plot!Points} can be created with the \texttt{px.scatter()} function which can include trendlines computed using different methods. The most commonly used local regression estimation is specified with the \texttt{trendline='lowess'} argument, as in the example below.
+A scatter plot\index{Plot!Points} can be created with the \texttt{px.scatter()} function which can include trendlines computed using different methods. The most common trendline uses local weighted regression estimation for smoothing (LOWESS) and is specified with the \texttt{trendline='lowess'} argument. Note that the LOWESS trendline is NOT a global (linear) regression function but is computed locally. The example below produces a scatterplot of City and Highway fuel efficiency that includes a red LOWESS trendline. 
 
 \begin{samepage}
 \begin{pythoncode}
-fig = px.scatter(fuel, 
-    x='Year', y='Range', trendline='lowess',
-    labels={'Range': 'Mean Range (km)'},
-    title='EV Range by Year')
-
-fig.update_layout(xaxis_title='Year',
-                  yaxis_title='Mean Range (km)')
+fig = px.scatter(data, 
+    x='City', y='Hwy', 
+    trendline='lowess',
+    trendline_color_override='red')
 \end{pythoncode}
 \end{samepage}
 
 \begin{center}
-  \includegraphics[width=\textwidth]{px.fuel.linesSmooth.pdf}
+  \includegraphics[width=.8\textwidth]{px.fuel.linesSmooth.pdf}
 \end{center}
 
-Two-dimensional density plots\index{Plot!Density} can be created with the \texttt{px.density\_heatmap()} function, as shown in the following example. This example also uses the \texttt{marginal\_x} and \texttt{marginal\_y} options to add histograms for each marginal distribution along the x and y axis. Some other useful options for marginal plots are ''rug'' and ''box''. 
+Two-dimensional histograms \index{Plot!Histogram} are analogous to one-dimensional histograms and show the count or frequency of data values against two other variables, as shown in the following example. Because Plotly Express does not provide a suitable function, the example begins with a scatter plot of the data points, and then adds a ''trace'', that is, a data series from the Plotly Graph Objects package. 
 
 \begin{samepage}
 \begin{pythoncode}
-fig = px.density_heatmap(fuel,
-    x = 'City', y = 'Hwy',
-    nbinsx=20, nbinsy=20,
-    color_continuous_scale=px.colors.sequential.Viridis,
-    marginal_x="histogram",
-    marginal_y="histogram",
-    title='EV Fuel Consumption Data',
-    labels={"range" : "Range", 
-           "Hwy": "Highway Economy", 
-            "City": "City Economy"})
+import plotly.graph_objects as go
+
+fig = px.scatter(data, x='Hwy', y='City')
+
+fig.add_trace(
+  go.Histogram2dContour(x=data['Hwy'], y=data['City']))
+\end{pythoncode}
+\end{samepage}
+
+\begin{center}
+  \includegraphics[width=.8\textwidth]{px.fuel.density2d.pdf}
+\end{center}
+
+The final example is somewhat more complex and introduces ''marginal'' plots that accompany a one- or two-dimensional plot. This example produces a two-dimensional density plot (''heatmap'') and then uses the \texttt{marginal\_x} and \texttt{marginal\_y} options to add histograms for each marginal distribution along the x and y axis. Other useful options for marginal plots are ''rug'' and ''box'' which add a projections of data values or a box plot as marginals. 
+
+\begin{samepage}
+\begin{pythoncode}
+fig = px.density_heatmap(data,
+  x = 'City', y = 'Hwy',
+  nbinsx=20, nbinsy=20,
+  marginal_x='histogram', marginal_y='histogram',
+  color_continuous_scale = px.colors.sequential.Viridis)
 \end{pythoncode}
 \end{samepage}
 
@@ -1774,21 +1704,180 @@ fig = px.density_heatmap(fuel,
 \begin{tcolorbox}[colback=code]
 \subsubsection*{Hands-On Exercises}
 
-Using the Pagila database files from the previous chapters, create the following plots using Plotly Express/Python. Use the appropriate Plotly Express functions to add informative labels for axes, useful legends to the plots, and use suitable color palettes. 
-
+Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.csv}
 \begin{enumerate}
-   \item A histogram and/or density chart of film length by film category
-   \item A column chart of the mean rental payments for films by film category
-   \begin{itemize}
-      \item Add error bars to this chart
-   \end{itemize}
-   \item A scatter plot of total rental payments by week
-   \begin{itemize}
-      \item Add a local regression line to this plot
-   \end{itemize}
-   \item A pie or donut chart of rental counts by film rating
+   \item Read the data into a Pandas data frame using \texttt{read\_csv()}
+   \item Create a box plot of the rental payment amounts for films by rating
+   \item Create a violin plot of the rental payment amounts for films by rating
 \end{enumerate}
+\begin{itemize}
+\item Compare the information conveyed by a box plot and a violin plot. What are the commonalities and what are the differences?
+\end{itemize}
 \end{tcolorbox}
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercises}
+
+Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.csv}
+\begin{enumerate}
+   \item Read the data into a Pandas data frame using \texttt{read\_csv()}
+   \item Use \texttt{drop\_duplicates()} to drop duplicates of the film titles
+   \begin{itemize}
+      \item Because each film may have been rented multiple times.
+   \end{itemize}
+   \item Produce a \emph{histogram} of counts of films by rating
+\end{enumerate}
+\vspace{\baselineskip}
+\textbf{Tip:}
+\begin{itemize}
+\item Use the \texttt{columns} and \texttt{shape} properties or the \texttt{describe()} method of a data frame to examine it. 
+\end{itemize}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercises}
+
+Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.csv}
+\begin{enumerate}
+   \item Read the data into a Pandas data frame using \texttt{read\_csv()}
+   \item Create a data frame with the mean rental payments for films by rating
+   \item Generate a bar chart of the mean rental payments for films by rating
+   \item Generate a pie or donut chart of rental counts by film rating
+\end{enumerate}
+
+\vspace{\baselineskip}
+\textbf{Tips:}
+\begin{itemize}
+   \item Use the \texttt{groupby()} function to group the data
+   \item Use the \texttt{mean()} function to find the mean for a data frame column
+\end{itemize}
+\end{tcolorbox}
+
+
+\section{Dashboards}
+
+Dashboards are sets of plots that show related information. They are typically customizable by the user of the dashboard or consumer of the information. Often, they are automatically updated, possibly in real time when required. Dashboards provide information of key metrics in a simple and easy to understand way to support decision making. Typical dashboards in a business might be one of key financial indicators for the CFA, key production measures for the COO, real-time machine data for the machine operator, etc. 
+
+Figure~\ref{fig:dashboard} shows an example of a dashboard for Canadian federal procurement contracts data. Such a dashboard may be useful for the procurement managers. The dashboard shows a selection box to select the year for which the data is to be shown, and a radio box that allows the user to decide whether to view the number of contracts or the dollar value of contracts. These two interactive elements determine the information shown on \emph{all} plots of the dashboard. In other words, when the dashboard user changes their selection, all plots are updated. 
+
+The first plot is a line plot that spans the entire width of the dashboard. This is followed by another heading, followed by three pie charts next to each other. The next row is another header, followed by a binary choice box. A final column chart spans the last row of the dashboard.
+
+\begin{figure}
+\centering
+
+  \includegraphics[width=\textwidth]{dashboard.png}
+  \caption{Example dashboard}
+  \label{fig:dashboard}
+\end{figure}
+
+This section briefly describes how interactive dashboards can be built using the Plotly Dash package for Python. Because Plotly Express figures are interactive, browser-based already, they lend themselves to being included in dashboards. 
+
+The first step is to import the required packages and components. The \texttt{dash} package provides core elements, dash bootstrap components provide the visual layout of the dashboard, and plotly express provides the figures or graphs that are part of the dashboard.
+
+\begin{samepage}
+\begin{pythoncode}
+from dash import Dash, html, dcc, callback, Output, Input
+import dash_bootstrap_components as dbc
+import plotly.express as px
+\end{pythoncode}
+\end{samepage}
+
+Next, the visual layout of the dashboard is specified, as shown in the following Python code block. The main layout is a container (\texttt{dbc.Container}) that contains a list of rows (\texttt{dbc.Row}). Each row contains a list of elements, such as HTML elements (headers (\texttt{html.H3} or paragraphs \texttt{html.P}), or interactive elements such as selection boxes (\texttt{dbc.Select}), radio buttons (\texttt{dbc.RadioItems}) and their labels (\texttt{dbc.Label}). Importantly, every interactive component has an \texttt{id} attribute that uniquely identifies it. 
+
+The following code block shows the beginning of the layout container definition, with the first row containing an HTML header element, and the second row containing selection boxes, radio items, and their labels. Compare the layout specification to the dashboard appearance in Figure~\ref{fig:dashboard}.
+
+\begin{samepage}
+\begin{pythoncode}
+app.layout = dbc.Container([
+  dbc.Row([
+    html.H3('Canadian Federal Procurement Contracts Data')]),
+  dbc.Row([
+    html.P(),
+    dbc.Label('Choose Year: '),
+    dbc.Select(
+      id='year-selection',
+      options=[{"label": x, "value": x} for x in years],
+      value=years[-1]),
+    html.P(),
+    dbc.Label('Choose Value: '),
+    dbc.RadioItems(
+      options=[{"label": "Counts", "value": 0},
+               {"label": "Dollars", "value": 1}],
+      value=0, inline = True,
+      id = 'value-selection'),
+    html.P() ]),
+\end{pythoncode}
+\end{samepage}
+
+The next code block below continues the layout container specification. It defines another row with a single column (\texttt{dbc.Col}) that spans the entire width of 12 units. Columns in turn contain lists of elements. The column in the example below contains a list with a single \texttt{dcc.Graph} element, which in turn has a \texttt{figure} and \texttt{id} attribute. This graph element is a placeholder for a Plotly Express figure, in this case the line plot that is shown in Figure~\ref{fig:dashboard}.
+
+Another row follows that contains a list of three HTML elements. The next row contains a list of three columns (\texttt{dbc.Col}) that each contain a list of a single \texttt{dcc.Graph} element as a placeholder for the three pie charts that are located next to each other in Figure~\ref{fig:dashboard}. The layout code for the remaining dashboard elements in Figure~\ref{fig:dashboard} are not shown but are similar to these.
+
+\begin{samepage}
+\begin{pythoncode}
+# Continued from previous snippet
+   dbc.Row([
+        dbc.Col([
+            dcc.Graph(figure={}, id='line')
+        ], width=12),
+    ]),
+    dbc.Row([
+        html.P(),
+        html.H4('By Commodity Type'),
+        html.P()
+    ]),
+    dbc.Row([
+        dbc.Col([
+            dcc.Graph(figure={}, id='pie1')
+        ], width=4),
+        dbc.Col([
+            dcc.Graph(figure={}, id='pie2')
+        ], width=4),
+        dbc.Col([
+            dcc.Graph(figure={}, id='pie3')
+        ], width=4),
+    ]),
+\end{pythoncode}
+\end{samepage}
+
+In order to generate the figures, each \texttt{dcc.Graph} element in the layout container has a corresponding update function. The code block below shows the \texttt{update\_line} function for the line chart. The update function creates a figure using the Plotly Express commands illustrated in the previous section.
+
+Importantly, each such update function has an associated ''callback'' specification. The callback has an \texttt{Output} element that specifies the component in the dashboard layout that receives the output of the function, that is, the figure. Additionally, the \texttt{callback} specifies a list of \texttt{Input} components that determine the inputs to the update function as values from interactive elements in the dashboard layout. 
+
+The example below specifies that the \texttt{update\_line} function receives the values of the \texttt{year-selection} and the \texttt{value-selection} elements in the layout, see the \texttt{id} of those components in the above code block. With these values, the update function can produce an appropriate figure. The output of the \texttt{update\_line} function (a figure) is shown in the element with id \texttt{line} in the dashboard layout. 
+
+\begin{samepage}
+\begin{pythoncode}
+@callback(
+    Output(component_id='line', component_property='figure'),
+    [
+        Input(component_id='year-selection', 
+              component_property='value'),
+        Input(component_id='value-selection', 
+              component_property='value')
+    ]
+)
+def update_line(year_chosen, value_chosen): 
+    # Figure creation code, for example
+    # fig = px.line(...)
+    return fig
+\end{pythoncode}
+\end{samepage}
+
+This callback mechanism links the interactive elements, such as radio buttons, selection boxes, value sliders, and others to the figures and plots that make up the dashboard. Whenever the dashboard user changes the value of any interactive element, the dashboard identifies which components receive those values as inputs and calls the corresponding update functions to produce new figures. Those figures are then placed into their graph object placeholders in the dashboard. 
+
+The final step is to run the dashboard app. This is accomplished with the following line of code:
+
+\begin{pythoncode}
+app.run()
+\end{pythoncode}
+
+\begin{tcolorbox}[colback=alert]
+\subsubsection*{Resources}
+Complete implementation of the dashboard example is available at
+\url{https://evermann.ca/busi4720/dashboard.py} \\
+\end{tcolorbox}
+
 
 \section{Review Questions}
 

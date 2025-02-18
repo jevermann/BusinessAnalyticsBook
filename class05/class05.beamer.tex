@@ -24,7 +24,7 @@
   \item Introduction to the Tidyverse set of packages
   \begin{itemize}
   \item ''Tidy'' data
-  \item Manipulating \& clearning data
+  \item Manipulating \& cleaning data
   \item Joining data
   \item Summarizing and reporting data
   \end{itemize}
@@ -57,7 +57,24 @@
 \includegraphics[width=\textwidth]{screen1.png}
 \end{frame}
 
-\begin{frame}[fragile]{My First R Command}
+\begin{frame}{Tips for Working with R}
+
+To make using R more efficient, consider doing the following:
+
+\begin{itemize}
+    \item Use the {\footnotesize\colorbox{lightgray}{up-arrow}} key to retrieve earlier commands.
+    \item The \texttt{history()} function shows your command history.
+    \item Use a notepad app to assemble and edit your commands easily, then copy/paste to R for execution.
+    \item Use a notepad app for your results, copy/paste from R.
+    \item The Ubuntu terminal uses {\footnotesize\colorbox{lightgray}{SHIFT-CTRL-X}}, {\footnotesize\colorbox{lightgray}{SHIFT-CTRL-C}}, {\footnotesize\colorbox{lightgray}{SHIFT-CTRL-V}} for cut/copy/paste.
+    \item Use multiple terminal and R windows (e.g. one for executing commands, one for reading help documentation or for listing files).
+    \item Don't update packages in the middle of a project.
+    \item Ensure you have a \emph{repeatable, automatable script} for your entire data analysis at the end of a project.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{My First R Commands}
 R can do math:
 \begin{Rcode}
 > 1+1
@@ -74,47 +91,6 @@ R knows variables:
 \end{frame}
 
 \begin{frame}[fragile]{R Basics}
-R does vector math:
-\begin{Rcode}
-> v <- c(1, 2, 3, 4)
-> v*3
-[1]  3  6  9 12
-\end{Rcode}
-\emph{Note}: No print statement needed in interactive mode\\
-
-\begin{Rcode}
-> s <- seq(0, 6, by=.5)
-> print(s)
-> r <- rep(3.5, 5)
-> print(r)
-\end{Rcode}
-\end{frame}
-
-\begin{frame}[fragile]{R Basics \small [cont'd]}
-More basic functions on vectors:
-\begin{Rcode}
-> length(v)
-> max(v)
-> min(v)
-> sqrt(vv)
-> var(v)
-> sd(v)
-> vv <- c(v, c(7, 8, 9), v)
-> print(vv)
-\end{Rcode}
-\end{frame}
-
-\begin{frame}[fragile]{R Basics \small [cont'd]}
-Vector indexing:
-\begin{Rcode}
-> vv[vv < 5]
-> vv[vv < 5] <- vv[vv < 5] + 5
-> vv[3:7]
-> vv[-(3:7)]
-\end{Rcode}
-\end{frame}
-
-\begin{frame}[fragile]{R Basics \small [cont'd]}
 R knows if its not a number:
 \begin{Rcode}
 > 2 / 0
@@ -125,21 +101,6 @@ R knows if its not a number:
 \end{frame}
 
 \begin{frame}[fragile]{R Basics \small [cont'd]}
-R knows NA:
-\begin{Rcode}
-> v[3] <- NA
-> v*3
-[1]  3  6 NA 12
-> is.na(v)
-[1] FALSE FALSE  TRUE FALSE
-> sum(v)
-[1] NA
-\end{Rcode}
-\emph{Note}: R indexes start at 1! \\
-\emph{Note}: TRUE and FALSE can be abbreviated T and F \\
-\end{frame}
-
-\begin{frame}[fragile]{R Basics \small [cont'd]}
 R knows boolean logic:
 \begin{Rcode}
 > TRUE & FALSE
@@ -147,101 +108,94 @@ FALSE
 > TRUE | FALSE
 TRUE
 \end{Rcode}
+
+\emph{Tip}: TRUE and FALSE can be abbreviated T and F \\
+
 R know character strings:
 \begin{Rcode}
-> label1 = 'I Love R'
-> label2 = 'and BUSI 4760'
-> paste(label1, label2, sep=' ')
-> strsplit('Hello World! My first string', ' ')
+label1 = 'I Love R'
+label2 = 'and BUSI 4760'
+paste(label1, label2, sep=' ')
+strsplit('Hello World! My first string', ' ')
 \end{Rcode}
+\emph{Note}: Strings may be enclosed in double or single quotes. \\
+
 \end{frame}
 
 \begin{frame}[fragile]{R Basics \small [cont'd]}
 R types and type coercion:
 \begin{Rcode}
-> is.numeric(vv)
-> is.integer(vv)
-> mode(vv)
-> as.character(vv)
-> is.character(as.character(vv))
-> as.factor(as.character(vv))
-> levels(as.factor(as.character(vv)))
+# Check whether it is numeric
+is.numeric(2)
+# Check whether it is an integer number
+is.integer(3.14)
+# Make it an integer
+as.integer(3.14)
+# Make it a character string
+as.character(3.14)
+# Make it a character string
+as.character(TRUE)
+# Make it a number
+as.numeric('3.1415')
 \end{Rcode}
 \end{frame}
+
+\section{The R Environment}
 
 \begin{frame}[fragile]{R Environment}
 R can manipulate its objects (''workspace'')
 \begin{Rcode}
+# Show objects in workspace
 > ls()
 [1] "a"          "b"          "v"
+# Remove one object
 > rm(v)
 > ls()
 [1] "a"          "b"
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{R Basics \small [cont'd]}
-R knows Regex:
-\footnotesize
-\begin{Rcode}
-> grep('^([0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}$', 
-    c('709 864 5000', 'abc def 9999', '709-865-5000'))
-[1] 1 3
-> grep('[A-V][0-9][A-V] [0-9][A-V][0-9]', 
-    c('A0P 1L0', '0AB L2K', 'A0X 1Z0'))
-[1] 1
-\end{Rcode}
-\normalsize
-R knows Levenshtein distances:
-\footnotesize
-\begin{Rcode}
-> agrep('apple', 
-    c('apricot', 'banana', 'grape', 'pineapple'), 
-    max.distance=3)
-[1] 1 3 4
-\end{Rcode}
-\end{frame}
-
-\section{The R Environment}
 
 \begin{frame}[fragile]{R Environment \small [cont'd]}
 R can help:
 \begin{Rcode}
-> help()
-> help(lm)
-> ?lm
-> ??lm
-> help.start()
+help()
+help(lm)
+?lm
+??lm
+help.start()
 \end{Rcode}
 \end{frame}
 
 \begin{frame}[fragile]{R Environment \small [cont'd]}
-R knows files and directories:
+R has a working directory in which it stores and reads its data:
 \begin{Rcode}
-> getwd()
-[1] "/home/busi4720"
-> setwd('DataSets')
-> getwd()
-[1] "/home/busi4720/DataSets"
-> list.files()
+# Get the working directory
+getwd()
+# Set the working directory
+setwd('DataSets')
+getwd()
+# List files in working directory
+list.files()
 \end{Rcode}
-\emph{Note}: Strings may be enclosed in double or single quotes. \\
+
+\emph{Tip:} It is often more convenient to change the working directory in the terminal, prior to invoking.
+
 \end{frame}
 
 \begin{frame}[fragile]{R Environment \small [cont'd]}
 R uses packages:
 \begin{Rcode}
-> search()
-> library(matrixcalc)
-> search()
-> library()
-> install.packages('lavaan')
-> library()
-> installed.packages()
+# Install the tidyverse library
+install.packages('tidyverse')
+# Load/attach the tidyverse library
+library(tidyverse)
+# List all installed packages
+installed.packages()
 \end{Rcode}
-R can read your command files:
+R can read command files:
 \begin{Rcode}
-> source('MyFirstScript.R')
+source('MyFirstScript.R')
 \end{Rcode}
 \emph{Note}: Sourcing a script turns off auto-printing, you must use explicit \texttt{print()} commands
 \end{frame}
@@ -249,85 +203,202 @@ R can read your command files:
 \begin{frame}[fragile]{R Environment \small [cont'd]}
 Say goodbye to R:
 \begin{Rcode}
-> quit()
+quit()
 \end{Rcode}
 R stores its \textbf{workspace} in each directory in a file called ''.RData'' and will read it when restarted. R stores its \textbf{command history} in each directory in a file called ''.Rhsitory'' and will read it when restarted.
 \end{frame}
 
+\section{Vectors}
+
+\begin{frame}[fragile]{R Vectors}
+R does vector math:
+\begin{Rcode}
+> v <- c(1, 2, 3, 4)
+> v
+[1] "1"    "a"    "TRUE"
+> v*3
+[1]  3  6  9 12
+\end{Rcode}
+\emph{Note}: No print statement needed in interactive mode\\
+
+\begin{Rcode}
+# Generate a sequence
+s <- seq(0, 6, by=.5)
+print(s)
+# Repeat a value
+r <- rep(3.5, 5)
+print(r)
+\end{Rcode}
+\end{frame}
+
+\begin{frame}[fragile]{R Vectors \small [cont'd]}
+More basic functions on vectors:
+\begin{Rcode}
+length(v)
+max(v)
+min(v)
+sqrt(v)
+var(v)
+sd(v)
+# Vectors get flattened
+vv <- c(v, c(7, 8, 9), v)
+print(vv)
+\end{Rcode}
+\end{frame}
+
+\begin{frame}[fragile]{R Vectors \small [cont'd]}
+Vector indexing:
+\begin{Rcode}
+vv < 5
+vv[vv < 5]
+vv[vv < 5] <- vv[vv < 5] + 5
+# Indexing is inclusive
+vv[3:7]
+vv[-(3:7)]
+\end{Rcode}
+
+\emph{Important}: R indexes start at 1!
+
+\end{frame}
+
+\begin{frame}[fragile]{R Missing Values}
+R knows NA:
+\begin{Rcode}
+# Introduce a missing value
+v[3] <- NA
+# Missing value arithmetic
+v*3
+# Testing for missing values
+is.na(v)
+# Missing values in aggregate functions
+sum(v)
+sum(v, na.ram=TRUE)
+\end{Rcode}
+\end{frame}
+
+\begin{frame}[fragile]{R Vectors \small [cont'd]}
+Regular Expressions:
+\footnotesize
+\begin{Rcode}
+# Match/find North American phone numbers
+> grep('^([0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}$', 
+    c('709 864 5000', 'abc def 9999', '709-865-5000'))
+[1] 1 3
+# Match/find Canadian postal codes
+> grep('[A-V][0-9][A-V] [0-9][A-V][0-9]', 
+    c('A0P 1L0', '0AB L2K', 'A0X 1Z0'))
+[1] 1
+\end{Rcode}
+\normalsize
+Levenshtein distances:
+\footnotesize
+\begin{Rcode}
+# Match/find strings up to Levenshtein distance of 3
+> agrep('apple', 
+    c('apricot', 'banana', 'grape', 'pineapple'), 
+    max.distance=3)
+[1] 1 3 4
+\end{Rcode}
+\end{frame}
+
+\section{Arrays, Matrices, Lists, and DataFrames}
+
 \begin{frame}[fragile]{R Arrays and Matrices}
 Arrays and matrices have dimensions:
 \begin{Rcode}
-> a <- array(1:20, dim=c(4,5))
-> a
-     [,1] [,2] [,3] [,4] [,5]
-[1,]    1    5    9   13   17
-[2,]    2    6   10   14   18
-[3,]    3    7   11   15   19
-[4,]    4    8   12   16   20
-> a[,2]
-> a[,2:4]
-> a[3,2:4]
-> a[3:1,2:4]
-> i <- array(c(1:3,3:1), dim=c(3,2))
-> a[i] <- 0
-> a
+# Default is to fill by column
+a <- array(1:20, dim=c(4,5))
+a
+# Result:
+#      [,1] [,2] [,3] [,4] [,5]
+# [1,]    1    5    9   13   17
+# [2,]    2    6   10   14   18
+# [3,]    3    7   11   15   19
+# [4,]    4    8   12   16   20
+# Indexing is inclusive and starts at 1
+a[,2]
+a[,2:4]
+a[3,2:4]
+a[3:1,2:4]
 \end{Rcode}
+\end{frame}
+
+\begin{frame}{R Arrays and Matrices \small [cont'd]}
+\begin{itemize}
+   \item The first dimension is the row, the second is the column
+   \item Initially, the array is created from a range of numbers between 1 and 20, and the \texttt{dim} argument specifies the dimensionality. 
+   \item R fills arrays by column, unless otherwise specified
+   \item A dimension need not be slided or indexed, as in \texttt{a[,2]} or \texttt{a[,2:4]} which do not subset the first dimension (rows). The result is that all rows are returned in these examples. 
+   \item Reversing the index reverses the result that is returned, as in \texttt{a[3:1,2:4]} which reverses the indexing of the first dimension (rows). 
+\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{R Arrays and Matrices \small [cont'd]}
 \begin{Rcode}
-> b <- matrix(20:1, nrow=5, byrow=T)
-> b
-     [,1] [,2] [,3] [,4]
-[1,]   20   19   18   17
-[2,]   16   15   14   13
-[3,]   12   11   10    9
-[4,]    8    7    6    5
-[5,]    4    3    2    1
-> is.matrix(b)
-> is.matrix(a)
-> t(b)
-> cbind(a, t(b))
-> rbind(t(a), b)
+b <- matrix(20:1, nrow=5, byrow=T)
+b
+# Result:
+#      [,1] [,2] [,3] [,4]
+# [1,]   20   19   18   17
+# [2,]   16   15   14   13
+# [3,]   12   11   10    9
+# [4,]    8    7    6    5
+# [5,]    4    3    2    1
+# Test if it is a matrix
+is.matrix(b)
+is.matrix(a)
+# Transpose
+t(b)
+# Bind (combine) by columns
+cbind(a, t(b))
+# Bind (combine) by rows
+rbind(t(a), b)
 \end{Rcode}
 \end{frame}
 
+%\begin{frame}[fragile]{R Lists}
+%R knows lists:
+%\begin{Rcode}
+%l <- list('a', 3, 'b', 2, TRUE)
+%l[[2]]
+%l[2]
+%is.list(l)
+%is.list(l[[2]])
+%is.list(l[2])
+%as.list(vv)
+%\end{Rcode}
+%\emph{Vectors are not lists}: Lists can contain elements of different types, vectors cannot:
+%\begin{Rcode}
+%c(3, 'a', TRUE)
+%c(3, FALSE, TRUE)
+%\end{Rcode}
+%\end{frame}
 
-\begin{frame}[fragile]{R Lists}
-R knows lists:
-\begin{Rcode}
-> l <- list('a', 3, 'b', 2, TRUE)
-> l[[2]]
-> l[2]
-> is.list(l)
-> is.list(l[[2]])
-> is.list(l[2])
-> as.list(vv)
-\end{Rcode}
-\emph{Vectors are not lists}: Lists can contain elements of different types, vectors cannot:
-\begin{Rcode}
-> c(3, 'a', TRUE)
-> c(3, FALSE, TRUE)
-\end{Rcode}
-\end{frame}
 
-
-\begin{frame}[fragile]{Data Frames}
-A dataframe is a special type of list:
+\begin{frame}[fragile]{R Data Frames}
 \begin{Rcode}
-> x <- rnorm(50)
-> y <- 2*x + rnorm(50)
-> data <- data.frame(x, y)
-> colnames(data)
-> colnames(data) <- c('Pred', 'Crit')
-> nrow(data)
-> ncol(data)
-> data$Pred
-> data$Crit
-> summary(data)
-> head(data)
-> tail(data)
-> cov(data)
+# Create a vector of 50 normally distributed random variables
+x <- rnorm(50)
+# Create another vector with random variables
+y <- 2*x + rnorm(50)
+# Create a data frame from the two vectors
+data <- data.frame(x, y)
+#  Get the column names
+colnames(data)
+# Update the column names
+colnames(data) <- c('Pred', 'Crit')
+# Get the number of rows and columns
+nrow(data)
+ncol(data)
+# Get the "Pred" column of the data frame
+data$Pred
+# Print a summary
+summary(data)
+# Print first and last rows
+head(data)
+tail(data)
+# Calculate the covariance matrix
+cov(data)
 \end{Rcode}
 \end{frame}
 
@@ -335,41 +406,27 @@ A dataframe is a special type of list:
 \begin{frame}[fragile]{Data Frames \small [cont'd]}
 Writing data to CSV:
 \begin{Rcode}
-> write.csv(data, 'data.csv', row.names=FALSE)
+# Write CSV file into current working directory
+# Omit the row names
+write.csv(data, 'data.csv', row.names=FALSE)
 \end{Rcode}
 
 Reading data from CSV:
 \begin{Rcode}
-> new.data <- read.csv('data.csv')
-> colnames(new.data)
+# Read the data from the current working directory
+new.data <- read.csv('data.csv')
 \end{Rcode}
-\end{frame}
-
-\begin{frame}{Tips for Working with R}
-\begin{itemize}
-    \item Use the \colorbox{lightgray}{up-arrow} key to retrieve earlier commands
-    \item The \texttt{history()} function shows your command history
-    \item Use a notepad app to assemble your commands, then copy/paste to R
-    \item Use a notepad app for your results, copy/paste from R
-    \item The Ubuntu terminal window uses \colorbox{lightgray}{SHIFT-CTRL-X}, \colorbox{lightgray}{SHIFT-CTRL-C}, \colorbox{lightgray}{SHIFT-CTRL-V}
-    \item Use multiple R windows (e.g. one for executing commands, one for reading help documentation or listing files)
-    \item Don't update packages in the middle of a project
-    \item Ensure you have a \emph{repeatable, automatable script} for your entire data analysis at the end of a project
-\end{itemize}
 \end{frame}
 
 \begin{frame}{Hands-On Exercise}
 \begin{enumerate}
-   \item Consider the last five digits of your student ID and label those digits A--E
-   \begin{itemize}
-      \item Example: Student ID=12453 $\Rightarrow$ A=1, B=2, C=4, D=5, E=3
-   \end{itemize}
-   \item Create a data frame with $(A+1)$ columns and $10*(B+1)$ rows of random numbers with mean of $C$ and standard deviation of $(D+1)$ (use the \texttt{rnorm()} function)
-   \item Name the columns with letters from ''A''--''K''
-   \item ''Clip'' the values so that all values lie between $-(E+1)$ and $+(E+1)$
-   \item Summarize the data and print the pairwise covariance matrix of the variables in the data frame
+   \item Create an array with $3$ columns and $50$ rows of random numbers with mean of $2$ and standard deviation of $4$ (use the \texttt{rnorm()} function)
+   \item Create a dataframe from the array and name the columns as ''A'', ''B'', ''C''
+   \item ''Clip'' the values so that all values lie between $-3$ and $+7$
+   \item Summarize the data 
+   \item Print the pairwise covariance matrix of the three columns in the data frame
+   \item Find the square root of each of the diagonal entries of the covariance matrix, compare this to the standard deviation of 4. Tip: Use the \texttt{diag()} function.
    \item Save the data frame in a CSV file using your first name as file name (file ending '.csv')
-   \item Save your script in an R file using your first name as file name (file ending '.R')
 \end{enumerate}
 \end{frame}
 
@@ -378,10 +435,12 @@ Reading data from CSV:
 \begin{frame}{Tidyverse}
 \includegraphics[width=\textwidth]{screen2.png}\\
 
-\textbf{Intro books}: \url{https://r4ds.hadley.nz/}
+\textbf{Intro books}: \url{https://r4ds.hadley.nz/} \\
+
+\textbf{''Cheat sheets}: \url{https://posit.co/resources/cheatsheets/} 
 \end{frame}
 
-\begin{frame}{Tidyverse}
+\begin{frame}{Tidyverse Packages}
 \renewcommand{\arraystretch}{1.25}
 \centering
 
@@ -398,15 +457,309 @@ tidyr & Make data tidy \\ \hline
 \end{tabular}
 \end{frame}
 
+\begin{frame}{Example Dataset}
+\begin{itemize}
+  \item Government of Canada, Open Government Portal
+  \item Fuel Consumption Ratings -- Battery-electric vehicles -- 2012--2023
+  \item \href{https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64}{https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64}
+\end{itemize} 
+
+\vspace{\baselineskip}
+\centering
+\footnotesize
+
+	\begin{tabular}{|l|l|} \hline
+	  {\bf Column} & {\bf Data Type} \\ \hline \hline
+	  Make & Categorical (string) \\ 
+	  Model & Categorical (string) \\
+	  Year & Numeric \\
+	  Category & Categorical (string)\\
+	  City & Numeric \\
+	  Hwy & Numeric \\
+	  Comb & Numeric \\
+	  Range & Numeric \\ \hline
+	\end{tabular}
+\end{frame}
+
+\begin{frame}[fragile]{Read Data}
+Load Tidyverse library and read data into a ''tibble''
+
+\begin{Rcode}
+# Load library
+library(tidyverse)
+# Read CSV into a Tibble
+e <- read_csv('https://evermann.ca/busi4720/fuel.csv')
+# Examine the data
+# Dimensions (rows, columns)
+dim(data)
+# Column names
+colnames(data)
+# Summary
+summary(data)
+\end{Rcode}
+
+Tibbles are an extension of data frames and provide more capabilities. Tibbles and data frames are automatically converted into each other when required.
+\end{frame}
+
+
+\begin{frame}{Summary of DPlyr ''Verbs''}
+
+\footnotesize
+\centering
+\renewcommand{\arraystretch}{1.25}
+
+\begin{tabularx}{\textwidth}{l|X} \hline
+\multicolumn{2}{c}{Basic} \\ \hline
+\texttt{filter} & filters by row \\
+\texttt{select} & selects columns to retain \\
+\texttt{mutate} & creates new columns \\
+\texttt{rename} & renames columns \\
+\texttt{distinct} & finds unique values \\
+\texttt{arrange} & sorts data rows \\
+\texttt{relocate} & moves data columns \\
+\texttt{group\_by} & groups data \\
+\texttt{summarize} & compute aggregate information \\
+\texttt{print} & prints a tibble \\  \hline
+\multicolumn{2}{c}{Advanced} \\ \hline
+\texttt{nest} & nests data, tibbles in tibbles \\
+\texttt{full\_join} & Joins tibbles (also \texttt{outer join}, \texttt{left\_join}, \texttt{inner\_join}, \texttt{right\_join}) \\ \hline
+\end{tabularx}
+
+\end{frame}
+
+\begin{frame}[fragile]{Filter()}
+
+Filters data based on conditions:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter and print results
+data |> 
+  filter(Make=='Ford', Year==2023) |> 
+  print()
+
+# Equivalent without pipe and boolean operator in filter
+filter(data, Make=='Ford' & Year==2023)
+\end{Rcode}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT * 
+   FROM data 
+   WHERE Make=='Ford' AND Year==2023;
+\end{sqlcode}
+
+\end{frame}
+
+\begin{frame}[fragile]{Select()}
+
+Selects specified columns:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter,
+# select specific columns and print results
+data |> 
+  filter(Make=='Ford', Year==2023) |> 
+  select(Model, Category, Range) |>
+  print()
+\end{Rcode}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT Model, Category, Range 
+   FROM data 
+   WHERE Make=='Ford' AND Year==2023;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Mutate()}
+
+Creates new calculated columns:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter,
+# create a new calculated column,
+# select specific columns and print results
+data |> 
+  filter(Make=='Ford', Year==2023) |> 
+  mutate(HwyRange = Range * Comb / Hwy) |>
+  select(Model, Category, Range, HwyRange) |>
+  print()
+\end{Rcode}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT Model, Category, Range, (Range*Comb)/Hwy AS HwyRange 
+   FROM data 
+   WHERE Make=='Ford' AND Year==2023;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Rename()}
+
+Renames columns:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter,
+# create new calculated columns,
+# rename an existing column,
+# select specific columns and print results
+data |> 
+  filter(Make=='Ford', Year==2023) |> 
+  mutate(HwyRange = Range * Comb / Hwy) |>
+  mutate(CityRange = Range * Comb / City) |>
+  rename(CombRange = Range) |>
+  select(Model, Category, CombRange, CityRange, HwyRange) |>
+  print()
+\end{Rcode}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT Model, Category, 
+      Range AS CombRange,
+      (Range*Comb)/Hwy AS HwyRange, 
+      (Range*Comb)/City As CityRange
+   FROM data 
+   WHERE Make=='Ford' AND Year==2023;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Distinct()}
+
+Returns unique values:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter,
+# select distinct value combinations and print results
+data |> 
+  distinct(Make, Model) |>
+  print()
+\end{Rcode}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT DISTINCT Make, Model 
+  FROM data;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Arrange()}
+
+Sorts/orders data by value:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter,
+# select specific columns,
+# order the data and print results
+data |> 
+  filter(Make=='Ford', Year==2023) |> 
+  select(Model, Category, Range) |>
+  arrange(Category, desc(Range)) |>
+  print()
+\end{Rcode}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT Model, Category, Range
+   FROM data 
+   WHERE Make=='Ford' AND Year==2023
+   ORDER BY Category ASC, Range DESC;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Relocate()}
+
+Reorders columns:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter,
+# select specific columns,
+# order the data,
+# move columns and print results
+data |> 
+  filter(Make=='Ford', Year==2023) |> 
+  select(Model, Category, Range) |>
+  arrange(Category, desc(Range)) |>
+  relocate(Category, Range) |>
+  print()
+\end{Rcode}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT Category, Range, Model
+   FROM data 
+   WHERE Make=='Ford' AND Year==2023
+   ORDER BY Category ASC, Range DESC;
+\end{sqlcode}
+\end{frame}
+
+\begin{frame}[fragile]{Group\_by() and summarize()}
+
+Groups data and calculates summary values for each group:
+
+\begin{Rcode}
+# Pipe a data frame or tibble into a filter,
+# group the data
+# summarize the data,
+# filter the summary information,
+# order the data,
+# relocate columns and print results
+data |> 
+  filter(Year==2023) |> 
+  group_by(Make, Category) |>
+  summarize(meanCity = mean(City), 
+            meanHwy = mean(Hwy),
+            meanComb = mean(Comb),
+            maxRange = max(Range),
+            nVehicle = n()) |>
+  filter(nVehicle > 1) |>
+  arrange(Category, meanComb) |>
+  relocate(Category, meanComb) |>
+  print()
+\end{Rcode}
+\end{frame}
+
+\begin{frame}[fragile]{Group\_by() and summarize()}
+
+Equivalent SQL:
+
+\begin{sqlcode}
+SELECT Category, 
+       AVG(Comb) AS meanComb,
+       Make,
+       AVG(City) AS meanCity,
+       AVG(Hwy) AS meanHwy,
+       MAX(Range) AS maxRange,
+       COUNT(*) AS nVehicle
+   FROM data 
+   WHERE Year==2023
+   GROUP BY Make, Category
+   HAVING COUNT(*) > 1
+   ORDER BY Category ASC, meanComb ASC;
+\end{sqlcode}
+\end{frame}
+
+
+
 \begin{frame}[fragile]{Pagila Database in R}
-Read into a tibble:
+Read data into tibbles:
 \small
 \begin{Rcode}
-rentals <- read_csv('rentals.csv')
-head(rentals)
-summary(rentals)
+rentals <- read_csv('http://evermann.ca/busi4720/rentals.csv')
+actors <- 
+  read_csv('https://evermann.ca/busi4720/actors.categories.csv')
+addresses <- 
+  read_csv('https://evermann.ca/busi4720/addresses.csv')
 \end{Rcode}
+
 Fix the column datatypes:
+
 \footnotesize
 \begin{Rcode}
 attach(rentals)
@@ -418,7 +771,8 @@ rental_staff <- as.integer(rental_staff)
 payment_staff <- as.integer(payment_staff)
 rental_duration <- as.integer(rental_duration)
 detach(rentals)
-summary(rentals)
+
+addresses$phone <- as.character(addresses$phone)
 \end{Rcode}
 \end{frame}
 
@@ -438,11 +792,6 @@ rentals |>
   \item Some films have not been rented
   \item Some rentals have not been returned
 \end{itemize}
-\emph{Notes:}
-\begin{itemize}
-  \item The pipe symbol (R native pipes \texttt{|>} or magrittr pipes \texttt{\%>\%})
-  \item No quoting of column names
-\end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Pagila Database in R \small [cont'd]}
@@ -451,8 +800,6 @@ Find all films and the actors that appeared in them, ordered by film category an
 
 \scriptsize
 \begin{Rcode}
-actors <- read_csv('actors.categories.csv')
-
 rentals |> 
     full_join(actors, 
         by='title', 
@@ -473,34 +820,12 @@ rentals |>
 \end{Rcode}
 \end{frame}
 
-\begin{frame}{Summary of DPlyr ''Verbs'' so far}
-\centering
-\renewcommand{\arraystretch}{1.25}
-
-\begin{tabular}{l|l} \hline
-full\_join & outer join (also left\_join, inner\_join, right\_join) \\
-filter & filters by row \\
-select & selects columns to retain \\
-mutate & creates new columns \\
-rename & renames columns \\
-distinct & finds unique values \\
-group\_by & groups data \\
-nest & nests data, tibbles in tibbles \\
-arrange & sorts data rows \\
-relocate & moves data columns \\
-print & prints a tibble \\ \hline
-\end{tabular}
-\end{frame}
-
 \begin{frame}[fragile]{Pagila Database in R \small [cont'd]}
 
 Find the most popular actors in the rentals in each city:
 
 \scriptsize
 \begin{Rcode}
-addresses <- read_csv('addresses.csv')
-addresses$phone <- as.character(addresses$phone)
-
 rentals |> 
    inner_join(addresses,
        by=c('customer_address'='address_id')) |>
@@ -711,116 +1036,6 @@ result_df <-
      \item Use separate in-memory or on-disk RDBMS for analytics (e.g. with \texttt{sqldf}) if desired/required
      \item If size of data is large, consider distributed tools such as Hadoop/Spark
   \end{itemize}
-\end{block}
-\end{frame}
-
-
-
-\begin{frame}{Data Cleaning}
-
-\begin{block}{Overview}
-\begin{itemize}
-  \item Critical step in the data analysis process
-  \item Identification and rectification of errors and inconsistencies
-  \item Improve data quality
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}{Data Cleaning}
-\begin{itemize}
-  \item Critical step in the data analysis process
-  \item Identify and ''fix'' errors and inconsistencies
-  \item Improve data quality
-\end{itemize}
-
-\begin{block}{Activities}
-\begin{enumerate}
-    \item \textbf{Auditing}: Identify anomalies and inconsistencies
-
-    \item \textbf{Validation}: Ensure data conforms to rules and constraints
-
-    \item \textbf{Cleaning:} Transform and correct data
-
-    \item \textbf{Duplicate Removal:} Ensure uniqueness of data.
-
-    \item \textbf{Harmonization:} Merge datasets from different sources and ensure consistent formats and scales.
-
-    \item \textbf{Standardization:} Bring data into a standard format.
-
-    \item \textbf{Quality Assessment:} Ensure cleaning has been effective.
-\end{enumerate}
-\end{block}
-\end{frame}
-
-\begin{frame}{Data Validation}
-\begin{itemize}
- \item Coding/serialization rules, e.g. with Regex 
- \begin{itemize}
-   \item \textbf{Example} Are all phone numbers of the format: 
-   \colorbox{code}{\texttt{\footnotesize \Verb_^([0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}$_}}
- \end{itemize}
- \item Data type constraints
- \begin{itemize}
-   \item \emph{Example}: Are all sales prices numbers?
- \end{itemize}
- \item Range constraints
- \begin{itemize}
-   \item \emph{Examples}: Are prices $> 0$? Are sales number $< 1000$?
- \end{itemize}
- \item Cross-field validation
- \begin{itemize}
-   \item \emph{Example}: If province is NL, then area code must be 709
- \end{itemize}
- \item Uniformity of measures/scales
- \begin{itemize}
-   \item \emph{Example}: All weights must be in kg, not pounds
- \end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Data Validation \small [cont'd]}
-\begin{itemize}
- \item Uniqueness constraints
- \begin{itemize}
-   \item Real duplicates and synonyms
-   \item \emph{Example}: Rebekah Uqi Williams \\ (Commissioner of Nunavut (2020--2021)
-   \item \textbf{Abbreviations}: \\ Rebekah U. Williams; Rebekah Williams, R.U. Williams
-   \item \textbf{Order}: \\ Williams, Rebekah Uqi; Williams, Rebekah U.; Williams, R.
-   \item \textbf{Spelling}: \\ Rebekah; Rebecca; Rebeccah; Rebeckah; Rebecka
-   \item \textbf{Misspellings}: \\ Reebkah, Rebkah, Wililams, Willaims, \ldots
-   \item \ldots
- \end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Data cleaning}
-\begin{itemize}
-	\item \textbf{Data Transformation,} into proper format or structure.
-	\begin{itemize}
-	  \item One row for each observation, case, event, \ldots
-	  \item Requires case or event identifiers
-	\end{itemize}
-	\item \textbf{Data Imputation,} replacing missing values with estimated or default values, or removing missing values
-	\begin{itemize}
-	  \item Different meanings of missing values
-	  \item Removal may bias data
-	  \item Estimating values may be error-prone
-	\end{itemize}
-	\item \textbf{Data Correction,} or removal of erroneous data.
-	\begin{itemize}
-	  \item Requires access to correct data
-	\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Data Cleaning}
-\begin{block}{Important}
-Cleaning, transformation, and correction of data is \emph{subjective} and requires \emph{expert knowledge} of the data, the validation rules, the metadata, and the application domain.
-\end{block}
-\vspace{5mm}
-\begin{block}{The 80/20 Rule of Data Science}
-Cleaning, transformation, and correction of data takes 80\% of of the time, data analysis takes 20\% of the time.
 \end{block}
 \end{frame}
 

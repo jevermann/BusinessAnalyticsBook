@@ -74,7 +74,7 @@ Y = \beta_0 + \beta_1 X + \epsilon
 \scriptsize Source: ISLR2 Figure 3.1
 \end{frame}
 
-\begin{frame}{Ensure a Linear Model is Sensible}
+\begin{frame}{Correlation versus Regression}
 \centering
 \includegraphics[width=.85\textwidth]{screen1.png} \\
 
@@ -105,24 +105,25 @@ RSS = \sum_i \left( y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i \right)^2 \quad \qua
 \hat{\beta}_0 &= \bar{y} - \hat{\beta}_1 \bar{x}
 \end{align*}
 where $\bar{x}$ and $\bar{y}$ are the sample means
-\item MSE (''L2 loss'') is susceptible to outlier influence, the MAE (''L1 loss'') is more robust
+%\item MSE (''L2 loss'') is susceptible to outlier influence, the MAE (''L1 loss'') is more robust
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Evaluating Linear Regression Models \small [cont'd]}
-\begin{itemize}
-  \item Estimates have \emph{standard errors} that indicate uncertainty of the estimates
-  \item A \emph{t-test} can be used to determine if a parameter is statistically significant from a value $V$ (typically $V=0$) using the test statistic
-\begin{align*}
-t = \frac{\hat{\beta}_1 - V}{SE(\hat{\beta}_1)}
-\end{align*}
-  \item The \emph{p-value} is the probability that the parameter is non-zero, assuming the estimated model is true
-  \item The $R^2$ value is the proportion of explained variance
+%\begin{itemize}
+  %\item Estimates have \emph{standard errors} that indicate uncertainty of the estimates
+  %\item A \emph{t-test} can be used to determine if a parameter is statistically significant from a value $V$ (typically $V=0$) using the test statistic
+%\begin{align*}
+%t = \frac{\hat{\beta}_1 - V}{SE(\hat{\beta}_1)}
+%\end{align*}
+  %\item The \emph{p-value} is the probability that the parameter is non-zero, assuming the estimated model is true
+%  \item 
+The $R^2$ value is the proportion of explained variance
 \begin{align*}
 R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
 \end{align*}
 where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares
-\end{itemize}
+%\end{itemize}
 \end{frame}
 
 \begin{frame}{Generalization to Multiple Predictors}
@@ -159,30 +160,32 @@ x_{i3} = \begin{cases}
 \end{cases}
 \end{align*}
 \item Note: $x_{i1} = x_{i2} = x_{i3} = 0$ represents level $d$!
-\item ''Contrasts'' determine how factor levels are coded using dummy variables
+%\item ''Contrasts'' determine how factor levels are coded using dummy variables
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Inputs, Predictors, and Polynomials}
 
-\begin{itemize}
-   \item Example:
+Example:
 \begin{align*}
 Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \epsilon
-\end{align*} \vspace{-7mm}
+\end{align*}
+\begin{itemize}
   \item Still linear in $\beta_j$
-  \item Two \emph{inputs} $X_1$ and $X_2$
-  \item Four \emph{predictors} or \emph{features}: $X_1$, $X_1^2$, $X_2$, $X_1 X_2$
-  \item \textbf{Main effects} $\beta_1$ and $\beta_3$, \textbf{interaction effect} $\beta_4$, and a degree-2 polynomial
+  \item Two \textbf{inputs} $X_1$ and $X_2$
+  \item Four \textbf{predictors} or \textbf{features}: $X_1$, $X_1^2$, $X_2$, $X_1 X_2$
+  \item \textbf{Main effects} $\beta_1$ and $\beta_3$, 
+  \item \textbf{interaction effect} $\beta_4$, 
+  \item A degree-2 \textbf{polynomial} effect $\beta_2$
 \end{itemize}
-\begin{columns}
-\begin{column}{0.85\textwidth}
-\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_7.pdf} 
-\end{column}
-\begin{column}{0.15\textwidth}
+\end{frame}
+
+\begin{frame}{Interactions}
+\centering
+
+\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_7.pdf}  \\
+
 \scriptsize Source: ISLR2 Figure 3.7
-\end{column}
-\end{columns}
 \end{frame}
 
 \begin{frame}{Multiple Regression with Polynomial Expansion}
@@ -193,7 +196,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \eps
 \scriptsize Source: ISLR2 Figure 3.8
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Linear Regression in R}
+\begin{frame}[fragile]{Linear Regression in R}
 
 The 'Boston' data set contains housing values in Boston in variable \texttt{medv} (median value). Examine the data:
 
@@ -218,7 +221,7 @@ plot(Boston)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Linear Regression in R \small [cont'd]}
+\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
 Fit a simple model, examine the results, and make predictions:
 \begin{Rcode}
 # Fit a model with intercept only
@@ -242,7 +245,7 @@ predict(fitted.model, data.frame(lstat=c(5, 10, 15)),
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Linear Regression in R \small [cont'd]}
+\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
 Build more complex models:
 \begin{Rcode}
 # Add another predictor
@@ -252,8 +255,7 @@ fitted.model <- lm(medv ~ lstat + age, data=Boston)
 fitted.model <- lm(medv ~ ., data=Boston)
 
 # Add interaction terms
-fitted.model <- lm(medv ~ lstat + age + lstat:age, 
-   data=Boston)
+fitted.model <- lm(medv ~ lstat + age + lstat:age,data=Boston)
    
 # Shorter and equivalent
 fitted.model <- lm(medv ~ lstat*age, data=Boston)
@@ -261,25 +263,24 @@ summary(fitted.model)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Linear Regression in R \small [cont'd]}
+\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
 Add polynomial terms:
 \begin{Rcode}
 # Add a polynomial term; use the I(.) function
 # for any data transformations, such as log(),
 # or exp() or sqrt() as well as polynomials
-fitted.model <- lm(medv ~ lstat + I(lstat^2), 
-   data=Boston)
+fitted.model <- lm(medv ~ lstat + I(lstat^2), data=Boston)
 summary(fitted.model)
 
 # Add all polynomial terms up to degree 5
 fitted.model <- lm(medv ~ poly(lstat, 5), data=Boston)
-# Note the coefficients for the polynomials 
-# in the summary
+
+# Note the coefficients for the polynomials in the summary
 summary(fitted.model)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Multiple Linear Regression in R \small [cont'd]}
+\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
 Categorical predictors (''factors'') using dummy variables:
 \begin{Rcode}
 ?Carseats
@@ -328,16 +329,13 @@ Use the \texttt{Carseats} data set from the ISLR2 library with \texttt{Sales} as
      \item Interpret the coefficients. Tip: Some variables are categorical
      \item Remove non-significant predictors
      \item How well do the two models fit the data?
-     \item Determine the 95\% confidence intervals for the coefficients of each model.
-     \item (How) does the importance of predictors change?
   \end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile]{Cross-Validation in R -- Holdout Sample}
 Validation set approach:
 \begin{Rcode}
-# Set the seed for the pseudo-random
-# number generator (RNG)
+# Set the seed for the pseudo-random number generator (RNG)
 set.seed(1)
 
 # Randomly use half the Auto data as training sample
@@ -348,25 +346,20 @@ test.data <- Auto[-train.idx,]
 # Fit model to (train model on) a subset
 fitted.model <- lm(mpg ~ horsepower, data=train.data)
 
-# Calculate the validation data MSE. 
-mean((test.data$mpg-predict(fitted.model,test.data))^2)
+# Calculate the validation data MSE
+mean((test.data$mpg - predict(fitted.model, test.data))^2)
 
 # Calculate the training MSE, first from residuals, 
 # then by explicitly predicting the training data
 mean(summary(fitted.model)$residuals^2)
-mean((train.data$mpg-predict(fitted.model,train.data))^2)
+mean((train.data$mpg-predict(fitted.model, train.data))^2)
 \end{Rcode}
 \end{frame}
 
 
 \begin{frame}[fragile]{Cross-Validation in R -- Leave One Out CV}
-\small
-\begin{itemize}
-  \item The \texttt{glm()} function fits \emph{Generalized Linear Models} using maximum-likelihood estimation, not RSS minimization. They yield identical solutions for ''ordinary'' linear models but MLE is more flexible and can be used on a wide range of models.
-  \item The use of \texttt{glm()} is identical to that of \texttt{lm()} for ''ordinary'' linear models; the \texttt{boot} package provides cross-validation for \texttt{glm} models
-  \item \textbf{Tip:} LOOCV is K-Fold CV with $K=N$
-\end{itemize}
-\normalsize
+LOOCV is K-Fold CV with $K=N$
+
 \begin{Rcode}
 library(boot)
 
@@ -378,11 +371,15 @@ summary(glm.fit)
 cv.err <- cv.glm(Auto, glm.fit, K=nrow(Auto))
 cv.err$delta[1]
 \end{Rcode}
+%\begin{itemize}
+%\scriptsize
+  %\item The \texttt{glm()} function fits \emph{Generalized Linear Models} using maximum-likelihood estimation, not RSS minimization. They yield identical solutions for ''ordinary'' linear models but MLE is more flexible and can be used on a wide range of models. The use of \texttt{glm()} is identical to that of \texttt{lm()} for ''ordinary'' linear models; the \texttt{boot} package provides cross-validation for \texttt{glm} models
+%\end{itemize}
 \end{frame}
 
 
 \begin{frame}[fragile]{Cross-Validation in R -- K-Fold CV}
-K-Fold Cross-Validation using the \texttt{glm} function \\
+K-Fold Cross-Validation with $K=10$\\
 \begin{Rcode}
 cv.err <- cv.glm(Auto, glm.fit, K=10)
 cv.err$delta[1]
@@ -413,11 +410,10 @@ Consider the Boston housing data set \texttt{Boston}.
      \item Predict the target for the testing data
      \item Compute the test error
   \end{enumerate}
-  \item Repeat the previous step 3 times, using different splits. How do the results change?
+  \item Repeat the previous step 2 times, using different splits. How do the results change?
   \item Average the test error of the four splits. 
-  \item Include \texttt{dis} as predictor. Does it reduce the test error?
   \item Calculate the test error estimate using LOOCV. Compare your result to that of step 4.
-  \item Calculate the test error estimate using 4-fold cross-validation. Compare the estimate to that of step 4
+  \item Calculate the test error estimate using 10-fold cross-validation. Compare the estimate to that of step 4
 \end{enumerate}
 \end{frame}
 
@@ -487,8 +483,8 @@ Consider the Boston housing data set \texttt{Boston}.
 \begin{frame}{Selecting the Tuning Parameter}
 \begin{block}{Grid Search}
 \begin{itemize} 
-   \item Define a ''grid'' of tuning parameters (e.g. $\lambda$) to search
-   \item Cross-validate models for each point in the grid (each value of $\lambda$)
+   \item Define a set/range of possible values for $\lambda$
+   \item Cross-validate models for each value of $\lambda$
    \item Fit the final model to the optimal cross-validated error
 \end{itemize}
 \end{block}
@@ -510,10 +506,10 @@ The Elastic Net penalty is a mix of L1-norm $||\beta||_1$ and L2-norm $||\beta||
 \end{itemize}
 
 \vspace{.5\baselineskip}
-The \texttt{glmnet()} function in the \texttt{glmnet} library uses the Elastic Net regularization method.\end{frame}
+The \texttt{glmnet()} function in the \texttt{glmnet} library for R uses the Elastic Net regularization method.\end{frame}
 
 \begin{frame}[fragile]{Ridge Regression in R}
-\small
+
 Use the \texttt{Hitters} data set to model \texttt{Salary} as outcome and other variables as predictors.
 \begin{Rcode}
 library(ISLR2)
@@ -522,7 +518,9 @@ library(glmnet)
 # Remove missing values
 Hitters <- na.omit(ISLR2::Hitters)
 \end{Rcode}
+
 The \texttt{glmnet()} function requires separate $x$ and $y$ values, instead of a formula. To create dummy variables for categorical variables, use the \texttt{model.matrix} function:
+
 \begin{Rcode}
 # Create dummy variables for categorical variables
 # Remove intercept from model
@@ -595,6 +593,7 @@ Compare regression coefficients between ridge using optimal $\lambda$ and unpena
 \begin{Rcode}
 # Show the coefficients at optimal lambda
 predict(ridge.test, type='coefficients', s=lambda.opt)
+
 # Compare to unpenalized least-squares fit
 coef(lm.fit(x.test, y.test))
 \end{Rcode}
@@ -643,6 +642,7 @@ Compare regression coefficients between Lasso using optimal $\lambda$ and unpena
 # Show the coefficients at optimal lambda, note the 
 # many zero coefficients
 predict(lasso.test, type='coefficients', s=lambda.opt)
+
 # Compare to unpenalized least-squares fit
 coef(lm.fit(x.test, y.test))
 \end{Rcode}
@@ -661,7 +661,7 @@ Predict the number of applications received using the other variables in the \te
       \item Fit an unpenalized linear model on the training set. Report the test error.
       \item Fit a ridge regression model on the training set, with $\lambda$ chosen by cross-validation. Report the test error.
       \item Fit a lasso model on the training set, with $\lambda$ chosen by cross-validation. Report the test error.
-      \item Compare and conrast the results
+      \item Compare and contrast the results
   \end{enumerate}
 \end{frame}
 
@@ -700,9 +700,9 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
 \begin{frame}{Classification}
   \begin{itemize}
      \item Qualitative (categorical) outcome
-     \item Estimate/predict probabilities of class membership
-     \item \textbf{Problem}: Linear combinations of predictors are not limited to $[0, 1]$
-     \item \textbf{Solution}: ''Link'' function that transforms the weighted sum of predictors
+     \item Estimate or predict probabilities of class membership
+     \item \textbf{Problem}: Linear combinations of predictors not in $[0, 1]$
+     \item \textbf{Solution}: ''Link'' function transforms linear combinations of predictors
   \end{itemize}
 \includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter4/4_2.pdf}
 \scriptsize Source: ISLR2 Figure 4.2
@@ -713,8 +713,8 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
 \begin{columns}
 \begin{column}{0.6\textwidth}
 \begin{align*}
-  \sigma(x) &= \frac{1}{1 + e^{-x}} = \frac{e^x}{1 + e^x} \\
-  &= 1 - \sigma(-x)
+  \sigma(a) &= \frac{1}{1 + e^{-a}} = \frac{e^a}{1 + e^a} \\
+  &= 1 - \sigma(-a)
 \end{align*}
 \end{column}
 \begin{column}{0.4\textwidth}
@@ -735,7 +735,7 @@ p(X) = \sigma( \beta_0 + \beta_1 X) &= \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\be
 
 \begin{frame}{Logistic Regression \small [cont'd]}
 \begin{block}{Predictions}
-Given estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, use the link function to predict probabilities:
+Given estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, use the link function to predict class/outcome probabilities for observation $X$:
 \begin{align*}
   \hat{p}(X) = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 X}}{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 X}}
 \end{align*}
@@ -791,9 +791,9 @@ contrasts(Smarket$Direction)
 Note the \texttt{family} argument for the \texttt{glm} function:
 \begin{Rcode}
 logreg.fitted <- 
-   glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume, 
-                 data=Smarket, 
-                 family=binomial(link='logit'))
+   glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume, 
+       data=Smarket, 
+       family=binomial(link='logit'))
 summary(logreg.fitted)
 \end{Rcode}
 \end{frame}
@@ -803,15 +803,13 @@ summary(logreg.fitted)
 \small
 Predict logits for training set:
 \begin{Rcode}
-logreg.logits <- 
-   predict(logreg.fitted, newdata = Smarket)
+logreg.logits <- predict(logreg.fitted, newdata = Smarket)
 \end{Rcode}
 Predict probabilities for training set:
 \begin{Rcode}
 # Predict probabilities for training test
 logreg.probabilities <- 
-   predict(logreg.fitted, newdata = Smarket, 
-           type='response')
+   predict(logreg.fitted, newdata = Smarket, type='response')
 \end{Rcode}
 Predict categorical outcomes:
 \begin{Rcode}
@@ -851,6 +849,7 @@ Predict probabilities for test data and classify:
 \begin{Rcode}
 logreg.probabilities <- predict(logreg.fitted, 
     newdata = test.data, type='response')
+    
 pred.direction <- rep('Down', nrow(test.data))
 pred.direction[logreg.probabilities > .5] <- 'Up'
 \end{Rcode}
@@ -919,8 +918,7 @@ plot(performance(pred.obj, 'prec', 'rec'), colorize=T)
 \end{align*}
 \item \textbf{Naive Bayes Assumption}: Within each class $c$, the $D$ predictors are independent:
 \begin{align*}
-p(X | Y=c ) &= p(x_1 | Y=c) \times p(x_2 | Y=c) \times \cdots  \\ 
-& \qquad \qquad \qquad \times p(x_D | Y=c) \\
+p(X | Y=c ) &= p(x_1 | Y=c) \times p(x_2 | Y=c) \times \cdots  \times p(x_D | Y=c) \\
             &= \prod_{d=1}^D p(x_d | Y=c)
 \end{align*}
 \item \textbf{Posterior probability}:
@@ -938,10 +936,9 @@ Naive Bayes using the \texttt{naiveBayes} function in the \texttt{e1071} library
 library(e1071)
 
 # Fit using same syntax as glm
-nb.fitted <- 
-    naiveBayes(Direction~Lag1+Lag2, data=train.data)
-# Output contains prior and conditional 
-# probabilities (and their SD)
+nb.fitted <- naiveBayes(Direction~Lag1+Lag2, data=train.data)
+
+# Output contains prior and conditional probabilities (and SD)
 nb.fitted
 \end{Rcode}
 Predict class membership and compute confusion matrix:
@@ -957,8 +954,8 @@ print(nb.cm)
 Evaluate the classifier:
 \begin{Rcode}
 # Predict probabilities (for use with ROCR)
-nb.probabilities <- 
-     predict(nb.fitted, test.data, type='raw')
+nb.probabilities <- predict(nb.fitted, test.data, type='raw')
+
 # Create an ROCR prediction object
 nb.pred.obj <- prediction(nb.probabilities[,'Up'], 
                           test.data$Direction)
@@ -966,8 +963,7 @@ nb.pred.obj <- prediction(nb.probabilities[,'Up'],
 Assess ROC and AUC:
 \begin{Rcode}
 # Generate an ROC plot
-plot(performance(nb.pred.obj, 'tpr', 'fpr'), 
-         colorize=T)
+plot(performance(nb.pred.obj, 'tpr', 'fpr'), colorize=T)
 abline(0, 1)
 
 # Compute the AUC
@@ -1027,8 +1023,8 @@ Use ROCR functions to evaluate classifier:
 \begin{Rcode}
 knn.pred.obj <- 
       prediction(knn.class.probs, test.data$Direction)
-plot(performance(knn.pred.obj, 'tpr', 'fpr'), 
-                 colorize=T)
+      
+plot(performance(knn.pred.obj, 'tpr', 'fpr'), colorize=T)
 abline(0, 1)
 performance(knn.pred.obj, 'auc')@y.values[[1]]
 \end{Rcode}
