@@ -91,14 +91,17 @@ The following R code block uses the \texttt{filter} function to generate the exa
 
 \begin{samepage}
 \begin{Rcode}
+# Load ASTSA library
+library(astsa)
+
 # Random numbers as errors
 w <- rnorm(500,0,1)
+
 # Moving average
 v <- filter(w, sides=2, filter=c(1/3,1/3,1/3), method='convolution')
+
 # Plot timeseries
 par(mfrow=c(2,1))
-# The astsa library contains the tsplot function
-library(astsa)
 tsplot(w, main="white noise", col=3, gg=T)
 tsplot(v, ylim=c(-3,3), main="moving average", col=4, gg=T)
 \end{Rcode}
@@ -125,13 +128,21 @@ AR models are widely used in economic and financial time series where data point
 
 The following R code uses the \texttt{filter} function in ''recursive'' mode with parameters \texttt{1} and \texttt{-.9} to create the time series corresponding to the example model\footnote{The R code for this and following examples are based on material Shumway \& Stoffer}. The resulting plot is shown in Figure~\ref{fig:figure3}.
 
+\begin{samepage}
 \begin{Rcode}
 # Random numbers (errors)
-w <- rnorm(550,0,1)
-# remove first 50 values for startup
-x <- filter(w, filter=c(1,-.9), method="recursive")[-(1:50)]
-tsplot(x, main="autoregression", col=4, gg=T)
+w = rnorm(550,0,1)
+
+# Autoregressive time series
+x = filter(w, filter=c(1,-.9), method="recursive")
+
+# Remove first 50 values for startup
+x = x[-(1:50)]
+
+# Plot time series
+tsplot(x, main="autoregression", col=4)
 \end{Rcode}
+\end{samepage}
 
 \begin{figure}
 \centering
@@ -157,17 +168,22 @@ The following R code block uses the the \texttt{cumsum()} function to calculate 
 
 \begin{samepage}
 \begin{Rcode}
-# Create random walk (white noise) model and then add drift
-w <- rnorm(200)
-x <- cumsum(w)
-drift <- .2
-w.drift <- w + drift;
-x.drift <- cumsum(w.drift)
-# Plot the two resulting series
-tsplot(x.drift, ylim=c(-10,55), main="random walk",ylab='',col=3,gg=T)
+# White noise
+w = rnorm(200)
+# Random walk
+x = cumsum(w)
+
+# Drift
+drift = .2
+w.drift = w + drift;
+# Random walk with drift
+x.drift = cumsum(w.drift)
+
+# Plot
+tsplot(x.drift, main="random walk", col=3, ylab='', ylim=c(-10,55))
 abline(a=0, b=drift, lty=2, col=3)
 lines(x, col=4)
-abline(h=0, col=4, lty=2)
+abline(a=0, b=0, lty=2, col=4)
 \end{Rcode}
 \end{samepage}
 
@@ -197,7 +213,10 @@ The following R code block creates a sinusoidal signal and overlays it with diff
 \begin{Rcode}
 # Create signal
 cs = 2*cos(2*pi*1:500/50 + .6*pi)
+
+# Create noise
 w = rnorm(500,0,1)
+
 # Overlay with gaussian noise and plot
 par(mfrow=c(3,1), mar=c(3,2,2,1), cex.main=1.5)
 tsplot(cs, main='Signal', col=2, gg=T)
@@ -238,13 +257,18 @@ The \texttt{zoo} library for R contains the functions \texttt{na.locf()} and \te
 
 \begin{samepage}
 \begin{Rcode}
+# Load zoo library
+library(zoo)
+
 # Introduce NA values into the time series
 ts_data[c(5, 10, 15)] <- NA
 
 # Using na.trim to remove leading/trailing NA values
 trimmed_ts <- na.trim(ts_data)
+
 # Using na.locf (Last Observation Carried Forward) to handle NA values
 locf_ts <- na.locf(ts_data)
+
 # Using na.approx to interpolate NA values
 approx_ts <- na.approx(ts_data)
 \end{Rcode}
@@ -259,6 +283,7 @@ ts_data2 <- ts(c(1:24), frequency = 12, start = c(2020, 7))
 
 # Using ts.intersect to determine intersection of two time series
 intersect_ts <- ts.intersect(ts_data, ts_data2)
+
 # Using ts.union to determin union of two time series
 union_ts <- ts.union(ts_data, ts_data2)
 \end{Rcode}
@@ -270,6 +295,7 @@ An important operation in time series analysis is to ''lag'' a time series, that
 \begin{Rcode}
 # Positive k shifts backwards in time
 lag_ts <- lag(ts_data, 2)
+
 # Negative k shifts forwards in time
 lag_ts <- lag(ts_data, 3)
 \end{Rcode}
@@ -298,7 +324,7 @@ library(astsa)
 ?soi
 # Apply moving average filter
 f = 1/12 * c(0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5)
-filter(soi, sides=2, filter=f, method='convolution')
+filter(soi, sides=2, filter=f)
 \end{Rcode}
 \end{samepage}
 
@@ -420,12 +446,16 @@ Time series regression uses ordinary least squares (OLS) regression models where
 \begin{Rcode}
 # Use data from the astsa library
 library(astsa)
+
 # Plot the three time series
 ts.plot(cmort, tempr, part, col=2:4)
+
 # Center the temperature variable
 temp = tempr - mean(tempr)
+
 # Square the temperature variable
 temp.2 = temp^2
+
 # Fit different linear models and provide summaries
 summary(lm(cmort ~ time(cmort)))
 summary(lm(cmort ~ time(cmort) + temp))
@@ -441,12 +471,15 @@ Time series regression can also use lagged time series data, that is, data of th
 # Lag the temperature
 temp.l.2 = lag(temp, 2)
 temp.l.4 = lag(temp, 4)
+
 # Intersect all time series to omit leading/trailing NA
 temp.df <- ts.intersect(cmort, time(cmort), part, 
-                  temp, temp.2, temp.l.2, temp.l.4, dframe=TRUE)
+                        temp, temp.2, temp.l.2, temp.l.4, 
+                        dframe=TRUE)
+                        
 # Fit the linear model including lagged temperature
 summary(lm(cmort ~ time.cmort. + temp + temp.2 + 
-                      temp.l.2 + temp.l.4 + part, data=temp.df))
+                   temp.l.2 + temp.l.4 + part, data=temp.df))
 \end{Rcode}
 \end{samepage}
 
@@ -459,14 +492,14 @@ Stationary data with a constant mean and variance is more predictable and theref
 Statistical inference in time series analysis relies heavily on the assumption of stationarity. Many time series statistical models, including linear regression and ARMA models, are based on the assumption of stationarity. These models provide meaningful and reliable results only if the stationarity assumption is satisfied. 
 
 \emph{Strict stationarity}\index{Stationarity (of time series)!strict} is defined as the requirement that the probabilistic behaviour of every set of values of the series
-\begin{align*}\{x_{t1}, x_{t2}, \ldots, x_{tk} \} \end{align*}
+\begin{align*}\{x_{t_1}, x_{t_2}, \ldots, x_{t_k} \} \end{align*}
 \noindent is identical to that of the set of values shifted by time $h$:
 \begin{align*}
-\{x_{t1+h}, x_{t2+h}, \ldots, x_{tk + h} \}
+\{x_{t_1+h}, x_{t_2+h}, \ldots, x_{t_k + h} \}
 \end{align*}
 \noindent That is,
 \begin{align*}
-&\Pr \{ x_{t1} \leq c_1, \ldots, x_{tk} \leq c_k \} = \Pr \{ x_{t1+h}\leq c_1, \ldots , x_{tk+h} \leq c_k \}
+&\Pr \{ x_{t_1} \leq c_1, \ldots, x_{t_k} \leq c_k \} = \Pr \{ x_{t_1+h}\leq c_1, \ldots , x_{t_k+h} \leq c_k \}
 \end{align*}
 
 Because strong stationarity is hard to test, a more commonly used and practical form of stationarity is \emph{weak stationarity}\index{Stationarity (of time series)!weak}, which requires only that the the mean, variance, and the \emph{autocovariance} (the covariance of the series with a lagged version itself) are constant over time. Most statistical tests and models assume weak stationarity. In summary, a weakly stationary time series is a finite variance process such that:
@@ -489,7 +522,7 @@ Let $s = t + h$, then under the assumption of weak stationarity:
 
 The \emph{autocovariance} and \emph{autocorrelations} are measures of dependence of the time series on lagged versions of itself. For a weakly stationary time series, the theoretical autocovariance for a lag $h$ is defined as the covariance between two points $t, t+h$ on time series $x$\index{Autocovariance}
 \begin{align*}
-\gamma(h) = cov(x, x_{t+h}) = E [ (x_t - \mu)(x_{t+h} - \mu)] 
+\gamma(h) = cov(x_t, x_{t+h}) = E [ (x_t - \mu)(x_{t+h} - \mu)] 
 \end{align*}
 
 Note that this definition implies weak stationarity because a constant term for the mean $\mu$ is used in the expectation on the right-hand side.
@@ -544,10 +577,12 @@ The following R code block illustrates the autocorrelation function using the st
 library(astsa)
 # Create Gaussian white noise
 t <- ts(rnorm(500))
+
 # The hard way:
 cor(ts.intersect(t, lag(t,1), dframe=T))
 cor(ts.intersect(t, lag(t,2), dframe=T))
 # etc.
+
 # The easy way:
 # Without plot
 acf <- acf1(t, plot=FALSE)
@@ -561,8 +596,10 @@ The following example in R uses the \texttt{soi} data set and the \texttt{lag1.p
 \begin{samepage}
 \begin{Rcode}
 library(astsa)
+
 # Compute and plot the ACF for different lags
 acf1(soi, gg=T, co=3, lwd=2)
+
 # Scatterplot of original versus or lags up to 6, with ACF values
 lag1.plot(soi, max.lag = 6, gg=T, col=4, lwl=3)
 \end{Rcode}
@@ -652,13 +689,13 @@ t <- ts(1:100 + rnorm(100) * 10)
 
 # Fit a linear model to the time series
 trend_model <- lm(t ~ time(t))
-# Calculate detrended series by subtracting the estimated trend
-detrended_series <- residuals(trend_model)
+# Calculate detrended series
+detrended <- residuals(trend_model)
 
 # Plot original and detrended
 par(mfrow=c(2,1))
-tsplot(t, type="l", main="original",col=3,gg=T)
-tsplot(detrended_series, type="l", main="detrend",col=2,gg=T)
+tsplot(t, type="l", main="original", col=3)
+tsplot(detrended, type="l", main="detrend", col=2)
 \end{Rcode}
 \end{samepage}
 
@@ -699,17 +736,20 @@ The following R code shows the effect of differencing on a simulated time series
 
 \begin{samepage}
 \begin{Rcode}
+set.seed(42)
 # Simulating a time series with trend
-t <- ts(cumsum(rnorm(100)))  # Cumulative sum of normal deviations
+t <- ts(cumsum(rnorm(100))) 
 
+# Plot original, first, and second difference
 par(mfrow=c(3,1))
-tsplot(t, type="l", main="original", col=3,gg=T)
-# First differencing
+tsplot(t, type="l", 
+    main="original", col=3)
+
 tsplot(diff(t, differences = 1), type="l", 
-    main="first difference", col=4,gg=T)
-# Second differencing
+    main="first difference", col=4)
+
 tsplot(diff(t, differences = 2), type="l", 
-    main="second difference", col=5,gg=T)
+    main="second difference", col=5)
 \end{Rcode}
 \end{samepage}
 
@@ -717,8 +757,12 @@ To see illustrate the effects of detrending and differencing on the ACF for a re
 
 \begin{Rcode}
 acf1(chicken, max.lag=48, main="original", col=1, gg=T)
+
 acf1(resid(fit), max.lag=48, main="detrend", col=2, gg=T)
-acf1(diff(chicken), max.lag=48, main="first diff", col=3, gg=T)
+
+acf1(diff(chicken), max.lag=48, 
+    main="first diff", col=3, gg=T)
+
 acf1(diff(chicken, differences=2), max.lag=48, 
     main="sec diff", col=4, gg=T)
 \end{Rcode}

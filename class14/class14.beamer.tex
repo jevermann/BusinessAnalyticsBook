@@ -97,16 +97,19 @@ Rob J. Hyndman and George Athanasopoulos (2018) \emph{Forecasting: Principles an
 Example:
 \begin{align*}v_t = \frac{1}{3} ( w_{t-1} + w_t + w_{t+1})\end{align*}
 \begin{Rcode}
+# Load ASTSA library
+library(astsa)
+
 # Random numbers
 w = rnorm(500,0,1)
+
 # Moving average
 v = filter(w, sides=2, filter=rep(1/3,3))
+
 # Plot timeseries
 par(mfrow=c(2,1))
-tsplot(w, 
-    main="white noise", col=3, gg=T)
-tsplot(v, ylim=c(-3,3), 
-    main="moving average", col=4, gg=T)
+tsplot(w, ylim=c(-3,3), main="white noise", col=3)
+tsplot(v, ylim=c(-3,3), main="moving average", col=4)
 \end{Rcode}
 \end{frame}
 
@@ -122,10 +125,15 @@ Example:
 \begin{Rcode}
 # Random numbers (errors)
 w = rnorm(550,0,1)
-# remove first 50 values for startup
-x = filter(w, filter=c(1,-.9), 
-              method="recursive")[-(1:50)]
-tsplot(x, main="autoregression", col=4, gg=T)
+
+# Autoregressive time series
+x = filter(w, filter=c(1,-.9), method="recursive")
+
+# Remove first 50 values for startup
+x = x[-(1:50)]
+
+# Plot time series
+tsplot(x, main="autoregression", col=4)
 \end{Rcode}
 \end{frame}
 
@@ -136,21 +144,35 @@ tsplot(x, main="autoregression", col=4, gg=T)
 \end{frame}
 
 \begin{frame}[fragile]{Random Walk with Drift}
+\begin{columns}
+\begin{column}{.4\textwidth}
 Example:
 \begin{align*}x_t &= \delta + x_{t-1} + w_t \\
 &= \delta t + \sum_{j=1}^t w_j\end{align*}
+\end{column}
+\begin{column}{.7\textwidth}
 \begin{Rcode}
+# White noise
 w = rnorm(200)
+# Random walk
 x = cumsum(w)
+
+# Drift
 drift = .2
+# White noise with drift
 w.drift = w + drift;
+# Random walk with drift
 x.drift = cumsum(w.drift)
-tsplot(x.drift, ylim=c(-10,55), 
-       main="random walk", ylab='', col=3, gg=T)
+
+# Plot
+tsplot(x.drift, main="random walk", col=3, 
+       ylab='', ylim=c(-10,55))
 abline(a=0, b=drift, lty=2, col=3)
 lines(x, col=4)
-abline(h=0, col=4, lty=2)
+abline(a=0, b=0, lty=2, col=4)
 \end{Rcode}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Random Walk with Drift \small [cont'd]}
@@ -170,15 +192,15 @@ A &= 2 &\qquad \text{amplitude} \\
 \begin{Rcode}
 # Create signal
 cs = 2*cos(2*pi*1:500/50 + .6*pi)
+
+# Create noise
 w = rnorm(500,0,1)
-# Overlay with gaussian noise and plot
+
+# Plot signal with different amount of noise
 par(mfrow=c(3,1), mar=c(3,2,2,1), cex.main=1.5)
-tsplot(cs, 
-    main='Signal', col=2, gg=T)
-tsplot(cs+w, 
-    main='Signal and N(0,1) noise', col=3, gg=T)
-tsplot(cs+5*w, 
-    main='Signal and N(0,25) noise', col=4, gg=T)
+tsplot(cs, main='Signal', col=2)
+tsplot(cs+w, main='Signal and N(0,1) noise', col=3)
+tsplot(cs+5*w, main='Signal and N(0,25) noise', col=4)
 \end{Rcode}
 \end{frame}
 
@@ -196,12 +218,16 @@ ts_data <- ts(1:24, frequency = 12, start = c(2020, 1))
 Dealing with missing values:
 \begin{Rcode}
 library(zoo)
+
 # Introduce NA values
 ts_data[c(5, 10, 15)] <- NA
+
 # Remove leading/trailing NA values
 trimmed_ts <- na.trim(ts_data)
+
 # Last Observation Carried Forward
 locf_ts <- na.locf(ts_data)
+
 # Interpolate NA values
 approx_ts <- na.approx(ts_data)
 \end{Rcode}
@@ -231,6 +257,7 @@ Lagging a series (shifting forward or backward in time):
 \begin{Rcode}
 # Positive k shifts backwards
 lag(ts_data, 6)
+
 # Negative k shifts forwards
 lag(ts_data, -3)
 \end{Rcode}
@@ -380,27 +407,11 @@ summary(lm(cmort ~ time.cmort. + temp + temp.2 +
 
 \begin{frame}{Strict Stationarity}
 A \textbf{strictly stationary} time series is one for which the probabilistic behaviour of every collection of values
-\begin{align*}&\{x_{t1}, x_{t2}, \ldots, x_{tk} \} \\
+\begin{align*}&\{x_{t_1}, x_{t_2}, \ldots, x_{t_k} \} \\
 \intertext{is identical to that of the shifted set}
-&\{x_{t1+h}, x_{t2+h}, \ldots, x_{tk + h} \}. \\
+&\{x_{t_1+h}, x_{t_2+h}, \ldots, x_{t_k + h} \}. \\
 \intertext{That is,}
-&\Pr \{ x_{t1} \leq c_1, \ldots, x_{tk} \leq c_k \} = \Pr \{ x_{t1+h}\leq c_1, \ldots , x_{tk+h} \leq c_k \}
-\end{align*}
-\end{frame}
-
-\begin{frame}{Weak Stationarity}
-A \textbf{weakly stationary} time series is a finite variance process such that
-\begin{enumerate}
-\item the mean is constant and does not depend on time: $\mu_t = \mu$
-\item the autocovariance $\gamma$ depends on $s$ and $t$ only through their difference $h=|s-t|$.
-\end{enumerate}
-Let $s = t + h$, then:
-\begin{align*}
-\gamma(s, t) = \gamma(t+h, t) &= cov(x_{t+h}, x_t) = cov(x_h, x_0) = \gamma(h) \\
-\intertext{and}
-\rho(h) &= \gamma(h) / \gamma(0)
-%\intertext{and the CCF of two jointly stationary time series is}
-%\rho_{xy}(h) &= \frac{\gamma_{xy}(h)}{\sqrt{\gamma_x(0)\gamma_y(0)}}
+&\Pr \{ x_{t_1} \leq c_1, \ldots, x_{t_k} \leq c_k \} = \Pr \{ x_{t_1+h}\leq c_1, \ldots , x_{t_k+h} \leq c_k \}
 \end{align*}
 \end{frame}
 
@@ -409,7 +420,7 @@ Let $s = t + h$, then:
 \begin{itemize}
    \item Covariance between two points $t, t+h$ on time series $x$ 
 \begin{align*}
-\gamma(h) = cov(x, x_{t+h}) = E [ (x_t - \mu)(x_{t+h} - \mu)] 
+\gamma(h) = cov(x_t, x_{t+h}) = E [ (x_t - \mu)(x_{t+h} - \mu)] 
 \end{align*}
 \vspace{-\baselineskip}
    \item Large autocovariance $\rightarrow$ smooth time series
@@ -418,7 +429,7 @@ Let $s = t + h$, then:
 \end{block}
 \begin{block}{Sample Autocovariance for Lag \emph{h}}
 \begin{align*}
-\hat{\gamma}(h)  = \frac{1}{n} \sum_{t=1}^{n-h} (x_t - \bar{x})(x_{t+h} - \bar{x})
+\hat{\gamma}(h)  = \frac{1}{(q-p)} \sum_{t=p}^{q-h} (x_t - \bar{x})(x_{t+h} - \bar{x})
 \end{align*}
 \end{block}
 \end{frame}
@@ -436,6 +447,23 @@ Let $s = t + h$, then:
 \end{block}
 \end{frame}
 
+
+\begin{frame}{Weak Stationarity}
+A \textbf{weakly stationary} time series is a process such that
+\begin{enumerate}
+\item the mean is constant and does not depend on time: $\mu_t = \mu$
+\item the autocovariance $\gamma$ depends on $s$ and $t$ only through their difference $h=|s-t|$.
+\end{enumerate}
+Let $s = t + h$, then:
+\begin{align*}
+\gamma(s, t) = \gamma(t+h, t) &= cov(x_{t+h}, x_t) = cov(x_h, x_0) = \gamma(h) \\
+\intertext{and}
+\rho(h) &= \gamma(h) / \gamma(0)
+%\intertext{and the CCF of two jointly stationary time series is}
+%\rho_{xy}(h) &= \frac{\gamma_{xy}(h)}{\sqrt{\gamma_x(0)\gamma_y(0)}}
+\end{align*}
+\end{frame}
+
 \begin{frame}{Measures of Dependence \small [cont'd]}
 The large-sample distribution of $\hat{\rho}_{x}(h)$ is normal with mean $0$ and standard deviation
 \begin{align*}
@@ -447,18 +475,6 @@ Hence, the approximate 95\% confidence interval on the ACF is
 \begin{align*}
 -\frac{1}{n} \pm \frac{2}{\sqrt{n}}
 \end{align*}
-\end{frame}
-
-
-\begin{frame}[fragile]{Measures of Dependence \small [cont'd]}
-\begin{block}{Partial Autocorrelation Function (PACF)}
-The PACF is the correlation between $x_{t+h}$ and $x_t$ with the linear dependence of $\{x_{t+1}, \ldots, x_{t+h-1}\}$ on each, removed:
-\begin{align*}
-\phi_{hh} = \begin{cases}\rho(1) &\quad h = 1 \\
- \operatorname{corr}(x_{t+h} - \hat{x}_{t+h}, x_t - \hat{x}_t) &\quad h \geq 2
- \end{cases}
-\end{align*}
-\end{block}
 \end{frame}
 
 %\begin{frame}[fragile]{Standard Deviations of ACF and CCF}
@@ -495,7 +511,7 @@ cor(ts.intersect(t, lag(t,2), dframe=T))
 # Without plot
 acf <- acf1(t, plot=FALSE)
 # With plot
-acf1(t, gg=T, col=7, lwd=3)
+acf1(t, col=7, lwd=3)
 \end{Rcode}
 \end{frame}
 
@@ -509,15 +525,12 @@ acf1(t, gg=T, col=7, lwd=3)
 Example using the \texttt{soi} data set (sea level air pressure index) from the \texttt{astsa} library:
 \begin{Rcode}
 library(astsa)
-?soi
 
 # Compute and plot the ACF for different lags
-acf1(soi, gg=T, co=3, lwd=2)
+acf1(soi, co=3, lwd=2)
 
-# Scatterplot of original versus
-# or lags up to 6, with ACF values
-lag1.plot(soi, max.lag = 6, 
-    gg=T, col=4, lwl=3)
+# Scatterplot of original versus or lags up to 6, with ACF
+lag1.plot(soi, max.lag = 6, col=4, lwl=3)
 \end{Rcode}
 \end{frame}
 
@@ -626,14 +639,16 @@ Assume that $x_t = \mu_t + y_t$ where $\mu_t$ is the trend and $y_t$ a stationar
 \begin{Rcode}
 # Simulate a time series with a linear trend
 t <- ts(1:100 + rnorm(100) * 10)
+
 # Fit a linear model to the time series
 trend_model <- lm(t ~ time(t))
 # Calculate detrended series
 detrended <- residuals(trend_model)
+
 # Plot original and detrended
 par(mfrow=c(2,1))
-tsplot(t, type="l", main="original",col=3,gg=T)
-tsplot(detrended, type="l", main="detrend",col=2,gg=T)
+tsplot(t, type="l", main="original", col=3)
+tsplot(detrended, type="l", main="detrend", col=2)
 \end{Rcode}
 \end{frame}
 
@@ -665,7 +680,12 @@ Assume that $x_t = \mu_t + y_t$ where $\mu_t$ is the trend and $y_t$ a stationar
 \begin{block}{Differencing}
 \begin{itemize}
   \item Model the trend stochastically as a random walk with drift: $\mu_t = \delta + \mu_{t-1} + w_t$ where $w_t$ is white noise
-  \item Differencing then yields $x_t - x_{t-1} = (\mu_t + y_t) - (\mu_{t-1} + y_{t-1}) = \delta + w_t + y_t - y_{t-1}$ which is stationary
+  \item Differencing then yields 
+  \begin{align*}x_t - x_{t-1} &= (\mu_t + y_t) - (\mu_{t-1} + y_{t-1})  \\
+  &= \mu_t - \mu_{t-1} + y_t - y_{t-1} \\
+  &= \delta + w_t + y_t - y_{t-1}
+  \end{align*}
+  which is stationary
 \end{itemize}
 \end{block}
 \begin{itemize}
@@ -675,51 +695,43 @@ Assume that $x_t = \mu_t + y_t$ where $\mu_t$ is the trend and $y_t$ a stationar
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Differencing \small [cont'd]}
-\begin{block}{Difference Operator}
-\vspace{-\baselineskip}
-\begin{align*}\nabla x_t = x_t - x_{t-1}\end{align*}
-\vspace{-\baselineskip}
-\end{block}
-\begin{block}{Backshift / Lag Operator}
-\vspace{-\baselineskip}
-\begin{align*}\operatorname{B} x_t &= x_{t-1} \\
-\operatorname{B}^k x_t &= x_{t-k} \\
-\nabla x_t &= (1-\operatorname{B})x_t \\
-\nabla^2 x_t &= (1-\operatorname{B})^2 x_t= (1-2 \operatorname{B} + \operatorname{B}^2)x_t = x_t - 2x_{t-1} + x_{t-2} \\
-\nabla^d &= (1-\operatorname{B})^d
- \end{align*}
- \vspace{-\baselineskip}
-\end{block}
-\end{frame}
-
 \begin{frame}[fragile]{Differencing in R}
 \begin{Rcode}
 set.seed(42)
 # Simulating a time series with trend
 t <- ts(cumsum(rnorm(100))) 
 
+# Plot original, first, and second difference
+par(mfrow=c(3,1))
+tsplot(t, type="l", 
+    main="original", col=3)
+
 tsplot(diff(t, differences = 1), type="l", 
-    main="first difference", col=4,gg=T)
+    main="first difference", col=4)
+
 tsplot(diff(t, differences = 2), type="l", 
-    main="second difference", col=5,gg=T)
+    main="second difference", col=5)
 \end{Rcode}
+\end{frame}
+
+\begin{frame}{Differencing in R}
 \begin{center}
-\includegraphics[width=.6\textwidth]{figure40a.pdf}
+\includegraphics[height=3in]{figure40a.pdf}
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Detrending and Differencing in R}
+\begin{frame}[fragile]{Detrending and Differencing in R -- ACF}
 Compare the ACF of the original, detrended, and differenced series:
 \begin{Rcode}
-acf1(chicken, max.lag=48, 
-     main="original", col=1, gg=T)
-acf1(resid(fit), max.lag=48, 
-     main="detrend", col=2, gg=T)
-acf1(diff(chicken), max.lag=48, 
-     main="first diff", col=3, gg=T)
-acf1(diff(chicken, differences=2), max.lag=48, 
-     main="sec diff", col=4, gg=T)
+acf1(chicken, max.lag=48, main="original", col=1)
+
+acf1(resid(fit), max.lag=48, main="detrend", col=2)
+
+acf1(diff(chicken, differences = 1), max.lag=48, 
+     main="first diff", col=3)
+
+acf1(diff(chicken, differences = 2), max.lag=48, 
+     main="sec diff", col=4)
 \end{Rcode}
 \end{frame}
 
@@ -762,6 +774,25 @@ Consider the two weekly time series \texttt{oil} and \texttt{gas} in the  \textt
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Differencing \small [cont'd]}
+%\begin{block}{Difference Operator}
+%\vspace{-\baselineskip}
+%\begin{align*}\nabla x_t = x_t - x_{t-1}\end{align*}
+%\vspace{-\baselineskip}
+%\end{block}
+\begin{block}{Backshift / Lag Operator}
+\vspace{-\baselineskip}
+\begin{align*}\operatorname{B} x_t &= x_{t-1} \\
+\operatorname{B}^k x_t &= x_{t-k} % \\
+%\nabla x_t &= (1-\operatorname{B})x_t \\
+%\nabla^2 x_t &= (1-\operatorname{B})^2 x_t= (1-2 \operatorname{B} + \operatorname{B}^2)x_t = x_t - 2x_{t-1} + x_{t-2} \\
+%\nabla^d &= (1-\operatorname{B})^d
+ \end{align*}
+ \vspace{-\baselineskip}
+\end{block}
+\end{frame}
+
+
 \begin{frame}{AR(p) Models}
 An \textbf{autoregressive model} of order $p$ is of the form:
 \begin{align*}
@@ -770,11 +801,11 @@ x_t = \phi_1 x_{t-1} + \phi_2 x_{t-2} + \cdots + \phi_p x_{t-p} + w_t
 where $w_t$ is white noise and $\phi_i$ are model parameters. \\
 
 
-\footnotesize
-In contrast to an ''ordinary'' regression model, the $x_i$ are random effects, not fixed, because each $x_i$ has an associated error term $w_t$. \\
-\normalsize
+%\footnotesize
+%In contrast to an ''ordinary'' regression model, the $x_i$ are random effects, not fixed, because each $x_i$ has an associated error term $w_t$. \\
+%\normalsize
 
-The \textbf{autoregressive operator} is defined using the backshift operator as 
+The \textbf{autoregressive operator} $\phi(B)$ is defined using the backshift operator as: 
 \begin{align*}
 \phi (B) &= 1 - \phi_1 B - \phi_2 B^2 - \cdots - \phi_p B^p \\
          &= \left(1 - \sum_{j=1}^p \phi_j B^j \right)
@@ -805,8 +836,7 @@ t.ar = arima.sim(list(ar=c(1.5, -.75)), n=200)
 # Compute and plot the ACF of the simulated series
 acf1(t.ar, max.lag=25, gg=T, lwd=2, col=4)
 # Add the theoretical values for comparison
-lines(ARMAacf(ar=c(1.5, -.75), lag.max=26)[-1], 
-      lwd=2, col=2)
+lines(ARMAacf(ar=c(1.5, -.75), lag.max=26)[-1], lwd=2, col=2)
 \end{Rcode}
 \begin{center}
 \includegraphics[width=.75\textwidth]{figure18.pdf}
@@ -856,7 +886,7 @@ x_t = w_t + \theta_1 w_{t-1} + \theta_2 w_{t-2} + \cdots + \theta_q w_{t-q}
 \end{align*}
 where $w_t$ are Gaussian errors and $\theta_i$ are model parameters. \\
 
-The \textbf{moving average operator} is defined using the backshift operator as
+The \textbf{moving average operator} $\theta(B)$ is defined using the backshift operator as
 \begin{align*}
 \theta (B) &= 1 + \theta_1 B + \theta_2 B^2 + \cdots + \theta_q B^q \\
            &= \left(1 + \sum_{j=1}^q \theta_i B^i \right) 
@@ -884,8 +914,7 @@ t.ma = arima.sim(list(ma=c(1.5, -.75)), n=200)
 # Compute and plot the ACF of the simulated series
 acf1(t.ma, gg=T, lwd=2, col=4)
 # Add the theoretical values for comparison
-lines(ARMAacf(ma=c(1.5, -.75), lag.max=26)[-1], 
-      lwd=2, col=2)
+lines(ARMAacf(ma=c(1.5, -.75), lag.max=26)[-1], lwd=2, col=2)
 \end{Rcode}
 \begin{center}
 \includegraphics[width=.75\textwidth]{figure19.pdf}
@@ -938,31 +967,45 @@ This can be written as
 %\end{align*}
 %\end{frame}
 
-\begin{frame}[fragile]{Equivalent Models}
-\begin{block}{ARMA to MA}
-Every ARMA model has an equivalent (infinite) MA model
-\begin{Rcode}
-ARMAtoMA(ar = c(-.5), ma = c(-.9), lag.max=10)
-\end{Rcode}
-\end{block}
+%\begin{frame}[fragile]{Equivalent Models}
+%\begin{block}{ARMA to MA}
+%Every ARMA model has an equivalent (infinite) MA model
+%\begin{Rcode}
+%ARMAtoMA(ar = c(-.5), ma = c(-.9), lag.max=10)
+%\end{Rcode}
+%\end{block}
 
-\begin{block}{ARMA to AR}
-An invertible ARMA model has an equivalent (infinite) AR model with coefficients $pi_j$ and $\pi (B) = \sum_{j=0}^\infty \pi_j B^j$.
-\begin{Rcode}
-library(astsa)
-ARMAtoAR(ar = c(-.5), ma = c(-.9), lag.max=10)
-\end{Rcode}
+%\begin{block}{ARMA to AR}
+%An invertible ARMA model has an equivalent (infinite) AR model with coefficients $pi_j$ and $\pi (B) = \sum_{j=0}^\infty \pi_j B^j$.
+%\begin{Rcode}
+%library(astsa)
+%ARMAtoAR(ar = c(-.5), ma = c(-.9), lag.max=10)
+%\end{Rcode}
+%\end{block}
+%\end{frame}
+
+
+\begin{frame}[fragile]{Measures of Dependence \small [cont'd]}
+\begin{block}{Partial Autocorrelation Function (PACF)}
+The PACF is the correlation between $x_{t+h}$ and $x_t$ with the linear dependence of $\{x_{t+1}, \ldots, x_{t+h-1}\}$ on each, removed:
+\begin{align*}
+\phi_{hh} = \begin{cases}\rho(1) &\quad h = 1 \\
+ \operatorname{corr}(x_{t+h} - \hat{x}_{t+h}, x_t - \hat{x}_t) &\quad h \geq 2
+ \end{cases}
+\end{align*}
 \end{block}
 \end{frame}
 
 
-\begin{frame}[fragile]{Partial Autocorrelation Function (PACF)}
+\begin{frame}[fragile]{Theoretical Partial Autocorrelation Function (PACF)}
 \begin{Rcode}
-ACF = ARMAacf(ar=c(1.5,-.75), ma=0, 24)[-1]
+ACF  = ARMAacf(ar=c(1.5,-.75), ma=0, 24)
 PACF = ARMAacf(ar=c(1.5,-.75), ma=0, 24, pacf=TRUE)
 
+# Plot the ACF
 plot(ACF, type="h", xlab="lag", ylim=c(-.8,1))
 abline(h=0)
+# Plot the PACF
 plot(PACF, type="h", xlab="lag", ylim=c(-.8,1))
 abline(h=0)
 \end{Rcode}
@@ -982,25 +1025,39 @@ abline(h=0)
 \end{tabular} \\
 
 \vspace{\baselineskip}
-\scriptsize Source: Shumway\&Stoffer, Table 3.1 \normalsize
+\scriptsize Source: Shumway \& Stoffer, Table 3.1 \normalsize
 \end{frame}
 
 
 \begin{frame}{ARIMA(p, d, q) Models}
+
 If the AR operator can be factorized by $(1-B)$, then:
+
 \begin{align*}
 \phi (B) = \left(1 - \sum_{j=1}^{p'} \phi_j B^j \right) = \left(1 - \sum_{j=1}^{p'-d} \phi_j B^j \right) (1 - B)^d 
 \end{align*}
+
 With $p=p'-d$, the \textbf{ARIMA(p,d,q)} model is then:
+
 \begin{align*}
 \left( 1 - \sum_{j=1}^p \phi_j B^j \right) (1-B)^d x_t &= \left( 1 + \sum_{j=1}^q \theta_j B^j \right) w_t
 \end{align*}
-This can be generalized to:
+%This can be generalized to:
+%\begin{align*}
+%\left( 1 - \sum_{j=1}^p \phi_j B^j \right) (1-B)^d x_t &= \delta + \left( 1 + \sum_{j=1}^q \theta_j B^j \right) w_t
+%\end{align*} 
+%where $\delta = \mu(1 - \phi_1 - \cdots - \phi_p)$
+
+Here $(1-B)$ is the \textbf{differencing operator} $\nabla$. For example:
+
 \begin{align*}
-\left( 1 - \sum_{j=1}^p \phi_j B^j \right) (1-B)^d x_t &= \delta + \left( 1 + \sum_{j=1}^q \theta_j B^j \right) w_t
-\end{align*} 
-where $\delta = \mu(1 - \phi_1 - \cdots - \phi_p)$
+(1-\operatorname{B})x_t &= x_t - x_{t-1}  = \nabla x_t \\
+(1-\operatorname{B})^2 x_t &= (1-2 \operatorname{B} + \operatorname{B}^2)x_t = x_t - 2x_{t-1} + x_{t-2} = \nabla^2 x_t\\
+\cdots
+\end{align*}
+
 \end{frame}
+
 
 
 \begin{frame}{Building ARIMA Models}
@@ -1018,7 +1075,7 @@ where $\delta = \mu(1 - \phi_1 - \cdots - \phi_p)$
 
 \begin{frame}{Identifying Dependence Order}
 \small
-\begin{block}{Identifying \emph{d}}
+\begin{block}{Differencing \emph{d}}
 \begin{itemize}
    \item Slow decay in sample ACF $\hat\rho(h)$ indicates need for differencing
    \item Over-differencing can introduce dependence where non exists
@@ -1028,7 +1085,7 @@ where $\delta = \mu(1 - \phi_1 - \cdots - \phi_p)$
 
 \begin{block}{Preliminary \emph{p} and \emph{q}}
 \begin{itemize}
-   \item Examine sample ACF and PACF of differenced data $\nabla^d x_t$
+   \item Examine sample ACF and PACF of differenced data % $\nabla^d x_t$
 \end{itemize}
 \vspace{.5\baselineskip} 
 \renewcommand{\arraystretch}{1.5}
@@ -1038,7 +1095,7 @@ where $\delta = \mu(1 - \phi_1 - \cdots - \phi_p)$
  PACF & Cuts off after lag $p$ & Tails off & Tails off \\ \hline
 \end{tabular} \\
 \vspace{.5\baselineskip}
-\scriptsize Source: Shumway\&Stoffer, Table 3.1 \normalsize
+\scriptsize Source: Shumway \& Stoffer, Table 3.1 \normalsize
 \end{block}
 \end{frame}
 
@@ -1085,11 +1142,19 @@ Fit initial models
 \begin{Rcode}
 # Fit an AR(1) model
 sarima(gnpgr, 1, 0, 0)
+
 # Fit an MA(2) model
 sarima(gnpgr, 0, 0, 2)
-# Models are roughly equivalent
-ARMAtoMA(ar=0.35, ma=0, 10)
 \end{Rcode}
+%\begin{Rcode}
+%# Fit an AR(1) model
+%sarima(gnpgr, 1, 0, 0)
+%# Fit an MA(2) model
+%sarima(gnpgr, 0, 0, 2)
+%# Models are roughly equivalent
+%ARMAtoMA(ar=0.35, ma=0, 10)
+%\end{Rcode}
+
 The models show similar fit and all coefficients are significant.
 \end{frame}
 
@@ -1102,13 +1167,13 @@ The models show similar fit and all coefficients are significant.
 \begin{frame}{Example \small [cont'd]}
 \begin{block}{Diagnostics}
 \begin{itemize}
-   \item Standardized residuals are Gaussian ($\mu=0$, $sd=1$)
+   \item Standardized residuals are normal random ($\mu=0$, $sd=1$)
    \item Residuals are not autocorrelated
-   \item Residual ACF are Gaussian with $\mu=0$ and $sd=1/\sqrt{n}$
+   \item Residual ACF are random normal with $\mu=0$ and $sd=1/\sqrt{n}$
    \item Ljung-Box statistic $Q$ of the error ACF $\hat\rho_e$ for different maximum lags $H$ is larger than the $1-\alpha$ quantile of the $\chi^2_{H-p-q}$ distribution (i.e. the test statistic is not statistically signifantly different from $0$)
-   \begin{align*}
-   Q = n(n+2) \sum_{h=1}^H \frac{\hat\rho_e^2(h)}{n-h}
-   \end{align*}
+   %\begin{align*}
+   %Q = n(n+2) \sum_{h=1}^H \frac{\hat\rho_e^2(h)}{n-h}
+   %\end{align*}
 \end{itemize}
 \end{block}
 \end{frame}

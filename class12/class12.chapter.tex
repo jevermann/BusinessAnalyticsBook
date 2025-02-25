@@ -137,7 +137,7 @@ An important statistic in linear regression analysis is the proportion of explai
 R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
 \end{align*}
 
-\noindent where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares. An $R^2$ value close to $1$ indicates that the fitted regression model explains a large proportion of the variability in the data set, that is, it explains the data well. In contrast, a value close to $0$ indicates that the fitted regression model explains very little of the observed variability, it does not explain the observed data well. Another important interpretation of the $R^2$ is as the correlation between the true $Y$ and the fitted or predicted values $\hat{Y}$.
+\noindent where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares. An $R^2$ value close to $1$ indicates that the fitted regression model explains a large proportion of the variability in the data set, that is, it explains the data well. In contrast, a value close to $0$ indicates that the fitted regression model explains very little of the observed variability, it does not explain the observed data well. Another important interpretation of the $R^2$ is as the correlation between the true $Y$ and the fitted or predicted values $\hat{Y}$. In this interpretation too, a value close to one indicates predicted values closely correlated with the true values, that is, a good model, whereas a low value indicates they are not closely correlated, that is, a bad model.
 
 Adding additional predictors into the linear regression model is straightforward, as is the inclusion of qualitative or categorical predictors. For example, a model with two predictors $X_1$ and $X_2$ assumes the true form
 
@@ -192,7 +192,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \eps
 \label{fig:groupinteraction}
 \end{figure}
 
-An example of polynomial predictors like $X^2$, $X^3$ or higher degrees is shown in Figure~\ref{fig:polynomial_chap12}. As the figure shows, and as is true in general, increasing the number of predictors increases the flexibility of the model to fit the data. This results in smaller model bias but at the expense of model variance. 
+An example of polynomial predictors like $X^2$, $X^3$ or higher degrees is shown in Figure~\ref{fig:polynomial_chap12}. As the figure shows, and as is true in general, increasing the number of predictors increases the flexibility of the model to fit the data. This results in smaller model bias but usually at the expense of model variance. 
 
 \begin{figure}
 \centering
@@ -234,7 +234,7 @@ plot(Boston)
 
 The formula interface to \texttt{lm()} is the easiest to use and resembles the way one would write the regression equation. The $\sim$ sign separates the output on the left side from the predictors or features on the right side of the formula. A \texttt{1} in the formula represents the intercept ($\beta_0$ in the formula above). The intercept is normally added automatically but can be explicitly added or removed (using \texttt{-1}) as needed. 
 
-The following R code fits a simple model to predict the median house value, shows the model summary, produces some plots, and illustrates the use of the \texttt{predict()} function to predict values:
+The following R code fits a simple model to predict the median house value, shows the model summary and produces a scatterplot with the fitted model regression line running through it. 
 
 \begin{samepage}
 \begin{Rcode}
@@ -249,13 +249,19 @@ summary(fitted.model)
 # Plot the data and the regression line
 plot(medv ~ lstat, data=Boston)
 abline(fitted.model, lwd=3, col='red')
+\end{Rcode}
+
+The \texttt{predict()} function is used to predict new values, given a fitted model and an optional data frame of predictor values, that is, it computes $\hat{y}$. When no predictor values are provided, the function predicts from the data set it was trained on. The \texttt{residuals()} function computes the difference between true and fitted values, that is, it computes $y - \hat{y}$.
+
+\begin{Rcode}
+For training data
+y.hat <- predict(fitted.model, Boston)
+# For new data
+newData <- data.frame(lstat = c(5, 10, 15))
+predict(fitted.model, newData)
 
 # Plot the residuals against predicted values
 plot(predict(fitted.model), residuals(fitted.model))
-
-# Predict three new observations of lstat
-predict(fitted.model, data.frame(lstat=c(5, 10, 15)), 
-   interval='confidence')
 \end{Rcode}
 \end{samepage}
 
@@ -290,6 +296,7 @@ summary(fitted.model)
 
 # Add all polynomial terms up to degree 5
 fitted.model <- lm(medv ~ poly(lstat, 5), data=Boston)
+
 # Note the coefficients for the polynomials in the summary
 summary(fitted.model)
 \end{Rcode}
@@ -328,8 +335,8 @@ summary(lm(Sales ~ . , data=Carseats))
      \item What is the predicted \texttt{mpg} value for a \texttt{horsepower} of 98? 
      \item Plot the response and predictor. Use the \texttt{abline()} function to add the regression line
      \item Produce a scatterplot of all variables
-     \item Perform a linear regression of all main effects (except for the variable \texttt{name}), then remove non-significant predictors
-     \item Use the \texttt{*} and \texttt{:} symbols to add interaction effects. Retain only significant ones
+     \item Perform a linear regression of all main effects (except for the variable \texttt{name}).
+     \item Use the \texttt{*} and \texttt{:} symbols to add interaction effects.
      \item Add transformations of the predictors (using the \texttt{I(.)} function) such as $\log(X)$, $\sqrt{X}$, $X^2$.
   \end{enumerate}
 
@@ -372,11 +379,11 @@ test.data <- Auto[-train.idx,]
 # Fit model to (train model on) a subset
 fitted.model <- lm(mpg ~ horsepower, data=train.data)
 
-# Calculate the test data MSE by predicting from the test data set
-mean((test.data$mpg-predict(fitted.model,test.data))^2)
-
 # Calculate the training MSE by predicting from the training data set
-mean((train.data$mpg-predict(fitted.model,train.data))^2)
+mean((train.data$mpg - predict(fitted.model, train.data))^2)
+
+# Calculate the test data MSE by predicting from the test data set
+mean((test.data$mpg - predict(fitted.model, test.data))^2)
 
 # The MSE can also be calculated from the squared residuals
 mean(summary(fitted.model)$residuals^2)
@@ -385,7 +392,7 @@ mean(summary(fitted.model)$residuals^2)
 
 The next R code block illustrates Leave-One-Out Cross-Validation (LOOCV), where one observation is used as test observation, and the remainder form the training data. This is repeated so that each observation becomes the test observation in turn. The errors are then averaged. 
 
-While this can be done manually in R using an iteration over the data frame, the library \texttt{boot} provides easy-to-use cross-validation functions for models fitted using the \texttt{glm} function (generalized linear models). Note that LOOCV is just k-fold cross-validation where $k$, the number of test data folds, is equal to the number of observations.
+While this can be done manually in R using an iteration over the data frame, the library \texttt{boot} provides easy-to-use cross-validation functions for models fitted using the \texttt{glm()} function (generalized linear models). Note that LOOCV is just k-fold cross-validation where $k$, the number of test data folds, is equal to the number of observations.
 
 \begin{samepage}
 \begin{Rcode}
@@ -445,7 +452,7 @@ print(cv.err)
 
 \section{Shrinkage Methods}
 
-Shrinkage methods are so-called because their aim is shrink the magnitude of the regression parameter values $\hat{\beta}_i$. This is primarily to avoid overfitting a model to one specific data set. In other words, they are a kind of \emph{regularization}. Shrinkage methods for linear regression model works by \emph{penalizing} the model for large regression parameter values, that is, by performing \emph{penalized regression}\index{Shrinkage methods}\index{Penalized regression|see{Shrinkage methods}}\index{Regularization}. There are three frequently used types of penalized regression or linear regression regularization: L1 regularization penalizes large absolute parameter values (that is, the L1 norm of the vector of parameters $\hat{\beta}$), L2 regularization penalizes large squared parameter values (that is, the L2 norm of the vector of parameters $\hat{\beta}$, and Elastic Net regularization is a combination of both. L1 regularization is also known as the \emph{LASSO} (''least absolute shrinkage and selection operator'') while L2 regularization is known as \emph{ridge regression} or Tikhonov regularization. 
+Shrinkage methods are so-called because their aim is shrink the magnitude of the regression parameter values $\hat{\beta}_i$. This is primarily to avoid overfitting a model to one specific data set. In other words, they are a kind of \emph{regularization}, that is, a type of method to avoid or prevent overfitting of models. Shrinkage methods for linear regression model works by \emph{penalizing} the model for large regression parameter values, that is, by performing \emph{penalized regression}\index{Shrinkage methods}\index{Penalized regression|see{Shrinkage methods}}\index{Regularization}. There are three frequently used types of penalized regression or linear regression regularization: L1 regularization penalizes large absolute parameter values (that is, the L1 norm of the vector of parameters $\hat{\beta}$), L2 regularization penalizes large squared parameter values (that is, the L2 norm of the vector of parameters $\hat{\beta}$, and Elastic Net regularization is a combination of both. L1 regularization is also known as the \emph{LASSO} (''least absolute shrinkage and selection operator'') while L2 regularization is known as \emph{ridge regression} or Tikhonov regularization. 
 
 \subsection{Ridge Regression}
 
@@ -484,7 +491,7 @@ Figure~\ref{fig:ridgemultiple} shows this effect for a polynomial of degree 14 t
 
 \subsection{LASSO}
 
-In contrast to the ridge regression, where the model parameter values are shrunk towards zero, but are never forced to equal zero, the LASSO does just that. In this form of penalized regression, as the degree of penalty is increased, model parameter values are set to 0, effectively making the LASSO a model or \emph{predictor selection method} as well, that is, it can be used to select only important predictors. This is reflected in its name: ''Least Absolute Shrinkage and Selection Operator''. The advantage over ridge regression is that this results in more parsminious, that is, smaller, models that are easier to interpret.
+In contrast to the ridge regression, where the model parameter values are shrunk towards zero, but are never forced to equal zero, the LASSO does just that. In this form of penalized regression, as the degree of penalty is increased, model parameter values are set to 0, effectively making the LASSO a model selection method or \emph{predictor selection method} as well, that is, it can be used to select only important predictors. This is reflected in its name: ''Least Absolute Shrinkage and Selection Operator''. The advantage over ridge regression is that this results in more parsminious, that is, smaller, models that are easier to interpret.
 
 The loss function or minimization objective of the LASSO\index{Least absolute shrinkage and selection operator}\index{LASSO|see{Least absolute shrinkage and selection operator}}\index{L2 regularization|see{Least absolute shrinkage and selection operator}} is the RSS but penalized for the L1 norm of the vector of parameters $\beta$. As in ridge regression, the amount of shrinkage is controlled by a parameter $\lambda$.
 
@@ -556,23 +563,22 @@ y <- Hitters$Salary
 \end{Rcode}
 \end{samepage}
 
-\noindent To illustrate the concepts of ridge regression, the following R code sets up a grid of 100 different $\lambda$ values, fits ridge regression models to each of them, and shows information about two models for different $\lambda$ values:
+\noindent To illustrate the concepts of ridge regression, the following R code fits a ridge regression model with $\lambda=10$ using the \texttt{glmnet()} function with $\alpha=0$. This value of $\alpha$ indicates ridge regression, that is only penalization of the L2 norm. 
+
 
 \begin{samepage}
 \begin{Rcode}
-grid <- 10^seq(from=10, to=-2, length=100)
-print(grid)
-ridge.model <- glmnet(x, y, alpha=0, lambda=grid)
+# Fit the model
+ridge.model <- glmnet(x, y, alpha=0, lambda=10)
 
-# Select the 50th lambda value
-ridge.model$lambda[50]
-coef(ridge.model)[, 50]
-L2.norm = sqrt(sum(coef(ridge.model)[-1, 50]^2))
+# Examine coefficients:
+coef(ridge.model)
 
-# Select the 60th lambda value
-ridge.model$lambda[60]
-coef(ridge.model)[, 60]
-L2.norm = sqrt(sum(coef(ridge.model)[-1, 60]^2))
+# Examine L2 norm (penalty to RSS) (without intercept)
+L2.norm = sqrt(sum(coef(ridge.model)[-1]^2))
+
+# Examine MSE:
+mean((y-predict(ridge.model, x))^2)
 \end{Rcode}
 \end{samepage}
 
@@ -595,11 +601,11 @@ y.test  <- y[-train.idx]
 \begin{Rcode}
 # 5-fold cross-valiation, use MSE as metric
 cv.out <- cv.glmnet(x.train, y.train, alpha=0, 
-   nfolds=5, type.measure='mse')
+                    nfolds=5, type.measure='mse')
 \end{Rcode}
 \end{samepage}
 
-The next R code block shows the optimal $\lambda$ and plots the MSE for different values of $\lambda$. The generated plot is shown in Figure~\ref{fig:glmnetcv}. It includes the standard errors of the MSE (as determined by cross-validation) and the number of non-zero coefficients (indicated above the graph). The left vertical line indicates the optimal $\lambda$, while the right vertical line indicates that largest $\lambda$ for which the error is within one standard error of the minimum error, that is, of the error of the optimal $\lambda$.
+The next R code block shows the optimal $\lambda$ and plots the MSE for different values of $\lambda$. The generated plot is shown in Figure~\ref{fig:glmnetcv}. It includes the standard errors of the MSE (as determined by cross-validation) and the number of non-zero coefficients (indicated above the graph). The left vertical line indicates the optimal $\lambda$, while the right vertical line indicates that largest $\lambda$ for which the MSE is within one standard error of the minimum MSE, that is, of the MSE of the optimal $\lambda$.
 
 \begin{samepage}
 \begin{Rcode}
@@ -608,6 +614,16 @@ plot(cv.out)
 lambda.opt <- cv.out$lambda.min
 \end{Rcode}
 \end{samepage}
+
+The following text box shows part of the output, indicating the optimal lambda (min), the MSE metric for that lambda (''Measure''), it's standard error, and the number of non-zero model parameters/coefficients. The number of non-zero parameters is always the full number of parameters in ridge regression; this will differ when the LASSO or a combination (Elastic Net) is used. Also shown is that value of lambda, for which the MSE is just within one standard error of the optimal MSE value. 
+
+\begin{textcode}
+> print(cv.out)
+    Lambda Index Measure    SE Nonzero
+min  461.6    68  102536 13016      19
+1se 2244.8    51  114493 19007      19
+\end{textcode}
+
 
 \begin{figure}
 \centering
@@ -617,27 +633,30 @@ lambda.opt <- cv.out$lambda.min
 \label{fig:glmnetcv}
 \end{figure}
 
-To evaluate the final model, the holdout test data is fitted to a ridge regression model with the optimal $\lambda$. Then, the model parameter values of the ridge regression with the optimal $\lambda$ are compared to the parameter values of an unrestricted linear regression model. Note the use of the \texttt{type='coefficients'} parameter to \texttt{predict(.)} that asks for the model parameter values, rather than the predicted target values in the following R code block.
+To evaluate the final model, the holdout test data is fitted to a ridge regression model with the optimal $\lambda$. Then, the model parameter values of the ridge regression with the optimal $\lambda$ are compared to the parameter values of an unrestricted linear regression model. 
 
 \begin{samepage}
 \begin{Rcode}
-# Fit test data:
-ridge.test <- glmnet(x.test, y.test, alpha=0)
-# Show the coefficients at optimal lambda
-predict(ridge.test, type='coefficients', s=lambda.opt)
-# Compare to unpenalized least-squares fit
-coef(lm.fit(x.test, y.test))
+# Fit test data with optimal lambda
+ridge.model <- glmnet(x.test, y.test, 
+                      alpha=0, lambda=lambda.opt)
+
+# Compare the coefficients of the ridge regression to
+# those of an umpenalized linear model
+coef(ridge.model)
+coef(lm(y.test ~ 1 + x.test))
 \end{Rcode}
 \end{samepage}
 
-Finally, the target values for the holdout test data set are predicted. Note the use of the \texttt{type='response'} parameter to \texttt{predict(.)} that asks for the predicted target values, rather than the model parameter values, in the following R code block:
+Finally, the target values for the holdout test data set are predicted. Note the use of the \texttt{type='response'} parameter to \texttt{predict(.)} that asks for the predicted target values, rather than the model parameter values, in the following R code block. After calculating the test data MSE, it is useful to compare the test data MSE to that of the optimal training data MSE above:
 
 \begin{samepage}
 \begin{Rcode}
-predictions <- predict(ridge.test, type='response', 
-                       s=lambda.opt, newx=x.test)
+y.hat.test <- predict(ridge.model, newx=x.test, 
+                                      type='response')
+
 # Calculate test MSE to compare to the CV optimal MSE above:
-mean((predictions - y.test)^2)
+mean((y.hat.test - y.test)^2)
 \end{Rcode}
 \end{samepage}
 
@@ -647,12 +666,21 @@ Because it uses the same \texttt{glmnet(.)} and \texttt{cv.glmnet(.)} functions,
 \begin{Rcode}
 # Set alpha to 1 for lasso
 cv.out <- cv.glmnet(x.train, y.train, alpha=1, 
-   nfolds=5, type.measure='mse')
+                    nfolds=5, type.measure='mse')
 print(cv.out)
 plot(cv.out)
 lambda.opt <- cv.out$lambda.min
 \end{Rcode}
 \end{samepage}
+
+The following text box shows part of the output which can also be seen in Figure~\ref{fig:lassocv} in graphical form. 
+
+\begin{textcode}
+> print(cv.out)
+    Lambda Index Measure    SE Nonzero
+min  33.33    22  107161 17195       6
+1se  92.75    11  122071 22061       4
+\end{textcode}
 
 The MSE values for different values of $\lambda$ are shown in Figure~\ref{fig:lassocv}. Note that now the number of non-zero model parameters, indicated above the graph, decreases. At the optimal $\lambda$ value, there are only six non-zero parameters, that is, only six predictors are selected to remain in the model.
 
@@ -663,6 +691,23 @@ The MSE values for different values of $\lambda$ are shown in Figure~\ref{fig:la
 \caption{Cross-validation MSE in the LASSO}
 \label{fig:lassocv}
 \end{figure}
+
+As with the ridge regression, the test data set is fitted to the model with the optimal lambda and it is again instructive to compare the LASSO coefficients to those of an unpenalized linear model.
+
+\begin{samepage}
+\begin{Rcode}
+# Fit test data with optimal lambda
+lasso.model <- glmnet(x.test, y.test, 
+                      alpha=0, lambda=lambda.opt)
+
+# Compare the coefficients of the ridge regression to
+# those of an umpenalized linear model
+coef(lasso.model)
+coef(lm(y.test ~ 1 + x.test))
+\end{Rcode}
+\end{samepage}
+
+
 
 \begin{tcolorbox}[colback=code]
 \subsubsection*{Hands-On Exercise} 
@@ -716,9 +761,9 @@ There are many transformation or link functions that may be used, but a popular 
 
 \begin{minipage}{.4\textwidth}
 \begin{align*}
-  \sigma(x) &= \frac{1}{1 + e^{-x}} \\
-  &= \frac{e^x}{1 + e^x} \\
-  &= 1 - \sigma(-x)
+  \sigma(a) &= \frac{1}{1 + e^{-a}} \\
+  &= \frac{e^a}{1 + e^a} % \\
+%  &= 1 - \sigma(-a)
 \end{align*}
 \end{minipage}
 \begin{minipage}{.6\textwidth}
@@ -737,7 +782,7 @@ p(X) &= \sigma( \beta_0 + \beta_1 X) \nonumber \\
 \Rightarrow \quad \log \left( \frac{p(X)}{1 - p(X)} \right) &= \beta_0 + \beta_1 X \qquad \text{''Log-Odds'', ''Logits''} \label{eq:logits}
 \end{align}
 
-Equation~\ref{eq:logistic} defines the probability of an observation being ''true'' as just the logistic transformation of the linear combination of predictors. Dividing and a little algebraic rearrangement yields equation~\ref{eq:odds} which represents the \emph{odds} as the exponential of the linear combination of predictors. Taking the natural logarithm yields equation~\ref{eq:logits} which shows that the linear combination of predictors are equal to the \emph{log-odds}\index{Log odds}, also called \emph{logits}\index{Logit}.
+Equation~\ref{eq:logistic} defines the probability of an observation being ''true'' as just the logistic transformation of the linear combination of predictors $\beta_0 + \beta_1 X$. Dividing and a little algebraic rearrangement yields equation~\ref{eq:odds} which represents the \emph{odds} as the exponential of the linear combination of predictors. Taking the natural logarithm yields equation~\ref{eq:logits} which shows that the linear combination of predictors are equal to the \emph{log-odds}\index{Log odds}, also called \emph{logits}\index{Logit}.
 
 Once estimates of the model parameters $\beta_0$ and $\beta_1$ have been calculated, predictions of the class probability can be made using the logistic link function:
 
@@ -745,7 +790,7 @@ Once estimates of the model parameters $\beta_0$ and $\beta_1$ have been calcula
   \hat{p}(X) = \sigma(\hat{\beta}_0 + \hat{\beta}_1 X) = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 X}}{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 X}}
 \end{align*}
 
-From there, a \emph{threshold value} can be used to predict class membership, for example based on $\hat{p}(X) > 0.5$, but other decision rules and threshold values may be used, depending on the desired proportion or cost of false positives and true positives.
+From there, a \emph{threshold value} can be used to predict class membership, for example based on the decision that $\hat{p}(X) > 0.5$, but other decision rules and threshold values may be used, depending on the desired proportion or cost of false positives and true positives.
 
 The binary logistic regression can be extended to \emph{mutinomial logistic regression}\index{Logistic regression!multinomial}, where there are more than two classes for the output or target. The form of the equations is similar for $K$ classes, starting from the log-odds. In this derivation, the last class $K$ plays the role of reference class. As classes are not ordered, this choice is arbitrary.
 
@@ -765,7 +810,7 @@ The binary logistic regression can be extended to \emph{mutinomial logistic regr
 
 Equations \ref{eq:multinomial3} and \ref{eq:multinomial4} give the class probabilities for the reference class $K$ and for any other class $k < K$. They are formally similar to the equations for the binary logistic regression above; for example, compare equation~\ref{eq:multinomial4} to equation~\ref{eq:logistic}.
 
-Just as polynomials of the input variables may be useful as predictors in linear regression, they also have applications in classification. In particular, they transform non-linear decision boundaries into linear ones that can be modeled using linear logistic regression. For example, the nonlinear boundary in the left panel of Figure~\ref{fig:nonlinearboundary} can be transformed into a linear boundary by squaring both predictors, as shown in the right panel of Figure~\ref{fig:nonlinearboundary}.
+Just as polynomials of the input variables may be useful as predictors in linear regression, they also have applications in classification. In particular, they transform non-linear decision boundaries into linear ones that can be modeled using linear logistic regression. For example, the nonlinear (circular) boundary in the left panel of Figure~\ref{fig:nonlinearboundary} can be transformed into a linear boundary by squaring both predictors, as shown in the right panel of Figure~\ref{fig:nonlinearboundary}.
 
 \begin{figure}
 \centering
@@ -775,7 +820,7 @@ Just as polynomials of the input variables may be useful as predictors in linear
 \label{fig:nonlinearboundary}
 \end{figure}
 
-Another example is shown in Figure~\ref{fig:nonlinearboundary2} where the linear decision boundary dividing the top left panel into a blue and red region clearly does not fit the observations, shown as blue and red points. Fitting logistic regressions with different degrees of polynomials shows that the decision boundary can be transformed to better fit the observed data. The bottom right panel in Figure~\ref{fig:nonlinearboundary2} shows the the train and test error rate for different degrees of polynomials. 
+Another example is shown in Figure~\ref{fig:nonlinearboundary2} where the linear decision boundary dividing the top left panel into a blue and red region clearly does not fit the observations, shown as blue and red points. Fitting logistic regressions with different degrees of polynomials shows that the decision boundary can be transformed to better fit the observed data. The bottom right panel in Figure~\ref{fig:nonlinearboundary2} shows the the train and test error rate for different degrees of polynomials and indicates a significant degree of overfitting as the degree of the included polynomials increases.
 
 \begin{figure}
 \centering
@@ -824,13 +869,15 @@ A decision rule is necesary to assign observations to classes using the calculat
 
 \begin{samepage}
 \begin{Rcode}
+pred.direction <- rep(NA, nrow(Smarket))
+
 # Predict 'up' or 'down' based on probabilities and a threshold
-pred.direction <- rep('Down', nrow(Smarket))
-pred.direction[logreg.probabilities > .5] <- 'Up'
+pred.direction[logreg.probs >  .5] <- 'Up'
+pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
 \end{samepage}
 
-The confusion matrix can be produced by using the \texttt{table(.)} function on the predicted class and the observed class. Accuracy is simply the average number of observations for which predicted class and observed class are identical.
+The confusion matrix can be produced by using the \texttt{table(.)} function on the vectors of predicted class and the observed class membership for each observation. Accuracy is simply the average number of observations for which predicted class and observed class are identical (recall that the boolean values ''True'' in R equals numeric 1 and ''False'' equals numeric 0).
 
 \begin{samepage}
 \begin{Rcode}
@@ -855,6 +902,7 @@ test.data <- Smarket[!(Smarket$Year < 2005),]
 \end{samepage}
 
 \noindent Next, the model is fitted to the training data set, class-membership probabilities for observations in the test data set are then predicted, and the observations are classified using a decision rule:
+
 \begin{samepage}
 \begin{Rcode}
 logreg.fitted <- 
@@ -864,8 +912,11 @@ logreg.fitted <-
 # Predict probabilities for test data and classify:
 logreg.probabilities <- predict(logreg.fitted, newdata = test.data,
                                   type='response')
-pred.direction <- rep('Down', nrow(test.data))
-pred.direction[logreg.probabilities > .5] <- 'Up'
+
+# Make classification decision using decision rule:
+pred.direction <- rep(NA, nrow(test.data))
+pred.direction[logreg.probs >  .5] <- 'Up'
+pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
 \end{samepage}
 

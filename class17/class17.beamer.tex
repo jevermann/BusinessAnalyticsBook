@@ -188,6 +188,21 @@ h_t &= O_t \otimes \phi(c_t)
 Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise multiplication, and $[.]$ denotes vector concatenation. $\sigma$ is the sigmoid/logistic function and $\phi$ is the hyperbolic tangent.
 \end{frame}
 
+\begin{frame}{LSTM Cell Parameters}
+\small
+\begin{itemize}
+  \item Let $h_t$ and $c_t$ be vectors of size $n$ and $x_t$ be a vector of size $m$ and 
+  \item The input to each gate is of size $n+m$, the output is of size $n$
+  \item Then $W_f$, $W_i$, $W_o$ and $W_c$ must be matrices of size $n \times (n+m)$
+  \item Then $b_f$, $b_i$, $b_o$ and $b_c$ must be vectors of size $n$. 
+  \item Then for each gate there are $n \times (n+m) + n$ parameters
+  \item Then for all four gates, there are $4 \times (n \times (n+m) + n)$ parameters
+\end{itemize}
+\textbf{Important}: Parameters are ''re-used'' for each unrolled step.\\
+
+\textbf{Example}: Let the unit size (state size) be 16 and the input size be 8. Then the total number of parameters for the LSTM cell is $4 \times (16 \times (8+16) + 16) = 1600$
+\end{frame}
+
 \begin{frame}{Gated Recurrent Unit (GRU) Cells}
 \begin{itemize}
    \item ''Update gate'' $Z$, ''Reset gate gate'' $R$
@@ -212,6 +227,22 @@ h_t &= (1 - Z_t) \otimes h_{t-1} + Z_t \otimes \hat{h}_t
 
 \small
 Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise multiplication, and $[.]$ denotes vector concatenation.  $\sigma$ is the sigmoid/logistic function and $\phi$ is the hyperbolic tangent.
+\end{frame}
+
+\begin{frame}{GRU Cell Parameters}
+\small
+\begin{itemize}
+  \item Let $h_t$ be a vector of size $n$ and $x_t$ be a vector of size $m$ and 
+  \item The input to each gate is of size $n+m$, the output is of size $n$
+  \item Then $W_z$, $W_r$, and $W_h$ must be matrices of size $n \times (n+m)$
+  \item Then $b_z$, $b_r$, and $b_h$ must be vectors of size $n$. 
+  \item Then for each gate there are $n \times (n+m) + n$ parameters
+  \item Then for all three gates, there are $3 \times (n \times (n+m) + n)$ parameters
+\end{itemize}
+\textbf{Important}: Parameters are ''re-used'' for each unrolled step.\\
+
+\textbf{Example}: Let the unit size (state size) be 16 and the input size be 8. Then the total number of parameters for the GRU cell is $3 \times (16 \times (8+16) + 16) = 1200$ \\
+{\tiny With Keras GRU layer option \texttt{reset\_after=False}.}
 \end{frame}
 
 \begin{frame}{Statefulness of RNN}

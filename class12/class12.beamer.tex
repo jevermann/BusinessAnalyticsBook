@@ -74,7 +74,7 @@ Y = \beta_0 + \beta_1 X + \epsilon
 \scriptsize Source: ISLR2 Figure 3.1
 \end{frame}
 
-\begin{frame}{Correlation versus Regression}
+\begin{frame}{Ensure a Linear Model is Sensible}
 \centering
 \includegraphics[width=.85\textwidth]{screen1.png} \\
 
@@ -83,7 +83,7 @@ Y = \beta_0 + \beta_1 X + \epsilon
 The ''Datasaurus Dozen'': All datasets have the same correlation between the two variables!
 \end{frame}
 
-\begin{frame}{Ensure a Linear Model is Sensible}
+\begin{frame}{Correlation versus Regression}
 \centering
 \includegraphics[width=.9\textwidth]{screen2.png} \\
 
@@ -97,7 +97,9 @@ Datasets with the same correlation (as indicated above each dataset) between two
 \begin{itemize}
   \item Estimate $\hat{\beta}_0$ and $\hat{\beta}_1$ to minimize the mean squared error (MSE) or residual sum of square (RSS)
 \begin{align*}
-RSS = \sum_i \left( y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i \right)^2 \quad \quad MSE = \frac{1}{n} RSS
+\hat{y}_i &= \hat{\beta}_0 + \hat{\beta}_1 x_i \qquad \text{Predicted/fitted values} \\
+RSS &= \sum_i \left( y_i - \hat{y}_i \right)^2  = \sum_i \left( y_i - \hat{\beta}_0 - \hat{\beta}_1 x_i \right)^2 \\
+MSE &= \frac{1}{n} RSS
 \end{align*}
   \item Analytically derivable \emph{least squares estimates} are
 \begin{align*}
@@ -118,11 +120,18 @@ where $\bar{x}$ and $\bar{y}$ are the sample means
 %\end{align*}
   %\item The \emph{p-value} is the probability that the parameter is non-zero, assuming the estimated model is true
 %  \item 
-The $R^2$ value is the proportion of explained variance
+$R^2$ Value:
 \begin{align*}
 R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
 \end{align*}
 where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares
+\begin{block}{Interpretation}
+\begin{enumerate}
+  \item Proportion of explained variance
+  \item Correlation of $Y$ and $\hat{Y}$
+\end{enumerate}
+\end{block}
+
 %\end{itemize}
 \end{frame}
 
@@ -137,14 +146,13 @@ where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares
 Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \\
 \cdots + \beta_p X_p + \epsilon
 \end{multline*}
-$R^2$ represents the correlation of $Y$ and $\hat{Y}$
 \end{column}
 \end{columns}
 \end{frame}
 
 \begin{frame}{Regression with Qualitative Predictors}
 \begin{itemize}
-  \item Qualitative predictors (\emph{factors} with multiple, exclusive \emph{levels}) can be used in linear regression models using \textbf{dummy variables}:
+  \item Qualitative/categorical predictors (\emph{factors} with multiple, exclusive \emph{levels}) can be used in linear regression models using \textbf{dummy variables}:
 \begin{align*}
 x_{i1} = \begin{cases}
 1 & \text{level ''a''} \\
@@ -175,39 +183,54 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \eps
   \item Two \textbf{inputs} $X_1$ and $X_2$
   \item Four \textbf{predictors} or \textbf{features}: $X_1$, $X_1^2$, $X_2$, $X_1 X_2$
   \item \textbf{Main effects} $\beta_1$ and $\beta_3$, 
-  \item \textbf{interaction effect} $\beta_4$, 
+  \item \textbf{Interaction effect} $\beta_4$, 
   \item A degree-2 \textbf{polynomial} effect $\beta_2$
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Interactions}
-\centering
+%\begin{frame}{Interactions}
+%\centering
 
-\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_7.pdf}  \\
+%\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_7.pdf}  \\
 
-\scriptsize Source: ISLR2 Figure 3.7
-\end{frame}
+%\scriptsize Source: ISLR2 Figure 3.7
+%\end{frame}
 
-\begin{frame}{Multiple Regression with Polynomial Expansion}
-\centering
-
-\includegraphics[width=.8\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_8.pdf} \\
+\begin{frame}{Multiple Regression with Polynomials}
+\begin{columns}
+\begin{column}{.7\textwidth}
+\begin{center}
+\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_8.pdf} \\
 
 \scriptsize Source: ISLR2 Figure 3.8
+\end{center}
+\end{column}
+\begin{column}{.3\textwidth}
+\begin{itemize}
+  \item Function more ''flexible''
+  \item Fit to data improves
+  \item Bias decreases
+  \item Training MSE decreses (what about test MSE?)
+\end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Linear Regression in R}
-
-The 'Boston' data set contains housing values in Boston in variable \texttt{medv} (median value). Examine the data:
-
+\small
+Load libraries for data sets:
 \begin{Rcode}
 # Functions and data from the textbook # 'Modern 
 # Applied Statistics with S'
 library(MASS)
-
 # Data sets from the textbook 'Introduction to 
 # Statistical Learning with Applications in R'
 library(ISLR2)
+\end{Rcode}
+The 'Boston' data set contains housing values in Boston in variable \texttt{medv} (median value). 
+
+\begin{Rcode}
+Examine the data:
 
 # Get a description of the data
 ?Boston
@@ -222,7 +245,8 @@ plot(Boston)
 \end{frame}
 
 \begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
-Fit a simple model, examine the results, and make predictions:
+\small
+Fit a simple model, examine and plot the results:
 \begin{Rcode}
 # Fit a model with intercept only
 fitted.model <- lm(medv ~ 1, data=Boston)
@@ -235,17 +259,31 @@ summary(fitted.model)
 # Plot the data and the regression line
 plot(medv ~ lstat, data=Boston)
 abline(fitted.model, lwd=3, col='red')
-
-# Plot the residuals against predicted values
-plot(predict(fitted.model), residuals(fitted.model))
-
-# Predict three new observations of lstat
-predict(fitted.model, data.frame(lstat=c(5, 10, 15)),
-   interval='confidence')
 \end{Rcode}
 \end{frame}
 
 \begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+\small
+The \texttt{predict()} function calculates $\hat{y}_i$:
+
+\begin{Rcode}
+# For training data
+y.hat <- predict(fitted.model, Boston)
+
+# For new data
+newData <- data.frame(lstat = c(5, 10, 15))
+predict(fitted.model, newData)
+\end{Rcode}
+
+The \texttt{residuals()} function calculates $y_i - \hat{y}_i$:
+\begin{Rcode}
+# Plot the residuals against predicted values
+plot(predict(fitted.model), residuals(fitted.model))
+\end{Rcode}
+\end{frame}
+
+\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+\small
 Build more complex models:
 \begin{Rcode}
 # Add another predictor
@@ -264,6 +302,7 @@ summary(fitted.model)
 \end{frame}
 
 \begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+\small
 Add polynomial terms:
 \begin{Rcode}
 # Add a polynomial term; use the I(.) function
@@ -280,28 +319,28 @@ summary(fitted.model)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
-Categorical predictors (''factors'') using dummy variables:
-\begin{Rcode}
-?Carseats
-\end{Rcode}
-Identify factor/categorical variables and their levels:
-\begin{Rcode}
-is.factor(Carseats$ShelveLoc)
-levels(Carseats$ShelveLoc)
-levels(Carseats$Urban)
-levels(Carseats$US)
-\end{Rcode}
-\textbf{Contrasts} show the dummy variables created (columns) and the values they take for different  factor levels (row):
-\begin{Rcode}
-contrasts(Carseats$ShelveLoc)
-contrasts(Carseats$US)
-\end{Rcode}
-Fit the model:
-\begin{Rcode}
-summary(lm(Sales ~ . , data=Carseats))
-\end{Rcode}
-\end{frame}
+%\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+%Categorical predictors (''factors'') using dummy variables:
+%\begin{Rcode}
+%?Carseats
+%\end{Rcode}
+%Identify factor/categorical variables and their levels:
+%\begin{Rcode}
+%is.factor(Carseats$ShelveLoc)
+%levels(Carseats$ShelveLoc)
+%levels(Carseats$Urban)
+%levels(Carseats$US)
+%\end{Rcode}
+%\textbf{Contrasts} show the dummy variables created (columns) and the values they take for different  factor levels (row):
+%\begin{Rcode}
+%contrasts(Carseats$ShelveLoc)
+%contrasts(Carseats$US)
+%\end{Rcode}
+%Fit the model:
+%\begin{Rcode}
+%summary(lm(Sales ~ . , data=Carseats))
+%\end{Rcode}
+%\end{frame}
 
 
 \begin{frame}{Hands-On Exercises}
@@ -314,30 +353,27 @@ Use the \texttt{Auto} data set from the ISLR2 library with \texttt{mpg} as the t
      \item What is the predicted \texttt{mpg} value for a \texttt{horsepower} of 98? 
      \item Plot the response and predictor. Use the \texttt{abline()} function to add the regression line
      \item Produce a scatterplot of all variables
-     \item Perform a linear regression of all main effects (except for the variable \texttt{name}), then remove non-significant predictors
-     \item Use the \texttt{*} and \texttt{:} symbols to add interaction effects. Retain only significant ones
+     \item Perform a linear regression of all main effects (except for the variable \texttt{name})
+     \item Use the \texttt{*} and \texttt{:} symbols to add interaction effects.
      \item Add transformations of the predictors (using the \texttt{I(.)} function) such as $\log(X)$, $\sqrt{X}$, $X^2$.
   \end{enumerate}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
-{\small (Source: ISLR2 Chapter 3)}
-\small
-Use the \texttt{Carseats} data set from the ISLR2 library with \texttt{Sales} as the target.
-  \begin{enumerate}
-     \item Perform a linear regression with \texttt{Price}, \texttt{Urban} and \texttt{US} as predictors
-     \item Interpret the coefficients. Tip: Some variables are categorical
-     \item Remove non-significant predictors
-     \item How well do the two models fit the data?
-  \end{enumerate}
-\end{frame}
+%\begin{frame}{Hands-On Exercises}
+%{\small (Source: ISLR2 Chapter 3)}
+%\small
+%Use the \texttt{Carseats} data set from the ISLR2 library with \texttt{Sales} as the target.
+  %\begin{enumerate}
+     %\item Perform a linear regression with \texttt{Price}, \texttt{Urban} and \texttt{US} as predictors
+     %\item Interpret the coefficients. Tip: Some variables are categorical
+     %\item Remove non-significant predictors
+     %\item How well do the two models fit the data?
+  %\end{enumerate}
+%\end{frame}
 
 \begin{frame}[fragile]{Cross-Validation in R -- Holdout Sample}
 Validation set approach:
 \begin{Rcode}
-# Set the seed for the pseudo-random number generator (RNG)
-set.seed(1)
-
 # Randomly use half the Auto data as training sample
 train.idx <- sample(nrow(Auto), nrow(Auto)/2)
 train.data <- Auto[train.idx,]
@@ -346,28 +382,30 @@ test.data <- Auto[-train.idx,]
 # Fit model to (train model on) a subset
 fitted.model <- lm(mpg ~ horsepower, data=train.data)
 
+# Calculate the training data MSE
+mean((train.data$mpg - predict(fitted.model, train.data))^2)
+
 # Calculate the validation data MSE
 mean((test.data$mpg - predict(fitted.model, test.data))^2)
-
-# Calculate the training MSE, first from residuals, 
-# then by explicitly predicting the training data
-mean(summary(fitted.model)$residuals^2)
-mean((train.data$mpg-predict(fitted.model, train.data))^2)
 \end{Rcode}
 \end{frame}
 
-
-\begin{frame}[fragile]{Cross-Validation in R -- Leave One Out CV}
-LOOCV is K-Fold CV with $K=N$
-
+\begin{frame}[fragile]{Cross-Validation in R}
+K-Fold Cross-Validation with $K=5$:
 \begin{Rcode}
 library(boot)
 
 # Fit a model with glm and show its summary
 glm.fit <- glm(mpg ~ horsepower, data=Auto)
-summary(glm.fit)
 
-# LOOCV is k-fold CV where k equals N, num of obs
+# 5-fold CV
+cv.err <- cv.glm(Auto, glm.fit, K=5)
+cv.err$delta[1]
+\end{Rcode}
+LOOCV is K-Fold CV with $K=N$
+
+\begin{Rcode}
+# LOOCV is k-fold CV where K equals N, num of obs
 cv.err <- cv.glm(Auto, glm.fit, K=nrow(Auto))
 cv.err$delta[1]
 \end{Rcode}
@@ -378,25 +416,20 @@ cv.err$delta[1]
 \end{frame}
 
 
-\begin{frame}[fragile]{Cross-Validation in R -- K-Fold CV}
-K-Fold Cross-Validation with $K=10$\\
-\begin{Rcode}
-cv.err <- cv.glm(Auto, glm.fit, K=10)
-cv.err$delta[1]
-\end{Rcode}
+%\begin{frame}[fragile]{Cross-Validation in R -- K-Fold CV}
 
-\textbf{Example:} Use cross-validation to compare different models:
+%\textbf{Example:} Use cross-validation to compare different models:
 
-\begin{Rcode}
-set.seed(17)
-cv.err <- rep(0, 5)
-for(i in 1:10) {
-  glm.fit <- glm(mpg ~ poly(horsepower,i), data=Auto)
-  cv.err[i] <- cv.glm(Auto, glm.fit, K=10)$delta[1]
-}
-cv.err
-\end{Rcode}
-\end{frame}
+%\begin{Rcode}
+%set.seed(17)
+%cv.err <- rep(0, 5)
+%for(i in 1:20) {
+  %glm.fit <- glm(mpg ~ poly(horsepower,i), data=Auto)
+  %cv.err[i] <- cv.glm(Auto, glm.fit, K=10)$delta[1]
+%}
+%cv.err
+%\end{Rcode}
+%\end{frame}
 
 
 \begin{frame}{Hands-On Exercises -- Cross-Validation}
@@ -424,7 +457,7 @@ Consider the Boston housing data set \texttt{Boston}.
    \item Reduce variance
    \item ''Shrink'' regression coefficients towards zero
    \item Penalize coefficients that are ''too high''
-   \item Type of ''regularization''
+   \item Type of ''\textbf{regularization}'' (methods to prevent overfitting)
 \end{itemize}
 \end{block}
 \end{frame}
@@ -480,19 +513,6 @@ Consider the Boston housing data set \texttt{Boston}.
 \end{columns}
 \end{frame}
 
-\begin{frame}{Selecting the Tuning Parameter}
-\begin{block}{Grid Search}
-\begin{itemize} 
-   \item Define a set/range of possible values for $\lambda$
-   \item Cross-validate models for each value of $\lambda$
-   \item Fit the final model to the optimal cross-validated error
-\end{itemize}
-\end{block}
-\centering
-\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter6/6_13.pdf} \\
-
-\scriptsize Source: ISLR2 Figure 6.13
-\end{frame}
 
 \begin{frame}{Elastic Net}
 The Elastic Net penalty is a mix of L1-norm $||\beta||_1$ and L2-norm $||\beta||_2^2$ penalties, defined by $\alpha$:
@@ -509,6 +529,7 @@ The Elastic Net penalty is a mix of L1-norm $||\beta||_1$ and L2-norm $||\beta||
 The \texttt{glmnet()} function in the \texttt{glmnet} library for R uses the Elastic Net regularization method.\end{frame}
 
 \begin{frame}[fragile]{Ridge Regression in R}
+\small
 
 Use the \texttt{Hitters} data set to model \texttt{Salary} as outcome and other variables as predictors.
 \begin{Rcode}
@@ -519,7 +540,7 @@ library(glmnet)
 Hitters <- na.omit(ISLR2::Hitters)
 \end{Rcode}
 
-The \texttt{glmnet()} function requires separate $x$ and $y$ values, instead of a formula. To create dummy variables for categorical variables, use the \texttt{model.matrix} function:
+The \texttt{glmnet()} function requires separate $x$ and $y$ values, instead of a formula. To create dummy variables for categorical variables, use the \texttt{model.matrix()} function:
 
 \begin{Rcode}
 # Create dummy variables for categorical variables
@@ -530,31 +551,66 @@ y <- Hitters$Salary
 \end{frame}
 
 \begin{frame}[fragile]{Ridge Regression in R \small [cont'd]}
-\small
-Set up a sequence of $\lambda$ to try and fit the model for each $\lambda$:
+Example for $\lambda=10$ using \texttt{glmnet()} with $\alpha=0$:
 \begin{Rcode}
-# Set up the sequence of lambda values to try
-grid <- 10^seq(from=10, to=-2, length=100)
-print(grid)
-ridge.model <- glmnet(x, y, alpha=0, lambda=grid)
+ridge.model <- glmnet(x, y, alpha=0, lambda=10)
 \end{Rcode}
-Examine some results:
+Examine coefficients:
 \begin{Rcode}
-# Select the 50th lambda value
-ridge.model$lambda[50]
-coef(ridge.model)[, 50]
-L2.norm = sqrt(sum(coef(ridge.model)[-1, 50]^2))
-
-# Select the 60th lambda value
-ridge.model$lambda[60]
-coef(ridge.model)[, 60]
-L2.norm = sqrt(sum(coef(ridge.model)[-1, 60]^2))
+coef(ridge.model)
+\end{Rcode}
+Examine L2 norm (penalty to RSS) (without intercept):
+\begin{Rcode}
+L2.norm = sqrt(sum(coef(ridge.model)[-1]^2))
+\end{Rcode}
+Examine MSE:
+\begin{Rcode}
+mean((y-predict(ridge.model, x))^2)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Ridge Regression in R \small [cont'd]}
+%\begin{frame}[fragile]{Ridge Regression in R \small [cont'd]}
+%\small
+%Set up a sequence of $\lambda$ to try and fit the model for each $\lambda$:
+%\begin{Rcode}
+%# Set up the sequence of lambda values to try
+%grid <- 10^seq(from=10, to=-2, length=100)
+%print(grid)
+%ridge.model <- glmnet(x, y, alpha=0, lambda=grid)
+%\end{Rcode}
+%Examine some results:
+%\begin{Rcode}
+%# Select the 50th lambda value
+%ridge.model$lambda[50]
+%coef(ridge.model)[, 50]
+%L2.norm = sqrt(sum(coef(ridge.model)[-1, 50]^2))
+
+%# Select the 60th lambda value
+%ridge.model$lambda[60]
+%coef(ridge.model)[, 60]
+%L2.norm = sqrt(sum(coef(ridge.model)[-1, 60]^2))
+%\end{Rcode}
+%\end{frame}
+
+\begin{frame}{Selecting the Tuning Parameter}
+\begin{block}{Grid Search}
+\begin{itemize} 
+   \item Define a set/range of possible values for $\lambda$
+   \item Cross-validate models for each value of $\lambda$
+   \item Fit the final model to the optimal cross-validated error
+\end{itemize}
+\end{block}
+
+\vspace{\baselineskip}
+\centering
+\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter6/6_13.pdf} \\
+
+\scriptsize Source: ISLR2 Figure 6.13
+\end{frame}
+
+\begin{frame}[fragile]{Ridge Regression in R -- Optimal Lambda}
 \small
-Identify the optimal $\lambda$ using cross-validation. First, create holdout test data set:
+Create holdout test data set:
 \begin{Rcode}
 # Randomly split the Hitters data
 train.idx <- sample(nrow(Hitters), nrow(Hitters)/2)
@@ -563,69 +619,115 @@ x.test <- x[-train.idx,]
 y.train <- y[train.idx]
 y.test <- y[-train.idx]
 \end{Rcode}
-Use the training set for cross-validation:
+Use the training set to find optimal $\lambda$ with CV:
 \begin{Rcode}
-# 5-fold cross-valiation, use MSE as metric
+# 5-fold cross-validation, use MSE as metric
 cv.out <- cv.glmnet(x.train, y.train, alpha=0, 
-   nfolds=5, type.measure='mse')
+                    nfolds=5, type.measure='mse')
 \end{Rcode}
 \end{frame}
 
 
-\begin{frame}[fragile]{Ridge Regression in R \small [cont'd]}
+\begin{frame}[fragile]{Ridge Regression in R  -- Optimal Lambda \small [cont'd]}
 \small
-Show the optimal lambda, the MSE measure, the SE of MSE and the number of non-zero coefficients. Also shown the largest lambda within one SE of the optimal lambda.
+Show the optimal lambda, the MSE and its standard error, and the number of non-zero coefficients.
+\begin{columns}
+\begin{column}{.35\textwidth}
 \begin{Rcode}
 print(cv.out)
 plot(cv.out)
-lambda.opt <- cv.out$lambda.min
+lambda.opt <- 
+  cv.out$lambda.min
 \end{Rcode}
+\end{column}
+\begin{column}{.65\textwidth}
+\begin{textcode}
+> print(cv.out)
+    Lambda Index Measure    SE Nonzero
+min  461.6    68  102536 13016      19
+1se 2244.8    51  114493 19007      19
+\end{textcode}
+\end{column}
+\end{columns}
 \includegraphics[width=\textwidth]{crossvalidated_ridge.pdf}
 \end{frame}
 
-\begin{frame}[fragile]{Ridge Regression in R -- Prediction}
+\begin{frame}[fragile]{Ridge Regression in R -- Optimal Lambda \small [cont'd]}
 \small
-Fit test data:
+Fit test data using optimal $\lambda$:
 \begin{Rcode}
-ridge.test <- glmnet(x.test, y.test, alpha=0)
+ridge.model <- glmnet(x.test, y.test, 
+                      alpha=0, lambda=lambda.opt)
 \end{Rcode}
-Compare regression coefficients between ridge using optimal $\lambda$ and unpenalized least squares:
+Compare coefficients between ridge and unpenalized least squares:
 \begin{Rcode}
-# Show the coefficients at optimal lambda
-predict(ridge.test, type='coefficients', s=lambda.opt)
-
-# Compare to unpenalized least-squares fit
-coef(lm.fit(x.test, y.test))
+coef(ridge.model)
+coef(lm(y.test ~ x.test + 1))
 \end{Rcode}
 \end{frame}
-
 
 \begin{frame}[fragile]{Ridge Regression in R -- Prediction}
 \small
 Predict values for the test data set:
 \begin{Rcode}
-predictions <- predict(ridge.test, type='response', 
-                       s=lambda.opt, newx=x.test)
+y.hat.test <- predict(ridge.model, newx=x.test, 
+                                      type='response')
 \end{Rcode}
 Calculate test MSE to compare to the CV optimal MSE above:
 \begin{Rcode}
-mean((predictions - y.test)^2)
+mean((y.hat.test - y.test)^2)
 \end{Rcode}
 Recall, the CV cross-validated error on the training set is an estimate/approximation of the real test error.
 \end{frame}
 
-
-\begin{frame}[fragile]{The Lasso in R}
+\begin{frame}[fragile]{The Lasso in R \small [cont'd]}
 \small
-Identify the optimal $\lambda$ using cross-validation:
+Example for $\lambda=10$ using \texttt{glmnet()} with $\alpha=1$:
 \begin{Rcode}
-# Set alpha to 1 for lasso
+lasso.model <- glmnet(x, y, alpha=1, lambda=10)
+\end{Rcode}
+Examine coefficients:
+\begin{Rcode}
+coef(lasso.model)
+\end{Rcode}
+Examine L1 norm (penalty to RSS) (without intercept):
+\begin{Rcode}
+L1.norm = sum(abs(coef(lasso.model)[-1])))
+\end{Rcode}
+Examine MSE:
+\begin{Rcode}
+mean((y-predict(ridge.model, x))^2)
+\end{Rcode}
+
+Use the training set to find optimal $\lambda$ with CV:
+\begin{Rcode}
+# 5-fold cross-validation, use MSE as metric
 cv.out <- cv.glmnet(x.train, y.train, alpha=1, 
-   nfolds=5, type.measure='mse')
+                    nfolds=5, type.measure='mse')
+\end{Rcode}
+\end{frame}
+
+\begin{frame}[fragile]{The Lasso in R -- Optimal Lambda}
+\small
+Show the optimal lambda, the MSE and its standard error, and the number of non-zero coefficients.
+\begin{columns}
+\begin{column}{.35\textwidth}
+\begin{Rcode}
 print(cv.out)
 plot(cv.out)
-lambda.opt <- cv.out$lambda.min
+lambda.opt <- 
+  cv.out$lambda.min
 \end{Rcode}
+\end{column}
+\begin{column}{.65\textwidth}
+\begin{textcode}
+> print(cv.out)
+    Lambda Index Measure    SE Nonzero
+min  33.33    22  107161 17195       6
+1se  92.75    11  122071 22061       4
+\end{textcode}
+\end{column}
+\end{columns}
 Note the number of non-zero coefficients in the result:
 \begin{center}
 \includegraphics[width=.8\textwidth]{crossvalidated_lasso.pdf}
@@ -633,24 +735,21 @@ Note the number of non-zero coefficients in the result:
 \end{frame}
 
 \begin{frame}[fragile]{The Lasso in R -- Prediction}
-Fit test data:
+Fit test data using optimal $\lambda$:
 \begin{Rcode}
-lasso.test <- glmnet(x.test, y.test, alpha=1)
+lasso.model <- glmnet(x.test, y.test, 
+                         alpha=1, lambda=lambda.opt)
 \end{Rcode}
-Compare regression coefficients between Lasso using optimal $\lambda$ and unpenalized least squares:
+Compare coefficients between Lasso and unpenalized least squares:
 \begin{Rcode}
-# Show the coefficients at optimal lambda, note the 
-# many zero coefficients
-predict(lasso.test, type='coefficients', s=lambda.opt)
-
-# Compare to unpenalized least-squares fit
-coef(lm.fit(x.test, y.test))
+coef(lasso.model)
+coef(lm(y.test ~ x.test + 1))
 \end{Rcode}
 Predict values for the test data set and compute test MSE
 \begin{Rcode}
-predictions <- predict(lasso.test, type='response', 
-                       s=lambda.opt, newx=x.test)
-mean((predictions - y.test)^2)
+y.hat.test <- predict(lasso.model, newx=x.test, 
+                                      type='response')
+mean((y.hat.test - y.test)^2)
 \end{Rcode}
 \end{frame}
 
@@ -713,8 +812,8 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
 \begin{columns}
 \begin{column}{0.6\textwidth}
 \begin{align*}
-  \sigma(a) &= \frac{1}{1 + e^{-a}} = \frac{e^a}{1 + e^a} \\
-  &= 1 - \sigma(-a)
+  \sigma(a) &= \frac{1}{1 + e^{-a}} = \frac{e^a}{1 + e^a} %\\
+%  &= 1 - \sigma(-a)
 \end{align*}
 \end{column}
 \begin{column}{0.4\textwidth}
@@ -726,10 +825,11 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
 \begin{block}{Binary Case (Binomial Logistic Regression)}
 \small
 \begin{align*}
-p(X) = \sigma( \beta_0 + \beta_1 X) &= \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}} \\
-\Rightarrow \quad \frac{p(X)}{1 - p(X)} &= e^{\beta_0 + \beta_1 X} \qquad\;\; \text{\textbf{''Odds''}} \\
-\Rightarrow \quad \log \left( \frac{p(X)}{1 - p(X)} \right) &= \beta_0 + \beta_1 X \qquad \text{\textbf{''Log-Odds'', ''Logits''}}
+p(X) = \sigma( \beta_0 + \beta_1 X) &= \frac{e^{\beta_0 + \beta_1 X}}{1 + e^{\beta_0 + \beta_1 X}} %\\
+%\Rightarrow \quad \frac{p(X)}{1 - p(X)} &= e^{\beta_0 + \beta_1 X} \qquad\;\; \text{\textbf{''Odds''}} \\
+%\Rightarrow \quad \log \left( \frac{p(X)}{1 - p(X)} \right) &= \beta_0 + \beta_1 X \qquad \text{\textbf{''Log-Odds'', ''Logits''}}
 \end{align*}
+where the linear predictor $\beta_0 + \beta_1 X$ are the \textbf{logits}
 \end{block}
 \end{frame}
 
@@ -740,41 +840,53 @@ Given estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, use the link function to pr
   \hat{p}(X) = \frac{e^{\hat{\beta}_0 + \hat{\beta}_1 X}}{1 + e^{\hat{\beta}_0 + \hat{\beta}_1 X}}
 \end{align*}
 \end{block}
-\end{frame}
-
-\begin{frame}{Logistic Regression \small [cont'd]}
+\begin{block}{Multinomial Logistic Regression}
 \begin{itemize}
-   \item Multiple $p$ predictors: \textbf{Multiple Linear Regression}
-   \item Multiple $K$ classes: \textbf{Multinomial Logistic Regression}
-   \item Multiple $n$ labels: \textbf{Multi-label Classification}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Multinomial Logistic Regression}
-\small
+  \item Same mathematical form
+  \item Probability for class being $k$:
 \begin{align*}
-\log \left( \frac{\Pr(Y=k | X=x)}{\Pr(Y=K | X=x)}\right) &= \beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p \; , k<K \\
-\intertext{Exponentiating and rearranging:}
-\Pr(Y=k | X=x) &= \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \;, k<K\\
-\intertext{Because probabilities must sum to 1:}
-\Pr(Y=K | X=x) &= 1 - \sum_{l=1}^{K-1} \Pr(Y=l | X=x) \\
-&= 1 - \sum_{l=1}^{K-1} \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \\
-\Rightarrow \Pr(Y=K | X = x) &= \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}} \\
-\Rightarrow \Pr(Y=k|X=x) &= \frac{e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}x_1 + \cdots + \beta_{lp}x_p}} \;, \; k < K
+\Rightarrow \Pr(Y=k|X) &= \frac{e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}x_1 + \cdots + \beta_{lp}x_p}}
 \end{align*}
-\end{frame}
-
-\begin{frame}{Logistic Regression with Polynomial Expansion}
-\begin{block}{Transforming Decision Boundaries}
-\includegraphics[width=\textwidth]{Figure_10.3.png} \\
-\scriptsize Source: Murphy Figure 10.3
+\end{itemize}
 \end{block}
 \end{frame}
 
-\begin{frame}{Logistic Regression with Polynomial Expansion \small [cont'd]}
-\centering
+%\begin{frame}{Logistic Regression \small [cont'd]}
+%\begin{itemize}
+   %\item Multiple $p$ predictors: \textbf{Multiple Linear Regression}
+   %\item Multiple $K$ classes: \textbf{Multinomial Logistic Regression}
+   %\item Multiple $n$ labels: \textbf{Multi-label Classification}
+%\end{itemize}
+%\end{frame}
+
+%\begin{frame}{Multinomial Logistic Regression}
+%\small
+%\begin{align*}
+%\log \left( \frac{\Pr(Y=k | X=x)}{\Pr(Y=K | X=x)}\right) &= \beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p \; , k<K \\
+%\intertext{Exponentiating and rearranging:}
+%\Pr(Y=k | X=x) &= \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \;, k<K\\
+%\intertext{Because probabilities must sum to 1:}
+%\Pr(Y=K | X=x) &= 1 - \sum_{l=1}^{K-1} \Pr(Y=l | X=x) \\
+%&= 1 - \sum_{l=1}^{K-1} \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \\
+%\Rightarrow \Pr(Y=K | X = x) &= \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}} \\
+%\Rightarrow \Pr(Y=k|X=x) &= \frac{e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}x_1 + \cdots + \beta_{lp}x_p}} \;, \; k < K
+%\end{align*}
+%\end{frame}
+
+\begin{frame}{Logistic Regression with Polynomials}
+Transforming decision boundaries:
+\begin{center}
+\includegraphics[width=\textwidth]{Figure_10.3.png} \\
+\scriptsize Source: Murphy Figure 10.3
+\end{center}
+\end{frame}
+
+\begin{frame}{Logistic Regression with Polynomials \small [cont'd]}
+But beware of overfitting:
+\begin{center}
 \includegraphics[width=.8\textwidth]{screen3.png} \\
 \scriptsize Source: Murphy Figure 10.4
+\end{center}
 \end{frame}
 
 \begin{frame}[fragile]{Logistic Regression in R}
@@ -784,11 +896,11 @@ Use the stock market data set \texttt{Smarket} to predict the binary outcome \te
 library(ISLR2)
 ?Smarket
 \end{Rcode}
-Contrasts show how factor levels are encoded using dummy variables:
-\begin{Rcode}
-contrasts(Smarket$Direction)
-\end{Rcode}
-Note the \texttt{family} argument for the \texttt{glm} function:
+%Contrasts show how factor levels are encoded using dummy variables:
+%\begin{Rcode}
+%contrasts(Smarket$Direction)
+%\end{Rcode}
+Fit to full data set. Note the link function in the \texttt{family} argument for the \texttt{glm()} function:
 \begin{Rcode}
 logreg.fitted <- 
    glm(Direction ~ Lag1 + Lag2 + Lag3 + Lag4 + Lag5 + Volume, 
@@ -799,34 +911,38 @@ summary(logreg.fitted)
 \end{frame}
 
 
-\begin{frame}[fragile]{Logistic Regression in R -- Prediction}
+\begin{frame}[fragile]{Logistic Regression in R}
 \small
-Predict logits for training set:
+Use \texttt{predict()} to predict logits for data set:
 \begin{Rcode}
 logreg.logits <- predict(logreg.fitted, newdata = Smarket)
 \end{Rcode}
-Predict probabilities for training set:
+Use \texttt{predict()} to predict probabilities for data set:
 \begin{Rcode}
 # Predict probabilities for training test
-logreg.probabilities <- 
-   predict(logreg.fitted, newdata = Smarket, type='response')
+logreg.probs <- predict(logreg.fitted, newdata = Smarket, 
+                     type='response')
 \end{Rcode}
-Predict categorical outcomes:
+Make classificiation decision using decision rule:
 \begin{Rcode}
 # Predict 'up' or 'down' based on probabilities
 # and a fixed threshold
-pred.direction <- rep('Down', nrow(Smarket))
-pred.direction[logreg.probabilities > .5] <- 'Up'
+pred.direction <- rep(NA, nrow(Smarket))
+pred.direction[logreg.probs >  .5] <- 'Up'
+pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Logistic Regression in R -- Prediction}
+\begin{frame}[fragile]{Logistic Regression in R}
 \small
+Compute confusion matrix:
 \begin{Rcode}
 # Compute confusion matrix
 logreg.cm <- table(pred.direction, Smarket$Direction)
 print(logreg.cm)
-
+\end{Rcode}
+Compute accuracy as mean of correct classifications:
+\begin{Rcode}
 # Compute accuracy
 mean(pred.direction == Smarket$Direction)
 \end{Rcode}
@@ -839,28 +955,34 @@ Split data to train and test set. Because this is time-dependent data, split by 
 train.data <- Smarket[Smarket$Year < 2005,]
 test.data <- Smarket[!(Smarket$Year < 2005),]
 \end{Rcode}
-Fit using training set:
+Fit model to training set:
 \begin{Rcode}
 logreg.fitted <- 
    glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume, 
-   data=train.data, family=binomial(link='logit'))
+       data=train.data, family=binomial(link='logit'))
 \end{Rcode}
-Predict probabilities for test data and classify:
+Predict probabilities for test data:
 \begin{Rcode}
-logreg.probabilities <- predict(logreg.fitted, 
+logreg.probs <- predict(logreg.fitted, 
     newdata = test.data, type='response')
-    
-pred.direction <- rep('Down', nrow(test.data))
-pred.direction[logreg.probabilities > .5] <- 'Up'
+\end{Rcode}
+Make classification decision using decision rule:
+\begin{Rcode}    
+pred.direction <- rep(NA, nrow(test.data))
+pred.direction[logreg.probs >  .5] <- 'Up'
+pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
 \end{frame}
 
 \begin{frame}[fragile]{Logistic Regression in R -- Holdout Set} 
 \small
-Compute confusion matrix and accuracy for test data:
+Compute confusion matrix for test data:
 \begin{Rcode}
 logreg.cm <- table(pred.direction, test.data$Direction)
 print(logreg.cm)
+\end{Rcode}
+Calculate accuracy as the mean of correct classifications:
+\begin{Rcode}
 mean(pred.direction == test.data$Direction)
 \end{Rcode}
 \end{frame}
@@ -873,7 +995,7 @@ library(ROCR)
 
 # A prediction object collects predicted 
 # probabilities and true labels
-pred.obj <- prediction(logreg.probabilities, 
+pred.obj <- prediction(logreg.probs, 
                        test.data$Direction)
 
 # Get some classifier performance metrics
@@ -893,6 +1015,7 @@ continued \ldots
 # ROC - True positive rate versus false positive rate
 plot(performance(pred.obj, 'tpr', 'fpr'), colorize=T)
 abline(0, 1)
+
 # Precision/Recall plot
 plot(performance(pred.obj, 'prec', 'rec'), colorize=T)
 \end{Rcode}
@@ -954,10 +1077,10 @@ print(nb.cm)
 Evaluate the classifier:
 \begin{Rcode}
 # Predict probabilities (for use with ROCR)
-nb.probabilities <- predict(nb.fitted, test.data, type='raw')
+nb.probs <- predict(nb.fitted, test.data, type='raw')
 
 # Create an ROCR prediction object
-nb.pred.obj <- prediction(nb.probabilities[,'Up'], 
+nb.pred.obj <- prediction(nb.probs[,'Up'], 
                           test.data$Direction)
 \end{Rcode}
 Assess ROC and AUC:
@@ -978,11 +1101,11 @@ performance(nb.pred.obj, 'auc')@y.values[[1]]
 
 \begin{frame}[fragile]{KNN Classification in R}
 \small
-Using the \texttt{knn} function from the \texttt{class} library:
+Using the \texttt{knn()} function from the \texttt{class} library:
 \begin{Rcode}
 library(class)
 \end{Rcode}
-Use only two predictors:
+Use only two predictors, Lag1 and Lag2:
 \begin{Rcode}
 train.x <- cbind(train.data$Lag1, train.data$Lag2)
 test.x <- cbind(test.data$Lag1, test.data$Lag2)
@@ -1038,7 +1161,7 @@ performance(knn.pred.obj, 'auc')@y.values[[1]]
 \begin{frame}{Hands-On Exercises}{Source: ISLR2, Chapter 4}
 Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
 \begin{enumerate}
-   \item Use the full data set to perform a logisttic regression with \texttt{Direction} as target. Which predictors are statistically significant?
+   \item Use the full data set to perform a logistic regression with \texttt{Direction} as target. Which predictors are statistically significant?
    \item Compute the confusion matrix and accuracy.
    \item Use the 1990 to 2008 data for a training set and the 2009/2010 for a test set. Fit a logistic regression model with \texttt{Lag2} as the only predictor.
    \item Repeat (3) using Naive Bayes

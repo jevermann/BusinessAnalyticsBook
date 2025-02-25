@@ -206,13 +206,15 @@ The parameters in an LSTM layer are ''re-used'' for each time step. In other wor
 
 Examining the dimensionality of the inputs and outputs to an LSTM cell allows calculating the number of trainable parameters in an LSTM layer. As equations~\ref{eq:forget} to \ref{eq:candidate} are identical in form, it suffices to focus on one and multiply the resulting number of parameters by four. 
 
-Consider an LSTM cell with hidden state $h_t$ and cell memory $c_t$ sizes of $n=16$ and an input size $x_t$ of $m=10$. This means that there must be $m+n=26$ weights for the forget gate $W_f$ in equation \ref{eq:forget}. That is, $W_f$ is a $1 \times (m+n)$ row vector that is multiplied with the $(m+n) \times 1$ column vector $[x_t, h_{t-1}]$ to yield a single number (a $1 \times 1$ ''vector''). The bias term is then added and the sigmoid function is applied to this sum. The total number of parameters is then of $m+n+1=27$.
+Consider an LSTM cell with hidden state $h_t$ and cell memory $c_t$ sizes of $n=16$ and an input size $x_t$ of $m=8$. This means that there must be $m+n=24$ weights for the forget gate $W_f$ in equation \ref{eq:forget}. That is, $W_f$ is a $1 \times (m+n)$ row vector that is multiplied with the $(m+n) \times 1$ column vector $[x_t, h_{t-1}]$ to yield a single number (a $1 \times 1$ ''vector''). The bias term is then added and the sigmoid function is applied to this sum. The total number of parameters is then of $m+n+1=25$.
 
 However, the output of the forget gate must be of the same dimensionality as the hidden state because of the element-wise multiplication and addition operations in Equations~\ref{eq:memory} and \ref{eq:state}. This means that $W_f$ must be a $n \times (n+m)$ matrix that is multiplied with the $(m+n) \times 1$ column vector $[x_t, h_{t-1}]$ to yield a $n \times 1$ column vector. As well, the bias is not simply a single number but an $n \times 1$ column vector. In other words, $W_f$ contains $n \times (n+m)$ parameters and the bias term contains another $n$ parameters for a total of $n+n\times(n+m)$ parameters. The sigmoid function (or the tanh function in Equation~\ref{eq:candidate}) are applied to each row.
 
 Another way to grasp this intuitively is by recognizing that the simpler representation in terms of $(m+n)$ sized vectors determines the gate function (in this case, the forget function) \emph{for a single element in the hidden state}. As the hidden state comprises $n$ such elements, this formula must be ''replicated'' $n=16$ times in this example, yielding again $n (m+n+1)$ parameters.
 
 For the total LSTM cell, the number of trainable parameters is therefore $4 \times (n + m + 1) \times n$.
+
+\textbf{Example}: Let the unit size (state size) be 16 and the input size be 8. Then the total number of parameters for the LSTM cell is $4 \times (16 \times (8+16) + 16) = 1600$
 
 \section{GRU Cells}
 

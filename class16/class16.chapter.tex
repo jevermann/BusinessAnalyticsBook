@@ -124,9 +124,28 @@ Figure~\ref{fig:screen4_chap16} shows an example of a zero padded input (bottom,
 
 While the convolution layer may look complicated and complex, it essentially produces a weighted sum of inputs where the convolution kernel entries are the weights, very much like the general neural network unit definition in the previous chapter. A bias term is added to the weighted sum produced by the convolution, before the sum is transformed using a non-linear activation function. In many ConvNets, the activation function is the ReLU (Rectified Linear Unit). In other words, the CNN functions very much like the general neural networks introduced in the previous chapter, except that the connections between inputs and weights are more complex and focus on spatial relationships. As with fully connected networks, it is important to understand the number of parameters (weights and biases) in order to verify the correctness of the implemented model.
 
+As with general neural networks, it is instructive to examine and verify the number of parameters for each CNN layer. Let the kernel be of size $k \times l$ and let the input have $m$ channels. Then, there are $k \times l$ elements for each of the $m$ input dimensions, i.e. a total of $m \times k \times l$ parameters. A CNN layer may produce $n$ different output channels, requiring such a kernel of size $m \times k \times l$ for each of the $n$ output channels, for a total of $n \times m \times k \times l$ parameters. Additionally, there will be one bias term for each of the $n$ output channels, for a total of $n \times m \times k \times l + n$ trainable parameters. \\
+
+\textbf{Example}: Let the kernel size be $5 \times 5$ applied to an input with $3$ channels and an output of $32$ channels. Then, the CNN layer has $32 \times 3 \times 5 \times 5 + 32 = 2432$ parameters.
+
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise}
+Calculate the number of trainable parameters for the following CNN layers:
+\begin{enumerate}
+\item A kernel of size $4 \times 4$ operating on an input with 3 channels and an output of 8 channels.
+\item A kernel of size $2 \times 2$ operating on an input with 8 channels and an output of 16 channels.
+\item A kernel of size $3 \times 3$ operating on an input with 16 channels and an output of 4 channels.
+\item A kernel of size $5 \times 5$ operating on an input with 4 channels and an output with 4 channels.
+\end{enumerate}
+Assume the previous four layers are part of the same neural network, what is the total number of trainable parameters?
+\end{tcolorbox}
+
+
+
 \section{Pooling Layers}
 
-Pooling layers\index{Pooling layer (in convolutional network)} within ConvNets are used to reduce the spatial dimensions (width and height) of the convolution output for the next convolutional layers or for subsequent dense, fully-connected layers. This reduction in dimensions serves several purposes. It decreases the computational load and the memory usage, helps prevent overfitting by providing an abstracted form of the representation, and makes the network invariant to small transformations, distortions, and translations in the input. Pooling is applied separately to each output channel of a convolution.
+Pooling layers\index{Pooling layer (in convolutional network)} within ConvNets are used to reduce the spatial dimensions (width and height) of the convolution output for the next convolutional layers or for subsequent dense, fully-connected layers. This reduction in dimensions serves several purposes. It decreases the computational load and the memory usage, helps prevent overfitting by providing an abstracted form of the representation, and makes the network invariant to small transformations, distortions, and translations in the input. Pooling is applied separately to each output channel of a convolution. Note that pooling layers do not have trainable parameters.
 
 The most common types of pooling include \emph{max pooling} and \emph{average pooling}. Max pooling partitions the convolution output into a set of overlapping or non-overlapping regions, and outputs the maximum value for each such region. For instance, a $2 \times 2$ max-pooling layer applied with a stride of 2 reduces the size of the input by a factor of four (halving the height and width separately). Instead of taking the maximum value from each distinct region, average pooling computes the average of the values in each patch on a feature map. 
 
@@ -163,9 +182,10 @@ and the following $3 \times 3$ convolution kernel:
 \end{align*}
 Zero-pad the matrix with \emph{two} zeros on all sides and using stride 2, calculate the convolution result. What are the dimensions of the convolution output?
 
-\item Apply a 2x2 max pooling layer to the result of the previous exercise. 
+\item Apply a $2 \times 2$ max pooling layer to the result of the previous exercise. 
 \end{enumerate}
 \end{tcolorbox}
+
 
 \section{Understanding ConvNets}
 

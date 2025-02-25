@@ -97,6 +97,32 @@ Chapter 13, 14, 15
 \emph{In a convolutional neural net layer, the convolution kernels are \textbf{trainable parameters}}.
 \end{frame}
 
+\begin{frame}{CNN Parameters}
+\small
+\begin{itemize}
+  \item Let the kernel be of size $k \times l$
+  \item Let the input be of $m$ channels
+  \item Let the output be $n$ channels
+  \item Then, there are $k \times l$ elements for each of the $m$ input dimensions, i.e. a total of $m \times k \times l$
+  \item Then, there are $m \times k \times l$ elements for each of the $n$ output dimensions, i.e. a total of $n \times m \times k \times l$
+  \item Additionally, there are $n$ bias terms, one for each output channel
+\end{itemize}
+\textbf{Example}: Let the kernel size be $5 \times 5$ applied to an input with $3$ channels and an output of $32$ channels. Then, the CNN layer has $32 \times 3 \times 5 \times 5 + 32 = 2432$ parameters.
+\end{frame}
+
+
+\begin{frame}{Hands-On Exercises}
+Calculate the number of trainable parameters for the following CNN layers:
+\begin{enumerate}
+\item A kernel of size $4 \times 4$ operating on an input with 3 channels and an output of 8 channels.
+\item A kernel of size $2 \times 2$ operating on an input with 8 channels and an output of 16 channels.
+\item A kernel of size $3 \times 3$ operating on an input with 16 channels and an output of 4 channels.
+\item A kernel of size $5 \times 5$ operating on an input with 4 channels and an output with 4 channels.
+\end{enumerate}
+Assume the previous four layers are part of the same neural network, what is the total number of trainable parameters?
+\end{frame}
+
+
 \begin{frame}{Convolution \small [cont'd]}{Striding and Padding}
 \begin{block}{Striding}
    \begin{itemize} 
@@ -125,6 +151,7 @@ Chapter 13, 14, 15
 \begin{itemize}
    \item Recognize location independent features
    \item Max pooling or average pooling
+   \item Pooling layers have no trainable parameters
 \end{itemize}
 \centering
 \includegraphics[width=.8\textwidth]{screen5.png} \\
@@ -152,9 +179,11 @@ and the following $3 \times 3$ convolution kernel:
 \end{align*}
 Zero-pad the matrix with two zeros on all sides and using stride 2, calculate the convolution result. What are the dimensions of the convolution output?
 
-\item Apply a 2x2 max pooling layer to the result of the previous exercise. 
+\item Apply a $2 \times 2$ max pooling layer to the result of the previous exercise. 
 \end{enumerate}
 \end{frame}
+
+
 
 
 \begin{frame}{CNN}
@@ -173,7 +202,7 @@ Zero-pad the matrix with two zeros on all sides and using stride 2, calculate th
 
 \begin{frame}{CNN}
 \begin{itemize}
-   \item Multiple convoluational kernels applied in parallel to the same image (''channels'')
+   \item Multiple convolutional kernels applied in parallel to the same image (''channels'')
 \end{itemize} 
 
 \vspace{\baselineskip}
