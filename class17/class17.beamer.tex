@@ -164,7 +164,7 @@ o_t &= \sigma (W_{o} \cdot h_t + B_{o} )
 
 \begin{frame}{Long-Short-Term Memory (LSTM) Cells}
 \begin{itemize}
-   \item ''Input gate'' $I$, ''Forget gate'' $F$, ''Output gate'' $O$
+   \item ''Input gate'' $I$, ''Forget gate'' $F$, ''Output gate'' $O$, candidate new memory $\tilde{c}_t$
    \item Hidden state $h$, Cell memory $c$
 \end{itemize}
 
@@ -205,7 +205,7 @@ Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise mult
 
 \begin{frame}{Gated Recurrent Unit (GRU) Cells}
 \begin{itemize}
-   \item ''Update gate'' $Z$, ''Reset gate gate'' $R$
+   \item ''Update gate'' $Z$, ''Reset gate gate'' $R$, candidate new memory $\hat{h}_t$
    \item Hidden state $h$
 \end{itemize}
 \begin{center}

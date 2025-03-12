@@ -83,7 +83,7 @@ The \emph{Moving Average}\index{Moving average} model is a fundamental time seri
 \begin{align*}v_t = \frac{1}{3} ( w_{t-1} + w_t + w_{t+1})
 \end{align*}
 
-\noindent where $w_t$ are the white noise error terms. In this example, all white noise terms are weighted equally by $1/3$.
+\noindent where $w_t$ are the white noise error terms. The sum of the weights in a moving average model must be $1$. In this example, all white noise terms are weighted equally by $1/3$.
 
 MA models are particularly useful in smoothing out noise and forecasting when the series exhibits a random behavior with no trend or seasonality.
 
@@ -122,7 +122,7 @@ The \emph{Autoregressive (AR) model}\index{Autoregression} is based on the conce
 \begin{align*}x_t = x_{t-1} - 0.9 x_{t-2} + w_t\end{align*}
 
 
-\noindent where $w_t$ is white noise.
+\noindent where $w_t$ is white noise. For stability of the time series, all coefficient of $x$ are usually less than or equal to $1$.
 
 AR models are widely used in economic and financial time series where data points are influenced significantly by their previous values.
 
@@ -160,7 +160,7 @@ A \emph{random walk with drift}\index{Random walk} adds a constant to the standa
 &= \delta t + \sum_{j=1}^t w_j
 \end{align*}
 
-\noindent where $\delta$ represents the drift (constant term), and $w_t$ is the noise component.
+\noindent where $\delta$ represents the drift (constant term), and $w_t$ is the noise component. Importantly, $x_{t-1}$ is the only lagged $x$ term and its coefficient must be $1$.
 
 This model is commonly applied in financial markets to model stock prices or other investments, reflecting that prices are serially correlated and can trend over time.
 

@@ -166,6 +166,21 @@ Gaussian error linear unit & $\operatorname{GeLU}(z) = z \Phi(z)$ \\
 \scriptsize Source: ISLR2 Figure 10.1
 \end{frame}
 
+\begin{frame}{Counting Parameters}
+In a fully-connected network, for a hidden or output layer of size $n$, that is, with $n$ cells/neurons and $k$ inputs, that is $k$ cells on the previous layer:
+\begin{itemize}
+   \item Each of the $n$ cells has as many weights as inputs $k$
+   \item Each of the $n$ cells has $1$ bias
+\end{itemize}
+\textbf{Example:} Input size $4$, hidden layer size $5$, output layer size $1$:
+\begin{itemize}
+   \item Hidden layer parameters: $4 \times 5 + 5 = 25$
+   \item Ouput layer parameters: $5 \times 1 + 1 = 6$
+   \item Total number of parameters: $25 + 6 = 31$
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Fully Connected Multilayer Network}
 \begin{columns}
 \begin{column}{.66\textwidth}
@@ -189,6 +204,22 @@ Multiple Outputs either
 \end{column}
 \end{columns}
 \end{frame}
+
+\begin{frame}{Hands-On Exercise}
+
+Consider the following network architecture for classification into 5 classes.
+
+\begin{itemize}
+   \item Input layer with 10 inputs
+   \item Fully-connected (dense) hidden layer with 20 units
+   \item Fully-connected (dense) hidden layer with 10 units
+   \item Fully-connected (dense) hidden layer with 5 units
+   \item Fully-connected (dense) output layer
+\end{itemize}
+
+Calculate the total number of learnable parameters for this network.
+\end{frame}
+
 
 \begin{frame}{Estimating Parameters}
 \footnotesize

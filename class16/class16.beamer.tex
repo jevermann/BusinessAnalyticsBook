@@ -282,13 +282,12 @@ import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
 import datetime
 
-(train_images, train_labels), \
-(test_images, test_labels) \
+(train_images, train_labels), (test_images, test_labels) \
     = datasets.cifar10.load_data()
 
 # Normalize pixel values to be between 0 and 1
-train_images, test_images = \
-train_images / 255.0, test_images / 255.0
+train_images = train_images / 255.0
+test_images = test_images / 255.0
 \end{pythoncode}
 \end{frame}
 
@@ -296,14 +295,15 @@ train_images / 255.0, test_images / 255.0
 Create a simple convolutional model:
 \begin{pythoncode}
 model = models.Sequential()
-model.add(layers.Conv2D(8, (3, 3), \ 
-    activation='relu', input_shape=(32, 32, 3)))
+
+model.add(layers.Conv2D(8, (3, 3), activation='relu', \
+    input_shape=(32, 32, 3)))
 model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(16, (3, 3), \ 
-    activation='relu'))
+
+model.add(layers.Conv2D(16, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
-model.add(layers.Conv2D(16, (3, 3), \
-    activation='relu'))
+
+model.add(layers.Conv2D(16, (3, 3), activation='relu'))
 \end{pythoncode}
 Add dense (fully-connected) layers for classification. There are 10 target classes:
 \begin{pythoncode}
@@ -316,25 +316,17 @@ model.summary()
 \end{frame}
 
 \begin{frame}[fragile]{CNN in Keras}
-Set up for TensorBoard:
-\begin{pythoncode}
-log_dir = "./tensorboard_logs/" + \
-    datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
-tensorboard_callback = \
-    tf.keras.callbacks.TensorBoard(log_dir=log_dir, 
-        histogram_freq=0)
-\end{pythoncode}
 Compile and train the model:
 \begin{pythoncode}
-model.compile(optimizer='adam',
+model.compile(
+    optimizer='adam',
     loss=tf.keras.losses \
         .SparseCategoricalCrossentropy(from_logits=True),
     metrics=['accuracy'])
 
-history = model.fit(train_images, train_labels, 
-    epochs=10, 
-    validation_data=(test_images, test_labels),
-    callbacks=[tensorboard_callback])
+model.fit(
+    train_images, train_labels, epochs=10, 
+    validation_data=(test_images, test_labels))
 \end{pythoncode}
 \end{frame}
 
@@ -390,21 +382,21 @@ from tensorflow.keras.layers import TextVectorization
 Download the Stack Overflow dataset:
 \begin{pythoncode}
 data_url = \
-'http://download.tensorflow.org/ \
-data/stack_overflow_16k.tar.gz'
+'http://download.tensorflow.org/data/stack_overflow_16k.tar.gz'
+
 # Get the data
-dataset_dir = \
-utils.get_file(origin=data_url,
-               untar=True,
+dataset_dir = utils.get_file(origin=data_url, untar=True,
                cache_subdir='stack_overflow')
+
 # Remember where we put it
 dataset_dir = pathlib.Path(dataset_dir).parent
 train_dir = dataset_dir/'train'
 test_dir = dataset_dir/'test'
+
 # Print a sample
 sample_file = train_dir/'python/1755.txt'
 with open(sample_file) as f:
-  print(f.read())
+    print(f.read())
 \end{pythoncode}
 \end{frame}
 
@@ -500,7 +492,7 @@ multi_hot_model = tf.keras.Sequential([
 
 multi_hot_model.compile(
     loss= \
-losses.SparseCategoricalCrossentropy(from_logits=True),
+      losses.SparseCategoricalCrossentropy(from_logits=True),
     optimizer='adam',
     metrics=['accuracy'])
 \end{pythoncode}
