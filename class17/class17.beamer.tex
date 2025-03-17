@@ -130,6 +130,14 @@ Chapter 15
 \scriptsize Source: Murphy Fig 15.5
 \end{frame}
 
+\begin{frame}{RNN -- Seq2Seq (Non-Aligned)}
+
+\centering
+\includegraphics[width=\textwidth]{seq2seq_nonaligned.png} \\
+
+\scriptsize Source: Murphy Fig. 15.7
+\end{frame}
+
 \begin{frame}{Recurrent Neural Networks (RNN)}
 \begin{itemize}
    \item A neural network block occurs multiple times in sequence
@@ -263,6 +271,32 @@ Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise mult
 \end{block}
 \end{frame}
 
+
+\begin{frame}{Hands-On Exercise}
+
+Consider a neural network for regression with the following characteristics:
+
+\begin{itemize}
+   \item Layer 1: Embedding
+   \begin{itemize}
+      \item Embedding matrix: $10000 \times 10$
+   \end{itemize}
+   \item Layer 2: LSTM (seq2seq)
+   \begin{itemize}
+      \item Hidden state and cell memory size: 24
+      \item Number of unrolled steps: 10
+   \end{itemize}
+   \item Layer 3: GRU (seq2vec)
+   \begin{itemize}
+      \item Hidden state size: 16
+   \end{itemize}
+   \item Layer 4: Dense layer
+\end{itemize}
+
+What is the number of trainable parameters for each layer and for the whole network?
+\end{frame}
+
+
 \begin{frame}[fragile]{Stock Market Prediction}
 Using historic stock market data, predict future performance.
 \begin{itemize}
@@ -304,12 +338,21 @@ data = pd.concat([
     data.diff().add_suffix('diff'),
     data.pct_change().add_suffix('pct')],
     axis=1).iloc[1:,]
-# Split data to train and validation set
-# No random shuffling for time series
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+
+Split data to train and validation set (no random shuffling for time series):
+
+\begin{pythoncode}
 train = data[:math.floor(0.8*data.shape[0])]
 valid = data.drop(train.index)
-# Normalize data using only info from training 
-# set. Prevent information 'leakage'
+\end{pythoncode}
+
+Normalize data using only info from training set to prevent information 'leakage':
+
+\begin{pythoncode}
 train_mean = train.mean()
 train_sd = train.std()
 train = (train - train_mean)/train_sd
@@ -318,23 +361,25 @@ valid = (valid - train_mean)/train_sd
 \end{frame}
 
 \begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
-Create \texttt{tf.Dataset} objects:
+Create \texttt{tf.Dataset} objects for training and validation:
 \begin{pythoncode}
 dataset_train = keras.preprocessing \
     .timeseries_dataset_from_array(
-    train.drop('price.closediff', axis=1),
-    train['price.closediff'],
-    sequence_length=n_steps,
-    batch_size=32,
-    shuffle=True)
+        train.drop('price.closediff', axis=1),
+        train['price.closediff'],
+        sequence_length=n_steps,
+        batch_size=32,
+        shuffle=True)
+\end{pythoncode}
 
+\begin{pythoncode}
 dataset_valid = keras.preprocessing \
     .timeseries_dataset_from_array(
-    valid.drop('price.closediff', axis=1),
-    valid['price.closediff'],
-    sequence_length=n_steps,
-    batch_size=32,
-    shuffle=True)
+        valid.drop('price.closediff', axis=1),
+        valid['price.closediff'],
+        sequence_length=n_steps,
+        batch_size=32,
+        shuffle=True)
 \end{pythoncode}
 \end{frame}
 
@@ -364,9 +409,14 @@ Do not shuffle data:
 
 \begin{pythoncode}
 ds = keras.preprocessing \
-    .timeseries_dataset_from_array(inputs, targets, \
-     batch_size=2, sequence_length=2, \
-     sequence_stride=1, shuffle=False)
+    .timeseries_dataset_from_array(
+        inputs, 
+        targets,
+        batch_size=2, 
+        sequence_length=2,
+        sequence_stride=1, 
+        shuffle=False)
+        
 for element in ds.as_numpy_iterator():
      print(element)
 
@@ -388,9 +438,14 @@ Shuffle data:
 
 \begin{pythoncode}
 ds = keras.preprocessing \
-    .timeseries_dataset_from_array(inputs, targets, \
-     batch_size=2, sequence_length=2, \
-     sequence_stride=1, shuffle=True)
+    .timeseries_dataset_from_array(
+        inputs, 
+        targets,
+        batch_size=2, 
+        sequence_length=2,
+        sequence_stride=1, 
+        shuffle=True)
+        
 for element in ds.as_numpy_iterator():
      print(element)
 
@@ -408,9 +463,14 @@ Sequence stride:
 
 \begin{pythoncode}
 ds = keras.preprocessing \
-    .timeseries_dataset_from_array(inputs, targets, \
-     batch_size=1, sequence_length=2, \
-     sequence_stride=2, shuffle=False)
+    .timeseries_dataset_from_array(
+        inputs, 
+        targets,
+        batch_size=1, 
+        sequence_length=2,
+        sequence_stride=2, 
+        shuffle=False)
+        
 for element in ds.as_numpy_iterator():
      print(element)
 
@@ -453,13 +513,15 @@ model.summary()
 \end{frame} 
 
 \begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
-Compile and fit the model:
+Compile the model:
 \begin{pythoncode}
-model.compile(loss='mean_squared_error',
+model.compile(loss='mean_squared_error', 
               optimizer='Adagrad')
+\end{pythoncode}
 
-model.fit(dataset_train,
-          epochs=n_epochs,
+Fit the model to data:
+\begin{pythoncode}
+model.fit(dataset_train, epochs=n_epochs, 
           validation_data=dataset_valid)
 \end{pythoncode}
 \end{frame}
@@ -558,21 +620,23 @@ Epoch 25/25
 \begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
 Does a stateful LSTM perform better? \\
 
-Change batch size to a single batch of continuous sequence:
+Set batch size to 1 for a single batch of continuous sequence:
 \begin{pythoncode}
 dataset_train = keras.preprocessing \
     .timeseries_dataset_from_array(
-    train.drop('price.closediff', axis=1),
-    train['price.closediff'],
-    sequence_length=n_steps,
-    sampling_rate=1, batch_size=1, shuffle=False)
+        train.drop('price.closediff', axis=1),
+        train['price.closediff'],
+        sequence_length=n_steps,
+        sampling_rate=1, batch_size=1, shuffle=False)
+\end{pythoncode}
 
+\begin{pythoncode}
 dataset_valid = keras.preprocessing \
     .timeseries_dataset_from_array(
-    valid.drop('price.closediff', axis=1),
-    valid['price.closediff'],
-    sequence_length=n_steps,
-    sampling_rate=1, batch_size=1, shuffle=False)
+        valid.drop('price.closediff', axis=1),
+        valid['price.closediff'],
+        sequence_length=n_steps,
+        sampling_rate=1, batch_size=1, shuffle=False)
 \end{pythoncode}
 \end{frame}
 
@@ -630,8 +694,7 @@ Treat the entire input as one large feature vector, without expressing any time-
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(
-    input_shape=(n_steps,
-                 len(train.columns)-1)))
+    input_shape=(n_steps, len(train.columns)-1)))
 model.add(layers.Flatten())
 model.add(layers.Dense(256))
 model.add(layers.Dropout(rate=0.25))
@@ -670,7 +733,9 @@ Epoch 25/25 - loss: 1.5864 - val_loss: 1.0902
 Using an event log, train a model to predict the next activity from a prefix sequence of 5 activities that have already occured. \\
 
 Download the complete Python file here: \url{https://evermann.ca/busi4720/process_prediction.py} \\
-Download the example event log here: \url{https://evermann.ca/busi4720/BPI_Challenge_2012.xes.gz} \\
+
+Download the example event log here: \url{https://evermann.ca/busi4720/BPI_Challenge_2012.xes.gz}
+
 \begin{pythoncode}
 import numpy
 from tensorflow import keras

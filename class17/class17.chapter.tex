@@ -126,6 +126,18 @@ Sequence-to-sequence (''\emph{Seq2seq}'')\index{Seq2Seq model} models are design
 
 A typical use case for Seq2Seq models is machine translation from one language to another, where both the input and output are sequences of words. In speech recognition, spoken language is converted into written text, where the audio input is a sequence of phonetic features, and the output is a sequence of words. In video-to-text applications, textual descriptions are generated from video sequences, which involves interpreting sequences of images and producing corresponding sequences of descriptive text.
 
+One complication in many seq2seq tasks is the fact that the input and output sequences have different lengths. For example, a translation from Innuktitut to English may require fewer or more output tokens (English) than input tokens (Innuktitut). In these cases, the architecture in Figure~\ref{fig:seq2seq_nonaligned} is used. The input sequence is ingested and a hidden state is computed based on this input. In essence, this part of the network forms an ''encoder'' that encodes the input into a state representation. The hidden state is then used as the start of the second ''stage'' of the network, the ''decoder'', that generates the output sequence. Each element of the output sequence is also fed into the subsequent stage as input (together with the encoded state).
+
+\begin{figure}
+\centering
+\includegraphics[width=.75\textwidth]{seq2seq_nonaligned.png} \\
+
+\scriptsize Source: Murphy Fig. 15.7
+\caption{Sec2Seq recurrent neural network architecture (non-aligned)}
+\label{fig:seq2seq_nonaligned}
+\end{figure}
+
+
 \section{Unrolling an RNN}
 
 The concept of ''\emph{unfolding}'' or ''\emph{unrolling}''\index{Unrolling}\index{Unfolding|see{Unrolling}} in recurrent neural networks (RNNs) is a fundamental technique used not only to visualize but more importantly, to implement these networks for sequence processing. Unrolling an RNN refers to the process of expanding the recurrent network through time, transforming it into an equivalent feedforward neural network that represents each time or sequence step explicitly. This helps in understanding and analyzing the behavior of RNNs, especially in training.
@@ -265,6 +277,32 @@ In \emph{stateless RNNs}, the internal state is reset for each batch of training
 
 \emph{Stateful RNNs}\index{Statefulness} maintain the internal state between batches, allowing the network to retain information across different input batches. This is useful when sequences are longer than the number of unrolled steps. Training stateful RNNs requires careful management of the state so that it is carried over appropriately across batches. Batches cannot be randomly drawn and cannot be shuffled. The state must be reset manually at the start of each epoch or when starting a new sequence. Stateful RNNs are advantageous for tasks involving long sequences where the context needs to be maintained over long periods, such as in time-series analysis or long-form text processing.
 
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise} 
+
+Consider a Seq2Vec neural network model for regression with the following characteristics:
+
+\begin{itemize}
+   \item \textbf{Layer 1: Embedding}
+   \begin{itemize}
+      \item Number of tokens: 10000
+      \item Output embedding size: 10
+   \end{itemize}
+   \item \textbf{Layer 2: LSTM (seq2seq)}
+   \begin{itemize}
+      \item Hidden state and cell memory size: 24
+      \item Number of unrolled steps: 10
+   \end{itemize}
+   \item \textbf{Layer 3: GRU (seq2vec)}
+   \begin{itemize}
+      \item Hidden state size: 16
+   \end{itemize}
+   \item \textbf{Layer 4: Dense layer}
+\end{itemize}
+
+Calculate the number of trainable parameters for each layer and for the whole network.
+\end{tcolorbox}
+
 \section{Example -- Stock Market Prediction}
 
 This example uses historic stock market data to predict future performance. In particular, it uses data for the Dow Jones Industrial Average (DJIA) that was exported from the \texttt{quarks} library for R. The data set encompasses opening closing, low, and high values, as well as trading volume for every day between the years 2000 and 2021 (converted to Euros). This is a regression problem with the targets being the difference in closing prices to the next day.
@@ -301,7 +339,8 @@ In the next step, additional features are created. In time series analysis it is
 
 \begin{samepage}
 \begin{pythoncode}
-data = pd.concat([data,
+data = pd.concat([
+    data,
     data.diff().add_suffix('diff'),
     data.pct_change().add_suffix('pct')],
     axis=1).iloc[1:,]
@@ -335,16 +374,22 @@ An easy way to create appropriate sequence batches and targets is to use the Ker
 \begin{samepage}
 \begin{pythoncode}
 dataset_train = keras.preprocessing.timeseries_dataset_from_array(
-    train.drop('price.closediff', axis=1), train['price.closediff'],
-    sequence_length=n_steps,
-    batch_size=32,
-    shuffle=True)
+    train.drop('price.closediff', axis=1), 
+    train['price.closediff'],
+    sequence_length = n_steps,
+    batch_size = 32,
+    shuffle = True)
+\end{pythoncode}
+\end{samepage}
 
+\begin{samepage}
+\begin{pythoncode}
 dataset_valid = keras.preprocessing.timeseries_dataset_from_array(
-    valid.drop('price.closediff', axis=1), valid['price.closediff'],
-    sequence_length=n_steps,
-    batch_size=32,
-    shuffle=True)
+    valid.drop('price.closediff', axis=1), 
+    valid['price.closediff'],
+    sequence_length = n_steps,
+    batch_size = 32,
+    shuffle = True)
 \end{pythoncode}
 \end{samepage}
 
@@ -376,8 +421,13 @@ The first example illustrates creating a dataset object that provides batches of
 \begin{samepage}
 \begin{pythoncode}
 ds = keras.preprocessing.timeseries_dataset_from_array(
-     inputs, targets,
-     batch_size=2, sequence_length=2, sequence_stride=1, shuffle=False)
+     inputs, 
+     targets,
+     batch_size = 2, 
+     sequence_length = 2, 
+     sequence_stride = 1, 
+     shuffle = False)
+     
 for element in ds.as_numpy_iterator():
      print(element)
 \end{pythoncode}
@@ -401,8 +451,13 @@ In contrast, the next example shuffles elements between batches and is suitable 
 \begin{samepage}
 \begin{pythoncode}
 ds = keras.preprocessing.timeseries_dataset_from_array(
-     inputs, targets, 
-     batch_size=2, sequence_length=2, sequence_stride=1, shuffle=True)
+     inputs, 
+     targets, 
+     batch_size = 2, 
+     sequence_length = 2, 
+     sequence_stride = 1, 
+     shuffle = True)
+     
 for element in ds.as_numpy_iterator():
      print(element)
 \end{pythoncode}
@@ -426,8 +481,13 @@ The next example shows the effect of varying the sequence stride and the batch s
 \begin{samepage}
 \begin{pythoncode}
 ds = keras.preprocessing.timeseries_dataset_from_array(
-     inputs, targets,
-     batch_size=1, sequence_length=2, sequence_stride=2, shuffle=False)
+     inputs, 
+     targets,
+     batch_size = 1, 
+     sequence_length = 2, 
+     sequence_stride = 2, 
+     shuffle = False)
+     
 for element in ds.as_numpy_iterator():
      print(element)
 \end{pythoncode}
@@ -468,12 +528,12 @@ Note that the second dimension of the input shape is one less than the total num
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(
-    input_shape=(n_steps, len(train.columns)-1)))
+    input_shape = (n_steps, len(train.columns)-1)))
 model.add(layers.LSTM(
-    units=16,
-    return_sequences=False,
-    return_state=False,
-    stateful=False))
+    units = 16,
+    return_sequences = False,
+    return_state = False,
+    stateful = False))
 model.add(layers.Dense(1))
 model.summary()
 \end{pythoncode}
@@ -496,15 +556,22 @@ Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
 \end{samepage}
 
-Compile and fit the model:
+Compile the model:
 \begin{samepage}
 \begin{pythoncode}
-model.compile(loss='mean_squared_error', optimizer='Adagrad')
+model.compile(loss='mean_squared_error', 
+              optimizer='Adagrad')
+\end{pythoncode}
+\end{samepage}
 
+\begin{samepage}
+Fit the model:
+\begin{pythoncode}
 model.fit(dataset_train, epochs=n_epochs,
           validation_data=dataset_valid)
 \end{pythoncode}
 \end{samepage}
+
 The training output, shown below, indicates that the training loss after 25 epochs is $\approx 1.00$ and the validation is $\approx 7.06$. Importantly, neither training nor validation loss have decreased during training, suggesting that either the neural network model is inappropriate or the problem of stock market prediction is quite difficult.
 
 \begin{textcode}
@@ -544,10 +611,14 @@ model = keras.Sequential()
 model.add(layers.InputLayer(
     input_shape=(n_steps, len(train.columns)-1)))
 model.add(layers.LSTM(
-    units=16, return_sequences=True, stateful=False))
+    units = 16, 
+    return_sequences = True, 
+    stateful = False))
 model.add(layers.Dropout(rate=0.25))
 model.add(layers.LSTM(
-    units=16, return_sequences=False, stateful=False))
+    units = 16, 
+    return_sequences = False, 
+    stateful = False))
 model.add(layers.Dense(32))
 model.add(layers.Dropout(rate=0.25))
 model.add(layers.Dense(1))
@@ -585,17 +656,25 @@ Perhaps more history than the last 20 steps is required for good predictions. Th
 \begin{pythoncode}
 dataset_train = keras.preprocessing \
     .timeseries_dataset_from_array(
-    train.drop('price.closediff', axis=1),
-    train['price.closediff'],
-    sequence_length=n_steps,
-    sampling_rate=1, batch_size=1, shuffle=False)
+        train.drop('price.closediff', axis=1),
+        train['price.closediff'],
+        sequence_length = n_steps,
+        sampling_rate = 1, 
+        batch_size = 1, 
+        shuffle = False)
+\end{pythoncode}
+\end{samepage}
 
+\begin{samepage}
+\begin{pythoncode}
 dataset_valid = keras.preprocessing \
     .timeseries_dataset_from_array(
-    valid.drop('price.closediff', axis=1),
-    valid['price.closediff'],
-    sequence_length=n_steps,
-    sampling_rate=1, batch_size=1, shuffle=False)
+        valid.drop('price.closediff', axis=1),
+        valid['price.closediff'],
+        sequence_length = n_steps,
+        sampling_rate = 1, 
+        batch_size = 1, 
+        shuffle = False)
 \end{pythoncode}
 \end{samepage}
 
@@ -607,7 +686,9 @@ model = keras.Sequential()
 model.add(layers.InputLayer(
     batch_input_shape=(1, None, len(train.columns)-1)))
 model.add(layers.LSTM(units=16,
-    return_sequences=False, return_state=False, stateful=True))
+    return_sequences = False, 
+    return_state = False, 
+    stateful = True))
 model.add(layers.Dense(1))
 model.summary()
 \end{pythoncode}
