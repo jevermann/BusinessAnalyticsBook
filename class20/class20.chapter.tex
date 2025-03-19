@@ -427,6 +427,22 @@ hdfs dfs -get hamlet.out/part-*
 cat part-* | sort -k2 -rn | less
 \end{bashcode}
 
+\begin{tcolorbox}[colback=code]
+
+\subsubsection*{Hands-On Exercise -- Map Reduce}
+
+Modify the \texttt{map.py} and \texttt{reduce.py} python code from above to count \textbf{word length frequencies}. \\
+
+\vspace{\baselineskip}
+\textbf{Tips:}
+\begin{itemize}
+   \item The map function should output the length of each word as key
+   \item Use the \texttt{len(.)} function to determine the length of a word
+   
+   \item The reduce function will use numerical keys, convert the keys it reads appropriately.
+\end{itemize}
+\end{tcolorbox}
+
 \newpage
 \subsubsection*{Case Study}
 

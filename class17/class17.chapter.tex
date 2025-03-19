@@ -178,7 +178,7 @@ Long Short-Term Memory (LSTM)\index{Long short-term memory cell}\index{LSTM cell
 \label{fig:lstm}
 \end{figure}
 
-An LSTM cell, shown schematically in Figure~\ref{fig:lstm}, is complex and contains multiple ''gates'' that regulate the flow of information. LSTM networks have two components to their state. The \emph{cell memory} is represented by $c_t$ and the hidden state is represented by $h_t$ in Figure~\ref{fig:lstm}. Each LSTM cell consists of the following components:
+An LSTM cell, shown schematically in Figure~\ref{fig:lstm}, is complex and contains multiple ''gates'' that regulate the flow of information. LSTM networks have two components to their state. The \emph{cell memory} is represented by $c_t$ and the hidden state is represented by $h_t$ in Figure~\ref{fig:lstm}. Each LSTM cell consists of the following components/gates. Note that each gate functions the same way as all neural network layers: Inputs are weighted by weights, then summed, as bias term is added, and then passed through a non-linear activation function:
 
 \begin{itemize}
 \item \emph{Forget Gate:}\index{Forget gate (in LSTM)} This gate decides which information is discarded from the cell memory $c$. It looks at the previous hidden state and the current input and passes its output through a sigmoid function, which outputs a number between 0 (''forget this vector element completely'') and 1 (''keep this vector element entirely''). The forget gate is represented by $F_t$ in Figure~\ref{fig:lstm} and formally defined as:
@@ -241,7 +241,7 @@ Gated Recurrent Unit (GRU)\index{Gated recurrent unit}\index{GRU cell|see{Gated 
 \label{fig:gru}
 \end{figure}
 
-A GRU cell, schematically shown in Figure~\ref{fig:gru} consists of only two gates, the \emph{reset gate} and the \emph{update gate}. It also merges the cell memory and the hidden state.
+A GRU cell, schematically shown in Figure~\ref{fig:gru} consists of only two gates, the \emph{reset gate} and the \emph{update gate}. It also merges the cell memory and the hidden state. Again, as with the LSTM cell, each gate functions like all neural network layers by summing the weighted inputs, adding a bias term, and passing the result through a non-linear activation function:
 
 \begin{itemize}
 \item \emph{Reset Gate:}\index{Reset gate (in GRU)} This gate, represented as $R_t$ in Figure~\ref{fig:gru}, determines how much past information to forget, which is important for making the model more adaptable to changes in the data sequence. It examines the previous state and current input and applies a sigmoid function. It outputs  value between 0 (''reset this vector element completely'') and 1 (''retain this vector element completely'').
@@ -335,7 +335,7 @@ data = pd.read_csv('https://evermann.ca/busi4720/djia.data.csv')
 \end{pythoncode}
 \end{samepage}
 
-In the next step, additional features are created. In time series analysis it is often useful to examine the differences between successive values and the relative or percentage changes. The following Python code fragmeent adds these to the data set by applying the Pandas functions \texttt{diff()} and \texttt{pct\_change()} tn the columns of the data frame and concatenating the differences and percentage changes to the dataframe by column.
+In the next step, additional features are created. In time series analysis it is often useful to examine the differences between successive values and the relative or percentage changes. The following Python code fragment adds these to the data set by applying the Pandas functions \texttt{diff()} and \texttt{pct\_change()} tn the columns of the data frame and concatenating the differences and percentage changes to the dataframe by column.
 
 \begin{samepage}
 \begin{pythoncode}
@@ -369,7 +369,7 @@ valid = (valid - train_mean)/train_sd
 \end{pythoncode}
 \end{samepage}
 
-An easy way to create appropriate sequence batches and targets is to use the Keras function \texttt{timeseries\_dataset\_from\_array()}. It accepts the features, the targetsm and arguments about the sequence length, batch size, and whether the data should be shuffled between batches. This first example will use a stateless LSTM so that the input can be shuffled. This is a regression problem with the target being the closing price difference to the following day.
+An easy way to create appropriate sequence batches and targets is to use the Keras function \texttt{timeseries\_dataset\_from\_array()}. It accepts the features, the targets, and arguments about the sequence length, batch size, and whether the data should be shuffled between batches. This first example will use a stateless LSTM so that the input can be shuffled. This is a regression problem with the target being the closing price difference to the following day.
 
 \begin{samepage}
 \begin{pythoncode}

@@ -182,6 +182,7 @@ k-NN & No & No & No  \\ \hline
 \end{frame}
 
 \begin{frame}[fragile]{Linear Regression}
+Using R:
 \begin{Rcode}
 # Load the bike rental data set
 d <- read.csv('https://evermann.ca/busi4720/bike.csv')
@@ -323,7 +324,7 @@ Be aware of bias-variance trade-off with all of these. \\
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Regression Trees}
+\begin{frame}[fragile]{Regression Trees -- Python}
 Prepare data:
 \begin{pythoncode}
 import matplotlib.pyplot as plt
@@ -338,52 +339,59 @@ from sklearn.tree import DecisionTreeRegressor
 regr = DecisionTreeRegressor()
 regr.fit(x, y)
 \end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{Regression Trees -- Python}
 Print the MSE:
 \begin{pythoncode}
 from sklearn.metrics import mean_squared_error
 mean_squared_error(regr.predict(x), y)
 \end{pythoncode}
-\end{frame}
-
-\begin{frame}[fragile]{Regression Trees}
 Print the tree:
 \begin{pythoncode}
-import sklearn
-print (sklearn.tree.export_text(regr, \
-    feature_names=x.columns))
-\end{pythoncode}
-Plot the tree:
-\begin{pythoncode}
-sklearn.tree.plot_tree(regr, 
-    max_depth=2, feature_names=x.columns,
-    filled=True, fontsize=6)
-plt.show()
-\end{pythoncode}
-Early stopping can prevent overfitting and maintain interpretability:
-\begin{pythoncode}
-regr = DecisionTreeRegressor(max_depth=3)
-regr = DecisionTreeRegressor(min_samples_leaf=10)
-regr = DecisionTreeRegressor(max_leaf_nodes=8)
+from sklearn.tree import export_text
+print (export_text(regr,feature_names=x.columns))
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Regression Trees}
-\centering
-%\hspace{-.5in}
-\includegraphics[width=\textwidth]{reg_tree.png}
+\begin{frame}[fragile]{Regression Trees -- Python}
+Early stopping can prevent overfitting and maintain interpretability. \\
+
+\vspace{\baselineskip}
+\textbf{Maximum depth:}
+\begin{pythoncode}
+regr = DecisionTreeRegressor(max_depth=3).fit(x, y)
+\end{pythoncode}
+
+\textbf{Minimum samples per leaf:}
+\begin{pythoncode}
+regr = DecisionTreeRegressor(min_samples_leaf=10).fit(x, y)
+\end{pythoncode}
+
+\textbf{Maximum number of leaf nodes:}
+\begin{pythoncode}
+regr = DecisionTreeRegressor(max_leaf_nodes=8).fit(x, y)
+\end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Regression Trees}
+%\begin{frame}{Regression Trees -- Python}
+%\centering
+%%\hspace{-.5in}
+%\includegraphics[width=\textwidth]{reg_tree.png}
+%\end{frame}
+
+\begin{frame}[fragile]{Regression Trees -- Python}
 Plot fitted versus true values:
 \begin{pythoncode}
 import plotly.express as px
-px.scatter(pd.DataFrame([y, regr.predict(x)], \
-    index=['y', 'yhat']).transpose() \
-        ,x='y', y='yhat').show()
+px.scatter(
+    pd.DataFrame([y, regr.predict(x)], index=['y', 'yhat']) \
+    .transpose(),
+    x='y', y='yhat').show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Regression Trees}
+\begin{frame}{Regression Trees -- Python}
 
 \centering
 
@@ -391,13 +399,13 @@ px.scatter(pd.DataFrame([y, regr.predict(x)], \
 \end{frame}
 
 \begin{frame}{Hands-On Exercises}
-Fit regression trees to the bike dataset on the previous slides. Calculate the MSE, print the decision rules, and plot predicted versus true values as you vary:
+Fit regression trees to the bike rental dataset on the previous slides. Calculate the MSE for each decision tree as you vary:
 \begin{itemize}
    \item \textbf{max\_depth}: choose values 1, 3, 5, 7
    \item \textbf{min\_samples\_leaf}: choose values 1, 5, 10, 20
    \item \textbf{max\_leaf\_nodes}: choose values 2, 8, 16, 32
 \end{itemize}
-How does the training MSE change? What can you observe from the plots of predicted versus true values?
+Which tree provides the best training MSE and what is that training MSE?
 \end{frame}
 
 %\begin{frame}{Regression Trees -- Pruning}
@@ -485,21 +493,37 @@ How does the training MSE change? What can you observe from the plots of predict
 
 \begin{frame}{Classification Trees}
 \begin{itemize}
-   \item Instead of mean, predict most common class in leaf node.
-   \item Instead of MSE, use \textbf{Gini index} $G$ (node purity) to determine splits:
+
+   \item Proportion of observations of class $k$ in leaf node $m$:
+   \begin{align*}p_{km}\end{align*}
+   \item Predict the most common (majority) class in a leaf node: 
+   \begin{align*}k(m) = \argmax_k p_{km}\end{align*}
+   \item Probability of choosing an item with label $i$ in node $m$ is
+   \begin{align*}p_{im}\end{align*}
+   \item Probability of misclassifying that item in node $m$ is 
+   \begin{align*}1 - p_{im} = \sum_{k \neq i} p_{km}\end{align*}
+   
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Classification Trees \small [cont'd]}
+\begin{itemize}
+   \item Use \textbf{Gini impurity} $G$ (node purity) for node $m$ to determine splits:
    \begin{align*}
-   G &= \sum_{k=1}^K \hat{p}_{mk}(1 - \hat{p}_{mk})
+   G_m &= \sum_{i=1}^J p_{im}(1-p_{im}) = \sum_{i=1}^J (p_{im} - p_{im}^2) = \sum_{i-1}^J - \sum_{i=1}^J p_{im}^2 \\
+     &= 1 - \sum_{i=1}^J p_{im}^2
    \end{align*} 
-   \item Instead of Gini index, use \textbf{Entropy} $H$ as loss functions to determine splits:
+   
+   \item Use \textbf{Cross-Entropy} $H$ for node $m$ to determine splits.
    \begin{align*}
-   H &= - \sum_{k=1}^K \hat{p}_{mk} \log \hat{p}_{mk} 
+   H_m &= - \sum_{i=1}^J p_{im} \log p_{im} 
    \end{align*}
-   \item Tree pruning using classification error rate
+   
 \end{itemize}
 \end{frame}
 
 \begin{frame}{Decision Trees}
-Further reading: \\
+\textbf{Further reading:} \\
 
 \small
 \url{https://scikit-learn.org/stable/modules/tree.html} \\
@@ -534,7 +558,7 @@ Further reading: \\
 \end{frame}
 
 \begin{frame}[fragile]{Partial Dependence Plot (PDP)}
-Marginal effect of one or a few features $X_S$ on the outcome, marginalized (i.e. sum weighted by probability) over all other (complement) features $X_C$.
+Marginal effect of one (or a few) features $X_S$ on the outcome, marginalized (i.e. sum weighted by probability) over all other (complement) features $X_C$.
 \begin{align*}
 \hat{f}_S(X_S) &= \mathbbm{E}_{X_C} \left[ \hat{f}(X_S, X_C)) \right] = \int \hat{f}(X_S, X_C) p(X_C) dX_c 
 \intertext{Estimated from sample data as:}
@@ -754,7 +778,7 @@ preds = regr.predict(x)
 Interpretable, linear model to explain predictions:
 \begin{pythoncode}
 from statsmodels.api import OLS
-OLS(preds, x).fit().summary()
+OLS(preds, x.astype(float)).fit().summary()
 \end{pythoncode}
 \end{frame}
 
@@ -787,26 +811,14 @@ R-squared measure for fit & \\ \hline
 \small
 \begin{block}{Idea}
 \begin{enumerate}
-   \item Choose an instance $x$ of interest, 
-   \item Sample instances around it, weight by distance kernel $\pi_g$,
-   \item Construct local interpretable model $g$
-   \begin{itemize}
-   \item Minimize discrepancy $\mathcal{L}$ between $g$ and black-box model $f$
-   \item Penalize by model complexity $\Omega(g)$
-   \end{itemize}
-\begin{align*}
-\xi(x) = \operatorname*{argmin}_{g \in G} \; \mathcal{L} (f, g, \pi_x) + \Omega(g)
-\end{align*}
+   \item Choose an instance $x$ of interest
+   \item Perturb data by turning on or off features $i$ using randomized feature combination vector of $z_i \in [0, 1]$
+   \item Sample perturbed instances around $x$, weighted by kernel $\pi_g$,
+   \item Fit each perturbed instance using black-box model $f(z_i)$
+   \item Train local interpretable model on features $z_i$, targets $f(z_i)$ and weights $\pi_x(z_i)$
 \end{enumerate}
 \end{block}
 
-
-\begin{block}{Method}
-\begin{enumerate}
-  \item Sample instances $z'_i$ around $x'$ (interpretable version of $x$)
-  \item Traing interpretable model on features $z'_i$, targets $f(z_i)$ and weights $\pi_x(z_i)$ ($z_i$ is the original version of $z'_i$)
-\end{enumerate}
-\end{block}
 \end{frame}
 
 \begin{frame}{LIME -- Example}
@@ -1099,6 +1111,15 @@ shap.plots.heatmap(shap_values)
 \includegraphics[width=\textwidth]{shap_text.png} \\
 
 \scriptsize Source: \url{https://shap.readthedocs.io/en/latest/text_examples.html} (MIT License)
+\end{frame}
+
+\begin{frame}[fragile]{Fixes for Matplotlib}
+\begin{bashcode}
+sudo apt-get install -y qt6-base-dev xcb libxcb-cursor-dev
+sudo ln -sf /usr/lib/x86_64-linux-gnu/qt6/plugins/platforms/ \
+    /usr/bin/
+pip install pyqt6
+\end{bashcode}
 \end{frame}
 
 \end{document}

@@ -690,7 +690,7 @@ In the second step, a simpler surrogate model is used to predict the predictions
 \begin{samepage}
 \begin{pythoncode}
 from statsmodels.api import OLS
-OLS(preds, x).fit().summary()
+OLS(preds, x.astype(float)).fit().summary()
 \end{pythoncode}
 \end{samepage}
 

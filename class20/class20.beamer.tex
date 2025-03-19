@@ -250,6 +250,41 @@ hdfs dfs -ls
 \end{block}
 \end{frame}
 
+\begin{frame}{Hands-On Exercise -- HDFS} 
+
+\textbf{Accessing HDFS}
+
+\begin{enumerate}
+  \item View the list of files on the HDFS file system.
+  \item Create a new directory in the HDFS named ''testdir''.
+  \item Verify that 'testdir' has been created by listing all files.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Hands-On Exercise -- HDFS} 
+
+\textbf{Exercise 2: Manipulating Files in HDFS}
+
+\begin{enumerate}
+  \item Use a text editor to create a text file called ''example.txt'' on your local file system and write ''Hello HDFS'' into it.
+  \item Copy ''example.txt'' from your local file system to the directory ''testdir'' in the HDFS.
+  \item Read the contents of the file from the HDFS.
+  \item Delete ''example.txt'' from the HDFS.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Hands-On Exercise -- HDFS} 
+
+\textbf{Exercise 3: Understanding HDFS Block Size}
+
+\begin{enumerate}
+  \item Create a large text file (e.g., larger than 128MB, the default block size in many HDFS installations) named ''largefile.txt'' on your local file system.
+  \item Copy ''largefile.txt'' to HDFS:
+  \item Use the \texttt{hdfs fsck} command with the \texttt{-files -blocks} options to check how HDFS has stored the file in terms of blocks.
+  \item Observe and note the number of blocks the file is split into and their locations.
+\end{enumerate}
+\end{frame}
+
 \begin{frame}{MapReduce}
 \begin{block}{What is it?}
 \begin{itemize}
@@ -455,6 +490,21 @@ hdfs dfs -get hamlet.out/part-*
 cat part-* | sort -k2 -rn | less
 \end{bashcode}
 \end{frame}
+
+\begin{frame}{Hands-On Exercise -- Map Reduce}
+
+Modify the \texttt{map.py} and \texttt{reduce.py} python code on the previous slide to count \textbf{word length frequencies}. \\
+
+\vspace{\baselineskip}
+\textbf{Tips:}
+\begin{itemize}
+   \item The map function should output the length of each word as key
+   \item Use the \texttt{len(.)} function to determine the length of a word
+   
+   \item The reduce function will use numerical keys, convert the keys it reads appropriately.
+\end{itemize}
+\end{frame}
+
 
 \begin{frame}{MapReduce Use Case -- Scalable Process Discovery}
 \begin{columns}
