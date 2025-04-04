@@ -198,8 +198,8 @@ True value $q_\pi(S_t, A_t)$ generally unknown; use an unbiased estimate $U_t = 
 & \quad \quad \text{Store transition} \; (S_t , A_t , R_t , S_{t+1} ) \; \text{in} \; D \\
 & \quad \quad \text{Sample minibatch} \; (S_j , A_j , R_j , S_{j+1} ) \; \text{from} \; D \\
 & \quad \quad \text{Target}\;y_j \leftarrow \begin{cases} r_j & \qquad \quad \text{if $S_{j+1}$ is terminal} \\
-r_j + \gamma \max_{A'} \hat{q}_T(S_{j+1}, A'; \theta^-) & \qquad \quad \text{otherwise}\end{cases} \\
-& \quad \quad \theta \leftarrow \theta + \alpha [y_j - \hat{q}_M (S_j, A_j, \theta_M)] \nabla \hat{q}_M(S_j, A_j, \theta_M) \hspace{1in} \\
+r_j + \gamma \max_{A'} \hat{q}_T(S_{j+1}, A'; \theta_T) & \qquad \quad \text{otherwise}\end{cases} \\
+& \quad \quad \theta_M \leftarrow \theta_M + \alpha [y_j - \hat{q}_M (S_j, A_j, \theta_M)] \nabla \hat{q}_M(S_j, A_j, \theta_M) \hspace{1in} \\
 %& \quad \quad \text{Perform a gradient descent step on loss function}\;L=\left[y_j-\hat{q}_M(S_j,a_j;\theta_M)\right]^2 \\
 & \quad \text{Every $C$ steps, update}\; \hat{q}_T \leftarrow \hat{q}_M\;\text{by setting}\; \theta_T \leftarrow \theta_M
 \end{align*}
