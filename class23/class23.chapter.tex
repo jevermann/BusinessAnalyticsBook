@@ -330,6 +330,26 @@ Detailed and up-to-date documentation can help the risk manager in objectively e
 
 Automation tools used during the preparation for production include continuous integration and automated testing tools for quality assurance and model risk evaluation. Model registries are used during this phase to document all information about a model and document the findings of its quality assurance and risk evaluation, including input data sources and data provenance, model assumptions, required software packages, test results including explanations and bias or fairness evaluations, training and test logs, security test results, etc. 
 
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise} 
+\paragraph*{Scenario:}
+Imagine a new machine learning model is being deployed to automate credit approval decisions at a Canadian financial institution.
+
+\paragraph*{Question}
+Research the typical responsibilities and concerns of a Model Risk Manager or Model Auditor specifically within the financial services industry in Canada. Based on your research, list two specific concerns such a professional would likely have regarding the deployment of this credit approval model before it goes live.
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise} 
+
+\paragraph*{Scenario}
+An online Canadian retailer is enhancing its website with a machine learning model to provide highly personalized product recommendations to individual shoppers.
+
+\paragraph*{Question}
+Research the ethical risks and challenges associated with personalized recommendation systems in e-commerce. Based on your findings, identify and briefly describe two distinct ethical risks that this Canadian retailer should consider regarding its new recommendation model.
+\end{tcolorbox}
+
+
 \subsection{Deploy to Production}
 
 Deploying a model to production includes both the CI/CD (continuous integration/ continuous deployment) pipelines for deploying the software that uses the model as well as building the ML model and related artifacts. The deploy to production phase is highlighted in Figure~\ref{fig:deploytoproduction}. Inputs are a production ready model and completed verification tests. The output is a model in its production environment. 
@@ -373,6 +393,16 @@ Deployment includes considering the scalability and reliability of the model at 
 Deployment to production also includes defining and provisioning infrastructure for continuous monitoring\index{Continuous monitoring}. Three aspects should be monitored regularly. Resource monitoring measures the infrastructure resources consumed by the model in production. This includes CPU computation time, network traffic, database and file storage space, and many related metrics. Abnormally high or low values can indicate operational problems and must be investigated. Model health checking involves assuring that the model serving software does actually accept prediction requests and provides model predictions. That is, it ensures the software works. This is different from resource monitoring which can only measure whether the server computer is busy. Finally, ML metrics monitoring focuses on prediction metrics, such as input and output characteristics or their distributions, or prediction error rates or accuracy (if ground truth is available at that time or shortly after). 
 
 Automation tools required and used during this phase of the MLOps lifecycle include source code repositories such as GitHub and software integration tools such as Jenkins to build and test the model and related software applications. Also required are model registries such as MLFlow and model serving tools such as TensorFlow Serving or Flask. Finally, log data storage and log analysis software is required for monitoring. 
+
+\begin{tcolorbox}[colback=code]
+\subsubsection*{Hands-On Exercise} 
+\paragraph*{Scenario}
+Consider deploying a machine learning model to a cloud platform like Amazon Web Services (AWS) or Microsoft Azure.
+
+\paragraph*{Question}
+Using internet resources (e.g., documentation, blog posts, articles related to MLOps on AWS or Azure), research the typical tasks and responsibilities of an ML Engineer or ML Architect during the deployment of a model to such a cloud environment. Describe one specific technical responsibility that an ML Engineer/Architect would likely have in ensuring the successful deployment and scalability of the model on the chosen cloud platform.
+\end{tcolorbox}
+
 
 The remainder of this section illustrates two basic deployment methods for a neural network model developed using Keras. As a first step, the model is defined and trained. The following example uses a very simple linear regression model for the Boston housing price dataset. The focus here is not on the quality of the model but on how the trained model can be deployed. 
 
