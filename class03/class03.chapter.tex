@@ -140,28 +140,18 @@ Similarly, when the DBeaver application is first started, it will also conncect 
 
 The basic ''psql'' command line tool can be started by by typing \texttt{psql} into a terminal window. The course virtual machine is configured to provide automatic access to the ''busi4720'' database. The database connection can be confirmed by executing the \texttt{\textbackslash conninfo} command in psql. Use psql options to specify other connections using the template \texttt{psql -d dbname -h hostname -u username}. Figure~\ref{fig:psql} shows the psql command line tool in a terminal window.
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 \noindent \emph{The examples and exercises in the remainder of this chapter refer to the ''busi4720'' database.}
-\end{tcolorbox}
+\end{alertbox}
 
 \section{Data Definition in SQL}
 
-\begin{tcolorbox}[colback=code]
-\paragraph*{Tip:} SQL commands are traditionally written in upper case letters and this is done here as well. However, SQL is not case sensitive, so that capitalization does not actuallly matter. Traditionally, an SQL command must end with a semicolon. This is done here as well, although some DBMS may no longer require this. 
-\end{tcolorbox}
+\begin{infobox}
+SQL commands are traditionally written in upper case letters and this is done here as well. However, SQL is not case sensitive, so that capitalization does not actuallly matter. Traditionally, an SQL command must end with a semicolon. This is done here as well, although some DBMS may no longer require this. 
+\end{infobox}
 
 For this example, assume that your database will be used to store information about products. The CREATE TABLE data definition command in SQL\index{Data definition language!SQL} is used to create tables, their columns, and constraints. This first example creates a simple table with three columns to store product data.
 
-\begin{tcolorbox}[colback=code]
-Enter the SQL commands in the code block below.
-\begin{itemize}
-   \item In psql, press \colorbox{lightgray}{RETURN} to execute
-   \item In DBeaver, press \colorbox{lightgray}{CTRL-RETURN} to execute
-   \item In pgAdmin, press \colorbox{lightgray}{F5} to execute.
-\end{itemize}
-\end{tcolorbox}
-
-\begin{samepage}
 \begin{sqlcode}
 CREATE TABLE products (
   pcode integer,
@@ -170,13 +160,20 @@ CREATE TABLE products (
   PRIMARY KEY (pcode) 
 );
 \end{sqlcode}
-\end{samepage}
+
+\begin{infobox}
+To run this code, enter it into psql or the SQL code windows of pgAdmin or DBeaver. Then,
+\begin{itemize}
+   \item in psql, press \colorbox{lightgray}{RETURN} to execute
+   \item in DBeaver, press \colorbox{lightgray}{CTRL-RETURN} to execute
+   \item in pgAdmin, press \colorbox{lightgray}{F5} to execute.
+\end{itemize}
+\end{infobox}
 
 The table contains a column named ''pcode'' (to store the product code) that is of integer type, that is, it can contain whole numbers only. The table has a column called ''name'' of characters with a varying length and a maximum length of 100 characters to store product names. Additionally, a column NOT NULL constraint has been defined for this column, ensuring that a name always exists for a product. The table has a column named ''price'' that is of a single precision floating point type (4 bytes), that is, it can hold decimal point numbers to store product prices. The final line of the SQL command created a primary key constraint on the single column ''pcode'' to ensure that the product code must not be NULL and must be unique, ensuring that each row in the table represents a distinct product. Note that column ''price''may be NULL, that is, may not contain values, because no NOT NULL constraints have been specified. This may be useful for example when the price has not been decided on or will be calculated later.
 
 The following SQL code block creates a table for suppliers. The table has a similar structure to the products table and similar NOT NULL and PRIMARY KEY constraints.
 
-\begin{samepage}
 \begin{sqlcode}
 CREATE TABLE suppliers (
   scode integer,
@@ -185,11 +182,9 @@ CREATE TABLE suppliers (
   PRIMARY KEY (scode) 
 );
 \end{sqlcode}
-\end{samepage}
 
 After creating tables with the data definition part of the SQL language, the data manipulation commands of SQL can be used to insert or update values in the tables. The following SQL code block inserts two rows into each of the tables that were just created. Enter the following SQL commands in the Query tool:
 
-\begin{samepage}
 \begin{sqlcode}
 INSERT INTO products VALUES (1, 'Hex Bolt', 1.99);
 INSERT INTO products VALUES (2, 'Round Bolt', 2.99);
@@ -197,18 +192,15 @@ INSERT INTO products VALUES (2, 'Round Bolt', 2.99);
 INSERT INTO suppliers VALUES (1, 'Bolts Inc', 'HVGB');
 INSERT INTO suppliers VALUES (2, 'Hardware Co', 'Cartwright');
 \end{sqlcode}
-\end{samepage}
 
 The values for each row must be specified in the order in which the columns of the table are defined. For the ''products'' table this is first the product code, followed by the name, and finally the price. For the ''suppliers'' table, this is first the supplier code, then the name and then the city. There are many different variations on the basic INSERT statement; consult the official documentation using the links in the earlier footnote.
 
 After inserting the values, a basic SELECT statement, which is the core querying command in SQL, checks that the data is actually in the tables. Run the commands in the following SQL code block one at a time to see each command's results:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT * FROM products;
 SELECT * FROM suppliers;
 \end{sqlcode}
-\end{samepage}
 
 This is the simplest form of a SELECT statement, the asterisk (''*'') instructs SQL to retrieve all columns. Later examples will illustrate ways to retrieve only some columns, and many other variants on the SELECT statement.
 
@@ -216,7 +208,6 @@ The two tables allow capturing information about products and information about 
 
 For the following example, assume that suppliers can supply many products, but a product may be supplied by only one supplier (or no supplier at all). This is called a \emph{one-to-many relationship}. The following SQL code block alters the tables, retaining the existing data, and then updates the information in the new ''supplier'' column for the ''products'' table:
 
-\begin{samepage}
 \begin{sqlcode}
 ALTER TABLE products ADD COLUMN supplier integer;
 ALTER TABLE products ADD FOREIGN KEY (supplier) REFERENCES suppliers;
@@ -224,7 +215,6 @@ ALTER TABLE products ADD FOREIGN KEY (supplier) REFERENCES suppliers;
 UPDATE products SET supplier = 1 WHERE pcode = 1;
 UPDATE products SET supplier = 1 WHERE pcode = 2;
 \end{sqlcode}
-\end{samepage}
 
 The first SQL statement above adds a new column to the existing products table in which to record the supplier of the product. The second line creates a foreign key reference from the supplier column in the products table to the primary key of the suppliers table; the primary is the ''scode'' column (see SQL code above). This ensures that only those suppliers can be recorded in the products table that actually exist in the suppliers table. 
 
@@ -232,7 +222,6 @@ The third and fourth line update the data in the products table and set the valu
 
 As an alternative to altering the existing products table, drop the products table to delete it and re-create it. Then insert some values. The following SQL code block uses the DROP TABLE command of SQL to delete the products table and all its contents.
 
-\begin{samepage}
 \begin{sqlcode}
 DROP TABLE products;
 
@@ -249,7 +238,6 @@ INSERT INTO products VALUES(1, 'Hex Bolt', 1.99, 1);
 INSERT INTO products VALUES(2, 'Round Bolt', 2.99, 1);
 INSERT INTO products VALUES(3, 'Square Bolt', 3.99, NULL);
 \end{sqlcode}
-\end{samepage}
 
 The above SQL code achieves the same as altering the table but in the process deletes all data in the products table. When possible, it is therefore preferable to use multiple ALTER TABLE statements instead of DROP and CREATE statements. 
 
@@ -270,7 +258,6 @@ Adding constraints can only be done when the constraint is already satisfied. Th
 
 When re-creating the table, the NOT NULL column constraint can be defined in the CREATE TABLE statement:
 
-\begin{samepage}
 \begin{sqlcode}
 DROP TABLE IF EXISTS products;
 
@@ -283,11 +270,9 @@ CREATE TABLE products (
   FOREIGN KEY (supplier) REFERENCES suppliers 
 );
 \end{sqlcode}
-\end{samepage}
 
 So far, the assumption was that each product can has one supplier. However, in many settings, products have multiple suppliers, and suppliers supply multiple products, that is, there is a \emph{many-to-many relationship} between the two. Expressing many-to-many relationships requires a third table that explicitly represents the relationship, here the ''supplies'' relatinship between products and suppliers. The following SQL code first removes the existing tables, then re-creates tables to express a many-to-many relationship instead.
 
-\begin{samepage}
 \begin{sqlcode}
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS suppliers;
@@ -311,13 +296,11 @@ CREATE TABLE supplies (
   FOREIGN KEY (scode) REFERENCES suppliers,
   FOREIGN KEY (pcode) REFERENCES products );
 \end{sqlcode}
-\end{samepage}
 
 Note that the tables must be dropped in the right order: ''products'' first, then ''suppliers'' because the products depend on the suppliers due to the foreign key constraint\footnote{Use the CASCADE keyword to drop dependent tables automatically but use with care.}. The IF EXISTS part is a safeguard to prevent an error if the table does not exist when attempting to drop it.
 
 The primary key of the supplies table is a \emph{compound key}\index{Compound key}, that is, it consists of a combination of columns. The supplies table is related by two FOREIGN KEY constraints both to the products and suppliers table so that only products and suppliers that already exist can be recorded here (and thereby related to each other). The price column is no longer in the products table, but has been moved to the supplies table, because each supplier may supply a product at a different price. The following example data shows this:
 
-\begin{samepage}
 \begin{sqlcode}
 INSERT INTO products VALUES (1, 'Hex Bolt');
 INSERT INTO products VALUES (2, 'Round Bolt');
@@ -330,24 +313,20 @@ INSERT INTO supplies VALUES(1, 2, 2.49);
 INSERT INTO supplies VALUES(2, 1, 2.99);
 INSERT INTO supplies VALUES(2, 2, 1.79);
 \end{sqlcode}
-\end{samepage}
 
 \noindent To clean up after these exercises, drop all tables if they are no longer required:
 
-\begin{samepage}
 \begin{sqlcode}
 DROP TABLE supplies;
 DROP TABLE products;
 DROP TABLE suppliers;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Summary} In summary, a \emph{one-to-many relationships} requires a foreign key from the ''many'' table that references the ''one'' table and its primary key. In the first example above, a supplier supplies many products but a product has one supplier (or none, depending on whether a NOT NULL constraint has been specified). In contrast, a \emph{many-to-many relationship} requires a table that explicitly represents the relationship. Foreign keys from this table reference the participating, original, ''main'' tables and their primary keys. In the second example above, a supplier supplies many products and a product can be supplied by many suppliers. 
 
 In fact, this type of relationship can be extended in a straightforward way to three or more tables. For example, a supplier supplies many products from many warehouses, a product may be supplied by many suppliers from many warehouses, and a warehouse may contain many products from many suppliers. 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
+\begin{exercisebox}
 \begin{enumerate}
   \item Consider the following information:
 	\begin{itemize}
@@ -363,7 +342,7 @@ In fact, this type of relationship can be extended in a straightforward way to t
   \item Use INSERT statements to create some example data.
   \item Use SELECT statements to ensure your data exists.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{SQL Queries}
 
@@ -371,7 +350,6 @@ In fact, this type of relationship can be extended in a straightforward way to t
 
 The SELECT statement in SQL is used to query and retrieve data from one or more tables in a database. The basic structure of a SELECT statement allows specification of which columns of data you want to retrieve and from which tables. A SELECT statement has multiple clauses or parts that are used to specific different characteristics of the information to retrieve:
 
-\begin{samepage}
 \begin{itemize}
  \item \texttt{SELECT}: Which columns to query (use the asterisk ''\texttt{*}'' to select all).
  \item \texttt{FROM}: Which tables to query from.
@@ -382,11 +360,9 @@ The SELECT statement in SQL is used to query and retrieve data from one or more 
  \item \texttt{ORDER BY}: How to sort the resulting records in either ascending or descending order.
  \item \texttt{LIMIT}: Limit on how many results to return.
 \end{itemize}
-\end{samepage}
 
 To demonstrate the basic use of SQL queries to retrieve information from a relational database, it is best to begin with a simple example, that of the 1:Many relationship between products and suppliers set up earlier. The following SQL commands (re-)create this example with a few more rows of data in the products table:
 
-\begin{samepage}
 \begin{sqlcode}
 -- Drop tables if they exist
 DROP TABLE IF EXISTS products;
@@ -407,9 +383,7 @@ scode   integer,
 PRIMARY KEY (pcode),
 FOREIGN KEY (scode) REFERENCES suppliers );
 \end{sqlcode}
-\end{samepage}
 
-\begin{samepage}
 \begin{sqlcode}
 -- Insert some data:
 INSERT INTO SUPPLIERS VALUES (1, 'Bolts Inc', 'HVGB');
@@ -422,7 +396,6 @@ INSERT INTO products VALUES(4, 'Hex Bolt B', 2.99, 1);
 INSERT INTO products VALUES(5, 'Round Bolt 2', 1.99, 2);
 INSERT INTO products VALUES(6, 'Square Bolt 7', 3.49, 2);
 \end{sqlcode}
-\end{samepage}
 
 With this data, the simplest SQL query contains only the SELECT and the FROM clauses to retrieve a set of columns from a single table. The following SQL code uses the asterisk (''\texttt{*}'') to select all columns and returns all rows from the products table:
 
@@ -464,7 +437,6 @@ If multiple common columns are needed to find corresponding rows, they can be sp
 
 The following two SQL expressions are essentially equivalent to the one above and to each other. Instead of the USING clause for common columns, the first expression explicitly specifies the join condition with the ON clause, while the second expression completely omits the JOIN clause and instead specifies both tables in the FROM clause and uses a condition in a WHERE clause to select corresponding rows in the two tables:
 
-\begin{samepage}
 \begin{sqlcode}
 -- (Almost) Equivalent:
 SELECT * FROM products 
@@ -473,11 +445,9 @@ SELECT * FROM products
 SELECT * FROM products, suppliers 
     WHERE products.scode=suppliers.scode;
 \end{sqlcode}
-\end{samepage}
 
 In the above JOIN examples, both the products and suppliers table contain a column ''name''. It is often useful to rename columns for clarity. The following example shows how this can be done using the AS keyword. It also demonstrates how the ambiguity of columns with the same name in different tables can be resolved by using the form ''table.column'' to select columns:
 
-\begin{samepage}
 \begin{sqlcode}
 -- Rename columns for clarity:
 SELECT products.name AS "Product", 
@@ -486,7 +456,6 @@ SELECT products.name AS "Product",
        city AS "Location"
     FROM products INNER JOIN suppliers USING (scode);
 \end{sqlcode}
-\end{samepage}
 
 The previous two examples used the ''INNER JOIN'', the most commonly used type of join between two tables. Table~\ref{tab:sqljoins} shows a list of other possible join types. 
 
@@ -510,26 +479,21 @@ FULL OUTER & Selects all rows from T1, T2. If the other table is missing corresp
 
 The GROUP BY clause of an SQL query is used in combination with aggregate functions for grouping information and calculating aggregate values. The easiest aggregation is to simply count the number of rows or entries for each group using the ''count(.)'' function, shown in the first example that selects the number of products for each supplier, that is, the count of rows in table products grouped by supplier code:
 
-\begin{samepage}
 \begin{sqlcode}
 -- Select the number of products for each supplier
 SELECT scode, count(*) from products GROUP BY scode;
 \end{sqlcode}
-\end{samepage}
 
 To also include the names of the suppliers requires joining the suppliers table, as shown below:
-\begin{samepage}
 \begin{sqlcode}
 -- Add the name of suppliers by joining suppliers table
 SELECT suppliers.name, count(*)
     FROM suppliers INNER JOIN products USING (scode)
     GROUP BY scode;
 \end{sqlcode}
-\end{samepage}
 
 The SQL code below illustrates another aggregate function, the average (''AVG'') and also shows that the aggregates can be used in the ORDER BY clause. The query returns the mean price of products for each suppliers, ordered descending by mean price:
 
-\begin{samepage}
 \begin{sqlcode}
 -- Mean price of products for each supplier, ordered descending
 SELECT suppliers.name, AVG(price)
@@ -537,11 +501,9 @@ SELECT suppliers.name, AVG(price)
     GROUP BY scode
     ORDER BY AVG(price) DESC;
 \end{sqlcode}
-\end{samepage}
 
 Finally, the HAVING clause is a filter clause like the WHERE clause, but instead of filtering the rows in a table, it filters the groups in a GROUP BY clause. The following SQL query returns only suppliers for which the average price of their products is less than 2.8:
 
-\begin{samepage}
 \begin{sqlcode}
 -- Find only suppliers for which average price less than 2.80:
 SELECT suppliers.name, AVG(price)
@@ -549,7 +511,6 @@ SELECT suppliers.name, AVG(price)
     GROUP BY scode
     HAVING AVG(price) < 2.8;
 \end{sqlcode}
-\end{samepage}
 
 Besides COUNT() and AVG() functions, SQL provides other aggregate functions, shown in Table~\ref{tab:sqlaggregates}. However, many of these are specific to various relational database management systems, like PostgreSQL. 
 
@@ -583,12 +544,10 @@ REGR\_R2() & RANK() & DENSE\_RANK() \\ \hline
 
 \noindent To clean up after these exercises, drop all tables if they are no longer required:
 
-\begin{samepage}
 \begin{sqlcode}
 DROP TABLE products;
 DROP TABLE suppliers;
 \end{sqlcode}
-\end{samepage}
 
 \subsection*{Relational Diagrams}
 
@@ -596,13 +555,10 @@ The previous section has presented the basics of the relational database model, 
 
 In many software tools, including in pgAdmin, the database developer can use relational diagrams to create tables, instead of writing CREATE TABLE statements. In the reverse, relational diagrams can also be automatically created from an existing database and its tables. 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
-
-In the pgAdmin Object Explorer, right-click on the ''busi4720'' database, then select ''ERD for Database'' to create a relational diagram. \\
+\begin{exercisebox}In the pgAdmin Object Explorer, right-click on the ''busi4720'' database, then select ''ERD for Database'' to create a relational diagram. \\
 
 In the DBeaver Database Navigator, select the ''busi4720'' database, then right-click on its ''public'' schema and select ''View Diagram'' to create the diagram.
-\end{tcolorbox}
+\end{exercisebox}
 
 \noindent The resulting diagram will look similar to the one in Figure~\ref{fig:pagila}. (If you did not clean up the tables you created in the above SQL exercises, these will be present in the diagram as well).
 
@@ -647,7 +603,6 @@ The following examples show queries for the Pagila database to illustrate differ
 
 \paragraph{Example:} Find all actors and the films they appeared in, ordered by film category and year, for those films that are rated PG
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT concat(left(actor.first_name, 1), '. ', 
            actor.last_name) AS Actor, 
@@ -666,7 +621,6 @@ SELECT concat(left(actor.first_name, 1), '. ',
            film.release_year DESC, 
            film.title ASC;
 \end{sqlcode}
-\end{samepage}
 
 Running this query will retrieve 1143 records from the Pagila database. 
 
@@ -684,7 +638,6 @@ The \texttt{ORDER BY} clause specifies the ordering of the results. In this case
 
 The \texttt{JOIN \ldots USING} clause assumes that the columns have the same name in both tables. When this is not the case, this short form is not available and joins must be specified manually. Recall that the join ensures that the join columns in both tables have the same value, which can also be specified in a \texttt{WHERE} clause as a set of conditions. The following query is equivalent to the previous one, but without the \texttt{JOIN} clauses:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT concat(left(actor.first_name, 1), '. ', 
            actor.last_name) AS Actor, 
@@ -703,13 +656,11 @@ SELECT concat(left(actor.first_name, 1), '. ',
            film.release_year DESC, 
            film.title ASC;
 \end{sqlcode}
-\end{samepage}
 
 When writing the query without \texttt{JOIN} keywords, the required tables must all be included in the \texttt{FROM} clause; it does not matter in which order they are listed there.
 
 \paragraph{Example:} Find the most popular actors in the rentals in each city
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT city.city, 
        concat(actor.first_name, '. ', actor.last_name) AS actor_name,
@@ -728,7 +679,6 @@ SELECT city.city,
            Number_Rentals DESC, 
            actor_name ASC;
 \end{sqlcode}
-\end{samepage}
 
 Running this query will retrieve 22 records from the Pagila database.
 
@@ -800,7 +750,6 @@ Because of the subquery, running this query is expensive in terms of computing t
 Get the total rental revenue and number of rentals for each store by month
 
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT city.city, 
        extract(year from payment_date) AS year, 
@@ -820,7 +769,6 @@ ORDER BY city.city,
          extract(year from payment_date), 
          extract(month from payment_date);
 \end{sqlcode}
-\end{samepage}
 
 Running this query will return 14 results.
 
@@ -829,7 +777,6 @@ This query shows the use of a date function in PostgreSQL. The \texttt{extract()
 \paragraph*{Example:} Get the top 5 and the bottom 5 grossing customers by year
 
 
-\begin{samepage}
 \begin{sqlcode}
 ( SELECT concat(customer.first_name, ' ', 
                 customer.last_name) AS customer_name,
@@ -855,7 +802,6 @@ GROUP BY extract(year from payment_date),
 ORDER BY dollars asc
 LIMIT 5 ) ORDER BY dollars DESC;
 \end{sqlcode}
-\end{samepage}
 
 This query combines the results of two simple queries with the UNION keyword. Both queries must return the same columns in order to be combined in this way. Because the results are mathematically sets, they are not intrinsically ordered; this is why the set that results from the UNION operation is ordered again.
 
@@ -863,28 +809,23 @@ This query combines the results of two simple queries with the UNION keyword. Bo
 
 PostgreSQL can easily import and export data for further analysis. The pgAdmin application can export query results to CSV files (there is a button in the query toolbar). Alternatively, one can use the \emph{COPY} command as in the following example.
 
-\begin{samepage}
 \begin{sqlcode}
 COPY (SELECT * FROM customer) 
   TO '/tmp/filename.csv' 
   WITH (FORMAT CSV, HEADER);
 \end{sqlcode}
-\end{samepage}
 
 Similarly, PostgreSQL can easily import data from CSV files using the copy command:
 
-\begin{samepage}
 \begin{sqlcode}
 COPY customer 
   FROM '/tmp/filename.csv' 
   WITH (FORMAT CSV, HEADER);
 \end{sqlcode}
-\end{samepage}
 
 Addtionally, PostgreSQL can import and export JSON files; see the documentation for details.
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
+\begin{exercisebox}
 \begin{enumerate}
   \item Find the names and the rental numbers of the top 5 customers who rented the most films
   \begin{itemize}
@@ -911,7 +852,7 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
     \item \textbf{Tip}: You need only one table
   \end{itemize}
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Review Questions}
 
@@ -939,8 +880,11 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{enumerate}
 
     
-\section{Additional SQL Exercises}
+\section{Additional Hands-On Exercises}
 
+This section contains additional exercises to practice writing SQL SELECT queries. Each exercise assumes a database schema of multiple tables with their columns. If you wish to try your queries, you will need to first write CREATE TABLE statements and create the tables in a database.
+
+\begin{exercisebox}
 \textbf{Database Schema:} 
 \begin{itemize}
     \item \textbf{Table:} Employees
@@ -948,7 +892,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the first and last names of all employees in the 'Sales' department. \\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Products
@@ -956,7 +902,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the ProductName and Price for all products in the 'Electronics' category.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Books
@@ -964,15 +912,19 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all columns from the Books table and sort the results by PublishYear in descending order.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Orders
     \item \textbf{Columns:} OrderID, CustomerName, OrderDate, TotalAmount
 \end{itemize}
 
-\noindent \textbf{Task:} Write a SQL query to select the OrderID and TotalAmount for orders where the TotalAmount is greater than 100. Sort the results by TotalAmount in ascending order.\\
+\noindent \textbf{Task:} Write a SQL query to select the OrderID and TotalAmount for orders where the TotalAmount is greater than 100. Sort the results by TotalAmount in ascending order.
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Students
@@ -980,7 +932,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all distinct majors from the Students table.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:} 
 \begin{itemize}
     \item \textbf{Table:} Customers
@@ -990,7 +944,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all orders with the corresponding customer's first and last name. Join the Customers and Orders tables on CustomerID.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Authors
@@ -1004,7 +960,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the title of the book, the name of the author, and the name of the publisher. This will require joining the Books, Authors, and BookPublishers tables, and then joining the resulting table with Publishers.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Employees
@@ -1014,7 +972,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select each employee's first name, last name, and total sales amount. This requires a join between Employees and Sales tables and the use of the SUM aggregate function on SaleAmount.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Products
@@ -1024,7 +984,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all products, along with the quantity ordered for each product. Use a LEFT JOIN to ensure that all products are listed, even if they have not been ordered.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Students
@@ -1034,7 +996,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the names of students and their grades who are enrolled in a specific course (e.g., 'Biology 101'). This requires a join between the Students and Enrollments tables and a WHERE clause to filter by the CourseID.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:} 
 \begin{itemize}
     \item \textbf{Table:} Employees
@@ -1044,7 +1008,9 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the first name and last name of employees who earn more than the average salary in their respective departments. This will require a subquery in the WHERE clause to calculate the average salary per department.\\
+\end{exercisebox}
 
+\begin{exercisebox}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Movies
@@ -1054,3 +1020,4 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the title of movies that have an average rating higher than the overall average rating of all movies. This will require a complex subquery to first calculate the average rating for each movie, and another subquery to calculate the overall average rating.\\
+\end{exercisebox}

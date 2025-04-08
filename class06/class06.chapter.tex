@@ -18,26 +18,26 @@ After reading this chapter, you should be able to:
 
 The material in this chapter draws on the following sources that are valuable for additional information, extended examples, and further details.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Chitlur, Swaroop (2024) A Byte of Python. \href{https://python.swaroopch.com/}{HTML Online}, \href{https://github.com/swaroopch/byte-of-python/releases/}{PDF} \\
-\end{tcolorbox}
+\end{resourcebox}
 
 The Python project itself does not provide a tutorial, but dozens can be found on the internet. This open-source book is available in HTML and as a PDF download under a Createive Commons license. It provides an introduction to Python from the very first steps and the basics to creating your own functions, modules, and data structures. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 \begin{itemize}
 \item \href{https://numpy.org/doc/stable/user/absolute_beginners.html}{NumPy for absolute beginners}
 \item \href{https://numpy.org/doc/stable/user/quickstart.html}{Quick Start}
 \end{itemize}
-\end{tcolorbox}
+\end{resourcebox}
 
 The NumPy website provides two very good introductions for those new to Numpy. Both are very readable tutorials with many simple, and some not so simple, examples that show the basic functionality of Numpy and will get the reader up to speed on numerical computation and working with array and matrix data in Python.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 \begin{itemize}
-\item \href{http://pandas.pydata.org/docs/user_guide/10min.html}{10 Minutes to Pandas}
+\item \href{http://pandas.pydata.org/docs/user_guide/10min.html}{10 Minutes to Pandas}\\
 \end{itemize}
-\end{tcolorbox}
+\end{resourcebox}
 
 The Pandas website provides very good ''10 minute tutorial'' that introduces the main concepts and important functions for data manipulation and data summarization in Pandas. It includes sections ranging from basic data structures to viewing and selection of data, merging data frames, grouping, reshaping, plotting and importing and exporting data from and to a variety of formats, covering the essential functionality for doing business analytics in Python with Pandas.
 
@@ -85,8 +85,7 @@ While the Python shell supports all the features of the Python language, it lack
 
 On Unbuntu Linux, simply type \texttt{python} in a terminal window to launch the Python shell. On Windows and MacOS systems, you will find applications to launch the Python shell in a window. The shell prompts you for commands with the \texttt{> > >} prompt. Simply enter the command and press the {\footnotesize\colorbox{lightgray}{ENTER}} key to execute a command. Use the \texttt{quit()} function to exit the shell. The Python shell remembers your previous commands, so you can use the up and down arrow keys to recall commands and edit them. The Python shell also performs code completion using the {\footnotesize\colorbox{lightgray}{TAB}} key, which helps speed up coding and reduce typing errors. Similar to an R session, you should use a notepad editor application to assemble commands and then copy/paste them into the Python shell, as copy/paste results into a notepad editor. This makes editing long commands easier and ensures that your analysis will be repeatable.
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Tips for working efficiently with Python:}
+\begin{infobox}
 
 To make using Python more efficient, consider doing the following:
 
@@ -100,8 +99,7 @@ To make using Python more efficient, consider doing the following:
     \item Don't update packages in the middle of a project.
     \item Ensure you have a \emph{repeatable, automatable script} for your entire data analysis at the end of a project.
 \end{itemize}
-
-\end{tcolorbox}
+\end{infobox}
 
 \paragraph*{Jupyter Notebooks} Jupyter notebooks offer a more interactive and versatile platform. Jupyter Notebooks allow users to create and share documents that can contain ''cells'' where each cell may contain Python code, text (using the Markdown text markup language\footnote{\url{https://www.markdownguide.org/}}), equations (using LaTeX), or visualizations. This mix of Python code, documentation, description, and results makes it ideal for data exploration, visualization, and complex analyses where explaining the process is as important as the code itself, allowing for a narrative approach to coading. While Jupyter Notebooks support various programming languages, they are predominantly used with Python. Figure~\ref{fig:jupyter} shows a screenshot of a Jupyter notebook in the JupyterLabs Desktop environment.
 
@@ -137,7 +135,6 @@ In summary, while the Interactive Python Shell is best for quick, simple tasks a
 
 As with R, you can use Python interactively as a calculator. It provides the usual arithmetic, comparison and boolean logic operators. The \texttt{//} operator is for integer division with floor (rounding down), the \texttt{\%} operator is the modulus (remainder) operator. Boolean values are \texttt{True} and \texttt{False} in Python and \emph{cannot} be abbreviated (unlike in R). The following Python code block illustrates typical usage:
 
-\begin{samepage}
 \begin{pythoncode}
 # Addition
 2 + 2
@@ -157,11 +154,9 @@ As with R, you can use Python interactively as a calculator. It provides the usu
 (3 < 5) and (4 < 2)
 (3 < 5) or not (4 < 2)
 \end{pythoncode}
-\end{samepage}
 
 The \texttt{print} function in Python is very versatile and provides different ways to print the values of multiple variables. In particular, character strings have a \texttt{format} function that can be used to substitute the \texttt{\{\}} placeholders with values, either by index/number, by name, or by position, as shown in the following Python code block that defines two variables, \texttt{age} and \texttt{name} and prints their values in a variety of ways:
 
-\begin{samepage}
 \begin{pythoncode}
 # Define some variables
 age = 19
@@ -175,11 +170,9 @@ print('{} is {} years old'.format(name, age))
 print(f'{name} is {age} years old')
 print(name+' is '+str(age)+' years old')
 \end{pythoncode}
-\end{samepage}
 
 \noindent Because Python commands can get quite long, Python allows for backslashes to break long lines and continue the command on the following line. While not needed in this case, the following code block illustrates how to use them:
 
-\begin{samepage}
 \begin{pythoncode}
 print('This is a very long \
 string and needs a second line')
@@ -187,22 +180,18 @@ i = \
 5
 print(i)
 \end{pythoncode}
-\end{samepage}
 
-%\noindent Multiline character strings are enclosed in triple quotes, and the line breaks form part of the string, as shown in the following example. Note that the \texttt{print(s)} function prints the line breaks in the character string.
+\noindent Multiline character strings are enclosed in triple quotes, and the line breaks form part of the string, as shown in the following example. Note that the \texttt{print(s)} function prints the line breaks in the character string.
 
-%\begin{samepage}
-%\begin{pythoncode}
-%s = '''This is line 1
-%and here is line 2
-%and now this is line 3'''
-%print(s)
-%\end{pythoncode}
-%\end{samepage}
+\begin{pythoncode}
+s = '''This is line 1
+and here is line 2
+and now this is line 3'''
+print(s)
+\end{pythoncode}
 
 \noindent The next code example shows some useful string functions. The \texttt{startwith()} function does what its name suggests and returns a boolean (True or False) value. The \texttt{find()} function returns either the first position of a string in another string, or -1 if the string is not found. 
 
-\begin{samepage}
 \begin{pythoncode}
 language = 'Innuktitut'
 # Check the start of a string
@@ -216,15 +205,13 @@ if 'u' in language:
 if language.find('nuk') != -1:
     print('Yes, it contains the string "nuk"')
 \end{pythoncode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=alert]
-\paragraph{Important:} Note the use of leading whitespace or indentation in the lines after the \texttt{if} statement in the above code. In Python, this \emph{whitespace is required for defining the program logic}! In the above example, the indented lines indicate the extent of the program block to be executed after the \texttt{if} statement. The normal leading whitespace is four spaces. 
-\end{tcolorbox}
+\begin{alertbox}
+Note the use of leading whitespace or indentation in lines 4, 7, and 11 after an \texttt{if} statement in the above code. In Python, this \emph{whitespace is required for defining the program logic}! In the above example, the indented lines indicate the extent of the program block to be executed after the \texttt{if} statement. The normal leading whitespace is four spaces. 
+\end{alertbox}
 
 The \texttt{join()} and \texttt{split()} functions for character strings do as the their names suggest and work with Python lists, illustrated in the code block below:
 
-\begin{samepage}
 \begin{pythoncode}
 # Join a list of strings with a delimiter
 delimiter = '_*_'
@@ -236,11 +223,9 @@ print(mystring)
 thelist = mystring.split(delimiter)
 print(thelist)
 \end{pythoncode}
-\end{samepage}
 
 \emph{Lists}\index{List} in Python are ordered collections of items, and use square brackets \texttt{[]} as delimiters. Lists are mutable, i.e. their contents can be changed. Lists may contain items of different data types, including other lists or structured data types. Useful list functions are \texttt{len()} which returns the number of items in a list, \texttt{append()}, which adds items to the end of the list, and \texttt{sort()}, which sorts by value (only for compatible data types in the list). Items can be removed by position using the \texttt{del()} or by value using the \texttt{remove()} functions.
 
-\begin{samepage}
 \begin{pythoncode}
 # Define list (Inuit deities)
 gods = ['Sedna', 'Nanook', 'Akna', 'Pinga']
@@ -261,13 +246,11 @@ olditem = gods[0]
 del gods[3]
 gods.remove('Sedna')
 \end{pythoncode}
-\end{samepage}
 
 The above example also shows iteration (''repeating'') in Python with the \texttt{for} statement. Similar to the earlier example illustrating the \texttt{if} statement, note the required indentation (leading whitespace) in the line(s) after the \texttt{for} statement to indicate the extent of the code block that is repeated.
 
 \emph{Tuples}\index{Tuple (in Python)} in Phython are also ordered collections of items, but they are immutable, i.e. their contents cannot be changed. Tuples use round brackets \texttt{()} as delimiters.
 
-\begin{samepage}
 \begin{pythoncode}
 # Define a tuple (Inuit Nunangat)
 regions = ('Inuvialuit', 'Nunavut', 'Nunavik', 'Nunatsiavut')
@@ -281,15 +264,12 @@ more_regions = ('Kalaallit', 'Inupiaq', regions)
 # Retrieve element 1 of element 3 in tuple
 more_regions[2][1]
 \end{pythoncode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=alert]
-\paragraph*{Important:} Indexing in Python is zero based, that is, the first element in a list or tuple is number 0, while the last element is number \texttt{len()} - 1. This is in contrast to R, where indexing starts at 1.
-\end{tcolorbox}
+\begin{alertbox}Indexing in Python is zero based, that is, the first element in a list or tuple is number 0, while the last element is number \texttt{len()} - 1. This is in contrast to R, where indexing starts at 1.
+\end{alertbox}
 
 \emph{Dictionaries}\index{Dictionary (in Python)}\index{Dict|see{Dictionary (in Python)}} (or short, ''dicts'') in Python are key-value pairs that map one element to another. In other programming languages, this data structure is also called a \emph{map} or an \emph{associative array}\index{Associative array|see{Dictionary (in Python)}} (because it associates keys with their values). Python uses curly brackets \texttt{\{\}} as delimiters; the keys and values are separated using \texttt{:}. The value for a key is retrieved using the square bracket operator \texttt{[]}. Keys and values may be any data type.
 
-\begin{samepage}
 \begin{pythoncode}
 # Define a dict (Largest citites of Innuit regions)
 c = {
@@ -299,11 +279,9 @@ c = {
     'Nunatsiavut': 'Nain' 
 }
 \end{pythoncode}
-\end{samepage}
 
 Keys and values can be retrieved separately using the function \texttt{keys()} and \texttt{values()}. Dicts are mutable, as the following example shows by removing an entry with \texttt{del} and adding another entry.
 
-\begin{samepage}
 \begin{pythoncode}
 # Get the list of keys
 list(c.keys())
@@ -326,11 +304,9 @@ c['Nunavut'] = 'Iqaluit'
 if 'Nunavut' in c:
     print("\nNunavut's largest city is", c['Nunavut'])
 \end{pythoncode}
-\end{samepage}
 
 A useful function to create dicts from two lists is the \texttt{zip()} function, shown below. The \texttt{zip()} function creates an iterator over fixed-length tuples that are passed into the dictionary creation function \texttt{dict()} as key--value tuples:
 
-\begin{samepage}
 \begin{pythoncode}
 # Define a list of towns
 towns = ['Hopedale', 'Makkovik', 'Nain', 'Postville', 'Rigolet']
@@ -339,13 +315,11 @@ pops = [596, 365, 1204, 188, 327]
 # Create a dictionary
 pop_by_town = dict(zip(towns, pops))
 \end{pythoncode}
-\end{samepage}
 
 In Python, lists, tuples, and character strings are examples of \emph{sequences}\index{Sequence (in Python)}. All sequences provide membership tests using \texttt{in} or \texttt{not in} operators, as shown in some of the examples above. Sequences also provide integer indexing and slicing.  Note that the end index in a slicing expression is \emph{not inclusive}, that is, the slice extends up to but does not include the final index. This makes it easy to write a slice like \texttt{[:len(a)]} where \texttt{a} is some sequence (rather than having to write \texttt{[:len(a)-1]} as one would in R or other programming languages where the end index is inclusive).
 
 The following code shows some examples for slicing\index{Slicing} tuples. Note the negative end index in the third example. A negative end index iterates from the end of a sequence forwards''. The slice \texttt{regions[1:-1]} extends from the second element to the third of the four elements. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Define a tuple
 regions = ('Inuvialuit', 'Nunavut', 'Nunavik', 'Nunatsiavut')
@@ -355,11 +329,9 @@ regions[2:]
 regions[1:-1]
 regions[:]
 \end{pythoncode}
-\end{samepage}
 
 When slicing in Python, the step size can also be specified, as shown in the next Python code block. The final example slices backwards.
 
-\begin{samepage}
 \begin{pythoncode}
 # Slicing with step size
 regions[::1]
@@ -367,54 +339,47 @@ regions[::2]
 regions[::3]
 regions[::-1]
 \end{pythoncode}
-\end{samepage}
 
-%Character strings are also sequences, and they support slicing or indexing the same way as other sequences in Python.
+Character strings are also sequences, and they support slicing or indexing the same way as other sequences in Python.
 
-%\begin{samepage}
-%\begin{pythoncode}
-%language = 'Innuktitut'
-%# Slicing on a string 
-%print('characters 1 to 3 is', language[1:3])
-%print('characters 2 to end is', language[2:])
-%print('characters 1 to -1 is', language[1:-1])
-%print('characters start to end is', language[:])
-%\end{pythoncode}
-%\end{samepage}
+\begin{pythoncode}
+language = 'Innuktitut'
+# Slicing on a string 
+print('characters 1 to 3 is', language[1:3])
+print('characters 2 to end is', language[2:])
+print('characters 1 to -1 is', language[1:-1])
+print('characters start to end is', language[:])
+\end{pythoncode}
 
 \noindent In the above example, pay careful attention to the use of negative indices in the slicing expressions, both for the index as well as the step size.
 
-%\begin{tcolorbox}[colback=code]
-%\paragraph*{Tip:} To read and execute Python statements from a file, use the expression \texttt{exec(open('filename.py').read())}
-%\end{tcolorbox}
+%\begin{infobox}To read and execute Python statements from a file, use the expression \texttt{exec(open('filename.py').read())}
+%\end{infobox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
+\begin{exercisebox}
 \begin{enumerate}
     \item Create a \emph{list} containing the numbers 1 to 10. Use list slicing to create a sublist with only the even numbers.
     \item Using a \texttt{for} loop, sum all the items in the list.
     \item Using a \texttt{for} loop, iterate over the list and print each number squared.
     \item Write a program to append the square of each number in the range [1:5] to a new list.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
+\begin{exercisebox}
 \begin{enumerate}
     \item Create a \emph{tuple} with different data types (string, int, float).
     \item Demonstrate how tuples are immutable by attempting to change its first element.
     \item Write a program to convert the tuple into a list.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
+\begin{exercisebox}
 \begin{enumerate}
     \item Create a \emph{dictionary} with at least three key-value pairs, where the keys are strings and the values are numbers.
     \item Write a Python script to add a new key-value pair to the dictionary and then print the updated dictionary.
     \item Create a nested dictionary, that is, a dictionary whose values are dictionaries, and demonstrate accessing elements at various levels.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{NumPy}
 
@@ -440,7 +405,6 @@ NumPy ndarrays have a set of useful properties or attributes, summarized in in T
 
 The following Python code block illustrates the use of these properties. Note the use of the \texttt{arange()} function to create a one-dimensional array of 15 numbers (from 0 to 14), that is then \texttt{reshape}d into a 2-dimensional array with 3 rows and 5 columns. Rows are axis 0, and columns are axis 1.
 
-\begin{samepage}
 \begin{pythoncode}
 # Import the numpy package
 import numpy as np
@@ -453,11 +417,9 @@ a.ndim
 a.dtype.name
 a.size
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block shows element-wise operations and array operations on a NumPy array. Python determines automatically which functions are array functions (like \texttt{sum()}) and which ones are element-wise functions (like \texttt{sqrt()}). Note the creation of the array with the \texttt{array()} function from a list of two tuples. Note also the use of the \texttt{axis} parameter in the \texttt{max} function to specify whether to aggregate by column (\texttt{axis=0}) or by row (\texttt{axis=1}). The \texttt{axis} parameter can also be applied to other functions like \texttt{sum()} or \texttt{std()}.
 
-\begin{samepage}
 \begin{pythoncode}
 # Create an array from Python lists and tuples
 b = np.array([(1.5, 2., 3), 
@@ -483,12 +445,10 @@ np.transpose(b)
 np.cov(b)
 np.cov(np.transpose(b))
 \end{pythoncode}
-\end{samepage}
 
 %In the above example, the \texttt{std()} function without \texttt{axis} parameter computes the standard deviation of all elements in the array, while \texttt{cov} treats each \emph{row} of the array as a vector and computes their variances and covariances. To treat array columns as vectors, either transpose the array first, using the \texttt{T} operator or use the \texttt{rowvar=False} parameter for the \texttt{cov()} function. 
 
 To create pre-initialized arrays, NumPy provides two convenience functions to create arrays filled with 0s or 1s:
-\begin{samepage}
 \begin{pythoncode}
 # Create an array of zeros with shape (3,4)
 x = np.zeros((3,4))
@@ -498,11 +458,9 @@ print(x)
 y = np.ones((2,3,4))
 print(y)
 \end{pythoncode}
-\end{samepage}
 
 In a generalization of the slicing expressions for Python sequences, each axis of a NumPy array can be sliced using the \texttt{[:]} or \texttt{[::]} expressions, as shown in the following example of a two-dimensional array\index{Slicing}. The slicing expressions for different axes are separated by commas.
 
-\begin{samepage}
 \begin{pythoncode}
 b = np.array([[ 0,  1,  2,  3],
               [10, 11, 12, 13],
@@ -521,11 +479,9 @@ b[1:3, :]
 # Last row
 b[-1]
 \end{pythoncode}
-\end{samepage}
 
 %When not all axes are supposed to be sliced, one can omit initial or final unsliced axes in the slicing expression using the ellipsis ''...'' as shown in the following Python code block.
 
-%\begin{samepage}
 %\begin{pythoncode}
 %c = np.array([[[  0,  1,  2],
                %[ 10, 12, 13]],
@@ -537,11 +493,9 @@ b[-1]
 %print(c[: , : , 2])
 %print(c[..., : , 1])
 %\end{pythoncode}
-%\end{samepage}
 
 NumPy arrays also provide convenient iteration of their rows and their elements. Note the use of the \texttt{flat} operator to ''flatten'' a multi-dimensional array to a single dimension in the code block below.
 
-\begin{samepage}
 \begin{pythoncode}
 for row in b:
     print(row)
@@ -549,11 +503,9 @@ for row in b:
 for element in b.flat:
     print(element)
 \end{pythoncode}
-\end{samepage}
 
 NumPy provides an easy way to reshape arrays to any dimension. However, it is important to be aware of where and how the elements move during such a reshape. The order can be specified using an optional argument to \texttt{rehshape}; consult the NumPy documentation for details. The following example also demonstrates the use of the default random number generator\footnote{A random number generator in computer science is always a pseudo-random number generator that creates a sequence of numbers according to a deterministic formula (because computers are deterministic), starting from an initial ''seed'' number. The sequence is repeatable when beginning with the same seed. A good pseudo-random number generate will create sequences that are indistinguishable from true random numbers, for example, those created by rolling dice.} (rng)\index{Random number generator} in NumPy to create an array of shape \texttt{(3, 4)} filled with random numbers between 0 and 1.
 
-\begin{samepage}
 \begin{pythoncode}
 # Create 3x4 array of random numbers
 a = np.floor(10 * np.random.random((3, 4)))
@@ -564,13 +516,11 @@ a.reshape(6, 2)
 a.T
 a.T.shape
 \end{pythoncode}
-\end{samepage}
 
 The above example uses the \texttt{flatten()} function which returns a one-dimensional array. The \texttt{T} property returns the transpose of the array (same as the \texttt{np.transpose()} function). % In two dimensions, the transpose swaps rows and columns. The NumPy transpose is also defined for more than two dimensions, the axes are transposed such that \texttt{a.T.shape==a.shape[::-1]}.
 
 The next example illustrates concatenation or stacking operations to stack two arrays either vertically, that is, by row, or horizontally, that is, by column. The arrays must be of compatible shape for these stacking operations. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Create another 3x4 array of random numbers
 b = np.floor(5 * np.random.random((3, 4)))
@@ -581,11 +531,9 @@ np.vstack((a, b))
 # Horizontal stacking
 np.hstack((b, a))
 \end{pythoncode}
-\end{samepage}
 
 Arrays can be indexed also by boolean arrays. For example, in the following Python code block, the expression \texttt{a < 5} constructs a boolean array whose entries are \texttt{True} when the corresponding element in \texttt{a} is less than 5. This boolean array is then used to select or index the array \texttt{a}:
 
-\begin{samepage}
 \begin{pythoncode}
 a = np.array([[1,  2,  3,  4], 
               [5,  6,  7,  8], 
@@ -601,11 +549,9 @@ a%2 == 0
 # Entries that are even
 a[a%2 == 0]
 \end{pythoncode}
-\end{samepage}
 
 %Finally, NumPy provides easy ways to identify unique elements in an array and to count how often particular elements occur in an array. The following example also demonstrates another use of the \texttt{zip()} function, already introduced above, to construct a list of tuples.
 
-%\begin{samepage}
 %\begin{pythoncode}
 %a = np.array([11, 11, 12, 13, 14, 15, 16, 
               %17, 12, 13, 11, 14, 18, 19, 20])
@@ -619,10 +565,8 @@ a[a%2 == 0]
 %values, counts = np.unique(a, return_counts=True)
 %print(list(zip(values, counts)))
 %\end{pythoncode}
-%\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercises}
+\begin{exercisebox}
 \begin{enumerate}
    \item Create a four-dimensional array with random numbers in the shape indicated by the last four digits of your student number (if your student number contains a 0, use a 1 instead)
    \item Construct a new array by swapping the first half of rows (axis 0) with the second half of rows (axis 0)
@@ -631,7 +575,7 @@ a[a%2 == 0]
    \item Select all elements that are greater than the overall mean
    \item Sort the selected elements from the previous step in ascending order
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Data management with Pandas}
 
@@ -645,7 +589,6 @@ Central to Pandas are two primary data structures, the Series and the DataFrame.
 
 The following Python code constructs a Pandas Series of random numbers\index{Series (in Pandas)}. The axis labels of a Series (and a DataFrame) are called ''index'' and allow one to name the elements. The following example also shows how a Python dict can be converted into a series with named elements.
 
-\begin{samepage}
 \begin{pythoncode}
 # Import the Pandas package
 import pandas as pd
@@ -666,13 +609,11 @@ print(pd.Series(d))
 # Produces NaN for index d
 print(pd.Series(d, index=["b", "c", "d", "a"]))
 \end{pythoncode}
-\end{samepage}
 
 Note that in the last line of the above example, renaming or reordering the elements of the Series \texttt{d} introduces a \texttt{NaN} element for the index ''d'', because the dict from which the series was created contains no value for the key ''d''.
 
 Pandas series behave largely like NumPy arrays, but to access their elements by numerical index, one has to use the \texttt{iloc} operator, as shown in the following Python code block. This allows slicing the same way as for Python sequences or NumPy arrays. The following example also shows that Series can behave like a Python dict, in that values for a named index (''key'') can be retrieved. Series also provide membership tests for ''keys'' using \texttt{in}.
 
-\begin{samepage}
 \begin{pythoncode}
 # Series behave like an ndarray
 s.iloc[0]
@@ -687,11 +628,9 @@ s['e'])
 'e' in s
 'f' in s
 \end{pythoncode}
-\end{samepage}
 
 Pandas \emph{DataFrames} are two-dimensional objects\index{Data frame!in Pandas}. Their columns may have different data types. Conceptually, DataFrames can be considered as a dict of Pandas Series, as the following example demonstrates. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Create a dict of two Series
 d = {
@@ -704,13 +643,11 @@ d = {
 # Create a dataframe from dict
 df = pd.DataFrame(d)
 \end{pythoncode}
-\end{samepage}
 
 Constructing the DataFrame \texttt{df} ''lines up'' the two Series on their common row labels (indices), and will introduce a ''NaN'' for index ''d'' in column ''col1'', because that Series does not contain a value for ''d''.
 
 Pandas provides some useful functions for getting basic information about the shape, dimensions, and contents of a data frame, as illustrated below. The \texttt{info()} function provides information about the columns and their data types, while \texttt{head()} and \texttt{tail()} print the first and last few lines of a DataFrame, and \texttt{describe()} produces summary statistics.
 
-\begin{samepage}
 \begin{pythoncode}
 # Dimensions (rows, columns)
 df.shape
@@ -731,11 +668,9 @@ df.tail()
 # Summary of data
 df.describe()
 \end{pythoncode}
-\end{samepage}
 
 %DataFrame columns can be accessed using their quoted name, and will yield a Pandas Series with the usual operations. The following Python code example shows that new columns can be added simply by defining them, as in the ''col3'' column below or using the \texttt{assign()} function, which works similarly to the \texttt{mutate} function in R/dplyr. 
 
-%\begin{samepage}
 %\begin{pythoncode}
 %# Access a column
 %df['col1']
@@ -746,7 +681,6 @@ df.describe()
 %# Create another new calculated column using 'assign'
 %df = df.assign(col4 = df['col1'] * np.sqrt(df['col2']))
 %\end{pythoncode}
-%\end{samepage}
 
 Pandas DataFrames can be indexed by colum, by label, by integer location, or by boolean vectors. Table\ref{tab:pandasindexing} shows an overview of the different methods and their return values.
 
@@ -764,7 +698,6 @@ Select rows by boolean vector & \texttt{df[bool]} & DataFrame \\ \hline
 \label{tab:pandasindexing}
 \end{table}
 
-\begin{samepage}
 The following Python code block shows examples of these selection/indexing methods:
 \begin{pythoncode}
 # Select one column
@@ -791,11 +724,9 @@ df[0:4:2]
 # Select rows by boolean array
 df[df['col1'] > 2]
 \end{pythoncode}
-\end{samepage}
 
 %As noted earlier, Pandas automatically aligns data by indices, that is, by row and column labels, for operations on dataframes. Note how the addition of two dataframes of unequal shape introduces ''NaNs''. 
 
-%\begin{samepage}
 %\begin{pythoncode}
 %df = pd.DataFrame(np.random.randn(10, 4), 
                   %columns=["A", "B", "C", "D"])
@@ -803,11 +734,9 @@ df[df['col1'] > 2]
                    %columns=["A", "B", "C"])
 %print(df + df2)
 %\end{pythoncode}
-%\end{samepage}
 
 For convenience, NumPy operations can also be used to operate on Pandas DataFrames, which are automatically converted to NumPy ndarrays before and converted back after such an operation. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Elementwise operators
 df * 5 + 2
@@ -821,11 +750,9 @@ df.T
 np.exp(df)
 np.sum(df[['col1', 'col2']], axis=1)
 \end{pythoncode}
-\end{samepage}
 
 %To apply element-wise character string operations on Series or DataFrames it is useful to use the \texttt{str} property:
 
-%\begin{samepage}
 %\begin{pythoncode}
 %# String functions with 'str'
 %s = pd.Series(
@@ -833,43 +760,35 @@ np.sum(df[['col1', 'col2']], axis=1)
      %"CABA", "dog", "cat"], dtype="string")
 %s.str.lower()
 %\end{pythoncode}
-%\end{samepage}
 
 %Pandas provides a number of useful functions to get information about the contents of a DataFrame. The \texttt{info()} function provides information about the columns and their data types, while \texttt{head()} and \texttt{tail()} print the first and last few lines of a DataFrame. 
 
-%\begin{samepage}
 %\begin{pythoncode}
 %df.info()
 %df.head()
 %df.tail(3)
 %\end{pythoncode}
-%\end{samepage}
 
 %The \emph{boolean reduction} functions \texttt{all()} and \texttt{any()} operate by column on DataFrames with boolean values. As their names suggest, \texttt{all()} returns \texttt{True} when the all entries in a column are true, whereas \texttt{any()} returns \texttt{True} if any of the entries in a column are true. The last line of the following Python code block re-applies \texttt{any()} to the Series that results from the first application of \texttt{any()}.
 
-%\begin{samepage}
 %\begin{pythoncode}
 %# Boolean reductions
 %(df > 0).all()
 %(df > 0).any()
 %(df > 0).any().any()
 %\end{pythoncode}
-%\end{samepage}
 
 %When making comparisons on DataFrames that include ''NaN'', it is important to realize that two ''NaNs'' are not equal when using the \texttt{==} operator, but they are equal when using the \texttt{equals} function. The following example illustrates this difference.
 
-%\begin{samepage}
 %\begin{pythoncode}
 %# NaN's are not the same
 %df.iloc[0,0] = np.nan
 %(df+df == df*2).all()
 %(df + df).equals(df*2)
 %\end{pythoncode}
-%\end{samepage}
 
 Pandas provides useful functions for basic descriptive statistics and aggregation on DataFrames. The \texttt{mean()} function takes as its optional first argument the axis number (0 for aggregating the columns, 1 for aggregating the rows) and can skip missing values when summing. Multiple aggregates can be formed using the \texttt{agg()} function. The Python code block below illustrates the use of these functions.
 
-\begin{samepage}
 \begin{pythoncode}
 # Descriptive statistics
 # By column
@@ -880,11 +799,9 @@ df.mean(axis=1, skipna=False)
 # Aggregation with 'agg', by column
 df.agg(['sum', 'mean', 'std'], axis=0)
 \end{pythoncode}
-\end{samepage}
 
 Pandas DataFrame values can be sorted by columns, and the functions \texttt{nlargest()} and \texttt{nsmallest()} can be used to select a DataFrame with only the n smallest or largest values in a given column.
 
-\begin{samepage}
 \begin{pythoncode}
 # Sort values by columns
 df.sort_values(by=['col1', 'col2'])
@@ -893,11 +810,9 @@ df.sort_values(by=['col1', 'col2'])
 df.nsmallest(3, 'col1')
 df.nlargest(3, 'col2')
 \end{pythoncode}
-\end{samepage}
 
 A very useful way to identify or select data in a Pandas DataFrame is the \texttt{query()} function, which accepts a simplified boolean condition as argument. This allows one to write much shorter and compact selection logic, as shown in the following example. Note the two different forms of the same logical operator \texttt{\&} and \texttt{and}.
 
-\begin{samepage}
 \begin{pythoncode}
 df = pd.DataFrame(np.random.rand(10, 3), columns=['a', 'b', 'c'])
 
@@ -910,7 +825,6 @@ df.query('a < b & b < c')
 df.query('a < b and b < c')
 df.query('a < b < c')
 \end{pythoncode}
-\end{samepage}
 
 %The \texttt{query()} function can also be used for membership tests in Series and DataFrames using the \texttt{in} operator. This also is much more compact and easy to read than the pure Python \texttt{isin()} function. The following example code block shows the pure Python selection followed by equivalent selection with \texttt{query()}:
 
@@ -972,7 +886,6 @@ This subsection introduces basic ideas of data manipulation with the Pandas. A s
 \label{tab:fueldatachapter6}
 \end{table}
 
-\begin{samepage}
 \paragraph*{Reading Data:} The following Python code reads the CSV file into a Pandas DataFrame and examines the data.
 
 \begin{pythoncode}
@@ -986,11 +899,9 @@ list(data.columns)
 data.info()
 data.describe()
 \end{pythoncode}
-\end{samepage}
 
 \paragraph*{Filtering:} The easiest way to apply filters to the data is to use the \texttt{query()} function in Pandas. This is equivalent to the R \texttt{filter()} function. The code block below illustrates this and shows the equivalent R and SQL code:
 
-\begin{samepage}
 \begin{pythoncode}
 # Filter values
 data.query('Make=="Ford" & Year==2023')
@@ -1013,17 +924,14 @@ SELECT *
          Year==2023;
 \end{sqlcode}
 \end{multicols}
-\end{samepage}
 
 \paragraph*{Selection:} One or more columns can be selected from the data frame using the data frame indexing described above. This is equivalent to the \texttt{select()} function in R:
 
-\begin{samepage}
 \begin{pythoncode}
 # Filter values and select columns
 data.query('Make=="Ford" & Year==2023') \
     [['Model', 'Category', 'Range']]
 \end{pythoncode}
-\end{samepage}
 
 \begin{multicols}{2}
 Equivalent in R
@@ -1048,7 +956,6 @@ SELECT Model, Category, Range
 
 \paragraph*{Column Creation:} A new column can be created either by simply declaring/defining it, or, alternatively, with the Pandas \texttt{assign()} function, which has the advantage that it returns the updated data frame and can therefore be part of a chain of functions operating on the data frame, as shown in the following example code block. The \texttt{assign()} function serves the same purpose as the \texttt{mutate()} function in R.
 
-\begin{samepage}
 \begin{pythoncode}
 # Filter values, create a new calculated column,
 # and select some columns
@@ -1056,7 +963,6 @@ data.query('Make=="Ford" & Year==2023') \
     .assign(HwyRange = data['Range']*data['Comb'] / data['Hwy']) \
     [['Model', 'Category', 'Range', 'HwyRange']]
 \end{pythoncode}
-\end{samepage}
 
 \begin{multicols}{2}
 Equivalent in R:
@@ -1083,7 +989,6 @@ SELECT Model, Category, Range,
 
 \paragraph*{Renaming:} Renaming of columns is done using the Pandas \texttt{rename()} function, which accepts a dict of the old and new column names, as key and value, respectively. For example, the following code renames the Range column as the ComRange column. Because \texttt{rename()} returns the data frame, the function can be inserted into the function chain in the following code block:
 
-\begin{samepage}
 \begin{pythoncode}
 # Filter values, create two new calculated columns,
 # rename a column, and select columns
@@ -1093,7 +998,6 @@ data.query('Make=="Ford" & Year==2023') \
     .rename(columns={'Range': 'CombRange'}) \
     [['Model', 'Category', 'CombRange', 'CityRange', 'HwyRange']]
 \end{pythoncode}
-\end{samepage}
 
 \begin{multicols}{2}
 Equivalent in R:
@@ -1155,7 +1059,6 @@ SELECT DISTINCT Make, Model
 
 \paragraph*{Ordering:} Ordering or sorting data by values is done using the Pandas function \texttt{sort\_values()}. This is similar to the R function \texttt{arrange()} and allows sorting in ascending or descending order, as shown in the following Python code block:
 
-\begin{samepage}
 \begin{pythoncode}
 # Filter values, order by values of two columns
 # and select columns
@@ -1163,7 +1066,6 @@ data.query('Make=="Ford" & Year==2023') \
     .sort_values(['Category', 'Range'], ascending=[True, False]) \
     [['Model', 'Category', 'Range']]
 \end{pythoncode}
-\end{samepage}
 
 %\newpage
 \begin{multicols}{2}
@@ -1193,7 +1095,6 @@ SELECT Model, Category, Range
 
 \paragraph*{Relocating Columns:} There is no function for relocating columns in the sense of changing the order of columns retrieved from a Pandas data frame. Insted, this is done when selecting the columns to retrieve. Hence, there is no equivalent to the R function \texttt{relocate()}.
 
-\begin{samepage}
 \begin{pythoncode}
 # Filter values, order by values of two columns
 # and select columns in particular order
@@ -1201,7 +1102,6 @@ data.query('Make=="Ford" & Year==2023') \
     .sort_values(['Category', 'Range'], ascending=[True, False]) \
     [['Category', 'Range', 'Model']]
 \end{pythoncode}
-\end{samepage}
 
 \begin{multicols}{2}
 
@@ -1233,7 +1133,6 @@ SELECT Category, Range, Model
 
 \paragraph*{Grouping and Summarizing:} Similar to the \texttt{group\_by()} and \texttt{summarize()} functions in R to compute aggregate values by group, Pandas provides the analogous functions \texttt{groupby()} and \texttt{agg()} for this purpose. These are illustrated in the following example:
 
-\begin{samepage}
 \begin{pythoncode}
 # Filter values, group the data,
 # calculate aggregates of multiple columns
@@ -1252,7 +1151,6 @@ data.query('Year==2023') \
     [['Category', 'meanComb', 'Make', 'meanCity', \
       'meanHwy', 'maxRange', 'nVehicle']]
 \end{pythoncode}
-\end{samepage}
 
 \begin{multicols}{2}
 
@@ -1301,7 +1199,6 @@ This section the use of Pandas for descriptive data analysis using the Pagila da
 
 The following Python code block reads the rentals data of the Pagila database into a Pandas DataFrame using the \texttt{read\_csv()} function. It then converts the data type of some columns from character strings to datetime types so that one can use date and time operations and arithmetic later.
 
-\begin{samepage}
 \begin{pythoncode}
 rentals = pd.read_csv(
      'http://evermann.ca/busi4720/rentals.csv')
@@ -1310,11 +1207,9 @@ actors = pd.read_csv(
 addresses = pd.read_csv(
      'https://evermann.ca/busi4720/addresses.csv')
 \end{pythoncode}
-\end{samepage}
 
 %When working with data, it is often useful to first identify and remove missing values. The following Python code block first identifies columns (\texttt{axis=1}) in the dataset that contain any (\texttt{any()}) missing values (\texttt{isna()}). Of these filtered rentals, only some columns are selected.
 
-%\begin{samepage}
 %\begin{pythoncode}
 %filtered_rentals = rentals[rentals.isna().any(axis=1)]
 
@@ -1322,22 +1217,18 @@ addresses = pd.read_csv(
     %filtered_rentals[
       %['last_name', 'rental_date', 'return_date', 'title', 'amount']]
 %\end{pythoncode}
-%\end{samepage}
 
 \noindent When printing DataFrames, Pandas by default abbreviates the output to manageable size. The number of rows and number of columns to be printed is controlled by two Pandas options that can be set as shown in the following example, which removes any limits.
 
-\begin{samepage}
 \begin{pythoncode}
 pd.set_option('display.max_rows', None)
 pd.set_option('display.width', None)
 \end{pythoncode}
-\end{samepage}
 
 The remainder of this section shows how Pandas can be used to provide equivalent results as obtained in the previous chapter using R/dplyr and in the chapter on relational databases with SQL. \emph{Compare the Python code to the R code and the SQL code to achieve similar results.}
 
 \paragraph*{Example:} Find all films and the actors that appeared in them, ordered by film category and year, for those films that are rated PG.
 
-\begin{samepage}
 \begin{pythoncode}
 data = pd.merge(rentals, actors, on='title', 
          suffixes=('_customer', '_actor'), how='outer')
@@ -1352,7 +1243,6 @@ data.query('rating == "PG"') \
     .reset_index() \
     .sort_values(['category', 'year']) \
 \end{pythoncode}
-\end{samepage}
 
 This Python code block above performs a series of data manipulation operations using Pandas. The operations merge, filter, transform, and group data from the Pagila movie rental dataset.
 
@@ -1378,7 +1268,6 @@ The Python code block below combines the data frames from the multiple CSV files
 \item The following command then merges the resulting data frame with the ''actors'', based on the ''title'' column. 
 \end{itemize}
 
-\begin{samepage}
 \begin{pythoncode}
 full_data = pd.merge(rentals, addresses, 
                      left_on='customer_address', 
@@ -1386,7 +1275,6 @@ full_data = pd.merge(rentals, addresses,
 full_data = pd.merge(full_data, actors, on='title', 
                      suffixes=('_customer', '_actor'))
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block performs the analysis to find the most popular actors on the full data constructed above, using the following steps:
 
@@ -1398,7 +1286,6 @@ The following Python code block performs the analysis to find the most popular a
 \item The filtered data is then sorted with the \texttt{sort\_values()} function by ''city'', ''ranking'', and ''actor'' .
 \end{itemize}
 
-\begin{samepage}
 \begin{pythoncode}
 full_data \
    .assign(actor=full_data['last_name_actor'] + ', ' + 
@@ -1412,11 +1299,9 @@ full_data \
    .query('ranking <= 3') \
    .sort_values(by=['city', 'ranking', 'actor'])
 \end{pythoncode}
-\end{samepage}
 
 \paragraph*{Example:} Find the customers who spend the most on rentals, and the number of rentals with the highest total rental payments for each category grouped by rental duration.
 
-\begin{samepage}
 \begin{pythoncode}
 full_data \
    .assign(customer=full_data['last_name_customer'] + ', ' + 
@@ -1434,7 +1319,6 @@ full_data \
          df.groupby(['category', 'rental_duration'])['ranking'] \
            .idxmin() ]
 \end{pythoncode}
-\end{samepage}
 
 By now, it should be clear what most of the functions in the analysis accomplish. The \texttt{idxmin()} function within the \texttt{loc[]} operator of the dataframe selects the smallest index, i.e. the smallest (highest) ranking when the data is grouped by category and rental duration.
 
@@ -1442,7 +1326,6 @@ By now, it should be clear what most of the functions in the analysis accomplish
 
 This example demonstrates the Pandas date and time function \texttt{to\_period()}. The argument \texttt{Q} returns quarters. Other frequently used arguments are 'D' for days, 'W' for weeks, 'M' for months, 'Y' for years, 'H' for hours, and 'T' for minutes. The use of the \texttt{sort\_values()} function demonstrates ''mixed'' sorting, ascending by quarter, and descending by payments.
 
-\begin{samepage}
 \begin{pythoncode}
 full_data \
    .assign(customer=full_data['last_name_customer'] + ', ' + 
@@ -1464,13 +1347,11 @@ full_data \
     .query('rank_top <= 5 or rank_bot <= 5') \
     .sort_values(by=['q', 'payments'], ascending=[True, False]) 
 \end{pythoncode}
-\end{samepage}
 
 \paragraph*{Example:} Find the set of film titles by rental customer and the total number rentals for each customer.
 
 The code below introduces the \texttt{apply()} function. This function applies some other function to every element in a Pandas series or data frame. In the example below, it first used to apply the function \texttt{list()} to all elements of the ''title'' column, creating the ''titles'' column, that is, a list of titles for each customer. It also applies an unnamed lambda function to all elements of the ''titles'' column in the grouped data. Here the lambda function converts its input \texttt{x} to a set (i.e. it removes duplicates), and then converts the set to a list.
 
-\begin{samepage}
 \begin{pythoncode}
 full_data \
    .assign(customer=full_data['last_name_customer'] + ', ' + 
@@ -1486,11 +1367,8 @@ full_data \
    .drop(columns=['titles']) \
    .sort_values(by='customer')
 \end{pythoncode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
-
+\begin{exercisebox}
 \begin{enumerate}
   \item Find all films with a rating of 'PG'
   \item List all customers who live in Canada (with their address)
@@ -1505,4 +1383,4 @@ full_data \
   \item List all films that have never been rented
   \item List the names of actors who have played in more than 15 films
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}

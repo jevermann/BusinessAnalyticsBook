@@ -20,20 +20,19 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Richard S. Sutton and Andrew G. Barto (2018) \emph{Reinforcement Learning -- An Introduction}. 2nd edition, The MIT Press, Cambridge, MA. (SB) \\
 \vspace{0.5\baselineskip}
-\url{http://incompleteideas.net/book/the-book.html} \\
+\small\url{http://incompleteideas.net/book/the-book.html}\normalsize \\
 \vspace{0.5\baselineskip}
 Chapters 2--7 \\
 \vspace{0.5\baselineskip}
 (CC BY-NC-ND License)
-\end{tcolorbox}
+\end{resourcebox}
 
 The Sutton \& Barto book is a standard introductory textbook on reinforcement learning and widely used. It is very approachable, but at the same time also detailed and thorough in its exposition. Its focus is on RL prior to the use of neural networks for function approximation, so up to about 2015. While it does not provide Python code itself, the pseudo-code in the book is easily implemented.
 
-\begin{tcolorbox}[colback=alert]
-\subsubsection*{Resources}
+\begin{resourcebox}
 Complete implementations of all examples in this chapter are available in the following GitHub repo:
 
 \url{https://github.com/jevermann/busi4720-rl} \\
@@ -41,7 +40,7 @@ Complete implementations of all examples in this chapter are available in the fo
 The project can be cloned from this URL:
 
 \url{https://github.com/jevermann/busi4720-rl.git}
-\end{tcolorbox}
+\end{resourcebox}
 
 
 \section{Introduction}
@@ -157,7 +156,7 @@ NewEstimate \leftarrow OldEstimate + StepSize \left[ Target - OldEstimate \right
 Where $\left[ Target - OldEstimate \right]$ is the \emph{error} in the estimate.
 
 \begin{figure}
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \begin{align*}
 &\text{Initialize, for $a=1$ to $k$:}\\
 &\quad Q(a) \leftarrow 0 \\
@@ -171,14 +170,13 @@ Where $\left[ Target - OldEstimate \right]$ is the \emph{error} in the estimate.
 &\quad N(A) \leftarrow N(A) + 1 \\
 &\quad Q(A) \leftarrow Q(A) + \frac{1}{N(A)} \left[ R - Q(A) \right]
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption{A simple bandit algorithm (Source: SB)}
 \label{fig:karmedbandit}
 \end{figure}
 
 A complete k-armed bandit algorithm is shown in peusdocode in Figure~\ref{fig:karmedbandit}. The corresponding implementation in Python is straightforward\footnote{Complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/bandits.py}}. The following code block defines a class \texttt{k\_bandit\_agent} that represents an agent. Initialization specifies the number of bandits $k$ in the environment, the parameter $\epsilon$ for the $\epsilon$-greedy policy and the initial value of the action value function, which may be 0 as in the pseudocode in Figure~\ref{fig:karmedbandit}. The method \texttt{determine\_action} is simply the $\epsilon$-greedy policy. The \texttt{train} method for each step determines the action to take, then takes that action in the environment and receives a reward. The agent then updates the action value function as in Equation~\ref{eq:2}.
 
-\begin{samepage}
 \begin{pythoncode}
 class k_bandit_agent:
     def __init__(self, k, epsilon, initial_value):
@@ -208,11 +206,9 @@ class k_bandit_agent:
             rewards.append(reward)
         return rewards
 \end{pythoncode}
-\end{samepage}
 
 A corresponding environment for the agent to act in is also readily implemented in Python and shown in the following code block. The initialization of the environment randomly sets the mean rewards of each of the $k$ bandits. Each time a bandit is played, the \texttt{step()} method randomly determines a reward from a standard normal distribution with the mean of the $k$-th bandit.
 
-\begin{samepage}
 \begin{pythoncode}
 class k_bandit_env:
     def __init__(self, k):
@@ -227,7 +223,6 @@ class k_bandit_env:
         reward = random.normalvariate(mean, 1)
         return reward
 \end{pythoncode}
-\end{samepage}
 
 Figure~\ref{fig:banditresults} shows a comparison of learning behaviour for agents with different parameters $\epsilon$. The horizontal axis shows the index of 1000 steps in the environment and the vertical axis shows the reward received at each step (mean over 1000 runs of the algorithm). The agent with $\epsilon=0$ (blue line) shows the worst learning behaviour. That agent only exploits and never explores. In other words, it never finds any better or more valuable actions to take, once it has found a good action. In contrast, the agent with $\epsilon=0.01$ (red line) learns slower in the beginning as it explores more but after 1000 steps has achieved a better mean reward. Finally, the purple line represents an agent with $\epsilon=0$ but whose action value function has been ''optimistically'' initialized with values of 5 instead of 0, that is, above the expected reward. This prevents it from assuming the first good action is the best one, which leads to high initial learning. However, with an $\epsilon$ of 0, that agent is not capable of further learning later in the sequence of actions taken. 
 
@@ -321,7 +316,7 @@ The Bellman equation (Equation~\ref{eq:bellman} and its equivalent for the actio
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \begin{align*}
 &\text{Loop:} \\
@@ -332,14 +327,13 @@ The Bellman equation (Equation~\ref{eq:bellman} and its equivalent for the actio
 &\quad \quad \Delta \leftarrow \max (\Delta, |v - V(s)|) \\
 &\text{until}\, \Delta < \theta
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption{Iterative Policy Evaluation (Source: SB)}
 \label{fig:policyiteration}
 \end{figure}
 
 This process is called \emph{iterative policy evaluation}\index{Iterative policy evaluation}. Figure~\ref{fig:policyiteration} shows this in pseudocode and the following Python code block shows the straightforward implementation, beginning with initial values of $0$ for each state.
 
-\begin{samepage}
 \begin{pythoncode}
 # Define actions for gridworld
 A = list(range(0,4))
@@ -363,7 +357,6 @@ def evaluate_policy():
         if Delta < theta:
             break
 \end{pythoncode}
-\end{samepage}
 
 
 \subsection{Bellman Optimality and Iterative Policy Improvement}
@@ -397,7 +390,7 @@ These final expressions are known as the \emph{Bellman optimality}\index{Bellman
 A simple, intuitive way of finding the optimal policy is to find the optimal state value function. The optimal policy is then to take that action that will yield the best following state. However, changing the policy will change the state value function. This intuitive procedure shows that state value function calculation and policy updates should happen alternatingly, until the policy no longer changes. 
 
 \begin{figure}
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \small
 \vspace{-\baselineskip}
 \begin{align*}
@@ -412,14 +405,13 @@ A simple, intuitive way of finding the optimal policy is to find the optimal sta
 &\quad \text{else} \\
 &\quad \quad \text{go to policy evaluation}
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption{Iterative Policy Improvement (Source: SB)}
 \label{fig:policyimprovement}
 \end{figure}
 
 Because the state value computation was already demonstrated using iterative policy evaluation above, the procedure for \emph{iterative policy improvement}\index{Iterative policy improvement} is simple, expressed in Figure~\ref{fig:policyimprovement}. The following Python code block illustrates the straightforward implementation:
 
-\begin{samepage}
 \begin{pythoncode}
 def improve_policy():
     stable = True
@@ -437,11 +429,9 @@ def improve_policy():
             stable = False
     return stable
 \end{pythoncode}
-\end{samepage}
 
 Putting both functions, \texttt{evaluate\_policy()} and \texttt{improve\_policy()}, together in an iteration will yield the optimal policy:
 
-\begin{samepage}
 \begin{pythoncode}
 stable = False
 while not stable:
@@ -451,7 +441,6 @@ while not stable:
 print("Optimal Policy:")
 print(pi)
 \end{pythoncode}
-\end{samepage}
 
 The procedures of \emph{iterative policy evaluation} and \emph{iterative policy improvement} are an example of the more general approach to optimization called \emph{dynamic programming}.
 
@@ -459,7 +448,6 @@ Consider the example of ''Jack's Car Rental'' (example 4.2 in SB). Jack rents ca
 
 The states in this problem are defined as the number of cars in location 1 and 2, for a total of $20 \times 20 = 400$ possible states and 2 actions, defined in the following Python code block\footnote{Complete implementation available at \url{https://github.com/jevermann/busi4720-rl/blob/main/jacks.py}}:
 
-\begin{samepage}
 \begin{pythoncode}
 States = []
 for cars1 in range(21):
@@ -468,7 +456,6 @@ for cars1 in range(21):
         
 Actions = range(-5, 5+1)
 \end{pythoncode}
-\end{samepage}
 
 Figure~\ref{fig:jackscars} shows the policies after each iteration of the iterative policy improvement algorithm in Figure~\ref{fig:policyimprovement}, beginning with the random policy in the top left panel of Figure~\ref{fig:jackscars}. Positive values for the policy indicate cars to move from location 2 to location 1, negative values indicate cars to move from location 1 to location 2. The policy improvement converges to the optimal policy after 4 iterations, with the final state value function shown in the bottom right panel of Figure~\ref{fig:jackscars}.
 
@@ -495,7 +482,7 @@ This section assumes \emph{episodic tasks}\index{Episodic task}, that is, proble
 A problem arises because the agent can be in the same state multiple times before the episode terminates. Different assumptions can be made. For example, one can assume that it is the first visit of a state that is most influential in determining the outcome of the episode and therefore the state value should be updated with the return at the time of the first visit of a state. Alternatively, one could assume that the last visit of a state is most important, and the value function is updated with the returns at the last time that the state is visited. Yet another alternative is to update the value function for all visits of a state. Figure~\ref{fig:firstvisitmc} shows the pseudocode for this process when the state value function is updated only for the first visit of a state, known as \emph{First-Visit Monte Carlo Prediction}\index{Monte Carlo prediction!first visit}.
 
 \begin{figure}
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \small
 \vspace{-\baselineskip}
 \begin{align*}
@@ -512,7 +499,7 @@ A problem arises because the agent can be in the same state multiple times befor
 & \quad \quad \quad \text{Append}\; G\; \text{to}\; Returns(S_t) \\
 & \quad \quad \quad V(S_t) \leftarrow \operatorname{average}(Returns(S_t))
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[First-visit MC prediction]{First-visit MC prediction (Source: SB)}
 \label{fig:firstvisitmc}
 \end{figure}
@@ -526,7 +513,7 @@ While Monte Carlo prediction is useful in approximating the state value function
 There is one additional difference between Figures~\ref{fig:firstvisitmc} and \ref{fig:firstvisitcontrol} in that the initial states and actions of each episode are chosen randomly. This is necessary because the policy $\pi$ in Figure~\ref{fig:firstvisitcontrol} is deterministic and greedy. Without any random influence, there would be no exploration. Forcing episodes to begin with random states and actions is called \emph{exploring starts}\index{Exploring starts} and it ensures that every state-action pair is visited at least once (assuming sufficiently many episodes are generated).
 
 \begin{figure}
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \small
 \vspace{-\baselineskip}
 \begin{align*}
@@ -545,7 +532,7 @@ There is one additional difference between Figures~\ref{fig:firstvisitmc} and \r
 & \quad \quad \quad Q(S_t, A_t) \leftarrow \operatorname{average}(Returns(S_t, A_t)) \\
 & \quad \quad \quad \pi(S_t) \leftarrow \operatorname*{arg max}_a Q(S_t, a)
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[First visit MC control with exploring starts]{First visit MC control with exploring starts (Source: SB)}
 \label{fig:firstvisitcontrol}
 \end{figure}
@@ -555,7 +542,6 @@ cards have values A, 2, 3, \ldots, 10 where A is the ace and 10 includes face ca
 
 For Blackjack, the states are defined as a combination of the player's current sum of cards, the initial card the dealer is showing, and whether the player has a usable ace (one that can be converted from an 11 to a 1). Actions are to hit or stick. The following Python code block shows how this can be readily implemented:
 
-\begin{samepage}
 \begin{pythoncode}
 gamma = 1.0
 # Define states
@@ -568,11 +554,9 @@ for ace in [0,1]:
 # Define actions
 Actions = (0, 1)
 \end{pythoncode}
-\end{samepage}
 
 Initially, the policy is a random policy, action value functions are 0 for all state-action pairs, and the list of returns for each state-action pair is empty:
 
-\begin{samepage}
 \begin{pythoncode}
 # Initialize policy
 pi = dict()
@@ -591,11 +575,9 @@ for s in States:
     for a in Actions:
         Returns[(s, a)] = []
 \end{pythoncode}
-\end{samepage}
 
 The following code block shows the generation of an episode under policy \texttt{pi} from initial state \texttt{s0} and with initial action \texttt{a0}. The function \texttt{step()} calls the environment. It includes the dealer drawing cards after the player uses the ''stick'' action in a state. 
 
-\begin{samepage}
 \begin{pythoncode}
 def generate_episode(pi, s0, a0):
     terminal = False
@@ -616,7 +598,6 @@ def generate_episode(pi, s0, a0):
 
     return states, actions, rewards, len(rewards)
 \end{pythoncode}
-\end{samepage}
 
 The core of MC control is implemented in the following Python code block, which is very much analogous to the pseudocode in Figure~\ref{fig:firstvisitcontrol}. Every episode begins in a random state and with a random action. An episode is generated and the sequence of states, actions, returns, and the length of the episode \texttt{T} are returned. Returns are computed from the end of the episode and assigned to the first-visit of a state-action pair. The policy is updated based on the new approximate value of the Q function.
 
@@ -706,7 +687,6 @@ def get_action(s):
 
 The following two Python functions manage the returns for each state-action pair:
 
-\begin{samepage}
 \begin{pythoncode}
 Returns = dict()
 def getReturns(s, a):
@@ -720,11 +700,9 @@ def appendReturn(s, a, r):
     else:
         Returns[(s, a)].append(r)
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block represents the core MC control algorithm. Note that the policy \texttt{pi} now represents the probabilities of taking an action in a state and is updated accordingly. The remainder of the code is largely unchanged from the Blackjack example, except that the Racetrack example does not need to use exploring starts, that is, random starting states and actions.
 
-\begin{samepage}
 \begin{pythoncode}
 for e in range(0, 10000+1):
     S, A, R, T = env.generate_episode()
@@ -741,7 +719,6 @@ for e in range(0, 10000+1):
                 else:
                     pi[(S[t],a)]=eps/len(Actions)
 \end{pythoncode}
-\end{samepage}
 
 Figure~\ref{fig:racetrackresults} shows visualizations of the trajectory of a car (green line) on the racetrack after 0, 100, 200, and 10,000 episodes. It is clear from these trajectories that the number of steps is reduced as training progresses.
 
@@ -771,7 +748,7 @@ Figure~\ref{fig:offpolicymc} shows pseudocode for off-policy MC control. In this
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \begin{align*}
 & \text{Initialize for all}\; s \in \mathcal{S}, a \in \mathcal{A}(s):\\
@@ -789,14 +766,13 @@ Figure~\ref{fig:offpolicymc} shows pseudocode for off-policy MC control. In this
 & \quad \quad \text{If}\; A_t \neq \pi(S_t) \; \text{then proceed to next episode} \\
 & \quad \quad W \leftarrow W / b(A_t | S_t)
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[Off-Policy MC Control]{Off-Policy MC Control (Source: SB)}
 \label{fig:offpolicymc}
 \end{figure}
 
 The following Python code blocks show how off-policy MC control can be implemented. The first block defines the two policies, the $\epsilon$-soft behaviour policy \texttt{b} and the greedy deterministic policy \texttt{pi}.
 
-\begin{samepage}
 \begin{pythoncode}
 def b(s):
     weights = []
@@ -817,11 +793,9 @@ def pi(s):
     else:
         return a
 \end{pythoncode}
-\end{samepage}
 
 Note that the last line of Figure~\ref{fig:offpolicymc} makes reference to the probabilities of action $A_t$ in state $S_t$ under the behaviour policy $b$. This probability is computed by the following Python code block:
 
-\begin{samepage}
 \begin{pythoncode}
 def bprob(a, s):
     if (s, a) not in Q:
@@ -835,11 +809,9 @@ def bprob(a, s):
     else:
         return math.exp(Q[(s, a)]) / sum(weights)
 \end{pythoncode}
-\end{samepage}
 
 With these definitions, the learning algorithm is a straightforward implementation of the pseudocode in Figure~\ref{fig:offpolicymc}\footnote{Complete implementation using the Racetrack example is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/racetrack_off_policy.py}.}:
 
-\begin{samepage}
 \begin{pythoncode}
 for e in range(0, 10000+1):
     S, A, R, T = env.generate_episode_b()
@@ -855,7 +827,6 @@ for e in range(0, 10000+1):
         else:
             W = W * 1/bprob(A[t], S[t])
 \end{pythoncode}
-\end{samepage}
 
 \section{Temporal-Difference (TD) Learning}
 
@@ -877,7 +848,7 @@ Figure~\ref{fig:sarsa} shows the pseudocode of a method called ''\emph{SARSA}''\
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \begin{align*}
 & \text{Initialize}\; Q(s, a) \; \text{for all} \; s \in \mathcal{S}^+ \; \text{, arbitrarily} \\
@@ -891,7 +862,7 @@ Figure~\ref{fig:sarsa} shows the pseudocode of a method called ''\emph{SARSA}''\
 & \quad \quad S \leftarrow S'; A \leftarrow A' \\
 & \quad \text{until}\, S\, \text{is terminal}
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[TD-control with SARSA]{TD-control with the SARSA method (Source: SB)}
 \label{fig:sarsa}
 \end{figure}
@@ -909,7 +880,6 @@ To illustrate the use of SARSA, consider the ''Windyworld'' example environment 
 
 The following python code blocks define the states, actions, and an $\epsilon$-greedy policy \texttt{pi}:
 
-\begin{samepage}
 \begin{pythoncode}
 # Define states
 States = []
@@ -932,11 +902,9 @@ def pi(s):
     else:
         return argmaxQ(s)
 \end{pythoncode}
-\end{samepage}
 
 With these definitions, the implementation of SARSA is straightforward from the pseudocode in Figure~\ref{fig:sarsa}\footnote{A complete implementation of the Windyworld example is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/windyworld_sarsa.py}.} and shown in the following Python code block.
 
-\begin{samepage}
 \begin{pythoncode}
 for e in range(0, 100):
     terminal = False
@@ -951,7 +919,6 @@ for e in range(0, 100):
         S = Sprime
         A = Aprime
 \end{pythoncode}
-\end{samepage}
 
 In summary, Temporal Difference learning and Monte Carlo methods differ primarily in when and how the updates to value estimates are made:
 \begin{itemize}
@@ -1002,7 +969,7 @@ Temporal Difference learning can be combined with off-policy learning as well. A
 
 Consider the following aspects of SARSA. The next action $A'$ that is carried out is determined using a (behaviour) policy based on $Q$ and $Q$ is being learned (updated) based on the actually taken action $A'$ (target policy). This makes SARSA an on-policy method.
 
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \setlength{\abovedisplayskip}{0pt}
 \setlength{\belowdisplayskip}{0pt}
 \setlength{\abovedisplayshortskip}{0pt}
@@ -1015,11 +982,11 @@ Consider the following aspects of SARSA. The next action $A'$ that is carried ou
 &  Q(S, A) \leftarrow Q(S, A) + \alpha \left[ R + \gamma Q(S', A') - Q(S, A) \right] \hspace{1in}\\
 &  S \leftarrow S'; A \leftarrow A'
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 
 A minor change is sufficient to change on-policy SARSA to off-policy Q-learning, shown in the box below. Here, the next action $A$ that is carried out is also determined using a (behaviour) policy based on $Q$, but $Q$ is updated not based on the actually taken action $A$, but based on the optimal action $A'$, that is, the action with the maximum $Q$ value in the following state $S'$. This difference means that the policy that governs behaviour (''behaviour policy'') is different than the policy that is updated or learned (''target policy''), making Q-learning an off-policy method. 
 
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \setlength{\abovedisplayskip}{0pt}
 \setlength{\belowdisplayskip}{0pt}
 \setlength{\abovedisplayshortskip}{0pt}
@@ -1032,11 +999,10 @@ A minor change is sufficient to change on-policy SARSA to off-policy Q-learning,
 &  Q(S, A) \leftarrow Q(S, A) + \alpha \left[ R + \gamma \operatorname*{max}_a Q(S', A') - Q(S, A) \right] \hspace{.6in}\\
 & S \leftarrow S'
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 
 The corresponding Python implementation for the Windyworld example is also straightforward from the above box\footnote{A complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/windyworld_q_learning.py}.}:
 
-\begin{samepage}
 \begin{pythoncode}
 for e in range(0, 1000):
     terminal = False
@@ -1049,7 +1015,6 @@ for e in range(0, 1000):
             gamma * maxQ(Sprime) - Q[(S, A)])
         S = Sprime
 \end{pythoncode}
-\end{samepage}
 
 Figure~\ref{fig:sarsaqlearning} shows the difference in learning behaviour between SARSA and Q-learning on the Windyworld problem. It plots the the number of required actions to achieving the goal against the number of episodes generated; off-policy Q-learning shows faster learning than SARSA.
 

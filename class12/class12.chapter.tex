@@ -20,33 +20,33 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. They are freely available. Consult them for additional information.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
 \vspace{1mm}
 \url{https://www.statlearning.com} \\
 \vspace{1mm}
 Chapters 2, 3, 4, 5
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by James et al. provides an easy introduction to machine learning at the introductory undergraduate level. It focuses on applications, not mathematics, and contains many exercises using R. Concepts are well explained and illustrated. There is a similar book available by the same authors with applications in Python. This book is a more accessible of the following book.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Trevor Hastie, Robert Tibshirani, and Jerome Friedman: \emph{The Elements of Statistical Learning}. 2nd edition, 12th corrected printing, 2017. (ESL) \\
 \vspace{1mm}
 \url{https://hastie.su.domains/ElemStatLearn/} \\
 \vspace{1mm}
 Chapters 2, 3, 4, 7
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Hastie et al. still sets the standard for statistical learning. It is widely used and cited. It's treatment is more technical than the previous book and there are no exercises in R or Python. However, it covers the concepts in more depth (and a few more formulas). However, it is still very accessible even to an undergraduate audience.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
 \vspace{1mm}
 \url{https://probml.github.io/pml-book/book1.html} \\
 \vspace{1mm}
 Chapters 4, 6, 9, 10, 11
-\end{tcolorbox}
+\end{resourcebox}
 
 Murphy's book is available under a creative-commons license. It is a somewhat more technical treatment of the material, but with many illustrations and examples. It is quite comprehensive in its coverage and targeted at the advanced undergraduate or graduate student. 
 
@@ -214,7 +214,6 @@ The following example uses the \texttt{Boston} data set that contains housing pr
 
 First, examine the data, get summary statistics, examine the first few rows of the data frame, and create scatterplots to identify the form of a linear model:
 
-\begin{samepage}
 \begin{Rcode}
 # Data set from the textbook 'Introduction to 
 # Statistical Learning with Applications in R'
@@ -230,13 +229,11 @@ head(Boston)
 # Bivariate scatterplots
 plot(Boston)
 \end{Rcode}
-\end{samepage}
 
 The formula interface to \texttt{lm()} is the easiest to use and resembles the way one would write the regression equation. The $\sim$ sign separates the output on the left side from the predictors or features on the right side of the formula. A \texttt{1} in the formula represents the intercept ($\beta_0$ in the formula above). The intercept is normally added automatically but can be explicitly added or removed (using \texttt{-1}) as needed. 
 
 The following R code fits a simple model to predict the median house value, shows the model summary and produces a scatterplot with the fitted model regression line running through it. 
 
-\begin{samepage}
 \begin{Rcode}
 # Fit a model with intercept only
 fitted.model <- lm(medv ~ 1, data=Boston)
@@ -263,11 +260,9 @@ predict(fitted.model, newData)
 # Plot the residuals against predicted values
 plot(predict(fitted.model), residuals(fitted.model))
 \end{Rcode}
-\end{samepage}
 
 The following R code fragment adds a second input variable (age) to the model. It also demonstrates some special notation in the R formula interface, such as the \texttt{.} to include all main effects, the \texttt{:} to specify interaction effects, and the \texttt{*} to include both main and interaction effects.
 
-\begin{samepage}
 \begin{Rcode}
 # Add another predictor
 fitted.model <- lm(medv ~ lstat + age, data=Boston)
@@ -282,11 +277,9 @@ fitted.model <- lm(medv ~ lstat + age + lstat:age, data=Boston)
 fitted.model <- lm(medv ~ lstat*age, data=Boston)
 summary(fitted.model)
 \end{Rcode}
-\end{samepage}
 
 The next example adds polynomial terms to the regression. It uses the \texttt{I(.)} function in R that can also be used with other transformations of the inputs, such as \texttt{I(sqrt(.))} or \texttt{I(log(.))}. To make it easier to include all polynomials up to a particular degree, one can us the \texttt{poly(.)} function:
 
-\begin{samepage}
 \begin{Rcode}
 # Add a polynomial term; use the I(.) function
 # for any data transformations, such as log(),
@@ -300,13 +293,11 @@ fitted.model <- lm(medv ~ poly(lstat, 5), data=Boston)
 # Note the coefficients for the polynomials in the summary
 summary(fitted.model)
 \end{Rcode}
-\end{samepage}
 
 The use of categorical input variables is illustrated in the following example that uses the \texttt{Carseats} data, also from the \texttt{ISLR2} package. The data frame represents sales data of car seats for different stores and a range of store characteristics in other variables, many of which are categorical. 
 
 The following R code demonstrates functions for dealing with categorical variables, called ''factors'' in R. The example then fits a regression model to predict Sales from the the main effects of all input variables in the data frame.
 
-\begin{samepage}
 \begin{Rcode}
 ?Carseats
 
@@ -324,10 +315,8 @@ contrasts(Carseats$US)
 # Fit the model
 summary(lm(Sales ~ . , data=Carseats))
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 \noindent Use the \texttt{Auto} data set from the ISLR2 library with \texttt{mpg} as the target.
   \begin{enumerate}
      \item Perform a linear regression with \texttt{horsepower} as predictor
@@ -341,10 +330,9 @@ summary(lm(Sales ~ . , data=Carseats))
   \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 3.7}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 \noindent Use the \texttt{Carseats} data set from the ISLR2 library with \texttt{Sales} as the target.
   \begin{enumerate}
      \item Perform a linear regression with \texttt{Price}, \texttt{Urban} and \texttt{US} as predictors
@@ -354,7 +342,7 @@ summary(lm(Sales ~ . , data=Carseats))
   \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 3.7}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Cross-Validation in R}
 
@@ -366,7 +354,6 @@ Randomly splitting the data set is accomplished using the \texttt{sample()} func
 
 To make the example repeatable, the initial seed of the pseudo-random number generator (RNG)\index{Random number generator}\index{RNG|see{Random number generator}} is set to a fixed value with \texttt{set.seed()}. Computers cannot generate truly random number; they are deterministic machines. The pseudo-random numbers they generate are computed by a deterministic algorithm, the ''random number generator'' (RNG), based on a given start value. With the same start value, the algorithm produces the same sequence of numbers. A good RNG produces numbers that are effectively indistinguishable from true trandom numbers.
 
-\begin{samepage}
 \begin{Rcode}
 # Set the seed for the pseudo-random number generator (RNG)
 set.seed(1)
@@ -388,13 +375,11 @@ mean((test.data$mpg - predict(fitted.model, test.data))^2)
 # The MSE can also be calculated from the squared residuals
 mean(summary(fitted.model)$residuals^2)
 \end{Rcode}
-\end{samepage}
 
 The next R code block illustrates Leave-One-Out Cross-Validation (LOOCV), where one observation is used as test observation, and the remainder form the training data. This is repeated so that each observation becomes the test observation in turn. The errors are then averaged. 
 
 While this can be done manually in R using an iteration over the data frame, the library \texttt{boot} provides easy-to-use cross-validation functions for models fitted using the \texttt{glm()} function (generalized linear models). Note that LOOCV is just k-fold cross-validation where $k$, the number of test data folds, is equal to the number of observations.
 
-\begin{samepage}
 \begin{Rcode}
 library(boot)
 
@@ -406,20 +391,16 @@ summary(fitted.model)
 cv.err <- cv.glm(Auto, fitted.model, K=nrow(Auto))
 cv.err$delta[1]
 \end{Rcode}
-\end{samepage}
 
 The same functions can be used for k-fold CV with a typical value for $k$:
 
-\begin{samepage}
 \begin{Rcode}
 cv.err <- cv.glm(Auto, glm.fit, K=10)
 cv.err$delta[1]
 \end{Rcode}
-\end{samepage}
 
 Cross-validation is useful for comparing different models, as shown in the following example that fits linear regression models with different degrees of polynomials to a data frame and computes their cross-validation errors using a \texttt{for} loop in R:
 
-\begin{samepage}
 \begin{Rcode}
 set.seed(1)
 cv.err <- rep(0, 5)
@@ -429,11 +410,8 @@ for(i in 1:10) {
 }
 print(cv.err)
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
-
+\begin{exercisebox}
 \begin{enumerate}
   \item Fit a regression model to the \texttt{Boston} data set with \texttt{medv} as target, and \texttt{age}, \texttt{lstat}, and \texttt{ptratio} as predictors
   \item Using the holdout approach, compute the test error of this model. Perform the following steps
@@ -448,7 +426,7 @@ print(cv.err)
   \item Calculate the test error estimate using LOOCV. Compare your result to the mean that you computed in step 4.
   \item Calculate the test error estimate using 10-fold cross-validation. Compare the estimate to the mean that you computed in step 4
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Shrinkage Methods}
 
@@ -542,7 +520,6 @@ The \texttt{glmnet} library for R implements the Elastic Net which can be used f
 
 The following R code examples use the \texttt{Hitters} data set containing information on baseball players. The data set is part of the \texttt{ISLR2} library. The code examples model a player's Salary as the output or prediction target and use a number of other variables as inputs\footnote{The R code for this example is based on material in Section 6.5.2 of ISLR2}. 
 
-\begin{samepage}
 \begin{Rcode}
 library(ISLR2)
 library(glmnet)
@@ -550,23 +527,19 @@ library(glmnet)
 # Remove missing values
 Hitters <- na.omit(ISLR2::Hitters)
 \end{Rcode}
-\end{samepage}
 
 The \texttt{glmnet(.)} function requires separate $x$ (predicots) and $y$  (target) values, instead of providing a formula interface like the \texttt{lm(.)} and \texttt{glm(.)} functions. To create dummy variables for categorical variables, use the \texttt{model.matrix} function:
 
-\begin{samepage}
 \begin{Rcode}
 # Create dummy variables for categorical variables
 # and remove the intercept (first column) from the model
 x <- model.matrix(Salary ~ ., Hitters)[, -1]
 y <- Hitters$Salary
 \end{Rcode}
-\end{samepage}
 
 \noindent To illustrate the concepts of ridge regression, the following R code fits a ridge regression model with $\lambda=10$ using the \texttt{glmnet()} function with $\alpha=0$. This value of $\alpha$ indicates ridge regression, that is only penalization of the L2 norm. 
 
 
-\begin{samepage}
 \begin{Rcode}
 # Fit the model
 ridge.model <- glmnet(x, y, alpha=0, lambda=10)
@@ -580,11 +553,9 @@ L2.norm = sqrt(sum(coef(ridge.model)[-1]^2))
 # Examine MSE:
 mean((y-predict(ridge.model, x))^2)
 \end{Rcode}
-\end{samepage}
 
 The optimal value for $\lambda$ is chosen through cross-validation. For this, a holdout test data set is created to evaluate the final model. The training data set portion is used with cross-validation, so that the final model evaluation is done on an independent data set from model selection. 
 
-\begin{samepage}
 \begin{Rcode}
 # Randomly split the Hitters data
 train.idx <- sample(nrow(Hitters), nrow(Hitters)/2)
@@ -593,27 +564,22 @@ x.test  <- x[-train.idx,]
 y.train <- y[ train.idx]
 y.test  <- y[-train.idx]
 \end{Rcode}
-\end{samepage}
 
 \noindent The \texttt{glmnet} library provides the function \texttt{cv.glmnet} as an easy-to-use way to combine Elastic Net model fitting with k-fold cross-validation. The following example uses 5-fold CV on the training portion of the data set:
 
-\begin{samepage}
 \begin{Rcode}
 # 5-fold cross-valiation, use MSE as metric
 cv.out <- cv.glmnet(x.train, y.train, alpha=0, 
                     nfolds=5, type.measure='mse')
 \end{Rcode}
-\end{samepage}
 
 The next R code block shows the optimal $\lambda$ and plots the MSE for different values of $\lambda$. The generated plot is shown in Figure~\ref{fig:glmnetcv}. It includes the standard errors of the MSE (as determined by cross-validation) and the number of non-zero coefficients (indicated above the graph). The left vertical line indicates the optimal $\lambda$, while the right vertical line indicates that largest $\lambda$ for which the MSE is within one standard error of the minimum MSE, that is, of the MSE of the optimal $\lambda$.
 
-\begin{samepage}
 \begin{Rcode}
 print(cv.out)
 plot(cv.out)
 lambda.opt <- cv.out$lambda.min
 \end{Rcode}
-\end{samepage}
 
 The following text box shows part of the output, indicating the optimal lambda (min), the MSE metric for that lambda (''Measure''), it's standard error, and the number of non-zero model parameters/coefficients. The number of non-zero parameters is always the full number of parameters in ridge regression; this will differ when the LASSO or a combination (Elastic Net) is used. Also shown is that value of lambda, for which the MSE is just within one standard error of the optimal MSE value. 
 
@@ -635,7 +601,6 @@ min  461.6    68  102536 13016      19
 
 To evaluate the final model, the holdout test data is fitted to a ridge regression model with the optimal $\lambda$. Then, the model parameter values of the ridge regression with the optimal $\lambda$ are compared to the parameter values of an unrestricted linear regression model. 
 
-\begin{samepage}
 \begin{Rcode}
 # Fit test data with optimal lambda
 ridge.model <- glmnet(x.test, y.test, 
@@ -646,11 +611,9 @@ ridge.model <- glmnet(x.test, y.test,
 coef(ridge.model)
 coef(lm(y.test ~ 1 + x.test))
 \end{Rcode}
-\end{samepage}
 
 Finally, the target values for the holdout test data set are predicted. Note the use of the \texttt{type='response'} parameter to \texttt{predict(.)} that asks for the predicted target values, rather than the model parameter values, in the following R code block. After calculating the test data MSE, it is useful to compare the test data MSE to that of the optimal training data MSE above:
 
-\begin{samepage}
 \begin{Rcode}
 y.hat.test <- predict(ridge.model, newx=x.test, 
                                       type='response')
@@ -658,11 +621,9 @@ y.hat.test <- predict(ridge.model, newx=x.test,
 # Calculate test MSE to compare to the CV optimal MSE above:
 mean((y.hat.test - y.test)^2)
 \end{Rcode}
-\end{samepage}
 
 Because it uses the same \texttt{glmnet(.)} and \texttt{cv.glmnet(.)} functions, the LASSO in R is very similar to ridge regression. The following example shows cross-validation on the training data set to determine the optimal value for $\lambda$. 
 
-\begin{samepage}
 \begin{Rcode}
 # Set alpha to 1 for lasso
 cv.out <- cv.glmnet(x.train, y.train, alpha=1, 
@@ -671,7 +632,6 @@ print(cv.out)
 plot(cv.out)
 lambda.opt <- cv.out$lambda.min
 \end{Rcode}
-\end{samepage}
 
 The following text box shows part of the output which can also be seen in Figure~\ref{fig:lassocv} in graphical form. 
 
@@ -694,7 +654,6 @@ The MSE values for different values of $\lambda$ are shown in Figure~\ref{fig:la
 
 As with the ridge regression, the test data set is fitted to the model with the optimal lambda and it is again instructive to compare the LASSO coefficients to those of an unpenalized linear model.
 
-\begin{samepage}
 \begin{Rcode}
 # Fit test data with optimal lambda
 lasso.model <- glmnet(x.test, y.test, 
@@ -705,13 +664,10 @@ lasso.model <- glmnet(x.test, y.test,
 coef(lasso.model)
 coef(lm(y.test ~ 1 + x.test))
 \end{Rcode}
-\end{samepage}
 
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
-
+\begin{exercisebox}
 Predict the number of applications received using the other variables in the \texttt{College} dataset
   \begin{enumerate} 
       \item Split the data set into a training and a test set
@@ -722,11 +678,10 @@ Predict the number of applications received using the other variables in the \te
   \end{enumerate}
 
 \footnotesize Source: ISLR2, Section 6.6 \normalsize
-\end{tcolorbox}
+\end{exercisebox}
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 
 Predict the per-capita crime rate in the \texttt{Boston} data set using the other variables.
   \begin{enumerate}
@@ -738,7 +693,7 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
   \end{enumerate}
 
 \footnotesize Source: ISLR2, Section 6.6 \normalsize
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Classification}
 
@@ -836,7 +791,6 @@ The following illustration of logistic regression in R uses the \texttt{Smarket}
 
 Logistic regression can be performed using the same \texttt{glm(.)} function as for linear regression; it is one specific form of the generalized linear model. The \texttt{family} argument is used to indicate the type of regression and the link function:
 
-\begin{samepage}
 \begin{Rcode}
 library(ISLR2)
 ?Smarket
@@ -850,11 +804,9 @@ logreg.fitted <-
            family=binomial(link='logit'))
 summary(logreg.fitted)
 \end{Rcode}
-\end{samepage}
 
 The \texttt{predict(.)} function for the fitted model can be used to predict either the logits or the class probabilities:
 
-\begin{samepage}
 \begin{Rcode}
 # Predict logits for training data
 logreg.logits <- predict(logreg.fitted, newdata = Smarket)
@@ -863,11 +815,9 @@ logreg.logits <- predict(logreg.fitted, newdata = Smarket)
 logreg.probabilities <- predict(logreg.fitted, newdata = Smarket, 
                                    type='response')
 \end{Rcode}
-\end{samepage}
 
 A decision rule is necesary to assign observations to classes using the calculated probabilities. The following example classifies them into the ''Up'' class, if its class-membership probability is greater than .5:
 
-\begin{samepage}
 \begin{Rcode}
 pred.direction <- rep(NA, nrow(Smarket))
 
@@ -875,11 +825,9 @@ pred.direction <- rep(NA, nrow(Smarket))
 pred.direction[logreg.probs >  .5] <- 'Up'
 pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
-\end{samepage}
 
 The confusion matrix can be produced by using the \texttt{table(.)} function on the vectors of predicted class and the observed class membership for each observation. Accuracy is simply the average number of observations for which predicted class and observed class are identical (recall that the boolean values ''True'' in R equals numeric 1 and ''False'' equals numeric 0).
 
-\begin{samepage}
 \begin{Rcode}
 # Compute confusion matrix
 logreg.cm <- table(pred.direction, Smarket$Direction)
@@ -888,22 +836,18 @@ print(logreg.cm)
 # Compute accuracy
 mean(pred.direction == Smarket$Direction)
 \end{Rcode}
-\end{samepage}
 
 The next R code blocks illustrate the use of a holdout sample or validation set approach to evaluate the performance of the logistic regression classifier. 
 
 Because the data set is a time series, a random split is not appropriate because it would mean that the training set would contain information later in time that informs the model parameter estimates which are used to predict earlier observations in the test set. Instead, time series data must be split non-randomly at some point in time:
 
-\begin{samepage}
 \begin{Rcode}
 train.data <- Smarket[Smarket$Year < 2005,]
 test.data <- Smarket[!(Smarket$Year < 2005),]
 \end{Rcode}
-\end{samepage}
 
 \noindent Next, the model is fitted to the training data set, class-membership probabilities for observations in the test data set are then predicted, and the observations are classified using a decision rule:
 
-\begin{samepage}
 \begin{Rcode}
 logreg.fitted <- 
    glm(Direction~Lag1+Lag2+Lag3+Lag4+Lag5+Volume, data=train.data,  
@@ -918,11 +862,9 @@ pred.direction <- rep(NA, nrow(test.data))
 pred.direction[logreg.probs >  .5] <- 'Up'
 pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
-\end{samepage}
 
 While the confusion matrix is useful to understand how a classifier behaves, it is only a first step in evaluating the classifier performance. The \texttt{ROCR} library provides the \texttt{performance(.)} function to evaluate the predictive performance of a classifier. It provides metrics such as accuracy, precision, recall, and can generate ROC curves. The last two plots generated by the R code block below are shown in Figure~\ref{fig:logregplot}. The left panel shows the ROC curve, the right panel shows the precision/recall plot. It is clear from the results that predicting the stock market from the inputs in the given data set does not work well.
 
-\begin{samepage}
 \begin{Rcode}
 library(ROCR)
 
@@ -943,7 +885,6 @@ plot(performance(pred.obj, 'prec', 'rec'), colorize=T)
 # Calculate the AUC
 performance(pred.obj, 'auc')@y.values[[1]]
 \end{Rcode}
-\end{samepage}
 
 \begin{figure}
 \centering 
@@ -982,7 +923,6 @@ The probabilities in the product of Equation~\ref{eq:bayes2} can be trivially es
 
 The \texttt{e1071} library for R provides the \texttt{naiveBayes(.)} function that implements the naive Bayes classifier. The following illustration uses the same \texttt{Smarket} data from the \texttt{ISLR2} library that was used in the above example on logistic regression\footnote{The R code for this example is based on material in Section 4.7.5 of ISLR2}:
 
-\begin{samepage}
 \begin{Rcode}
 library(e1071)
 library(ISLR2)
@@ -994,21 +934,17 @@ nb.fitted <- naiveBayes(Direction ~ Lag1 + Lag2, data=train.data)
 # Output contains prior and conditional probabilities (and their SD)
 print(nb.fitted)
 \end{Rcode}
-\end{samepage}
 
 \noindent A \texttt{predict(.)} method is available to predict class membership, given a fitted naive Bayes classifier and a data set of observations. A confusion matrix can be constructed by comparing predicted classes to observed classes. The following R code predicts class memberships and computes the confusion matrix for the test data.
 
-\begin{samepage}
 \begin{Rcode}
 nb.predictions <- predict(nb.fitted, test.data)
 nb.cm <- table(nb.predictions, test.data$Direction)
 print(nb.cm)
 \end{Rcode}
-\end{samepage}
 
 Evaluating the classifier is similar to evaluating the logistic regression classifier and again uses the \texttt{ROCR} library. The ROC curve created by the following R code block is shown in Figure~\ref{fig:naiveBayesROC}. Comparing this ROC curve to the one in Figure~\ref{fig:logregplot} shows that the naive Bayes classifier performs slightly better than the logistic regression classifier. 
 
-\begin{samepage}
 \begin{Rcode}
 library(ROCR)
 
@@ -1023,7 +959,6 @@ abline(0, 1)
 # Compute the AUC value
 performance(nb.pred.obj, 'auc')@y.values[[1]]
 \end{Rcode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -1042,7 +977,6 @@ One important requirement in KNN classification is \emph{scaling of inputs} to h
 
 The \texttt{class} library for R provides the \texttt{knn(.)} function, as illustrated in the following example R code block that uses the same \texttt{Smarket} stock market data set as the above examples for logistic regression and naive Bayes\footnote{The R code for this example is based on material in Section 4.7.6 of ISLR2}.
 
-\begin{samepage}
 \begin{Rcode}
 library(class)
 library(ISLR2)
@@ -1055,7 +989,6 @@ test.x <- cbind(test.data$Lag1, test.data$Lag2)
 train.y <- train.data$Direction
 test.y <- test.data$Direction
 \end{Rcode}
-\end{samepage}
 
 Next, the \texttt{knn(.)} function is used to make predictions for the test data set, given the training data inputs and training data outputs. The \texttt{knn(.)} function uses the Euclidean distance metric. The following R code example considers $k=3$ nearest neighbours and returns the class membership probabilities in addition to the class memberships of the test data set observations:
 
@@ -1065,18 +998,15 @@ knn.pred <- knn(train.x, test.x, train.y, k=3, prob=T)
 
 A confusion matrix can be computed using the \texttt{table(.)} function and the accuracy is calculated as the mean number (proportion) of observations for which the knn prediction is the same as the observed class membership.
 
-\begin{samepage}
 \begin{Rcode}
 # Confusion matrix
 table(knn.pred, test.y)
 # Accuracy
 mean(knn.pred == test.y)
 \end{Rcode}
-\end{samepage}
 
 The class membership probabilities returned in the \texttt{knn(.)} function result are those of the majority class, in this example the class ''Down''. Because this is a binary classification, the class membership probabilities for the ''Up'' class can be trivially calculated, as shown in the following R code block:
 
-\begin{samepage}
 \begin{Rcode}
 knn.probs <- attributes(knn.pred)$prob
 
@@ -1084,18 +1014,15 @@ knn.probs <- attributes(knn.pred)$prob
 knn.class.probs <- knn.probs
 knn.class.probs[knn.pred=='Down'] <- 1-knn.probs[knn.pred=='Down']
 \end{Rcode}
-\end{samepage}
 
 With the class membership probabilities for both classes, the \texttt{ROCR} library functions can be used to evaluate the classifier by plotting the ROC curve and computing the AUC. The ROC curve produced by the R code block below is shown in Figure~\ref{fig:knnroc}.
 
-\begin{samepage}
 \begin{Rcode}
 knn.pred.obj <- prediction(knn.class.probs, test.data$Direction)
 plot(performance(knn.pred.obj, 'tpr', 'fpr'), colorize=T)
 abline(0, 1)
 performance(knn.pred.obj, 'auc')@y.values[[1]]
 \end{Rcode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -1105,9 +1032,7 @@ performance(knn.pred.obj, 'auc')@y.values[[1]]
 \end{figure}
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
-
+\begin{exercisebox}
 Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
 \begin{enumerate}
    \item Use the full data set to perform a logisttic regression with \texttt{Direction} as target. Which predictors are statistically significant?
@@ -1118,10 +1043,9 @@ Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
    \item Which model provides the best results on this data?
 \end{enumerate}
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 4.8}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
 \begin{enumerate}
    \item Create a binary variable, \texttt{mpg01} that contains a 1 if \texttt{mpg} is above its median, 0 otherwise. \emph{Tip}: Use the \texttt{median()} function. Add the new variable to the data frame.
@@ -1131,10 +1055,9 @@ Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
    \item Repeat (3) using KNN with different values of $K$. What value of $K$ performs best?
 \end{enumerate}
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 4.8}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classification models to predict whether a given census tract has a crime rate above or below the median.
 \begin{enumerate}
    \item Create a new binary variable \texttt{crime01} that is $1$ is \texttt{crime} is above its median, and $0$ otherwise. Combine this variable with the data frame. \emph{Tip}: Use the \texttt{median()} function for this.
@@ -1143,7 +1066,7 @@ Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classifica
    \item Describe your findings in terms of prediction error, precision, recall, F1 and AUC
 \end{enumerate}
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 4.8}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Review Questions}
 

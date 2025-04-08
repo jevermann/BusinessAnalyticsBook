@@ -16,18 +16,17 @@ After reading this chapter, you should be able to:
 
 \section*{Sources and Further Reading}
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
 
-\url{https://probml.github.io/pml-book/book1.html} \\
+\small\url{https://probml.github.io/pml-book/book1.html}\normalsize \\
 
 Chapter 15
-
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Murphy is freely available and provides three chapters on neural networks, one for structured data, one for images, and one for sequences. It provides significant depth on convolutional and recurrent network architectures, fitting the models, and problems the data analyst may encounter. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 \subsubsection*{Guides and examples on the Tensorflow and Keras web sites:}
 
 \begin{itemize}
@@ -36,17 +35,17 @@ The book by Murphy is freely available and provides three chapters on neural net
 \item \href{https://www.tensorflow.org/text/tutorials/text_generation}{Text Generation with an RNN (Tensorflow)} \\
 \item \href{https://keras.io/examples/timeseries/timeseries_weather_forecasting/}{Timeseries Forecasting for Weather Prediction (Keras)}
 \end{itemize}
-\end{tcolorbox}
+\end{resourcebox}
 
 This course uses the Tensorflow programming framework for neural network applications. The Tensorflow website has a multitude of introductory and advanced guides and tutorial that cover all aspects of machine learning with neural networks. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 \subsubsection*{Introductory tutorials:}
 
 Olah, Christopher (2015) \href{https://colah.github.io/posts/2015-08-Understanding-LSTMs/}{Understanding LSTM Networks} \\
 
 Karpathy, Andrej (2015) \href{https://karpathy.github.io/2015/05/21/rnn-effectiveness/}{The Unreasonable Effectiveness of Recurrent Neural Networks}
-\end{tcolorbox}
+\end{resourcebox}
 
 Chris Olah has been lead researcher at OpenAI and Google Brain and co-founded Anthropic. Andrej Karpathy has been lead reaserchers at OpenAI and Tesla. Both tutorials are very useful and easy introductions to the topic of recurrent LSTM networks.
 
@@ -228,6 +227,10 @@ For the total LSTM cell, the number of trainable parameters is therefore $4 \tim
 
 \textbf{Example}: Let the unit size (state size) be 16 and the input size be 8. Then the total number of parameters for the LSTM cell is $4 \times (16 \times (8+16) + 16) = 1600$
 
+\begin{alertbox}
+Verifying the shape/dimensions of inputs, cell memory and hidden state, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
+\end{alertbox}
+
 \section{GRU Cells}
 
 Gated Recurrent Unit (GRU)\index{Gated recurrent unit}\index{GRU cell|see{Gated recurrent unit}} cells are a type of recurrent neural network (RNN) architecture introduced as an alternative to Long Short-Term Memory (LSTM) cells. The motivation behind the development of GRUs was to simplify the LSTM architecture, which, although powerful, is also quite complex due to its multiple gates and states. By reducing the number of gates from three to two, GRUs aim to offer a model that can train faster and require fewer computational resources, while still capturing long-range dependencies within the data. GRUs also do not have an internal memory unit separate from the hidden state. While GRUs tend to train faster due to their simpler structure, in some cases LSTMs outperform GRUs in predictive performance, if the additional complexity of LSTMs are appropriate to the data set and task.
@@ -269,17 +272,12 @@ In Equations~\ref{eq:reset} to \ref{eq:gruoutput}, $\cdot$ denotes the dot-produ
 
 The number of trainable parameters for a GRU layer is determined analogously to that for an LSTM layer, except by noting that there is one less gate to consider. In other words, for a hidden state $h_t$ size $n$ and input size $m$, the number of trainable parameters is $3 \times (n+m+1) \times n$.
 
-\section{Statefulness}
+\begin{alertbox}
+Verifying the shape/dimensions of inputs, cell memory, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
+\end{alertbox}
 
-Recurrent Neural Networks (RNNs) are designed to handle sequence data. One of the key decisions in designing RNNs is whether to use a stateful or stateless configuration. This choice affects how the network processes sequences and learns from data, influencing both the training process and application effectiveness.
 
-In \emph{stateless RNNs}, the internal state is reset for each batch of training data. This means that the learning and predictions are independent of the previous batch. The network starts with a clean slate for every input sequence, making no assumptions based on past data points within the same batch. Since stateless RNNs treat each input sequence as independent, training can be simpler and faster. There is no need to maintain and manage state continuity across batches, and batches can be assembled from the input sequences in arbitrary order and randomly shuffled. Stateless RNNs are typically used when sequences are short enough to fit within the number of unrolled RNN steps and the context within a single sequence is sufficient for the prediction task.
-
-\emph{Stateful RNNs}\index{Statefulness} maintain the internal state between batches, allowing the network to retain information across different input batches. This is useful when sequences are longer than the number of unrolled steps. Training stateful RNNs requires careful management of the state so that it is carried over appropriately across batches. Batches cannot be randomly drawn and cannot be shuffled. The state must be reset manually at the start of each epoch or when starting a new sequence. Stateful RNNs are advantageous for tasks involving long sequences where the context needs to be maintained over long periods, such as in time-series analysis or long-form text processing.
-
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
-
+\begin{exercisebox}
 Consider a Seq2Vec neural network model for regression with the following characteristics:
 
 \begin{itemize}
@@ -301,24 +299,30 @@ Consider a Seq2Vec neural network model for regression with the following charac
 \end{itemize}
 
 Calculate the number of trainable parameters for each layer and for the whole network.
-\end{tcolorbox}
+\end{exercisebox}
+
+
+\section{Statefulness}
+
+Recurrent Neural Networks (RNNs) are designed to handle sequence data. One of the key decisions in designing RNNs is whether to use a stateful or stateless configuration. This choice affects how the network processes sequences and learns from data, influencing both the training process and application effectiveness.
+
+In \emph{stateless RNNs}, the internal state is reset for each batch of training data. This means that the learning and predictions are independent of the previous batch. The network starts with a clean slate for every input sequence, making no assumptions based on past data points within the same batch. Since stateless RNNs treat each input sequence as independent, training can be simpler and faster. There is no need to maintain and manage state continuity across batches, and batches can be assembled from the input sequences in arbitrary order and randomly shuffled. Stateless RNNs are typically used when sequences are short enough to fit within the number of unrolled RNN steps and the context within a single sequence is sufficient for the prediction task.
+
+\emph{Stateful RNNs}\index{Statefulness} maintain the internal state between batches, allowing the network to retain information across different input batches. This is useful when sequences are longer than the number of unrolled steps. Training stateful RNNs requires careful management of the state so that it is carried over appropriately across batches. Batches cannot be randomly drawn and cannot be shuffled. The state must be reset manually at the start of each epoch or when starting a new sequence. Stateful RNNs are advantageous for tasks involving long sequences where the context needs to be maintained over long periods, such as in time-series analysis or long-form text processing.
 
 \section{Example -- Stock Market Prediction}
 
 This example uses historic stock market data to predict future performance. In particular, it uses data for the Dow Jones Industrial Average (DJIA) that was exported from the \texttt{quarks} library for R. The data set encompasses opening closing, low, and high values, as well as trading volume for every day between the years 2000 and 2021 (converted to Euros). This is a regression problem with the targets being the difference in closing prices to the next day.
 
-\begin{tcolorbox}[colback=code]
-\footnotesize
+\begin{resourcebox}
 Complete implementations for this and the other examples in this chapter are available in the following GitHub repo:
-\url{https://github.com/jevermann/busi4720-ml} \\
+\small\url{https://github.com/jevermann/busi4720-ml}\normalsize \\
 
-The project can be cloned from this URL: \url{https://github.com/jevermann/busi4720-ml.git}
-\normalsize
-\end{tcolorbox}
+The project can be cloned from this URL: \small\url{https://github.com/jevermann/busi4720-ml.git}\normalsize
+\end{resourcebox}
 
 First, load all required packages, specify parameters for the network architecture and training, and then read the data file:
 
-\begin{samepage}
 \begin{pythoncode}
 import math
 import tensorflow as tf
@@ -333,11 +337,9 @@ n_epochs = 25             # Train for 25 epochs
 # The read the data set
 data = pd.read_csv('https://evermann.ca/busi4720/djia.data.csv')
 \end{pythoncode}
-\end{samepage}
 
 In the next step, additional features are created. In time series analysis it is often useful to examine the differences between successive values and the relative or percentage changes. The following Python code fragment adds these to the data set by applying the Pandas functions \texttt{diff()} and \texttt{pct\_change()} tn the columns of the data frame and concatenating the differences and percentage changes to the dataframe by column.
 
-\begin{samepage}
 \begin{pythoncode}
 data = pd.concat([
     data,
@@ -345,21 +347,17 @@ data = pd.concat([
     data.pct_change().add_suffix('pct')],
     axis=1).iloc[1:,]
 \end{pythoncode}
-\end{samepage}
 
 When splitting the data into training and validation set, random shuffling cannot be used because the data set is time series data. In other words, information from future observations should not be used in the training set to help predict values of past observations. The following Python code uses the first $80\%$ of the data set for training and the remainder for validation:
 
-\begin{samepage}
 \begin{pythoncode}    
 # Split data, no random shuffling for time series
 train = data[:math.floor(0.8*data.shape[0])]
 valid = data.drop(train.index)
 \end{pythoncode}
-\end{samepage}
 
 Normalizing the data to zero means and unit standard deviation must again only use information from the training data set, even if that means the actual validation set standard deviations are not exactly equal to 1:
 
-\begin{samepage}
 \begin{pythoncode}
 # Normalize data using only info from training set.
 train_mean = train.mean()
@@ -367,11 +365,9 @@ train_sd = train.std()
 train = (train - train_mean)/train_sd
 valid = (valid - train_mean)/train_sd
 \end{pythoncode}
-\end{samepage}
 
 An easy way to create appropriate sequence batches and targets is to use the Keras function \texttt{timeseries\_dataset\_from\_array()}. It accepts the features, the targets, and arguments about the sequence length, batch size, and whether the data should be shuffled between batches. This first example will use a stateless LSTM so that the input can be shuffled. This is a regression problem with the target being the closing price difference to the following day.
 
-\begin{samepage}
 \begin{pythoncode}
 dataset_train = keras.preprocessing.timeseries_dataset_from_array(
     train.drop('price.closediff', axis=1), 
@@ -380,9 +376,7 @@ dataset_train = keras.preprocessing.timeseries_dataset_from_array(
     batch_size = 32,
     shuffle = True)
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 \begin{pythoncode}
 dataset_valid = keras.preprocessing.timeseries_dataset_from_array(
     valid.drop('price.closediff', axis=1), 
@@ -391,13 +385,11 @@ dataset_valid = keras.preprocessing.timeseries_dataset_from_array(
     batch_size = 32,
     shuffle = True)
 \end{pythoncode}
-\end{samepage}
 
 \subsection*{Tensorflow Datasets for Sequence Data}
 
 To see how Tensorflow manages time series or sequence data in its datasets, it is instructive to work with a simple example. Consider the following Pandas dataframe of inputs and targets:
 
-\begin{samepage}
 \begin{pythoncode}
 test = pd.DataFrame([[0, 0], [1, 1], [2, 2,], [3, 3], 
                      [4, 4], [5, 5], [6, 6], [7, 7]]) 
@@ -406,19 +398,15 @@ targets = test.iloc[2:,1]
 
 pd.DataFrame([inputs, targets])
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 \begin{textcode}
      0    1    2    3    4    5    6    7
 0  0.0  1.0  2.0  3.0  4.0  5.0  6.0  NaN
 1  NaN  NaN  2.0  3.0  4.0  5.0  6.0  7.0
 \end{textcode}
-\end{samepage}
 
 The first example illustrates creating a dataset object that provides batches of size 2 for a sequence length of 2, using a stride of 1 across the input sequences. This example does not shuffle the data between batches and is therefore suitable for stateful RNNs:
 
-\begin{samepage}
 \begin{pythoncode}
 ds = keras.preprocessing.timeseries_dataset_from_array(
      inputs, 
@@ -431,11 +419,9 @@ ds = keras.preprocessing.timeseries_dataset_from_array(
 for element in ds.as_numpy_iterator():
      print(element)
 \end{pythoncode}
-\end{samepage}
 
 The following output shows batches of sequences and their targets. Note how the sequences are continuous across batchs. For example the first sequence of 2 elements of the first batch is $[0, 1]$ and the first sequence of 2 elements of the second batch is $[2, 3]$, that is, the second batch continues sequences from the first batch, and the hidden state in the LSTM or GRU cells in the RNN can be carried over to the next batch. 
  
-\begin{samepage}
 \begin{textcode}
 (array([[0, 1],
        [1, 2]]), array([2, 3]))
@@ -444,11 +430,9 @@ The following output shows batches of sequences and their targets. Note how the 
 (array([[4, 5],
        [5, 6]]), array([6, 7]))
 \end{textcode}
-\end{samepage}
 
 In contrast, the next example shuffles elements between batches and is suitable for stateless RNNs where state is not maintained between batches:
 
-\begin{samepage}
 \begin{pythoncode}
 ds = keras.preprocessing.timeseries_dataset_from_array(
      inputs, 
@@ -461,11 +445,9 @@ ds = keras.preprocessing.timeseries_dataset_from_array(
 for element in ds.as_numpy_iterator():
      print(element)
 \end{pythoncode}
-\end{samepage}
 
 The output below clearly shows the differences. The sequences of length 2 are not continuous across batches. For example, the first sequence of 2 elements in the second batch is $[5, 6]$ while the first sequence of 2 elements in the third batch is $[3, 4]$.
 
-\begin{samepage}
 \begin{textcode}
 (array([[4, 5],
        [2, 3]]), array([6, 4]))
@@ -474,11 +456,9 @@ The output below clearly shows the differences. The sequences of length 2 are no
 (array([[3, 4],
        [1, 2]]), array([5, 3]))
 \end{textcode}
-\end{samepage}
 
 The next example shows the effect of varying the sequence stride and the batch size. The batch size is now set to 1, and the sequence stride is 2, that is, after assembling a series of 2 elements for a batch, the next set of 2 elements is taken from two positions further in the input.
 
-\begin{samepage}
 \begin{pythoncode}
 ds = keras.preprocessing.timeseries_dataset_from_array(
      inputs, 
@@ -491,28 +471,25 @@ ds = keras.preprocessing.timeseries_dataset_from_array(
 for element in ds.as_numpy_iterator():
      print(element)
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 \begin{textcode}
 (array([[0, 1]]), array([2]))
 (array([[2, 3]]), array([4]))
 (array([[4, 5]]), array([6]))
 \end{textcode}
-\end{samepage}
 
 In this small illustrative example, every step of the feature sequence is a single number, whereas in the stock market prediction example every step of the feature sequence is itself a vector of values.
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 Using the simple example data from above to:
 \begin{enumerate}
    \item Experiment with different values for \texttt{batch\_size},
    \item Experiment with different values for \texttt{sequence\_length},
    \item Experiment with different values for \texttt{sequence\_stride}.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 The stock market prediction example uses a sequential neural network model with an input layer to specify the shape of the features to be used for training, one LSTM layer and a dense (fully-connected) layer with a single output for regression. It has the following characteristics:
 
@@ -524,7 +501,6 @@ The stock market prediction example uses a sequential neural network model with 
 
 Note that the second dimension of the input shape is one less than the total number of columns in the training data, because the column of target values has been removed.
 
-\begin{samepage}
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(
@@ -537,11 +513,9 @@ model.add(layers.LSTM(
 model.add(layers.Dense(1))
 model.summary()
 \end{pythoncode}
-\end{samepage}
 
 The model summary is shown below. It is instructive to verify the number of parameters. Weights and biases are shared between time steps; recall that the RNN actually has a single LSTM cell and unrolling is simply there to make the computation easier. That is, the total parameter count reported below is for a single LSTM cell. Equations~\ref{eq:forget} to \ref{eq:candidate} show that the forget, input and output gates as well as the candidate new memory of the LSTM unit use the same number of parameters, that is, each equation introduces $1984/4 = 496$ parameters. The Equations~\ref{eq:forget} to \ref{eq:candidate} operate on the concatenation of the hidden state and the input, that is on a vector of $16 + 14 = 30$ units. Each equation adds a bias term. Hence, the total number of weights and bias for each gate as $(16 + 14 + 1) * 16 = 496$.
 
-\begin{samepage}
 \begin{textcode}
 Model: "sequential_4"
 _________________________________________________________________
@@ -554,23 +528,18 @@ Total params: 2001 (7.82 KB)
 Trainable params: 2001 (7.82 KB)
 Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
-\end{samepage}
 
 Compile the model:
-\begin{samepage}
 \begin{pythoncode}
 model.compile(loss='mean_squared_error', 
               optimizer='Adagrad')
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 Fit the model:
 \begin{pythoncode}
 model.fit(dataset_train, epochs=n_epochs,
           validation_data=dataset_valid)
 \end{pythoncode}
-\end{samepage}
 
 The training output, shown below, indicates that the training loss after 25 epochs is $\approx 1.00$ and the validation is $\approx 7.06$. Importantly, neither training nor validation loss have decreased during training, suggesting that either the neural network model is inappropriate or the problem of stock market prediction is quite difficult.
 
@@ -584,8 +553,7 @@ Epoch 25/25
  loss: 1.0028 - val_loss: 7.0621
 \end{textcode}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 
 Download the Python code from \href{https://raw.githubusercontent.com/jevermann/busi4720-ml/main/lstm_example.py}{here}. Then:
 
@@ -601,11 +569,10 @@ Experiment with different model characteristics:
     \item Swap the LSTM layer for a GRU layer (\texttt{layers.GRU}). The Keras GRU layer construction function takes the same arguments as the Keras LSTM layer construction function.
     \item Comment on the model performance results.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 Given the poor performance of the single layer LSTM network, it is natural to ask whether more LSTM layers can make a difference. To illustrate the use of Seq2Seq models, the following model stacks two LSTM layers. Note that the first LSTM layer is a Seq2Seq type that returns an output for each step of the sequence. These outputs form the inputs for the second LSTM layer. That second layer is a Seq2Vec model that returns a single output. The model also adds a second fully-connected layer and droput layers to prevent overfitting. 
 
-\begin{samepage}
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(
@@ -624,11 +591,9 @@ model.add(layers.Dropout(rate=0.25))
 model.add(layers.Dense(1))
 model.summary()
 \end{pythoncode}
-\end{samepage}
 
 The model summary and the final epoch training output are shown below. Unfortunately, the model performs no better than the simple one.
 
-\begin{samepage}
 \begin{textcode}
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
@@ -648,11 +613,9 @@ Epoch 25/25
 138/138 [==============================] - 2s 17ms/step 
 - loss: 1.0064 - val_loss: 7.1526
 \end{textcode}
-\end{samepage}
 
 Perhaps more history than the last 20 steps is required for good predictions. The following example illustrates a stateful LSTM. First, change the batch size to 1 for a single sequence of continuous elements and prohibit shuffling of the data set:
 
-\begin{samepage}
 \begin{pythoncode}
 dataset_train = keras.preprocessing \
     .timeseries_dataset_from_array(
@@ -663,9 +626,7 @@ dataset_train = keras.preprocessing \
         batch_size = 1, 
         shuffle = False)
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 \begin{pythoncode}
 dataset_valid = keras.preprocessing \
     .timeseries_dataset_from_array(
@@ -676,11 +637,9 @@ dataset_valid = keras.preprocessing \
         batch_size = 1, 
         shuffle = False)
 \end{pythoncode}
-\end{samepage}
 
 The neural network architecture is a single LSTM as in the initial example, but this time the LSTM layer is stateful. Note that the input layer does not specify a sequence length for the batch input shape.
 
-\begin{samepage}
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(
@@ -692,11 +651,9 @@ model.add(layers.LSTM(units=16,
 model.add(layers.Dense(1))
 model.summary()
 \end{pythoncode}
-\end{samepage}
 
 Again, this model does not perform any better than the previous two models. As a baseline comparison, a Vec2Vec model is fitted with a single large feature vector that contains all 20 sequence steps. A \texttt{Flatten} layer is used to re-shape the inputs from shape $[None, 20, 14]$ to $[None, 280]$ where the first index is the batch size which is flexible and depends on how the data set is prepared.
 
-\begin{samepage}
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(
@@ -709,11 +666,9 @@ model.add(layers.Dropout(rate=0.25))
 model.add(layers.Dense(1))
 model.summary()
 \end{pythoncode}
-\end{samepage}
 
 It turns out this model performs significantly better than any of the three previous LSTM models. However, the model summary indicates a very large number of model parameters, almost 50 times the number of the basic LSTM model, making this model much more flexible and powerful than the earlier LSTM models:
 
-\begin{samepage}
 \begin{textcode}
 Model: "sequential"
 _________________________________________________________________
@@ -730,28 +685,24 @@ Total params: 88449 (345.50 KB)
 Trainable params: 88449 (345.50 KB)
 Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
-\end{samepage}
 
 \section{Next Activity Prediction in Business Processes}
 
 As another example of a sequence data problem, consider predicting the next activity in a running instance of a business process. In particular, train a model to predict the next activity from a prefix sequence of 5 activities that have already occurred. This is a classification problem, where the class of the next activity is to be predicted. 
 
-\begin{tcolorbox}[colback=code]
-\footnotesize
-Complete implementations for this and the other examples in this chapter are available in the following GitHub repo: \url{https://github.com/jevermann/busi4720-ml} \\
+\begin{resourcebox}
+Complete implementations for this and the other examples in this chapter are available in the following GitHub repo: \normalsize\url{https://github.com/jevermann/busi4720-ml}\normalsize \\
 
-The project can be cloned from this URL: \url{https://github.com/jevermann/busi4720-ml.git}
+The project can be cloned from this URL: \normalsize\url{https://github.com/jevermann/busi4720-ml.git}\normalsize \\
 
 Download the example event log here\footnote{
 The example log file is taken from the \href{
 https://doi.org/10.4121/uuid:3926db30-f712-4394-aebc-75976070e91f}{4TU repository} where it has been published under the \href{ https://data.4tu.nl/articles/_/12721292/1}{4TU general terms of use}.
 }: \url{https://evermann.ca/busi4720/BPI_Challenge_2012.xes.gz}
-\normalsize
-\end{tcolorbox}
+\end{resourcebox}
 
 First, import the required libraries and use PM4Py to read the event log:
 
-\begin{samepage}
 \begin{pythoncode}
 import numpy
 from tensorflow import keras
@@ -765,11 +716,9 @@ prefix_len= 5
 # Read the log
 log = pm4py.read_xes('BPI_Challenge_2012.xes.gz')  
 \end{pythoncode}
-\end{samepage}
 
 Preprocess the data by fixing data types after the import and filtering the log for activity completion events:
 
-\begin{samepage}
 \begin{pythoncode}
 log['time:timestamp'] = pd.to_datetime(log['time:timestamp'],utc=True)
 log['case:REG_DATE'] = pd.to_datetime(log['case:REG_DATE'],utc=True)
@@ -779,11 +728,9 @@ log['org:resource'] = log['org:resource'].astype(str)
 # Retain only activity completion events
 log = log[log['lifecycle:transition'] == 'COMPLETE']
 \end{pythoncode}
-\end{samepage}
 
 Filter and sort the log for cases that contain 6 or more activities (5 to predict from, plus one target):
 
-\begin{samepage}
 \begin{pythoncode}
 # Find the case start time as time of the first event in case
 log = log.merge(log.groupby('case:concept:name',as_index=False) \
@@ -800,7 +747,6 @@ log = log[log['num_events'] > prefix_len]
 # Sort log by case start, then by event time
 log.sort_values(['case:start', 'time:timestamp'], inplace=True)
 \end{pythoncode}
-\end{samepage}
 
 Next, specify the feature column:
 
@@ -811,7 +757,6 @@ f_name = 'concept:name'
 
 Next, identify the ''vocabulary'', that is, the set of unique activity names for inputs and targets. Rather than converting this to integers using a Keras preprocessing layer, the following code block builds dictionary objects for converting activity names to and from integers. Note that a special end-of-case marker is added to the set of activity names.
 
-\begin{samepage}
 \begin{pythoncode}
 # Vocabulary
 vocab = list(log[f_name].unique()) + ['EOC']
@@ -821,58 +766,46 @@ v_size = len(vocab)
 f2int = dict([(s, vocab.index(s)) for s in vocab])
 int2f = dict([(v, k) for (k, v) in f2int.items()])
 \end{pythoncode}
-\end{samepage}
 
 The following code block creates a list of activity for each case. This is done by grouping the data frame by case ID (''\texttt{case:concept:name}'') and then using the \texttt{apply(list)} function to the feature columns of the grouped data frame and naming the resulting column \texttt{features}:
 
-\begin{samepage}
 \begin{pythoncode}
 # Make sequences of feature names for each case
 features = log.groupby(['case:concept:name'])[f_name] \
     .apply(list).reset_index(name='features')
 \end{pythoncode}
-\end{samepage}
 
 The end-of-case marker is added to each list just created and the lists are then converted to lists of integers using the dictionary built earlier:
 
-\begin{samepage}
 \begin{pythoncode}
 sequences=[l+['EOC'] for l in list(features['features'])]
 sequences=[[f2int[i] for i in seq] for seq in sequences]
 \end{pythoncode}
-\end{samepage}
 
 Split sequences into prefix and target using a sliding window over each sequence:
-\begin{samepage}
 \begin{pythoncode}
 data = pd.DataFrame([(seq[i:i+prefix_len], \
     seq[i+prefix_len]) for seq in sequences \
     for i in range(len(seq)-prefix_len)])
 \end{pythoncode}
-\end{samepage}
 
 Then, split the sequence elements into their own data frame columns, that is Pandas Series:
 
-\begin{samepage}
 \begin{pythoncode}
 # Split the lists into dataframe columns
 data = data.assign(**data[0].apply(pd.Series).add_prefix('index_'))
 \end{pythoncode}
-\end{samepage}
 
 Treating each prefix as independent, split the data randomly into a training and validation set. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Divide into train and test set
 train = data.sample(frac=0.8)
 valid = data.drop(train.index)
 \end{pythoncode}
-\end{samepage}
 
 Then, separate the features from the targets:
 
-\begin{samepage}
 \begin{pythoncode}
 # Separate X and Y
 train_x = train.iloc[:,2:]
@@ -880,11 +813,9 @@ train_y = train.iloc[:,1]
 valid_x = valid.iloc[:,2:]
 valid_y = valid.iloc[:,1]
 \end{pythoncode}
-\end{samepage}
 
 The neural network model is a single-layer stateless LSTM with a Seq2Vec architecture. The input layer specifies the input shape as 5 sequence steps with an undetermined feature size. The features, that is, the activity numbers, are passed to a word embedding layer with 16 output dimensions. That is, each activity number is transformed into a set of 16 values. Note that this occurs for each of the 5 sequence steps fed into the network. Each embedding output is then provided as the input feature vector to the LSTM layer. The LSTM output is passed to a fully-connected output layer with as many units as there are different activity names. The activation function is a softmax function so that this layer returns class membership probabilities. 
 
-\begin{samepage}
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(input_shape=(5,)))
@@ -893,11 +824,9 @@ model.add(layers.LSTM(units=32,
     return_sequences=False, return_state=False, stateful=False))
 model.add(layers.Dense(v_size, activation='softmax'))
 \end{pythoncode}
-\end{samepage}
 
 Finally, the model is compiled and trained for 25 epochs:
 
-\begin{samepage}
 \begin{pythoncode}
 # Compile with loss and optimizer
 model.compile(loss='sparse_categorical_crossentropy',
@@ -909,11 +838,9 @@ model.fit(train_x, train_y,
           validation_data=(valid_x, valid_y),
           epochs=25, shuffle=True)
 \end{pythoncode}
-\end{samepage}
 
 The model summary is shown below, as well as the training progress information for the first and last epoch. The prediction accuracy improves significantly from the first epoch, for both the training and the validation dataset. Additionally, the training and validation losses are similar, suggesting the model does not overfit.
 
-\begin{samepage}
 \begin{textcode}
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
@@ -936,11 +863,9 @@ Epoch 25/25
 loss: 1.4728 - sparse_categorical_accuracy: 0.5886 - 
 val_loss: 1.4553 - val_sparse_categorical_accuracy: 0.5935
 \end{textcode}
-\end{samepage}
 
 To predict from the trained model, use the Keras \texttt{predict()} function of the fitted model. The following Python code block takes as input a sequence from the training data set, and predicts the class membership probabilities, that is the probabilities over the following process activity. The predicted activity is determined by sampling from the class membership. Alternatively, the most likely class could be chosen. Both options can be combined in that a random choice is made between sampling from the probabilites and choosing the most likely class. 
 
-\begin{samepage}
 \begin{pythoncode}
 input = train_x.iloc[2:3,:].copy()
 print(input)
@@ -956,11 +881,9 @@ pred = numpy.random.choice(a=range(v_size), p=probs)
 # Print the result
 print(int2f[pred])
 \end{pythoncode}
-\end{samepage}
 
 The chosen activity is added to the end of the input sequence and the prediction is repeated until the end of the case is predicted.
 
-\begin{samepage}
 \begin{pythoncode}
 # And keep doing this until end-of-case is reached
 while int2f[pred] != 'EOC':
@@ -972,11 +895,9 @@ while int2f[pred] != 'EOC':
     pred = numpy.random.choice(a=range(v_size),p=probs)
     print(int2f[pred])
 \end{pythoncode}
-\end{samepage}
 
 An example output is shown below. The exact result depends on the specific parameter values of the trained model and the sampling of the class probabilities.
 
-\begin{samepage}
 \begin{textcode}
       index_0  index_1  index_2  index_3  index_4
 4380        9       10        9       15       13
@@ -999,7 +920,6 @@ W_Valideren aanvraag
 1/1 [==============================] - 0s 16ms/step
 EOC
 \end{textcode}
-\end{samepage}
 
 %\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 %Alternative model with stacked and bi-directional LSTM:
@@ -1023,8 +943,7 @@ EOC
 %\end{pythoncode}
 %\end{frame}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 
 Download the \href{https://github.com/jevermann/busi4720-ml/blob/main/process_prediction.py}{complete Python file} and the \href{https://evermann.ca/busi4720/BPI_Challenge_2012.xes.gz}{example event log}. \\
 
@@ -1036,7 +955,7 @@ Adapt the network architecture to identify the impact on training and validation
       \item Further training epochs (originally 25)
    \end{enumerate}
 Comment on your findings and identify the best model. \\
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Review Questions}
 \paragraph*{Introduction}

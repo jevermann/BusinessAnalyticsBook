@@ -21,30 +21,29 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Treveil, M. and the Dataiku Team (2020) \emph{Introducing MLOps}, O'Reilly Media, Sebastopol, CA (T) 
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Mark Treveil and others is a good, short introduction to the principles and ideas of machine learning operations. It provides guidance on the process, the management, and the governance of MLOps. Given its focus on high-level introduction, it provides few technical details, but this also means that this book will likely stay relevant longer. 
 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Gift, N. and Deza, Al. (2021) \emph{Practical MLOps}, O'Reilly Media, Sebastopol, CA (GD)
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Noah Gift and Alfredo Deza provides a more ''hands-on'' introduction to machine learning operations. While also touching on the principles and processes, it goes in-depth and offers specific technical illustrations of good MLOps practices. The book uses both on-premises technology and cloud-based technologies, but focuses most heavily on MLOps on the AWS cloud. 
 
 
-\begin{tcolorbox}[colback=alert]
-\subsubsection*{Resources}
+\begin{resourcebox}
 Complete implementations of all examples in this chapter are available on the following GitHub repo:
 
-\url{https://github.com/jevermann/busi4720-mlops} \\
+\small\url{https://github.com/jevermann/busi4720-mlops}\normalsize \\
 
 The project can be cloned from this URL:
 
-\url{https://github.com/jevermann/busi4720-mlops.git}
-\end{tcolorbox}
+\small\url{https://github.com/jevermann/busi4720-mlops.git}\normalsize
+\end{resourcebox}
 
 
 \section{Introduction}
@@ -330,24 +329,22 @@ Detailed and up-to-date documentation can help the risk manager in objectively e
 
 Automation tools used during the preparation for production include continuous integration and automated testing tools for quality assurance and model risk evaluation. Model registries are used during this phase to document all information about a model and document the findings of its quality assurance and risk evaluation, including input data sources and data provenance, model assumptions, required software packages, test results including explanations and bias or fairness evaluations, training and test logs, security test results, etc. 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 \paragraph*{Scenario:}
 Imagine a new machine learning model is being deployed to automate credit approval decisions at a Canadian financial institution.
 
 \paragraph*{Question}
 Research the typical responsibilities and concerns of a Model Risk Manager or Model Auditor specifically within the financial services industry in Canada. Based on your research, list two specific concerns such a professional would likely have regarding the deployment of this credit approval model before it goes live.
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 
 \paragraph*{Scenario}
 An online Canadian retailer is enhancing its website with a machine learning model to provide highly personalized product recommendations to individual shoppers.
 
 \paragraph*{Question}
 Research the ethical risks and challenges associated with personalized recommendation systems in e-commerce. Based on your findings, identify and briefly describe two distinct ethical risks that this Canadian retailer should consider regarding its new recommendation model.
-\end{tcolorbox}
+\end{exercisebox}
 
 
 \subsection{Deploy to Production}
@@ -366,7 +363,6 @@ Deploying a model to production includes both the CI/CD (continuous integration/
 
 A typical, automated CI/CD pipelines comprises at least the following steps\footnote{Adapted from Treveil et al. (2020) (pg. 74f)}:
 
-\begin{samepage}
 \begin{enumerate}
 \item Build model
 \begin{enumerate}
@@ -386,7 +382,6 @@ A typical, automated CI/CD pipelines comprises at least the following steps\foot
    \item Full deployment
 \end{enumerate}
 \end{enumerate} 
-\end{samepage}
 
 Deployment includes considering the scalability and reliability of the model at inference time. Deployment targets (that is, server types and numbers) must be chosen that are appropriate to the expected workload. For example, an ML architect must be determine which servers should serve the model predictions, where in the world they should be located, how many there should be, and other technical considerations. Workload balancing for multiple servers must be defined and set up, for example, based on input features, request characteristics such as geographic location, or randomly. Automatic fail-over\index{Fail-over} to replacement servers must be defined. This includes the ability to automatically detect server failure and to automatically re-provision replace servers. This phase must also consider how model upgrades are performed (e.g. shadow deployment, progressive deployment).
 
@@ -394,20 +389,19 @@ Deployment to production also includes defining and provisioning infrastructure 
 
 Automation tools required and used during this phase of the MLOps lifecycle include source code repositories such as GitHub and software integration tools such as Jenkins to build and test the model and related software applications. Also required are model registries such as MLFlow and model serving tools such as TensorFlow Serving or Flask. Finally, log data storage and log analysis software is required for monitoring. 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 \paragraph*{Scenario}
 Consider deploying a machine learning model to a cloud platform like Amazon Web Services (AWS) or Microsoft Azure.
 
 \paragraph*{Question}
 Using internet resources (e.g., documentation, blog posts, articles related to MLOps on AWS or Azure), research the typical tasks and responsibilities of an ML Engineer or ML Architect during the deployment of a model to such a cloud environment. Describe one specific technical responsibility that an ML Engineer/Architect would likely have in ensuring the successful deployment and scalability of the model on the chosen cloud platform.
-\end{tcolorbox}
+\end{exercisebox}
 
 
 The remainder of this section illustrates two basic deployment methods for a neural network model developed using Keras. As a first step, the model is defined and trained. The following example uses a very simple linear regression model for the Boston housing price dataset. The focus here is not on the quality of the model but on how the trained model can be deployed. 
 
-\begin{tcolorbox}[colback=alert]
-\subsubsection*{Resources}
+\begin{resourcebox}
 Complete implementations of all examples in this chapter are available in the following GitHub repo:
 
 \url{https://github.com/jevermann/busi4720-mlops} \\
@@ -415,12 +409,11 @@ Complete implementations of all examples in this chapter are available in the fo
 The project can be cloned from this URL:
 
 \url{https://github.com/jevermann/busi4720-mlops.git}
-\end{tcolorbox}
+\end{resourcebox}
 
 As a first step, the data set is retrieved, features are created and the linear regression model is defined\footnote{
 Complete implementation is available at \url{https://github.com/jevermann/busi4720-mlops/blob/main/train_model.py}}. \\
 
-\begin{samepage}
 \begin{pythoncode}
 import keras.utils
 import pandas as pd
@@ -438,11 +431,9 @@ norm_boston_model=keras.models.Sequential([
     keras.layers.Input(shape=(3,), dtype=tf.float32),
     keras.layers.Dense(1, activation=None) ])
 \end{pythoncode}
-\end{samepage}
 
 Next, the model is trained and saved in three different ways, for use in Keras, for use in TensorFlow serving, and for use in TensorFlowJS. Each of these require a different model package format.
 
-\begin{samepage}
 \begin{pythoncode}
 stop_callback = keras.callbacks.EarlyStopping()
 norm_boston_model.compile(
@@ -460,7 +451,14 @@ norm_boston_model.export('norm.boston.model.trained.export')
 tfjs.converters.save_keras_model(norm_boston_model,
     'norm.boston.model.trained.tjfs')
 \end{pythoncode}
-\end{samepage}
+
+To run this Python program, first clone it from GitHub, change into the new directory, and then run the Python script.
+
+\begin{bashcode}
+git clone https://github.com/jevermann/busi4720-mlops.git
+cd busi4720-mlops
+python train_model.py
+\end{bashcode}
 
 \subsubsection*{Deployment as a Flask Microservice}
 
@@ -468,7 +466,6 @@ The following code blocks illustrate how a trained model may be deployed as a mi
 
 First, the saved model is loaded. The \texttt{predict()} function accepts the inputs and provides suitable output (assuming that inputs are single observations, it returns the first and only target of the first and only element of a batch).
 
-\begin{samepage}
 \begin{pythoncode}
 import keras
 import flask
@@ -483,11 +480,9 @@ norm_boston_model = keras.saving. \
 def predict(inputs):
     return norm_boston_model.predict_on_batch(inputs)[0][0]
 \end{pythoncode}
-\end{samepage}
 
 Setting up the Flask web server is simple. The \texttt{app} defines the Flask application and the decoration \texttt{@app.route(...)} indicates that the \texttt{predict\_json()} function should be called when a client requests the \texttt{/predict\_json} URL using the \texttt{POST} method on the server. The \texttt{predict\_json()} function accepts the input data from the request, and creates a suitable Pandas dataframe. It calls the \texttt{predict()} function and packages the resulting prediction as a JSON object to be returned to the client. 
 
-\begin{samepage}
 \begin{pythoncode}
 app = flask.Flask(__name__)
 
@@ -508,22 +503,25 @@ def predict_json():
 # Run the server app
 app.run()
 \end{pythoncode}
-\end{samepage}
+
+To run this Python program, run the following script:
+
+\begin{bashcode}
+python flask_deploy.py
+\end{bashcode}
+
 
 To access this microservice application when it is running, a simple web request can be used from the Bash command line\footnote{Complete file is available on \url{https://github.com/jevermann/busi4720-mlops/blob/main/json_demo.sh}.}. The \texttt{curl} program sends web requests and receives and prints the responses, the \texttt{-X} option specifies the request method, the \texttt{-H} option specifies request headers, \texttt{--data} specifies the data to be sent and the final argument is the web server address and URL. 
 
-\begin{samepage}
 \begin{bashcode}
 curl -X POST \
      -H "Content-Type: application/json" \
      --data '[6, 250, 66.5]' \
      http://localhost:5000/predict_json
 \end{bashcode}
-\end{samepage}
 
 To show how such a service may be used from a web-based application, the following code blocks define a simple HTML form\footnote{Complete file is available on \url{https://github.com/jevermann/busi4720-mlops/blob/main/predict_form_async.html}.}. The form provides input fields for the user to enter the input feature values, and in the document header defines a short JavaScript script that calls the Flask microservice to provide the predicted house price. 
 
-\begin{samepage}
 \begin{htmlcode}
 <!DOCTYPE html>
 <html lang="en">
@@ -551,11 +549,9 @@ To show how such a service may be used from a web-based application, the followi
   </script>
  </head>
 \end{htmlcode}
-\end{samepage}
 
 The body of the HTML document is the HTML form with its input elements. When the ''submit'' button is pressed, the \texttt{predict()} function defined in the document header in the previous HTML code block is executed. 
 
-\begin{samepage}
 \begin{htmlcode}
  <body>
   <h1>Boston Housing Data Inputs</h1>
@@ -578,7 +574,6 @@ The body of the HTML document is the HTML form with its input elements. When the
  </body>
 </html>
 \end{htmlcode}
-\end{samepage}
 
 The Flask application defined here is typically packaged in a container\index{Containerization} (using Docker or other container technology). One or more instances of such a container are then executed on container servers, depending on the required capacity. Container deployments to servers are typically performed automatically using software such as Kubernetes\footnote{\url{https://kubernetes.io/}}, which is an open-source container orchestration system for automating software deployment, scaling, and management. 
 
@@ -588,7 +583,6 @@ Another way to deploy an ML model is to embed it in a browser-based web applicat
 
 The following HTML code block\footnote{Complete file is available on \url{https://github.com/jevermann/busi4720-mlops/blob/main/tjfs_demo.html}.} is a slightly altered version of the web form in the Flask example above. Instead of requesting a prediction from the Flask service, the JavaScript\index{JavaScript} script loads the model directly using the \texttt{tf.LoadLayersModel()} function provided by the TensorFlowJS framework and calls its \texttt{predict()} function. The document body that defines the form and its input fields is identical to the one in the code block above. 
 
-\begin{samepage}
 \begin{htmlcode}
 <!DOCTYPE html>
 <html>
@@ -614,7 +608,8 @@ The following HTML code block\footnote{Complete file is available on \url{https:
   </script>
  </head>
 \end{htmlcode}
-\end{samepage}
+
+To see this form in action, load the file \texttt{tjfs\_demo.html} from the cloned GitHub repository with any web browser.
 
 \subsection{Monitoring and Feedback}
 
@@ -663,7 +658,6 @@ The first code fragment sets up a logger to log the web requests to a file. A lo
 
 A file handler is added to the logger for writing the events to a file, rather than printing them on the console. As an alternative, a \texttt{RotatingFileHandler} may be used. This handler automatically limits the log file size and rotates logs when a file size exceeds the limit. In the example below, the 5 most recent logs are kept, while earlier log information is discarded. 
 
-\begin{samepage}
 \begin{pythoncode}
 import logging.handlers
 
@@ -679,11 +673,9 @@ req_logger.addHandler(
 #         maxBytes=1000000,
 #         backupCount=5))
 \end{pythoncode}
-\end{samepage}
 
 With the request logger defined, the following code fragment shows how it can be used. The code block modified the \texttt{predict\_json()} and the \texttt{predict\_form()} functions to log the web request, together with the model name, the current time, and the remote internet address (the address of the web client or browser). Logging is done simply by calling the \texttt{info()} method of the request logger and providing the message to the be logged as well as the arguments to be inserted into that message. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Use the logger:
 @app.route("/predict_json", methods=["POST"])
@@ -702,10 +694,8 @@ def predict_form():
                     request.form)
 ...
 \end{pythoncode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
+\begin{exercisebox}
 \begin{enumerate}
 \item Download the complete file from \href{https://github.com/jevermann/busi4720-mlops/blob/main/flask_deploy_logging.py}{GitHub}.
 \item Define a second logger that writes to a different log file
@@ -719,7 +709,7 @@ def predict_form():
    \item To make the log easy to analyze, write the information in CSV format. Make sure you quote the fields that need quoting.
 \end{itemize}
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{ML Governance}
 

@@ -20,35 +20,39 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
 
-\url{https://www.statlearning.com} \\
+\small\url{https://www.statlearning.com}\normalsize \\
 
 Chapter 10
-\end{tcolorbox}
+\end{resourcebox}
 
 While the James et al. book is otherwise very comprehensive, it only provides a single chapter on neural networks. The benefit here is that neural networks are discussed in context, as just one other regression or classification method. The downside is that it does not dive sufficiently deep into neural network architectures and fitting of neural network models that is at the heart of modern machine learning applications.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
 
-\url{https://probml.github.io/pml-book/book1.html} \\
+\small\url{https://probml.github.io/pml-book/book1.html}\normalsize \\
 
 Chapter 13, 14, 15
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Murphy is freely available under a Creative Commons license and provides three chapters on neural networks, one for structured data, one for images, and one for sequences. It provides significant depth on convolutional and recurrent network architectures, fitting the models, and problems the data analyst may encounter. However, it tends to focus on the mathematical background, rather than application or implementation.
 
-\begin{tcolorbox}[colback=alert]
-Tensorflow Guides: \url{https://www.tensorflow.org/guide}
-\end{tcolorbox}
+\begin{resourcebox}
+\vspace{0.5\baselineskip} 
+Tensorflow Guides: \small\url{https://www.tensorflow.org/guide}\normalsize
+\vspace{0.5\baselineskip} 
+\end{resourcebox}
 
 This section uses the Tensorflow programming framework for implementing neural network machine learning applications. The Tensorflow website has a multitude of introductory and advanced guides and tutorial that cover all aspects of machine learning with neural networks and are all very accessible to the beginner. While they focus heavily on implementation aspects, they provide significant coverage of the concepts as well.
 
-\begin{tcolorbox}[colback=alert]
-Tensorflow Playground: \url{https://playground.tensorflow.org}
-\end{tcolorbox}
+\begin{resourcebox}
+\vspace{0.5\baselineskip} 
+Tensorflow Playground: \small\url{https://playground.tensorflow.org}\normalsize
+\vspace{0.5\baselineskip} 
+\end{resourcebox}
 
 \begin{figure}
 \centering
@@ -169,7 +173,6 @@ For a simple function of one variable, like $f(x) = x^2$, the gradient is simply
 
 As gradients are functions again, they can be evaluated for different inputs $v$, written as $\nabla f(x) \rvert_{v}$. For example, the gradient of $x^2$ evaluated at $x=2$ is $\nabla f(x) \rvert_{x=2} = 4$ and the gradient of $x^2$ evaluated at $3$ is $\nabla f(x) \rvert_{x=3} = 6$.
 
-\begin{samepage}
 \noindent Gradient descent\index{Gradient descent} is an iterative method to find the minimum of a function of multiple inputs:
 \begin{enumerate}
    \item Begin with random initial parameter values
@@ -179,7 +182,6 @@ As gradients are functions again, they can be evaluated for different inputs $v$
       \item Move a step in that direction by adjusting the parameters. The step size is determined by the \emph{learning rate})
    \end{enumerate}
 \end{enumerate}
-\end{samepage}
 
 This procedure can be summarized as follows. Consider the loss $L$ at a certain input $X$ as a function of parameter values $\theta$. Then, at each step $t$, update the parameters $\theta$ using learning rate $\gamma$ until the parameter values do not change anymore (in practice: until the changes are smaller than a certain threshold):
 
@@ -371,12 +373,12 @@ The landscape of neural network software frameworks has expanded significantly i
 \end{wrapfigure}
 TensorFlow, developed by the Google Brain team and released as version 1.0 in 2018, is an open-source framework designed for high-performance numerical computation, in particular for neural network applications. TensorFlow supports both CPU and GPU computing, and it can be scaled from single machines to large clusters, making it suitable for a wide range of applications, from developing simple models on a desktop to deploying complex systems in production environments. Tensorflow provides automatic differentiation and computation of gradients, supports distributed computing across clusters, and parallel computing on multiple GPUs per compute node. Tensorflow provides a wide range of loss functions, optimizers, activation functions and neural network architectures.
 
-\begin{wrapfigure}{l}{1in}
+Keras is a high-level neural networks API, written in Python and originally developed for running on top of TensorFlow, Theano, or Microsoft Cognitive Toolkit (CNTK). Later releases of Keras focused on TensorFlow only. Keras aims to enable fast experimentation with deep neural networks, focusing on being user-friendly, modular, and extensible. \begin{wrapfigure}{l}{1in}
 \begin{center}
 \includegraphics[width=.75in]{keraslogo.png}
 \end{center}
 \end{wrapfigure}
-Keras is a high-level neural networks API, written in Python and originally developed for running on top of TensorFlow, Theano, or Microsoft Cognitive Toolkit (CNTK). Later releases of Keras focused on TensorFlow only. Keras aims to enable fast experimentation with deep neural networks, focusing on being user-friendly, modular, and extensible. It provides simple and consistent high-level APIs (application programming interfaces) that make it easy to create deep learning models without getting bogged down in the details of the underlying algorithms. Keras handles the specifics of creating complex network layers, loss calculations, and optimization steps, allowing developers to focus on building the core parts of their models. It provides a wide range of neural network layer types to support different architectures and offers simplified data management for training. Keras is officially integrated into TensorFlow as the \texttt{tf.keras} package, making it the default high-level framework for building and training machine learning models in TensorFlow.
+It provides simple and consistent high-level APIs (application programming interfaces) that make it easy to create deep learning models without getting bogged down in the details of the underlying algorithms. Keras handles the specifics of creating complex network layers, loss calculations, and optimization steps, allowing developers to focus on building the core parts of their models. It provides a wide range of neural network layer types to support different architectures and offers simplified data management for training. Keras is officially integrated into TensorFlow as the \texttt{tf.keras} package, making it the default high-level framework for building and training machine learning models in TensorFlow.
 
 \subsubsection*{PyTorch}
 
@@ -409,7 +411,7 @@ Also known as CNTK, this deep learning framework from Microsoft provides an effi
 
 \section{Linear Regression using Tensorflow and Keras}
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 \footnotesize
 Complete implementations for this and the other examples in this chapter are available on the following GitHub repo:
 \url{https://github.com/jevermann/busi4720-ml} \\
@@ -417,49 +419,41 @@ Complete implementations for this and the other examples in this chapter are ava
 The project can be cloned from this URL:
 \url{https://github.com/jevermann/busi4720-ml.git}
 \normalsize
-\end{tcolorbox}
+\end{resourcebox}
 
 As noted in the previous section, Keras makes the construction of a neural network model very easy, as the Python example in this section shows. This first example shows a linear regression in Keras. In particular, no non-linear activation functions are used. 
 
 First, the required packages are imported. The \texttt{pandas} package is required to read the training data, and the \texttt{tensorflow} package includes Keras as well:
 
-\begin{samepage}
 \begin{pythoncode}
 import pandas as pd
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras import layers
 \end{pythoncode}
-\end{samepage}
 
 Next, the training data set is read from a CSV file. This example uses the Boston housing price dataset that from the R package \texttt{ISLR2} was used previously in regression analysis examples:
 
-\begin{samepage}
 \begin{pythoncode}
 # Use the Boston housing data set
 boston_data = pd.read_csv("https://evermann.ca/busi4720/boston.csv")
 \end{pythoncode}
-\end{samepage}
 
 The example uses all columns as input features, except the \texttt{medv} column, the median value of house prices in a suburb, which is the prediction target or the true label for the observation:
 
-\begin{samepage}
 \begin{pythoncode}
 boston_features = boston_data.copy()
 boston_labels = boston_features.pop('medv')
 \end{pythoncode}
-\end{samepage}
 
 Next, the neural network model is defined. It is a model that contains two sequential layers, both fully-connected (''dense'' in the Tensorflow/Keras terminology). Keras provides the \texttt{Sequential} model type for defining this, which accepts a list of layer definitions, here the \texttt{Dense} layer types:
 
-\begin{samepage}
 \begin{pythoncode}
 boston_model = tf.keras.Sequential([
   tf.keras.layers.Dense(64, activation=None),
   tf.keras.layers.Dense(1, activation=None)
 ])
 \end{pythoncode}
-\end{samepage}
 
 Keras provides many different model types and layer types, other than sequential layers to allow the analyst to define more complex neural network architectures. Consult the Keras documentation at \url{https://keras.io/api/models/} and \url{https://keras.io/api/layers/} for an overview and details.
 
@@ -471,26 +465,21 @@ Each of the $k$ input features is passed to each of the 64 units in the first la
 
 Model compilation using the \texttt{compile()} function in Keras is used to specify the loss function and the optimizer to use. As a regression analysis, this example uses the MSE as loss function, and the Adam optimizer for SGD.
 
-\begin{samepage}
 \begin{pythoncode}
 boston_model.compile(
     loss = tf.keras.losses.MeanSquaredError(),
     optimizer = tf.keras.optimizers.Adam())
 \end{pythoncode}
-\end{samepage}
 
 With model compilation complete, the model can be trained, that is, fitted to the data using the \texttt{fit()} function. This example trains the model for $25$ epochs. When no batch size is specified, as in this example, Keras by default chooses 32 as batch size.
 
-\begin{samepage}
 \begin{pythoncode}
 boston_model.fit(boston_features, boston_labels, epochs=25)
 boston_model.summary()
 \end{pythoncode}
-\end{samepage}
 
 The \texttt{summary()} function does not show a summary of training results but a summary of the model architecture. It is only once the \texttt{fit()} function has been called that Keras knows the size of the input layer, that is, the number of feature columns, and therefore the exact architecture of the model. The output of the \texttt{summary()} function is reproduced below. The output of each layer is two-dimensional, with the first dimension (the ''rows'') being the batch size, and the second dimension (the columns) being the outputs of the neural units at that level. The word \texttt{None} in the output shapes of each layer indicate that the minibatch size is flexible. The model summary also confirms the number of trainable paramaters, as explained earlier.
 
-\begin{samepage}
 \begin{textcode}
 >>> boston_model.summary()
 Model: "sequential"
@@ -504,11 +493,10 @@ Total params: 897 (3.50 KB)
 Trainable params: 897 (3.50 KB)
 Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Verifying the number of parameters and understanding what they do is important to understand and verify the correctness of the implemented model!
-\end{tcolorbox}
+\end{alertbox}
 
 \section{Non-Linear Regression using Tensorflow and Keras}
 
@@ -528,7 +516,6 @@ norm_layer.adapt(boston_features.to_numpy())
 
 This example also uses a sequential model. The first layer is the normalization layer that has been adapted to the training data. The remaining hidden and output layers are similar to the earlier example, but this example uses a ReLU activation function for the hidden layer and leaves the output layer without an activation.
 
-\begin{samepage}
 \begin{pythoncode}
 norm_boston_model = tf.keras.Sequential([
   norm_layer,
@@ -536,11 +523,9 @@ norm_boston_model = tf.keras.Sequential([
   tf.keras.layers.Dense(1, activation=None)
 ])
 \end{pythoncode}
-\end{samepage}
 
 The model summary output below shows the normalization layer as part of the model. Note that a summary can be produced in this case prior to model fitting, because the normalization layer already ''knows'' about the shape of the data through its adaptation. 
 
-\begin{samepage}
 \begin{textcode}
 >>> norm_boston_model.summary()
 Model: "sequential_1"
@@ -555,17 +540,15 @@ Total params: 922 (3.61 KB)
 Trainable params: 897 (3.50 KB)
 Non-trainable params: 25 (104.00 Byte)
 \end{textcode}
-\end{samepage}
 
 The number of trainable parameters is the same as in the previous model. However, the normalization layer contains 25 parameters that are not trainable: the 12 columns means, the 12 column standard deviations, and one parameter for the number of observations used in \texttt{adapt()}. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Verifying the number of parameters and understanding what they do is important to understand and verify the correctness of the implemented model!
-\end{tcolorbox}
+\end{alertbox}
 
 The loss and optimizer functions are set as in the previous example. However, the following code block also illustrates the use of \texttt{metrics} specified in the \texttt{compile()} function. These are additional metrics that Keras will compute during training and testing. They are accessible from the training history object that is returned by the \texttt{fit()} function.
 
-\begin{samepage}
 \begin{pythoncode}
 # Define loss and specify optimizer
 norm_boston_model.compile(
@@ -573,11 +556,9 @@ norm_boston_model.compile(
     optimizer = tf.keras.optimizers.Adam(),
     metrics = ['mse', 'mae'])
 \end{pythoncode}
-\end{samepage}
 
 \noindent The \texttt{fit()} function returns a history of the loss function and any additional metrics specified in \texttt{compile()}. The following Python code block also illustrates specifying a different minibatch size (20, the default is 32), and a training/validation split for the sample. After every epoch, Keras will evaluate the trained model on the validation sample. 
 
-\begin{samepage}
 \begin{pythoncode} 
 # Fit model to data
 train_hist = norm_boston_model.fit(
@@ -587,11 +568,9 @@ train_hist = norm_boston_model.fit(
                     epochs=50,
                     validation_split=0.33)
 \end{pythoncode}
-\end{samepage}
 
 The final output of this example looks like the following, indicating the loss function values and the additional metric values for both training and validation data sets for each epoch:
 
-\begin{samepage}
 \begin{textcode}
 Epoch 1/50
  1/17 [>.............................] - ETA: 8s - loss: 784.9610 - 
@@ -605,11 +584,9 @@ Epoch 50/50
  loss: 13.6148 - mse: 13.6148 - mae: 2.8122 - val_loss: 200.7858 - 
  val_mse: 200.7858 - val_mae: 11.5683
 \end{textcode}
-\end{samepage}
 
 The metrics can also be plotted. The following Python code example uses the Plotly Express package and produces the graph shown in Figure~\ref{fig:regressiontraining}.
 
-\begin{samepage}
 \begin{pythoncode}
 import plotly.express as px
 import numpy as np
@@ -624,7 +601,6 @@ hist = pd.melt(hist, id_vars='epoch',
 fig = px.line(hist, x='epoch', y='value', color='variable')
 fig.show()
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -633,14 +609,14 @@ fig.show()
 \label{fig:regressiontraining}
 \end{figure}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 \begin{itemize}
   \item Modify the above code to include different activation functions, e.g. \texttt{"tanh"}, \texttt{"sigmoid"}, or \texttt{"relu"}. Comment on the learning progress and loss function values.
   \item Modify the above code to change the number of units in the dense layer. Comment on the learning progress and loss function values.
   \item Modify the architecture to add one or more dense layers with different numbers of units. Comment on the learning progress and loss function values.
 \end{itemize}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Classification using Tensorflow and Keras}
 
@@ -648,7 +624,6 @@ The classification example in this section uses the \texttt{wage} dataset from t
 
 First, read the data set and separate features and target labels, as in the regression example above:
 
-\begin{samepage}
 \begin{pythoncode}
 # Read data and separate features from target labels
 wage_data = pd.read_csv("https://evermann.ca/wage.csv")
@@ -656,13 +631,11 @@ wage_data = pd.read_csv("https://evermann.ca/wage.csv")
 wage_features = wage_data.copy()
 wage_labels = wage_features.pop('wagequart') - 1
 \end{pythoncode}
-\end{samepage}
 
 This example encodes each categorical feature using \emph{one-hot encoding}\index{One-hot encoding}. Similar to contrasts in traditional regression models, one-hot-encoding uses binary dummy variables to express the different categories. Unlike contrasts in traditional regression models, which use $k-1$ dummy variables to encode $k$ categories, one-hot encoding uses $k$ dummy variables to encode $k$ categories. There is no ''base'' category encoded by all dummy variables being zero, as in contrasts in traditional regression. Instead, every category is represented by its own dummy variable, and exactly one of the dummy variables is one. 
 
 Because there are many categorical variables in the data set, the transformation to one-hot is done using a \texttt{for} loop in the Python code block below. This example introduces the Keras \texttt{Input} object, which is used to specify the shape and type of input for each categorical feature. The Keras \texttt{StringLookup} layer takes as input a character string denoting the category and turns character strings into one-hot dummy variables (or, alternatively) into integer category numbers. The layer must be adapted, that is, the data set is used to determine the number of different categories and therefore the number of binary dummy variables for that layer. After adaptation, the lookup layer is applied to the input object to create the one-hot encoded feature. The Keras input object is then added to a dictionary of input objects, and the pre-processed, one-hot encoded feature is added to a list pre-processed.
 
-\begin{samepage}
 \begin{pythoncode}
 # Keep track of inputs and preprocessed inputs
 inputs = {}
@@ -694,11 +667,9 @@ for cat_feature in ['maritl', 'race', 'education', \
     # Append the preprocessed feature to list of preprocessed inputs
     preproc_inputs.append(onehot)
 \end{pythoncode}
-\end{samepage}
 
 As in the earlier example, numerical input features (here, only the feature \texttt{age}) are normalized using a normalization layer. The layer is adapted to the data set (the column ''age'' of the Pandas dataframe). Next, the normalized age feature is formed by applying the normalization layer to the age input opbject. The ''age'' input object feature is then added to the dictionary of input objects, and the normalized feature is appended to the list of pre-processed inputs. 
 
-\begin{samepage}
 \begin{pythoncode}
 age_input = tf.keras.Input(shape=(1,), name="age", dtype="float32")
 norm_layer = tf.keras.layers.Normalization(name="age_norm")
@@ -708,11 +679,9 @@ age_norm = norm_layer(age_input)
 inputs["age"] = age_input
 preproc_inputs.append(age_norm)
 \end{pythoncode}
-\end{samepage}
 
 The integer feature \texttt{year} will also be treated as categorical, rather than numerical. For this, Keras provides an \texttt{IntegerLookup} layer, which behaves analogous to the \texttt{StringLookupLayer} above but for integer inputs instead of character string inputs.
 
-\begin{samepage}
 \begin{pythoncode}
 # Define the input placeholder
 year_input = tf.keras.Input(shape=(1,), name="year", dtype="int32")
@@ -727,31 +696,25 @@ year_onehot = lookup(year_input)
 inputs["year"] = year_input
 preproc_inputs.append(year_onehot)
 \end{pythoncode}
-\end{samepage}
 
 The next step concatenates all preprocessed input features into a single vector using a Keras \texttt{Concatenate} layer:
 
-\begin{samepage}
 \begin{pythoncode}
 preprocessed_inputs = \
     tf.keras.layers.Concatenate(name="concat")(preproc_inputs)
 \end{pythoncode}
-\end{samepage}
 
 The next step builds a first Keras model that is responsible only for the preprocessing of inputs. Instead of using a \texttt{Sequential} model type construction, a Keras \emph{Model} object is created directly by supplying its inputs (\texttt{inputs}) and outputs \\(the \texttt{preprocessed\_inputs}) as well as a name for the model. Note that in defining the preprocessing in the above code blocks, the outputs can be traced back to the preprocessing layers and then to the corresponding inputs; Keras assembles a model using this information.
 
-\begin{samepage}
 \begin{pythoncode}
 preproc_model = tf.keras.Model(inputs, 
                                preprocessed_inputs,
                                name="preproc")
 preproc_model.summary()
 \end{pythoncode}
-\end{samepage}
 
 The summary for this model is printed below. Note the output shape of the input layers are one element each (that is, the character string expressing the category, or the integer for the year, or the floating point value for the age), whereas the output of the corresponding string lookup layers are one-hot-encoded and have as many elements as there are categories for that feature. Also note last column that shows the connections between a layer and its input. Finally, except for the normalization layer for age, no other layer has any parameters. The age normalization layer has three parameters, corresponding to the mean, standard deviation, and number of observations of the inputs it has received during adaptation. These are non-trainable parameters and their values are determined from the data when the layer was adapted. 
 
-\begin{samepage}
 \begin{textcode}
 >>> preproc_model.summary()
 Model: "preproc"
@@ -787,15 +750,13 @@ Total params: 3 (16.00 Byte)
 Trainable params: 0 (0.00 Byte)
 Non-trainable params: 3 (16.00 Byte)
 \end{textcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Verifying the output shapes of each layer is important to understand and verify the correctness of the implemented model!
-\end{tcolorbox}
+\end{alertbox}
 
 With the preprocessing complete, the actual classification model can be built. The Python code block below defines this as a three-layer sequential model with four output units, corresponding to the four classes to be predicted. The activation on the output layer is a softmax so that the model outputs class-membership probabilities, rather than logits (as an equivalent, Keras provides an explicit \texttt{Softmax} layer that could be used). Instead of providing layers as a list to the Keras \texttt{Sequential} model constructor as in the earlier example, this example uses the \texttt{add()} function to add layers to the model.
 
-\begin{samepage}
 \begin{pythoncode}
 class_model = tf.keras.Sequential(name="classification")
 class_model.add(tf.keras.layers.Dense(64, activation="relu"))
@@ -807,20 +768,16 @@ class_model.add(tf.keras.layers.Dense(4, activation="softmax"))
 # class_model.add(tf.keras.layers.Dense(4, activation=None))
 # class_model.add(tf.keras.layers.Softmax())
 \end{pythoncode}
-\end{samepage}
 
 To connect the model for feature preprocessing and the classification model, it is important to recall that the output of the preprocessing model is the input to the classification model. That is, the output of the preprocessing model when applied to the \texttt{inputs}, is the input to the \texttt{class\_model}. In other words, the classification result is the output of applying the class model to the output of the preprocessing model when applied to the input objects, as shown in the following Python code block:
 
-\begin{samepage}
 \begin{pythoncode}
 class_results = class_model(preproc_model(inputs))
 class_model.summary()
 \end{pythoncode}
-\end{samepage}
 
 The output of the \texttt{summary()} function is shown below. The reader should verify the number of trainable parameters and understand what these parameters represent in the model.
 
-\begin{samepage}
 \begin{textcode}
 Model: "classification"
 _________________________________________________________________
@@ -836,18 +793,14 @@ Total params: 4516 (17.64 KB)
 Trainable params: 4516 (17.64 KB)
 Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
-\end{samepage}
 
 The final complete Keras \texttt{Model} has the dictionary of \texttt{Input} objects as input and the classofication result as outputs:
 
-\begin{samepage}
 \begin{pythoncode}
 wage_model = tf.keras.Model(inputs, class_results, name="wage_model")
 wage_model.summary()
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 \begin{textcode}
 Model: "wage_model"
 __________________________________________________________________
@@ -875,11 +828,9 @@ Total params: 4519 (17.66 KB)
 Trainable params: 4516 (17.64 KB)
 Non-trainable params: 3 (16.00 Byte)
 \end{textcode}
-\end{samepage}
 
 With the model defined, it can now be compiled. That is, the loss function, the optimizer, and any additional metrics are specified. This example uses cross-entropy as a loss function, the Adam optimizer, and the accuracy and KL-divergence as additional metrics to calculate and report. The Python code block below explicitly shows some of the hyper-parameters for the Adam optimizer for illustration, but they are left at their defaults. Note how these parameters are used in Equations~\ref{eq:adam1} to \ref{eq:adam3}.
 
-\begin{samepage}
 \begin{pythoncode}
 wage_model.compile(
     loss=tf.keras.losses.SparseCategoricalCrossentropy(
@@ -896,22 +847,18 @@ wage_model.compile(
 # the softmax activation or the softmax layer at the bottom of the 
 # sequential classification model.
 \end{pythoncode}
-\end{samepage}
 
 As indicated in the model summary output above, the model has eight distinct inputs in its \texttt{InputLayer}. Hence, when fitting the model, the training or validation data must be provided as a dictionary with eight corresponding entries of Numpy arrays. The following Python code block sets this up, converting Pandas dataframe columns to Numpy arrays:
 
-\begin{samepage}
 \begin{pythoncode}
 import numpy as np
 wage_feature_dict = \
     {name: np.array(value) for \
         name, value in wage_features.items()}
 \end{pythoncode}
-\end{samepage}
 
 TensorBoard is a tool to visualize neural network models and their training and validation data/performance, as shown in Figure~\ref{fig:tensorboard}. To use the TensorBoard visualization tool, the training and validation performance is written to a set of files during the training process. The following code block specifies the folder where the files are to be created, with a separate subfolder for each model that is fitted, named by date and time. A callback function is then created that will be passed to the model \texttt{fit()} function:
 
-\begin{samepage}
 \begin{pythoncode}
 import datetime
 # Construct the folder name
@@ -922,7 +869,6 @@ log_dir = "./tensorboard_logs/" + \
 tensorboard_callback = \
     tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=0)
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -935,7 +881,6 @@ tensorboard_callback = \
 
 Next, the model is trained for 25 epochs, using $1/3$ of the data for validation and the remainder for training:
 
-\begin{samepage}
 \begin{pythoncode}
 wage_hist = wage_model.fit(
     x = wage_feature_dict,
@@ -945,11 +890,9 @@ wage_hist = wage_model.fit(
     epochs = 25,
     callbacks=[tensorboard_callback])
 \end{pythoncode}
-\end{samepage}
 
 Training history can be plotted using Python graphics packages, here Plotly Express:
 
-\begin{samepage}
 \begin{pythoncode}
 import plotly.express as px
 hist = pd.DataFrame({
@@ -963,15 +906,14 @@ hist = pd.melt(hist, id_vars='epoch',
 fig = px.line(hist, x='epoch', y='value', color='variable')
 fig.show()
 \end{pythoncode}
-\end{samepage}
 
 However, TensorBoard provides a better and more interactive way to explore the model and its training peformance. To use Tensorboard for models fitted with an appropriate callback function, first start Tensorboard from a terminal application or other bash shell and provide the log file directory that was specified in the TensorBoard callback definition:
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 \small
 This following command is NOT a Python command, use a bash shell in a Terminal!
 \normalsize
-\end{tcolorbox}
+\end{alertbox}
 
 \begin{bashcode}
 tensorboard --logdir tensorboard_logs
@@ -1003,7 +945,6 @@ tensorboard --logdir tensorboard_logs
 
 Callback functions like the Tensorboard callback used above, are a Keras mechanism to perform certain actions as part of the training process. Keras calls these callback functions while training the model. Another useful callback function is the \texttt{EarlyStopping} callback. It allows the analyst to specify that Keras should stop model training when a certain metric does not change over a number of epochs. The following Python code block gives an example:
 
-\begin{samepage}
 \begin{pythoncode}
 earlystop_callback = tf.keras.callbacks.EarlyStopping(
     monitor = 'val_loss',
@@ -1011,12 +952,11 @@ earlystop_callback = tf.keras.callbacks.EarlyStopping(
     mode = 'min', # or 'max' or 'auto' depending on monitor metric
     restore_best_weights = True)
 \end{pythoncode}
-\end{samepage}
 
 The metric to monitor can be the loss function (training or validation as per the prefix) or any of the additional metrics to be computed that are specified in the \texttt{metrics} argument to \texttt{compile()}. The \texttt{patience} parameter indicates the number of epochs to wait for an improvement before stopping the training; the \texttt{mode} parameter indicates whether to wait for decrease, increase, or to automatically determine this from the metric to monitor. Finally the \texttt{restore\_best\_weights} option is used to restore the parameter values from the best epoch or to retain the parameter values from the final training epoch. The early stopping callback can be provided to the \texttt{fit()} function in the same list as the Tensorboard callback.
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 \begin{itemize}
    \item Examine the model summaries for the preprocessing, the classification, and the complete wage model. Explain the number of trainable and total parameters, and also explain the output shapes of each layer.
    \item Make the ''wage'' prediction a binary classification problem:
@@ -1033,7 +973,7 @@ The metric to monitor can be the loss function (training or validation as per th
       \item Plot the metrics after training
    \end{enumerate}
 \end{itemize}
-\end{tcolorbox}
+\end{exercisebox}
 
 
 \FloatBarrier

@@ -22,50 +22,49 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Tom White (2012) \emph{Hadoop -- The Definitive Guide}. 3rd edition. O'Reilly Media. Sebastopol, California, US.
-\end{tcolorbox}
+\end{resourcebox}
 
 This book introduces in great detail the main concepts of Apache Hadoop and provides step-by-step introduction to setting up a Hadoop cluster, using the Map-Reduce API, submitting and managing jobs. The book also provides a chapter on related projects, such as Hive and Pig. It was written for Hadoop 2.3, which introduced the Map-Reduce 2.0 API and YARN. While older, it can still serve as a comprehensive reference also to more recent Hadoop versions.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Hrishikesh V. Karambelkar (2018) \emph{Apache Hadoop 3 Quick Start Guide}. Packt Publishing. Birmingham, UK.
-\end{tcolorbox}
+\end{resourcebox}
 
 This quick start guide is more recent and written for Hadoop 3.0. It provides only a brief overview of the Hadoop system, focusing on cluster installation, configuration, and management, rather than Map-Reduce or data management.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Bill Chambers and Matei Zaharia (2018) \emph{Spark -- The Definitive Guide}. O'Reilly Media. Sebastopol, California, US.
-\end{tcolorbox}
+\end{resourcebox}
 
 This is a very comprehensive book, written for Spark 2.0. Matei Zaharia is the original designer and lead developer of the Spark project. The book covers all aspects of Spark. All examples are provided both in Scala and in Python. While a little older at this point, it is very instructive and easy to follow with many practical points of how to get the most out of Spark.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Jules Damji et al. (2020) \emph{Learning Spark -- Lightning-Fast Data Analytics}. 2nd edition. O'Reilly Media. Sebastopol, California, US.
-\end{tcolorbox}
+\end{resourcebox}
 
 This book, while not quite as comprehensive as the one by Chambers \& Zaharia, is newer and targets Spark 3.0. It also covers all aspects of Spark, from installation and configuration, to programming the SQL, streaming, and machine learning components of Spark. The book provides most examples in both Scala and Python.
 
-\begin{tcolorbox}[colback=alert]
-\subsubsection*{Resources}
+\begin{resourcebox}
 Complete implementations of all examples in this chapter are available in the following GitHub repos.\\
 
 For the Hadoop MapReduce examples:
 
-\url{https://github.com/jevermann/busi4720-hadoop} \\
+\small\url{https://github.com/jevermann/busi4720-hadoop}\normalsize \\
 
 The project can be cloned from this URL:
 
-\url{https://github.com/jevermann/busi4720-hadoop.git} \\
+\small\url{https://github.com/jevermann/busi4720-hadoop.git}\normalsize \\
 
 For the Spark examples:
 
-\url{https://github.com/jevermann/busi4720-pyspark} \\
+\small\url{https://github.com/jevermann/busi4720-pyspark}\normalsize \\
 
 The project can be cloned from this URL:
 
-\url{https://github.com/jevermann/busi4720-pyspark.git} \\
-\end{tcolorbox}
+\small\url{https://github.com/jevermann/busi4720-pyspark.git}\normalsize \\
+\end{resourcebox}
 
 \section{Introduction}
 
@@ -216,28 +215,22 @@ sudo systemctl start hadoop.service
 
 Download an event log file to your local file system and then put the event log onto the Hadoop Distributed File System:
 
-\begin{samepage}
 \begin{bashcode}
 wget https://evermann.ca/busi4720/eventlog.short.log
 hdfs dfs -put eventlog.short.log
 \end{bashcode}
-\end{samepage}
 
 Display the start and end of the from the HDFS:
-\begin{samepage}
 \begin{bashcode}
 hdfs dfs -head eventlog.short.log
 hdfs dfs -tail eventlog.short.log
 \end{bashcode}
-\end{samepage}
 
 Show disk usage and disk free space:
-\begin{samepage}
 \begin{bashcode}
 hdfs dfs -du
 hdfs dfs -df
 \end{bashcode}
-\end{samepage}
 
 Copy the event log:
 \begin{bashcode}
@@ -250,9 +243,7 @@ hdfs dfs -ls
 \end{bashcode}
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
-
+\begin{exercisebox}
 \paragraph*{Exercise 1: Accessing HDFS}
 
 \begin{enumerate}
@@ -279,7 +270,7 @@ hdfs dfs -ls
   \item Observe and note the number of blocks the file is split into and their locations.
 \end{enumerate}
 
-\end{tcolorbox}
+\end{exercisebox}
 
 \subsection{Map-Reduce}
 
@@ -339,7 +330,6 @@ While Hadoop MapReduce is natively programmed in Java, Hadoop Streaming allows M
 
 The Map function in the following Python code block reads lines from standard input. Hadoop Streaming is responsible for feeding those lines from the specified input to the Map function. After whitespace is stripped from the beginning and end of each line, the line is split into words. For each word, the Map outputs a key--value pair, separated by a tab character. The key is the word, the value is the number 1.
 
-\begin{samepage}
 \begin{pythoncode}
 #!/usr/bin/env python
 import sys
@@ -350,11 +340,9 @@ for line in sys.stdin:
     for word in words:
         print ('{}\t{}'.format(word, 1))
 \end{pythoncode}
-\end{samepage}
 
 Every instance of the Reduce function sees all values for a key, but may be processing the multiple keys. The following Reduce implementation reads key--value pairs from the standard input. It splits them on the tab character and maintains a dictionary of word counts. For each new key--value pair it increments its counter by the value it has just read. Finally, it outputs its results in the form of key--value pairs.
 
-\begin{samepage}
 \begin{pythoncode}
 #!/usr/bin/env python
 import sys
@@ -373,18 +361,15 @@ for line in sys.stdin:
 for word, count in word_counts.items():
     print('{}\t{}'.format(word, count))
 \end{pythoncode}
-\end{samepage}
 
 Before submitting this application as a job to a Hadoop cluster, it is useful to run it on the local machine and local filesystem. Download the program files and a data file and make the downloaded files executable:
 
-\begin{samepage}
 \begin{bashcode}
 wget https://evermann.ca/busi4720/map.py
 wget https://evermann.ca/busi4720/reduce.py
 wget https://evermann.ca/busi4720/hamlet.txt
 chmod +x *.py
 \end{bashcode}
-\end{samepage}
 
 Then, run the Map function and view its output to understand how it works. The \texttt{''|''} symbol in the following bash code is a \emph{pipe} that pipes the output of one command into the next command. Here, the output of \texttt{cat}, which simply shows the contents of a file, are piped into the map function defined above, and its output is redirected with the \texttt{>} symbol to a file. The \texttt{less} command shows the contents of that file one line in an interactive way.
 
@@ -427,9 +412,9 @@ hdfs dfs -get hamlet.out/part-*
 cat part-* | sort -k2 -rn | less
 \end{bashcode}
 
-\begin{tcolorbox}[colback=code]
+\begin{exercisebox}
 
-\subsubsection*{Hands-On Exercise -- Map Reduce}
+\subsubsection*{Map Reduce}
 
 Modify the \texttt{map.py} and \texttt{reduce.py} python code from above to count \textbf{word length frequencies}. \\
 
@@ -441,7 +426,7 @@ Modify the \texttt{map.py} and \texttt{reduce.py} python code from above to coun
    
    \item The reduce function will use numerical keys, convert the keys it reads appropriately.
 \end{itemize}
-\end{tcolorbox}
+\end{exercisebox}
 
 \newpage
 \subsubsection*{Case Study}
@@ -612,7 +597,7 @@ Figure~\ref{fig:sparkcomponents} shows the components of Spark. Despite its name
 \label{fig:sparkcomponents}
 \end{figure}
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 The Apache Spark web site provides a wealth of information, both at the introductory, conceptual level and the advanced, detailed level. The following sections are useful for learning more about Apache Spark:
 
 \begin{itemize}
@@ -621,7 +606,7 @@ The Apache Spark web site provides a wealth of information, both at the introduc
 \item \href{https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html}{Structured Streaming}
 \item \href{https://spark.apache.org/docs/latest/ml-guide.html}{Machine Learning}
 \end{itemize}
-\end{tcolorbox}
+\end{resourcebox}
 
 \subsubsection*{Cluster Management}
 
@@ -703,16 +688,13 @@ The examples in this section are intended to illustrate the basic usage of Spark
 
 First, start the local Hadoop cluster (if not already running) and the PySpark console. PySpark is Python with a built-in Spark context object to connect to the cluster manager, as shown in the output below. The Hadoop YARN cluster manager manages the PySpark application, and has a web interface at \url{localhost:8088}. From there, information about the PySparkShell application can be viewed.
 
-\begin{samepage}
 \begin{bashcode}
 sudo systemctl start hadoop.service
 pyspark --master yarn
 \end{bashcode}
-\end{samepage}
 
 The result is the PySparkShell, which is a Python shell with a Spark context object that provides the connection to the cluster manager:
 
-\begin{samepage}
 \begin{textcode}
 Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0] on linux
 Type "help", "copyright", "credits" or "license" for more information.
@@ -728,11 +710,9 @@ Spark context Web UI available at http://10.0.2.15:4040
 Spark context available as 'sc' (master = yarn, app id = application_
 SparkSession available as 'spark'.
 \end{textcode}
-\end{samepage}
 
 The following Python code block reads a file from HDFS and gathers some statistics. Note that the \texttt{textFile} is treated as a DataFrame with typical data frame operations such as \texttt{count()} and \texttt{filter()}. PySpark will provide some information about the job progress on the cluster as these operations are executed.
 
-\begin{samepage}
 \begin{pythoncode}
 textFile = spark.read.text(\
     'hdfs://localhost:9000/user/busi4720/hamlet.txt')
@@ -743,11 +723,9 @@ textFile.first()
 # How many lines contain the word Hamlet?
 textFile.filter(textFile.value.contains("Hamlet")).count() 
 \end{pythoncode}
-\end{samepage}
 
 The Python code block below shows another example of Spark DataFrame operations. It finds the longest line by number of words. It imports a number of useful functions from the Spark SQL package. The \texttt{sf.split()} function splits a character string on a regular expression into a list of words, \texttt{sf.size()} returns the length of that list, \texttt{sf.col()} returns a specified columns, and the \texttt{sf.max()} function returns the maximum of its arguments. The \texttt{agg()} function specifies an aggregation and the final \texttt{collect()} is an action that triggers execution of the transformation operations.
 
-\begin{samepage}
 \begin{pythoncode}
 # Import useful functions from Spark SQL:
 from pyspark.sql import functions as sf
@@ -758,11 +736,9 @@ textFile.select(sf.size(sf.split(textFile.value, "\s+")) \
     .agg(sf.max(sf.col("numWords"))) \
     .collect()
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block implements the word count. It uses two functions from the Spark SQL library, \texttt{sf.split()} and \texttt{sf.explode()}. The first splits a line of text (a character string) on a regular expression, here, one or more whitespace characters. The \texttt{sf.explode()} function converts the list resulting from \texttt{sf.split()} into a DataFrame column. This column is then called ''word''. The \texttt{groupBy()} and \texttt{count()} operations then aggregate the information. The final \texttt{collect()} is an action that triggers actual execution of the transformation operations.
 
-\begin{samepage}
 \begin{pythoncode}
 # Import useful functions from Spark SQL:
 from pyspark.sql import functions as sf
@@ -775,7 +751,6 @@ wordCounts = textFile \
     .orderBy("count")
 wordCounts.collect()
 \end{pythoncode}
-\end{samepage}
 
 \subsubsection*{Spark Schemas}
 
@@ -785,7 +760,6 @@ Spark supports a variety of data types similar to traditional database types, wh
 
 A schema in Spark is defined using the Spark schema DDL (data definition language)\index{Data definition language!Spark} which looks superficially like an SQL table definition, as shown in the following PySpark example that defines a schema for reading an event log file for process analytics:
 
-\begin{samepage}
 \begin{pythoncode}
 # Define a schema using Spark schema DDL
 logSchema = \
@@ -793,11 +767,9 @@ logSchema = \
      activity STRING, \
      ts TIMESTAMP'
 \end{pythoncode}
-\end{samepage}
 
 The schema can then be used the reading data into a DataFrame, as shown in the Python code block below. A CSV file is read from HDFS using specific options for delimiter and header row and the schema defined above:
 
-\begin{samepage}
 \begin{pythoncode}
 fname='hdfs://localhost:9000/user/busi4720/eventlog.short.log'
 
@@ -808,18 +780,15 @@ data = spark.read \
     .schema(logSchema) \
     .load(fname)
 \end{pythoncode}
-\end{samepage}
 
 The following PySpark commands provide basic information for the DataFrame:
 
-\begin{samepage}
 \begin{pythoncode}
 data.printSchema()
 data.count()
 data.show(5)
 data.summary().show()
 \end{pythoncode}
-\end{samepage}
 
 \subsubsection*{Spark SQL}
 
@@ -839,16 +808,13 @@ data.write.saveAsTable('log_table')
 
 In either case, the \texttt{spark.sql()} function allows the use of SQL commands on the temporary or permanent table:
 
-\begin{samepage}
 \begin{pythoncode}
 result_df = spark.sql('select * from log limit 5')
 result_df.show()
 \end{pythoncode}
-\end{samepage}
 
 For a more elaborate example, consider the construction of a Directly-Follows-Graph (DFG)\index{Directly-follows graph}, as used in business process analytics. This is relatively easy to do with the follwing SQL query. It computes the number of times an activity directly follows another activity, as well as the mean time between two activities following each other. 
 
-\begin{samepage}
 \begin{pythoncode}
 sql_query = \
 'SELECT COUNT(*), l1.activity AS activity1, \
@@ -858,32 +824,26 @@ sql_query = \
     WHERE l3.caseid=l1.caseid AND l3.ts > l1.ts) \
      GROUP BY GROUPING SETS((l1.activity, l2.activity))'
 \end{pythoncode}
-\end{samepage}
 
 Query execution may require some time due to the multiple self-joins on the log table. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Run the query, show the results
 dfg = spark.sql(sql_query)
 dfg.count()
 dfg.show()
 \end{pythoncode}
-\end{samepage}
 
 To illustrate the concept of a query plan and query plan optimization, it may be useful to examine the optimized query plan that Spark uses for the actual calculations. The output provides information about the logical query plans, both the initial and the optimized one, as well as the physical query plan, the set of tasks that Spark runs on the cluster nodes to calculate the result.
 
-\begin{samepage}
 \begin{pythoncode}
 # Explain the query plan:
 dfg.explain(mode='formatted')
 dfg.explain(True)
 \end{pythoncode}
-\end{samepage}
 
 So far, the Spark examples have been run interactively from the PySpark console. However, longer running analytics jobs are typically submitted to the Spark cluster for execution as self-contained applications so the analyst does not have to wait for results to be returned. To do this, one can use the \texttt{spark-submit} command and specify the PySpark file and its arguments. The following example downloads a Python application file (which contains the above code to compute the DFG) and then submits it to the cluster manager for execution, providing the HDFS file name as its argument. Result will be written to HDFS. While the job is running, use Hadoop Job Tracker at \url{https://localhost:8088} to track the status of nodes and the progress of jobs.
 
-\begin{samepage}
 \begin{bashcode}
 # Download file
 wget https://evermann.ca/busi4720/spark_dfg.py
@@ -891,7 +851,6 @@ wget https://evermann.ca/busi4720/spark_dfg.py
 spark-submit --master yarn spark_dfg.py \
  hdfs://localhost:9000/user/busi4720/eventlog.short.log
 \end{bashcode}
-\end{samepage}
 
 \subsection{Spark Machine Learning}
 
@@ -923,7 +882,6 @@ Figure~\ref{fig:sparkpipelines} illustrates the use of Spark ML pipelines\index{
 
 The following example illustrates the use of Spark ML for binary classification. The example requires some feature transformation to illustrate the use of the pipelines. The full example is available to run as self-contained application\footnote{\url{https://evermann.ca/busi4720/spark_ml.py}} using \texttt{spark-submit} on a Spark cluster. Remember that the Hadoop job tracker\footnote{\url{https://localhost:8080}} is available to track the status of the submitted Spark job. The data set for this example is a public dataset originally from the UCI mchine learning laboratory\footnote{Source: \url{https://archive.ics.uci.edu/dataset/848/secondary+mushroom+dataset}, CC-BY 4.0 license}.
 
-\begin{samepage}
 \begin{bashcode}
 # Download file
 wget https://evermann.ca/busi4720/spark_ml.py
@@ -936,11 +894,9 @@ hdfs dfs -put mushrooms.csv
 spark-submit --master yarn spark_ml.py \
     hdfs://localhost:9000/user/busi4720/mushrooms.csv
 \end{bashcode}
-\end{samepage}
 
 The remainder of this section illustrates the code in detail. First, the schema is defined for reading the CSV data set into a Spark DataFrame and to validate the data types:
 
-\begin{samepage}
 \begin{pythoncode}
 the_schema = 'class STRING, `cap-diameter` DOUBLE, \
     `cap-shape` STRING, `cap-surface` STRING, \
@@ -954,11 +910,9 @@ the_schema = 'class STRING, `cap-diameter` DOUBLE, \
     `spore-print-color` STRING, habitat STRING, \
     season STRING'
 \end{pythoncode}
-\end{samepage}
 
 The \texttt{spark.read()} function uses the schema and specific parameters for delimiter and header rows to read the CSV file into a Spark DataFrame. The ''veil-type'' column is then dropped and missing values are replaced by the character string 'NULL'.
 
-\begin{samepage}
 \begin{pythoncode}
 fname='hdfs://localhost:9000/user/busi4720/mushrooms.csv'
 
@@ -971,9 +925,7 @@ data = spark.read \
 data = data.drop('veil-type')
 data = data.fillna('NULL')
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 Next, import the required packages:
 \begin{pythoncode}
 # Import all required pieces:
@@ -984,71 +936,57 @@ from pyspark.ml.feature import StandardScaler, \
 from pyspark.ml.evaluation import BinaryClassificationEvaluator
 from pyspark.ml import PipelineModel
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 The numerical feature columns are concatenated (''assembled'') into a single vector column using the \texttt{VectorAssembler} transformer:
 \begin{pythoncode}
 numFeatures = VectorAssembler(
     inputCols = ['cap-diameter', 'stem-width', 'stem-height'],
     outputCol = 'numFeatures')
 \end{pythoncode}
-\end{samepage}
 
-\begin{samepage}
 The \texttt{StandardScaler} transformer scales and standardizes the numerical features:
 \begin{pythoncode}
 scaler = StandardScaler(inputCol='numFeatures',
                         outputCol='numFeaturesS')
 \end{pythoncode}
-\end{samepage}
 
 The categorical variables are one-hot encoded using dummy variables. First, identify the columns with 'string' data type, and construct column names for the indexed and one-hot encoded corresponding columns:
 
-\begin{samepage}
 \begin{pythoncode}
 categoricalCols = \
     [name for (name, dtype) in data.dtypes if dtype=='string']
 indexOutputCols = [x + 'index' for x in categoricalCols]
 oheOutputCols = [x + 'ohe' for x in categoricalCols]
 \end{pythoncode}
-\end{samepage}
 
 A \texttt{StringIndexer} is a transformer that transforms a column or set of columns of character strings into a column or set of columns of integer indices.
 
-\begin{samepage}
 \begin{pythoncode}
 stringIndexer = StringIndexer(
     inputCols = categoricalCols,
     outputCols = indexOutputCols,
     handleInvalid='skip')
 \end{pythoncode}
-\end{samepage}
 
 The \texttt{OneHotEncoder} takes one or more numerical category index columns and returns the corresponding one-hot encoded columns:
 
-\begin{samepage}
 \begin{pythoncode}
 oheEncoder = OneHotEncoder(
     inputCols = indexOutputCols,
     outputCols = oheOutputCols)
 \end{pythoncode}
-\end{samepage}
 
 Finally, the numerical and categorical feature columns are combined into a column with the entire feature vector using another \texttt{VectorAssembler} transformer:
 
-\begin{samepage}
 \begin{pythoncode}
 # Assemble all features into a feature vector
 vecAssembler = VectorAssembler(
     inputCols = oheOutputCols+['numFeaturesS'],
     outputCol = 'feature_vec')
 \end{pythoncode}
-\end{samepage}
 
 The targets are also encoded as numerical indices, using the \texttt{StringIndexer} transformer:
 
-\begin{samepage}
 \begin{pythoncode}
 # Encode the target classes as numbers
 stringIndexTarget = StringIndexer(
@@ -1056,20 +994,16 @@ stringIndexTarget = StringIndexer(
     outputCols = ['classIndex'],
     handleInvalid='skip')
 \end{pythoncode}    
-\end{samepage}
 
 As the last required element, the \texttt{LogisticRegression} estimator is defined, accepting the feature vector column and the target column:
 
-\begin{samepage}
 \begin{pythoncode}
 # Create the classification estimator
 logReg = LogisticRegression(
     featuresCol = 'feature_vec', labelCol = 'classIndex')
 \end{pythoncode}
-\end{samepage}
 All components can be assembled into a pipeline:
 
-\begin{samepage}
 \begin{pythoncode}
 # Put all components into the pipeline
 pipeline = Pipeline(stages=[
@@ -1081,29 +1015,23 @@ pipeline = Pipeline(stages=[
     stringIndexTarget,
     logReg])
 \end{pythoncode}
-\end{samepage}
 
 To train the model, the data set is split into training and test data, using the \texttt{randomSplit} transformation on the Spark DataFrame:
 
-\begin{samepage}
 \begin{pythoncode}
 # Create train/test data split
 train_data, test_data = data.randomSplit([.66, .33], seed=1)
 \end{pythoncode}
-\end{samepage}
 
 Calling the pipeline's \texttt{fit} method will turn the final estimator, and the entire pipeline into a fitted model, that is, a transformer:
 
-\begin{samepage}
 \begin{pythoncode}
 # Fit the model to the training data
 pipelineModel = pipeline.fit(train_data)
 \end{pythoncode}
-\end{samepage}
 
 Performance metrics for the training data can be retrieved from the last stage of the pipeline, that is, from the \texttt{LogisticRegression} estimator (now a transformer):
 
-\begin{samepage}
 \begin{pythoncode}
 # Summary of the training data performance
 summary = pipelineModel.stages[-1].summary
@@ -1114,20 +1042,16 @@ summary.precisionByLabel
 summary.recallByLabel
 summary.roc.show()
 \end{pythoncode}
-\end{samepage}
 
 Fitted estimators, including whole pipelines, become transformers. The \texttt{transform()} method of a transformer can be used to transform inputs into output predictions: 
 
-\begin{samepage}
 \begin{pythoncode}
 trainPred = pipelineModel.transform(train_data)
 testPred = pipelineModel.transform(test_data)
 \end{pythoncode}
-\end{samepage}
 
 Apache Spark ML provides ''evaluators'' to evaluate the predictive performance of models. The \texttt{BinaryClassificationEvaluator} focuses on the AUC. It accepts the true classes and can then evaluate the predictions created by the pipeline against the true class indices:
 
-\begin{samepage}
 \begin{pythoncode}
 # Evaluate the model using AUC
 evaluator = BinaryClassificationEvaluator(
@@ -1135,11 +1059,9 @@ evaluator = BinaryClassificationEvaluator(
 evaluator.evaluate(trainPred)
 evaluator.evaluate(testPred)
 \end{pythoncode}
-\end{samepage}
 
 To help manage trained models for later reuse, Spark ML provides methods to save and load fitted models/pipelines:
 
-\begin{samepage}
 \begin{pythoncode}
 # Save the fitted model for later re-use:
 pipelineModel.write().overwrite().save('myFirstModel')
@@ -1147,7 +1069,6 @@ pipelineModel.write().overwrite().save('myFirstModel')
 # Load a saved model:
 savedModel = PipelineModel.load('myFirstModel')
 \end{pythoncode}
-\end{samepage}
 
 
 \section{Stream Analytics}
@@ -1255,16 +1176,13 @@ To illustrate Spark Streaming, the following PySpark example implements a real-t
 
 The first Python code block imports all necessary functions:
 
-\begin{samepage}
 \begin{pythoncode}
 from pyspark.sql.functions import explode, split, col, desc, \
     window, current_timestamp
 \end{pythoncode}
-\end{samepage}
 
 The next code block creates a stream reader to read from a network socket on the local machine on port number 9999. The result, \texttt{lines}, is a Spark DStream object representing the input data stream. Note that the stream reader opens a \emph{client} socket, i.e. the socket must already have been opened for writing by the data producer, otherwise the \texttt{load()} action will fail.
 
-\begin{samepage}
 \begin{pythoncode}
 lines = spark.readStream \
              .format('socket') \
@@ -1272,15 +1190,12 @@ lines = spark.readStream \
              .option('port', 9999) \
              .load()
 \end{pythoncode}
-\end{samepage}
 
 Next, processing of individual lines is done, using the same functions as in the earlier Spark DataFrame examples. In the following block of Python code \texttt{words} is another DStream that is connected to the \texttt{lines} DStream, as illustrated in Figure~\ref{fig:sparkwordcount}.
 
-\begin{samepage}
 \begin{pythoncode}
 words = lines.select(explode(split(col('value'),'\\s')).alias('word'))
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -1293,17 +1208,14 @@ words = lines.select(explode(split(col('value'),'\\s')).alias('word'))
 
 Individual words are then processed, again, in the same way as in the earlier Spark DataFrame example. The following Python code block creates \texttt{counts} as another Dstream, connected to the \texttt{words} DStream.
 
-\begin{samepage}
 \begin{pythoncode}
 counts = words.groupBy('word') \
               .count() \
               .sort(desc('count'))
 \end{pythoncode}
-\end{samepage}
 
 Finally, an output writer is defined with a ''complete'' output mode that writes the complete result after each micro-batch, and a 5 second timer interval trigger on processing -- Spark Streaming will read and process a micro-batch every 5 seconds. The checkpoint location is where Spark Streaming stores information about the status of the data streams so it can recover in case processing is interrupted. This ensures fault tolerance, and allows Spark Streaming to guarantee that every record is processed and every record is processed only once. Figure~\ref{fig:streamingexample} illustrates the complete example.
 
-\begin{samepage}
 \begin{pythoncode}
 writer = counts.writeStream \
            .format('console') \
@@ -1312,7 +1224,6 @@ writer = counts.writeStream \
            .option('checkpointLocation', \
                'hdfs://localhost:9000/user/busi4720/')
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -1350,24 +1261,20 @@ streamingQuery.stop()
 
 This basic example can be extended to illustrate time windowing, illustrated in the following Python code block. First, the line processing is changed to not only split lines into words, but also to record the event timestamp. That is, the \texttt{words} DStream will contain two columns, \texttt{word} and \texttt{eventTime}:
 
-\begin{samepage}
 \begin{pythoncode}
 words = lines \
     .select(explode(split(col('value'),'\\s')).alias('word')) \
     .withColumn('eventTime', current_timestamp())
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block changes the definition of the \texttt{counts} DStream to group by words but now for one minute windows of the \texttt{eventTime} column; windows are updated every 30 second, that is, overlapping time windows. Figure~\ref{fig:streamingtimewindow} illustrates the time windowing concept.
 
-\begin{samepage}
 \begin{pythoncode}
 counts = words \
     .groupBy('word', window('eventTime', '1 minute', '30 second')) \
     .count() \
     .sort(desc('count'))
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering

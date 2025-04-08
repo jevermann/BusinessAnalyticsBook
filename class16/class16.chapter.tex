@@ -18,22 +18,23 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
 
-\url{https://probml.github.io/pml-book/book1.html} \\
+\small\url{https://probml.github.io/pml-book/book1.html}\normalsize \\
 
 Chapter 13, 14, 15
-
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Murphy is freely available and provides three chapters on neural networks, one for structured data, one for images, and one for sequences. It provides significant depth on convolutional and recurrent network architectures, fitting the models, and problems that the data analyst may encounter. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Tensorflow Guides: \\
-\url{https://www.tensorflow.org/guide} \\
-\url{https://www.tensorflow.org/tutorials/load_data/text}
-\end{tcolorbox}
+
+\small\url{https://www.tensorflow.org/guide}\normalsize \\
+
+\small\url{https://www.tensorflow.org/tutorials/load_data/text}\normalsize
+\end{resourcebox}
 
 This course uses the Tensorflow programming framework for neural network applications. The Tensorflow website has a multitude of introductory and advanced guides and tutorial that cover all aspects of machine learning with neural networks. 
 
@@ -99,13 +100,13 @@ A single convolutional network layer may have \emph{multiple filters}. Each filt
 
 Consider another simple example in image processing, with an input image of size $32 \times 32 \times 3$ (width x height x channel (red, green, blue)). A convolutional layer might have 10 filters of size $5 \times 5 \times 3$. The output of applying these filters will result in an output of size $28 \times 28 \times 10$ (when using a stride of 1 and no padding, see below).
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 While the examples show fixed numbers in the kernels, the kernel elements are actually trainable parameters.
-\end{tcolorbox}
+\end{alertbox}
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Verifying the shape/dimensions of inputs, kernels, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
-\end{tcolorbox}
+\end{alertbox}
 
 There are two key considerations when defining a convolutional network layer, \emph{stride}\index{Striding (in convolutional network)} and \emph{padding}\index{Padding (in convolutional layer)}. When moving the kernel over the input, the \emph{stride} controls the size of the steps in each direction. A stride of $1$ means the kernel moves one column or row at a time. A larger stride results in downsizing of the feature map, in removing redundancy in the output feature map (it avoids an input element being processed multiple times by a filter) and in increasing the efficiency of the data representation in the neural network.
 
@@ -129,8 +130,8 @@ As with general neural networks, it is instructive to examine and verify the num
 \textbf{Example}: Let the kernel size be $5 \times 5$ applied to an input with $3$ channels and an output of $32$ channels. Then, the CNN layer has $32 \times 3 \times 5 \times 5 + 32 = 2432$ parameters.
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
+\begin{exercisebox}
+
 Calculate the number of trainable parameters for the following CNN layers:
 \begin{enumerate}
 \item A kernel of size $4 \times 4$ operating on an input with 3 channels and an output of 8 channels.
@@ -139,7 +140,7 @@ Calculate the number of trainable parameters for the following CNN layers:
 \item A kernel of size $5 \times 5$ operating on an input with 4 channels and an output with 4 channels.
 \end{enumerate}
 Assume the previous four layers are part of the same neural network, what is the total number of trainable parameters?
-\end{tcolorbox}
+\end{exercisebox}
 
 
 
@@ -162,8 +163,8 @@ Figure~\ref{fig:screen5_chap16} shows an example of $2 \times 2$ max pooling on 
 
 In image processing in particular, pooling helps the network become invariant to small translations, rotations, and scalings of an image. Max pooling in particular helps in detecting features like edges, textures, and shapes, even if they appear in different areas of the image in different instances. Although pooling reduces the resolution of the feature map, important features (like the presence of certain edges or textures) are retained due to the nature of max or average operations within localized regions of the input.
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 \begin{enumerate}
 \item Assume the following $5 \times 5$ input matrix:
 \begin{align*}
@@ -184,7 +185,7 @@ Zero-pad the matrix with \emph{two} zeros on all sides and using stride 2, calcu
 
 \item Apply a $2 \times 2$ max pooling layer to the result of the previous exercise. 
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 
 \section{Understanding ConvNets}
@@ -204,9 +205,9 @@ Figure~\ref{fig:screen6} shows an example of a complete network. Multiple convol
 
 Figure~\ref{fig:screen12} shows another useful diagram. In addition to the general architecture it shows the dimensionality of the output at each stage, which is very helpful in understanding how convolution and pooling filters operate. For example, the input image is of shape $224 \times 224 \times 3$. There are 96 convolutional filters operating on this image, each with a kernel shape of $7 \times 7 \times 3$ and a stride of 2. This yields an output with shape $110 \times 110 \times 96$. The subsequent $3 \times 3$ pooling with stride 2 reduces this to $55 \times 55 \times 96$ for the final layer 1 output. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Verifying the shape/dimensions of inputs, kernels, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
-\end{tcolorbox}
+\end{alertbox}
 
 \begin{figure}
 \centering
@@ -223,9 +224,9 @@ Verifying the shape/dimensions of inputs, kernels, and outputs, and understandin
 \end{figure}
 
 
-\begin{tcolorbox}[colback=alert]
+\begin{infobox}
 This term ''feature map''\index{Feature map} may be used in various ways. Some authors use it to describe the convolution output before the application of activation function and pooling, some authors use it to describe the convolution output after application of the activation function but prior to pooling, some authors use it to describe the output after pooling and some authors use it to describe any of the three. Hence, when the term ''feature map'' is used, it is important to identify the precise meaning in a particular context.
-\end{tcolorbox}
+\end{infobox}
 
 To understand how convolutional networks perform feature extraction or feature learning, it is instructive to visualize the feature maps. There are multiple ways of doing this. One of the earliest techniques developed for this is the ''\emph{DeconvNet}\footnote{Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}}''. The general architecture of a DeconvNet is shown in Figure~\ref{fig:screen13}. Using an unpooling operation, a DeconvNet successively reconstructs the image input for a feature map\index{DeconvNet}. 
 
@@ -291,18 +292,15 @@ Finally, layers 4 and 5 have learned to extract specific objects or object parts
 
 This section illustrates how to implement convolutional neural networks in Tensorflow/Keras\footnote{Python code for this example is taken from \href{https://www.tensorflow.org/tutorials/images/cnn}{TensorFlow.org} that is made available under a \href{https://www.apache.org/licenses/LICENSE-2.0}{Apache 2.0 license}.}. This example uses the CIFAR10 data set, a standard data set used to benchmark image classification methods. The data set consists of 60,000 images with resolution of $32 \times 32$ pixels and 3 RGB channels. There are ten classes. The latest error rates on this data set are less then 0.5\%, showing that it is no longer useful as a realistic or competitive benchmark --- it is essentially a solved problem. However, due to the small image size and data set size, it is computationally easy to analyze and useful as an illustrative example. 
 
-\begin{tcolorbox}[colback=code]
-\footnotesize
+\begin{resourcebox}
 Complete implementations for this and the other examples in this chapter are available in the following GitHub repo:
-\url{https://github.com/jevermann/busi4720-ml} \\
+\small\url{https://github.com/jevermann/busi4720-ml}\normalsize \\
 
-The project can be cloned from this URL: \url{https://github.com/jevermann/busi4720-ml.git}
-\normalsize
-\end{tcolorbox}
+The project can be cloned from this URL: \small\url{https://github.com/jevermann/busi4720-ml.git}\normalsize
+\end{resourcebox}
 
 The data set is part fo the Keras Python package, making import easy. The function \texttt{load\_data()} provides separated training and testing images and labels:
 
-\begin{samepage}
 \begin{pythoncode}
 import tensorflow as tf
 from tensorflow.keras import datasets, layers, models
@@ -311,22 +309,18 @@ import datetime
 (train_images, train_labels), (test_images, test_labels) \
     = datasets.cifar10.load_data()
 \end{pythoncode}
-\end{samepage}
 
 The RGB values in the original images are coded on a scale of 0 to 255. The first step is to scale these values to the range of 0 to 1 in order to avoid gradient problems during model training:
 
-\begin{samepage}
 \begin{pythoncode}
 # Normalize pixel values to be between 0 and 1
 train_images, test_images = train_images/255.0, test_images/255.0
 \end{pythoncode}
-\end{samepage}
 
 Keras makes it easy to create a convolutional network similar to the one shown in Figure~\ref{fig:screen12}. This example uses three convolutional layers, each with a ReLU activation and followed by max-pooling. 
 
 The first argument to the \texttt{Conv2D()} layer creation function specifies the number of output channels, that is, the number of independent convolution kernels. In the example, the first layer has 8 output channels, the second and third layers have 16 output channels. The second argument specifies the shape of the convolution kernel, which is $3 \times 3$ for all layers in this example. The input shape for the first convolutional layer must be provided explicitly. Note that no batch size is specified, only the image input dimensions are needed; the batch size can be specified later. The input shapes for subsequent layers are automatically determined from the output shapes of the previous layers.
 
-\begin{samepage}
 \begin{pythoncode}
 # Create a simple convolutional model:
 model = models.Sequential()
@@ -337,11 +331,9 @@ model.add(layers.Conv2D(16, (3, 3), activation='relu'))
 model.add(layers.MaxPooling2D((2, 2)))
 model.add(layers.Conv2D(16, (3, 3), activation='relu'))
 \end{pythoncode}
-\end{samepage}
 
 After the convolutional layers for feature extraction, the remainder of network uses fully-connected, dense layers for classification. Because there are 10 target classes, the final, output layer has 10 units.
 
-\begin{samepage}
 \begin{pythoncode}
 # Add dense (fully-connected) layers for classification. 
 # There are 10 target classes
@@ -351,7 +343,6 @@ model.add(layers.Dense(10))
 # Show model summary
 model.summary()
 \end{pythoncode}
-\end{samepage}
 
 The model summary is shown below. It is easy to verify the number of parameters. For example, the first Conv2D layer uses $3 \times 3$ kernels on 3 channels, for a total of 27 parameters. There are 8 such kernels, each creating one of the 8 output channels, and each adding a bias term before applying the activation function, for a total of $8 \times 27 + 8 = 224$ parameters. The output shape is $30 \times 30$ because a kernel of shape $3 \times 3$ can be moved 30 times in each direction with a stride of $1$.
 
@@ -361,7 +352,6 @@ The second Conv2D layer operates on this input size and produces 16 output chann
 
 The third Conv2D layer uses $16$ output channels of a $3 \times 3$ kernel. Each kernel operates on $16$ input channels. Thus, the total number of parameters in this layer is $3 \times 3 \times 16 \times 16 + 16 = 2320$. A kernel this size can be moved 4 times in each direction over an input of size $6 \times 6$, yielding a final output shape of $4 \times 4 \times 16$ for a total of 256 values. The flatten layer simply transforms them to a one-dimensional layer of 256 values. The following dense layer with 32 units then has $32 \times 256 + 32 = 8224$ trainable parameters (refer to the previous chapter for details), and the output layer for 10 classes has $10 \times 32 + 10$ parameters. Note that the model contains no softmax activation or softmax layer, so the final output are logits, not class membership probabilities. 
 
-\begin{samepage}
 \begin{textcode}
  Layer (type)                Output Shape              Param #   
 =================================================================
@@ -378,15 +368,13 @@ Total params: 12266 (47.91 KB)
 Trainable params: 12266 (47.91 KB)
 Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Verifying the shape/dimensions of inputs, kernels, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
-\end{tcolorbox}
+\end{alertbox}
 
 Next, the callback function for writing TensorBoard log files is specified, similar to examples in the previous chapter:
 
-\begin{samepage}
 \begin{pythoncode}
 # Construct log file folder name
 log_dir = "./tensorboard_logs/" + \
@@ -395,11 +383,9 @@ log_dir = "./tensorboard_logs/" + \
 tensorboard_callback = \
     tf.keras.callbacks.TensorBoard(log_dir=log_dir, histogram_freq=0)
 \end{pythoncode}
-\end{samepage}
 
 Finally, the model is compiled and trained for 100 episodes. Note that \texttt{from\_logits} must be set for the loss function because the model's output layer provides logits, not probabilities.
 
-\begin{samepage}
 \begin{pythoncode}
 # Compile and train the model:
 model.compile(optimizer='adam',
@@ -412,12 +398,10 @@ history = model.fit(train_images, train_labels,
     validation_data=(test_images, test_labels),
     callbacks=[tensorboard_callback])
 \end{pythoncode}
-\end{samepage}
 
 The training accuracy after 100 episodes is $\approx 75\%$ and the validation accuracy is $\approx 66\%$ showing relatively poor performance and some evidence of overfitting. However, noting that random performance should yield an accuracy of $0.1$ for 10 classes, it also shows that a relatively simple network with only a few thousand parameters is already quite capable at image classification. 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
       \item Convolution kernel size (originally $3 \times 3$)
@@ -433,7 +417,7 @@ Comment on your findings and identify the best model.\\
 In particular, explore the trade-offs between using a large number of smaller filters versus a smaller number of larger filters in the context of convolution followed by pooling. \\
 
 Explore how does the choice of pooling strategy (max vs average) affects the features extracted by a convolutional neural network and the predictive performance of the model.\\
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Other Computer Vision Tasks for CNNs}
 
@@ -485,9 +469,9 @@ For some applications, object detection and semantic segmentation must be combin
 \label{fig:street}
 \end{figure}
 
-\begin{tcolorbox}[colback=code]
-The Keras web site has a large number of Keras tutorials on all kinds of computer vision problems, including object detection and semantic segmentation. See this site for more information: \footnotesize\url{https://keras.io/examples/vision/}\normalsize.
-\end{tcolorbox}
+\begin{resourcebox}
+The Keras web site has a large number of Keras tutorials on all kinds of computer vision problems, including object detection and semantic segmentation. See this site for more information: \small\url{https://keras.io/examples/vision/}\normalsize.
+\end{resourcebox}
 
 \section{Text Classification Example using Tensorflow}
 
@@ -497,7 +481,6 @@ The two examples in this section use the StackOverflow 16k data set\footnote{Pyt
 
 First, import the required packages:
 
-\begin{samepage}
 \begin{pythoncode}
 import collections
 import pathlib
@@ -506,11 +489,9 @@ import tensorflow as tf
 from tensorflow.keras import layers, losses, utils
 from tensorflow.keras.layers import TextVectorization
 \end{pythoncode}
-\end{samepage}
 
 Next, download the StackOverflow data set. The data set will be placed in the local Keras cache directory and will be separated by training and test data, as well by the four classes, as shown in Figure~\ref{fig:screen9_chap16}.
 
-\begin{samepage}
 \begin{pythoncode}
 # Get the data
 url='http://download.tensorflow.org/data/stack_overflow_16k.tar.gz'
@@ -527,16 +508,13 @@ sample_file = train_dir/'python/1755.txt'
 with open(sample_file) as f:
   print(f.read())
 \end{pythoncode}
-\end{samepage}
 
 The sample output from the code above is shown here (training data for python, observation 1755). Note that the actual input has been ''blinded'', that is, direct mentions of the programming language have been removed.
 
-\begin{samepage}
 \begin{textcode}
 why does this blank program print true x=true.def stupid():.
 x=false.stupid().print x
 \end{textcode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -548,7 +526,6 @@ x=false.stupid().print x
 
 Next, the training data portion is split into training and validation sets, yielding a total of three portions of data: training, validation, and testing:
 
-\begin{samepage}
 \begin{pythoncode}
 raw_train_ds=utils.text_dataset_from_directory(
     train_dir, batch_size=32, validation_split=0.2,
@@ -560,7 +537,6 @@ raw_val_ds=utils.text_dataset_from_directory(
 
 raw_test_ds=utils.text_dataset_from_directory(test_dir, batch_size=32)
 \end{pythoncode}
-\end{samepage}
 
 The first step in applying neural networks to text data is to pre-process and standardize the text representation itself. This includes at least the following activities:
 
@@ -574,18 +550,15 @@ The first step in applying neural networks to text data is to pre-process and st
 
 This example uses the ''Bag-of-Words'' \index{Bag-of-words model} word frequency model that encodes the input as the number of times that a word occurs. Consider the following example where the input sentence is represented as a dictionary of word counts. 
 
-\begin{samepage}
 \begin{textcode}
 John likes to watch movies. Mary likes movies too.
 {"John":1,"likes":2,"to":1,"watch":1, "movies":2,"Mary":1,"too":1}
 \end{textcode}
-\end{samepage}
 
 This is a simple encoding that may suffice for the classification task, but it does neglect word order which could be important for other tasks. The second example below will use a different encoding that respects word order and is therefore suitable for the use with CNNs. This first, simple example serves as a baseline to compare the later example to.
 
 Keras provides an easy way to preprocess text using the \texttt{TextVectorization} layer. The following Python code block creates such a layer for a maximum of 10,000 different tokens (approximately the first 10,000 unique words). It standardizes the input by converting all words to lower-case and removing punctuation. Tokenization then splits the input on whitespace into separate words. The words are not stemmed or processed further. Finally, vectorization produces ''multi-hot'' output, that is, the frequency of words for each input as seen in the above example. The \texttt{TextVectorization} layer is then adapted to the training set. Essentially, adaptation creates the list of 10,000 unique words to count when the actual input is processed.
 
-\begin{samepage}
 \begin{pythoncode}
 # Use the Keras TextVectorization pre-processing layer:
 multi_hot_vectorize_layer = TextVectorization(
@@ -597,11 +570,9 @@ multi_hot_vectorize_layer = TextVectorization(
 train_text = raw_train_ds.map(lambda text,labels: text)
 multi_hot_vectorize_layer.adapt(train_text)
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block illustrates the type of output generated by the text vectorization layer for the first element of the first batch of the training data set. The \texttt{next()} function gets the next element of an iterator, in this case an iterator over the training data set and the first element is a batch of text input and corresponding labels.
 
-\begin{samepage}
 \begin{pythoncode}
 # Retrieve a batch from the dataset
 text_batch, label_batch = next(iter(raw_train_ds))
@@ -611,11 +582,9 @@ text_batch, label_batch = next(iter(raw_train_ds))
 print(text_batch[0])
 print(list(multi_hot_vectorize_layer(text_batch[0]).numpy()))
 \end{pythoncode}
-\end{samepage}
 
 The first element of the \texttt{text\_batch} is a tensor containing the raw text, while the output is a set of 10,000 numbers that represent the count of individual words (after standardization and tokenization).
 
-\begin{samepage}
 \begin{textcode}
 >>> print(text_batch[0])
 tf.Tensor(b'"unit testing of setters and getters teacher wanted us 
@@ -637,11 +606,9 @@ shape=(), dtype=string)
 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0
 ...
 \end{textcode}
-\end{samepage}
 
 This simple example uses a classification model defined with a single fully-connected output layer. The four output units represent class probability logits. Cross-entropy is specified for the loss function, and accuracy metrics will be examined. Note the use of the \texttt{from\_logits} parameter when specifying the loss function. This avoids the use of softmax activation function for the dense layer or adding a softmax layer to the sequential network model.
 
-\begin{samepage}
 \begin{pythoncode}
 # Define a simple model
 multi_hot_model = tf.keras.Sequential([
@@ -653,19 +620,18 @@ multi_hot_model.compile(
     loss=losses.SparseCategoricalCrossentropy(from_logits=True),
     optimizer='adam', metrics=['accuracy'])
 \end{pythoncode}
-\end{samepage}
 
 The training accuracy of this model is $\approx 99\%$ and the validation accuracy is $\approx 83\%$ showing the power of a relatively simple network architecture, albeit with significant number of trainable parameters (with 10,000 inputs from the vectorization pre-processing layer and four outputs, the network has 400004 trainable parameters).
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
       \item Vocabulary size (originally 10 000)
       \item Number of layers (originally 1)
    \end{enumerate}
 Comment on your findings and identify the best model.
-\end{tcolorbox}
+\end{exercisebox}
 
 \subsection[Word Embedding]{Text classification using word embedding with a CNN}
 
@@ -673,7 +639,6 @@ The example in this section illustrates a different way to encode words that is 
 
 The Keras \texttt{TextVectorization} layer can perform this, with a small change from the above example: Instead of the \texttt{multi\_hot} output mode, the following code block specifies the \texttt{int} output model for the layer:
 
-\begin{samepage}
 \begin{pythoncode}
 # Use the Keras TextVectorization pre-processing layer:
 int_vectorize_layer = TextVectorization(
@@ -685,11 +650,9 @@ int_vectorize_layer = TextVectorization(
 train_text = raw_train_ds.map(lambda text,labels: text)
 int_vectorize_layer.adapt(train_text)
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block illustrates the type of output generated by the text vectorization layer for the first element of the first batch of the training data set.
 
-\begin{samepage}
 \begin{pythoncode}
 # Retrieve a batch from the dataset
 text_batch, label_batch = next(iter(raw_train_ds))
@@ -699,11 +662,9 @@ text_batch, label_batch = next(iter(raw_train_ds))
 print(text_batch[0])
 print(list(int_vectorize_layer(text_batch[0]).numpy()))
 \end{pythoncode}
-\end{samepage}
 
 The printed output below illustrates how raw input text, the first element of the first batch of the training data set, is converted into a set of integer numbers by this layer. The output is a list of 21 tokens (among the 10,000 most frequent ones). For example, the word ''how'' is coded as 5, the word ''to'' is coded as 4, etc.
 
-\begin{samepage}
 \begin{textcode}
 >>> print(text_batch[0])
 tf.Tensor(b'"how to crop a portion from an existing pdf and create 
@@ -716,7 +677,6 @@ shape=(), dtype=string)
 3, 46, 4, 6757, 5, 2173, 7, 2661, 48, 6931, 1, 31, 32, 1183, 962, 9, 
 319, 2877, 8, 46, 4, 124, 5, 15, 962]
 \end{textcode}
-\end{samepage}
 
 \paragraph*{Word Embeddings}
 
@@ -736,7 +696,6 @@ This example uses a sequential model beginning with the integer vectorization la
 
 A dropout layer with a dropout rate of $0.5$ is added to the sequential model for regularization. This is followed by a 1-dimensional convolution layer with kernel length of 5. The Conv1D layer uses 64 separate filters to produce 64 output channels from an input depth of 64. The global max pooling layer reduces the input to the maximum value along each convolution output channel.
 
-\begin{samepage}
 \begin{pythoncode}
 int_model = tf.keras.Sequential([
   int_vectorize_layer, 
@@ -749,13 +708,11 @@ int_model = tf.keras.Sequential([
   ])
 int_model.summary()
 \end{pythoncode}
-\end{samepage}
 
 It is instructive to examine the model summary, printed below. Note that the output shapes have no value for the first dimension, that is, the batch size. This will be determined when the model is trained using the batch size provided by the training data set (The above code segment when preparing the data set defined the batch size as $32$). The second dimension of the output shapes for any layer that processes sequences of words is also not explicitly defined. This second dimension indicates the sequence length. It will be determined from at training time when the training data set is provided as input, potentially padded by $0$ if necessary. Note that the global max pooling layer reduces the dimensionality as its output is the maximum value along the second dimension, that is, the maximum value over the sequence of convoluation ouputs. 
 
 The model summary output below also confirms the number of parameters of the word embedding layer. From the parameter count of the 1-dimensional convolution layer, one can deduce the specific kernel size. Knowing there are 64 filters one can subtract one bias term for each filter, leaving 20,480 parameters for 64 output channels. That is, each output channel is calculated by a kernel with 320 parameters. This is because these are one-dimensional kernels of length 5 and the input (output of the dropout layer) is of depth 64, that is, the full kernel must be of shape $5 \times 64$ with 320 parameters. 
 
-\begin{samepage}
 \begin{textcode}
 Model: "sequential_2"
 _________________________________________________________________
@@ -772,11 +729,9 @@ Total params: 660868 (2.52 MB)
 Trainable params: 660868 (2.52 MB)
 Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
-\end{samepage}
 
 Next, the model is compiled with cross-entropy as loss function and accuracy as a result metric:
 
-\begin{samepage}
 \begin{pythoncode}
 # Compile the model using cross-entropy loss and report accuracy
 int_model.compile(
@@ -784,27 +739,24 @@ int_model.compile(
     optimizer='adam',
     metrics=['accuracy'])
 \end{pythoncode}
-\end{samepage}
 
 Finally, the model is trained for 25 epochs: 
 
-\begin{samepage}
 \begin{pythoncode}
 int_model.fit(raw_train_ds, 
               validation_data=raw_val_ds, 
               epochs=25)
 \end{pythoncode}
-\end{samepage}
 
 The training accuracy of this model is $\approx 99.95\%$ but with a validation accuracy similar to the earlier, simpler model of $\approx 80\%$, showing very good training performance but also more evidence of overfitting. To some degree this is unsurprising, as the number of parameters in this model is about 50 times that of the simpler model, making this model more powerful and more flexible to adapt to the specific training set. This short example illustrates another use of convolutional networks besides computer vision, where they were first used.
 
-\begin{tcolorbox}[colback=code]
-The Keras web site has a large number of Keras tutorials on all kinds of natural language processing problems. See this site for more information: \footnotesize\url{https://keras.io/examples/nlp/}\normalsize.
-\end{tcolorbox}
+\begin{resourcebox}
+The Keras web site has a large number of Keras tutorials on all kinds of natural language processing problems. See this site for more information: \small\url{https://keras.io/examples/nlp/}\normalsize.
+\end{resourcebox}
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
       \item Vocabulary size (originally 10 000)
@@ -820,7 +772,7 @@ Comment on your findings and identify the best model.\\
 In particular, explore the trade-offs between using a large number of smaller filters versus a smaller number of larger filters in the context of convolution followed by pooling. \\
 
 Explore how does the choice of pooling strategy (max vs average) affects the features extracted by a convolutional neural network and the predictive performance of the model.\\
-\end{tcolorbox}
+\end{exercisebox}
 
 %\clearpage
 

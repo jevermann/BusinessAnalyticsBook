@@ -1,5 +1,5 @@
 \usepackage[x11names]{xcolor}
-\usepackage{tcolorbox}
+\usepackage[most]{tcolorbox}
 \usepackage{physics}
 \usepackage{wrapfig}
 \usepackage{pgf}
@@ -35,16 +35,16 @@
 \usepackage{placeins}
 \usepackage{minted}
 %\usepackage{graphicx}
-\newminted{cypher}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{R}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{xml}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{bash}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{html}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{js}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{sql}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{text}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt}
-\newminted{json}{autogobble,bgcolor=code,breakbytoken,frame=single,framesep=3pt,escapeinside=||}
-\newminted{python}{autogobble,bgcolor=code,breakbytoken,python3,frame=single,framesep=3pt}
+\newminted{cypher}{autogobble,label=cypher,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{R}{autogobble,label=R,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{xml}{autogobble,label=XML,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{bash}{autogobble,label=bash,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{html}{autogobble,label=HTML,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{js}{autogobble,label=JavaScript,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{sql}{autogobble,label=SQL,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{text}{autogobble,label=Text,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single}
+\newminted{json}{autogobble,label=JSON,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,samepage=true,frame=single,escapeinside=||}
+\newminted{python}{autogobble,label=Python,numbers=left,stepnumber=2,bgcolor=Gray0!25!white,breakbytoken,python3,samepage=true,frame=single}
 \AtBeginEnvironment{minted}{%
   \renewcommand{\fcolorbox}[4][]{#4} \footnotesize}
 \AtEndEnvironment{minted}{%
@@ -52,6 +52,16 @@
 
 \definecolor{code}{gray}{0.95}
 \definecolor{alert}{RGB}{238,224,229} % LavenderBlush2 
+
+\newtcolorbox{exercisebox}{enhanced,colback=Gray0!25!white,colframe=Gray0!60!black,title={Hands-On Exercise},fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=1pt] at (frame.west) {\includegraphics[width=8mm]{../hand2.png}};}}
+
+\newtcolorbox{resourcebox}{enhanced,colback=LightSteelBlue1!25!white,colframe=LightSteelBlue1!60!black,title={Resources},fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=0.5pt] at (frame.west) {\includegraphics[width=8mm]{../book.png}};}}
+
+\newtcolorbox{alertbox}{enhanced,colback=OrangeRed1!25!white,colframe=OrangeRed1!60!black,title=Important,fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=0.5pt] at (frame.west) {\includegraphics[width=8mm]{../attention2.png}};}}
+
+\newtcolorbox{infobox}{enhanced,colback=DarkSeaGreen1!25!white,colframe=DarkSeaGreen1!60!black,title=Tip,fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=0.5pt] at (frame.west) {\includegraphics[width=8mm]{../tip1a.png}};}}
+
+\newtcolorbox{pseudocodebox}{enhanced,colback=code,colframe=code!50!black}
 
 \renewcommand\floatpagefraction{.95}
 \renewcommand\topfraction{.95}

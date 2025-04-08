@@ -22,33 +22,33 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. They are freely available. Consult them for additional information.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
 
 \url{https://www.statlearning.com} \\
 
 Chapters 2, 3, 4, 5
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by James et al. provides an easy introduction to machine learning at the introductory undergraduate level. It focuses on applications, not mathematics, and contains many exercises using R. Concepts are well explained and illustrated. There is a similar book available by the same authors with applications in Python. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Trevor Hastie, Robert Tibshirani, and Jerome Friedman: \emph{The Elements of Statistical Learning}. 2nd edition, 12th corrected printing, 2017. (ESL) \\
 
 \url{https://hastie.su.domains/ElemStatLearn/} \\
 
 Chapters 2, 3, 4, 7
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Hastie et al. still sets the standard for statistical learning. It is widely used and cited. It's treatment is more technical than the previous book and there are no exercises in R or Python. However, it covers the concepts in more depth (and a few more formulas). However, it is still very accessible even to an undergraduate audience.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
 
 \url{https://probml.github.io/pml-book/book1.html} \\
 
 Chapters 4, 6, 9, 10, 11
-\end{tcolorbox}
+\end{resourcebox}
 
 Murphy's book is available under a creative commons license. It is a somewhat more technical treatment of the material, but with many illustrations and examples. It is quite comprehensive in its coverage and targeted at the advanced undergraduate or graduate student. 
 
@@ -149,9 +149,7 @@ Bias & Variance \\ \hline
 \label{tab:predictexplain}
 \end{table}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
-
+\begin{exercisebox}
 For each of the following problems, decide if it is a prediction or inference/explanation problem:
 \begin{enumerate}
    \item How do real estate prices vary with location and age?
@@ -161,7 +159,7 @@ For each of the following problems, decide if it is a prediction or inference/ex
    \item Calculate the difference in expected sales prices for the house at 310 Elizabeth Avenue when sold in August and February
    \item When should a house be sold to achieve the best price?
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Bias and Variance in Regression Analysis}
 
@@ -189,9 +187,9 @@ Importantly, the focus of evaluating the quality of a model should not be on the
 
 A typical strategy is then to separate \emph{test data} from the \emph{training data} in the form of a \emph{holdout sample}. The model is fitted to the training data and then evaluated on the test data.
 
-\begin{tcolorbox}[colback=LavenderBlush2]
+\begin{alertbox}
 Low error on training data does NOT imply low errors on test data.
-\end{tcolorbox}
+\end{alertbox}
 
 Consider the regression model shown in Figure~\ref{fig:freedom}. The left panel shows a set of observed $x$ and $y$ values generated from the true relationship (black line) by adding some random error. The left panel also shows three different functions that are fitted to this data. The diagonal orange line represents a simple linear regression model with only $x$ and an intercept as predictors, that is, it only has two parameters. The blue and green lines represent smoothing regression splines with different levels of flexibility.
 
@@ -231,22 +229,22 @@ Closely related to flexibility is concept of \emph{degrees of freedom}\index{Deg
 
 To better understand the concepts of underfitting and overfitting, it is useful to consider the MSE regression loss in more detail. This requires the concepts of expected value and variance of a random variable $X$ from basic statistics.
 
-\begin{tcolorbox}[colback=alert]
+\begin{infobox}
 \paragraph*{Expected Value}\index{Expected value} 
 \begin{align*}
 E[X] &= \sum_{i=1}^{\infty} x_i p_i \qquad \text{discrete random variable}\\
 E[X] &= \int_{-\infty}^{\infty} x p(x) dx \qquad \text{continuous random variable}
 \end{align*}
 For uniform distributions or unweighted observations $p_i=p_j \; \forall i, j \; $ so that $E[X] = \frac{1}{n} \sum_{i=1}^{\infty} x_i $, i.e. expectation = mean
-\end{tcolorbox}
+\end{infobox}
 
-\begin{tcolorbox}[colback=alert]
+\begin{infobox}
 \paragraph*{Variance}\index{Variance!of a random variable} 
 \begin{align*}
 Var[X] &= E[(X - E[X])^2] = E[X^2] - E[X]^2 
 \end{align*}
 For zero-centered variables $E[X] = 0$ so that $Var[X] = E[X^2]$
-\end{tcolorbox}
+\end{infobox}
 
 Equipped with these concepts, one can rewrite the MSE to decompose it into three parts:
 
@@ -372,9 +370,7 @@ $\vcenter{\hbox{\includegraphics[width=.49\textwidth]{Figures_Chapters_1-6/Chapt
 
 In KNN classification (and also in KNN regression), the model with the lower value of $k$ is the more flexible model, and is more likely to lead to overfitting. As $k$ increases, the model becomes less flexible, less likely to overfit, and increasingly more likely to underfit and have a high bias. The left panel in Figure~\ref{fig:knn3} shows the training and test error rates for the KNN classifier for different values of $k$. Note the horizontal axis shows the inverse of $k$, that is $1/k$, larger $k$ are to the left, smaller $k$ are to the right in this panel. The right panel in Figure~\ref{fig:knn3} shows the classifications and decision boundary for $k=10$, which is close to optimal.
 
-\begin{tcolorbox}[colback=code]
-\paragraph*{Hands-On Exercise} 
-
+\begin{exercisebox}
 The table below provides a training data set containing six observations, three predictors, and one qualitative response variable.\\ 
 \vspace{.5\baselineskip}
 \begin{center}
@@ -401,7 +397,7 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_1=X_2=
 \end{enumerate}
 
 \vspace{.5\baselineskip}\scriptsize Adapted from ISLR Exercise 2.7
-\end{tcolorbox}
+\end{exercisebox}
 
 In binary classification, the \emph{confusion matrix}\index{Confusion matrix} is a useful tool for summarizing the performance of a classifier. It tabulates the number of positive and negative predictions that match the true values. The following confusion matrix shows the results of a hypothetical binary classifier for credit card defaults that assigns classes by highest probability:
 
@@ -529,59 +525,49 @@ Because the ROC curve of a perfect classifier runs though the top-left corner of
 \label{fig:auc}
 \end{figure}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercises} 
-
-\begin{enumerate}
-%\vspace{.5\baselineskip}
-  \item Consider the two confusion matrices above. 
+\begin{exercisebox}
+Consider the two confusion matrices above. 
   \begin{itemize}
      \item Compute precision and recall for the two confusion matrixes above
      \item Computer accuracy and F1 values for the two confusion matrixes above
      \item The two confusion matrixes above characterize two points on the ROC curve. Plot the two points for this classifier in an ROC space/diagram. Are they above or below the diagonal?
   \end{itemize}
-  \vspace{.5\baselineskip}
-  \item Consider a medical testing scenario where 1000 individuals are tested for a disease. The results are:
+\end{exercisebox}
+
+\begin{exercisebox}
+Consider a medical testing scenario where 1000 individuals are tested for a disease. The results are:
   \begin{itemize}
     \item 100 people actually have the disease, and 900 do not.
     \item Out of the 100 people with the disease, 90 are correctly identified as having it, but 10 are not detected.
     \item Of the 900 people without the disease, 810 are correctly identified as not having it, but 90 are incorrectly identified as having the disease.
   \end{itemize}
-  %\vspace{\baselineskip}
   Calculate the precision, recall, sensitivity, and accuracy of the test. \\
   \emph{Tip}: Write down the confusion matrix first.
-\end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercises [cont'd]} 
-
-\begin{enumerate}
-%\vspace{.5\baselineskip}
-  \setcounter{enumi}{2}
-  \item Given the following results from a machine learning model:
+\begin{exercisebox}
+Given the following results from a machine learning model:
   \begin{itemize}
     \item Precision: 0.75
     \item Recall: 0.60
     \item Accuracy: 0.80
   \end{itemize}
-  Answer the following questions:
+Answer the following questions:
   \begin{enumerate}
     \item What percentage of identified positives are actually positive?
     \item What percentage of actual positives are identified by the model?
     \item What percentage of the total classifications were correct?
   \end{enumerate}
+\end{exercisebox}
 
-  \vspace{.5\baselineskip}
-  \item Consider a binary classification task with the following confusion matrix at a certain threshold:
+\begin{exercisebox}
+Consider a binary classification task with the following confusion matrix at a certain threshold:
   \begin{itemize}
     \item TP: 150, FP: 50
     \item FN: 30, TN: 200
   \end{itemize}
   Discuss how adjusting the classification threshold might affect precision, recall, and accuracy. What happens if the threshold is increased or decreased?
-\end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Multinomial Classification}
 
@@ -610,16 +596,14 @@ In \emph{micro-averaging}\index{Micro averaging}, the TP, TN, FP, and FN values 
 
 In \emph{macro-averaging}\index{Macro averaging}, the TP, TN, FP, and FN values are counted for all classes, but instead of summing these values, precision and recall are calculated for each class. These precision and recall values are then averaged over all classes, optionally weighting each class by its true count of instances. Macro-averaging is appropriate when all classes are equally important. It is also appropriate for an imbalanced data set and ensures that all classes contribute equally. However, it may mask poor performance of important minority classes, and it may lower overall performance measures due to low classifier performance on small or unimportant classes that nonetheless contribute equally to larger or important classes. 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
-
+\begin{exercisebox}
 For the multi-class confusion matrix above,
 \begin{enumerate}
   \item Compute precision and recall for each class.
   \item Compute the micro-averages of precision and recall and show that they equal the accuracy.
   \item Compute the macro-averages of precision and recall.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 While precision, recall, and accuracy are useful metrics for evaluating a binary or multinomial classifer, they do not lend themselves to be used directly as loss functions in fitting a model. This is because the assignment of an observation to a class is a function of the probability of its class membership and the actual class assignment may depend on the chosen threshold probability or other decision rule. Thus, a desirable loss function is a function that expresses how close or how different the predicted class membership probabilities are from the true class membership probabilities. 
 
@@ -639,11 +623,8 @@ D_{KL}(P || Q) &= \sum_i p_i \log \left( \frac{p_i}{q_i} \right) \qquad \text{Ku
   & = - H(p, p) + H(p, q)
 \end{align*}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
-
-\begin{enumerate}
-\item Consider the two probability distributions $P$ and $Q$ in the following diagrams. \begin{center}
+\begin{exercisebox}
+Consider the two probability distributions $P$ and $Q$ in the following diagrams. \begin{center}
 \includegraphics[width=.5\textwidth]{kl.png}
 
 \tiny \url{https://commons.wikimedia.org/wiki/File:Kullback-Leibler_distributions_example_1.svg}
@@ -654,32 +635,37 @@ D_{KL}(P || Q) &= \sum_i p_i \log \left( \frac{p_i}{q_i} \right) \qquad \text{Ku
 \begin{enumerate}
    \item Calculate the cross-entropy of P and Q.
    \item Calculate the entropy of P.
-   \item Calculate the KL divergence of P and Q. \\
-   \vspace{-8mm}
-\emph{Tip}: Binomial distribution: $\Pr(P=k) = \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k}$ \\
+   \item Calculate the KL divergence of P and Q.
 \end{enumerate}
 
-\vspace{1.5\baselineskip}
-  \item Calculate the cross-entropy and KL-divergence for the multi-class confusion matrix above.
-  \vspace{.5\baselineskip}
-  \item Given two probability distributions P and Q over a discrete set of events, where $P = [0.1, 0.4, 0.5]$ and $Q = [0.2, 0.3, 0.5]$, calculate the cross-entropy $H(P, Q)$ and the KL-divergence $D_{KL}(P || Q)$.
-  \vspace{.5\baselineskip}
-  \item In a binary classification task, you have the following probability distributions for the actual labels (P) and predicted labels (Q):
+\vspace{\baselineskip}
+\emph{Tip}: Binomial distribution: $\Pr(P=k) = \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k}$ \\
+\end{exercisebox}
+
+\begin{exercisebox}
+Calculate the cross-entropy and KL-divergence for the multi-class confusion matrix above.
+\end{exercisebox}
+
+\begin{exercisebox}
+Given two probability distributions P and Q over a discrete set of events, where $P = [0.1, 0.4, 0.5]$ and $Q = [0.2, 0.3, 0.5]$, calculate the cross-entropy $H(P, Q)$ and the KL-divergence $D_{KL}(P || Q)$.
+\end{exercisebox}
+
+\begin{exercisebox}
+In a binary classification task, you have the following probability distributions for the actual labels (P) and predicted labels (Q):
 \begin{itemize}
   \item P = [1, 0] (the actual class is positive)
   \item Q = [0.7, 0.3] (the model predicts a 70\% chance of being positive)
 \end{itemize}
 Calculate the cross-entropy loss for this scenario.
+\end{exercisebox}
 
-\vspace{.5\baselineskip}
-  \item Calculate the KL divergence between the following probability distributions:
+\begin{exercisebox}
+Calculate the KL divergence between the following probability distributions:
   \begin{itemize}
      \item P = [0.1, 0.9]
      \item Q = [0.5, 0.5]
   \end{itemize}
-
-\end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Crossvalidation Methods}
 

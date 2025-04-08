@@ -19,38 +19,37 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Richard S. Sutton and Andrew G. Barto (2018) \emph{Reinforcement Learning -- An Introduction}. 2nd edition, The MIT Press, Cambridge, MA. (SB) \\
 \vspace{0.5\baselineskip}
-\url{http://incompleteideas.net/book/the-book.html} \\
+\small\url{http://incompleteideas.net/book/the-book.html}\normalsize \\
 \vspace{0.5\baselineskip}
 Chapters 9--13 \\
 \vspace{0.5\baselineskip}
 (CC BY-NC-ND License)
-\end{tcolorbox}
+\end{resourcebox}
 
 The Sutton \& Barto book is a standard introductory textbook on reinforcement learning and widely used. It is very approachable, but at the same time also detailed and thorough in its exposition. Its focus is on RL prior to the use of neural networks for function approximation, so up to about 2015. While it does not provide Python code itself, the pseudo-code in the book is easily implemented.
 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Sudharsan Ravichandiran (2020) \emph{Deep Reinforcement Learning with Python}. 2nd edition. Packt Publishing, Birmingham, UK. \\
 \vspace{0.5\baselineskip}
 Chapters 9--11
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Ravichandiran is practically oriented with plenty of Python code. It discusses some of the theoretical background, but does not go into depth. It should be used after reading the Sutton \& Barto chapters on function approximation and policy-based methods.
 
 
-\begin{tcolorbox}[colback=alert]
-\subsubsection*{Resources}
+\begin{resourcebox}
 Complete implementations of all examples in this chapter are available on the following GitHub repo:
 
-\url{https://github.com/jevermann/busi4720-rl} \\
+\small\url{https://github.com/jevermann/busi4720-rl}\normalsize \\
 
 The project can be cloned from this URL:
 
-\url{https://github.com/jevermann/busi4720-rl.git}
-\end{tcolorbox}
+\small\url{https://github.com/jevermann/busi4720-rl.git}\normalsize
+\end{resourcebox}
 
 
 \section{Introduction}
@@ -120,13 +119,13 @@ Then the parameter update becomes:
  &= \theta_t + \alpha \left[ R_t + \gamma \hat{q}(S_{t+1}, A_{t+1}, \theta_t) - \hat{q}(S_t, A_t, \theta_t)\right] \nabla \hat{q}(S_t, A_t, \theta_t) \nonumber
 \end{align}
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 While tabular methods update the value of $Q$ for a state--action pair directly, function approximation methods replace the update to $Q$ with an update to $\theta$. This updates the values of $Q$ for many state--action pairs indirectly, as $Q$ is approximated by a parameterized function.
-\end{tcolorbox}
+\end{alertbox}
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \begin{align*}
 & \text{Initialize}\; \theta \in \mathbbm{R}^d \; \text{arbitrarily} \\
@@ -140,7 +139,7 @@ While tabular methods update the value of $Q$ for a state--action pair directly,
 & \quad \quad S \leftarrow S'; A \leftarrow A'\\
 & \quad \text{until S is terminal}
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[Semi-gradient SARSA]{Semi-gradient SARSA (Source: SB)}
 \label{fig:gradientsarsa}
 \end{figure}
@@ -173,7 +172,7 @@ Taking the two ideas of experience replay and target networks and adapting the g
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \begin{align*}
 & \text{Initialize replay buffer}\;D \\
@@ -192,7 +191,7 @@ r_j + \gamma \operatorname*{max}_{A'} \hat{q}_T(S_{j+1}, A'; \theta_T) & \qquad 
 %& \quad \quad \text{Perform a gradient descent step on loss function}\;L=\left[y_j-\hat{q}_M(S_j,a_j;\theta_M)\right]^2 \\
 & \quad \text{Every $C$ steps, update}\; \hat{q}_T \leftarrow \hat{q}_M\;\text{by setting}\; \theta_T \leftarrow \theta_M
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption{DQN Algorithm (adapted from SB)}
 \label{fig:dqn}
 \end{figure}
@@ -214,7 +213,6 @@ In this particular version of the problem, the \emph{action space} is binary, 0 
 
 The DQN can be implemented using the ''CartPole'' environment\footnote{\url{https://gymnasium.farama.org}. The Farama gymnasium provides a number of reference environments for reinforcement learning.}. First, the required packages are loaded, the environment is created and the number of actions and number of features of a state are determined:
 
-\begin{samepage}
 \begin{pythoncode}
 import math
 import random
@@ -230,11 +228,9 @@ env = gym.make("CartPole-v1", render_mode="human")
 Actions = range(0, env.action_space.n)
 Ssize = env.observation_space.shape[0]
 \end{pythoncode}
-\end{samepage}
 
 The next Python code block defines hyperparameters for the neural network and for reinforcement learning:
 
-\begin{samepage}
 \begin{pythoncode}
 # Neural net parameters
 batch_size = 20
@@ -249,12 +245,10 @@ C = 5*batch_size # When to update weights
 # Replay buffer D
 D = collections.deque(maxlen=5000)
 \end{pythoncode}
-\end{samepage}
 
 The functions $\hat{q}_M$ and $\hat{q}_T$ are sequential, fully-connected neural networks with a single output unit, defined in Keras. The output represents the value of $\hat{q}$ computed by the network from its inputs. The inputs are state--action pairs, which is why \\
 {\small \texttt{input\_shape=(Ssize+1)}} in the Python code block below which defines the main neural network:
 
-\begin{samepage}
 \begin{pythoncode}
 # Main network, used to select actions
 Q_m = keras.Sequential([
@@ -269,33 +263,27 @@ Q_m = keras.Sequential([
 ])
 Q_m.compile(loss='huber', optimizer='adam')
 \end{pythoncode}
-\end{samepage}
 
 Keras provides functions that make cloning a network and getting and setting weights easy. The following Python code block creates the target network as a copy of the main network and sets its weights to those of the main network:
 
-\begin{samepage}
 \begin{pythoncode}
 # Target network, used to compute targets
 Q_t = keras.models.clone_model(Q_m)
 Q_t.compile(loss='huber', optimizer='adam')
 Q_t.set_weights(Q_m.get_weights())
 \end{pythoncode}
-\end{samepage}
 
 Getting a value of $\hat{q}$ for some input state-action pair is prediction from the network. The following function prepares the inputs (state features and action) as a Numpy array, adding the minibatch dimension, then selects the first prediction of the first return batch:
 
-\begin{samepage}
 \begin{pythoncode}
 def getQ(Q, s, a):
     return Q.predict( \
         np.expand_dims(np.array(s.tolist()+[a]), axis=0), \
         verbose=0)[0][0]
 \end{pythoncode}
-\end{samepage}
 
 The following Python code block implements a convenient max and argmax function over all actions for the $\hat{q}$ values of the main or target network:
 
-\begin{samepage}
 \begin{pythoncode}
 def maxQ(Q, s, arg):
     maxq = -np.inf
@@ -307,11 +295,9 @@ def maxQ(Q, s, arg):
             maxa = a
     return maxa if arg else maxq
 \end{pythoncode}
-\end{samepage}
 
 The policy $\pi$ is an $\epsilon$-greedy policy, defined in Python in the following code block. This uses the main network \texttt{Q\_m}.
 
-\begin{samepage}
 \begin{pythoncode}
 def pi(s, epsilon):
     if random.random() < epsilon:
@@ -319,20 +305,16 @@ def pi(s, epsilon):
     else:
         return maxQ(Q_m, s, True)
 \end{pythoncode}
-\end{samepage}
 
 The update target for the DQN uses the target network \texttt{Q\_t} and the target expression from Figure~\ref{fig:dqn}. 
 
-\begin{samepage}
 \begin{pythoncode}
 def target_DQN(Q_t, r, sprime):
     return r + gamma * maxQ(Q_t, sprime, False)
 \end{pythoncode}
-\end{samepage}
 
 The following function takes a batch of entries of the experience replay buffer and creates training batches of inputs x (state features and action) and target y:
 
-\begin{samepage}
 \begin{pythoncode}
 def training_xy(batch):
     x = np.zeros((batch_size, Ssize+1))
@@ -345,11 +327,9 @@ def training_xy(batch):
             y[i]=target_DQN(Q_t, r, sprime)
     return x, y
 \end{pythoncode}
-\end{samepage}
 
 The final block of Python code is the DQN algorithm, a straightforward implementation of Figure~\ref{fig:dqn}\footnote{A complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/DDQN_tuples.py}.}. The SGD update step is done using the Keras function \texttt{train\_on\_batch} that trains the network on a single batch of data.
 
-\begin{samepage}
 \begin{pythoncode}
 t = 0
 for episode in range(max_episodes):
@@ -369,7 +349,6 @@ for episode in range(max_episodes):
         if t % C == 0:
             Q_t.set_weights(Q_m.get_weights())
 \end{pythoncode}
-\end{samepage}
 
 \subsubsection*{Double DQN}
 
@@ -457,7 +436,7 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \begin{align*}
 & \text{Input: A differentiable policy}\;\pi(a | s, \theta);\;\text{step size}\; \alpha > 0 \\
@@ -468,7 +447,7 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 & \quad \quad G \leftarrow \sum\nolimits_{k=t+1}^T \gamma^{k - t - 1}R_k \\
 & \quad \quad \theta \leftarrow \theta + \alpha G \nabla \ln \pi(A_t | S_t, \theta)
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[REINFORCE: Monte-Carlso Control]{REINFORCE: Monte-Carlo Control (episodic) (Source: SB)}
 \label{fig:reinforce}
 \end{figure}
@@ -493,7 +472,7 @@ A complete implementation is shown in Figure~\ref{fig:reinforcebaseline}. Note t
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \begin{align*}
 & \text{Input: A policy}\;\pi(a | s, \theta);\;\text{step size}\; \alpha_\theta > 0 \\
@@ -507,7 +486,7 @@ A complete implementation is shown in Figure~\ref{fig:reinforcebaseline}. Note t
 & \quad \quad w \leftarrow w + \alpha_w \delta \nabla \hat{v}(S_t, w) \\
 & \quad \quad \theta \leftarrow \theta + \alpha_\theta G \nabla \ln \pi(A_t | S_t, \theta)
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[REINFORCE with Baseline]{REINFORCE with Baseline (Source: SB)}
 \label{fig:reinforcebaseline}
 \end{figure}
@@ -526,7 +505,7 @@ Here, $\delta_t$ is the TD error. The resulting ''\emph{One-Step Actor-Critic}''
 
 \begin{figure}
 \small
-\begin{tcolorbox}[colback=code]
+\begin{pseudocodebox}
 \vspace{-\baselineskip}
 \vspace{-.5\baselineskip}
 \begin{align*}
@@ -543,7 +522,7 @@ Here, $\delta_t$ is the TD error. The resulting ''\emph{One-Step Actor-Critic}''
 & \quad \quad \theta \leftarrow \theta + \alpha_\theta G \nabla \ln \pi(A_t | S_t, \theta) \\
 & \quad \quad S \leftarrow S'; I \leftarrow \gamma I
 \end{align*}
-\end{tcolorbox}
+\end{pseudocodebox}
 \caption[One-Step Actor-Critic algorithm]{One-Step Actor-Critic algorithm (Source: SB)}
 \label{fig:actorcritic}
 \end{figure}
@@ -569,11 +548,15 @@ Stable Baselines includes a wide array of RL algorithms, each tailored for diffe
     \item \emph{A2C and A3C:} Synchronous (A2C) and Asynchronous (A3C) Advantage Actor-Critic methods that use multiple workers to explore the environment and learn more efficiently.
 \end{itemize}
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
+\vspace{\baselineskip}
+
 \small
 \url{https://stable-baselines.readthedocs.io/en/master/}
 \normalsize
-\end{tcolorbox}
+
+\vspace{\baselineskip}
+\end{resourcebox}
 
 \subsubsection*{Gymnasium}
 
@@ -595,11 +578,15 @@ The environments in Farama Gymnasium can be categorized into several types, each
 \item \emph{2D and 3D Robots:} Simulations of robotic tasks including walking, picking, and moving objects, which are more complex and require continuous control strategies.
 \end{itemize}
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
+\vspace{\baselineskip}
+
 \small
 \url{https://gymnasium.farama.org/index.html}
 \normalsize
-\end{tcolorbox}
+
+\vspace{\baselineskip}
+\end{resourcebox}
 
 \subsubsection*{AlphaGo}
 
@@ -622,13 +609,13 @@ AlphaGo\index{AlphaGo} is a significant achievement in the field of artificial i
 
 The award-winning full-length documentary ''AlphaGo'' (Figure~\ref{fig:alphago}) chronicles the journey of the AI program from its initial development through its historic 2016 match against Lee Sedol, one of the world's top Go players. It provides an in-depth look at the human and technical narratives behind AlphaGo's development. The film highlights several key aspects of RL.
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \small
 \url{https://www.alphagomovie.com} \\
 
 \url{https://www.youtube.com/watch?v=WXuK6gekU1Y}
 \normalsize
-\end{tcolorbox}
+\end{resourcebox}
 
 The introductory paper on AlphaGo by David Silver and others in the journal Nature should be easy to understand: ''\href{https://www.nature.com/articles/nature24270}{Mastering the game of Go without human knowledge}''. Nature. 550 (7676): 354--359
 
@@ -639,7 +626,7 @@ Many well-known and well-published researchers and many companies are actively p
 \paragraph*{David Silver}
 Dr. David Silver of University College London is also a lead researchers with Google DeepMind and contributed extensively to the AlphaGo team. He has an excellent introductory course on reinforcement learning with class materials (from 2015) and lectures in a YouTube playlist. Updated courses (2018, 2021) are available on the DeepMind YouTube channel. The 2021 course include topics on deep reinforcement learning. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://www.davidsilver.uk/} \\
 
@@ -648,105 +635,105 @@ Dr. David Silver of University College London is also a lead researchers with Go
 \url{https://www.youtube.com/playlist?list=PLqYmG7hTraZDM-OYHWgPebj2MfCFzFObQ}. \\
 
 \url{https://www.youtube.com/@Google_DeepMind/playlists}.
-\end{tcolorbox}
+\end{resourcebox}
 
 \paragraph*{UC Berkeley}
 
 UC Berkeley hosted a Deep RL Bootcamp in 2017 with slides and lecture videos available online. Additionally, UC Berkeley's course on Deep RL is available online, with lecture slides and videos of past years.
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://sites.google.com/view/deep-rl-bootcamp/lectures} \\
 
 \url{https://rail.eecs.berkeley.edu/deeprlcourse/}
-\end{tcolorbox}
+\end{resourcebox}
 
 
 \paragraph*{Denny Britz}
 
 Formerly at the Google AI team, Denny Britz applied RL algorithms to financial markets and trading. He has a interesting blog, and a GitHub repository with resources and algorithm implementations of popular RL algorithms. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://dennybritz.com/} \\
 
 \url{https://github.com/dennybritz/reinforcement-learning}
-\end{tcolorbox}
+\end{resourcebox}
 
 
 \paragraph*{Massimiliano Patacchiola} 
 
 Dr. Patacchiola is a postdoc at Cambridge University. He has written a series of excellent blog posts on reinforcement based on the book ''Artificial Intelligence -- A Modern Approach'' by Russell and Norvig. There are lots of illustrations and pointers to implementation and code in multiple languages. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://github.com/mpatacchiola/dissecting-reinforcement-learning}
-\end{tcolorbox}
+\end{resourcebox}
 
 \paragraph*{Pascal Poupart}
 
 Dr. Poupart of the University of Waterloo has made available videos and all course materials for all lectures for a course on reinforcement learning at UWaterloo. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://www.youtube.com/playlist?list=PLdAoL1zKcqTXFJniO3Tqqn6xMBBL07EDc} \\
 
 \url{https://cs.uwaterloo.ca/~ppoupart/teaching/cs885-spring18/schedule.html}
-\end{tcolorbox}
+\end{resourcebox}
 
 
 \paragraph*{Andrew Ng}
 
 Dr. Ng of Stanford University was the former head of Google Brain and chief scientist at Baidu. He has taught an introductory class on reinforcement learning, as part of a broader course on machine learning. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://www.andrewng.org/} \\
 
 \url{https://www.youtube.com/watch?v=RtxI449ZjSc} \\
 
 \url{https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599}
-\end{tcolorbox}
+\end{resourcebox}
 
 
 \paragraph*{Andrej Karpathy}
 
 Andrej Karpathy was a founding member of OpenAI (makers of ChatGPT and Dall-E) and later became the Tesla lead for their Autopilot autonomous driving program. An early blog post by Andrei Karpathy on RL is at the introductory level. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://karpathy.ai/} \\
 
 \url{https://karpathy.github.io/2016/05/31/rl/}
-\end{tcolorbox}
+\end{resourcebox}
 
 
 \paragraph*{Lilian Weng}
 
 Dr. Weng is a lead researchers at OpenAI (makers of ChatGPT and Dall-E). She has written an early blog post on RL and another one on policy gradient algorithms. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://lilianweng.github.io/} \\
 
 \url{https://lilianweng.github.io/posts/2018-02-19-rl-overview/}\\
 
 \url{https://lilianweng.github.io/posts/2018-04-08-policy-gradient/}
-\end{tcolorbox}
+\end{resourcebox}
 
 
 \paragraph*{OpenAI}
 
 OpenAI (makers of ChatGPT and Dall-E) post regularly on their blog, on all things deep learning and also reinforcement learning. The blog posts are easy introduction to a variety of analytics topics. \\
 
-\begin{tcolorbox}[colback=code]
+\begin{resourcebox}
 \footnotesize
 \url{https://openai.com/blog/openai-baselines-ppo/} \\
 
 \url{https://openai.com/blog/evolved-policy-gradients/} \\
 
 \url{https://openai.com/blog/evolution-strategies/}
-\end{tcolorbox}
+\end{resourcebox}
 
 \section{Review Questions}
 

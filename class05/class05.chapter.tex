@@ -18,29 +18,30 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Venables, W.N., Smith, D.M. and the R Core Team (2024) An Introduction to R.  \\
 
-\url{https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf}
-\end{tcolorbox}
+\footnotesize
+\url{https://cran.r-project.org/doc/manuals/r-release/R-intro.pdf}\normalsize
+\end{resourcebox}
 
 This tutorial is a good, easy, and comprehensive introduction to R. It covers the most important aspects of R in 100 pages. It is continuously updated by the R team for new versions of R and new features. Chapters 1 through 7 cover the initial material in this module. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Wickham, H., Cetinkaya-Rundel, M., and Grolemund, G. (2023) R for Data Science. O'Reilly Media, Inc. \\
 
-\url{https://r4ds.hadley.nz/}. 
-\end{tcolorbox}
+\footnotesize\url{https://r4ds.hadley.nz/}\normalsize
+\end{resourcebox}
 
 This is a free, open-source book directly from the authors of the popular and widely-used Tidyverse libraries. With many examples, and easy-to-understand descriptions, the book provides a solid foundation for business analytics with R. It provides sections on data import, data transformation, data visualization, and data communication, each with multiple chapters. This is a highly relevant resource for anyone doing data science in R.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Posit (2024) Cheatsheet. \\
 
-\url{https://posit.co/resources/cheatsheets/}
-\end{tcolorbox}
+\footnotesize\url{https://posit.co/resources/cheatsheets/}\normalsize
+\end{resourcebox}
 
-Posit is the maker of the popular RStudio programming environment for R, the shiny library for building web applications and graphical dashboards with R, and a number of other open-source tools around the R system. Posit provides a number of very helpful ''cheatsheets'' that are one-page summaries of various R libraries. The ''cheatsheets'' useful for this module is the one on the dplyr package for data transformation.
+Posit is the maker of the popular RStudio programming environment for R, the shiny library for building web applications and graphical dashboards with R, and a number of other open-source and proprietary tools around the R system. Posit provides a number of very helpful ''cheatsheets'' that are one-page summaries of various R libraries. The ''cheatsheets'' useful for this module is the one on the dplyr package for data transformation.
 
 
 \section{Introduction}
@@ -68,9 +69,7 @@ The R system can be launched simply by invoking the \texttt{R} command from the 
 
 To install R on Microsoft Windows or on MacOS, download the installation files from CRAN (Comprehensive R Archive Network) at \url{https://cran.r-project.org} and follow the instructions. R on Microsoft Windows and R on MacOS will show their command prompts inside a window but otherwise function similarly to R on Ubuntu that is installed in the course virtual machine.
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Tips for working efficiently with R:}
-
+\begin{infobox}
 To make using R more efficient, consider doing the following:
 
 \begin{itemize}
@@ -83,25 +82,21 @@ To make using R more efficient, consider doing the following:
     \item Don't update packages in the middle of a project.
     \item Ensure you have a \emph{repeatable, automatable script} for your entire data analysis at the end of a project.
 \end{itemize}
-
-\end{tcolorbox}
+\end{infobox}
 
 \section{R Basics}
 
 The most basic way to use R is to simply use it as a calculator, as shown in the following R code example. Type ''\texttt{1+1}'' at the ''\texttt{>}'' prompt, then press the \colorbox{lightgray}{RETURN} key to execute the statement. R will respond on the following line with the result:
 
-\begin{samepage}
 \begin{Rcode}
 > 1+1
 [1] 2
 \end{Rcode}
-\end{samepage}
 
 A \emph{variable} in R is a named storage space for numbers, characters, strings, and other data elements. Traditionally, values are assigned to variables using the \texttt{<-} operator, but one may also use the more ''normal'' assignment operator \texttt{=}. Using the \texttt{<-} assignment operator helps to clearly distinguish assignment from equality testing, which uses \texttt{==}. 
 
 The following R code example introduces the R function called \texttt{print()} that does as its name suggests. Most data types and data structures that can be assigned to variables have a useful print function associated to them, so that on the interactive R command line you can simply type their name to get their value. In interactive mode, R calls the \texttt{print()} function automatically. In an R script that you execute from file, you will have to explicitly use the \texttt{print} function.
 
-\begin{samepage}
 \begin{Rcode}
 > a <- 3
 > b <- 2
@@ -110,49 +105,40 @@ The following R code example introduces the R function called \texttt{print()} t
 > a
 [1] 3
 \end{Rcode}
-\end{samepage}
 
 R has special symbols to denote infinity (\texttt{inf}) and results that are not a number (\texttt{NaN}):
 
-\begin{samepage}
 \begin{Rcode}
 > 2 / 0
 [1] Inf
 > 0 / 0
 [1] NaN
 \end{Rcode}
-\end{samepage}
 
 \noindent The boolean logical operators \emph{and} and \emph{or} are represented by the operators \texttt{\&} and \texttt{|} shown in the R code block below.
 
-\begin{samepage}
 \begin{Rcode}
 > TRUE & FALSE
 FALSE
 > TRUE | FALSE
 TRUE
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Tip:}
+\begin{infobox}
 The boolean constants \texttt{TRUE} and \texttt{FALSE} can be abbreviated by \texttt{T} and \texttt{F}
-\end{tcolorbox}
+\end{infobox}
 
 Character strings in R are enclosed in single or double quotes (but not mixed quotes!). Two useful functions are \texttt{paste()} which pastes its arguments together with an optional separator between them and returns a characters string, and the \texttt{strsplit()} function which accepts a string (or vector of strings) to split, and a separator character that identifies where to split the string. It returns a list of vectors of strings.
 
-\begin{samepage}
 \begin{Rcode}
 > label1 = 'I Love R'
 > label2 = 'and BUSI 4760'
 > paste(label1, label2, sep=' ')
 > strsplit('Hello World! My first string', ' ')
 \end{Rcode}
-\end{samepage}
 
 Because you can assign arbitrary values to variables in R, R provides functions to test the type of the value and to coerce, that is, to change, the type of a value.
 
-\begin{samepage}
 \begin{Rcode}
 # Check whether it is numeric
 is.numeric(2)
@@ -167,13 +153,11 @@ as.character(TRUE)
 # Make it a number
 as.numeric('3.1415')
 \end{Rcode}
-\end{samepage}
 
 \section{The R Environment}
 
 The collection of variables, functions, and libraries that exists in R at any one time is called the R \emph{workspace}. The functions \texttt{ls()} and \texttt{rm()}, named after their Unix bash shell equivalents, list and remove objects from the R workspace.
 
-\begin{samepage}
 \begin{Rcode}
 # Show objects in workspace
 > ls()
@@ -183,11 +167,9 @@ The collection of variables, functions, and libraries that exists in R at any on
 > ls()
 [1] "a"
 \end{Rcode}
-\end{samepage}
 
 R comes with a built-in user manual that one can access with the \texttt{help()} function or simply the \texttt{?} operator. Help is available on any function in R, as shown in the following example. For added convenience, R provides a web browser interface to its help pages that is started by \texttt{help.start()}.
 
-\begin{samepage}
 \begin{Rcode}
 help()
 help(lm)
@@ -195,11 +177,9 @@ help(lm)
 ??lm
 help.start()
 \end{Rcode}
-\end{samepage}
 
 R has a current working directory where it reads and writes files from and to. On Ubuntu Linux, this is the directory from which the \texttt{R} command was issued. R provides functions to get the working directory (\texttt{getwd()}), to set (change) it (\texttt{setwd()}, and to list the files in the working directory (\texttt{list.files()}):
 
-\begin{samepage}
 \begin{Rcode}
 # Get the working directory
 getwd()
@@ -209,15 +189,12 @@ getwd()
 # List files in working directory
 list.files()
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\paragraph*{Tip:} It is often more convenient to change the working directory in the terminal, prior to invoking \texttt{R}.
-\end{tcolorbox}
+\begin{infobox}It is often more convenient to change the working directory in the terminal, prior to invoking \texttt{R}.
+\end{infobox}
 
 A collection of related functions is called a \emph{library} in R. While some libraries come with the base R system, other packages will need to be downloaded and installed. The CRAN (Comrehensive R Archive Network) provides libraries in convenient form. To install packages from CRAN, use the \texttt{install.packages()} function with the name (or a vector of names) of packages to install from CRAN. Once installed, libraries can be attached to the R workspace with the \texttt{library()} function, which makes its functions and any data sets it contains available for use. 
 
-\begin{samepage}
 \begin{Rcode}
 # Install the tidyverse library
 install.packages('tidyverse')
@@ -226,7 +203,6 @@ library(tidyverse)
 # List all installed packages
 installed.packages()
 \end{Rcode}
-\end{samepage}
 
 It is sometimes useful to assemble a series of related R commands for a particular data analysis task in a script file. Script files are useful to ensure that the analysis can be repeated. The \texttt{source()} function will read and execute a file containing R commands. As noted earlier, in a script file, you will need to use the \texttt{print()} function to print the values of variables.
 
@@ -244,7 +220,6 @@ quit()
 
 A common structured data type in R is a \emph{vector}\index{Vector (in R)}. A vector in R contains elements of the same data type and is ordered. When assigning elements of different datatypes to a vector, R will coerce the types of all elements to a common datatype.
 
-\begin{samepage}
 \begin{Rcode}
 > v <- c(1, 'a', TRUE)
 > v
@@ -253,13 +228,11 @@ A common structured data type in R is a \emph{vector}\index{Vector (in R)}. A ve
 > v*3
 [1]  3  6  9 12
 \end{Rcode}
-\end{samepage}
 
 In the above example, R automatically determined that multiplication with a scalar is an element-wise operation and applies it to each element of the vector. 
 
 Useful functions to create vectors are the sequence function \texttt{seq()}, which accepts the lower and upper limit and a step size as parameter, and the repetition function \texttt{rep()} which repeats its first argument the number of times specified by its second argument.
 
-\begin{samepage}
 \begin{Rcode}
 # Generate a sequence
 s <- seq(0, 6, by=.5)
@@ -268,11 +241,9 @@ print(s)
 r <- rep(3.5, 5)
 print(r)
 \end{Rcode}
-\end{samepage}
 
 R provides useful functions for numerical vectors, to find their length, their maximum and minimum value, the square root of their values, as well as the variance and standard deviation of the elements. R automatically determines whether functions are applied to the whole vector, like \texttt{var()} or \texttt{sd()}, or whether functions are applied element-wise to each element, like \texttt{sqrt()}. Vector concatenation, using the \texttt{c()} function, automatically ''flattens'' the vectors.
 
-\begin{samepage}
 \begin{Rcode}
 length(v)
 max(v)
@@ -284,39 +255,32 @@ sd(v)
 vv <- c(v, c(7, 8, 9), v)
 print(vv)
 \end{Rcode}
-\end{samepage}
 
 The most common way to select elements from vectors is by \emph{indexing} with a boolean vector. In the following example, the expression \texttt{vv < 5} yields a vector of boolean values (true or false). Indexing the variable \texttt{vv} with that vector determines which elements of \texttt{vv} to select (those elements for which the corresponding entry is true).
 
-\begin{samepage}
 \begin{Rcode}
 vv < 5
 vv[vv < 5]
 vv[vv < 5] <- vv[vv < 5] + 5
 \end{Rcode}
-\end{samepage}
 
 Vectors can also be indexed numerically, selecting elements by their position. This is also called ''Slicing''. R allows you select a sequence of values with the \texttt{:} operator, and the exclusion of elements, or sequences of elements, using \texttt{-}. The first line in the following example selects elements at positions 3 through 7, the second line selects elemnts \emph{except} those at positions 3 through 7.
 
-\begin{samepage}
 \begin{Rcode}
 # Indexing is inclusive
 vv[3:7]
 vv[-(3:7)]
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=alert]
-\paragraph*{Important:}
+\begin{alertbox}
 \begin{itemize}
    \item R begins indexing positions with 1, while other programming languages begin at 0.
    \item Indexing in R is inclusive, that is, both the start and end index are included.
 \end{itemize}
-\end{tcolorbox}
+\end{alertbox}
 
 \emph{Missing values} are designated by the special symbol \texttt{NA}. The \texttt{is.na()} function can be used to identify and select \texttt{NA} and then filter them. When an aggregation function encounters a \texttt{NA}, it will normally return a \texttt{NA}, so it is important to remove or replace \texttt{NA} values before analyzing the data. Many functions offer an option to remove \texttt{NA} values prior to applying them, as shown for the \texttt{sum()} function in the following R code block. 
 
-\begin{samepage}
 \begin{Rcode}
 # Introduce a missing value
 v[3] <- NA
@@ -328,11 +292,9 @@ is.na(v)
 sum(v)
 sum(v, na.ram=TRUE)
 \end{Rcode}
-\end{samepage}
 
 Important string functions are \texttt{grep()} and \texttt{agrep()}. The \texttt{grep()} function checks whether each string in a vector of strings contains a substring that matches a regular expression, and returns the indices of strings in the vector that match the pattern. The first use of \texttt{grep()} in the following R code block matches a phone number, the second use of \texttt{grep()} matches a Canadian postal code.
 
-\begin{samepage}
 \begin{Rcode}
 # Match/find North American phone numbers
 > grep('^([0-9]{3})[ -]?[0-9]{3}[ -]?[0-9]{4}$', 
@@ -343,11 +305,9 @@ Important string functions are \texttt{grep()} and \texttt{agrep()}. The \texttt
     c('A0P 1L0', '0AB L2K', 'A0X 1Z0'))
 [1] 1
 \end{Rcode}
-\end{samepage}
 
 The \texttt{agrep()} function calculates the Levenshtein distance between a regular expression and a vector of strings and returns the indices of those strings that are within a certain distance. The Levenshtein distance is defined as the sum of insertions, deletions, and substitutions of characters to transform one string into another.
 
-\begin{samepage}
 \begin{Rcode}
 # Match/find strings up to Levenshtein distance of 3
 > agrep('apple', 
@@ -355,7 +315,6 @@ The \texttt{agrep()} function calculates the Levenshtein distance between a regu
     max.distance=3)
 [1] 1 3 4
 \end{Rcode}
-\end{samepage}
 
 \section{Arrays, Matrices, and DataFrames}
 
@@ -370,7 +329,6 @@ A few important things to note in the following R code block example:
    \item Reversing the index reverses the result that is returned, as in \texttt{a[3:1,2:4]} which reverses the indexing of the first dimension (rows). 
 \end{itemize}
 
-\begin{samepage}
 \begin{Rcode}
 # Default is to fill by column
 a <- array(1:20, dim=c(4,5))
@@ -387,13 +345,11 @@ a[,2:4]
 a[3,2:4]
 a[3:1,2:4]
 \end{Rcode}
-\end{samepage}
 
 Constructing a \emph{matrix} with the \texttt{matrix()} function is similar to constructing an array, but instead of providing the dimensionality with \texttt{dim}, one must provide either the number of rows or columns (\texttt{nrow} or \texttt{ncol}) and how to fill the matrix from the elements provided using the \texttt{byrow} argument; by default, R fills arrays and matrices by column. 
 
 The \texttt{t()} function returns the transpose of a matrix, that is, it reverses rows and columns. Binding (combining) two matrices together by columns with \texttt{cbind()} or by rows with \texttt{rbind()} requires compatible dimensions, that is, same number of rows for \texttt{cbind()} or same number of columns for \texttt{rbind()}.
 
-\begin{samepage}
 \begin{Rcode}
 b <- matrix(20:1, nrow=5, byrow=T)
 b
@@ -414,13 +370,11 @@ cbind(a, t(b))
 # Bind (combine) by rows
 rbind(t(a), b)
 \end{Rcode}
-\end{samepage}
 
 A \emph{data frame}\index{Data frame!in R} is the most widely used data structure for data analytics and statistics in R. It is essentially a table with a set of columns whose elements are of the same type. Columns are named and columns can be selected using the \texttt{\$} symbol. Useful functions on data frames are \texttt{summary()}, \texttt{head()} and \texttt{tail()}. 
 
 The following R code block creates a variable \texttt{x} as a vector of 50 normally distributed random values using the \texttt{rnorm()} function. The variable \texttt{y} is created from vector \texttt{x} and then adds a normally distributed random variable. The two are then combined into a data frame with the \texttt{data.frame()} function. The \texttt{colnames()} function retrieves the column names, but can also change/update the column names. The \texttt{nrow()} and \texttt{ncol()} functions return the number of rows and columns, \texttt{head()} and \texttt{tail()} return the first few or last few rows, and \texttt{cov()} is an example of a statistical function that returns the covariance matrix of all columns in the data frame.
 
-\begin{samepage}
 \begin{Rcode}
 # Create a vector of 50 normally distributed random variables
 x <- rnorm(50)
@@ -445,11 +399,9 @@ tail(data)
 # Calculate the covariance matrix
 cov(data)
 \end{Rcode}
-\end{samepage}
 
 Data frames may be written to CSV files and read from CSV files, as shown in the following R code block. The functions \texttt{write.csv()} and \texttt{read.csv()} have a range of options for reading/writing files with or without header lines, with different separators, for skipping rows, for different decimal points, for whitespace stripping, etc. Consult the R built-in help system for details.
 
-\begin{samepage}
 \begin{Rcode}
 # Write CSV file into current working directory
 # Omit the row names
@@ -457,12 +409,9 @@ write.csv(data, 'data.csv', row.names=FALSE)
 # Read the data from the current working directory
 new.data <- read.csv('data.csv')
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsection*{Hands-On Exercises}
-
-The following hands-on exercises are designed to familiarize you with the Tidyverse packages, especially the dplyr package. Use these exercises with the Pagila CSV data set.
+\begin{exercisebox}
+These hands-on exercises are designed to familiarize you with the Tidyverse packages, especially the dplyr package. Use these exercises with the Pagila CSV data set.
 
 \begin{enumerate}[nosep]
     \item Create an array with $3$ columns and $50$ rows of random numbers with mean of $2$ and standard deviation of $4$ (use the \texttt{rnorm()} function)
@@ -473,7 +422,7 @@ The following hands-on exercises are designed to familiarize you with the Tidyve
    \item Find the square root of each of the diagonal entries of the covariance matrix, compare this to the standard deviation of 4. Tip: Use the \texttt{diag()} function.
    \item Save the data frame in a CSV file using your first name as file name (file ending '.csv')
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Tidyverse}
 
@@ -540,7 +489,6 @@ The following R code reads a CSV file using the \texttt{read\_csv()} function fr
 
 When reading CSV files with readr, the data is stored in a \emph{tibble}\index{Tibble}, not a data frame. A tibble provides a number of extensions and convenience operations that make it much more capable than a data frame. When using data frames with any dplyr function, they are automatically converted to tibbles. The output looks slightly different than that for data frames, but accomplishes essentially the same things.
 
-\begin{samepage}
 \begin{Rcode}
 # Read CSV into a Tibble
 data <- read_csv('https://evermann.ca/busi4720/fuel.csv')
@@ -552,7 +500,6 @@ colnames(data)
 # Summary
 summary(data)
 \end{Rcode}
-\end{samepage}
 
 The functionality in the dplyr library is intended to mirror SQL queries from the earlier module on relational databases. The main dplyr ''verbs'' used in the examples are summarized in Table~\ref{tab:dplyr}. The examples below will illustrate each of these ''verbs'' or functions and also show the equivalement SQL statements. 
 
@@ -584,7 +531,6 @@ The tidyverse libraries make extensive use of the \emph{pipe}\index{Pipe} operat
 
 \paragraph*{Filtering:} The example below starts with the tibble that was read earlier and pipes it into the \texttt{filter()} function. The filter function specifies two conditions, filtering data by vehicle Make and vehicle model Year. The output of the \texttt{filter} function is piped into the \texttt{print()} function. 
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter and print results
 data |> 
@@ -594,21 +540,17 @@ data |>
 # Equivalent without pipe and boolean operator in filter
 filter(data, Make=='Ford' & Year==2023)
 \end{Rcode}
-\end{samepage}
 
 The \texttt{filter()} function is similar to the \texttt{WHERE} clause in an SQL SELECT statement and the above R code is equivalent to the following SQL statement:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT * 
    FROM data 
    WHERE Make=='Ford' AND Year==2023;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Selection:} The following example adds the \texttt{select()} function to select specific columns from the data set:
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter,
 # select specific columns and print results
@@ -617,21 +559,17 @@ data |>
   select(Model, Category, Range) |>
   print()
 \end{Rcode}
-\end{samepage}
 
 There is no equivalent SQL clause for the \texttt{select()} function because the selection of result columns occurs in the main SELECT clause, as illustrated in the following equivalent SQL statement:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT Model, Category, Range 
    FROM data 
    WHERE Make=='Ford' AND Year==2023;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Column Creation:} The next example shows the use the \texttt{mutate()} function to create a new column that expresses the range of a vehicle for highway driving. It involves a calculation using the Hwy fuel economy, the Comb combined fuel economy and the Range. The \texttt{mutate()} function is added into the above data manipulation pipeline:
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter,
 # create a new calculated column,
@@ -642,21 +580,17 @@ data |>
   select(Model, Category, Range, HwyRange) |>
   print()
 \end{Rcode}
-\end{samepage}
 
 An equivalent SQL statement constructs the new column in the main SELECT clause:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT Model, Category, Range, (Range*Comb)/Hwy AS HwyRange 
    FROM data 
    WHERE Make=='Ford' AND Year==2023;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Renaming:} The example below shows renaming of columns using the \texttt{rename()} function. The Range column is renamed to be the CombRange column. While \texttt{mutate()} creates an additional columns, \texttt{rename()} does not and only renames an existing column. It is therefore more efficient for renaming.
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter,
 # create new calculated columns,
@@ -670,11 +604,9 @@ data |>
   select(Model, Category, CombRange, CityRange, HwyRange) |>
   print()
 \end{Rcode}
-\end{samepage}
 
 An equivalent SQL statement constructs the new column in the main SELECT clause using the AS keyword:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT Model, Category, 
       Range AS CombRange,
@@ -683,11 +615,9 @@ SELECT Model, Category,
    FROM data 
    WHERE Make=='Ford' AND Year==2023;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Distinct Values:} The \texttt{distinct()} function can be used to find the set of unique values of a column. For example, the following R code identifies the unique vehicle Makes and Models in the data set. 
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter,
 # select distinct value combinations and print results
@@ -695,20 +625,16 @@ data |>
   distinct(Make, Model) |>
   print()
 \end{Rcode}
-\end{samepage}
 
 SQL uses the DISTINCT keyword for this purpose as well, illustrated in the following example:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT DISTINCT Make, Model 
   FROM data;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Ordering:} The dplyr \texttt{arrange()} function is used to order data by values, in ascending or descending order. The following example illustrates this by adding the \texttt{arrange()} function to the data processing pipeline. The \texttt{arrange()} function orders the data first by vehicle Category in ascending order (the default ordering), then, for equal values of Model, by Range in descending order (using the \texttt{desc()} function:
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter,
 # select specific columns,
@@ -719,22 +645,18 @@ data |>
   arrange(Category, desc(Range)) |>
   print()
 \end{Rcode}
-\end{samepage}
 
 An equivalent SQL statement uses the ORDER BY clause with the keywords ASC or DESC to indicate the direction of ordering:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT Model, Category, Range
    FROM data 
    WHERE Make=='Ford' AND Year==2023
    ORDER BY Category ASC, Range DESC;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Relocating Columns:} The function \texttt{relocate()} can be used to specify the order in which columns are returned. The following code example rearranges the column order before printing by adding the \texttt{relocate()} function to the data processing pipeline:
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter,
 # select specific columns,
@@ -747,24 +669,20 @@ data |>
   relocate(Category, Range) |>
   print()
 \end{Rcode}
-\end{samepage}
 
 SQL does not require a function or keyword in the SELECT statements. There, columns are returned in the order in which they are specified in the SELECT clause:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT Category, Range, Model
    FROM data 
    WHERE Make=='Ford' AND Year==2023
    ORDER BY Category ASC, Range DESC;
 \end{sqlcode}
-\end{samepage}
 
 \paragraph*{Grouping and Summarizing:} The \texttt{group\_by()} function can be used to group data in preparation for computing aggregate information. It is typically used with the \texttt{summarize()} function that calculates aggregates. 
 
 The following example shows how to compute mean fuel efficiency data, grouped by vehicle Make and vehicle Category. It adds both a \texttt{group\_by()} and a \texttt{summarize()} function into the data processing pipeline. The summarized data is then filtered again, it is sorted by vehicle Category and mean combined fuel economy, and the columns are then reordered so that vehicle Category and mean combined economy are the first two columns.
 
-\begin{samepage}
 \begin{Rcode}
 # Pipe a data frame or tibble into a filter,
 # group the data
@@ -785,11 +703,9 @@ data |>
   relocate(Category, meanComb) |>
   print()
 \end{Rcode}
-\end{samepage}
 
 The equivalent SQL statement also uses the GROUP BY clause. Summary information is defined in the main SELECT clause. The second \texttt{filter()} function in the R code refers to aggregate information, so that the equivalent clause in SQL is the HAVING clause:
 
-\begin{samepage}
 \begin{sqlcode}
 SELECT Category, 
        AVG(Comb) AS meanComb,
@@ -804,7 +720,6 @@ SELECT Category,
    HAVING COUNT(*) > 1
    ORDER BY Category ASC, meanComb ASC;
 \end{sqlcode}
-\end{samepage}
 
 \section{Advanced Tidyverse for Data Analysis}
 
@@ -812,7 +727,6 @@ This section focuses on the use of dplyr to analyze data from a set of CSV files
 \url{https://github.com/devrimgunduz/pagila/blob/master/LICENSE.txt}} is a demonstration database originally developed for teaching and development of the MySQL RDBMS under the name Sakila\footnote{\url{https://dev.mysql.com/doc/sakila/en/}, \\
 \url{https://dev.mysql.com/doc/sakila/en/sakila-license.html}}. Pagila is designed as a sample database to illustrate database concepts and is based on a fictional DVD rental store. It originally consists of several tables organized into categories like film and actor information, customer data, store inventory, and rental transactions. For this section, the Pagila data was summarized in a few related CSV files. The following R code block reads the data and coerces data types as required.
 
-\begin{samepage}
 \begin{Rcode}
 rentals <- read_csv('http://evermann.ca/busi4720/rentals.csv')
 rentals$rating <- as.factor(rentals$rating)
@@ -829,13 +743,11 @@ actors <-
 addresses <- read_csv('https://evermann.ca/busi4720/addresses.csv')
 addresses$phone <- as.character(addresses$phone)
 \end{Rcode}
-\end{samepage}
 
 The following paragraphs show further examples of data analysis with Tidyverse and introduce additional dplyr functions or additional ways to use the dplyr functions. These example data processing pipelines mirror the example in the previous module on SQL. Only new aspects of the examples are explained.
 
 \paragraph*{Example:} Find all films and the actors that appeared in them, ordered by film category and year, for those films that are rated PG.
 
-\begin{samepage}
 \begin{Rcode}
 rentals |> 
   full_join(actors, by='title', 
@@ -853,7 +765,6 @@ rentals |>
   relocate(category, year, title) |>
   print(n=Inf, width=Inf)
 \end{Rcode}
-\end{samepage}
 
 This R code joins the rentals data with the actors data using a full join. The join is performed on the title column that is common to both data frames/tibbles. The \texttt{suffix} argument adds distinct suffixes to column names from each data frame to avoid name clashes. The \texttt{relationship='many-to-many'} indicates the nature of the join.
 
@@ -865,9 +776,7 @@ The data is grouped by category, year, and title, using the \texttt{group\_by()}
 
 This R code block below involves combining multiple data frames and then manipulating and summarizing the data. It builds on the rental and actor tibbles from the previous example and adds address information.
 
-\begin{samepage}
 \begin{Rcode}
-
 full_data <- 
   rentals |> 
     inner_join(addresses, by=c('customer_address'='address_id')) |>
@@ -885,7 +794,6 @@ full_data |>
   arrange(city, ranking, actor) |>
   print(n=25)
 \end{Rcode}
-\end{samepage}
 
 The analysis starts by reading a CSV file containing address information into a tibble. An inner join is performed between the rental data and the address data, matching them on a specified key in each data frame, that is, the cusomter\_address in the rentals data frame must be equal to the address\_id in the addresses data frame. 
 
@@ -896,7 +804,6 @@ The data is grouped by city and actor and a new summary column is created that c
 
 \paragraph*{Example:} Find the customers who spend the most on rentals, with their phone numbers and cities, and the number of rentals with the higest total rental payments for each category grouped by rental duration.
 
-\begin{samepage}
 \begin{Rcode}
 full_data |>
    mutate(customer= paste(first_name_customer, last_name_customer)) |>
@@ -909,13 +816,11 @@ full_data |>
    slice(which.min(ranking)) |>
    print(n=Inf, width=Inf)
 \end{Rcode}
-\end{samepage}
 
 In this example, there is no \texttt{summarize()} function after the \texttt{group\_by()} function because \texttt{summarize()} omits all non-grouped columns, but the example requires phone numbers and cities of customers. Either these would need to be included somehow in the \texttt{summarize()} function, or, as is done in this R code, summary columns are created using the \texttt{mutate()} function instead.  Also note the ''negative'' argument to the \texttt{select()} function, which is used to remove the ''amount'' column. The data processing pipeline uses multiple \texttt{group\_by()} statements with different aggregate functions (\texttt{sum()}, \texttt{n()}, \texttt{min\_rank()}) for the different groups. Finally, the R code uses \texttt{slice()} to select the rows with the smallest ranks.
 
 \paragraph*{Example:} Get the total rental revenue, number of rentals, and the mean and standard deviation of the rental amounts for each country.
 
-\begin{samepage}
 \begin{Rcode}
 full_data |>
   group_by(country) |>
@@ -927,13 +832,11 @@ full_data |>
           desc(revenue)) |>
   print(n=Inf, width=Inf)  
 \end{Rcode}
-\end{samepage}
 
 The R code for this query demonstrates a number different aggregate summary functions, \texttt{sum()}, \texttt{n()}, \texttt{mean()} and \texttt{sd()} (standard deviation). It also shows how to use the \texttt{desc()} function to arrange or sort data in decreasing order.
 
 \paragraph*{Example:} Get the top 5 and the bottom 5 grossing customers for each quarter.
 
-\begin{samepage}
 \begin{Rcode}
 full_data |>
   mutate(customer=paste(first_name_customer,last_name_customer)) |>
@@ -951,13 +854,11 @@ full_data |>
   relocate(q, customer, payments, rank_top, rank_bot) |>
   print(n=Inf, width=Inf)
 \end{Rcode}
-\end{samepage}
 
 The code for this query again does not use a \texttt{summarize()} function. It also shows the use of the \texttt{quarter()} function from the ''lubridate'' library. The lubridate library contains a large range of date and time related functions. Two ranking columns are created using the \texttt{mutate()} and the \texttt{min\_rank()} functions, once in descending order to get the top ranks, and again in ascending order to get the bottom ronks. The code uses \texttt{filter()} instead of \texttt{slice()} to select the top and bottom 5 ranks (using a boolean ''or'' operator), uses \texttt{arrange()} to sort the data, and then uses \texttt{relocate()} to re-arrange the order of columns prior to printing.
 
 \paragraph*{Example:} Find the set of film titles by rental customer and the total number rentals for each customer.
 
-\begin{samepage}
 \begin{Rcode}
 full_data |>
   mutate(customer=paste(first_name_customer,last_name_customer)) |>
@@ -970,7 +871,6 @@ full_data |>
   arrange(customer) |>
   print(n=Inf, width=Inf)
 \end{Rcode}
-\end{samepage}
 
 The code for this query works with nested data, that is, data with columns that contain lists, created using the \texttt{nest()} function. In this example, \texttt{nest(titles=title)} creates a columns called ''titles'' that contains a list of all the elements of the ''title'' column for each customer. The R code also demonstrates row-wise operations. Both \texttt{mutate()} functions after \texttt{rowwise()} function operate by row. Specifically, the first use of the \texttt{mutate()} function creates a new column ''rentals'' which contains the number of rows in the titles column \emph{for each row} (recall that the ''titles'' column contains lists of film title). Similarly, the second use of the \texttt{mutate()} function creates a new column ''unique\_title''that contains a list of distinct film titles from the ''titles'' column \emph{for each row}.
 
@@ -1009,10 +909,9 @@ When faced between the choice of data analytics using an SQL RDBMS or R/Tidyvers
  \item Finally, if the size of data is too large to handle in R, consider distributed tools such as Hadoop/Spark that are made for Big Data analytics.
 \end{itemize}
 
-\begin{tcolorbox}[colback=code]
-\subsection*{Hands-On Exercises}
+\begin{exercisebox}
 
-The following hands-on exercises are designed to familiarize you with the Tidyverse packages, especially the dplyr package. Use these exercises with the Pagila CSV data set.
+These hands-on exercises are designed to familiarize you with the Tidyverse packages, especially the dplyr package. Use these exercises with the Pagila CSV data set.
 
 \begin{enumerate}[nosep]
   \item Find all films with a rating of 'PG'
@@ -1028,4 +927,4 @@ The following hands-on exercises are designed to familiarize you with the Tidyve
   \item List all films that have never been rented
   \item List the names of actors who have played in more than 15 films
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}

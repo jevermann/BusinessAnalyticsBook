@@ -128,7 +128,6 @@ The standardized interchange format for event log data is the XES file format\in
 
 The file below is an excerpt of a CSV file that contains event log information (line breaks have been added to fit this into the width of the page but are not in the actual file). Note how ''Start Timestamp'' and ''Complete Timestamp'' exist for each row. This means that one row captures two events, the starting and the completion of an activity instance. 
 
-\begin{samepage}
 \begin{textcode}
 Case ID,Start Timestamp,Complete Timestamp,Activity,Resource,Role
 339,2011/02/16 14:31:00.000,2011/02/16 15:23:00.000,
@@ -140,7 +139,6 @@ Case ID,Start Timestamp,Complete Timestamp,Activity,Resource,Role
 339,2011/02/18 17:24:00.000,2011/02/18 17:30:00.000,
     Analyze Purchase Requisition,Heinz Gutschmidt,Requester Manager
 \end{textcode}
-\end{samepage}
 
 \section{Types and Goals of Process Analytics}
 
@@ -209,7 +207,6 @@ PM4Py\footnote{\url{https://processintelligence.solutions/pm4py}} is a Python li
 
 This section illustrates process analytics using the PM4Py framework for Python. In a first step, we import an event log in CSV format into a Pandas data frame\footnote{The event log is originally taken from here: \url{http://files.fluxicon.com//Datasets/Purchasing-Example.csv}}. This event log is a fictitous log of a purchasing or procurement process. There are no case or event attributes other than the basic information aboutr activity names, resources, and timestamps.
 
-\begin{samepage}
 \begin{pythoncode}
 import pandas as pd
 import pm4py
@@ -219,11 +216,9 @@ log = pd.read_csv('https://evermann.ca/busi4720/PurchasingExample.csv',
    parse_dates=['Start Timestamp', 'Complete Timestamp'], 
    infer_datetime_format=True)
 \end{pythoncode}
-\end{samepage}
 
 In order for any process analytics tool to work with event log data, it must know which column in the data set is the case identifier, so that it knows which events belong to each case. It must also know what the name of the activity of each event is, the correct timestamp for sequentially ordering events within a case, and the resource that executed the activity referred to by the event. PM4Py by default uses attribute names similar to those in the XES file above, although others can be explicitly specified. The following Python code block defines the expected columns in the data set with the appropriate names and types.
 
-\begin{samepage}
 \begin{pythoncode}
 # Tell PM4PY about which columns represent case ID, activity name, 
 # and timestamp. Case ID and activity. Names must be string type
@@ -232,7 +227,6 @@ log['concept:name']=log['Activity'].astype('string')
 log['time:timestamp']=log['Complete Timestamp']
 log['org:resource']=log['Resource']
 \end{pythoncode}
-\end{samepage}
 
 Reading an XES file into PM4Py is also easy, but because it does not use the Pandas library, XES files must be on a local filesystem (although they may be compressed). As illustrated above, an XES file contains sufficient meta-data to identify case ID, event name, timestamp, and resource, so that these need not be specified upon import.
 
@@ -244,7 +238,6 @@ log2 = pm4py.read_xes('BPI_Challenge_2012.xes.gz')
 
 Basic event log statistics can of course be computed through Pandas data frame operations as in the first two lines of the following example code block, but PM4Py provides easy-to-use functions. The following Python code block shows the number of cases, number of events, the set of all start activities of traces, the set of all end activity of traces, case durations, and trace and event attributes. The last two are only applicable to event logs in XES format.
 
-\begin{samepage}
 \begin{pythoncode}
 # Number of traces/cases
 num_cases = len(log['Case ID'].unique())
@@ -260,13 +253,11 @@ pm4py.get_all_case_durations(log)
 pm4py.get_event_attributes(log)
 pm4py.get_trace_attributes(log)
 \end{pythoncode}
-\end{samepage}
 
 \subsection*{Variants}
 
 To perform a variant analysis, the log must be separated into sets of traces (''sub-logs'') for which every trace contains the same sequence of events, called a \emph{variant}\index{Variant}. The PM4Py function \texttt{split\_by\_process\_variant()} returns an iterator over the variants and their associated sub-logs, where each variant is the list of activity names in the order in which they were executed in that variant. Each sub-log can then be analyzed separately, for example in compliance analysis or performance mining, allowing deeper insights and also a comparative analysis of processes.
 
-\begin{samepage}
 \begin{pythoncode}
 pm4py.get_variants(log)
 # Returns a dict with keys and values
@@ -278,13 +269,11 @@ for variant, subdf in pm4py.split_by_process_variant(log):
     print(variant)
     print(subdf)  
 \end{pythoncode}
-\end{samepage}
 
 \subsection*{Process Discovery}
 
 The basic output of process discovery is a dependency graph\index{Dependency graph}, also called a directly-follows graph\index{Directly-follows graph|see{Dependency graph}} (DFG)\index{DFG|see{Directly-follows graph}} or process map. This graph simply shows how often one activity is directly followed by another activity in the traces of the log. The PM4Py function \texttt{discovery\_dfg()} returns the directly-follows-graph and also the set of start and end events. This graph can then be visualized using the \texttt{view\_dfg()} function, as shown in Figure~\ref{fig:dfg}, and saved to a file using the \texttt{save\_vis\_dfg()} function. This is illustrated in the following Python code lbock.
 
-\begin{samepage}
 \begin{pythoncode}
 dfg, start, end = pm4py.discover_dfg(log)
 
@@ -294,7 +283,6 @@ pm4py.save_vis_dfg(dfg=dfg,
     start_activities=start, end_activities=end, 
     file_path='dfg.png', rankdir='TB')
 \end{pythoncode}
-\end{samepage}
 
 To show the usefulness of even this basic process visualization, consider the following observations. First, the example DFG in Figure~\ref{fig:dfg} shows that all 608 traces in the log start with the same activity (''Create Purchase Requisition''). The activity ''Analyze Request for Quotation'' is carried out 1107 times, suggesting that some cases require this activity multiple times, as is also evident from the loops between this activity and the activities ''Amend Request for Quotation Requester'' and ''Amend Request for Quation Requester Manager''. This iteration suggests re-work to fix errors in the original quotation. Eliminating these errors may improve the overall process performance. 
 
@@ -311,16 +299,15 @@ Third, note that there are 10 cases where the activity ''Release Supplier's Invo
 
 A DFG is not a process model in the sense of the example BPMN model in Figure~\ref{fig:bpmn}, as it is missing gateways and decisions. A range of algorithms have been developed over the years to discover BPMN models from event logs. PM4Py provides the Inductive Miner and the Heuristics Net Miner. 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise}
-Use the event log from \url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}
+\begin{exercisebox}
+Use the event log from \small\url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}\normalsize
 \begin{enumerate}
    \item Read the data into a Pandas data frame using \texttt{read\_csv()}. Parse the \texttt{Start Timestamp} and \texttt{Complete Timestamp} columns as dates.
    \item Create the \texttt{case:concept:name}, \texttt{concept:name}, \texttt{time:timestamp}, \texttt{org:resource} columns as in the example above.
    \item Create and visualize a directly-follows-graph (DFG)
    \item How many variants are there? What is the most frequent variant?
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 The Inductive Miner\index{Inductive miner} works by repeatedly ''cutting'' the DFG for an event log to identify subsets of activities that represent exclusive choice, parallelism, sequence, or loops. For example, as Figure~\ref{fig:inductive} shows, when there are sets of activities that are not connected by each other, and have distinct pre- and post-sets of activities, then this may indicate an exclusive choice between these sets. Similarly, a sequence of activities is characterized by the absence of ''backwards'' connections in the DFG, and parallelism is indicated by a set of arrows that fully connects two sets of activities with a common post-set. 
 
@@ -334,7 +321,6 @@ Source: Leemans, S.J.J., Fahland, D., van der Aalst, W.M.P. (2013). Discovering 
 
 PM4Py provides the function \texttt{discover\_bpmn\_inductive} which produces a BPMN model that can be viewed and saved. An example is shown in Figure~\ref{fig:inductive_example}.
 
-\begin{samepage}
 \begin{pythoncode}
 bpmn_model = pm4py.discover_bpmn_inductive(log, noise_threshold=0.5)
 
@@ -342,7 +328,6 @@ pm4py.view_bpmn(bpmn_model, rankdir='LR')
 
 pm4py.save_vis_bpmn(bpmn_model, file_path='bpmn.png', rankdir='TB')
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -361,7 +346,6 @@ a \Rightarrow b = \left( \frac{
  
 The PM4Py function \texttt{discover\_petri\_net\_heuristics} provides the Heuristics Net Miner. It returns a Petri net (a type of process model) that can be converted to a BPMN model for viewing and saving. An example is shown in Figure~\ref{fig:heuristics_example}.
 
-\begin{samepage}
 \begin{pythoncode}
 petri_net, initial_marking, final_marking = \
     pm4py.discover_petri_net_heuristics(log, 
@@ -377,7 +361,6 @@ bpmn_model2 = pm4py.convert_to_bpmn(petri_net,
 pm4py.view_bpmn(bpmn_model2)
 pm4py.save_vis_bpmn(bpmn_model2, 'bpmn2.png', rankdir='TB')
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -405,7 +388,6 @@ Note that the results of the two types of analysis are not necessarily the same 
 
 PM4Py provides functions to compute fitness and precision using both methods. For this, PM4Py uses the Petri net type of process model. As we noted above, this can be transformed into a BPMN model for visualization. 
 
-\begin{samepage}
 \begin{pythoncode}
 petri_net, initial_marking, final_marking = \
     pm4py.discover_petri_net_inductive(log, noise_threshold=0.5)
@@ -426,7 +408,6 @@ precision_tbr = pm4py.precision_token_based_replay(log,
     petri_net, initial_marking, final_marking)
 print(precision_tbr)
 \end{pythoncode}
-\end{samepage}
 
 \subsection*{Log Filtering}
 
@@ -457,10 +438,12 @@ PM4Py provides a number of different filters, with a few examples shown in Table
 \label{tab:pm4py_filters}
 \end{table}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercises -- Basic Log Information}
 
 The following exercises are designed to be used with the event log in the running examples above. Tips are provided to guide you and to provide links to the documentation for important functions to use.
+
+\begin{exercisebox}
+
+\subsubsection*{Basic Log Information}
 
 \begin{enumerate}
     \item What are the different types of activities in the log?
@@ -480,19 +463,18 @@ The following exercises are designed to be used with the event log in the runnin
        \item Use \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.stats.get_all_case_durations.html}{\texttt{pm4py.stats.get\_all\_case\_durations}}
        \item Put case durations into a \texttt{pd.DataFrame}
        \item 1 day = 86400 seconds
-       \item Use \href{https://plotly.com/python/histograms/}{\texttt{px.histogram}} or \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.vis.view_case_duration_graph.html}{\texttt{pm4py.vis.view\_case\_duration\_graph}}
+       \item Use \href{https://plotly.com/python/histograms/}{\texttt{px.histogram}} or \\ \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.vis.view_case_duration_graph.html}{\texttt{pm4py.vis.view\_case\_duration\_graph}}
     \end{itemize}
     \item What is the mean case duration?
     \begin{itemize}
        \item Use the Pandas \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html}{\texttt{mean()}} function on the result of the previous exercise
     \end{itemize}
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercises for PM4Py -- Automatic Process Discovery}
+\begin{exercisebox}
 
-The following exercises are designed to be used with the event log in the running examples above. Tips are provided to guide you and to provide links to the documentation for important functions to use.
+\subsubsection*{Automatic Process Discovery}
 
 \begin{enumerate}
     \item Using the mean case duration identified in the previous exercise, split the log on the mean case duration; that is, one sub-log should contain traces that are shorter than the mean, the other sub-log should contain cases that take longer than the mean.
@@ -503,12 +485,11 @@ The following exercises are designed to be used with the event log in the runnin
     \item Discover a BPMN model from the total log. How does it differ from the models discovered for the partial logs?
     \item Calculate and compare the fitness and precision values of the models discovered from the partial log and the total log.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercises for PM4Py -- Performance Analysis}
+\begin{exercisebox}
 
-The following exercises are designed to be used with the event log in the running examples above. Tips are provided to guide you and to provide links to the documentation for important functions to use.
+\subsubsection*{Performance Analysis}
 
 \begin{enumerate}
    \item What is the activity with the longest mean time? Activities taking a long time may be a bottleneck in the process flow.
@@ -525,10 +506,10 @@ The following exercises are designed to be used with the event log in the runnin
        \item Calculate the number of instances for each case for each activity using the Pandas \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}} and \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.count.html}{\texttt{count()}} functions on the dataframe
    \end{itemize}
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercises for PM4Py -- Conformance Analysis}
+\begin{exercisebox}
+\subsubsection*{Conformance Analysis}
 
 The following exercises are designed to be used with the event log in the running examples above. Tips are provided to guide you and to provide links to the documentation for important functions to use.
 
@@ -538,7 +519,7 @@ The following exercises are designed to be used with the event log in the runnin
       \item Use \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.filtering.filter_eventually_follows_relation.html}{\texttt{filter\_eventually\_follows\_relationship}}
    \end{itemize}
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Performance Mining}
 
@@ -546,7 +527,6 @@ Performance mining\index{Performance mining} is that aspect of process analytics
 
 The easiest and most interpretable way to do this in PM4Py is to annotate the DFG with this information. For example, the following Python code block calculates the median waiting times between activities and shows them in the DFG. The annotated DFG is shown in Figure~\ref{fig:performance_dfg}. Because the example event log did not contain start and end times for each activity, it is not possible to show the service times on the DFG, that is, the duration of the activities.
 
-\begin{samepage}
 \begin{pythoncode}
 perf_dfg, start_activities, end_activities = \
     pm4py.discover_performance_dfg(log)
@@ -559,7 +539,6 @@ pm4py.save_vis_performance_dfg(perf_dfg,
     start_activities, end_activities, 
     file_path='perfdfg.png', rankdir='TB')
 \end{pythoncode}
-\end{samepage}
 
 This example shows a few problems with the process. For example, the median wait time between creating a request for quotation and analyzing it is 6 days. If the request needs to be amended, it then has to wait another 8 to 10 days to be analyzed again. These long wait times indicate performance problems in the process. This may stem from a lack of resources, or insufficient prioritization, or other process issues, that needs be investigated in detail by the process analyst. 
 
@@ -573,7 +552,6 @@ This example shows a few problems with the process. For example, the median wait
 
 Another useful tool in process performance analysis is the \emph{dotted chart}\index{Dotted chart}. An example dotted chart is shown in Figure~\ref{fig:dotted_chart}. The horizontal axis represents the time stamp of each activity or event, while the vertical axis represents the case ID -- each row in the diagram contains the events of one trace. The colors correspond to different types of activities. The following Python code produces the example in Figure~\ref{fig:dotted_chart}.
 
-\begin{samepage}
 \begin{pythoncode}
 perf_dfg, start_activities, end_activities = \
     pm4py.discover_performance_dfg(log)
@@ -586,7 +564,6 @@ pm4py.save_vis_performance_dfg(perf_dfg,
     start_activities, end_activities, 
     file_path='perfdfg.png', rankdir='TB')
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -601,7 +578,6 @@ A dotted chart can also be useful to examine the case arrival rates. In the exam
 
 A performance spectrum graph\index{Performance spectrum graph}, like the one in Figure~\ref{fig:perf_spectrum} shows the wating times between two activities, the one at the top and the one at the bottom. The horizontal axis represents time. Lines that are slanted or run diagonally at an angle indicate a long waiting time. A performance spectrum can also show when lines are ''bunched together'' or ''sparsely distributed'', indicating variations in the rate at which one activity finishes or the next activity begins. The following Python code block produces the graph in Figure~\ref{fig:dotted_chart}.
 
-\begin{samepage}
 \begin{pythoncode}
 pm4py.view_performance_spectrum(log,
     ['Send invoice', 'Pay invoice'])
@@ -610,7 +586,6 @@ pm4py.save_vis_performance_spectrum(log,
     ['Send invoice', 'Pay invoice'],
     'perfspectrum.png') 
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -621,14 +596,12 @@ pm4py.save_vis_performance_spectrum(log,
 
 To indicate when a process that delivers a service is in high demand and requires high capacity, the distribution of events over time should be considered. This can be done by day-of-the-week, by month-of-the-year, or by week-of-the-year, as the following PM4Py functions show. An example of event distribution by week-of-the-year is shown in Figure~\ref{fig:event_distribution}.
 
-\begin{samepage}
 \begin{pythoncode}
 pm4py.view_events_distribution_graph(log, 'days_week')
 pm4py.view_events_distribution_graph(log, 'days_month')
 pm4py.view_events_distribution_graph(log, 'months')
 pm4py.view_events_distribution_graph(log, 'weeks')
 \end{pythoncode}
-\end{samepage}
 
 The example in Figure~\ref{fig:event_distribution} shows that this process is very busy early in the year, in approximately the first quarter, but not at all in the last quarter of the year, except for some activity in the final week of the year. This uneven demand requires adequate capacity planning over of the organization and an organization may decide to identify ways to smooth out the demand. 
 
@@ -641,12 +614,10 @@ The example in Figure~\ref{fig:event_distribution} shows that this process is ve
 
 Plotting the events over time for the entire log as a probability density shows similar characteristics. Figure~\ref{fig:events_per_time} plots the frequency (technically, a probability kernel density) of event occurrence, produced by the following Python code.
 
-\begin{samepage}
 \begin{pythoncode}
 pm4py.view_events_per_time_graph(log)
 pm4py.save_vis_events_per_time_graph(log, 'eventspertime.png')
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -662,7 +633,6 @@ Organizational mining focuses on the resources and their roles in a process. It 
 
 A simple way to focus on organizational roles or resources is to construct a DFG, but using the resource or role information for the nodes of the graph, instead of the activity names. The DFG then expresses how often one resource or role follows another in the execution of the cases; in other words, how often one resource or role passes work to another (or to itself). The following Python code block produces the \emph{handover-of-work network}\index{Handover-of-work network} shown in Figure~\ref{fig:handover}. Notice how the same PM4Py function for the DFG discovery is used, but a different data frame column is specified for the ''activity\_key'' parameter.
 
-\begin{samepage}
 \begin{pythoncode}
 dfg, start, end = pm4py.discover_dfg(log, activity_key='Role')
 
@@ -673,7 +643,6 @@ pm4py.save_vis_dfg(dfg=dfg,
     end_activities=end, 
     file_path='handover.png', rankdir='TB')
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -684,14 +653,12 @@ pm4py.save_vis_dfg(dfg=dfg,
 
 A similar analysis can be performed using the PM4Py function \\ \texttt{discover\_working\_together\_network()}, as shown in the following Python code and in Figure~\ref{fig:workingtogether}. Note that this graph is normally interactive.
 
-\begin{samepage}
 \begin{pythoncode}
 sna_graph = pm4py.discover_working_together_network(log,
    resource_key='Role')
 pm4py.view_sna(sna_graph, variant_str='pyvis')   
 pm4py.view_sna(sna_graph, variant_str='networkx')   
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -702,16 +669,13 @@ pm4py.view_sna(sna_graph, variant_str='networkx')
 
 Yet another analysis focuses on identifying resources that perform the same sets of activities. This is useful for identifying implicit roles or resources with similar skills.
 
-\begin{samepage}
 \begin{pythoncode}
 roles = pm4py.discover_organizational_roles(log)
 print(roles)
 \end{pythoncode}
-\end{samepage}
 
 Another way to achieve this goal is with the following Python code, which produces the activity-based resource similarity graph in Figure~\ref{fig:resource_similarity}. The graph shows four clusters of resources that are similar to each other within their cluster, i.e. they perform similar sets of activities in this process. 
 
-\begin{samepage}
 \begin{pythoncode}
 sna_graph = pm4py.discover_activity_based_resource_similarity(log)
 
@@ -721,7 +685,6 @@ pm4py.view_sna(sna_graph, variant_str='pyvis')
 pm4py.save_vis_sna(sna_graph, 'ressimilarity.png',
     variant_str='networkx')
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering

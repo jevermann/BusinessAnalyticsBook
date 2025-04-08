@@ -277,20 +277,31 @@ VirtualBox is a free and open-source virtualization software application develop
 
 VMWare Fusion is a proprietary virtualization software owned by Broadcom. VMWare Fusion is available for Apple Mac computers running either Intel processors (before circa 2021) or the later Apple M1, M2 or M3 processors (after circa 2021). Similar to VirtualBox, it allows users to create and run virtual machines on their computer and provides a way to share folders from the host system to the guest system, and to copy and paste from host to guest and vice versa. \\
  
-\begin{tcolorbox}[colback=alert]
-\noindent Virtual machine files for use with VirtualBox and VMWare Fusion are provided\footnote{\url{https://evermann.ca/busi4720.html}} that contains an Ubuntu system with all required software installed
-If you wish to use this, you must install VirtualBox or VMWare Fusion on your computer, then download the corresponding virtual machine file and import it into the virtualization software application.  \\
+\begin{alertbox}
+Virtual machine files for use with VirtualBox and VMWare Fusion may be provided by your instructor that contains an Ubuntu system with all required software installed. If you wish to use this, you must install VirtualBox or VMWare Fusion on your computer, then download the corresponding virtual machine file and import it into the virtualization software application.  \\
 
 The username is \textbf{busi4720} and the password is \textbf{busi4720}. Whenever a password is required, you should enter \textbf{busi4720}.
-\end{tcolorbox}
+\end{alertbox}
   
-\noindent \begin{tcolorbox}[colback=alert]\emph{If you do NOT wish to use the VirtualBox Appliance, you should download and install all software to your computer from the sources indicated in Table~\ref{tab:software} in (at least) the versions indicated in the table.}\end{tcolorbox}
+\begin{alertbox}
+If you do NOT wish to use the VirtualBox Appliance, you should download and install all software to your computer from the sources indicated in Table~\ref{tab:software} in (at least) the versions indicated in the table.
+\end{alertbox}
  
 \section{The Ubuntu Command Line (also for Mac Users)}
 
 This tutorial provides a very brief introduction to the Ubuntu command line (''terminal''). The command line, also called a ''shell'' is by default the ''bash'' shell (Bourne-again shell; a pun on the earlier Bourne shell)\index{Bash|see{Bourne-again shell}}\index{Bourne-again shell}. In Ubuntu, you can open the Terminal application using the key combination \fcolorbox{black}{lightgray}{Ctrl-Alt-T}, or by selecting the Terminal application icon from the side bar or the application list. You can also open a Terminal from the file browser. \\
 
 \noindent \emph{Note:} The default shell in the MacOS terminal is the ''zsh'' and behaves slightly differently from the bash shell. You can work with a ''bash'' shell by typing the \texttt{bash} command in a MacOS terminal.
+
+\begin{resourcebox}
+The following are further beginner-level tutorials on using the command line on Ubuntu (or any other Linux distribution):
+\begin{itemize}
+\item \href{https://ubuntu.com/tutorials/command-line-for-beginners}{Ubuntu command line for beginners}
+\item \href{https://www.digitalocean.com/community/tutorials/a-linux-command-line-primer}{Linux command line primer}
+\item \href{https://www.digitalocean.com/community/tutorial-series/getting-started-with-linux}{Getting started with Linux}
+\end{itemize}
+\end{resourcebox}
+
 
 Bash will show you a \emph{command prompt} that indicates your username (''busi4720''), the name of the computer (''busi4720vm'') and your current working directory (''$\sim$'') followed by the dollar sign ''\$''.
 
@@ -404,7 +415,7 @@ $ rm someFolder/someFile.txt
 $ rm -r ~/someFolder
 \end{bashcode}
 
-\noindent \emph{\textcolor{red}{Use this very carefully! You could inadvertently delete all your files. The shell will delete files and folders immediately and irrevocably. There is no ''undoing'' this.}} \\
+\begin{alertbox}Use the \texttt{rm} command very carefully! You could inadvertently delete all your files. The shell will delete files and folders immediately and irrevocably. There is no ''undoing'' this.\end{alertbox}
 
 \noindent View the command line \underline{history} with the \texttt{history} commands. Remember that you can redirect this output to a file if you wish or use a pipe to pipe it into the less command (see below).
 \begin{bashcode}
@@ -438,7 +449,6 @@ $ man ls
 \end{bashcode}
 
 \noindent If you can't quite remember which command to use, you can search for commands using keywords with the \texttt{apropos} command:
-\begin{samepage}
 \begin{bashcode}
 busi4720@busi4720vm:~$ apropos python
 keyring (1)          - Python-Keyring command-line utility
@@ -457,7 +467,6 @@ python3.10-config (1) - output build options for python C/C++ exte...
 python3 (1)          - an interpreted, interactive, object-oriente...
 ...
 \end{bashcode}
-\end{samepage}
 
 \noindent You can see a list of all processes currently running using the \texttt{ps} command. The results show the process identifier (PID), the console from which you started the process, the computing time it has consumed, and the command that was used to start the process. Add the \texttt{a} and \texttt{x} option to see \emph{all} the processes running on your computer, not just the processes you have started.
 \begin{bashcode}
@@ -476,55 +485,9 @@ $ history | grep .txt
 
 \noindent \emph{Note:} The vertical bar is called a \emph{''pipe''}\index{Pipe}, it pipes the output of one command as input into the next one
 
-\noindent The following are further beginner-level tutorials on using the command line on Ubuntu (or really any Linux distribution):
-\begin{itemize}
-\item \href{https://ubuntu.com/tutorials/command-line-for-beginners}{Ubuntu command line for beginners}
-\item \href{https://www.digitalocean.com/community/tutorials/a-linux-command-line-primer}{Linux command line primer}
-\item \href{https://www.digitalocean.com/community/tutorial-series/getting-started-with-linux}{Getting started with Linux}
-\end{itemize}
-
-\section{Review Questions}
-
-\paragraph*{General}
-\begin{enumerate}[nosep]
-	\item What is the definition of ''data analytics''? What is "business analytics"?
-	\item What is the relationship between data management and analytics?
-	\item Give examples of areas related to analytics and their relationships.
-	\item Why is text analysis mentioned in connection with machine learning?
-	\item What are artificial neural networks (ANN) and deep neural networks (DNN), and how are they the same and how are they different from linear regression models?
-	\item In what way does AI include areas beyond machine learning?
-	\item Characterize Big Data and its focus.
-	\item Provide an example that illustrates areas of AI outside of data analytics.
-	\item Define techniques in the context of data science.
-    \item Provide an example of a technique used in exploratory data analysis.
-	\item Mention a few examples of tools used in data science.
-	\item Explain the relationship between methods and techniques in data science.
-	\item Provide examples of tasks or challenges that high-level methodologies (methods) might address in data science.
-	\item Summarize the roles of methods, techniques, and tools in the context of data science.
-\end{enumerate}
-\paragraph*{Types of Analytics}
-\begin{enumerate}[nosep,resume*]
-	\item What is the primary purpose of descriptive analytics? Give an example of how it might be used in a business context?
-	\item Explain how predictive analytics differs from descriptive analytics. Illustrate with an example how a simple linear regression model can be used in predictive analytics.
-    \item Describe prescriptive analytics and how it differs from predictive analytics. 
-    \item What is visual analytics and how does it support human tasks in data analysis? Discuss how it can contribute to other types of analytics.
-    \item Compare and contrast predictive and prescriptive analytics in terms of their approach and end goals. How do they both utilize past data?
-    \item If a company wants to understand its sales performance over the last five years, which type of analytics would be most appropriate and why?
-    \item Imagine a scenario where a company needs to decide on future marketing strategies. Which type of analytics would be most beneficial for them and how might it be implemented?
-\end{enumerate}
-\paragraph*{Learning}
-\begin{enumerate}[nosep,resume*]
-	\item What is supervised learning in machine learning, and how does it differ from unsupervised learning?
-	\item Describe how a simple linear regression model works in supervised learning. What are the key parameters in this model?
-    \item Compare the simplicity of a linear regression model with the complexity of a model like GPT in supervised learning. What are the key differences?
-    \item Provide examples of tasks that are typically performed using unsupervised learning.
-	\item How is clustering used in unsupervised learning, and can you give an example of its application in a business context?
-	\item Explain the concept of dimensionality reduction in unsupervised learning and its potential benefits.
-\end{enumerate}
-
-\section{Hands-On Exercises}
-
 The following are a set of connected exercises to help you practice your command line skills. Do them in the order listed.
+
+\begin{exercisebox}
 
 \begin{enumerate}
 \item Navigation and Listing
@@ -569,5 +532,45 @@ The following are a set of connected exercises to help you practice your command
 	\item Remove the entire "Exercise1" directory and its contents using \texttt{rm -r}.
 	\item Confirm that the "Exercise1" directory no longer exists by listing the contents of the current directory.
 \end{enumerate}
+\end{enumerate}
+\end{exercisebox}
+
+\section{Review Questions}
+
+\paragraph*{General}
+\begin{enumerate}[nosep]
+	\item What is the definition of ''data analytics''? What is "business analytics"?
+	\item What is the relationship between data management and analytics?
+	\item Give examples of areas related to analytics and their relationships.
+	\item Why is text analysis mentioned in connection with machine learning?
+	\item What are artificial neural networks (ANN) and deep neural networks (DNN), and how are they the same and how are they different from linear regression models?
+	\item In what way does AI include areas beyond machine learning?
+	\item Characterize Big Data and its focus.
+	\item Provide an example that illustrates areas of AI outside of data analytics.
+	\item Define techniques in the context of data science.
+    \item Provide an example of a technique used in exploratory data analysis.
+	\item Mention a few examples of tools used in data science.
+	\item Explain the relationship between methods and techniques in data science.
+	\item Provide examples of tasks or challenges that high-level methodologies (methods) might address in data science.
+	\item Summarize the roles of methods, techniques, and tools in the context of data science.
+\end{enumerate}
+\paragraph*{Types of Analytics}
+\begin{enumerate}[nosep,resume*]
+	\item What is the primary purpose of descriptive analytics? Give an example of how it might be used in a business context?
+	\item Explain how predictive analytics differs from descriptive analytics. Illustrate with an example how a simple linear regression model can be used in predictive analytics.
+    \item Describe prescriptive analytics and how it differs from predictive analytics. 
+    \item What is visual analytics and how does it support human tasks in data analysis? Discuss how it can contribute to other types of analytics.
+    \item Compare and contrast predictive and prescriptive analytics in terms of their approach and end goals. How do they both utilize past data?
+    \item If a company wants to understand its sales performance over the last five years, which type of analytics would be most appropriate and why?
+    \item Imagine a scenario where a company needs to decide on future marketing strategies. Which type of analytics would be most beneficial for them and how might it be implemented?
+\end{enumerate}
+\paragraph*{Learning}
+\begin{enumerate}[nosep,resume*]
+	\item What is supervised learning in machine learning, and how does it differ from unsupervised learning?
+	\item Describe how a simple linear regression model works in supervised learning. What are the key parameters in this model?
+    \item Compare the simplicity of a linear regression model with the complexity of a model like GPT in supervised learning. What are the key differences?
+    \item Provide examples of tasks that are typically performed using unsupervised learning.
+	\item How is clustering used in unsupervised learning, and can you give an example of its application in a business context?
+	\item Explain the concept of dimensionality reduction in unsupervised learning and its potential benefits.
 \end{enumerate}
 

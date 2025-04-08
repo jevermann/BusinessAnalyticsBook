@@ -21,37 +21,53 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Molnar, Christoph: \emph{Interpretable Machine Learning} (2023) \\
 
-\url{https://christophm.github.io/interpretable-ml-book/} \\
+\small\url{https://christophm.github.io/interpretable-ml-book/}\normalsize \\
 
 (CC BY-NC-SA License)
-\end{tcolorbox}
+\end{resourcebox}
 
 Christoph Molnar's book is a very readable and fairly comprehensive introduction to interpretable machine learning or explainable artificial intelligence (XAI). It provides only a few mathematical formulas for illustration and explanation and otherwise relies on intuitive and easy-to-understand descriptions and explanations. It points to and uses software for R and Python, but is not focused on code.
 
-\begin{tcolorbox}[colback=alert]
-SciKit-Learn: \url{https://scikit-learn.org/}
-\end{tcolorbox}
+\begin{resourcebox}
+\vspace{\baselineskip}
+
+SciKit-Learn: \small\url{https://scikit-learn.org/}\normalsize
+
+\vspace{\baselineskip}
+\end{resourcebox}
 
 SciKit-Learn is a comprehensive machine learning framework for Python that also provides some interpretable ML functions. It provides many commonly used as well as advanced functions for classification, regression, and clustering, as well as methods for data preprocessing and model validation and selection.
 
-\begin{tcolorbox}[colback=alert]
-PyALE: \url{https://pypi.org/project/PyALE/}
-\end{tcolorbox}
+\begin{resourcebox}
+\vspace{\baselineskip}
+
+PyALE: \small\url{https://pypi.org/project/PyALE/}\normalsize
+
+\vspace{\baselineskip}
+\end{resourcebox}
 
 PyALE is a Python package to compute Accumulated Local Effects. It is based on an R package with similar functionality and provides ALE plots for numerical and categorical features.
 
-\begin{tcolorbox}[colback=alert]
-LIME: \url{https://github.com/marcotcr/lime}
-\end{tcolorbox}
+\begin{resourcebox}
+\vspace{\baselineskip}
+
+LIME: \small\url{https://github.com/marcotcr/lime}\normalsize
+
+\vspace{\baselineskip}
+\end{resourcebox}
 
 LIME is a Python package to compute Local Interpretable Model Explanations (a local model-agnostic method). The package was developed by the authors of the original paper that developed and introduced this method. LIME can be used to explain tabular predictions as well as text- and image-based predictions.
 
-\begin{tcolorbox}[colback=alert]
-SHAP: \url{https://shap.readthedocs.io/en/latest/}
-\end{tcolorbox}
+\begin{resourcebox}
+\vspace{\baselineskip}
+
+SHAP: \small\url{https://shap.readthedocs.io/en/latest/}\normalsize
+
+\vspace{\baselineskip}
+\end{resourcebox}
 
 SHAP is a Python package to compute Shapley Additive Explanations (a local model-agnostic interpretation method). The package was created by the authors of the paper that initially developed the method. SHAP can provide explanations for tabular, text and image predictions. 
 
@@ -333,7 +349,6 @@ To illustrate decision trees, consider the following Python example, using the \
 
 The example fits an unpruned tree, that is, there is no stopping criterion and the tree will have as many leaf nodes as there are observations. Consequently, there will be no prediction error for the training data and the tree is very much overfitted.
 
-\begin{samepage}
 \begin{pythoncode}
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -349,11 +364,9 @@ regr.fit(x, y)
 from sklearn.metrics import mean_squared_error
 mean_squared_error(regr.predict(x), y)
 \end{pythoncode}
-\end{samepage}
 
 Early stopping can prevent overfitting and maintain interpretability. The following three examples show how to use the tree depth criterion, the leaf node sample size criterion and the leaf node count criterion for stopping the tree construction. Each of those trees will have a non-zero training error.
 
-\begin{samepage}
 \begin{pythoncode}
 regr = DecisionTreeRegressor(max_depth=3)
 regr.fit(x, y)
@@ -362,11 +375,9 @@ regr.fit(x, y)
 regr = DecisionTreeRegressor(max_leaf_nodes=8)
 regr.fit(x, y)
 \end{pythoncode}
-\end{samepage}
 
 To demonstrate the interpretability of a decision tree, it is useful to print the tree and to visualize or plot the tree. 
 
-\begin{samepage}
 \begin{pythoncode}
 import sklearn
 # Print the tree:
@@ -376,7 +387,6 @@ sklearn.tree.plot_tree(regr, max_depth=2, feature_names=x.columns,
     filled=True, fontsize=6)
 plt.show()
 \end{pythoncode}
-\end{samepage}
 
 Printing the fitted tree will show the decision nodes and the predicted value of each leaf node, which is simply the mean value of the observations for that leaf node. The output from the Python code above is shown below. Plotting the tree results in the visualization shown in Figure~\ref{fig:regtree}. It is clear that decision trees have good local interpretability, that is, for a given observation, it is easy to see how the tree model arrives at its predictions. However, global interpretability is lacking. For example, it is unclear whether temperature or humdity is the more important predictor in this example. One could count the number of splits that are based on a particular variable to gain an idea of its importance, but this is a pretty rough approximation. 
 
@@ -388,7 +398,6 @@ Printing the fitted tree will show the decision nodes and the predicted value of
 \label{fig:regtree}
 \end{figure}
 
-\begin{samepage}
 \begin{textcode}
 |--- temp <= 12.32
 |   |--- temp <= 4.92
@@ -413,18 +422,15 @@ Printing the fitted tree will show the decision nodes and the predicted value of
 |   |--- hum >  84.85
 |   |   |--- value: [3381.93]
 \end{textcode}
-\end{samepage}
 
 Finally, to show the piecewise constant predictions across small regions of the feature space, consider the scatter plot of predicted values in Figure~\ref{fig:treescatter}, created using the following Python code block. The plot shows the actual target on the horizontal axis and the predicted target on the vertical axis. Predictions for different actual target values are the same. From the graph, it is evident that the tree has eight leaf nodes corresponding to those in the printed output, that is, the tree is able to predict 8 different values. 
 
-\begin{samepage}
 \begin{pythoncode}
 # Plot fitted versus true values:
 import plotly.express as px
 px.scatter(pd.DataFrame([y, regr.predict(x)], \
     index=['y', 'yhat']).transpose(),x='y', y='yhat').show()
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -433,8 +439,7 @@ px.scatter(pd.DataFrame([y, regr.predict(x)], \
 \label{fig:treescatter}
 \end{figure}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
 
 \begin{enumerate}
 \item Fit regression trees to the bike dataset in the above examples. Calculate the MSE, print the decision rules, and plot predicted versus true values as you vary the following stopping rule criteria:
@@ -447,7 +452,7 @@ How does the training MSE change? What can you observe from the plots of predict
 
 \item Split the data set into a training and test sample. Repeat exercise (1) but now evaluate the test MSE. What is the optimal stopping criterion?
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Global Model-Agnostic Methods}
 
@@ -470,7 +475,6 @@ where the sum in Equation~\ref{eq:pdp} is over all observations and $X_C^(i)$ ar
 
 Consider the following example in Python. For ease of illustration, the example explains a decision tree model, which is of course intrinsically interpretable already. The example uses the bike rental data set from above and first fits a regression tree.
 
-\begin{samepage}
 \begin{pythoncode}
 # Read the data set and identify features and target
 import pandas as pd
@@ -481,11 +485,9 @@ y=d[['cnt']]
 from sklearn.tree import DecisionTreeRegressor
 regr = DecisionTreeRegressor(max_depth=5).fit(x, y)
 \end{pythoncode}
-\end{samepage}
 
 Once the model is fitted, the \texttt{PartialDependenceDisplay} class in the Scikit-Learn package can be used to generate a PDP. The \texttt{features} argument indicates which features to use for the PDP. This example Python code below shows individual PDPs for the first and second feature and a joint feature PDP for those two features as well. The \texttt{grid\_resolution} argument controls the discretization of continuous features into equal intervals for summing/marginalization. Figure~\ref{fig:pdp} shows the resulting PDPs. For example, the left panel shows how the prediction varies when the temperature value changes. For each value of temperature, the sum in Equation~\ref{eq:pdp} is computed to calculate the average prediction for that temperature value.
 
-\begin{samepage}
 \begin{pythoncode}
 import matplotlib.pyplot as plt
 from sklearn.inspection import PartialDependenceDisplay
@@ -494,7 +496,6 @@ PartialDependenceDisplay.from_estimator(
     X = x, features = [0, 1, (0,1)], grid_resolution = 20)
 plt.show()
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -551,17 +552,14 @@ Consider the illustrative example in Figure~\ref{fig:molnar87}. It shows five ne
 
 To illustrate ALEs, consider the following regression tree, again trained on the bicycle rental count data with the same features and predictors as before.
 
-\begin{samepage}
 \begin{pythoncode}
 # Train model:
 from sklearn.tree import DecisionTreeRegressor
 regr=DecisionTreeRegressor(min_samples_leaf=10).fit(x,y)
 \end{pythoncode}
-\end{samepage}
 
 The PyALE package provides the \texttt{ale} class to calculate the accumulated local effects. They can be plotted for a single feature or for two features. Figure~\ref{fig:ale1} shows the ALE for the temperature feature on bicycle rental counts. The effect of temperature varies across the range of temperature. The two-feature ALE plot is shown in Figure~\ref{fig:ale2} and this also shows a variable impact of the feature combinations on the predicted bicycle rental count. 
 
-\begin{samepage}
 \begin{pythoncode}
 import matplotlib.pyplot as plt
 from PyALE import ale
@@ -573,7 +571,6 @@ ale_effects = ale(X=x, model=regr,
     feature=['temp', 'hum'], grid_size=50)
 plt.show()
 \end{pythoncode}
-\end{samepage}
 
 Notably, ALE plots also remove the ''ceteris paribus'' assumption that all other values remain equal. However, instead of overaging over all values of the complement features, as PDPs do, the effects are computed for a local window of complement feature values. This makes ALE suitable for the use with correlated variables. 
 
@@ -604,7 +601,6 @@ Permutation feature importance begins by estimating the prediction error (loss f
 e^{\text{orig}} = L(y, \hat{f}(X))
 \end{align*}
 
-\begin{samepage}
 Next, the feature importance is calculated for each feature $j$, using $K$ multiple random shuffles (''permutations'') $k$ of each feature's values:
 
 \begin{itemize}
@@ -620,11 +616,9 @@ Next, the feature importance is calculated for each feature $j$, using $K$ multi
      \begin{align*}i_j = e^{\text{orig}} - \frac{1}{K}\sum_k^K e^{\text{perm}}_{j, k}\end{align*}
   \end{itemize}
 \end{itemize}
-\end{samepage}
 
 The following example again uses the bicycle rental data set. The rental count is used as prediction target, variables other than year and days since 2011 are used as features. A regression tree is fitted with the following Python code block.
 
-\begin{samepage}
 \begin{pythoncode}
 import pandas as pd
 # Prepare data:
@@ -635,22 +629,18 @@ y=x.pop('cnt')
 from sklearn.tree import DecisionTreeRegressor
 regr=DecisionTreeRegressor(min_samples_leaf=10).fit(x,y)
 \end{pythoncode}
-\end{samepage}
 
 The SciKit-Learn package provides the \texttt{permutation\_importance} class to compute feature importance. The \texttt{n\_repeats} parameter specifies the number of permutations to use for each feature. For simplicity of exposition, the permutation feature importance is calculated here using the training data, but practical applications should use independent test data for this. The second line in the code below sorts the permutation feature importances by their mean for later plotting.
 
-\begin{samepage}
 \begin{pythoncode}
 from sklearn.inspection import permutation_importance
 # Calculate permutation feature importance and sort them
 r = permutation_importance(regr, x, y, n_repeats=30)
 r_idx = r.importances_mean.argsort()
 \end{pythoncode}
-\end{samepage}
 
 The feature importances can be easily visualized using the following Python code. The resulting graph is shown in Figure~\ref{fig:pfi}. The graph shows that temperature has the greatest importance, followed by humidity and windspeed. Many features have little or no impact on the prediction outcome.
 
-\begin{samepage}
 \begin{pythoncode}
 import matplotlib.pyplot as plt
 # Produce a plot of sorted feature importance:
@@ -659,7 +649,6 @@ ax.boxplot(r.importances[r_idx].T,vert=False,labels=x.columns[r_idx])
 ax.axvline(x=0, color="k", linestyle="--")
 plt.show()
 \end{pythoncode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -675,7 +664,6 @@ Global surrogate interpretation models\index{Global surrogate interpretation mod
 
 Doing this in practice is simple. For example, the following Python code trains a neural network regression model with two hidden layers and ReLU activation function on the bicycle rental data set. The model is then used to predict values for the training observations.
 
-\begin{samepage}
 \begin{pythoncode}
 # Example 'black box' model
 from sklearn.neural_network import MLPRegressor
@@ -683,16 +671,13 @@ regr = MLPRegressor((4, 2,), max_iter=10000)
 regr.fit(x, y)
 preds = regr.predict(x)
 \end{pythoncode}
-\end{samepage}
 
 In the second step, a simpler surrogate model is used to predict the predictions. The following example uses a linear regression model fitted using ordinary least squares. As noted above, the absolute value of the $t$ statistic in the fitted OLS model serves as an indication of feature importance in this surrogate model. The summary results indicate that the surrogate model has an $R^2$ value of $0.995$, that is, it explains the predictions of the complex model (not the original targets!) very well. 
 
-\begin{samepage}
 \begin{pythoncode}
 from statsmodels.api import OLS
 OLS(preds, x.astype(float)).fit().summary()
 \end{pythoncode}
-\end{samepage}
 
 \begin{table}
 \centering
@@ -788,18 +773,15 @@ Figure~\ref{fig:molnar96} illustrates the strong dependence of LIME results on t
 
 The following Phython code block uses LIME to provide an explanation for the predictions of a decision tree classifier. 
 
-\begin{samepage}
 \begin{pythoncode}
 import sklearn.tree
 # Using a deep decision tree as black box model
 dt = sklearn.tree.DecisionTreeClassifier(max_depth=8)
 dt.fit(x, y)
 \end{pythoncode}
-\end{samepage}
 
 The \texttt{lime} package provides the \texttt{LimeTabularExplainer} for regular datasets consisting of rows and columns. LIME can also be applied to other types of data such as images, see below.
 
-\begin{samepage}
 \begin{pythoncode}
 import lime, lime.lime_tabular
 # Create the explainer
@@ -810,11 +792,9 @@ explainer = lime.lime_tabular.LimeTabularExplainer(
     mode='regression', 
     verbose=True)
 \end{pythoncode}
-\end{samepage}
 
 With the explaining model created, specific data instances can be explained using the \texttt{explain\_instance()} method. The following example code explains the prediction for the 8th instance in the training data set that is generated by the \texttt{predict()} method of the regression tree object. The local neighbourhood is created with $n=1000$ samples, the explanation is limited to $k=5$ features, and the distance between observations for weighting them is determined by the Euclidean distance.
 
-\begin{samepage}
 \begin{pythoncode}
 # Explain instance number 7
 exp = explainer.explain_instance( 
@@ -829,11 +809,9 @@ exp.as_pyplot_figure().show()
 # Show complete explanation
 exp.save_to_file('lime_explanation.html')
 \end{pythoncode}
-\end{samepage}
 
 The results indicate the contribution of each feature value to the prediction. Note that continuous variables like temperature and windspeed have been discretized at various boundaries to form interpretable components. The visualizations in Figure~\ref{fig:limecontribs} and Figure~\ref{fig:limeexplanation} shows those contributions as well. 
 
-\begin{samepage}
 \begin{textcode}
 [('temp <= 7.84', -1738.6611673589232), 
  ('mnth_MAR <= 0.00', 640.903016649792), 
@@ -841,7 +819,6 @@ The results indicate the contribution of each feature value to the prediction. N
  ('windspeed > 15.63', 493.90993722141997), 
  ('season_SPRING <= 0.00', -333.38496260796086)]
 \end{textcode}
-\end{samepage}
 
 Figure~\ref{fig:limeexplanation} consists of three parts. The left panel shows the prediction for this instance, $959$ on the scale between the minimum ($431$) and maximum ($7403$). The right panel shows the actual feature values for the observation in table form. The center panel (which is identical to Figure~\ref{fig:limecontribs}) shows the negative and positive contribution of each interpretable component. For example, the contribution of $temp <= 7.84$ is $-1738.66$. This means that if the temperature were \emph{not} equal to or below 7.84 degrees, the prediction would be $1738$ higher than it is, that is, it would be $2697$. Similarly, the feature $mnth MAR <= 0.00$ contributes positively to the prediction ($640.90$). This means that if the month were March, the prediction would be $640.00$ lower than it is. 
 
@@ -872,11 +849,11 @@ LIME can also be used on other models such as image or text classification model
 \label{fig:molnar98}
 \end{figure}
 
-\begin{tcolorbox}[colback=code]
-\small
+\begin{resourcebox}
+
 Further information on LIME, including many examples, can be found at the website for the Python package\footnote{\url{https://github.com/marcotcr/lime}}. More details on the theoretical foundation and principles of LIME can be found in the original paper\footnote{\url{https://arxiv.org/abs/1602.04938}}.
-\normalsize
-\end{tcolorbox}
+
+\end{resourcebox}
 
 \subsection{Shapley Additive eXplanations (SHAP)}
 
@@ -931,7 +908,6 @@ Shapley Additive eXplanations (SHAP) is a Python package developed by authors of
 
 This example uses a data set on California house prices that is part of the SHAP package. The target variable are house values in various districts, and predictors inlcude median income, number of rooms, population, and similar variables. To illustrate the basic use of SHAP, this example fits a simple linear regression model to the data.
 
-\begin{samepage}
 \begin{pythoncode}
 import sklearn
 import shap
@@ -939,18 +915,15 @@ import shap
 X, y = shap.datasets.california(n_points=1000)
 model = sklearn.linear_model.LinearRegression().fit(X, y)
 \end{pythoncode}
-\end{samepage}
 
 The SHAP \texttt{Explainer} object is constructed using the fitted model's prediction function and the training data set. The explainer object can then be used to explain predictions in the same or another data set, e.g. just a for a single new observation, or for the test or validation data set. The following Python code block illustrates this usage:
 
-\begin{samepage}
 \begin{pythoncode}
 # Create the Explainer object:
 explainer = shap.Explainer(model.predict, X)
 # Compute the SHAP values:
 shap_values = explainer(X)
 \end{pythoncode}
-\end{samepage}
 
 
 The SHAP package provides different ways to visualize individual predictions. The \emph{barplot} in Figure~\ref{fig:shapbar1} shows the importance of feature values (\emph{not the importance of features!}) for an individual prediction, generated from the running example using the following Python code:

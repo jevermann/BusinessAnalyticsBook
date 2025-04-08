@@ -137,7 +137,6 @@ Figure~\ref{fig:sample-cypher} shows how nodes and relationships are represented
 
 \paragraph*{Relationships} Relationships\index{Relationship (in Neo4j)} are directed connections between two nodes. Unlike nodes, relationships only have a single label. But like nodes, they can have properties specified as key--value pairs in JSON syntax. Relationships are written as ''lines'' between nodes, directed or undirected, with an optional variable name and relationship label in square brackets. 
 
-\begin{samepage}
 \begin{cyphercode}
 // Undirected, used in pattern
 ()-[variable : Label]-()  
@@ -150,7 +149,6 @@ Figure~\ref{fig:sample-cypher} shows how nodes and relationships are represented
 ()-->()
 ()<--()
 \end{cyphercode}
-\end{samepage}
 
 \begin{tcolorbox}[colback=alert]
 \emph{Only directed relationships can be created in a Neo4j graph, but undirected relationships can be used in a pattern to query a graph}. \\
@@ -197,7 +195,6 @@ Nodes or relationships in a graph can be created using the MERGE or CREATE state
 \label{fig:johnsallyexample}
 \end{figure}
 
-\begin{samepage}
 \begin{cyphercode}
 // Create nodes
 MERGE (j:Person {name: "John"})
@@ -215,13 +212,11 @@ MERGE (j)-[rel2:HAS_READ]->(b)
 MERGE (s)-[rel3:HAS_READ]->(b)
   ON CREATE SET rel3.on = "02/09/2013", rel3.rated = 4
 \end{cyphercode}
-\end{samepage}
 
 Note that the six \texttt{MERGE} statements in the above code block are logically related, so that variable names, for example \texttt{j, b} and \texttt{s}, in one \texttt{MERGE} clause can be used to refer to a new node or relationship in a later \texttt{MERGE} clause. While using variable names in a \texttt{MERGE} clause is not mandatory, it is more efficient than having to later query the graph data for a particular node when creating subsequent relationships. The \texttt{ON CREATE SET} clause in the above statements sets one or more property values (separated by commas) of the newly created nodes and relationships. Note that some properties are lists, such as the \texttt{authors} property, indicated by the square brackets of the JSON notation. 
 
 The following \texttt{MATCH} queries can be used to view all nodes and relationships, irrespective of their labels. The first \texttt{MATCH} clause matches all nodes and returns them, the second \texttt{MATCH} clause matches all relationships between any two nodes and returns the relationships, the final query matches any two nodes that are connected by a relationship and returns the set of triples of first node, second node, and relationship.
 
-\begin{samepage}
 \begin{cyphercode}
 // Query nodes
 MATCH (n) RETURN n    
@@ -232,7 +227,6 @@ MATCH ()-[r]-() RETURN r
 // Query both together
 MATCH (n1)-[r]-(n2) RETURN n1, r, n2  
 \end{cyphercode}
-\end{samepage}
 
 \noindent The Neo4j Browser interface allows graph visualization and visual exploration of nodes, relationships, and their properties, as shown in Figure~\ref{fig:neo4jgraphviz}.
 
@@ -306,7 +300,6 @@ The graph model in Figure~\ref{fig:propertymodel} is particularly useful to find
 
 The second query first identifies all pairs of Movie nodes in the \texttt{MATCH} clause, then uses the \texttt{WHERE} clause to filter those pairs that share entries in their genre attribute. Recall that the genre attributes are lists, so \texttt{x IN m1.genre WHERE x IN m2.genre} checks every element of the second list for every element of the first list. 
 
-\begin{samepage}
 \begin{cyphercode}
 // find the genres for a particular movie
 MATCH (m:Movie {title:"The Matrix"})
@@ -319,13 +312,11 @@ WHERE any(x IN m1.genre
 AND m1 <> m2
 RETURN m1, m2;
 \end{cyphercode}
-\end{samepage}
 
 The graph model in Figure~\ref{fig:relationshipmodel} on the other hand requires a more complex query to find the genres of the movie. However, while more complex, it no less efficient than the corresponding query for the other model above. On the other hand, the query to find movies that share genres becomes easier, more intuitive to write, and more computationally efficient, as the following Cypher queries show.
 
 The first query uses \texttt{MATCH} to first select movies and filter on the movie name, then for that movie \texttt{m} it traverses the \texttt{IN\_GENRE} relationship to identify all related Genre nodes \texttt{g} in order to return their names. The second query is more intuitive than the corresponding query for the other model. It finds two Movie nodes \texttt{m1} and \texttt{m2} that both have an \texttt{IN\_GENRE} relationship that points to the same Genre node \texttt{g}. 
 
-\begin{samepage}
 \begin{cyphercode}
 // find the genres for a particular movie
 MATCH (m:Movie {title:"The Matrix"}),
@@ -337,7 +328,6 @@ MATCH (m1:Movie)-[:IN_GENRE]->(g:Genre),
       (m2:Movie)-[:IN_GENRE]->(g)
 RETURN m1, m2, g
 \end{cyphercode}
-\end{samepage}
 
 In summary, neither way of modeling the facts is better or worse, but the two options are more suitable to different types of queries and data to be retrieved.
 
@@ -422,7 +412,8 @@ The Pagila database is already imported into the Neo4j Community Edition in the 
 
 \FloatBarrier
 
-\begin{cyphercode}
+\footnotesize
+\begin{minted}[autogobble,label=Python,numbers=left,bgcolor=code,breakbytoken,python3,frame=single]{python}
 load csv with headers from 'file:///actor.csv' as row 
 merge (actor:Actor {actorID: row.actor_id})
 on create set actor.firstName = row.first_name 
@@ -562,7 +553,8 @@ load csv with headers from 'file:///film_category.csv' as row
 match (film:Film {filmID: row.film_id} )
 match (category:Category {categoryID: row.category_id} )
 merge (film)-[r:FILM_CATEGORY]->(category);
-\end{cyphercode}
+\end{minted}
+\normalsize
 
 Importing the Pagila database takes about 10 minutes and will yield a graph that can be explored visually using Neo4j Browser using the following Cypher command that calls a built-in function for visualizing the database schema. A screen shot of the visual explorer is shown in Figure~\ref{fig:pagilagraph}.
 
@@ -588,33 +580,28 @@ This section introduces the syntax of Cypher queries using example queries for t
 \paragraph*{Example:}
 Find actors by last name, limit to 10.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (a:Actor) 
 RETURN a.firstName, a.lastName
 ORDER BY a.lastName DESC
 LIMIT 10;
 \end{cyphercode}
-\end{samepage}
 
 The Cypher code above shows basic node label matching in the \texttt{MATCH} clause, returning a selection of node properties using the \texttt{RETURN} clause, ordering and limiting the result set using the \texttt{ORDER BY} and \texttt{LIMIT} clause, which are analogous to the SQL clauses with the same names.
 
 \paragraph*{Example:} Find films whose title starts with a 'T' and that have a rental rate less than 3, sort by film title, limit to 10.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (f:Film {rating: "PG"})
 WHERE (f.title STARTS WITH "T") AND (f.rentalRate < 3)
 RETURN f.title, f.rating, f.rentalRate
 ORDER BY f.title ASC LIMIT 10;
 \end{cyphercode}
-\end{samepage}
 
 The Cypher code above introduces note matching on labels and properties and filterung using a \texttt{WHERE} clauses. Two conditions are combined using the \texttt{AND} word. Note that the matching on the rating property value of 'PG' could also have been incorportated into the \texttt{WHERE} clause, but not all WHERE clause conditions can always be moved to the node property specification in the \texttt{MATCH} clause and queries may be more readable when using a \texttt{WHERE} clause. 
 
 \paragraph*{Example:} Find rental datas and customer names of customers that live in India.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (r:Rental) 
         -[:RENTAL_CUSTOMER]->(c) 
@@ -623,7 +610,6 @@ MATCH (r:Rental)
         -[:COUNTRY_OF_CITY]->(ct {country: "India"})
 RETURN c.firstName, c.lastName, r.rentalDate LIMIT 5
 \end{cyphercode}
-\end{samepage}
 
 This example introduces matching of paths that contain multiple nodes and multiple relationships. In the above query, the types or labels or nodes and relationships are specified, but because no properties of the intermediate nodes or relationships are to be returned, they do not need to be bound to query variables.
 
@@ -649,7 +635,6 @@ Write a Cypher query to find all customers that have rented a film with rating '
 
 \paragraph*{Example:} Find the mean and standard deviation of rental payments by country.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (p:Payment) 
         -[:PAYMENT_RENTAL]->(r:Rental) 
@@ -663,26 +648,22 @@ WITH ct,
 RETURN ct.country, amountMean, amountSD
 ORDER BY amountMean DESC LIMIT 5
 \end{cyphercode}
-\end{samepage}
 
 This example introduces \textbf{aggregation}. In contrast to aggregation in SQL where grouping variables must be declared in the \texttt{GROUP BY} cluase, grouping in Cypher is implicit and uses all non-aggregated variables. In the following example, the non-aggregated variables is \texttt{ct} (the country). The query also introduces the aggregation functions \texttt{avg()} and \texttt{stDev()} that compute the average and standard deviation, respectively. More information of aggregation functions can be found in the Neo4j documentation\footnote{\url{https://neo4j.com/docs/cypher-manual/current/functions/aggregating/}}.
 
 \paragraph*{Example:} Find the sets of last names of the movie cast, and the total number of actors.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (a:Actor)-[:ACTS_IN]->(f:Film) 
 RETURN f.title, 
        collect(a.lastName) AS cast, 
        count(*) AS numActors;
 \end{cyphercode}
-\end{samepage}
 
 This example introduces aggregation into collections (lists) using the \texttt{collect()} function. The query returns a list of actor last names as cast, together with the count of actors that act in each movie. Grouping happens implicitly for each variable not aggregated. In this example, that is the variable \texttt{f}, representing the film.
 
 \paragraph*{Example:} Find the set of film titles by rental customer and the number of rentals.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (f:Film)-[:FILM_INVENTORY]-()
       -[:RENTAL_INVENTORY]-(r:Rental)
@@ -691,13 +672,11 @@ RETURN c.lastName,
        collect(f.title) AS filmRentals, 
        count(*) AS numRentals;
 \end{cyphercode}
-\end{samepage}
 
 This example also uses aggregation with collection and a slightly more complex graph pattern in the \texttt{MATCH} clause\footnote{From \url{https://neo4j.com/docs/getting-started/cypher-intro/results/}}.
 
 \paragraph*{Example:} Find the set of rental customers for each film and the rental count.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (f:Film)-[:FILM_INVENTORY]-()
       -[:RENTAL_INVENTORY]-(r:Rental)
@@ -706,13 +685,11 @@ RETURN DISTINCT f.title,
       collect(c.lastName" "+left(c.firstName,1)+".") AS custNames, 
       count(*) as rentalCount
 \end{cyphercode}
-\end{samepage}
 
 This example introduces string functions and operators. Strings can be concatenated with the ''+'' operator. The function \texttt{left(., n)} returns the leftmost segment of $n$ characters of the string. In contrast to the last query, here the collection creates a list of customers, grouped by films, rather than films, grouped by customer. The query also introduces the DISTINCT key word that limits the result set to unique values of a variable.
 
 \paragraph*{Example:} Find the customers who rent films that are in inventory at multiple stores.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (c:Customer)<-[:RENTAL_CUSTOMER]-(r:Rental)
        -[:RENTAL_INVENTORY]-()
@@ -726,19 +703,16 @@ RETURN DISTINCT
   c.lastName+" "+left(c.firstName,1)+"." AS custName, 
   storeNum
 \end{cyphercode}
-\end{samepage}
 
 This example introduces \emph{sub-queries} and the \texttt{WITH clause}. The \texttt{WITH} clause introduces elements that will be passed to subsequent clauses. In this example, the result of the subquery within the \texttt{\{ \ldots \}} function is passed on in the variable \texttt{storeNum} in the ''outer'' query. This is then used in the \texttt{WHERE} clause of the outer query.
 
 \paragraph*{Example:} Find Christian Akroyd's co-actors.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (a:Actor {firstName:"CHRISTIAN", lastName:"AKROYD"}) 
       -[:ACTS_IN]->(f:Film)<-[:ACTS_IN]-(coActors) 
 RETURN coActors.firstName+" "+coActors.lastName AS Name;
 \end{cyphercode}
-\end{samepage}
 
 This query example emphasizes path matching from a given node. Note the second \texttt{ACTS\_IN} relationship is traversed in reverse order, it's arrow points ''left''.
 
@@ -754,20 +728,17 @@ This query introduces \emph{quantified relationships}. In the example, the \text
 
 \paragraph*{Example:} The shortest path of an acts-in relationship between Christian Akroyd and Charlize Dench.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH path=shortestPath( 
   (a1:Actor {firstName:"CHRISTIAN", lastName:"AKROYD"}) 
   -[:ACTS_IN*]-(a2:Actor {firstName:"CHARLIZE", lastName:"DENCH"})) 
 RETURN path;
 \end{cyphercode}
-\end{samepage}
 
 This query introduces the use of \emph{built-in functions}. In this case, the built-in function \texttt{shortestPath()} is a graph-theoretic function that computes the shortest path along \texttt{ACTS\_IN} relationships between two specific nodes. Graph databases are particularly useful and efficient for queries on such graph-theoretic functions, which are very difficult to express in SQL.
 
 \paragraph*{Example:} Find actors that Christian Akroyd hasn't yet worked with, but his co-actors have. Extend Christian Akroyd's co-actors, to find co-co-actors who haven't worked with him.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (a1:Actor {firstName:"CHRISTIAN", lastName:"AKROYD"})
          -[:ACTS_IN]->(m)<-[:ACTS_IN]-(coActors),
@@ -779,13 +750,11 @@ RETURN cocoActors.firstName+" "+
        count(*) AS Strength 
 ORDER BY Strength DESC
 \end{cyphercode}
-\end{samepage}
 
 This query example introduces the use of multiple patterns in the \texttt{MATCH} clause that are separated by commas and are related in the sense that variables in one can be used in the other and refer to the same node or relationship. The two patterns in the \texttt{MATCH} clause are connected through the shared variable \texttt{coActors}. Note also that traversal direction of the various relationships. Finally, this example also introduces the use of patterns in the \texttt{WHERE} clause, allowing more complex filters on the results. The patterns in the \texttt{WHERE} clause are also logically related to the patterns in the \texttt{MATCH} clause, in this example they share the variable \texttt{cocoActors}.
 
 \paragraph*{Example:} Find someone who can introduce Christian Akroyd to Susan Davis.
 
-\begin{samepage}
 \begin{cyphercode}
 MATCH (a1:Actor {firstName:"CHRISTIAN", lastName:"AKROYD"})
         -[:ACTS_IN]->(m)<-[:ACTS_IN]-(coActors),
@@ -793,7 +762,6 @@ MATCH (a1:Actor {firstName:"CHRISTIAN", lastName:"AKROYD"})
         <-[:ACTS_IN]-(a2:Actor {firstName:"SUSAN", lastName:"DAVIS"})
 RETURN a1, m, coActors, m2, a2
 \end{cyphercode}
-\end{samepage}
 
 The example is similar to the one above with its use of multiple path patterns in the \texttt{MATCH} clause. The query finds common co-actors of two named actors. Note the traversal directions of the relationships.
 

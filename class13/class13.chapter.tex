@@ -20,33 +20,34 @@ After reading this chapter, you should be able to:
 
 The material in this chapter is based on the following sources. They are freely available. Consult them for additional information.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
-\vspace{1mm}
-\url{https://www.statlearning.com} \\
-\vspace{1mm}
+
+\small\url{https://www.statlearning.com}\normalsize \\
+
 Chapter 12
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by James et al. provides an easy introduction to machine learning at the introductory undergraduate level. It focuses on applications, not mathematics, and contains many exercises using R. Concepts are well explained and illustrated. There is a similar book available by the same authors with applications in Python. This book is a more accessible of the following book.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Trevor Hastie, Robert Tibshirani, and Jerome Friedman: \emph{The Elements of Statistical Learning}. 2nd edition, 12th corrected printing, 2017. (ESL) \\
-\vspace{1mm}
-\url{https://hastie.su.domains/ElemStatLearn/} \\
-\vspace{1mm}
+
+\small\url{https://hastie.su.domains/ElemStatLearn/}\normalsize \\
+
 Chapter 14
-\end{tcolorbox}
+\end{resourcebox}
 
 The book by Hastie et al. still sets the standard for statistical learning. It is widely used and cited. It's treatment is more technical than the previous book and there are no exercises in R or Python. However, it covers the concepts in more depth (and a few more formulas). However, it is still very accessible even to an undergraduate audience.
 
-\begin{tcolorbox}[colback=alert]
+\begin{resourcebox}
 Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
-\vspace{1mm}
-\url{https://probml.github.io/pml-book/book1.html} \\
-\vspace{1mm}
+
+
+\small\url{https://probml.github.io/pml-book/book1.html}\normalsize \\
+
 Chapters 20, 21
-\end{tcolorbox}
+\end{resourcebox}
 
 Murphy's book is available under a creative-commons license. It is a somewhat more technical treatment of the material, but with many illustrations and examples. It is quite comprehensive in its coverage and targeted at the advanced undergraduate or graduate student. 
 
@@ -117,9 +118,9 @@ This procedure can be repeated until as many principal components $k$ are calcul
 
 There are two important considerations when working with PCA. First, the input data variables should be scaled to have equal or unit standard deviation, so that the measurement scale of different variables does not influence the outcome of the PCA. Second, the signs of the principal components can be ''flipped'' arbitrarily. This can be seen in Figure~\ref{fig:pca1}, where one can easily imagine the two arrows pointing in opposite direction, and still providing the same good summary of the original data. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Variables in the data set should be scaled to identical standard deviations prior to PCA.
-\end{tcolorbox}
+\end{alertbox}
 
 To give an applied example, consider four input variables extracted from a data set of police arrest data in the US for violent crimes in each of the 50 states of the US. While four principal components can be computed, the four input variables can be summarized pretty well by just the first two principal components that together explain more than 80\% of the total variance. Figure~\ref{fig:pca2} shows a plot of the data along the first two components which form the horizontal and vertical axis. This is known as a \emph{biplot}\index{Biplot}. Overlayed are the four original variables. Table~\ref{tab:pca} shows the \emph{component loadings}, that is the $\phi$ in the above formulas, for the first two principal components. 
 
@@ -193,19 +194,16 @@ In practice, the number of principal components to retain is often subjective, a
 
 The \texttt{USArrests} in the \texttt{ISLR2} library contains data on the arrests (per 100,000 residents) for various violent crimes as well as the percentage of urban population in the 50 states of the US\footnote{The R code for this example is based on material in Section 12.5 of ISLR2}. First, examine the data and the correlation between variables. In the correlation matrix, one can already see that ''UrbanPop'' is not highly correlated with the other three variables, an indication that it will not load on the same principal component as those.
 
-\begin{samepage}
 \begin{Rcode}
 library(ISLR2)
 ?USArrests
 summary(USArrests)
 cor(USArrests)
 \end{Rcode}
-\end{samepage}
 
 \noindent The \texttt{prcomp()} function in R performs a PCA and can optionally scale and center the data before doing so:
 
 
-\begin{samepage}
 \begin{Rcode}
 # PCA using prcomp()
 # Scaling is generally a good idea
@@ -214,20 +212,16 @@ pca.result <- prcomp(USArrests, scale=TRUE)
 # Print the component loadings
 pca.result$rotation
 \end{Rcode}
-\end{samepage}
 
 The results can be plotted in a biplot, similar to the one in Figure~\ref{fig:pca2}, using the \texttt{biplot()} function for the \texttt{prcomp} result object. By default, that function uses the first two principal components, but others can be specified using the \texttt{choices} argument. Note that the signs of the principal components may be arbitrarily flipped.
 
-\begin{samepage}
 \begin{Rcode}
 # Biplot for components 1 and 2
 biplot(pca.result, choices=1:2, scale=0)
 \end{Rcode}
-\end{samepage}
 
 \noindent The explained variance can be computed from the result and plotted in a scree plot similar to the one in the left panel of Figure~\ref{fig:pca3}.
 
-\begin{samepage}
 \begin{Rcode}
 # Explained variance for each component
 pca.result$sdev^2
@@ -235,11 +229,9 @@ pca.result$sdev^2
 # Scree plot (both points and lines)
 plot(pca.result$sdev^2, type='b', col='blue')
 \end{Rcode}
-\end{samepage}
 
 \noindent Recall that the proportion of variance explained is the proportion of the variance of a principal component out of the total variance explained by all principal components. The R function \texttt{cumsum()} can be used to conveniently calculate the cumulative value of this. The following code block computes a cumulative plot similar to the right panel in Figure~\ref{fig:pca3}.
 
-\begin{samepage}
 \begin{Rcode}
 # Proportion of variance explained
 pve <- pca.result$sdev^2 / sum(pca.result$sdev^2)
@@ -247,11 +239,9 @@ pve <- pca.result$sdev^2 / sum(pca.result$sdev^2)
 # Cumulative sum of variance explained
 plot(cumsum(pve), type='b', col='blue')
 \end{Rcode}
-\end{samepage}
 
 \noindent Using the \texttt{eigen(.)} function for eigenvalue decomposion shows that the principal component loadings correspond to the eigenvectors and the explained variance corresponds to the eigenvalues, 
 
-\begin{samepage}
 \begin{Rcode}
 # Eigen-decomposition of correlation matrix
 e <- eigen(cor(USArrests))
@@ -259,21 +249,18 @@ e <- eigen(cor(USArrests))
 e$values
 e$vectors
 \end{Rcode}
-\end{samepage}
 
 
 \noindent The component scores themselves are also available in the \texttt{prcomp} result for use in further analysis such as regression or classification:
 
-\begin{samepage}
 \begin{Rcode}
 # Print the component scores themselves 
 # For further use in regression, etc.
 head(pca.result$x)
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices in the different suburbs of Boston. Use PCA to reduce the number of dimensions for this dataset:
 \begin{enumerate}
    \item Use the \texttt{prcomp} function to perform a PCA on the centered and standardized data. Limit yourself to quantitative inputs.
@@ -282,10 +269,10 @@ The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices
    \item How many components would you retain? Why? How much of the total variance would this explain?
    \item Based on the loadings, can you ascribe meaning to the components? What do they represent?
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Harmann74.cor} dataset in the \texttt{datasets} library contains the results of 24 psychological tests given to 145 school children. 
 Use PCA to reduce the number of dimensions for this dataset:
 \begin{enumerate}
@@ -295,10 +282,10 @@ Use PCA to reduce the number of dimensions for this dataset:
    \item How many components would you retain? Why? How much of the total variance would this explain?
    \item Based on the loadings, can you ascribe meaning to the components? What do they represent?
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary of 322 baseball players and season statistics. Use \texttt{salary} as the target variable and all other numerical variables as predictors. 
 
 \begin{enumerate}
@@ -308,7 +295,7 @@ The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary o
    \item Repeat steps (1) to (3), retaining 2, 3, \ldots, all components
    \item Plot the training and validation error agains the number of components. Describe and discuss your results.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Clustering}
 
@@ -333,15 +320,15 @@ W(C_k) &= \frac{1}{|C_k|} \sum_{i,i' \in C_k} \sum_{j=1}^p (x_{ij} - x_{i'j})^2 
 
 \noindent Here, $i, i'$ range over observations within cluster $C_k$, $j$ ranges over the $p$ different variables that make up an observation, and $\bar{\mu}_kj$ is the mean of variable $j$ for cluster $k$.
 
-\begin{tcolorbox}[colback=alert]
+\begin{infobox}
 \noindent This definition of distance means that k-means cluster analysis is only applicable to quantitative variables. 
-\end{tcolorbox}
+\end{infobox}
 
 When variables are measured on different scales, e.g. one variables in the range of $[0, 1]$ while another is measured between $[0, 1000000]$ it is important to \emph{standardize or scale the variables to have similar standard deviations} (typically, unit standard deviation, i.e. 1). Otherwise, the Euclidean distance between observations is dominated by the variable with the largest range.
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Variables in the data set should be scaled to identical standard deviations prior to k-means clustering.
-\end{tcolorbox}
+\end{alertbox}
 
 \begin{figure}
 \centering
@@ -358,9 +345,9 @@ This process is illustrated in Figure~\ref{fig:kmeans1}. The top left panel show
 
 It should be clear from this description that the random initial cluster assignment has a significant impact on the final result. As the number of observations grow, the random effects generally diminish, but different random initial cluster assignments may yield different final clustering solutions. 
 
-\begin{tcolorbox}[colback=alert]
-\noindent The k-means algorithm should be run multiple times and the optimal solution, that is, the one with the lowest within-cluster variability, should be chosen for further analysis.
-\end{tcolorbox}
+\begin{alertbox}
+The k-means algorithm should be run multiple times and the optimal solution, that is, the one with the lowest within-cluster variability, should be chosen for further analysis.
+\end{alertbox}
 
 
 \begin{figure}
@@ -378,7 +365,6 @@ This effect is shown in Figure~\ref{fig:kmeans2}. The data from the previous exa
 
 To illustrate k-means clustering in R, consider the following simulated example, which uses the \texttt{kmeans()} function\footnote{The R code for this example is based on material in Section 12.5 of ISLR2}. Data is simulated as 50 observations on two normally distributed variables. One half of the data is shifted by $+3$ on the first variables and by $-4$ on the second variable. With a standard deviation of $1$, this constitutes a large separation and should lead to clearly identifiable clusters.
 
-\begin{samepage}
 \begin{Rcode}
 # Set RNG seed for replicability
 set.seed(2)
@@ -389,20 +375,16 @@ x <- matrix(rnorm(n=50*2, mean=0, sd=1), ncol=2)
 x[1:25, 1] <- x[1:25, 1] + 3
 x[1:25, 2] <- x[1:25, 2] - 4
 \end{Rcode}
-\end{samepage}
 
 \noindent Next, the data is clustered using the \texttt{kmeans()} function into 2 clusters, 20 times with different random initial cluster assignments:
 
-\begin{samepage}
 \begin{Rcode}
 # Cluster into 2 clusters, performing 20 random starting assignments
 km.result <- kmeans(x, 2, nstart=20)
 \end{Rcode}
-\end{samepage}
 
 The result object \texttt{km.result} contains the cluster means, the cluster assignments for each observation and the sum-of-squares (distances) within each cluster and between clusters. Recall that the optimization objective is to minimize the within-cluster variation.
 
-\begin{samepage}
 \begin{Rcode}
 # Results show cluster means, cluster assignments, 
 # and sums of squares (distances) within and between 
@@ -413,18 +395,15 @@ print(km.result$centers)
 print(km.result$withinss)
 # etc.
 \end{Rcode}
-\end{samepage}
 
 Finally, it is easy to create colour-coded plot of the data (the following R code block adds 1 to every cluster number to avoid plotting black points). This generates a plot as shown in Figure~\ref{fig:kmeans4}, clearly indicating the well-separated clusters.
 
-\begin{samepage}
 \begin{Rcode}
 # Plot the color-coded points
 plot(x, col=(km.result$cluster+1),
      main = 'K-Means Clustering Results with K=2',
      xlab = '', ylab='', pch=20, cex=2)
 \end{Rcode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -435,18 +414,18 @@ plot(x, col=(km.result$cluster+1),
 \end{figure}
 
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices in the different suburbs of Boston. Use K-Means Clustering to identify sets of similar suburbs using only the numerical variables in the data set.
 \begin{enumerate}
    \item Use the \texttt{kmeans} function to perform a cluster analysis, using multiple starting assignments. Limit yourself to quantitative inputs but do not scale the variables.
    \item Use different numbers of clusters $k$ and identify which value of $k$ gives you the best results. Define what you mean by ''best'' and justify your choice.
    \item Scale the data so that each variable has the same variance or standard deviation, but do not change the variable means. 
    \item Repeat the cluster analysis with the best value of $k$ and compare results.\end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary of 322 baseball players and season statistics. Use K-Means Clustering to identify sets of similar players, using only the numerical variables in the data set.
 
 \begin{enumerate}
@@ -455,7 +434,7 @@ The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary o
    \item Scale the data so that each variable has the same variance or standard deviation, but do not change the variable means. 
    \item Repeat the cluster analysis with the best value of $k$ and compare results.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \subsection{Hierarchical Clustering}
 
@@ -496,9 +475,9 @@ Table~\ref{tab:distance} shows a set of common distance metrics\index{Distance m
 
 Because the distance function is heavily influenced by the measurement scale of the variables, when these are not equal, it is possible for one variable to dominate others, simply because it is measured on a different scale. As with PCA and k-means clustering, it is therefore important to scale the variables in the data set to identical standard deviation (typically, unit standard deviation, i.e. 1). 
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 Variables in the data set should be scaled to identical standard deviations prior to hierarchical clustering.
-\end{tcolorbox}
+\end{alertbox}
 
 
 \begin{table}
@@ -566,7 +545,6 @@ The final question concerns the choice of the number of clusters. The answer to 
 
 This example uses the same simulated data as the example for k-means clustering\footnote{The R code for this example is based on material in Section 12.5 of ISLR2}. First, generate 50 observations on two variables from a normal distribution. One half of the observations are shifted on both variables to provide a known cluster structure.
 
-\begin{samepage}
 \begin{Rcode}
 # Set RNG seed for replicability
 set.seed(2)
@@ -577,11 +555,9 @@ x <- matrix(rnorm(n=50*2, mean=0, sd=1), ncol=2)
 x[1:25, 1] <- x[1:25, 1] + 3
 x[1:25, 2] <- x[1:25, 2] - 4
 \end{Rcode}
-\end{samepage}
 
 The \texttt{dist()} function is used to calculate differences between the observations. The names for the \texttt{method} argument to \texttt{dist()} are the same as in Table~\ref{tab:distance}. Additionally, the \texttt{'maximum'} distance in R uses the greatest distance among all the variables of the two observations. 
 
-\begin{samepage}
 \begin{Rcode}
 # The dist() function calculated distances
 # according to a variety of metrics/norms
@@ -590,22 +566,18 @@ pnorm.dist <- dist(x, method='minkowski', p=3)
 manh.dist <- dist(x, method='manhattan')
 max.dist <- dist(x, method='maximum')
 \end{Rcode}
-\end{samepage}
 
 The \texttt{hclust()} function performs the hierarchical agglomerative clustering. The \texttt{method} argument specifies the type of linkage, according to Table~\ref{tab:linkages}. The \texttt{hclust()} function can use a few additional linkages not listed in that table, see the documentation (\texttt{?hclust}) for details. 
 
-\begin{samepage}
 \begin{Rcode}
 # Use the hclust() function with a distance metric
 hc.complete <- hclust(euclid.dist, method='complete')
 hc.single <- hclust(euclid.dist, method='single')
 hc.average <- hclust(euclid.dist, method='average')
 \end{Rcode}
-\end{samepage}
 
 The dendrograms for the three different clustering solutions can be plotted to produce Figure~\ref{fig:dendro4}. 
 
-\begin{samepage}
 \begin{Rcode}
 # Plot the dendrograms in a single plot
 par(mfrow = c(1, 3))
@@ -616,7 +588,6 @@ plot(hc.average , col='blue',
 plot(hc.single , col='green', 
    main = "Single Linkage", xlab = "", sub = "", cex = .9)
 \end{Rcode}
-\end{samepage}
 
 \begin{figure}
 \centering
@@ -629,17 +600,15 @@ The complete linkage and average linkage solutions are visually quite similar, b
 
 Finally, cutting the dendrogram is done with the \texttt{cutree()} function by specifying either the number of clusters $k$ or the height $h$ at which the dendrogram is to be cut. The function returns a vector with the cluster membership for each observation.
 
-\begin{samepage}
 \begin{Rcode}
 # Cut by number of groups/clusters
 cutree(hc.complete, k=4)
 # Cut by height (distance)
 cutree(hc.complete, h=6)
 \end{Rcode}
-\end{samepage}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices in the different suburbs of Boston. Use Hierarchical Clustering to identify sets of similar suburbs using only the numerical variables in the data set.
 \begin{enumerate}
    \item Use the \texttt{hclust} function to perform a cluster analysis, exploring different distance metrics and linkage functions. Limit yourself to quantitative inputs.
@@ -647,10 +616,10 @@ The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices
    \item How many clusters $k$ would you choose?
    \item Using this value for $k$, perform a k-means Clustering and compare the results. Remember that k-means clustering uses the Euclidean distance.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary of 322 baseball players and season statistics. Use Hierarchical Clustering to identify sets of similar players, using only the numerical variables in the data set.
 
 \begin{enumerate}
@@ -659,10 +628,10 @@ The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary o
    \item How many clusters $k$ would you choose?
    \item Using this value for $k$, perform a k-means clustering and compare the results. Remember that k-means clustering uses the Euclidean distance.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
-\begin{tcolorbox}[colback=code]
-\subsubsection*{Hands-On Exercise} 
+\begin{exercisebox}
+
 The \texttt{Auto} dataset in the \texttt{ISLR2} library contains information on 392 vehicles. Use Hierarchical Clustering to identify sets of similar vehicles, using only the numerical variables in the data set.
 
 \begin{enumerate}
@@ -671,7 +640,7 @@ The \texttt{Auto} dataset in the \texttt{ISLR2} library contains information on 
    \item How many clusters $k$ would you choose?
    \item Using this value for $k$, perform a k-means Clustering and compare the results. Remember that k-means clustering uses the Euclidean distance.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Review Questions}
 
