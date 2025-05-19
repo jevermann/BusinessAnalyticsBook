@@ -29,17 +29,36 @@
 \end{frame}
 
 \begin{frame}{Based On}
+
 \begin{block}{}
 Molnar, Christoph: \emph{Interpretable Machine Learning} (2023) \\
-
-\vspace{\baselineskip}
+\vspace{1mm}
 \small
 \url{https://christophm.github.io/interpretable-ml-book/} \\
-
-\vspace{\baselineskip}
+\normalsize
+\vspace{1mm}
 (CC BY-NC-SA License)
 \end{block}
 
+\begin{block}{}
+Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
+\vspace{1mm}
+\small
+\url{https://www.statlearning.com} \\
+\normalsize
+\vspace{1mm}
+Chapter 8
+\end{block}
+
+\begin{block}{}
+Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
+\vspace{1mm}
+\small
+\url{https://probml.github.io/pml-book/book1.html} \\
+\normalsize
+\vspace{1mm}
+Chapter 18
+\end{block}
 \end{frame}
 
 \begin{frame}{Additional Materials}
@@ -398,14 +417,21 @@ px.scatter(
 \includegraphics[height=3.25in]{tree_fitted_true.png}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
-Fit regression trees to the bike rental dataset on the previous slides. Calculate the MSE for each decision tree as you vary:
+\begin{frame}[fragile]{Hands-On Exercises}
+\begin{enumerate}
+\item Fit regression trees to the \emph{entire bike rental dataset} on the previous slides. Calculate the MSE as you vary:
 \begin{itemize}
    \item \textbf{max\_depth}: choose values 1, 3, 5, 7
    \item \textbf{min\_samples\_leaf}: choose values 1, 5, 10, 20
    \item \textbf{max\_leaf\_nodes}: choose values 2, 8, 16, 32
 \end{itemize}
-Which tree provides the best training MSE and what is that training MSE?
+\item Split the data into a test and training data set, like this:
+\begin{pythoncode}
+train=df.sample(frac=0.8)
+test=df.drop(train.index)
+\end{pythoncode}
+\item Repeat exercise (1) by fitting the tree to the \emph{training data} and calculate the MSE for the \emph{test data}.
+\end{enumerate}
 \end{frame}
 
 %\begin{frame}{Regression Trees -- Pruning}
@@ -425,7 +451,6 @@ Which tree provides the best training MSE and what is that training MSE?
    %\item $m$ counts terminal nodes
 %\end{itemize}
 %\end{frame}
-
 
 %\begin{frame}[fragile]{Regression Trees -- Pruning}
 %Prune the tree using cost-complexity and cross-validation:
@@ -522,11 +547,264 @@ Which tree provides the best training MSE and what is that training MSE?
 \end{itemize}
 \end{frame}
 
+\begin{frame}[fragile]{Classification Trees \small [cont'd]}
+Stock market data (from R ISLR2 package):
+\begin{pythoncode}
+d=pd.read_csv('https://evermann.ca/busi4720/Smarket.csv')
+x=d[['Lag1', 'Lag2', 'Lag3', 'Lag4', 'Lag5', 'Volume']]
+y=d['Direction']
+\end{pythoncode}
+Fit a classification tree:
+\begin{pythoncode}
+from sklearn.tree import DecisionTreeClassifier
+clf = DecisionTreeClassifier(max_depth=5)
+clf.fit(x, y)
+\end{pythoncode}
+Classifier has similar tree control options to regressor. \\
+
+Training accuracy:
+\begin{pythoncode}
+from sklearn.metrics import accuracy_score
+accuracy_score(clf.predict(x), y)
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{Hands-On Exercises}
+\begin{enumerate}
+\item Fit classification trees to the \emph{entire stock market dataset} on the previous slides. Calculate the accuracy as you vary:
+\begin{itemize}
+   \item \textbf{max\_depth}: choose values 1, 3, 5, 7
+   \item \textbf{min\_samples\_leaf}: choose values 1, 5, 10, 20
+   \item \textbf{max\_leaf\_nodes}: choose values 2, 8, 16, 32
+\end{itemize}
+\item Split the data into a test and training data set, like this:
+\begin{pythoncode}
+train = d.iloc[:3*d.shape[0]//4,:]
+test = d.iloc[3*d.shape[0]//4:,:]
+\end{pythoncode}
+\item Repeat exercise (1) by fitting the tree to the \emph{training data} and calculate the accuracy for the \emph{test data}.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Tree Ensemble Methods}
+
+\textbf{Problem:} Trees are unstable, have high variance, prone to overfitting \\
+
+\textbf{Solution:} Fit multiple trees
+
+\begin{block}{Aggregation:}
+\begin{align*}
+f(y | x) = \frac{1}{|M|} \sum_{m \in M} f_m(y|x)
+\end{align*}
+\begin{itemize}
+   \item Average prediction for regression trees
+   \item Majority vote for classification models
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{block}{Stacking:}
+\begin{align*}
+f(y | x) = \frac{1}{|M|} \sum_{m \in M} w_m f_m(y|x)
+\end{align*}
+\begin{itemize}
+   \item Train weights $w_m$ using separate data set
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{block}{Bagging:}
+\begin{itemize}
+  \item ''Bootstrap Aggregating''
+  \item Randomly sample data with replacement (bootstrapping)
+  \item OOB (''out-of-bag'') error serves as test error
+\end{itemize}
+\end{block}
+
+\begin{block}{Random Forests:}
+\begin{itemize}
+  \item ''Decorrelate'' trees
+  \item At each split, only consider a random sample of $m$ predictors as split candidates
+  \item Typically $m \approx \sqrt{p}$
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\centering
+
+\includegraphics[height=2.75in]{murphy_18_04.png} \\
+
+\scriptsize Source: Murphy Figure 18.4 \normalsize
+\end{frame}
+
+\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\textbf{Example:} Impact of $m$ on test error:
+
+\centering
+
+\includegraphics[height=2.5in]{../class11/Figures_Chapters_7-13/Chapter8/8_10.pdf} \\
+
+\scriptsize Source: ISLR 2, Figure 8.10 \normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+Bagging in Python:
+\begin{pythoncode}
+from sklearn.ensemble import BaggingClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+bagging = BaggingClassifier(DecisionTreeClassifier(max_depth=3),
+    n_estimators=20,
+    max_samples=2/3, 
+    max_features=2/3)
+bagging.fit(x, y)
+accuracy_score(bagging.predict(x), y)
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+Random forest regression in Python:
+
+\begin{pythoncode}
+from sklearn.ensemble import RandomForestRegressor
+
+d=pd.read_csv('https://evermann.ca/busi4720/bike.csv')
+x=d[['temp', 'hum']]
+y=d['cnt']
+\end{pythoncode}
+
+\begin{pythoncode}
+regr = RandomForestRegressor(n_estimators=10, 
+                             max_features="sqrt")
+regr = regr.fit(x, y)
+mean_squared_error(regr.predict(x), y)
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+Random forest classification in Python:
+
+\begin{pythoncode}
+from sklearn.ensemble import RandomForestClassifier
+
+d=pd.read_csv('https://evermann.ca/busi4720/Smarket.csv')
+x=d[['Lag1', 'Lag2', 'Lag3', 'Lag4', 'Lag5', 'Volume']]
+y=d['Direction']
+\end{pythoncode}
+
+\begin{pythoncode}
+clf = RandomForestClassifier(n_estimators=10, 
+                             max_features="sqrt")
+clf = clf.fit(x, y)
+accuracy_score(clf.predict(x), y)
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{Hands-On Exercise}
+\begin{itemize}
+\item Using the random forest regressor and classifier in Python, vary the number of estimators and the maximum number of features to determine their impact on the \emph{training performance} (MSE or accuracy).
+\item Split the data into a test and training data set, like this:
+\begin{pythoncode}
+train=df.sample(frac=0.8)
+test=df.drop(train.index)
+\end{pythoncode}
+\item Using the random forest regressor and classifier in Python, vary the number of estimators and the maximum number of features to determine their impact on the \emph{test performance} (MSE or accuracy).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{block}{Boosting:}
+\begin{itemize}
+    \item Iteratively build $B$ simple (''weak'') trees using residuals
+\end{itemize}
+\end{block}
+
+\footnotesize
+\begin{enumerate}
+\item Set $\hat{f}(x) = 0$; $r_i=y_i$
+\item For $b = 1, 2, \ldots, B,$ repeat:
+\begin{enumerate}[(a)]
+\footnotesize
+  \item Fit tree $\hat{f}^b$ with $d$ splits to data $(X, r)$. Typically, $d=1$ or $2$.
+  \item Update $\hat{f}$ by adding a ''shrunken'' version of the new tree. Typically, $\lambda = 0.01$ or $\lambda = 0.001$.
+   \begin{align*}
+   \hat{f}(x) \leftarrow \hat{f}(x) + \lambda \hat{f}^b (x)
+   \end{align*}
+  \item Update the residuals
+   \begin{align*}r_i \leftarrow r_i - \lambda \hat{f}^b(x_i)
+   \end{align*}
+\end{enumerate}
+\item Output the boosted model:
+\begin{align*}\hat{f}(x) = \sum_{b=1}^B \lambda \hat{f}^b (x)\end{align*}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\textbf{Example:} Impact of $d$ on test error:
+
+\centering
+
+\includegraphics[height=2.5in]{../class11/Figures_Chapters_7-13/Chapter8/8_11.pdf} \\
+
+\scriptsize Source: ISLR 2, Figure 8.11 \normalsize
+\end{frame}
+
+
+\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\textbf{Example:} Comparison of Bagging, Random Forest, and Boosting:
+
+\centering
+
+\includegraphics[height=2.25in]{murphy_18_05.png} \\
+
+\scriptsize Source: Murphy Figure 18.5 \normalsize
+\end{frame}
+
+\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+Boosting classification in Python:
+
+\begin{pythoncode}
+from sklearn.ensemble import GradientBoostingClassifier
+
+d=pd.read_csv('https://evermann.ca/busi4720/Smarket.csv')
+x=d[['Lag1', 'Lag2', 'Lag3', 'Lag4', 'Lag5', 'Volume']]
+y=d['Direction']
+\end{pythoncode}
+
+\begin{pythoncode}
+clf = GradientBoostingClassifier(
+         learning_rate=0.01,
+         n_estimators=10, 
+         max_depth=3)
+
+clf = clf.fit(x, y)
+accuracy_score(clf.predict(x), y)
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{Hands-On Exercise}
+\begin{itemize}
+\item Using the gradient boosting regressor and classifier in Python, vary the learning rate and the maximum tree depth to determine their impact on the \emph{training performance} (MSE or accuracy).
+\item Split the data into a test and training data set, like this:
+\begin{pythoncode}
+train=df.sample(frac=0.8)
+test=df.drop(train.index)
+\end{pythoncode}
+\item Using the gradient boosting regressor and classifier in Python, vary the learning rate and the maximum tree depth to determine their impact on the \emph{test performance} (MSE or accuracy).
+\end{itemize}
+\end{frame}
+
+
 \begin{frame}{Decision Trees}
 \textbf{Further reading:} \\
 
 \small
 \url{https://scikit-learn.org/stable/modules/tree.html} \\
+
+\url{https://scikit-learn.org/stable/modules/ensemble.html\#} \\
 
 \url{https://scikit-learn.org/stable/auto_examples/tree/plot_unveil_tree_structure.html} \\
 
@@ -568,32 +846,6 @@ Marginal effect of one (or a few) features $X_S$ on the outcome, marginalized (i
 Shows how the \emph{average} prediction changes when the focal predictor is changed (assuming feature independence). 
 
 \end{frame}
-
-%\begin{frame}[fragile]{Partial Dependence Plot (PDP)}
-%A simple linear regression example
-%\begin{pythoncode}
-%import matplotlib.pyplot as plt
-%import pandas as pd
-%d=pd.read_csv('https://evermann.ca/busi4720/bike.csv')
-%x=pd.get_dummies(d)
-%y=x.pop('cnt')
-
-%from sklearn import linear_model
-%regr = linear_model.LinearRegression()
-%regr.fit(x, y)
-
-%from sklearn.inspection import PartialDependenceDisplay
-%PartialDependenceDisplay \
-    %.from_estimator(regr, x, [1, 2, (1,2)])
-%plt.show()
-%\end{pythoncode}
-%\end{frame}
-
-%\begin{frame}{Partial Dependence Plot (PDP)}
-%\centering
-
-%\includegraphics[width=\textwidth]{pdp_lm.png}
-%\end{frame}
 
 \begin{frame}[fragile]{Partial Dependence Plot (PDP)}
 Read the data set:
