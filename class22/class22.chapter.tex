@@ -452,6 +452,79 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 \label{fig:reinforce}
 \end{figure}
 
+The pseudocode in Figure~\ref{fig:reinforce} is easily implemented in Python. The following Python code block defines a policy function as a neural network. This policy function is defined for discrete actions with as many outputs as there are actions. The final layer has a softmax activation function so it produces probabilities $\pi$ for each action.
+
+\begin{pythoncode}
+# Batch size of 1 as we update after every action
+p_net = keras.Sequential([
+    layers.InputLayer(batch_input_shape=(1, Ssize), dtype=tf.float32),
+    layers.Dense(Ssize*4, activation='relu'),
+    layers.Dropout(rate=0.25),
+    layers.Dense(Ssize*2, activation='relu'),
+    layers.Dropout(rate=0.25),
+    layers.Dense(len(Actions), activation='softmax')
+])
+\end{pythoncode}
+
+Action selection using the policy $\pi$ is simply making a prediction from the policy network and using the resulting probabilities to sample from the set of possible actions. This is implemented in the next Python code block:
+
+\begin{pythoncode}
+def select_action(state):
+    probs = p_net(np.expand_dims(state, axis=0))[0].numpy()
+    action = np.random.choice(Actions, size=1, p=probs)[0]
+    return action
+\end{pythoncode}
+
+The code block simply generates an episode and, once completed, computes the discounted returns for each step using the list of rewards and the discount factor:
+
+\begin{pythoncode}
+# Do this for each episode
+for e in range(neps):
+    # Initialize variables and lists
+    T = 0
+    rewards, states, actions = [], [], []
+    # Reset environment
+    s = env.reset()[0]
+    terminal = False
+    # Generate an episode and keep track
+    # of states, actions, rewards
+    while (T < max_steps) and not terminal:
+        a = select_action(s)
+        sprime, r, terminal, _, _ = env.step(a)
+        states.append(s)
+        actions.append(a)
+        rewards.append(r)
+        s = sprime
+        T += 1
+
+    print(f'Episode {e:5} goes to step {T:3}')
+    # Compute discounted returns
+    returns = discounted_returns(rewards, gamma)
+\end{pythoncode}
+
+The next Python code block below contains the actual learning of the RL agent, that is, the updates to the parameters of the policy network. For each step of the episode, the probabilities of all actions are determined from the policy network. The index of the actually selected action and the return are retrieved. For computing the loss function, the action index is converted to one-hot notation and multiplied with the action probabilities, then summed. This selects just the probability of the selected action. The log is taken and then multiplied with the return and discount factors. Once the loss is computed, the gradient of the policy network parameters w.r.t. the loss is computed and applied to update the policy network parameters:
+
+\begin{pythoncode}
+    # Learn for each step of the episode
+    for t in range(len(returns)):
+        with tf.GradientTape() as tape:
+            # Action probabilities
+            pi = p_net(np.expand_dims(states[t], axis=0))
+            # Action index
+            action_idx = np.array(actions[t], dtype=np.int32)
+            # Return
+            G = np.array(returns[t])
+            # Loss
+            loss = - G * gamma**t * 
+                tf.math.log(tf.reduce_sum(tf.math.multiply(pi, 
+                    tf.one_hot(action_idx, env.action_space.n)), axis=1))
+
+        # Calculate gradients and update parameters
+        grads = tape.gradient(loss, p_net.trainable_variables)
+        optimizer.apply_gradients(zip(grads, p_net.trainable_variables))
+\end{pythoncode}
+
+
 \subsubsection*{REINFORCE with Baseline}
 
 An extension to the basic REINFORCE method is to use ''baselines''\index{Baseline (in reinforcement learning)}, values relative to which the return $G_t$ is evaluated. This reduces the variance of the updates but leaves the expected values unchanged, that is, it is unbiased. Additionally, this has been shown to improve the speed of learning. 
@@ -490,6 +563,37 @@ A complete implementation is shown in Figure~\ref{fig:reinforcebaseline}. Note t
 \caption[REINFORCE with Baseline]{REINFORCE with Baseline (Source: SB)}
 \label{fig:reinforcebaseline}
 \end{figure}
+
+The implementation of REINFORCE with Baseline in Python is very similar to the Python code for REINFORCE as the only differences are in the learning portion of the code. A value function/network is defined analogous to the policy network, although it need not be identical or even have the same architecture. The following code block shows how losses for policy and value networks are computed, as well as gradients for both, and the parameters for both are updated:
+
+\begin{pythoncode}
+for t in range(len(returns)):
+    with tf.GradientTape() as p_tape:
+        with tf.GradientTape() as v_tape:
+            pi = policy_network(np.expand_dims(states[t], axis=0))
+            action_idx = np.array(actions[t], dtype=np.int32)
+            # Value function
+            v = value_network(np.expand_dims(states[t], axis=0))
+            # Return
+            G = np.array(returns[t])
+            delta = G - v
+            # Losses for policy and value networks
+            p_loss = -delta * gamma**t *
+                tf.math.log(tf.reduce_sum(tf.math.multiply(pi,
+                    tf.one_hot(action_idx, env.action_space.n)),axis=1))
+            v_loss = -delta * v
+
+    # Calculate gradients and update parameters for policy network
+    p_grads = p_tape.gradient(p_loss,p_net.trainable_variables)  
+    p_optimizer.apply_gradients(zip(p_grads, 
+        p_net.trainable_variables))
+    # Calculate gradients and update parameters for value network
+    v_grads = v_tape.gradient(v_loss,v_net.trainable_variables)
+    v_optimizer.apply_gradients(zip(v_grads, 
+        v_network.trainable_variables))
+\end{pythoncode}
+
+
 
 \subsubsection*{Actor-Critic Methods}
 

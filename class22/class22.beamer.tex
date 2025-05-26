@@ -489,6 +489,83 @@ REINFORCE update:
 \end{block}
 \end{frame}
 
+\begin{frame}[fragile]{REINFORCE in Python}
+Policy function/network for discrete actions:
+\begin{pythoncode}
+# Batch size of 1 as we update after every action
+p_net = keras.Sequential([
+    layers.InputLayer(batch_input_shape=(1, Ssize), 
+        dtype=tf.float32),
+    layers.Dense(Ssize*4, activation='relu'),
+    layers.Dropout(rate=0.25),
+    layers.Dense(Ssize*2, activation='relu'),
+    layers.Dropout(rate=0.25),
+    layers.Dense(len(Actions), activation='softmax')
+])
+\end{pythoncode}
+Action selection using policy network probabilities:
+\begin{pythoncode}
+def select_action(state):
+    probs = p_net(np.expand_dims(state, axis=0))[0].numpy()
+    action = np.random.choice(Actions, size=1, p=probs)[0]
+    return action
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{REINFORCE in Python \small [cont'd]}
+Generate an episode:
+\begin{pythoncode}
+# Do this for each episode
+for e in range(neps):
+    # Initialize variables and lists
+    T = 0
+    rewards, states, actions = [], [], []
+    # Reset environment
+    s = env.reset()[0]
+    terminal = False
+    # Generate an episode and keep track
+    # of states, actions, rewards
+    while (T < max_steps) and not terminal:
+        a = select_action(s)
+        sprime, r, terminal, _, _ = env.step(a)
+        states.append(s)
+        actions.append(a)
+        rewards.append(r)
+        s = sprime
+        T += 1
+
+    print(f'Episode {e:5} goes to step {T:3}')
+    # Compute discounted returns
+    returns = discounted_returns(rewards, gamma)
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}[fragile]{REINFORCE in Python \small [cont'd]}
+Learning from episode:
+\begin{pythoncode}
+    # Learn for each step of the episode
+    for t in range(len(returns)):
+        with tf.GradientTape() as tape:
+            # Action probabilities
+            pi = p_net(np.expand_dims(states[t], axis=0))
+            # Action index
+            action_idx = np.array(actions[t], dtype=np.int32)
+            # Return
+            G = np.array(returns[t])
+            # Loss
+            loss = - G * gamma**t * 
+                tf.math.log(tf.reduce_sum(tf.math.multiply(pi, 
+                    tf.one_hot(action_idx, env.action_space.n)), 
+                        axis=1))
+
+        # Calculate gradients and update parameters
+        grads = tape.gradient(loss, p_net.trainable_variables)
+        optimizer.apply_gradients(zip(grads, 
+            p_net.trainable_variables))
+\end{pythoncode}
+\end{frame}
+
+
 \begin{frame}{Policy Gradient Methods}
 REINFORCE with a baseline $b(S_t)$:
 \begin{align*}
@@ -522,6 +599,34 @@ Choose $b(S_t) = \hat{v}(S_t)$ the state-value function:
 \end{align*}
 \vspace{-.5\baselineskip}
 \end{block}
+\end{frame}
+
+\begin{frame}[fragile]{REINFORCE with Baseline in Python \small [cont'd]}
+Learning from episode:
+\begin{pythoncode}
+for t in range(len(returns)):
+    with tf.GradientTape() as p_tape:
+        with tf.GradientTape() as v_tape:
+            pi = policy_network(np.expand_dims(states[t], axis=0))
+            action_idx = np.array(actions[t], dtype=np.int32)
+            # Value function
+            v = value_network(np.expand_dims(states[t], axis=0))
+            # Return
+            G = np.array(returns[t])
+            delta = G - v
+            # Losses for policy and value networks
+            p_loss = -delta * gamma**t * tf.math.log(tf.reduce_sum(tf.math.multiply(pi, tf.one_hot(action_idx, env.action_space.n)), axis=1))
+            v_loss = -delta * v
+
+    # Calculate gradients and update parameters for policy network
+    p_grads = p_tape.gradient(p_loss,p_net.trainable_variables)  
+    p_optimizer.apply_gradients(zip(p_grads, 
+        p_net.trainable_variables))
+    # Calculate gradients and update parameters for value network
+    v_grads = v_tape.gradient(v_loss,v_net.trainable_variables)
+    v_optimizer.apply_gradients(zip(v_grads, 
+        v_network.trainable_variables))
+\end{pythoncode}
 \end{frame}
 
 
