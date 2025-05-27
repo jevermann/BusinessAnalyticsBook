@@ -176,9 +176,8 @@ augmentation = keras.models.Sequential([
     layers.RandomFlip("horizontal"),
     layers.RandomTranslation(.2, .2, fill_mode="reflect"),
     layers.RandomRotation(0.2, fill_mode="reflect"),
-    layers.RandomZoom(.2, .2, fill_mode="reflect"),
-    layers.RandomContrast(0.2),
-    layers.RandomBrightness(0.2)])
+    layers.RandomZoom(.2, .2, fill_mode="reflect")
+])
 
 # Apply augmentation model to training data
 train_ds = train_ds.map(lambda x, y: (augmentation(x), y))
@@ -209,8 +208,7 @@ To use the cats--dogs data set as input, the image data must be rescaled from $[
 \begin{pythoncode}
 # Create new input model
 inputs = keras.Input(shape=(150, 150, 3))
-# Pre-trained Xception weights requires input scaling
-# from [0, 255] to [-1., +1.]
+# Pre-trained Xception weights requires input in [-1., +1.]
 scale_layer = keras.layers.Rescaling(scale=1/127.5, offset=-1)
 x = scale_layer(inputs)
 \end{pythoncode}
@@ -231,7 +229,6 @@ model.summary(show_trainable=True)
 The complete model (training only the classification layers) is compiled with the default learning rate for the chosen optimizer and then fitted in 2 epochs in the following Python code block. 
 
 \begin{infobox}Only a few epochs are needed as the CNN portion of the model that serves as feature extractor is pre-trained and the classification portion of the model contains only relatively few trainable parameters.\end{infobox}
-
 
 \begin{pythoncode}
 model.compile(
@@ -672,15 +669,23 @@ An auto-encoder\index{Auto-encoder} is a neural network that maps a high-dimensi
 \end{center}
 \end{figure}
 
-A frequent use case for auto-encoders is with image data. Figure~\ref{fig:mnist_autoencoder} shows two examples of an auto-encoder with the MNIST Fashion image data set. In the left panel (a) of the figure, the encoder is a 3-layer densely connected network with sizes 768 (input), 100, and 30 (latent space size). The top row of images shows the input, the bottom row the decoded output. The right panel (b) of the Figure uses a 3-layer CNN for encoder, also with a latent space size of 30. Larger models could be used to improve on the decoding performance. 
+A frequent use case for auto-encoders is with image data. Figure~\ref{fig:mnist_autoencoder_dense} and Figure~\ref{fig:mnist_autoencoder_cnn} show two examples of an auto-encoder with the MNIST Fashion image data set. In Figure~\ref{fig:mnist_autoencoder_dense} the encoder is a 3-layer densely connected network with sizes 1000, 500, and 30 (latent space size). The top row of images shows the input, the bottom row the decoded output. Figure~\ref{fig:mnist_autoencoder_cnn} uses a 3-layer CNN for encoder, also with a latent space size of 30. Larger models or larger latent spaces could be used to improve on the decoding performance. 
 
 \begin{figure}
 \begin{center}
-\includegraphics[width=\textwidth]{murphy_20_17.png} \\
+\includegraphics[width=\textwidth]{autoencoder_sample_dense.png} \\
 
-\scriptsize Source: Murphy, Fig. 20.17 \normalsize
-\caption{MNIST auto-encoder examples}
-\label{fig:mnist_autoencoder}
+\caption{MNIST auto-encoder examples (dense network)}
+\label{fig:mnist_autoencoder_dense}
+\end{center}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{autoencoder_sample_cnn.png} \\
+
+\caption{MNIST auto-encoder examples (ConvNet)}
+\label{fig:mnist_autoencoder_cnn}
 \end{center}
 \end{figure}
 
@@ -770,6 +775,26 @@ Finally, the auto-encoder model is compiled with MSE loss and trained on the dat
 auto_encoder.compile(loss="mse")
 auto_encoder.fit(x_train, x_train, 
                  epochs=5, validation_data=(x_test, x_test))
+\end{pythoncode}
+
+Once the auto-encoder is trained, it can be used to encode and decode images. The following code block shows an example of this usage and also shows how Figures~\ref{fig:mnist_autoencoder_dense} and \ref{fig:mnist_autoencoder_cnn} are created from the original and the auto-encoded data.
+
+\begin{pythoncode}
+from plotly import subplots
+import plotly.express as px
+
+# Encode and decode some digits
+encoded_imgs = encoder.predict(x_test)
+decoded_imgs = decoder.predict(encoded_imgs)
+
+# Create plot
+fig = subplots.make_subplots(rows=2, cols=10)
+for i in range(10):
+    fig.add_trace(px.imshow(x_test[i], 
+        binary_string=True).data[0], row=1, col=i + 1)
+    fig.add_trace(px.imshow(decoded_imgs[i], 
+        binary_string=True).data[0], row=2, col=i + 1)
+fig.show()
 \end{pythoncode}
 
 As a variation, the following two Python code blocks show a CNN architecture for both encoder and decoder. As noted above, it is not necessary that encoder and decoder have the same architecture, the same types or the same number of layers. For example, the fully-connected encoder can be connected to the CNN decoder below for a complete auto-encoder.

@@ -225,9 +225,8 @@ augmentation = keras.models.Sequential([
     layers.RandomFlip("horizontal"),
     layers.RandomTranslation(.2, .2, fill_mode="reflect"),
     layers.RandomRotation(0.2, fill_mode="reflect"),
-    layers.RandomZoom(.2, .2, fill_mode="reflect"),
-    layers.RandomContrast(0.2),
-    layers.RandomBrightness(0.2)])
+    layers.RandomZoom(.2, .2, fill_mode="reflect")
+])
 
 # Apply augmentation model to training data
 train_ds = train_ds.map(lambda x, y: (augmentation(x), y))
@@ -240,6 +239,13 @@ train_ds = train_ds.map(lambda x, y: (augmentation(x), y))
    \item This example replaces the data set with the transformed images; consider adding the transformed images to the data set
 \end{itemize}
 \end{block}
+\end{frame}
+
+\begin{frame}{Data Augmentation in Python \small [cont'd]}
+Before and after:
+
+\includegraphics[width=.49\textwidth]{catsdogs_sample.png}
+\includegraphics[width=.49\textwidth]{catsdogs_sample_transformed.png}
 \end{frame}
 
 \begin{frame}[fragile]{Transfer Learning in Python}
@@ -758,33 +764,6 @@ Map input to \emph{point} in lower-dimensional latent space:
 \end{block}
 \end{frame}
    
-\begin{frame}{Auto-Encoder Examples}
-\textbf{Fashion MNIST -- Original and Reconstruction}
-\begin{itemize}
-   \item \emph{Left:} 3-layer densely connected network (decoder inverse)
-   \item \emph{Right:} 3-layer CNN (decoder inverse)
-\end{itemize} 
-
-\begin{center}
-\includegraphics[width=\textwidth]{murphy_20_17.png} \\
-
-\scriptsize Source: Murphy, Fig. 20.17 \normalsize
-\end{center}
-\end{frame}
-
-\begin{frame}{Auto-Encoder Examples}
-\textbf{Fashion MNIST -- First 2 Latent Dimensions}
-\begin{itemize}
-   \item \emph{Left:} 3-layer densely connected network (decoder inverse)
-   \item \emph{Right:} 3-layer CNN (decoder inverse)
-\end{itemize} 
-
-\begin{center}
-\includegraphics[width=\textwidth]{murphy_20_18.png} \\
-
-\scriptsize Source: Murphy, Fig. 20.18 \normalsize
-\end{center}
-\end{frame}
 
 \begin{frame}{Auto-Encoder in Python}
 
@@ -853,6 +832,30 @@ auto_encoder.fit(x_train, x_train,
 \end{pythoncode}
 \end{frame}
 
+\begin{frame}[fragile]{Auto-Encoder in Python \small [cont']}
+Visualize results:
+
+\begin{pythoncode}
+from plotly import subplots
+import plotly.express as px
+
+# Encode and decode some digits
+encoded_imgs = encoder.predict(x_test)
+decoded_imgs = decoder.predict(encoded_imgs)
+
+# Create plot
+fig = subplots.make_subplots(rows=2, cols=10)
+for i in range(10):
+    fig.add_trace(px.imshow(x_test[i], 
+        binary_string=True).data[0], 
+        row=1, col=i + 1)
+    fig.add_trace(px.imshow(decoded_imgs[i], 
+        binary_string=True).data[0], 
+        row=2, col=i + 1)
+fig.show()
+\end{pythoncode}
+\end{frame}
+
 \begin{frame}[fragile]{CNN Auto-Encoder in Python \small [cont']}
 
 Encoder:
@@ -881,6 +884,37 @@ decoder = models.Sequential([
                padding="same", activation="sigmoid"),
     layers.Reshape([28, 28])])
 \end{pythoncode}
+\end{frame}
+
+\begin{frame}{Auto-Encoder Examples}
+\textbf{Fashion MNIST -- Original and Reconstruction}
+\begin{itemize}
+   \item 3-layer densely connected network (decoder inverse)
+\end{itemize} 
+\begin{center}
+\includegraphics[width=\textwidth]{autoencoder_sample_dense.png} \\
+\end{center}
+
+\begin{itemize}
+   \item 3-layer CNN (decoder inverse)
+\end{itemize} 
+\begin{center}
+\includegraphics[width=\textwidth]{autoencoder_sample_cnn.png} \\
+\end{center}
+\end{frame}
+
+\begin{frame}{Auto-Encoder Examples}
+\textbf{Fashion MNIST -- First 2 Latent Dimensions}
+\begin{itemize}
+   \item \emph{Left:} 3-layer densely connected network (decoder inverse)
+   \item \emph{Right:} 3-layer CNN (decoder inverse)
+\end{itemize} 
+
+\begin{center}
+\includegraphics[width=\textwidth]{murphy_20_18.png} \\
+
+\scriptsize Source: Murphy, Fig. 20.18 \normalsize
+\end{center}
 \end{frame}
 
 
