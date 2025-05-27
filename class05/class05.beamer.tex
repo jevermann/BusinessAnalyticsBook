@@ -211,15 +211,21 @@ R stores its \textbf{workspace} in each directory in a file called ''.RData'' an
 \section{Vectors}
 
 \begin{frame}[fragile]{R Vectors}
+All elements have the same type:
+\begin{Rcode}
+> v <- c(1, 'a', TRUE)
+> v
+[1] "1"    "a"    "TRUE"
+\end{Rcode}
 R does vector math:
 \begin{Rcode}
 > v <- c(1, 2, 3, 4)
 > v
-[1] "1"    "a"    "TRUE"
+[1] 1 2 3 4
 > v*3
 [1]  3  6  9 12
 \end{Rcode}
-\emph{Note}: No print statement needed in interactive mode\\
+\emph{Note}: No print statement needed in interactive mode
 
 \begin{Rcode}
 # Generate a sequence
@@ -254,6 +260,7 @@ vv[vv < 5]
 vv[vv < 5] <- vv[vv < 5] + 5
 # Indexing is inclusive
 vv[3:7]
+# Exclude some elements
 vv[-(3:7)]
 \end{Rcode}
 
@@ -272,7 +279,7 @@ v*3
 is.na(v)
 # Missing values in aggregate functions
 sum(v)
-sum(v, na.ram=TRUE)
+sum(v, na.rm=TRUE)
 \end{Rcode}
 \end{frame}
 
@@ -488,7 +495,7 @@ Load Tidyverse library and read data into a ''tibble''
 # Load library
 library(tidyverse)
 # Read CSV into a Tibble
-e <- read_csv('https://evermann.ca/busi4720/fuel.csv')
+data <- read_csv('https://evermann.ca/busi4720/fuel.csv')
 # Examine the data
 # Dimensions (rows, columns)
 dim(data)
