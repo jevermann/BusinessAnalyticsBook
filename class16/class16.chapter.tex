@@ -290,7 +290,15 @@ Finally, layers 4 and 5 have learned to extract specific objects or object parts
 
 \section{Image Classification Example using Tensorflow}
 
-This section illustrates how to implement convolutional neural networks in Tensorflow/Keras\footnote{Python code for this example is taken from \href{https://www.tensorflow.org/tutorials/images/cnn}{TensorFlow.org} that is made available under a \href{https://www.apache.org/licenses/LICENSE-2.0}{Apache 2.0 license}.}. This example uses the CIFAR10 data set, a standard data set used to benchmark image classification methods. The data set consists of 60,000 images with resolution of $32 \times 32$ pixels and 3 RGB channels. There are ten classes. The latest error rates on this data set are less then 0.5\%, showing that it is no longer useful as a realistic or competitive benchmark --- it is essentially a solved problem. However, due to the small image size and data set size, it is computationally easy to analyze and useful as an illustrative example. 
+This section illustrates how to implement convolutional neural networks in Tensorflow/Keras\footnote{Python code for this example is taken from \href{https://www.tensorflow.org/tutorials/images/cnn}{TensorFlow.org} that is made available under a \href{https://www.apache.org/licenses/LICENSE-2.0}{Apache 2.0 license}.}. This example uses the CIFAR10 data set, a standard data set used to benchmark image classification methods. The data set consists of 60,000 images with resolution of $32 \times 32$ pixels and 3 RGB channels. Figure~\ref{fig:cifar10sample} shows the first 25 training images. There are ten classes of images in this data set. The latest classification error rates on this data set are less then 0.5\%, showing that it is no longer useful as a realistic or competitive benchmark --- it is essentially a solved problem. However, due to the small image size and data set size, it is computationally easy to analyze and useful as an illustrative example. 
+
+\begin{figure}
+\centering
+\includegraphics[height=2in]{cifar10.png}
+\caption{CIFAR-10 sample images}
+\label{fig:cifar10sample}
+\end{figure}
+
 
 \begin{resourcebox}
 Complete implementations for this and the other examples in this chapter are available in the following GitHub repo:
@@ -315,6 +323,19 @@ The RGB values in the original images are coded on a scale of 0 to 255. The firs
 \begin{pythoncode}
 # Normalize pixel values to be between 0 and 1
 train_images, test_images = train_images/255.0, test_images/255.0
+\end{pythoncode}
+
+The following Python code block uses the Plotly Express package to show the first 25 images of the training data set in a $5\times 5$ plot (Figure~\ref{fig:cifar10sample}).
+
+\begin{pythoncode}
+import plotly
+import plotly.express as px
+
+fig = plotly.subplots.make_subplots(rows=5, cols=5)
+for i in range(25):
+    fig.add_trace(px.imshow(train_images[i]).data[0], 
+                            row=i//5+1, col=i%5+1)
+fig.show()
 \end{pythoncode}
 
 Keras makes it easy to create a convolutional network similar to the one shown in Figure~\ref{fig:screen12}. This example uses three convolutional layers, each with a ReLU activation and followed by max-pooling. 
