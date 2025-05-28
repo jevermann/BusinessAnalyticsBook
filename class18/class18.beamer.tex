@@ -148,6 +148,46 @@ Zhang, A., Lipton, Z.C., Li, M. and Smola, A.J.: \emph{Dive into Deep Learning (
 \normalsize
 \end{frame}
 
+\begin{frame}[fragile]{SMOTE in Python}
+
+Load example classification data:
+\begin{pythoncode}
+import sklearn
+import pandas as pd
+import imblean 
+
+X, y = sklearn.datasets.load_wine(return_X_y=True)
+# Original class distribution
+[sum(e==y) for e in set(y)]
+# Original data summary
+pd.DataFrame(X).describe()
+\end{pythoncode}
+
+Apply SMOTE (from package ''imblearn''):
+\begin{pythoncode}
+# Apply SMOTE
+sm = imblearn.over_sampling.SMOTE()
+X_res, y_res = sm.fit_resample(X, y)
+# Resampled class distribution
+[sum(e==y_res) for e in set(y_res)]
+# Resampled data summary
+pd.DataFrame(X_res).describe()
+\end{pythoncode}
+\end{frame}
+
+\begin{frame}{Hands-On}
+\begin{enumerate}
+  \item Load the telekom customer church dataset from\\
+  \url{https://archive.ics.uci.edu/static/public/563/iranian+churn+dataset.zip}
+  
+  \item Use column ''Churn'' as the binary classification target.
+  \item Check the class balance for the target.
+  \item Apply SMOTE to create a balanced dataset.
+  \item How many synthetic observations are generated?
+  \item Compare the data summary statistics of the original and the balanced dataset. Are there significant differences?
+\end{enumerate}
+\end{frame}
+
 \begin{frame}{Transfer Learning}
 
 \begin{block}{Ideas}
@@ -917,6 +957,14 @@ decoder = models.Sequential([
 \end{center}
 \end{frame}
 
+\begin{frame}{Hands-On Exercise}
+\begin{enumerate}
+  \item Download the complete Python code for the auto-encoder or clone the Git repo. That code includes visualization of original and decoded images.
+  \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+  \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+  \item Generate some numbers in the latent space and decode them to new images, that is, use the auto-encoder in a generative way. What can you say about the results?
+\end{enumerate}
+\end{frame}
 
 \begin{frame}{Auto-Encoder -- Denoising}
 \begin{itemize}
@@ -1033,6 +1081,8 @@ class Sampling(layers.Layer):
 Encoder:
 
 \begin{pythoncode}
+# Latent space dimensionality
+ldim = 2
 # This is NOT a sequential model
 encoder_inputs = tf.keras.Input(shape=(28, 28, 1))
 x = layers.Conv2D(32, (3,3), activation="relu", 
@@ -1043,10 +1093,10 @@ x = layers.Flatten()(x)
 x = layers.Dense(16, activation="relu")(x)
 
 # Vector of means
-z_mean = layers.Dense(10, name="z_mean")(x)
+z_mean = layers.Dense(ldim, name="z_mean")(x)
 
 # Vector of log variances
-z_log_var = layers.Dense(10, name="z_log_var")(x)
+z_log_var = layers.Dense(ldim, name="z_log_var")(x)
 
 # Point in latent space
 z = Sampling()([z_mean, z_log_var])
@@ -1059,24 +1109,33 @@ encoder = keras.Model(encoder_inputs, [z_mean, z_log_var, z])
 Loss function:
 
 \begin{pythoncode}
-    def vae_loss(encoder, decoder, data):
-        z_mean, z_log_var, z = encoder(data)
-        reconstruction = decoder(z)
-        mse_loss = keras.losses.MeanSquaredError()
-        reconstruction_loss = mse_loss(data, reconstruction)
-        kl_loss = -0.5 * (1 +
-                          z_log_var -
-                          tf.square(z_mean) -
-                          tf.exp(z_log_var))
-        kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss,axis=1))
-        total_loss = reconstruction_loss + kl_loss
-        return total_loss
+with tf.GradientTape() as tape:
+    z_mean, z_log_var, z = self.encoder(data)
+    reconstruction = self.decoder(z)
+    reconstruction_loss = tf.reduce_mean(
+        tf.reduce_sum(
+            keras.losses.binary_crossentropy(
+                data, reconstruction), axis=(1, 2)))
+	kl_loss = -0.5 * tf.reduce_mean(
+	    tf.reduce_sum(1 + z_log_var - tf.square(z_mean) 
+                      - tf.exp(z_log_var), axis=1))
+    total_loss = reconstruction_loss + kl_loss
 \end{pythoncode}
 
 \begin{itemize}
 \item Combination of reconstruction loss and KL loss (''difference'' to standard normal distribution)
 \end{itemize}
 \end{frame}
+
+\begin{frame}{Hands-On Exercise}
+\begin{enumerate}
+  \item Download the complete Python code for the VAE or clone the Git repo. That code includes visualization of original and decoded images.
+  \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+  \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+\end{enumerate}
+\end{frame}
+
+
 
 \begin{frame}{GAN -- Generative Adversarial Networks}
 

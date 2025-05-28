@@ -87,7 +87,46 @@ Data augmentation for textual data uses techniques such as character, word, or s
 
 Data augmentation for tabular data, that is, numeric data uses techniques such as SMOTE\index{Synthetic Minority Oversampling Technique}\index{SMOTE|see{Synthetic Minority Oversampling Technique}} and SMOTE-NC. As its name implies, SMOTE (''synthetic minority oversampling technique'') is designed for class balancing, that is to create additional instances of a minority class in classification model training. Originally developed for The idea of SMOTE is simple and intuitive. Consider Figure~\ref{fig:smote}. The left panel shows observations for two classes in a two-dimensional continuous feature space. When generating an additional observation for the green class, SMOTE first determines the $k$ nearest neighbours of one observation for some value of $k$ (center panel in Figure~\ref{fig:smote}). Then, one of the neighbours is chosen at random, and an additional observation is created at some random distance between the focal observation and the chosen neighbour (right panel in Figure~\ref{fig:smote}). SMOTE-NC is the generalization of SMOTE to categorical features.
 
+Performing oversampling using SMOTE in Python is made simple using the Python package ''imblearn'' that provides a range of oversampling methods. The following code example uses a simple classification data set of wine data for three classes. First, the example data is loaded, the class distribution and summary statistics are provided.
+
+\begin{pythoncode}
+import sklearn
+import pandas as pd
+import imblean 
+
+X, y = sklearn.datasets.load_wine(return_X_y=True)
+# Original class distribution
+[sum(e==y) for e in set(y)]
+# Original data summary
+pd.DataFrame(X).describe()
+\end{pythoncode}
+
+Next, the SMOTE method is applied to the data set to balance the classes. The resampled class distribution and summary statistics are shown:
+
+\begin{pythoncode}
+# Apply SMOTE
+sm = imblearn.over_sampling.SMOTE()
+X_res, y_res = sm.fit_resample(X, y)
+# Resampled class distribution
+[sum(e==y_res) for e in set(y_res)]
+# Resampled data summary
+pd.DataFrame(X_res).describe()
+\end{pythoncode}
+
 A variational auto-encoder is described in Section~\ref{sec:vae} below. The main idea is that input data is encoded into feature space that is a probability distribution, typically Gaussian or normal, characterized by a mean vector and a covariance matrix. To generate a new observation, one simply samples from a Gaussian and decodes the result. VAEs are popular with image data, underlying many popular generative AI image generators, but can also be used with tabular data for data augmentation purposes. In a broad sense, this could be seen as analogous to text data augmentation by ''jiggling'' the embedding (except text embeddings are not characterized by a probability distribution). 
+
+\begin{exercisebox}
+\begin{enumerate}
+  \item Load the telekom customer church dataset from\\
+  \url{https://archive.ics.uci.edu/static/public/563/iranian+churn+dataset.zip}
+  \item Use column ''Churn'' as the binary classification target.
+  \item Check the class balance for the target.
+  \item Apply SMOTE to create a balanced dataset.
+  \item How many synthetic observations are generated?
+  \item Compare the data summary statistics of the original and the balanced dataset. Are there significant differences?
+\end{enumerate}
+\end{exercisebox}
+
 
 \section{Transfer Learning}
 
@@ -183,12 +222,35 @@ augmentation = keras.models.Sequential([
 train_ds = train_ds.map(lambda x, y: (augmentation(x), y))
 \end{pythoncode}
 
+The following code block uses Plotly Express to show a $5 \times 5$ grid of the first 25 transformed images:
+\begin{pythoncode}
+import plotly.express as px
+from plotly import subplots
+
+fig = subplots.make_subplots(rows=5, cols=5)
+train_iterator = iter(train_ds)
+for i in range(25):
+    image, label = next(train_iterator)
+    fig.add_trace(px.imshow(image.numpy()).data[0], 
+                  row=i // 5 + 1, col=i % 5 + 1)
+fig.show(renderer='browser')
+\end{pythoncode}
+
 \begin{infobox}
 \begin{itemize}
    \item This example applies all layers to all training images; consider applying single transformations to an image or random combinations of transformations
    \item This example replaces the data set with the transformed images; consider adding the transformed images to the data set
 \end{itemize}
 \end{infobox}
+
+
+\begin{exercisebox}
+\begin{enumerate}
+  \item Using the Keras documentation, identify different options for the \texttt{fill\_mode} attribute.
+  \item Adapt the augmentation layer in the example above to use individual transformations and identify the effect of different fill modes.
+\end{enumerate}
+\end{exercisebox}
+
 
 The following Python code loads an image classification model as a base model and a set of pre-trained weights for this model. Importantly, it does \emph{not} load the classification layer (\small\texttt{include\_top = False}\normalsize). The original data set the model was trained on has 1000 classes, but in this example application, the classification is only between cats and dogs, that is, two classes.
  
@@ -826,6 +888,17 @@ decoder = models.Sequential([
 While the encoder and decoder in the examples here have the same architecture, this need not be the case! One could encode with a CNN and decode with a dense network, or any other combination of architectures.
 \end{infobox}
 
+
+\begin{exercisebox}
+\begin{enumerate}
+  \item Download the complete Python code for the auto-encoder or clone the Git repo. That code includes visualization of original and decoded images.
+  \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+  \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+  \item Generate some numbers in the latent space and decode them to new images, that is, use the auto-encoder in a generative way. What can you say about the results?
+\end{enumerate}
+\end{exercisebox}
+
+
 \FloatBarrier
 
 \section{Variational Auto-Encoders (VAE)}
@@ -895,9 +968,11 @@ class Sampling(layers.Layer):
         return z_mean + tf.exp(0.5 * z_log_var) * epsilon
 \end{pythoncode}
 
-The encoder of a VAE\index{Encoder} in the following Python code block begins with a CNN whose output is flattened. The vector of 10 means and the vector of 10 log-variances are then created using a fully-connected layer (without activation function, that is, simply a matrix multiplication). That is, the latent space in this example has 10 dimensions. The sampling layer is added to take the means and log-variances and create a vector in the 10 dimensional latent space. Because both the means and log-variances are computed from the flattened CNN output, this is not a sequential model, so the definition looks slightly different than for the auto-encoder above.
+The encoder of a VAE\index{Encoder} in the following Python code block begins with a CNN whose output is flattened. The vector of \texttt{ldim} means and the vector of \texttt{ldim} log-variances are then created using a fully-connected layer (without activation function, that is, simply a matrix multiplication). Here, \texttt{ldim} is the dimensionality of the latent space, in this example, that is 2. The sampling layer is added to take the means and log-variances and create a vector in the \texttt{ldim}-dimensional latent space. Because both the means and log-variances are computed from the flattened CNN output, this is not a sequential model, so the definition looks slightly different than for the auto-encoder above.
 
 \begin{pythoncode}
+# Latent space dimensionality
+ldim = 2
 # This is NOT a sequential model
 encoder_inputs = tf.keras.Input(shape=(28, 28, 1))
 x = layers.Conv2D(32, (3,3), activation="relu", 
@@ -908,10 +983,10 @@ x = layers.Flatten()(x)
 x = layers.Dense(16, activation="relu")(x)
 
 # Vector of means
-z_mean = layers.Dense(10, name="z_mean")(x)
+z_mean = layers.Dense(ldim, name="z_mean")(x)
 
 # Vector of log variances
-z_log_var = layers.Dense(10, name="z_log_var")(x)
+z_log_var = layers.Dense(ldim, name="z_log_var")(x)
 
 # Point in latent space
 z = Sampling()([z_mean, z_log_var])
@@ -919,11 +994,11 @@ z = Sampling()([z_mean, z_log_var])
 encoder = keras.Model(encoder_inputs, [z_mean, z_log_var, z])
 \end{pythoncode}
 
-The VAE decoder\index{Decoder} is essentially the same as the decoder of an auto-encoder shown above. It takes as input a point in the 10-dimensional latent space, uses a fully-connected layer to increase the dimensionality, reshapes it into a two dimensional image format and applies a sequence of 2D convolutional transpose operations to it. The output of the decoder is an image with the same dimensions as the input images to the encoder.
+The VAE decoder\index{Decoder} is essentially the same as the decoder of an auto-encoder shown above. It takes as input a point in the \texttt{ldim}-dimensional latent space, uses a fully-connected layer to increase the dimensionality, reshapes it into a two dimensional image format and applies a sequence of 2D convolutional transpose operations to it. The output of the decoder is an image with the same dimensions as the input images to the encoder.
 
 \begin{pythoncode}
 # Decoder
-latent_inputs = keras.Input(shape=(10,))
+latent_inputs = keras.Input(shape=(ldim,))
 x = layers.Dense(7 * 7 * 64, activation="relu")(latent_inputs)
 x = layers.Reshape((7, 7, 64))(x)
 x = layers.Conv2DTranspose(64, (3, 3), activation="relu", 
@@ -938,19 +1013,45 @@ decoder = keras.Model(latent_inputs, decoder_outputs)
 As indicated in Figures~\ref{fig:murphy_20_22} and \ref{fig:murphy_20_23}, the VAE loss consists of both the ''reconstruction loss'', that is, the difference between input and output images, and the loss of the difference between the normal Gaussian and the Gaussian distribution with the given means and variances. The two losses are simply added (in contrast to Fig.~\ref{fig:murphy_20_22}, the following example uses the MSE for the reconstruction error, as did the auto-encoder example above). This combination of losses ensures the model tries to generate normally distributed points in the latent space as well as good reconstructions of the inputs.
 
 \begin{pythoncode}
-def vae_loss(encoder, decoder, data):
-    z_mean, z_log_var, z = encoder(data)
-    reconstruction = decoder(z)
-    mse_loss = keras.losses.MeanSquaredError()
-    reconstruction_loss = mse_loss(data, reconstruction)
-    kl_loss = -0.5 * (1 +
-                      z_log_var -
-                      tf.square(z_mean) -
-                      tf.exp(z_log_var))
-    kl_loss = tf.reduce_mean(tf.reduce_sum(kl_loss,axis=1))
+with tf.GradientTape() as tape:
+    z_mean, z_log_var, z = self.encoder(data)
+    reconstruction = self.decoder(z)
+    reconstruction_loss = tf.reduce_mean(
+        tf.reduce_sum(
+            keras.losses.binary_crossentropy(
+                data, reconstruction), axis=(1, 2)))
+	kl_loss = -0.5 * tf.reduce_mean(
+	    tf.reduce_sum(1 + z_log_var - tf.square(z_mean) 
+                      - tf.exp(z_log_var), axis=1))
     total_loss = reconstruction_loss + kl_loss
-    return total_loss
 \end{pythoncode}
+
+This VAE example code produces image reconstructions shown in Figure~\ref{fig:vae_sample} while Figure~\ref{fig:vae_sample_generative} shows the decoded images of a random sample of 10 points in the 2-dimensional latent space. Finally, Figure~\ref{fig:vae_sample_generative2} shows a more systematic exploration of different points in the two dimensional latent space. 
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{vae_sample.png}
+\end{center}
+\caption{VAE image reconstruction examples}
+\label{fig:vae_sample}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=\textwidth]{vae_sample_generative.png}
+\end{center}
+\caption{VAE image generation examples}
+\label{fig:vae_sample_generative}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{vae_sample_generative2.png}
+\end{center}
+\caption{Exploring the VAE latent space in 2 dimensions}
+\label{fig:vae_sample_generative2}
+\end{figure}
+
 
 \begin{resourcebox}
 Adapted from: 
@@ -965,6 +1066,15 @@ The project can be cloned from this URL:
 
 \small\url{https://github.com/jevermann/busi4720-ai.git}\normalsize
 \end{resourcebox}
+
+
+\begin{exercisebox}
+\begin{enumerate}
+  \item Download the complete Python code for the VAE or clone the Git repo. That code includes visualization of original and decoded images.
+  \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+  \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
+\end{enumerate}
+\end{exercisebox}
 
 
 \FloatBarrier
