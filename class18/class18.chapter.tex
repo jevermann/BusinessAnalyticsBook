@@ -222,7 +222,24 @@ augmentation = keras.models.Sequential([
 train_ds = train_ds.map(lambda x, y: (augmentation(x), y))
 \end{pythoncode}
 
-The following code block uses Plotly Express to show a $5 \times 5$ grid of the first 25 transformed images:
+The following code block uses Plotly Express to show a $5 \times 5$ grid of the first 25 transformed images. The before and after images are shown in Figures~\ref{fig:catsdogs_before} and \ref{fig:catsdogs_after}.
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{catsdogs_sample.png}
+\end{center}
+\caption{Sample images of the cats and dogs data set before transformation}
+\label{fig:catsdogs_before}
+\end{figure}
+
+\begin{figure}
+\begin{center}
+\includegraphics[width=.8\textwidth]{catsdogs_sample_transformed.png}
+\end{center}
+\caption{Sample images of the cats and dogs data set after transformation}
+\label{fig:catsdogs_after}
+\end{figure}
+
 \begin{pythoncode}
 import plotly.express as px
 from plotly import subplots
