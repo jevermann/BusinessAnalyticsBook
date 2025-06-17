@@ -4,7 +4,7 @@ book:
 
 .PHONY: zip
 zip:
-	tar -c -f busi4720.slides.tar.gz -z -v class01/class01.beamer.pdf class02/class02.beamer.pdf class03/class03.beamer.pdf class04/class04.beamer.pdf class05/class05.beamer.pdf class06/class06.beamer.pdf class07/class07.beamer.pdf class08/class08.beamer.pdf class09/class09.beamer.pdf class11/class11.beamer.pdf class12/class12.beamer.pdf class13/class13.beamer.pdf class14/class14.beamer.pdf class15/class15.beamer.pdf class16/class16.beamer.pdf class17/class17.beamer.pdf class19/class19.beamer.pdf class20/class20.beamer.pdf class21/class21.beamer.pdf class22/class22.beamer.pdf class23/class23.beamer.pdf class24/class24.beamer.pdf
+	tar -c -f busi4720.slides.tar.gz -z -v class01/class01.beamer.pdf class02/class02.beamer.pdf class03/class03.beamer.pdf class04/class04.beamer.pdf class05/class05.beamer.pdf class06/class06.beamer.pdf class07/class07.beamer.pdf class08/class08.beamer.pdf class09/class09.beamer.pdf class11/class11.beamer.pdf class12/class12.beamer.pdf class13/class13.beamer.pdf class14/class14.beamer.pdf class15/class15.beamer.pdf class16/class16.beamer.pdf class17/class17.beamer.pdf class19/class19.beamer.pdf class18/class18.beamer.pdf class20/class20.beamer.pdf class21/class21.beamer.pdf class22/class22.beamer.pdf class23/class23.beamer.pdf class24/class24.beamer.pdf
 	
 clean:
 	find . -type d -name "_minted*" -prune -exec rm -rf {} \;
@@ -29,13 +29,13 @@ squeaky: clean
 	find . -name "*.tex~" -exec rm {} \;	
 	
 .PHONY: all
-all: class1 class2 class3 class4 class5 class6 class7 class8 class9 class11 class12 class13 class14 class15 class16 class17 class19 class20 class21 class22 class23 class24 vm book
+all: class1 class2 class3 class4 class5 class6 class7 class8 class9 class11 class12 class13 class14 class15 class16 class17 class18 class19 class20 class21 class22 class23 class24 vm book
 
 .PHONY: chapters
-chapters: class1chapter class2chapter class3chapter class4chapter class5chapter class6chapter class7chapter class9chapter class11chapter class12chapter class13chapter class14chapter class15chapter class16chapter class17chapter class19chapter class20chapter class21chapter class22chapter class23chapter class24chapter vmchapter
+chapters: class1chapter class2chapter class3chapter class4chapter class5chapter class6chapter class7chapter class9chapter class11chapter class12chapter class13chapter class14chapter class15chapter class16chapter class17chapter class18chapter class19chapter class20chapter class21chapter class22chapter class23chapter class24chapter vmchapter
 
 .PHONY: slides
-slides: class1slides class2slides class3slides class4slides class5slides class6slides class7slides class8slides class9slides class11slides class12slides class13slides class14slides class15slides class16slides class17slides class19slides class20slides class21slides class22slides class23slides class24slides
+slides: class1slides class2slides class3slides class4slides class5slides class6slides class7slides class8slides class9slides class11slides class12slides class13slides class14slides class15slides class16slides class17slides class18slides class19slides class20slides class21slides class22slides class23slides class24slides
 
 .PHONY: class1
 class1:
@@ -100,6 +100,10 @@ class16:
 .PHONY: class17
 class17:
 	${MAKE} -C class17 all
+
+.PHONY: class18
+class18:
+	${MAKE} -C class18 all
 
 .PHONY: class19
 class19:
@@ -174,6 +178,9 @@ class16chapter:
 class17chapter:
 	${MAKE} -C class17 chapter
 
+class18chapter:
+	${MAKE} -C class18 chapter
+
 class19chapter:
 	${MAKE} -C class19 chapter
 
@@ -242,6 +249,9 @@ class16slides:
 
 class17slides:
 	${MAKE} -C class17 slides
+
+class18slides:
+	${MAKE} -C class18 slides
 
 class19slides:
 	${MAKE} -C class19 slides
