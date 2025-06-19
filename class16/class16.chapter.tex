@@ -330,8 +330,10 @@ The following Python code block uses the Plotly Express package to show the firs
 \begin{pythoncode}
 import plotly
 import plotly.express as px
+from plotly import subplots
+from plotly.subplots import make_subplots
 
-fig = plotly.subplots.make_subplots(rows=5, cols=5)
+fig = make_subplots(rows=5, cols=5)
 for i in range(25):
     fig.add_trace(px.imshow(train_images[i]).data[0], 
                             row=i//5+1, col=i%5+1)

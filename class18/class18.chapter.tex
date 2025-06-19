@@ -44,6 +44,18 @@ Zhang, A., Lipton, Z.C., Li, M. and Smola, A.J.: \emph{Dive into Deep Learning (
 
 The book by Zhang et al. is an open-source, ''living'' book that can also be found on Github and its website. It focuses on deep learning models only and provides a thorough treatment of the material with Python examples for a variety of deep learning frameworks, including PyTorch and TensorFlow. It is light on the math, but does explain the concepts well with diagrams and a few formulas. It focuses on the implementation of the ideas in actual code. 
 
+\begin{infobox}
+\subsubsection*{Requirements}
+
+Examples in this module require additional Python packages; install from the bash command line:
+
+\begin{bashcode}
+pip install imblearn
+pip install tensorflow_datasets
+\end{bashcode}
+\end{infobox}
+
+
 
 \section{Data Augmentation}
 
@@ -92,7 +104,7 @@ Performing oversampling using SMOTE in Python is made simple using the Python pa
 \begin{pythoncode}
 import sklearn
 import pandas as pd
-import imblean 
+import imblearn 
 
 X, y = sklearn.datasets.load_wine(return_X_y=True)
 # Original class distribution
@@ -243,8 +255,9 @@ The following code block uses Plotly Express to show a $5 \times 5$ grid of the 
 \begin{pythoncode}
 import plotly.express as px
 from plotly import subplots
+from plotly.subplots import make_subplots
 
-fig = subplots.make_subplots(rows=5, cols=5)
+fig = make_subplots(rows=5, cols=5)
 train_iterator = iter(train_ds)
 for i in range(25):
     image, label = next(train_iterator)

@@ -55,9 +55,18 @@ Zhang, A., Lipton, Z.C., Li, M. and Smola, A.J.: \emph{Dive into Deep Learning (
 
 \url{https://d2l.ai/} \url{https://github.com/d2l-ai/d2l-en}
 \end{block}
-
-
 \end{frame}
+
+\begin{frame}[fragile]{Requirements}
+
+Examples in this module require additional Python packages; install from the bash command line:
+
+\begin{bashcode}
+pip install imblearn
+pip install tensorflow_datasets
+\end{bashcode}
+\end{frame}
+
 
 \begin{frame}{Data Augmentation}
 
@@ -154,7 +163,7 @@ Load example classification data:
 \begin{pythoncode}
 import sklearn
 import pandas as pd
-import imblean 
+import imblearn 
 
 X, y = sklearn.datasets.load_wine(return_X_y=True)
 # Original class distribution
@@ -878,13 +887,15 @@ Visualize results:
 \begin{pythoncode}
 from plotly import subplots
 import plotly.express as px
+from plotly import subplots
+from plotly.subplots import make_subplots
 
 # Encode and decode some digits
 encoded_imgs = encoder.predict(x_test)
 decoded_imgs = decoder.predict(encoded_imgs)
 
 # Create plot
-fig = subplots.make_subplots(rows=2, cols=10)
+fig = make_subplots(rows=2, cols=10)
 for i in range(10):
     fig.add_trace(px.imshow(x_test[i], 
         binary_string=True).data[0], 
