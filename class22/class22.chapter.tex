@@ -95,7 +95,7 @@ Despite their advantages, function approximation methods introduce new challenge
 Function approximation aims to minimize the differences between the true state or action value function and the approximated function. Assuming a MSE loss, the \emph{value error} VE\index{Value error} can be expressed as follows:
 
 \begin{align*}
-\operatorname{VE} = \sum_{s \in \mathcal{S}} \mu(s) \left[ q_\pi(s, a) - \hat{q}(s, a, \theta) \right]^2
+\operatorname{VE} = \sum_{s \in \mathcal{S}} \left[ q_\pi(s, a) - \hat{q}(s, a, \theta) \right]^2
 \end{align*}
 
 Stochastic gradient descent (SGD) is used to minimize this loss function, similar to the use of SGD in neural network machine learning. Refer to that chapter for a discussion of problems that can arise with SGD and different optimization methods that address these problems. 
@@ -107,7 +107,7 @@ The parameters $\theta$ are iteratively updated using the gradient of the loss f
  &= \theta_t + \alpha \left[ q_\pi(S_t, A_t) - \hat{q}(S_t, A_t, \theta_t)\right] \nabla \hat{q}(S_t, A_t, \theta_t)
 \end{align*}
 
-Unfortunately, the true values $q_\pi(S_t, A_t)$ are unknown. However, using the idea of bootstrapping and the definition of the action value function as an estimate of the return means that the following expression $U_t$ can be used as an estimate of the true value $q_\pi(S_t, A_t)$: 
+Unfortunately, the true values $q_\pi(S_t, A_t)$ are unknown. However, using the idea of bootstrapping and the definition of the action value function as an estimate of the return means that the following expression $U_t$ can be used as an approximation of the true value $q_\pi(S_t, A_t)$: 
 
 \begin{align*}
 U_t = R_t + \gamma \hat{q}(S_{t+1}, A_{t+1}, \theta_t) \approx q_\pi(S_t, A_t)
@@ -375,9 +375,9 @@ Another extension to the basic DQN algorithm is the use of \emph{prioritized rep
 The Dueling DQN is another extension of the basic DQN algorithm\index{Dueling DQN}. It is based on the \emph{advantage function}, which is the difference between the action value function and the state value function\index{Advantage function}:
 
 
-\begin{align*}
-A(s, a) = Q(s, a) - V(s)
-\end{align*}
+\begin{align}
+A(s, a) = Q(s, a) - V(s) \label{eq:advantage}
+\end{align}
 
 In other words, the advantage function expresses the advantage of taking action $a$ in state $s$ over the average action in state $s$ that is represented by the state value function. The advantage function can be rewritten as follows:
 \begin{align*}
@@ -406,11 +406,11 @@ which defines the probability of selecting action $a$ in state $s$, parameterize
 
 The objective function in policy gradient methods is defined as:
 
-\begin{align*}
-J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ R(\tau) \right]
-\end{align*}
+\begin{align}
+J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ R(\tau) \right] \label{eq:policyobjective}
+\end{align}
 
-where $\tau$ denotes a trajectory of states and actions, and $R(\tau)$ is the cumulative reward of the trajectory. The expectation is over all trajectories possible under policy $\pi_\theta$.
+where $\tau$ denotes a trajectory of states and actions, and $R(\tau)$ is the cumulative reward, that is, the undiscounted return, of the trajectory. The expectation is over all trajectories possible under policy $\pi_\theta$.
 
 Policy gradient methods have a number of advantages over value-based methods such as DQN or DDQN:
 \begin{itemize}
@@ -432,7 +432,7 @@ A simple policy gradient method is REINFORCE\index{REINFORCE|see{Policy gradient
 \theta_{t+1} = \theta_t + \alpha G_t \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)} \label{eq:reinforce}
 \end{align}
 
-A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:reinforce}. The basic structure is similar to the tabular MC control introduced in the previous chapter. Complete episodes are generated and the updates are based on the actual return $G$ at each step. There is no bootstrapping of estimates using other estimates. The primary difference to tabular MC is in the update step that uses the REINFORCE update formula Equation~\ref{eq:reinforce}.
+A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:reinforce}. The basic structure is similar to the tabular MC control introduced in the previous chapter. Complete episodes are generated and the updates are based on the actual return $G$ at each step. There is no bootstrapping of estimates using other estimates. The primary difference to tabular MC is in the update step that uses the REINFORCE update formula Equation~\ref{eq:reinforce}. Note that this is not a loss-function minimization problem that is typical in neural network applications. Instead, REINFORCE uses gradient \emph{ascent} to maximize the expression in Equation~\ref{eq:policyobjective}.
 
 \begin{figure}
 \small
@@ -453,6 +453,10 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 \end{figure}
 
 The pseudocode in Figure~\ref{fig:reinforce} is easily implemented in Python. The following Python code block defines a policy function as a neural network. This policy function is defined for discrete actions with as many outputs as there are actions. The final layer has a softmax activation function so it produces probabilities $\pi$ for each action.
+
+\begin{infobox}
+In the case of a continuous action space, either of two changes could be made to this. First, the action itself could be made part of the input of the network, and a single output provides the action probability given a particular state and action. Alternatively, the output of the network could be a vector of means and variances that describe a probability distribution over the entire action space. Action probabilities are given by this distribution and actions to take in the environment can be sampled from that distribution.
+\end{infobox}
 
 \begin{pythoncode}
 # Batch size of 1 as we update after every action
@@ -497,12 +501,13 @@ for e in range(neps):
         s = sprime
         T += 1
 
-    print(f'Episode {e:5} goes to step {T:3}')
     # Compute discounted returns
     returns = discounted_returns(rewards, gamma)
 \end{pythoncode}
 
-The next Python code block below contains the actual learning of the RL agent, that is, the updates to the parameters of the policy network. For each step of the episode, the probabilities of all actions are determined from the policy network. The index of the actually selected action and the return are retrieved. For computing the loss function, the action index is converted to one-hot notation and multiplied with the action probabilities, then summed. This selects just the probability of the selected action. The log is taken and then multiplied with the return and discount factors. Once the loss is computed, the gradient of the policy network parameters w.r.t. the loss is computed and applied to update the policy network parameters:
+The next Python code block below contains the actual learning of the RL agent, that is, the updates to the parameters of the policy network. For each step of the episode, the probabilities of all actions are determined from the policy network. The index of the actually selected action and the return are retrieved. For computing the loss function, the action index is converted to one-hot notation and multiplied with the action probabilities, then summed. This selects just the probability of the selected action. The log is taken and then multiplied with the return and discount factors. Once the loss is computed, the gradient of the policy network parameters w.r.t. the loss is computed and applied to update the policy network parameters. 
+
+Note that while the code uses the term ''loss'', this is not a loss in the usual neural network training sense that it is to be minimized. Instead, REINFORCE uses gradient \emph{ascent} to maximize the expression in Equation~\ref{eq:policyobjective}. Consequently, the ''loss'' in the following code is negative as the \texttt{apply\_gradients()} function subtracts the gradients from parameter estimates (because it is built for minimizing loss functions in neural network training).
 
 \begin{pythoncode}
     # Learn for each step of the episode
@@ -517,7 +522,8 @@ The next Python code block below contains the actual learning of the RL agent, t
             # Loss
             loss = - G * gamma**t * 
                 tf.math.log(tf.reduce_sum(tf.math.multiply(pi, 
-                    tf.one_hot(action_idx, env.action_space.n)), axis=1))
+                    tf.one_hot(action_idx, env.action_space.n)), 
+                    axis=1))
 
         # Calculate gradients and update parameters
         grads = tape.gradient(loss, p_net.trainable_variables)
@@ -535,7 +541,7 @@ The main idea is to use the following update that includes a ''baseline'' return
 \theta_{t+1} = \theta_t + \alpha(G_t - b(S_t)) \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)}
 \end{align*}
 
-One can choose $b(S_t) = \hat{v}(S_t)$, that is to use the state value function as baseline. This yields the following update:
+One can choose $b(S_t) = \hat{v}(S_t)$, that is, to use the state value function as baseline. This yields the following update:
 
 \begin{align*}
 \theta_{t+1} = \theta_t + \alpha(G_t - \hat{v}(S_t)) \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)}
@@ -580,7 +586,8 @@ for t in range(len(returns)):
             # Losses for policy and value networks
             p_loss = -delta * gamma**t *
                 tf.math.log(tf.reduce_sum(tf.math.multiply(pi,
-                    tf.one_hot(action_idx, env.action_space.n)),axis=1))
+                    tf.one_hot(action_idx, env.action_space.n)),
+                    axis=1))
             v_loss = -delta * v
 
     # Calculate gradients and update parameters for policy network
@@ -594,18 +601,18 @@ for t in range(len(returns)):
 \end{pythoncode}
 
 
-
 \subsubsection*{Actor-Critic Methods}
 
-The policy gradient methods in Figures~\ref{fig:reinforce} and \ref{fig:reinforcebaseline} are both Monte Carlo methods. Recall that moving from Monte Carlo method to TD methods involved recognizing that $G_{t+1} = R_t + \gamma G_t$ and that the expected values of $G_t$ is the state value of state $S_t$. Starting with the REINFORCE with baseline update function, the same considerations apply to policy gradient methods.
+The policy gradient methods in Figures~\ref{fig:reinforce} and \ref{fig:reinforcebaseline} are both Monte Carlo methods. Recall that moving from Monte Carlo method to TD methods involved recognizing that $G_{t} = r + \gamma G_{t+1}$, that is, the return $G_{t}$ is the current reward $r_t$ plus the expected future return $G_{t+1}$. Further, the expected value of $G_{t+1}$ is the state value of state $S_{t+1}$, that is $\hat{v}(S_{t+1})$. Just as in tabular TD learning, this bootstraps the estimates by using estimates of future returns. With this, it is easy to adapt the REINFORCE with baseline update function to use TD bootstrapping, that is, to update the function parameters at every step, not just at the end of an episode. 
 
 \begin{align*}
-\theta_{t+1} &= \theta_t + \alpha (G_{t} - \hat{v}(S_t)) \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)} \\
-&= \theta_t + \alpha (R_{t+1} + \gamma \hat{v}(S_{t+1}, w) - \hat{v}(S_t, w)) \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)} \\
+\theta_{t+1} &= \theta_t + \alpha (G_{t} - \hat{v}(S_t)) \frac{\nabla \pi(A_t | S_t, \theta_t)}{\pi(A_t | S_t, \theta_t)} 
+\intertext{The function $\hat{v}$ is parameterized by a set of parameters $w$:}
+&= \theta_t + \alpha (r_{t} + \gamma \hat{v}(S_{t+1}, w) - \hat{v}(S_t, w)) \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)} \\
 &= \theta_t + \alpha \delta_t \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)}
 \end{align*}
 
-Here, $\delta_t$ is the TD error. The resulting ''\emph{One-Step Actor-Critic}'' method uses bootstrapping to estimate the state value function, that is, it uses estimated values rather than actual returns. Just like TD, SARSA and Q-learning for tabular methods, actor-critic methods\index{Actor-critic method} can improve on the slow learning of Monte Carlo methods and are also useful for non-episodic, continuous problems. Figure~\ref{fig:actorcritic} shows the complete algorithm for the one-step actor-critic method.
+Here, $\delta_t$ is the TD error $\delta_t = r_{t} + \gamma \hat{v}(S_{t+1}, w) - \hat{v}(S_t, w)$. The resulting ''\emph{One-Step Actor-Critic}'' method uses bootstrapping to estimate the state value function, that is, it uses estimated values rather than actual returns. Just like TD, SARSA and Q-learning for tabular methods, actor-critic methods\index{Actor-critic method} can improve on the slow learning of Monte Carlo methods and are also useful for non-episodic, continuous problems. Figure~\ref{fig:actorcritic} shows the complete algorithm for the one-step actor-critic method where $S' = S_{t+1}$ and $S = S_t$.
 
 \begin{figure}
 \small
@@ -620,16 +627,31 @@ Here, $\delta_t$ is the TD error. The resulting ''\emph{One-Step Actor-Critic}''
 & \quad \text{Initialize}\;S\;\text{(first state of episode)}; I \leftarrow 1 \\
 & \quad \text{Loop while}\;S\;\text{not terminal (for each time step):} \\
 & \quad \quad \text{Sample}\;A\;\text{from}\; \pi(.|S, \theta) \\
-& \quad \quad \text{Take action}\;A,\;\text{observe}\;S', R \\
-& \quad \quad \delta \leftarrow R + \gamma \hat{v}(S', w) - \hat{v}(S, w) \\
-& \quad \quad w \leftarrow w + \alpha_w \delta \nabla \hat{v}(S_t, w) \\
-& \quad \quad \theta \leftarrow \theta + \alpha_\theta G \nabla \ln \pi(A_t | S_t, \theta) \\
+& \quad \quad \text{Take action}\;A,\;\text{observe}\;S', r \\
+& \quad \quad \delta \leftarrow r + \gamma \hat{v}(S', w) - \hat{v}(S, w) \\
+& \quad \quad w \leftarrow w + \alpha_w \delta \nabla \hat{v}(S, w) \\
+& \quad \quad \theta \leftarrow \theta + \alpha_\theta G \nabla \ln \pi(A_t | S, \theta) \\
 & \quad \quad S \leftarrow S'; I \leftarrow \gamma I
 \end{align*}
 \end{pseudocodebox}
 \caption[One-Step Actor-Critic algorithm]{One-Step Actor-Critic algorithm (Source: SB)}
 \label{fig:actorcritic}
 \end{figure}
+
+This method is called an \emph{actor--critic method} as the policy function $\pi(.,\theta)$ serves as the actor in the environment and determines the actions to be executed. The value function $\hat{v}(.,w)$ serves as the critic in the sense that it is the relative baseline against which the actions are evaluated. The two functions work together: Improving the critic will in turn improve the actor, driven by a need to keep $\delta_t$ positive, that is leading to higher rewards $r_t$. In turn, improving the actor will in turn improve the critic as better actions lead to higher rewards and therefore lead to higher state value estimates. 
+
+This method is also called the ''advantage actor-critic method'' A2C. This is easy to see when one considers that the advantage function from Equation~\ref{eq:advantage} can be rewritten as follows:
+
+\begin{align*}
+A(s, a) &= Q(s, a) - V(s) 
+\intertext{approximating the $Q$ value as:}
+Q(s, a ) &\approx r + \gamma V(s') 
+\intertext{leads to}
+A(s, a) &\approx r + \gamma V(s') - V(s)
+\end{align*}
+
+Thus, the TD error $\delta$ is computed using the advantage function.
+
 
 \section{Additional Information}
 
