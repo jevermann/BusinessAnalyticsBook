@@ -89,9 +89,9 @@ Similar to SQL queryies, Cypher queries have multiple clauses, specifying a ''qu
 
 Neo4j offers a number of options for running the Neo4j database management system, among them a limited developer version called ''Neo4j desktop'' and a free, open-source community edition that is usually accessed through a web interface (''Neo4j browser''). Table~\ref{tab:neo4jinfo} provides links to useful documentation of the Neo4j database and the Cypher language.
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 The community edition is installed in the course virtual machine and enabled to run when the machine is started. You can access Neo4j Browser (Figure~\ref{fig:neo4jbrowser}) at \url{http://localhost:7474} with the username ''\textbf{neo4j}'' and the password ''\textbf{busi4720}''. 
-\end{tcolorbox}
+\end{alertbox}
 
 \begin{table}
 \renewcommand{\arraystretch}{1.5}
@@ -150,11 +150,11 @@ Figure~\ref{fig:sample-cypher} shows how nodes and relationships are represented
 ()<--()
 \end{cyphercode}
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 \emph{Only directed relationships can be created in a Neo4j graph, but undirected relationships can be used in a pattern to query a graph}. \\
 
 Directionality of relationships is important and matters for querying a graph. A directed relationship \texttt{-->} will match a directed pattern \texttt{-->} or an undirected pattern \texttt{--} but not \texttt{<--}. 
-\end{tcolorbox}
+\end{alertbox}
 
 \paragraph*{Path}
 A path\index{Path (in Neo4j)} in Neo4j is a sequence of alternating nodes and relationships, beginning and ending with a node.
@@ -237,7 +237,7 @@ MATCH (n1)-[r]-(n2) RETURN n1, r, n2
 \label{fig:neo4jgraphviz}
 \end{figure}
 
-\begin{tcolorbox}[colback=code]
+\begin{exercisebox}
 \subsubsection*{Hands-On Exercise}
 
 Consider the following description:
@@ -252,7 +252,7 @@ Define a graph in Cypher that represents this description:
   \item Use CREATE or MERGE statements to create nodes first, then relationships
   \item Use MATCH to verify your graph is correct.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 To remove nodes and relationships from a graph, use the \texttt{MATCH} query clause together with a \texttt{DELETE} clause. For example, to clean and remove the Person and Book nodes and relationships between Person and Book nodes created in the previous exercise, use the following Cypher statements:
 
@@ -406,9 +406,9 @@ Applying these heuristics should only be considered as an initial translation. A
 
 \paragraph*{Pagila Database Example} As an example, each table of the Pagila relational database from the previous chapter was exported from PostgreSQL to a CSV file. These CSV files can be imported into Neo4j with the following set of Cypher expressions. Note that not all data is imported in this example, and a more compact representation of the statements is possible. 
 
-\begin{tcolorbox}[colback=alert]
+\begin{infobox}
 The Pagila database is already imported into the Neo4j Community Edition in the course virtual machine.
-\end{tcolorbox}
+\end{infobox}
 
 \FloatBarrier
 
@@ -569,9 +569,9 @@ CALL db.schema.visualization()
 \label{fig:pagilagraph}
 \end{figure}
 
-\begin{tcolorbox}[colback=alert]
+\begin{alertbox}
 When importing from files, or exporting to files, Neo4j Community Edition uses the the \texttt{/var/lib/neo4j/import/} directory on the server. Files to import must be placed in that directory, and exported files will be created there. Additionally, any scripts to be run by calling \texttt{CALL apoc.cypher.runFile()} must be located in that directory.
-\end{tcolorbox}
+\end{alertbox}
 
 \section{Graph Queries with Cypher}
 
@@ -614,7 +614,7 @@ RETURN c.firstName, c.lastName, r.rentalDate LIMIT 5
 This example introduces matching of paths that contain multiple nodes and multiple relationships. In the above query, the types or labels or nodes and relationships are specified, but because no properties of the intermediate nodes or relationships are to be returned, they do not need to be bound to query variables.
 
 
-\begin{tcolorbox}[colback=code]
+\begin{exercisebox}
 \subsubsection*{Hands-On Exercise}
 
 Write a Cypher query to find all customers that have rented a film with rating ''PG'':
@@ -625,7 +625,7 @@ Write a Cypher query to find all customers that have rented a film with rating '
   \item Design a pattern that starts with a customer node and ends with a film node
   \item Define an appropriate \texttt{WHERE} clause of property restrictions in node patterns
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{screen14.png}
@@ -765,7 +765,7 @@ RETURN a1, m, coActors, m2, a2
 
 The example is similar to the one above with its use of multiple path patterns in the \texttt{MATCH} clause. The query finds common co-actors of two named actors. Note the traversal directions of the relationships.
 
-\begin{tcolorbox}[colback=code]
+\begin{exercisebox}
 \subsubsection*{Hands-On Exercises}
 
 The following hands-on exercises are designed to familiarize you with the Cypher language and use the Pagila database.
@@ -778,7 +778,7 @@ The following hands-on exercises are designed to familiarize you with the Cypher
 	\item Calculate the rental counts for each country of customer. Are there countries with no rentals?
 	\item Create a graph that represents a product hierarchy.
 \end{enumerate}
-\end{tcolorbox}
+\end{exercisebox}
 
 \section{Review Questions}
 
