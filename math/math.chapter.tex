@@ -356,7 +356,7 @@ For example, the variance of a random variable $R$ representing the roll of a di
 The \emph{standard deviation}\index{Standard deviation} of a random variable is defined as the square root of the variance:
 
 \begin{align*}
-\operatorname*{std}(X) = \sigma = \sqrt{\mathbb{V}(X)}
+\operatorname*{std}(X) = \sigma(X) = \sqrt{\mathbb{V}(X)}
 \end{align*}
 
 The variance of a random variable $X$ multiplied by a scaling factor $a$ and shifted by an amount $b$ is:
@@ -463,27 +463,27 @@ $(h(g(x)))' = h'(g(x)) g'(x)$ & Chain rule for composite functions \\ \hline
 \label{tab:math2}
 \end{table}
 
-When dealing with functions of multiple variables, e.g. $f(x_0, x_1, \ldots , x_n)$ one can take the derivative with respect to each variable, treating the other variables as constants. Such derivatives are called \emph{partial derivatives}\index{Partial derivative} and are written as $\frac{\partial f}{\partial x}$. 
+When dealing with functions of multiple variables, e.g. $f(x_1, x_2, \ldots , x_n)$ one can take the derivative with respect to each variable, treating the other variables as constants. Such derivatives are called \emph{partial derivatives}\index{Partial derivative} and are written as $\frac{\partial f}{\partial x}$. 
 
-For example, consider the function $f(x_0, x_1) = x_0^2 + x_0 x_1^2$. Then, the two partial derivatives are:
+For example, consider the function $f(x_1, x_2) = x_1^2 + x_1 x_2^2$. Then, the two partial derivatives are:
 
 \begin{align*}
-\frac{\partial f}{\partial x_0} &= 2 x_0 + x_1^2 \qquad &\text{(treating $x_1$ as a constant)} \\
-\frac{\partial f}{\partial x_1} &= 2 x_0 x_1 \qquad &\text{(treating $x_0$ as a constant)}
+\frac{\partial f}{\partial x_1} &= 2 x_1 + x_2^2 \qquad &\text{(treating $x_2$ as a constant)} \\
+\frac{\partial f}{\partial x_2} &= 2 x_1 x_2 \qquad &\text{(treating $x_1$ as a constant)}
 \end{align*}
 
 These partial derivatives can be written in vector form. This vector is called the \emph{gradient}\index{Gradient} of the function $f$, written using the ''nabla'' symbol $\nabla$:
 
 \begin{align}
 \nabla f = \begin{pmatrix}
-2 x_0 + x_1^2 \\
-2 x_0 x_1 \end{pmatrix} \label{eq:math:gradient}
+2 x_1 + x_2^2 \\
+2 x_1 x_2 \end{pmatrix} \label{eq:math:gradient}
 \end{align}
 
-Evaluating the gradient at some point, for example at $x_0=1, x_1=2$ provides the slope in the $x_0$ and $x_1$ directions at that point:
+Evaluating the gradient at some point, for example at $x_1=1, x_2=2$ provides the slope in the $x_1$ and $x_2$ directions at that point:
 
 \begin{align*}
-\nabla f \rvert_{x_0=1, x_1=2} = \begin{pmatrix}
+\nabla f \rvert_{x_1=1, x_2=2} = \begin{pmatrix}
 2 \cdot 1 + 2^2 \\
 2 \cdot 1 \cdot 2 \end{pmatrix} = \begin{pmatrix} 6 \\ 4 \end{pmatrix}
 \end{align*}
@@ -504,7 +504,11 @@ Finally, the \emph{Hessian}\index{Hessian} $\mathbf{H}$ of a function $f$ is the
 
 \begin{align*}
 \mathbf{H}(f) = \begin{pmatrix}
-2 & 2x_1 \\
-2 x_1 & 2 x_0 \end{pmatrix}
+\frac{\partial^2 f}{\partial x_1^2} & \frac{\partial^2 f}{\partial x_1 \partial x_2} \\
+\frac{\partial^2 f}{\partial x_2 \partial x_1} & \frac{\partial^2 f}{\partial x_2^2}
+\end{pmatrix} = 
+\begin{pmatrix}
+2 & 2x_2 \\
+2 x_2 & 2 x_1 \end{pmatrix}
 \end{align*}
 
