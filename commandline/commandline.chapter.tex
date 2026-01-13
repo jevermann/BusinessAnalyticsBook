@@ -1,0 +1,258 @@
+
+\section{The Unix/Linux Command Line (also for Mac and Windows users)}
+
+This tutorial provides a very brief introduction to the Ubuntu command line (''terminal''). The command line, also called a ''shell'' is by default the ''bash'' shell (Bourne-again shell; a pun on the earlier Bourne shell)\index{Bash|see{Bourne-again shell}}\index{Bourne-again shell}. 
+
+\begin{infobox} The default shell in the MacOS terminal is the ''zsh'' and behaves slightly differently from the bash shell. You can work with a ''bash'' shell by typing the \texttt{bash} command in a MacOS terminal.
+\end{infobox}
+
+\begin{infobox} When using WSL (Windows Subsystem for Linux) and the default Ubuntu installation, the default shell in the WSL terminal for Ubuntu is also the ''bash'' shell. 
+\end{infobox}
+
+
+\begin{resourcebox}
+The following are further beginner-level tutorials on using the command line on Ubuntu (or any other Linux distribution):
+\begin{itemize}
+\item \href{https://ubuntu.com/tutorials/command-line-for-beginners}{Ubuntu command line for beginners}
+\item \href{https://www.digitalocean.com/community/tutorials/a-linux-command-line-primer}{Linux command line primer}
+\item \href{https://www.digitalocean.com/community/tutorial-series/getting-started-with-linux}{Getting started with Linux}
+\end{itemize}
+\end{resourcebox}
+
+Bash will show you a \emph{command prompt} that indicates your username, the name of the computer, and your current working directory followed by the dollar sign ''\$''. In the following example, the username is ''busi4720'', the name of the computer is also ''busi4720vm'' and your current working directory is the home directory, indicated by ''$\sim$'':
+
+You can \underline{p}rint the \underline{w}orking \underline{d}irectory by typing the \texttt{pwd} command and then pressing the \fcolorbox{black}{lightgray}{Return} or \fcolorbox{black}{lightgray}{Enter} key:
+\begin{bashcode}
+busi4720@busi4720vm:~$ pwd
+/home/busi4720
+\end{bashcode}
+
+You can \underline{m}a\underline{k}e a folder/\underline{dir}ectory with the \texttt{mkdir} command (in your current working directory):
+\begin{bashcode}
+busi4720@busi4720vm:~$ mkdir someFolder
+\end{bashcode}
+
+You can \underline{c}hange the working \underline{d}irectory to the folder you have just created with the \texttt{cd} command. Note how the Bash command prompt indicates your new working directory. 
+
+
+\begin{bashcode}
+busi4720@busi4720vm:~$ cd someFolder
+busi4720@busi4720vm:~/someFolder$ cd ..
+busi4720@busi4720vm:~$ cd ~
+\end{bashcode}
+
+\noindent The following special characters can be used when specifying folders/directories and paths:\\
+
+\begin{center}
+\begin{tabular}{l|l} \hline
+\texttt{$\sim$} & User home directory \\
+\texttt{.} & Current directory \\
+\texttt{..} & Upwards in the directory tree \\
+\texttt{/} & Root of directory tree \\ \hline
+\end{tabular} \\
+\end{center}
+
+\begin{infobox}
+Here are some tips that make working with the shell a lot easier:
+
+\begin{itemize}
+  \item Autocompletion of file names is available with the ''\fcolorbox{black}{lightgray}{Tab}'' key. When multiple file names exist that match what you have entered so far, you can enter further characters of a file name to disambiguate and press the \fcolorbox{black}{lightgray}{Tab} key again for further autocompletion. 
+  \item You can recall earlier commands with the ''\fcolorbox{black}{lightgray}{Up Arrow}'' key. By default, the shell stores the last 1000 commands.
+  \item You can search earlier commands with the ''\fcolorbox{black}{lightgray}{Ctrl-R}'' key. You are then prompted to search by typing in characters to find commands. The shell finds the most recent command that contains the  characters you entered. At any time you can press \fcolorbox{black}{lightgray}{Ctrl-R} again to find earlier matches to your command search. 
+  \item Because the usual keys \fcolorbox{black}{lightgray}{Ctrl-X}, \fcolorbox{black}{lightgray}{Ctrl-C}, \fcolorbox{black}{lightgray}{Ctrl-V} for cutting, copying, and pasting text have different functions in the shell, you can cut, copy, and paste with the \fcolorbox{black}{lightgray}{Ctrl-Shift-X}, \fcolorbox{black}{lightgray}{Ctrl-Shift-C}, and \fcolorbox{black}{lightgray}{Ctrl-Shift-V} keys.
+\end{itemize}
+\end{infobox}
+
+You can \underline{l}i\underline{s}t folder/directory contents using the \texttt{ls} command. The option \texttt{-l} for the command indicates that you would like to see long results. 
+
+\scriptsize
+\begin{bashcode}
+busi4720@busi4720vm:~$ ls -l ~/Applications
+total 8
+drwxrwxr-x 7 busi4720 busi4720 4096 Nov  8 12:05 arcadedb-23.10.1
+drwxr-xr-x 8 busi4720 busi4720 4096 Nov  7 11:45 pycharm-community-2
+\end{bashcode}
+\normalsize
+
+\noindent The results show the total size in kB (kilobytes), and a list of entries:
+\begin{itemize}
+  \item Type of entry (''d'' = directory)
+  \item Permissions for owner of the file (''rwx''), users in the same user group as the owner (''r-x'') and other users (''r-x''): \texttt{r} indicates read access, \texttt{w} indicates write access, \texttt{x} indicates permission to run the application or enter/view a directory (with \texttt{cd} or \texttt{ls}), and a \texttt{-} indicates the lack of the corresponding permission. 
+  \item Names of owner and groups (''busi4720'')
+  \item Size (in bytes)
+  \item Last modification date and time
+  \item File or directory name
+\end{itemize}
+
+Printing a string of text uses the \texttt{echo} command:
+\begin{bashcode}
+$ echo "To be or not to be"
+To be or not to be
+\end{bashcode}
+
+\noindent Redirect the output of the \texttt{echo} command to a file using the \emph{redirect} symbol ''\texttt{>}''. You can redirect the output of any command this way. Use \texttt{>>} to redirect and append, instead of overwriting a file.
+\small
+\begin{bashcode}
+$ echo "To be or not to be" > someFile.txt
+$ ls -l someFile.txt
+-rw-rw-r-- 1 busi4720 busi4720 19 Nov  8 14:50 someFile.txt
+\end{bashcode}
+\normalsize
+
+\noindent Print contents of a file (''con\underline{cat}enate'') using the \texttt{cat} command. You can concatenate multiple files by specifying them all (this is why the command is called ''concatenate''):
+\begin{bashcode}
+$ cat someFile.txt
+To be or not to be
+\end{bashcode}
+
+\noindent If you would like to see the contents of a file page by page or line by line, use the \texttt{less} command (a pun on ''less is more'' and the earlier ''more'' command that did the same). You will be shown the contents and can navigate up and down with the usual arrow keys.
+
+\begin{bashcode}
+$ less someFile.txt
+\end{bashcode}
+
+You can \underline{c}o\underline{p}y a file using the \texttt{cp} command:
+\begin{bashcode}
+$ cp someFile.txt someCopy.txt
+\end{bashcode}
+
+You can \underline{m}o\underline{v}e a file to a new location (folder/directory) using the \texttt{mv} command:
+\begin{bashcode}
+$ mv someCopy.txt ~/someFolder
+\end{bashcode}
+
+\noindent Renaming is moving. When you want to rename a file, move it to a new file name:
+\begin{bashcode}
+$ mv someFile.txt newName.txt
+\end{bashcode}
+
+You can \underline{r}e\underline{m}ove (delete) a file using the \texttt{rm} command:
+\begin{bashcode}
+$ rm someFolder/someFile.txt
+\end{bashcode}
+
+\noindent Remove a directory recursively (i.e. remove all its contents first):
+\begin{bashcode}
+$ rm -r ~/someFolder
+\end{bashcode}
+
+\begin{alertbox}Use the \texttt{rm} command very carefully! You could inadvertently delete all your files. The shell will delete files and folders immediately and irrevocably. There is no ''undoing'' this.\end{alertbox}
+
+\noindent View the command line \underline{history} with the \texttt{history} commands. Remember that you can redirect this output to a file if you wish or use a pipe to pipe it into the less command (see below).
+\begin{bashcode}
+$ history
+    1  echo "To be or not to be"
+    2  echo "To be or not to be" > someFile.txt
+    3  ls -l someFile.txt
+    4  less someFile.txt 
+    5  cat someFile.txt
+...
+\end{bashcode}
+
+\noindent Management of file permissions is done using the \texttt{chmod} command. You can gran and revoke read, write, and execute permissions for yourself, your group members, and other users. Remove write permission for yourself by using the \texttt{-w} option and specifying the filename:
+\begin{bashcode}
+$ chmod -w newName.txt
+\end{bashcode}
+
+\noindent Add write permissions using the \texttt{+w} option:
+\begin{bashcode}
+$ chmod +w newName.txt
+\end{bashcode}
+
+\noindent Add execute permissions using the \texttt{+x} option:
+\begin{bashcode}
+$ chmod +x newName.txt
+\end{bashcode}
+
+\noindent If you are stuck on how to use a command or wish to see all its options and capabilities, you can get the \underline{man}ual for a command using the \texttt{man} command:
+\begin{bashcode}
+$ man ls
+\end{bashcode}
+
+\noindent If you can't quite remember which command to use, you can search for commands using keywords with the \texttt{apropos} command:
+\begin{bashcode}
+busi4720@busi4720vm:~$ apropos python
+keyring (1)          - Python-Keyring command-line utility
+pdb3 (1)             - the Python debugger
+pdb3.10 (1)          - the Python debugger
+pip (1)              - A tool for installing and managing Python p...
+pip3 (1)             - A tool for installing and managing Python p...
+py3compile (1)       - byte compile Python 3 source files
+py3versions (1)      - print python3 version information
+pydoc3 (1)           - the Python documentation tool
+pydoc3.10 (1)        - the Python documentation tool
+pygettext3 (1)       - Python equivalent of xgettext(1)
+pygettext3.10 (1)    - Python equivalent of xgettext(1)
+python (1)           - an interpreted, interactive, object-oriente...
+python3.10-config (1) - output build options for python C/C++ exte...
+python3 (1)          - an interpreted, interactive, object-oriente...
+...
+\end{bashcode}
+
+\noindent You can see a list of all processes currently running using the \texttt{ps} command. The results show the process identifier (PID), the console from which you started the process, the computing time it has consumed, and the command that was used to start the process. Add the \texttt{a} and \texttt{x} option to see \emph{all} the processes running on your computer, not just the processes you have started.
+\begin{bashcode}
+$ ps ax
+    PID TTY          TIME CMD
+   3024 pts/0    00:00:00 bash
+   3151 pts/0    00:00:00 ps
+\end{bashcode}
+
+\noindent The \texttt{grep} command is useful to find something in a file or input stream. Use it as in the following example in a pipe:
+\begin{bashcode}
+$ cat newName.txt | grep be
+$ ls -l | grep .txt
+$ history | grep .txt
+\end{bashcode}
+
+\noindent \emph{Note:} The vertical bar is called a \emph{''pipe''}\index{Pipe}, it pipes the output of one command as input into the next one
+
+The following are a set of connected exercises to help you practice your command line skills. Do them in the order listed.
+
+\begin{exercisebox}
+
+\begin{enumerate}
+\item Navigation and Listing
+\begin{enumerate}[nosep]
+	\item Open the terminal and use the \texttt{pwd} command to print the current working directory.
+	\item Use \texttt{ls} to list the contents of the current directory.
+	\item Create a new directory named "Exercise1" using \texttt{mkdir}.
+	\item Navigate into the "Exercise1" directory using \texttt{cd}.
+\end{enumerate}
+\item File Manipulation
+\begin{enumerate}[nosep,resume*]
+	\item Create a new file named "file1.txt" inside the "Exercise1" directory using \texttt{touch}.
+	\item Use \texttt{cat} to display the contents of "file1.txt".
+	\item Append the text "Hello, Bash!" to "file1.txt" using \texttt{echo} and \texttt{>>}.
+	\item Display the updated contents of "file1.txt" using \texttt{cat}.
+\end{enumerate}
+\item Removing and Renaming
+\begin{enumerate}[nosep,resume*]
+	\item Remove "file1.txt" using the \texttt{rm} command.
+	\item Create a copy of the "Exercise1" directory named "Exercise1\_backup" using \texttt{cp -r}.
+	\item Remove the original "Exercise1" directory using \texttt{rm -r}.
+\end{enumerate}
+\item Directory Manipulation
+\begin{enumerate}[nosep,resume*]
+	\item Recreate the "Exercise1" directory.
+	\item Create three subdirectories inside "Exercise1" named "Subdir1", "Subdir2", and "Subdir3" using \texttt{mkdir}.
+	\item List the contents of "Exercise1" to verify the creation of subdirectories.
+\end{enumerate}
+\item Searching and Filtering
+\begin{enumerate}[nosep,resume*]
+	\item Create a file named "keywords.txt" inside "Exercise1" and add some random text.
+	\item Use \texttt{grep} to search for a specific word (e.g., "Bash") in "keywords.txt".
+	\item Create a new file named "filtered.txt" and use \texttt{grep} to filter lines containing the word you searched for in "keywords.txt".
+\end{enumerate}
+\item Process Management
+\begin{enumerate}[nosep,resume*]
+	\item Use \texttt{ps} to display information about the current processes running on your system.
+	\item Use \texttt{ps aux | grep bash} to filter and display information about Bash processes.
+\end{enumerate}
+\item Cleanup
+\begin{enumerate}[nosep,resume*]
+	\item Remove the entire "Exercise1" directory and its contents using \texttt{rm -r}.
+	\item Confirm that the "Exercise1" directory no longer exists by listing the contents of the current directory.
+\end{enumerate}
+\end{enumerate}
+\end{exercisebox}
+

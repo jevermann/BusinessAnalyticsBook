@@ -103,13 +103,17 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 \end{center}
 \end{wrapfigure}
 
-The PostgreSQL RDBMS (relational database management system) is installed in the course virtual machine or can be downloaded from the PostgreSQL website\footnote{\url{https://www.postgresql.org/download/}}. A DBMS is typically a background computer application without a user interface. It is typically used by other computer applications, such as accounting software to store financial information, a logistics management software to store information about shipments, a customer relationship management system to store information about customers and marketing campaigns, etc. 
+%The PostgreSQL RDBMS (relational database management system) is installed in the course virtual machine or can be downloaded from the PostgreSQL website\footnote{\url{https://www.postgresql.org/download/}}. 
+A DBMS is typically a background computer application without a user interface. It is typically used by other computer applications, such as accounting software to store financial information, a logistics management software to store information about shipments, a customer relationship management system to store information about customers and marketing campaigns, etc. 
 
-End users can interact with a DBMS using administration software, such as the basic ''psql'' command line software or a graphical application like ''pgAdmin'' or ''DBeaver''. The desktop version of pgAdmin and DBeaver are installed in the course virtual machine, or can be downloaded from their websites\footnote{\url{https://www.pgadmin.org/download/}, \url{https://dbeaver.io/download/}}. They provide easy-to-use tools for creating tables and querying data, but this section focuses on using the SQL language instead.
+End users can interact with a DBMS using administration software, such as the basic ''psql'' command line software or a graphical application like ''pgAdmin''.
+% or ''DBeaver''. The desktop version of pgAdmin and DBeaver are installed in the course virtual machine, or can be downloaded from their websites\footnote{\url{https://www.pgadmin.org/download/}, \url{https://dbeaver.io/download/}}. 
+They provide easy-to-use tools for creating tables and querying data, but this section focuses on using the SQL language instead.
 
 A DBMS runs on a single computer (''server'') or, if the amount of data is very large, distributes the data across a cluster of multiple computers. Different DBMS differ in their performance, the ease with which data can be distributed, and the scalability to very large clusters. However, from the users perspective, these technical considerations are largely invisible. \emph{When connecting to a DBMS that runs on your own computer, use the computer name ''localhost''}.
 
-A DBMS can manage multiple databases\index{Database management system}\index{DBMS|see{Database management system}}. \emph{A database named ''busi4720'' has already been created in your course virtual machine, using the CREATE DATABASE command}. pgAdmin and DBeaver also have the ability to show the SQL command that creates every element in a DBMS, including databases, tables, and constraints. This is useful to understand exactly what elements are contained in a database or in a table and any constraints imposed upon them.
+A DBMS can manage multiple databases\index{Database management system}\index{DBMS|see{Database management system}}. %\emph{A database named ''busi4720'' has already been created in your course virtual machine, using the CREATE DATABASE command}. 
+pgAdmin has the ability to show the SQL command that creates every element in a DBMS, including databases, tables, and constraints. This is useful to understand exactly what elements are contained in a database or in a table and any constraints imposed upon them.
 
 Every database can have multiple schema\index{Schema!in relational database}. A schema is a collection of tables with their columns and constraints, as well as related elements such as functions, procedures, triggers, views and others. In PostgreSQL, every database contains the schema ''public''. This is the default schema and is used when no other schema is specified. 
 
@@ -120,29 +124,31 @@ Every database can have multiple schema\index{Schema!in relational database}. A 
 \label{fig:querytool}
 \end{figure}
 
-When the pgAdmin application is initially launched, it will connect to the DBMS that is running on the local machine (''localhost'') with the username ''busi4720'' (its password is ''busi4720'') and will show an ''Object Explorer'' in the left part of the application. This allows navigation and exploration of the contents of this DBMS, as shown in Figure~\ref{fig:querytool}.
+When the pgAdmin application is initially launched, it will connect to the DBMS that is running on the local machine (''localhost'') 
+% with the username ''busi4720'' (its password is ''busi4720'') 
+and will show an ''Object Explorer'' in the left part of the application. This allows navigation and exploration of the contents of this DBMS, as shown in Figure~\ref{fig:querytool}.
 
-\begin{figure}
-\centering
-\includegraphics[width=.9\textwidth]{screen4.png}
-\caption{DBeaver database tool}
-\label{fig:dbeaver}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=.9\textwidth]{screen4.png}
+%\caption{DBeaver database tool}
+%\label{fig:dbeaver}
+%\end{figure}
 
-Similarly, when the DBeaver application is first started, it will also conncect to the DBMS that is running on the local machine and will show a ''Database Navigator'' in the left part of the application window (Figure\ref{fig:dbeaver}. Navigate the contents of the DBMS to the ''busi4720'' database and the ''public'' schema.
+%Similarly, when the DBeaver application is first started, it will also conncect to the DBMS that is running on the local machine and will show a ''Database Navigator'' in the left part of the application window (Figure\ref{fig:dbeaver}. Navigate the contents of the DBMS to the ''busi4720'' database and the ''public'' schema.
 
-\begin{figure}
-\centering
-\includegraphics[width=.9\textwidth]{screen3.png}
-\caption{psql command line tool}
-\label{fig:psql}
-\end{figure}
+%\begin{figure}
+%\centering
+%\includegraphics[width=.9\textwidth]{screen3.png}
+%\caption{psql command line tool}
+%\label{fig:psql}
+%\end{figure}
 
-The basic ''psql'' command line tool can be started by by typing \texttt{psql} into a terminal window. The course virtual machine is configured to provide automatic access to the ''busi4720'' database. The database connection can be confirmed by executing the \texttt{\textbackslash conninfo} command in psql. Use psql options to specify other connections using the template \texttt{psql -d dbname -h hostname -u username}. Figure~\ref{fig:psql} shows the psql command line tool in a terminal window.
+%The basic ''psql'' command line tool can be started by by typing \texttt{psql} into a terminal window. The course virtual machine is configured to provide automatic access to the ''busi4720'' database. The database connection can be confirmed by executing the \texttt{\textbackslash conninfo} command in psql. Use psql options to specify other connections using the template \texttt{psql -d dbname -h hostname -u username}. Figure~\ref{fig:psql} shows the psql command line tool in a terminal window.
 
-\begin{alertbox}
-\noindent \emph{The examples and exercises in the remainder of this chapter refer to the ''busi4720'' database.}
-\end{alertbox}
+%\begin{alertbox}
+%\noindent \emph{The examples and exercises in the remainder of this chapter refer to the ''busi4720'' database.}
+%\end{alertbox}
 
 \section{Data Definition in SQL}
 
@@ -522,7 +528,6 @@ Standard SQL: \\
 
 \small
 \begin{tabular}{l|l|l|l|l} \hline
-\
 MIN() & MAX() & COUNT() & SUM() & AVG() \\ \hline
 \end{tabular}
 
@@ -557,7 +562,7 @@ In many software tools, including in pgAdmin, the database developer can use rel
 
 \begin{exercisebox}In the pgAdmin Object Explorer, right-click on the ''busi4720'' database, then select ''ERD for Database'' to create a relational diagram. \\
 
-In the DBeaver Database Navigator, select the ''busi4720'' database, then right-click on its ''public'' schema and select ''View Diagram'' to create the diagram.
+% In the DBeaver Database Navigator, select the ''busi4720'' database, then right-click on its ''public'' schema and select ''View Diagram'' to create the diagram.
 \end{exercisebox}
 
 \noindent The resulting diagram will look similar to the one in Figure~\ref{fig:pagila}. (If you did not clean up the tables you created in the above SQL exercises, these will be present in the diagram as well).

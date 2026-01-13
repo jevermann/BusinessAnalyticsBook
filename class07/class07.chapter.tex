@@ -608,14 +608,12 @@ data$Fuel <- as.factor(data$Fuel)
 \begin{Rcode}
 library(ggplot2)
 library(ggpattern)
-library(ggstream)
 library(ggsci)
 library(scales)
-library(ggrepel)
 library(ggradar)
 \end{Rcode}
 
-The core \texttt{ggplot()} function can be used in a dplyr pipeline and accepts the processed data tibble. The core argument to \texttt{ggplot()} is the ''\emph{aesthetic}'' that maps plot elements to data variables. The actual plots themselves are then added through the use of various ''\texttt{geoms}''. Such geoms respresent commonly used plot types. The geoms ''inherit'' the aesthetic specified in \texttt{ggplot()} and can add to it by including more variables mapped to different plot elements. More than one geom can be added to a plot, allowing the analyst to overlay plot types or combine plots for multiple data series or data sets. The final graph can be saved in a variety of different image formats. The following examples are intentionally kept simple and are not intended to show the full capabilities of the ggplot package. Many of the functions used below have a multitude of options to customize the output and a wide variety of ways, but this section focuses on the default visualizations they produce.
+The core \texttt{ggplot()} function can be used in a dplyr pipeline and receives the processed data tibble. The core argument to \texttt{ggplot()} is the ''\emph{aesthetic}'' that maps plot elements to data variables. The actual plots themselves are then added through the use of various ''\texttt{geoms}''. Such geoms respresent commonly used plot types. The geoms ''inherit'' the aesthetic specified in \texttt{ggplot()} and can add to it by including more variables mapped to different plot elements. More than one geom can be added to a plot, allowing the analyst to overlay plot types or combine plots for multiple data series or data sets. The final graph can be saved in a variety of different image formats. The following examples are intentionally kept simple and are not intended to show the full capabilities of the ggplot package. Many of the functions used below have a multitude of options to customize the output and a wide variety of ways, but this section focuses on the default visualizations they produce.
 
 The first example below introduces the histogram geom. Histograms\index{Plot!Histogram} show the count of values in a certain range. The \texttt{ggplot()} function's aesthetic maps the ''Range'' variable of the data tibble to the x axis of the plot. The argument to the \texttt{geom\_histogram()} function indcates that 50 bins should be formed, i.e. the data is divided in 50 separate regions for counting and plotting.
 

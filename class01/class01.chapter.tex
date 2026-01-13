@@ -15,7 +15,6 @@ After reading this chapter, you should be able to:
    \item Describe the difference between supervised and unsupervised machine learning.
    \item Describe the different aims of statistics and analytics despite the fact that they often use the same mathematical models.
    \item List some popular software tools for business analytics, and be able to describe why they are widely used and what they are used for.
-   \item Use a Linux system using the Terminal window and command line for basic file and folder management.
 \end{itemize}
 
 \section{Introduction}
@@ -94,29 +93,21 @@ Free and Open-Source Software (FOSS) \emph{licenses} are legal agreements that g
 
 While a lot of free and open-source software used to be developed by individuals, increasingly FOSS is developed by companies whose business model rests either on providing paid support for such tools, or on providing paid hosted versions of the software, or on providing non-free extensions for their FOSS software. In other cases, companies provide software developer time to important projects that benefit themselves.
 
+
 \begin{table}
 \small
 \centering
 
 \begin{tabular}{l|l|l} \hline
 R & 4.1.2 & \url{www.r-project.org}\\ 
-dplyr & 1.1.3 & \url{www.tidyverse.org} \\
-tidyr & 1.3.0 & \url{www.tidyverse.org} \\
-ggplot2 & 3.4.4 & \url{www.tidyverse.org} \\
 Python & 3.8 & \url{www.python.org} \\
-numpy & 1.24.4 & \url{numpy.org} \\
-pandas & 2.0.3 & \url{pandas.pydata.org} \\
-plotly & 5.18.0 & \url{plotly.com} \\ 
-tensorflow & 2.13.1 & \url{www.tensorflow.org} \\
 Postgres & 16.0-1 & \url{www.postgresql.org} \\
-pgAdmin4 & 7.8 & \url{www.pgadmin.org} \\
-PyCharm & 2023.2.3 & \url{www.jetbrains.com/pycharm/} \\
-Jupyterlab & 4.0.7-1 & \url{//github.com/jupyterlab/jupyterlab-desktop} \\
 Neo4J & 5.14.0 & \url{www.neo4j.com} \\ \hline
 \end{tabular}
-\caption[Software used in this book]{Software used in this course}
+\caption[Software used in this book]{Software versions at the time of preparing this book}
 \label{tab:software}
 \end{table}
+
 
 \subsection*{The R System}
 
@@ -135,11 +126,39 @@ The open-source nature of R played a pivotal role in its success. As more people
 
 R continues to thrive as a dynamic and evolving tool in the world of data science. Its rich ecosystem of packages and active community ensure that it remains at the forefront of statistical computing and analysis. 
 
-One of the key hubs of the R community is the Comprehensive R Archive Network (CRAN), where thousands of R packages are hosted. These packages cover a vast array of topics, from basic statistical functions to cutting-edge machine learning algorithms. The "open-source" ethos is strong here, with contributors from around the globe actively developing and maintaining packages.
+One of the key hubs of the R community is the Comprehensive R Archive Network (CRAN), where thousands of R packages are hosted. These packages cover a vast array of topics, from basic statistical functions to cutting-edge machine learning algorithms. The "open-source" ethos is strong here, with contributors from around the globe actively developing and maintaining packages. Table~\ref{tab:Rsoftware} is a list of the major R packages used in this book. Brief descriptions and extensive user manuals for each are found on their respective web pages.
 
 Stack Overflow\footnote{\url{https://stackoverflow.com/collectives/r-language}} and other online forums serve as virtual interchanges of ideas where R users exchange knowledge and troubleshoot problems.
 
-The tidyverse\footnote{\url{https://www.tidyverse.org/}} is a comprehensive collection of R packages that share a common philosophy and syntax, designed to streamline and enhance the data analysis workflow. Developed by Hadley Wickham and his collaborators, the tidyverse promotes a principled approach to data manipulation, visualization, and exploration. Key components are:
+The Tidyverse\footnote{\url{https://www.tidyverse.org/}} is a comprehensive collection of R packages that share a common philosophy and syntax, designed to streamline and enhance the data analysis workflow. Developed by Hadley Wickham and his collaborators, the tidyverse promotes a principled approach to data manipulation, visualization, and exploration. Key components of the Tidyverse are:
+
+\begin{table}
+\small
+\centering
+
+\begin{tabular}{l|l|l} \hline
+ggplot2 & 3.4.4 & \url{www.tidyverse.org} \\
+scales & 1.3.0 & \url{scales.r-lib.org/} \\
+dplyr & 1.1.3 & \url{www.tidyverse.org} \\
+tidyr & 1.3.0 & \url{www.tidyverse.org} \\
+readr & 2.1.4 & \url{www.tidyverse.org} \\
+lubridate & 1.9.3 & \url{www.tidyverse.org} \\
+ggradar & 0.2 & \url{github.com/ricardo-bion/ggradar} \\
+ggpattern & 1.0.1 & \url{cran.r-project.org/package=ggpattern} \\
+ggsci & 3.0.0 & \url{nanx.me/ggsci/} \\
+sqldf & 0.4-11 & \url{cran.r-project.org/package=sqldf} \\
+ISLR2 & 1.3-2 & \url{cran.rstudio.com/package=ISLR2} \\
+glmnet & 4.1-8 & \url{glmnet.stanford.edu} \\
+class & 7.3-20 & \url{cran.r-project.org/package=class} \\
+ROCR & 1.0-11 & \url{cran.r-project.org/package=ROCR} \\
+e1071 & 1.7-14 & \url{cran.r-project.org/package=e1071} \\
+astsa & 2.1 & \url{cran.r-project.org/package=astsa} \\
+zoo & 1.8-12 & \url{cran.r-project.org/package=zoo} \\
+fGarch & 4032.91 & \url{cran.r-project.org/package=fGarch} \\ \hline
+\end{tabular}
+\caption[Software used in this book]{R package versions at the time of preparing this book}
+\label{tab:Rsoftware}
+\end{table}
 
 \paragraph*{ggplot2} A sophisticated and flexible plotting system, ggplot2 enables the creation of intricate and publication-ready visualizations. Its grammar of graphics approach provides a consistent framework for constructing a wide range of plots.
 
@@ -148,6 +167,8 @@ The tidyverse\footnote{\url{https://www.tidyverse.org/}} is a comprehensive coll
 \paragraph*{tidyr} Complementing dplyr, tidyr focuses on reshaping and tidying data. It provides functions like `gather()` and `spread()` to efficiently restructure datasets, ensuring they adhere to the principles of tidy data.
 
 \paragraph*{readr} A fast and user-friendly package for reading and parsing data from various file formats. readr's emphasis on speed and consistency makes it a reliable choice for importing datasets seamlessly.
+
+\paragraph*{lubridate} A flexible package for dealing with times and dates, and date and time artithmetic and computations. 
 
 The tidyverse's cohesive design and interoperability between packages make it a popular choice for data scientists and analysts seeking an efficient and coherent ecosystem for their R-based projects.
 
@@ -169,7 +190,39 @@ Python's adoption in data science has surged, with libraries such as NumPy, pand
 
 The language's cross-platform compatibility, supported by its interpreted nature, allows developers to write code once and run it on various operating systems without modification. This, combined with a vast and active community, ensures that Python remains at the forefront of technological advancements.
 
-In the Python ecosystem, packages play a crucial role in extending the language's functionality and addressing specific programming needs. Python packages are collections of modules, scripts, and other resources that facilitate the development of reusable and modular code. Pip (Package Installer for Python) is the default package installer for Python, allowing users to easily install, upgrade, and manage Python packages. It simplifies the process of fetching and installing packages from the Python Package Index (PyPI) and other repositories. PyPI is the official repository for Python packages, hosting a vast collection of open-source Python software.
+In the Python ecosystem, packages play a crucial role in extending the language's functionality and addressing specific programming needs. Python packages are collections of modules, scripts, and other resources that facilitate the development of reusable and modular code. Pip (''Package Installer for Python'') is the default package installer for Python, allowing users to easily install, upgrade, and manage Python packages. It simplifies the process of fetching and installing packages from the Python Package Index (''PyPI'') and other repositories. PyPI is the official repository for Python packages, hosting a vast collection of open-source Python software. 
+
+Table~\ref{tab:Pythonsoftware} provides a list of Python packages that are used in this book. The following paragraphs introduce a few major packages.
+
+\begin{table}
+\small
+\centering
+
+\begin{tabular}{l|l|l} \hline
+numpy & 1.26.2 & \url{numpy.org} \\
+pandas & 2.1.2 & \url{pandas.pydata.org} \\
+plotly & 5.18.0 & \url{plotly.com} \\ 
+kaleido & 0.2.1 & \url{github.com/plotly/Kaleido} \\
+pm4py & 2.7.8.4 & \url{processintelligence.solutions/pm4py} \\
+tensorflow & 2.14.0 & \url{www.tensorflow.org} \\
+tensorflowjs & 4.20.0 & \url{www.tensorflow.org/js} \\
+tensorflow\_datasets & 4.9.9 & \url{www.tensorflow.org/datasets} \\
+keras & 2.14.0 & \url{keras.io} \\
+scikit-learn & 1.3.2 & \url{scikit-learn.org} \\
+imblearn & 0.13.0 & \url{imbalanced-learn.org} \\
+statsmodels & 0.14.1 & \url{www.statsmodels.org} \\
+gymnasium & 0.29.1 & \url{gymnasium.farama.org} \\
+pygame & 2.5.2 & \url{www.pygame.org} \\
+shap & 0.45.0 & \url{github.com/shap/shap} \\
+lime & 0.2.0.1 & \url{github.com/marcotcr/lime} \\
+PyALE & 1.2.0 & \url{pypi.org/project/PyALE/} \\
+pyspark & 3.5.1 & \url{spark.apache.org} \\
+Werkzeug & 2.3.8 & \url{werkzeug.palletsprojects.com} \\
+Flask & 2.2.3 & \url{flask.palletsprojects.com} \\ \hline
+\end{tabular}
+\caption[Software used in this book]{Python package versions at the time of preparing this book}
+\label{tab:Pythonsoftware}
+\end{table}
 
 \paragraph*{NumPy} NumPy, short for Numerical Python, is a fundamental library in the Python ecosystem for numerical computing. Developed to facilitate array operations, mathematical functions, and linear algebra capabilities, NumPy provides a foundation for scientific and data-intensive applications.
 
@@ -193,29 +246,6 @@ TensorFlow is an open-source machine learning framework initially developed by t
 
 Keras is an open-source high-level neural networks API written in Python. Originally developed as an independent library, it has become an integral part of TensorFlow, serving as its official high-level programming interface. Keras simplifies the process of building, training, and deploying neural networks, making it accessible to developers of different skill levels. While Keras is designed to be user-friendly and concise, TensorFlow provides a more extensive and low-level framework for those requiring greater flexibility in model design and customization. 
 
-\paragraph*{PyCharm} 
-
-\begin{wrapfigure}{r}{1in}
-\begin{center}
-\includegraphics[height=.5in]{PyCharm_icon.png}
-\end{center}
-\end{wrapfigure}
-
-PyCharm by JetBrains is an integrated development environment (IDE) for Python developers. PyCharm Community is its free and open-source version. The IDE includes a code editor with syntax highlighting, code completion, and error checking, supporting developers in writing clean and efficient code. PyCharm's code navigation and refactoring tools facilitate easy exploration and improvement of code bases. The built-in debugger and seamless integration with testing frameworks like pytest enhance debugging and testing capabilities. PyCharm also supports version control systems, including Git and Mercurial, promoting collaborative development. PyCharm has a user-friendly interface, continuous updates, and active support.
-
-\paragraph*{Jupyter, JupyterLab, JupyterLab Desktop} 
-
-\begin{wrapfigure}{r}{1in}
-\begin{center}
-\includegraphics[height=.5in]{Jupyter_logo.svg.png}
-\end{center}
-\end{wrapfigure}
-
-Jupyter Notebooks are interactive computing environments that allow users to create and share documents containing live code, equations, visualizations, and narrative text. Originally developed for Python, Jupyter Notebooks support multiple programming languages through various kernels. The notebooks are structured as a series of cells, where each cell can contain code, markdown text, or rich media elements. Users can execute code cells interactively, see immediate outputs, and create a seamless blend of code and documentation.
-
-JupyterLab is an extensible web-based interactive computing environment developed by the Jupyter Project. It serves as the next-generation interface for Jupyter Notebooks, offering a more versatile and powerful environment. JupyterLab provides a flexible and modular interface where users can arrange documents, notebooks, terminals, and custom components in a tabbed layout. It supports multiple Jupyter Notebooks simultaneously and allows for drag-and-drop functionality to rearrange and organize the workspace. JupyterLab's extensibility comes from its plugin system, enabling users to add new features and customize the environment to suit their workflows.
-
-JupyterLab Desktop refers to the stand alone application version of JupyterLab that runs on a user's desktop rather than in a web browser. It offers the same rich features as the web-based version but provides a stand alone application that can be launched independently. JupyterLab Desktop enhances user accessibility and convenience, providing a familiar desktop application experience for working with Jupyter Notebooks and other interactive computing tasks.
 
 \subsection*{PostgreSQL}
 
@@ -243,298 +273,45 @@ Neo4j is a graph database management system, designed to handle and store data i
 
 One of the key strengths of Neo4j is its powerful query language, Cypher, which allows for expressive and efficient querying and manipulation of the graph data. Cypher is designed to be intuitive and readable, focusing on the clarity of expressing what data to retrieve or how to manipulate the data, rather than how to navigate the structure. This makes it easier to model complex relationships and query them efficiently. Neo4j is a popular choice for applications that require complex data relationships and network analysis, such as social networks, recommendation systems, and fraud detection.
 
-\section{Ubuntu Linux}
-
-\begin{wrapfigure}{l}{1.5in}
-\begin{center}
-\includegraphics[height=.5in]{Ubuntu-logo.png}
-\end{center}
-\end{wrapfigure}
-
-Ubuntu Linux, developed and distributed by Canonical Ltd., has emerged as a popular distribution within the Linux ecosystem since its first release in 2004. Through its commitment to ease-of-use and pragmatic approach to hardware compatibility, Ubuntu has played a significant role in popularizing Linux as a viable alternative to proprietary operating systems. The operating system's development is steered by a global community of contributors who collaborate on various aspects, from bug fixes to the introduction of new features.
-
-One distinguishing feature of Ubuntu is its emphasis on regular and predictable release cycles. This approach ensures that users have access to the latest software updates, security patches, and improvements. Ubuntu's Long Term Support (LTS) releases, occurring every two years, provide a support window of 5 years, offering stability and reliability for enterprises and users seeking a more predictable environment.
-
-The desktop edition of Ubuntu employs the GNOME desktop environment, providing an intuitive and user-friendly interface. Ubuntu's package management system, APT, simplifies the installation and removal of software packages. It uses the ''apt'' command line tool or the ''Synaptic'' graphical interface to APT. The extensive and well-maintained software repositories contribute to Ubuntu's versatility, allowing users to access a rich ecosystem of applications without the need for extensive manual configurations. Because Ubuntu is based on Debian, it can use Debian packages and packages in the Debian package format.
-
-\begin{center}
-\includegraphics[height=3in]{screenshot1.png}
-\end{center}
-
-As a multi-user operating system, Ubuntu provides support for file permissions for each user, user home directories, and user privileges. User home directories are typically located in \texttt{/home/<userName>/} and the \texttt{sudo} (''\underline{s}uper\underline{u}ser do'') command may be used to execute commands as super user (equivalent to the ''root'' user in Linux terminology).
- 
-\begin{wrapfigure}{r}{1.in}
-\begin{center}
-\includegraphics[height=.5in]{Virtualbox_logo.png}
-\end{center}
-\end{wrapfigure}
- 
-\section{Virtual Machines}
- 
-Virtualization with virtual machines\index{Virtual machine}\index{Virtualization|see{Virtual machine}} allows users to create an run virtual computers on their own computers, enabling the installation and operation of multiple operating systems simultaneously. The ''real'' system that is running the virtualization software application is called the host system or host operating system, while the virtual computer running inside the virtualization software is called the guest system, or guest operating system. In effect, the virtualization software pretends to be an actual computer to the guest system, and the guest system is a complete operating system, such as Windows or Linux.
-
-VirtualBox is a free and open-source virtualization software application developed by Oracle. VirtualBox is available for host systems with an Intel or AMD processor, running Windows, MacOS, or Linux operating systems. VirtualBox supports a wide range of guest operating systems, including various versions of Windows, Linux distributions, MacOS, BSD, and others. VirtualBox provides "Guest Additions," which are additional software packages that can be installed on the guest operating system. These additions enhance the performance and integration between the host and guest systems, providing features like seamless mouse integration, shared folders, and improved graphics support. 
-
-VMWare Fusion is a proprietary virtualization software owned by Broadcom. VMWare Fusion is available for Apple Mac computers running either Intel processors (before circa 2021) or the later Apple M1, M2 or M3 processors (after circa 2021). Similar to VirtualBox, it allows users to create and run virtual machines on their computer and provides a way to share folders from the host system to the guest system, and to copy and paste from host to guest and vice versa. \\
- 
-\begin{alertbox}
-Virtual machine files for use with VirtualBox and VMWare Fusion may be provided by your instructor that contains an Ubuntu system with all required software installed. If you wish to use this, you must install VirtualBox or VMWare Fusion on your computer, then download the corresponding virtual machine file and import it into the virtualization software application.  \\
-
-The username is \textbf{busi4720} and the password is \textbf{busi4720}. Whenever a password is required, you should enter \textbf{busi4720}.
-\end{alertbox}
-  
-\begin{alertbox}
-If you do NOT wish to use the VirtualBox Appliance, you should download and install all software to your computer from the sources indicated in Table~\ref{tab:software} in (at least) the versions indicated in the table.
-\end{alertbox}
- 
-\section{The Ubuntu Command Line (also for Mac Users)}
-
-This tutorial provides a very brief introduction to the Ubuntu command line (''terminal''). The command line, also called a ''shell'' is by default the ''bash'' shell (Bourne-again shell; a pun on the earlier Bourne shell)\index{Bash|see{Bourne-again shell}}\index{Bourne-again shell}. In Ubuntu, you can open the Terminal application using the key combination \fcolorbox{black}{lightgray}{Ctrl-Alt-T}, or by selecting the Terminal application icon from the side bar or the application list. You can also open a Terminal from the file browser. \\
-
-\noindent \emph{Note:} The default shell in the MacOS terminal is the ''zsh'' and behaves slightly differently from the bash shell. You can work with a ''bash'' shell by typing the \texttt{bash} command in a MacOS terminal.
-
-\begin{resourcebox}
-The following are further beginner-level tutorials on using the command line on Ubuntu (or any other Linux distribution):
-\begin{itemize}
-\item \href{https://ubuntu.com/tutorials/command-line-for-beginners}{Ubuntu command line for beginners}
-\item \href{https://www.digitalocean.com/community/tutorials/a-linux-command-line-primer}{Linux command line primer}
-\item \href{https://www.digitalocean.com/community/tutorial-series/getting-started-with-linux}{Getting started with Linux}
-\end{itemize}
-\end{resourcebox}
-
-
-Bash will show you a \emph{command prompt} that indicates your username (''busi4720''), the name of the computer (''busi4720vm'') and your current working directory (''$\sim$'') followed by the dollar sign ''\$''.
-
-\noindent\underline{P}rint the \underline{w}orking \underline{d}irectory by typing the \texttt{pwd} command and then pressing the \fcolorbox{black}{lightgray}{Return} or \fcolorbox{black}{lightgray}{Enter} key:
-\begin{bashcode}
-busi4720@busi4720vm:~$ pwd
-/home/busi4720
-\end{bashcode}
-
-\noindent\underline{M}a\underline{k}e a folder/\underline{dir}ectory with the \texttt{mkdir} command (in your current working directory):
-\begin{bashcode}
-busi4720@busi4720vm:~$ mkdir someFolder
-\end{bashcode}
-\noindent\underline{C}hange the working \underline{d}irectory to the folder you have just created with the \texttt{cd} command. Note how the Bash command prompt indicates your new working directory. 
-
-
-\begin{bashcode}
-busi4720@busi4720vm:~$ cd someFolder
-busi4720@busi4720vm:~/someFolder$ cd ..
-busi4720@busi4720vm:~$ cd ~
-\end{bashcode}
-
-\noindent The following special characters can be used when specifying folders/directories and paths:\\
-
-\begin{tabular}{l|l} \hline
-\texttt{$\sim$} & User home directory \\
-\texttt{.} & Current directory \\
-\texttt{..} & Upwards in the directory tree \\
-\texttt{/} & Root of directory tree \\ \hline
-\end{tabular} \\
-
-\noindent Here are some tips that make working with the shell a lot easier:
-
-\begin{itemize}
-  \item Autocompletion of file names is available with the ''\fcolorbox{black}{lightgray}{Tab}'' key. When multiple file names exist that match what you have entered so far, you can enter further characters of a file name to disambiguate and press the \fcolorbox{black}{lightgray}{Tab} key again for further autocompletion. 
-  \item You can recall earlier commands with the ''\fcolorbox{black}{lightgray}{Up Arrow}'' key. By default, the shell stores the last 1000 commands.
-  \item You can search earlier commands with the ''\fcolorbox{black}{lightgray}{Ctrl-R}'' key. You are then prompted to search by typing in characters to find commands. The shell finds the most recent command that contains the  characters you entered. At any time you can press \fcolorbox{black}{lightgray}{Ctrl-R} again to find earlier matches to your command search. 
-  \item Because the usual keys \fcolorbox{black}{lightgray}{Ctrl-X}, \fcolorbox{black}{lightgray}{Ctrl-C}, \fcolorbox{black}{lightgray}{Ctrl-V} for cutting, copying, and pasting text have different functions in the shell, you can cut, copy, and paste with the \fcolorbox{black}{lightgray}{Ctrl-Shift-X}, \fcolorbox{black}{lightgray}{Ctrl-Shift-C}, and \fcolorbox{black}{lightgray}{Ctrl-Shift-V} keys.
-\end{itemize}
-
-\noindent\underline{L}i\underline{s}t folder/directory contents using the \texttt{ls} command. The option \texttt{-l} for the command indicates that you would like to see long results. 
-
-\scriptsize
-\begin{bashcode}
-busi4720@busi4720vm:~$ ls -l ~/Applications
-total 8
-drwxrwxr-x 7 busi4720 busi4720 4096 Nov  8 12:05 arcadedb-23.10.1
-drwxr-xr-x 8 busi4720 busi4720 4096 Nov  7 11:45 pycharm-community-2
-\end{bashcode}
-\normalsize
-
-\noindent The results show the total size in kB, and a list of entries:
-\begin{itemize}
-  \item Type of entry (''d'' = directory)
-  \item Permissions for owner of the file (''rwx''), users in the same user group as the owner (''r-x'') and other users (''r-x''): \texttt{r} indicates read access, \texttt{w} indicates write access, \texttt{x} indicates permission to run the application or enter/view a directory (with \texttt{cd} or \texttt{ls}), and a \texttt{-} indicates the lack of the corresponding permission. 
-  \item Names of owner and groups (''busi4720'')
-  \item Size (in bytes)
-  \item Last modification date and time
-  \item File or directory name
-\end{itemize}
-
-\noindent Print a string of text using the \texttt{echo} command:
-\begin{bashcode}
-$ echo "To be or not to be"
-To be or not to be
-\end{bashcode}
-
-\noindent Redirect the output of the \texttt{echo} command to a file using the \emph{redirect} symbol ''\texttt{>}''. You can redirect the output of any command this way. Use \texttt{>>} to redirect and append, instead of overwriting a file.
-\small
-\begin{bashcode}
-$ echo "To be or not to be" > someFile.txt
-$ ls -l someFile.txt
--rw-rw-r-- 1 busi4720 busi4720 19 Nov  8 14:50 someFile.txt
-\end{bashcode}
-\normalsize
-
-\noindent Print contents of a file (''con\underline{cat}enate'') using the \texttt{cat} command. You can concatenate multiple files by specifying them all (this is why the command is called ''concatenate''):
-\begin{bashcode}
-$ cat someFile.txt
-To be or not to be
-\end{bashcode}
-
-\noindent If you would like to see the contents of a file page by page or line by line, use the \texttt{less} command (a pun on ''less is more'' and the earlier ''more'' command that did the same). You will be shown the contents and can navigate up and down with the usual arrow keys.
-
-\begin{bashcode}
-$ less someFile.txt
-\end{bashcode}
-
-\noindent \underline{C}o\underline{p}y a file using the \texttt{cp} command:
-\begin{bashcode}
-$ cp someFile.txt someCopy.txt
-\end{bashcode}
-
-\noindent \underline{M}o\underline{v}e a file to a new location (folder/directory) using the \texttt{mv} command:
-\begin{bashcode}
-$ mv someCopy.txt ~/someFolder
-\end{bashcode}
-
-\noindent Renaming is moving. When you want to rename a file, move it to a new file name:
-\begin{bashcode}
-$ mv someFile.txt newName.txt
-\end{bashcode}
-
-\noindent \underline{R}e\underline{m}ove (delete) a file using the \texttt{rm} command:
-\begin{bashcode}
-$ rm someFolder/someFile.txt
-\end{bashcode}
-
-\noindent Remove a directory recursively (i.e. remove all its contents first):
-\begin{bashcode}
-$ rm -r ~/someFolder
-\end{bashcode}
-
-\begin{alertbox}Use the \texttt{rm} command very carefully! You could inadvertently delete all your files. The shell will delete files and folders immediately and irrevocably. There is no ''undoing'' this.\end{alertbox}
-
-\noindent View the command line \underline{history} with the \texttt{history} commands. Remember that you can redirect this output to a file if you wish or use a pipe to pipe it into the less command (see below).
-\begin{bashcode}
-$ history
-    1  echo "To be or not to be"
-    2  echo "To be or not to be" > someFile.txt
-    3  ls -l someFile.txt
-    4  less someFile.txt 
-    5  cat someFile.txt
-...
-\end{bashcode}
-
-\noindent Management of file permissions is done using the \texttt{chmod} command. You can gran and revoke read, write, and execute permissions for yourself, your group members, and other users. Remove write permission for yourself by using the \texttt{-w} option and specifying the filename:
-\begin{bashcode}
-$ chmod -w newName.txt
-\end{bashcode}
-
-\noindent Add write permissions using the \texttt{+w} option:
-\begin{bashcode}
-$ chmod +w newName.txt
-\end{bashcode}
-
-\noindent Add execute permissions using the \texttt{+x} option:
-\begin{bashcode}
-$ chmod +x newName.txt
-\end{bashcode}
-
-\noindent If you are stuck on how to use a command or wish to see all its options and capabilities, you can get the \underline{man}ual for a command using the \texttt{man} command:
-\begin{bashcode}
-$ man ls
-\end{bashcode}
-
-\noindent If you can't quite remember which command to use, you can search for commands using keywords with the \texttt{apropos} command:
-\begin{bashcode}
-busi4720@busi4720vm:~$ apropos python
-keyring (1)          - Python-Keyring command-line utility
-pdb3 (1)             - the Python debugger
-pdb3.10 (1)          - the Python debugger
-pip (1)              - A tool for installing and managing Python p...
-pip3 (1)             - A tool for installing and managing Python p...
-py3compile (1)       - byte compile Python 3 source files
-py3versions (1)      - print python3 version information
-pydoc3 (1)           - the Python documentation tool
-pydoc3.10 (1)        - the Python documentation tool
-pygettext3 (1)       - Python equivalent of xgettext(1)
-pygettext3.10 (1)    - Python equivalent of xgettext(1)
-python (1)           - an interpreted, interactive, object-oriente...
-python3.10-config (1) - output build options for python C/C++ exte...
-python3 (1)          - an interpreted, interactive, object-oriente...
-...
-\end{bashcode}
-
-\noindent You can see a list of all processes currently running using the \texttt{ps} command. The results show the process identifier (PID), the console from which you started the process, the computing time it has consumed, and the command that was used to start the process. Add the \texttt{a} and \texttt{x} option to see \emph{all} the processes running on your computer, not just the processes you have started.
-\begin{bashcode}
-$ ps ax
-    PID TTY          TIME CMD
-   3024 pts/0    00:00:00 bash
-   3151 pts/0    00:00:00 ps
-\end{bashcode}
-
-\noindent The \texttt{grep} command is useful to find something in a file or input stream. Use it as in the following example in a pipe:
-\begin{bashcode}
-$ cat newName.txt | grep be
-$ ls -l | grep .txt
-$ history | grep .txt
-\end{bashcode}
-
-\noindent \emph{Note:} The vertical bar is called a \emph{''pipe''}\index{Pipe}, it pipes the output of one command as input into the next one
-
-The following are a set of connected exercises to help you practice your command line skills. Do them in the order listed.
-
 \begin{exercisebox}
 
-\begin{enumerate}
-\item Navigation and Listing
-\begin{enumerate}[nosep]
-	\item Open the terminal and use the \texttt{pwd} command to print the current working directory.
-	\item Use \texttt{ls} to list the contents of the current directory.
-	\item Create a new directory named "Exercise1" using \texttt{mkdir}.
-	\item Navigate into the "Exercise1" directory using \texttt{cd}.
-\end{enumerate}
-\item File Manipulation
-\begin{enumerate}[nosep,resume*]
-	\item Create a new file named "file1.txt" inside the "Exercise1" directory using \texttt{touch}.
-	\item Use \texttt{cat} to display the contents of "file1.txt".
-	\item Append the text "Hello, Bash!" to "file1.txt" using \texttt{echo} and \texttt{>>}.
-	\item Display the updated contents of "file1.txt" using \texttt{cat}.
-\end{enumerate}
-\item Removing and Renaming
-\begin{enumerate}[nosep,resume*]
-	\item Remove "file1.txt" using the \texttt{rm} command.
-	\item Create a copy of the "Exercise1" directory named "Exercise1\_backup" using \texttt{cp -r}.
-	\item Remove the original "Exercise1" directory using \texttt{rm -r}.
-\end{enumerate}
-\item Directory Manipulation
-\begin{enumerate}[nosep,resume*]
-	\item Recreate the "Exercise1" directory.
-	\item Create three subdirectories inside "Exercise1" named "Subdir1", "Subdir2", and "Subdir3" using \texttt{mkdir}.
-	\item List the contents of "Exercise1" to verify the creation of subdirectories.
-\end{enumerate}
-\item Searching and Filtering
-\begin{enumerate}[nosep,resume*]
-	\item Create a file named "keywords.txt" inside "Exercise1" and add some random text.
-	\item Use \texttt{grep} to search for a specific word (e.g., "Bash") in "keywords.txt".
-	\item Create a new file named "filtered.txt" and use \texttt{grep} to filter lines containing the word you searched for in "keywords.txt".
-\end{enumerate}
-\item Process Management
-\begin{enumerate}[nosep,resume*]
-	\item Use \texttt{ps} to display information about the current processes running on your system.
-	\item Use \texttt{ps aux | grep bash} to filter and display information about Bash processes.
-\end{enumerate}
-\item Cleanup
-\begin{enumerate}[nosep,resume*]
-	\item Remove the entire "Exercise1" directory and its contents using \texttt{rm -r}.
-	\item Confirm that the "Exercise1" directory no longer exists by listing the contents of the current directory.
-\end{enumerate}
-\end{enumerate}
+Download and install the required software on your computer.  See the detailed instructions in the appendix for how to do this.
+
+	\begin{itemize}
+		\item R $\rightarrow$ \url{www.r-project.org}
+		\item Python $\rightarrow$ \url{www.python.org}
+		\item Postgres $\rightarrow$ \url{www.postgresql.org}
+		\item Neo4J $\rightarrow$ \url{www.neo4j.com}
+	\end{itemize}
+
 \end{exercisebox}
 
+%\section{Ubuntu Linux}
+
+%\begin{wrapfigure}{l}{1.5in}
+%\begin{center}
+%\includegraphics[height=.5in]{Ubuntu-logo.png}
+%\end{center}
+%\end{wrapfigure}
+
+%Ubuntu Linux, developed and distributed by Canonical Ltd., has emerged as a popular distribution within the Linux ecosystem since its first release in 2004. Through its commitment to ease-of-use and pragmatic approach to hardware compatibility, Ubuntu has played a significant role in popularizing Linux as a viable alternative to proprietary operating systems. The operating system's development is steered by a global community of contributors who collaborate on various aspects, from bug fixes to the introduction of new features.
+
+%One distinguishing feature of Ubuntu is its emphasis on regular and predictable release cycles. This approach ensures that users have access to the latest software updates, security patches, and improvements. Ubuntu's Long Term Support (LTS) releases, occurring every two years, provide a support window of 5 years, offering stability and reliability for enterprises and users seeking a more predictable environment.
+
+%The desktop edition of Ubuntu employs the GNOME desktop environment, providing an intuitive and user-friendly interface. Ubuntu's package management system, APT, simplifies the installation and removal of software packages. It uses the ''apt'' command line tool or the ''Synaptic'' graphical interface to APT. The extensive and well-maintained software repositories contribute to Ubuntu's versatility, allowing users to access a rich ecosystem of applications without the need for extensive manual configurations. Because Ubuntu is based on Debian, it can use Debian packages and packages in the Debian package format.
+
+%\begin{center}
+%\includegraphics[height=3in]{screenshot1.png}
+%\end{center}
+
+%As a multi-user operating system, Ubuntu provides support for file permissions for each user, user home directories, and user privileges. User home directories are typically located in \texttt{/home/<userName>/} and the \texttt{sudo} (''\underline{s}uper\underline{u}ser do'') command may be used to execute commands as super user (equivalent to the ''root'' user in Linux terminology).
+ 
+%\begin{wrapfigure}{r}{1.in}
+%\begin{center}
+%\includegraphics[height=.5in]{Virtualbox_logo.png}
+%\end{center}
+%\end{wrapfigure}
+ 
 \section{Review Questions}
 
 \paragraph*{General}

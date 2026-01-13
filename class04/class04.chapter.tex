@@ -89,9 +89,9 @@ Similar to SQL queryies, Cypher queries have multiple clauses, specifying a ''qu
 
 Neo4j offers a number of options for running the Neo4j database management system, among them a limited developer version called ''Neo4j desktop'' and a free, open-source community edition that is usually accessed through a web interface (''Neo4j browser''). Table~\ref{tab:neo4jinfo} provides links to useful documentation of the Neo4j database and the Cypher language.
 
-\begin{alertbox}
-The community edition is installed in the course virtual machine and enabled to run when the machine is started. You can access Neo4j Browser (Figure~\ref{fig:neo4jbrowser}) at \url{http://localhost:7474} with the username ''\textbf{neo4j}'' and the password ''\textbf{busi4720}''. 
-\end{alertbox}
+%\begin{alertbox}
+%The community edition is installed in the course virtual machine and enabled to run when the machine is started. You can access Neo4j Browser (Figure~\ref{fig:neo4jbrowser}) at \url{http://localhost:7474} with the username ''\textbf{neo4j}'' and the password ''\textbf{busi4720}''. 
+%\end{alertbox}
 
 \begin{table}
 \renewcommand{\arraystretch}{1.5}
@@ -406,9 +406,9 @@ Applying these heuristics should only be considered as an initial translation. A
 
 \paragraph*{Pagila Database Example} As an example, each table of the Pagila relational database from the previous chapter was exported from PostgreSQL to a CSV file. These CSV files can be imported into Neo4j with the following set of Cypher expressions. Note that not all data is imported in this example, and a more compact representation of the statements is possible. 
 
-\begin{infobox}
-The Pagila database is already imported into the Neo4j Community Edition in the course virtual machine.
-\end{infobox}
+%\begin{infobox}
+%The Pagila database is already imported into the Neo4j Community Edition in the course virtual machine.
+%\end{infobox}
 
 \FloatBarrier
 
@@ -569,9 +569,9 @@ CALL db.schema.visualization()
 \label{fig:pagilagraph}
 \end{figure}
 
-\begin{alertbox}
-When importing from files, or exporting to files, Neo4j Community Edition uses the the \texttt{/var/lib/neo4j/import/} directory on the server. Files to import must be placed in that directory, and exported files will be created there. Additionally, any scripts to be run by calling \texttt{CALL apoc.cypher.runFile()} must be located in that directory.
-\end{alertbox}
+%\begin{alertbox}
+%When importing from files, or exporting to files, Neo4j Community Edition uses the the \texttt{/var/lib/neo4j/import/} directory on the server. Files to import must be placed in that directory, and exported files will be created there. Additionally, any scripts to be run by calling \texttt{CALL apoc.cypher.runFile()} must be located in that directory.
+%\end{alertbox}
 
 \section{Graph Queries with Cypher}
 
