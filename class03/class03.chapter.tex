@@ -76,6 +76,7 @@ Columns constraints are rules that are applied to individual columns, while tabl
 \item The \emph{FOREIGN KEY}\index{Constraint!Foreign key}\index{Foreign key constraint|see{Constraint!Foreign key}} constraint is used to link columns in different tables, establishing a relationship between them. It ensures that values in a column or combination of columns must exist in the referenced colum or combination of columns. The referenced columns may be in the same table, so that the constraint expresses a \emph{unary} relationship\index{Unary relationship}, or in another table, so that the constraint expresses a \emph{binary} relationship\index{Binary relationship}. Together with NOT NULL constraints, this allows the repsentation of optional or mandatory relationships. 
 \end{itemize}
 
+\begin{withcode}
 \section{Introduction to SQL and PostgreSQL}
 
 Despite its name, SQL\index{Structured query language}\index{SQL|see{Structured query language}} serves as a language not only for querying but for data definition, data manipulation, data access control, transaction control, and querying. SQL has been standardized by the American National Standards Institute (ANSI) and the International Organization for Standardization (ISO), ensuring a consistent syntax and set of features across different database systems. However, many database systems extend standard SQL with proprietary extensions to enhance functionality and performance. Despite these variations, the core elements of SQL remain widely consistent, contributing to its status as the lingua franca of database management. 
@@ -149,6 +150,8 @@ and will show an ''Object Explorer'' in the left part of the application. This a
 %\begin{alertbox}
 %\noindent \emph{The examples and exercises in the remainder of this chapter refer to the ''busi4720'' database.}
 %\end{alertbox}
+
+\end{withcode}
 
 \section{Data Definition in SQL}
 
@@ -352,7 +355,9 @@ In fact, this type of relationship can be extended in a straightforward way to t
 
 \section{SQL Queries}
 
+\begin{advanced}
 \subsection*{Basic Queries with the SELECT Statement}
+\end{advanced}
 
 The SELECT statement in SQL is used to query and retrieve data from one or more tables in a database. The basic structure of a SELECT statement allows specification of which columns of data you want to retrieve and from which tables. A SELECT statement has multiple clauses or parts that are used to specific different characteristics of the information to retrieve:
 
@@ -463,6 +468,7 @@ SELECT products.name AS "Product",
     FROM products INNER JOIN suppliers USING (scode);
 \end{sqlcode}
 
+\begin{advanced}
 The previous two examples used the ''INNER JOIN'', the most commonly used type of join between two tables. Table~\ref{tab:sqljoins} shows a list of other possible join types. 
 
 The INNER JOIN selects only those rows that have a corresponding row or rows in the other table, and vice versa. The LEFT OUTER join selects all rows from table T1, even those that do not have a corresponding row in table T2. For the missing corresponding rows, it simply returns NULL values. The RIGHT OUTER join does the same thing but from the perspective of table T2. That is, it returns all rows of T2, but for those rows that do not have a corresponding entry in table T1, it returns NULL values. The FULL OUTER join is a combination of the LEFT OUTER and RIGHT OUTER joins.
@@ -482,6 +488,7 @@ FULL OUTER & Selects all rows from T1, T2. If the other table is missing corresp
 \caption{Types of Joins between two tables T1 and T2 in SQL}
 \label{tab:sqljoins}
 \end{table}
+\end{advanced}
 
 The GROUP BY clause of an SQL query is used in combination with aggregate functions for grouping information and calculating aggregate values. The easiest aggregation is to simply count the number of rows or entries for each group using the ''count(.)'' function, shown in the first example that selects the number of products for each supplier, that is, the count of rows in table products grouped by supplier code:
 
@@ -558,14 +565,14 @@ DROP TABLE suppliers;
 
 The previous section has presented the basics of the relational database model, focusing on how tables are related by foreign key relationships. Tables and their relationships are often graphically shown in a \emph{relational diagram}\index{Relational diagram}. Such diagrams are often called ''\emph{ER Diagrams}\footnote{Technically, the two are not quite the same.}''\index{ER diagram|see{Entity-relationship diagram}} or ''Entity-Relationship Diagrams''\index{Entity-relationship diagram}. A graphical representation of the database structure is useful for understanding the data and for writing queries to extract data from the table or tables of the database. 
 
-In many software tools, including in pgAdmin, the database developer can use relational diagrams to create tables, instead of writing CREATE TABLE statements. In the reverse, relational diagrams can also be automatically created from an existing database and its tables. 
+In many software tools the database developer can use relational diagrams to create tables, instead of writing CREATE TABLE statements. In the reverse, relational diagrams can also be automatically created from an existing database and its tables. An example relational diagram of a movie rental database is shown in Figure~\ref{fig:pagila} with the main tables and foreign key relationships.
 
+\begin{withcode}
 \begin{exercisebox}In the pgAdmin Object Explorer, right-click on the ''busi4720'' database, then select ''ERD for Database'' to create a relational diagram. \\
 
 % In the DBeaver Database Navigator, select the ''busi4720'' database, then right-click on its ''public'' schema and select ''View Diagram'' to create the diagram.
 \end{exercisebox}
-
-\noindent The resulting diagram will look similar to the one in Figure~\ref{fig:pagila}. (If you did not clean up the tables you created in the above SQL exercises, these will be present in the diagram as well).
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -575,7 +582,7 @@ In many software tools, including in pgAdmin, the database developer can use rel
 \label{fig:pagila}
 \end{figure}
 
-
+\begin{withcode}
 \subsection*{The Pagila Database}
 
 The diagram shows the structure of the \emph{Pagila} database\footnote{\url{https://github.com/devrimgunduz/pagila}, \\
@@ -858,6 +865,7 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
   \end{itemize}
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{Review Questions}
 

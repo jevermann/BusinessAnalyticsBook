@@ -14,7 +14,9 @@ After reading this chapter, you should be able to:
     \item Explain the relative advantages and disadvantages of different global, model-agnostic interpretation methods and apply each one to a given classification or regression model and interpret their results. 
     \item Explain the main principles behind LIME and apply it to a 	classification or regression model and interpret the results. 
     \item Explain the game-theoretic background of Shapley Values and its application to interpretable machine learning. 
+\begin{withcode}
     \item Apply SHAP to a classification and regression model and interpret its results. 
+\end{withcode}
 \end{itemize}
 
 \section*{Sources and Further Reading}
@@ -31,6 +33,7 @@ Molnar, Christoph: \emph{Interpretable Machine Learning} (2023) \\
 
 Christoph Molnar's book is a very readable and fairly comprehensive introduction to interpretable machine learning or explainable artificial intelligence (XAI). It provides only a few mathematical formulas for illustration and explanation and otherwise relies on intuitive and easy-to-understand descriptions and explanations. It points to and uses software for R and Python, but is not focused on code.
 
+\begin{withcode}
 \begin{resourcebox}
 \vspace{\baselineskip}
 
@@ -70,6 +73,7 @@ SHAP: \small\url{https://shap.readthedocs.io/en/latest/}\normalsize
 \end{resourcebox}
 
 SHAP is a Python package to compute Shapley Additive Explanations (a local model-agnostic interpretation method). The package was created by the authors of the paper that initially developed the method. SHAP can provide explanations for tabular, text and image predictions. 
+\end{withcode}
 
 %To install these packages and dependencies, use the following command from the bash command line
 
@@ -200,7 +204,13 @@ k-NN & No & No & No  \\ \hline
 
 \subsection{Linear Regression}
 
-Linear regression is one of the simplest prediction methods available and is intrinsically interpretable\index{Linear regression}. Consider the following example linear regression model for predicting bicycle rental count (variable \texttt{cnt}) from the season (\texttt{season}) and the temperature (\texttt{cnt}) (using R).
+Linear regression is one of the simplest prediction methods available and is intrinsically interpretable\index{Linear regression}. Consider the following example linear regression model for predicting bicycle rental count 
+\begin{withcode}
+(variable \texttt{cnt}) from the season (\texttt{season}) and the temperature (\texttt{cnt}) (using R)
+\end{withcode}
+.
+
+\begin{withcode}
 
 \begin{Rcode}
 # Load the bike rental data set
@@ -209,6 +219,8 @@ d <- read.csv('https://evermann.ca/busi4720/bike.csv')
 # Perform the regression and summarize results
 summary(lm(cnt~season+temp, data=d))
 \end{Rcode}
+
+\end{withcode}
 
 The abbreviated output below is easy to interpret and demonstrates linearity and  monotonicity. For example, the coefficient for temperature of $132.79$ means that, all other variables remaining the same (''ceteris paribus''), a change of one degree of temperature will change the predicted bicycle rental count by $132.79$, no matter what the original temperature is (linearity) and always in the same direction as the temperature change (monotonicity). 
 
@@ -297,6 +309,7 @@ Consider the top right panel in Figure~\ref{fig:decisiontree} as an example. Her
 
 The bottom left panel in Figure~\ref{fig:decisiontree} shows how these split or divisions of the feature space form a (upside down) decision tree with root, decision nodes, and the resulting leaf nodes. The bottom right panel in Figure~\ref{fig:decisiontree} shows what a prediction of a target variable (here, a numerical target), might look like. For a regression tree\index{Regression tree}, the predicted value for each region is simply the average of the observed target values in each region, leading to the flat plateaus shown in the bottom right panel, that is, piece-wise constant predictions for small regions of the feature space. For a classfication tree\index{Classification tree}, the predicted class for a leaf node is simply the majority class of observations in each region. 
 
+\begin{advanced}
 For binary decision trees, the choice on which feature to split on next and which specific feature value to split on is decided as follows:
 \begin{enumerate}
    \item For every feature $j$ and potential split feature value $s$ define regions
@@ -331,8 +344,9 @@ Gini = 1 - \sum_{i=1}^k p(y)^2
 where $p(y)$ is the probability of an observation being classified to a particular class $y$. The Gini impurity index represents the probability of an observation being misclassified if it were randomly assigned a label according to the distribution of classes in the data at that node. A Gini impurity of 0 indicates that all cases in the node fall into a single category, i.e., the node is completely pure. The decision tree algorithm will calculate the Gini impurity for each subgroup that would result from a split and will choose the split that results in the lowest weighted sum of the group impurities.
 \end{itemize}
 \end{enumerate}
+\end{advanced}
 
-The above process is recursively repeated for each region, resulting in a tree that is growing new leaf nodes and gaining depth. Without any stopping, the tree will grow, that is, nodes will be split, until every leaf node contains only a single observations. It is clear that such a fully-grown tree is overfitted to the training data set, and not easily interpretable. 
+The feature space is recursively split or divided, resulting in a tree that is growing new leaf nodes and gaining depth. Without any stopping, the tree will grow, that is, nodes will be split, until every leaf node contains only a single observations. It is clear that such a fully-grown tree is overfitted to the training data set, and not easily interpretable. 
 
 In practice, to prevent overfitting and ensure the tree remains interpretable, the splitting process is stopped using one many options for \emph{stopping criteria}:
 
@@ -345,6 +359,7 @@ In practice, to prevent overfitting and ensure the tree remains interpretable, t
   \item \emph{Minimum change in node impurity or information gain}: Regions are split while the improvement in purity or reduction of entropy are above a certain threshold. This criterion prevents unnecessary splits that do not significantly improve the predictive power of the model. 
 \end{itemize}
 
+\begin{withcode}
 To illustrate decision trees, consider the following Python example, using the \\ \texttt{DecisionTreeRegressor} class from the SciKit-Learn package. The example uses the same data set as the linear regression example above and constructs a regression tree to predict the count of bicycle rentals from the temperature and humidity, two numerical variables. 
 
 The example fits an unpruned tree, that is, there is no stopping criterion and the tree will have as many leaf nodes as there are observations. Consequently, there will be no prediction error for the training data and the tree is very much overfitted.
@@ -453,6 +468,7 @@ How does the training MSE change? What can you observe from the plots of predict
 \item Split the data set into a training and test sample. Repeat exercise (1) but now evaluate the test MSE. What is the optimal stopping criterion?
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{Global Model-Agnostic Methods}
 
@@ -460,7 +476,7 @@ Global model-agnostic interpretation methods\index{Global model-agnostic interpr
 
 \subsection{Partial Dependence Plots (PDP)}
 
-Partial Dependence Plots (PDPs)\index{Partial dependence plot}\index{PDP|see{Partial dependence plot}} provide insights into the relationship between a feature and the predicted outcome, averaged over the distribution of values of the other features in the dataset. By isolating the effect of one or two features, PDPs can show how changes in these features impact the predicted outcome, irrespective of the values of other variables, offering a global view of the model's mechanics.
+Partial Dependence Plots (PDPs)\index{Partial dependence plot}\index{PDP|see{Partial dependence plot}} provide insights into the relationship between a feature and the predicted outcome, averaged over the distribution of values of the other features in the dataset (Figure~\ref{fig:pdp}). By isolating the effect of one or two features, PDPs can show how changes in these features impact the predicted outcome, irrespective of the values of other variables, offering a global view of the model's mechanics.
 
 Formally, a PDP shows the marginal effect of one or a few features $X_S$ on the predicted output, marginalized over all other (''complement'') features $X_C$. Recall that marginalization is the summing, or integration for continuous features, weighted by probabilities:
 
@@ -473,6 +489,7 @@ Formally, a PDP shows the marginal effect of one or a few features $X_S$ on the 
 
 where the sum in Equation~\ref{eq:pdp} is over all observations and $X_C^(i)$ are the complement feature values of the i-th observations. The integrals or sums are computed for all possible values of $X_S$ to generate the PDP curves. Essentially, the PDP shows shows how the \emph{average} prediction changes when the focal predictor $X_S$ is changed. \emph{Importantly, PDPs assume feature independence}.
 
+\begin{withcode}
 Consider the following example in Python. For ease of illustration, the example explains a decision tree model, which is of course intrinsically interpretable already. The example uses the bike rental data set from above and first fits a regression tree.
 
 \begin{pythoncode}
@@ -496,6 +513,7 @@ PartialDependenceDisplay.from_estimator(
     X = x, features = [0, 1, (0,1)], grid_resolution = 20)
 plt.show()
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -508,13 +526,15 @@ plt.show()
 
 \subsection{Individual Conditional Expectation (ICE) Curves}
 
-Individual Conditional Expectation (ICE)\index{Individual conditional expectation curve}\index{ICE curve|see{Individual conditional expectation curve}} curves extend the idea of PDPs by disaggregating the effects for individual observations. Instead of an average effect over all observations or feature values, an ICE plot displays one curve per instance in the dataset, showing how predictions change for that instance if the feature of interest is varied. This essentially means that no summation in Equation~\ref{eq:pdp} takes place; the ICE curves are simply the individual summands of that sum. Thus, averaging all ICE curves yields the PDP curve. This allows identification of outlier cases or heterogeneous data. 
+Individual Conditional Expectation (ICE)\index{Individual conditional expectation curve}\index{ICE curve|see{Individual conditional expectation curve}} curves extend the idea of PDPs by disaggregating the effects for individual observations. Instead of an average effect over all observations or feature values, an ICE plot displays one curve per instance in the dataset, showing how predictions change for that instance if the feature of interest is varied (Figure~\ref{fig:ice}). This essentially means that no summation in Equation~\ref{eq:pdp} takes place; the ICE curves are simply the individual summands of that sum. Thus, averaging all ICE curves yields the PDP curve. This allows identification of outlier cases or heterogeneous data. 
 
+\begin{withcode}
 ICE plots can created in Python using the same way as PDPs. The result of the following Python code block is shown in Figure~\ref{fig:ice}. While the bike rental data set in this example has 731 observations, the ICE plot in Figure~\ref{fig:ice} shows fewer lines because of the piece-wise constant predictions (the fitted tree has 31 leaf nodes), that is, the predictions for multiple observations are identical and the lines are overlaid on top of each other in the ICE plot. From Figure~\ref{fig:ice} it is clear that not all observations follow the same, average pattern and that there is significant heterogeneity in the data set.
 
 \begin{pythoncode}
 PartialDependenceDisplay.from_estimator(regr, x, [0, 1], kind='both')
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -523,7 +543,6 @@ PartialDependenceDisplay.from_estimator(regr, x, [0, 1], kind='both')
 \caption{Example ICE plot for a regression tree}
 \label{fig:ice}
 \end{figure}
-
 
 \subsection{Accumulated Local Effects (ALE) Plot}
 
@@ -550,6 +569,7 @@ The range of values for feature $j$ is divided into $k$ equal size intervals. $N
 
 Consider the illustrative example in Figure~\ref{fig:molnar87}. It shows five neighbourhoods defined for feature $x1$. The four horizontal lines represent the differences in prediction for four observations when the value of $x1$ changes from $Z_{3,1}$ to $Z_{4,1}$, The value of $x2$ is held constant. The four differences are summed to yield the local effect. Local effects are calculated in the same way for the other four intervals in Figure~\ref{fig:molnar87} and then summed. 
 
+\begin{withcode}
 To illustrate ALEs, consider the following regression tree, again trained on the bicycle rental count data with the same features and predictors as before.
 
 \begin{pythoncode}
@@ -589,11 +609,12 @@ Notably, ALE plots also remove the ''ceteris paribus'' assumption that all other
 \caption{Example ALE for two features}
 \label{fig:ale2}
 \end{figure}
+\end{withcode}
 
 \FloatBarrier
 \subsection{Permutation Feature Importance}
 
-Permutation feature importance\index{Permutation feature importance} assesses the importance of each feature by observing the effect on predictive accuracy when the values of that feature are randomly shuffled. This disrupts the relationship between the feature and the outcome, and a significant drop in model performance indicates that the feature is important for model predictions. The intuition is simple: A feature that has no effect on the prediction outcome can be randomly reshuffled without consequence for the predictive performance of the model.
+Permutation feature importance\index{Permutation feature importance} assesses the importance of each feature by observing the effect on predictive accuracy when the values of that feature are randomly shuffled (Figure~\ref{fig:pfi}). This disrupts the relationship between the feature and the outcome, and a significant drop in model performance indicates that the feature is important for model predictions. The intuition is simple: A feature that has no effect on the prediction outcome can be randomly reshuffled without consequence for the predictive performance of the model.
 
 Permutation feature importance begins by estimating the prediction error (loss function) for the model $L$ on the original data $X$. Permutation feature importance should be calculated on test data, not training data.
 
@@ -617,6 +638,7 @@ Next, the feature importance is calculated for each feature $j$, using $K$ multi
   \end{itemize}
 \end{itemize}
 
+\begin{withcode}
 The following example again uses the bicycle rental data set. The rental count is used as prediction target, variables other than year and days since 2011 are used as features. A regression tree is fitted with the following Python code block.
 
 \begin{pythoncode}
@@ -649,6 +671,7 @@ ax.boxplot(r.importances[r_idx].T,vert=False,labels=x.columns[r_idx])
 ax.axvline(x=0, color="k", linestyle="--")
 plt.show()
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -662,6 +685,7 @@ plt.show()
 
 Global surrogate interpretation models\index{Global surrogate interpretation model} are interpretable models that are trained to approximate the predictions of a complex model. By training a simpler model (like a decision tree or linear regression model) to mimic the behavior of a more complex model, insights can be gained into how the complex model makes decisions, providing an interpretable approximation of its decision-making process. Intuitively, the predictions of the complex model are the prediction targets of the simpler surrogate model, that is, the simple surrogate model should predict the predictions (rather than the original target values).
 
+\begin{withcode}
 Doing this in practice is simple. For example, the following Python code trains a neural network regression model with two hidden layers and ReLU activation function on the bicycle rental data set. The model is then used to predict values for the training observations.
 
 \begin{pythoncode}
@@ -678,6 +702,7 @@ In the second step, a simpler surrogate model is used to predict the predictions
 from statsmodels.api import OLS
 OLS(preds, x.astype(float)).fit().summary()
 \end{pythoncode}
+\end{withcode}
 
 \begin{table}
 \centering
@@ -740,7 +765,7 @@ In principle, LIME aims to identify the explanation model as that local surrogat
 \xi(x) = \operatorname*{argmin}_{g \in G} \; \mathcal{L} (f, g, \pi_x) + \Omega(g)
 \end{align*}
 
-However, in practice, as noted in the LIME procedure steps, the analyst must select the number of features and the type of local surrogate model. LIME only minimizes the discrepancy to the complex model; the complexity is determined by the analyst.
+However, in practice, as noted in the LIME procedure steps, the analyst must select the number of features and the type of local surrogate model.
 
 Figure~\ref{fig:molnar95} illustrates the principles behind LIME. The top left panel shows a classification problem with two predictors $x1$ and $x2$ and a somehwat complicated decision boundary. 
 
@@ -759,6 +784,7 @@ The bottom left panel indicates the weighting of observations in the neighbourho
 
 The bottom right panel shows the class predictions of the simple surrogate model that has been fitted to the weighted samples. The white line shows the linear decision boundary of the surrogate model, the superimposed plus and minus signs the predictions of the surrogate model. The local surrogate model is quite accurate for values in the vicinity of the focal observation, but not very good for points far away from it.
 
+\begin{advanced}
 Figure~\ref{fig:molnar96} illustrates the strong dependence of LIME results on the kernel, in particular the width of the kernel. The ''X'' marks the focal observation, and the graph plots the values predicted by the complex model against the values predicted by the simple model for different kernel widths. The point that Figure~\ref{fig:molnar96} makes is that not only the strength but also the sign or direction of the relationship between the predictions of the two models can change, depending on the choice of kernel. 
 
 \begin{figure}
@@ -770,7 +796,9 @@ Figure~\ref{fig:molnar96} illustrates the strong dependence of LIME results on t
 \caption{LIME results depend on choice of weight kernel}
 \label{fig:molnar96}
 \end{figure}
+\end{advanced}
 
+\begin{withcode}
 The following Phython code block uses LIME to provide an explanation for the predictions of a decision tree classifier. 
 
 \begin{pythoncode}
@@ -837,6 +865,7 @@ Figure~\ref{fig:limeexplanation} consists of three parts. The left panel shows t
 \caption{LIME results for explaining a specific instance}
 \label{fig:limeexplanation}
 \end{figure}
+\end{withcode}
 
 LIME can also be used on other models such as image or text classification models. For example, Figure~\ref{fig:molnar98} shows the contributions of individual pixels of an image to the classification of that image. The left panel shows the original image, the middle panel the contributions for the label ''bagel'' and the right panel the contributions for the label ''strawberries''. 
 
@@ -908,6 +937,7 @@ Shapley Additive eXplanations (SHAP) is a Python package developed by authors of
 
 This example uses a data set on California house prices that is part of the SHAP package. The target variable are house values in various districts, and predictors inlcude median income, number of rooms, population, and similar variables. To illustrate the basic use of SHAP, this example fits a simple linear regression model to the data.
 
+\begin{withcode}
 \begin{pythoncode}
 import sklearn
 import shap
@@ -924,7 +954,7 @@ explainer = shap.Explainer(model.predict, X)
 # Compute the SHAP values:
 shap_values = explainer(X)
 \end{pythoncode}
-
+\end{withcode}
 
 The SHAP package provides different ways to visualize individual predictions. The \emph{barplot} in Figure~\ref{fig:shapbar1} shows the importance of feature values (\emph{not the importance of features!}) for an individual prediction, generated from the running example using the following Python code:
 

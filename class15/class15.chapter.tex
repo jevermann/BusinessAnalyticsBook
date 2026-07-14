@@ -11,11 +11,16 @@ After reading this chapter, you should be able to:
    \item Explain gradient descent optimization and different methods to adjust the step sizes for parameter updates.
    \item Explain the problems of vanishing and exploding gradients and identify ways to address them.
    \item Explain the purpose of dropout in neural networks.
+\begin{withcode}
    \item Build basic neural network regression and classification models with a widely-used neural network software package, train the models, and evaluate the quality of the fitted model.
+\end{withcode}
+\begin{advanced}
    \item Encode categorical data in ways appropriate for neural network input.
+\end{advanced}
 \end{itemize}
 
 
+\clearpage
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources. 
@@ -40,6 +45,7 @@ Chapter 13, 14, 15
 
 The book by Murphy is freely available under a Creative Commons license and provides three chapters on neural networks, one for structured data, one for images, and one for sequences. It provides significant depth on convolutional and recurrent network architectures, fitting the models, and problems the data analyst may encounter. However, it tends to focus on the mathematical background, rather than application or implementation.
 
+\begin{withcode}
 \begin{resourcebox}
 \vspace{0.5\baselineskip} 
 Tensorflow Guides: \small\url{https://www.tensorflow.org/guide}\normalsize
@@ -62,6 +68,7 @@ Tensorflow Playground: \small\url{https://playground.tensorflow.org}\normalsize
 \end{figure}
 
 The Tensorflow Playground, shown in Figure~\ref{fig:tensorflowplayground}, is a very visual and interactive introduction to how neural networks function. It allows playful exploration of a number of features with a small simulated neural network.
+\end{withcode}
 
 \FloatBarrier
 
@@ -409,6 +416,7 @@ Theano was originally at the University of Montreal. Although development has st
 
 Also known as CNTK, this deep learning framework from Microsoft provides an efficient environment for training deep learning models at scale, across multiple GPUs and machines. CNTK supports both declarative and imperative programming languages and is known for its performance in handling large datasets.
 
+\begin{withcode}
 \section{Linear Regression using Tensorflow and Keras}
 
 \begin{resourcebox}
@@ -975,6 +983,7 @@ The metric to monitor can be the loss function (training or validation as per th
 \end{itemize}
 \end{exercisebox}
 
+\end{withcode}
 
 \FloatBarrier
 

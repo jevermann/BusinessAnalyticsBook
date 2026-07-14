@@ -404,6 +404,7 @@ Applying these heuristics to the example in Figure~\ref{fig:relationalgraph1} le
 
 Applying these heuristics should only be considered as an initial translation. As seen above, some or all properties may well be represented as nodes in their own right (Figure~\ref{fig:equivalentmodels}) or be modelled as relationship labels (Figure~\ref{fig:airportmodels}), depending on the type of queries expected to be run against the graph data.
 
+\begin{withcode}
 \paragraph*{Pagila Database Example} As an example, each table of the Pagila relational database from the previous chapter was exported from PostgreSQL to a CSV file. These CSV files can be imported into Neo4j with the following set of Cypher expressions. Note that not all data is imported in this example, and a more compact representation of the statements is possible. 
 
 %\begin{infobox}
@@ -568,10 +569,13 @@ CALL db.schema.visualization()
 \caption{The Pagila database in Neo4j Browser}
 \label{fig:pagilagraph}
 \end{figure}
-
 %\begin{alertbox}
 %When importing from files, or exporting to files, Neo4j Community Edition uses the the \texttt{/var/lib/neo4j/import/} directory on the server. Files to import must be placed in that directory, and exported files will be created there. Additionally, any scripts to be run by calling \texttt{CALL apoc.cypher.runFile()} must be located in that directory.
 %\end{alertbox}
+
+\end{withcode}
+
+\begin{withcode}
 
 \section{Graph Queries with Cypher}
 
@@ -779,6 +783,8 @@ The following hands-on exercises are designed to familiarize you with the Cypher
 	\item Create a graph that represents a product hierarchy.
 \end{enumerate}
 \end{exercisebox}
+
+\end{withcode}
 
 \section{Review Questions}
 

@@ -14,7 +14,9 @@ After reading this chapter, you should be able to:
    \item Compute a confusion matrix from a trained classifier given a decision criterion.
    \item Calculate precision, recall, specificity, accuracy and related metrics from a confusion matrix.
    \item Summarize the performance of a classifier as a ROC curve and its AUC.
+\begin{advanced}
    \item Calculate cross-entropy and KL divergence to evaluate the performance of a multinomial classifier.
+\end{advanced}
    \item Select and apply appropriate resampling methods to evaluate the prediction error of a trained model.
 \end{itemize}
 
@@ -78,6 +80,15 @@ Depending on the type of output, one distinguishes regression from classificatio
 \label{fig:regression_chap11}
 \end{figure}
 
+\begin{figure}
+\centering
+\includegraphics[width=.75\textwidth]{Figures_Chapters_1-6/Chapter1/1_2.pdf} \\
+\scriptsize Source: ISLR2 Figure 1.2
+\caption{Example classification model}
+\label{fig:classification}
+\end{figure}
+
+\newpage
 There are many different regression metrics, some parametric, some non-parametric. The highlighted entries in the list are covered in this and the following chapter; later chapters will also cover neural network regression and regression trees. 
 
 \begin{itemize}
@@ -101,14 +112,6 @@ There are many different regression metrics, some parametric, some non-parametri
 
 In contrast, the output of \emph{classification} is categorical or qualitative\index{Classification}. The quality of a model is measured by the proportion of correct classifications (accuracy) and related metrics. Figure~\ref{fig:classification} shows an example of a classification model where the binary output ''Today's Direction'' (of the stock market) is to be predicted from the inputs ''Yesterday'', ''Two Days Previous'', and ''Three Days Previous''. Note that all three inputs are qualitative, although quantitative inputs can also be used in classification.
 
-\begin{figure}
-\centering
-\includegraphics[width=.75\textwidth]{Figures_Chapters_1-6/Chapter1/1_2.pdf} \\
-\scriptsize Source: ISLR2 Figure 1.2
-\caption{Example classification model}
-\label{fig:classification}
-\end{figure}
-
 There are many different classification methods, most of which are parametric, except for decision trees and KNN. The highlighted methods are covered in this and the following chapter; decision trees and neural networks are covered in later chapters.
 
 \begin{itemize}
@@ -118,7 +121,9 @@ There are many different classification methods, most of which are parametric, e
    \item Support vector machines
    \item \textbf{Neural networks}
    \item \textbf{Logistic regression}
+\begin{advanced}
    \item \textbf{Naive Bayes}
+\end{advanced}
    \item Probit model
    \item Genetic programming
    \item \textbf{K-Nearest-Neighbours (KNN)}
@@ -163,7 +168,8 @@ For each of the following problems, decide if it is a prediction or inference/ex
 
 \section{Bias and Variance in Regression Analysis}
 
-The predictive quality of a regression model is typically evaluated by the \emph{mean squared error} (MSE)\index{Mean squared error}\index{MSE|see{Mean squared error}} or the \emph{mean absolute error} (MAE)\index{Mean absolute error}\index{MAE|see{Mean absolute error}}. The error of the model in predicting the correct output, that is, the difference between prediction and true output, is often called the \emph{loss function}\index{Loss function}, which is to be minimized for optimal fit. The mean absolute error is sometimes preferred because it is more robust to the presence of outliers as it does not square the difference between prediction and target; other \emph{loss functions} are the \emph{mean absolute percentage error}\index{Mean absolute percentage error}\index{MAPE|see{Mean absolute percentage error}} or the \emph{Huber loss}\index{HUber loss}\index{Loss function!Huber}. The Huber loss function, shown in Figure~\ref{fig:huber}, combines a square error for small values with an absolute error for larger values, making it also robust to outliers. 
+The predictive quality of a regression model is typically evaluated by the \emph{mean squared error} (MSE)\index{Mean squared error}\index{MSE|see{Mean squared error}} or the \emph{mean absolute error} (MAE)\index{Mean absolute error}\index{MAE|see{Mean absolute error}}. The error of the model in predicting the correct output, that is, the difference between prediction and true output, is often called the \emph{loss function}\index{Loss function}, which is to be minimized for optimal fit. The mean absolute error is sometimes preferred because it is more robust to the presence of outliers as it does not square the difference between prediction and target; other \emph{loss functions} are the \emph{mean absolute percentage error}\index{Mean absolute percentage error}\index{MAPE|see{Mean absolute percentage error}} or the \emph{Huber loss}\index{HUber loss}\index{Loss function!Huber}. 
+\begin{advanced}The Huber loss function, shown in Figure~\ref{fig:huber}, combines a square error for small values with an absolute error for larger values, making it also robust to outliers. 
 
 \begin{align*}
 \operatorname{MSE} &= \frac{1}{n}\sum_{i=1}^n (y_i - \hat{f}(x_i))^2 \\
@@ -182,10 +188,11 @@ L_{\text{Huber}} &= \begin{cases} \frac{1}{2}(y - \hat{f}(x))^2 & \text{for}\, |
 \caption{Huber loss function versus squared error}
 \label{fig:huber}
 \end{figure}
+\end{advanced}
 
 Importantly, the focus of evaluating the quality of a model should not be on the training data itself, but on how well it performs on data that were not used for training. For example, a model is trained on past stock market information, but is used to predict future stock performance; a model is trained on previous patient information, but is used to predict future patient outcomes; a model is trained on past real estate prices but is used to predict future closing prices. 
 
-A typical strategy is then to separate \emph{test data} from the \emph{training data} in the form of a \emph{holdout sample}. The model is fitted to the training data and then evaluated on the test data.
+A typical strategy is then to separate \emph{test data} from the \emph{training data} in the form of a \emph{holdout sample}. The model is fitted to the training data and then evaluated on the test data (see Section~\ref{sec:crossvalidation}).
 
 \begin{alertbox}
 Low error on training data does NOT imply low errors on test data.
@@ -227,8 +234,7 @@ Closely related to flexibility is concept of \emph{degrees of freedom}\index{Deg
 
 \noindent Each parameter to be estimated requires one observation and so ''uses up'' one degree of freedom. The model in the bottom left panel of Figure~\ref{fig:polynomial_chap11} has no degrees of freedom left, it has as many parameters $p$ as observations $n$. 
 
-To better understand the concepts of underfitting and overfitting, it is useful to consider the MSE regression loss in more detail. This requires the concepts of expected value and variance of a random variable $X$ from basic statistics.
-
+\begin{advanced}
 \begin{infobox}
 \paragraph*{Expected Value}\index{Expected value} 
 \begin{align*}
@@ -246,7 +252,7 @@ Var[X] &= E[(X - E[X])^2] = E[X^2] - E[X]^2
 For zero-centered variables $E[X] = 0$ so that $Var[X] = E[X^2]$
 \end{infobox}
 
-Equipped with these concepts, one can rewrite the MSE to decompose it into three parts:
+To better understand the concepts of underfitting and overfitting, it is useful to consider the MSE regression loss in more detail. Using the concepts expected value and variance of a random variable $X$ from basic statistics, one can rewrite the MSE to decompose it into three parts:
 
 \begin{align*}
 \operatorname{MSE} &= E[(y - \hat{f})^2] \\
@@ -275,6 +281,7 @@ MSE &= f^2 + \sigma^2 - 2 f E[\hat{f}] + Var[\hat{f}] + E[\hat{f}]^2 \\
     &= (f - E[\hat{f}])^2 + \sigma^2 + Var[\hat{f}] \\
     &= Bias[\hat{f}]^2 + \sigma^2 + Var[\hat{f}] \\
 \end{align*}
+\end{advanced}
 
 The \emph{bias}\index{Bias (in prediction)} of an estimated model $\hat{f}$ expresses how far the expected value of the estimated model $\hat{f}$ is away from the true target value $f$, while the \emph{variance}\index{Variance!of a predictive model} of an estimated model $\hat{f}$ expresses how much the expected value of the estimated model varies with different inputs or data sets. The final part of the MSE is the \emph{irreducible error}\index{Irreducible error} $\sigma^2$ that represents the random variations of the data around the true target value $f$.
 
@@ -569,6 +576,7 @@ Consider a binary classification task with the following confusion matrix at a c
   Discuss how adjusting the classification threshold might affect precision, recall, and accuracy. What happens if the threshold is increased or decreased?
 \end{exercisebox}
 
+\begin{advanced}
 \section{Multinomial Classification}
 
 Multinomial or multi-class classification assigns each observation to one of more than two classes. In this setting, the confusion matrix becomes larger, as shown in the following example, where the overall accuracy is calculated as the sum of the diagonal element divided by the sum of all elements, i.e. sum(diag(.)) / sum(.) $=17/24=.71$.
@@ -666,8 +674,10 @@ Calculate the KL divergence between the following probability distributions:
      \item Q = [0.5, 0.5]
   \end{itemize}
 \end{exercisebox}
+\end{advanced}
 
 \section{Crossvalidation Methods}
+\label{sec:crossvalidation}
 
 Recall that the goal in prediction is to have an unbiased assessment of the true classification or regression error, and to generalize to prediction of future, yet unseen observations. Finding a suitable prediction model involves two separate steps, that of \emph{model selection}, and that of \emph{model assessment}. Model selection estimates the predictive performance, that is, the error or loss, of different models in order to choose the best one. After having chosen the final model, its prediction error must again be estimated on new data. This is to avoid model selection capitalizing on specific idiosyncrasies of the test data, which may not hold for new, as yet unseen data\index{Cross-validation}.
 
@@ -771,6 +781,7 @@ One important consideration in splitting the data is preventing \emph{informatio
     \item Discuss the importance of the ROC curve and AUC in the evaluation of classification models. How do these metrics help in assessing the performance of a model?
     \item Given a scenario where you are developing a classifier for a medical diagnosis application, which metric would you prioritize and why?
 \end{enumerate}
+\begin{advanced}
 \paragraph*{Multinomial classification evaluation}
 \begin{enumerate}[nosep,resume*]
     \item Explain what is meant by multinomial classification. How does it differ from binary classification?
@@ -783,6 +794,7 @@ One important consideration in splitting the data is preventing \emph{informatio
   \item Define cross-entropy and explain its significance in machine learning, especially in classification tasks.
   \item Define Kullback-Leibler divergence and explain its relationship with cross-entropy.
 \end{enumerate}
+\end{advanced}
 \paragraph*{Cross-validation}
 \begin{enumerate}[nosep,resume*]
     \item Explain the concept of cross-validation and how it helps in model assessment.

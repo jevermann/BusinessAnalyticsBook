@@ -22,6 +22,35 @@
 \usepackage{titlepic}
 \usepackage{parskip}
 \usepackage{imakeidx}
+
+% Conditional compilation with or without code
+% based on BASH variable _BUSI4720_BOOK_CODE
+\usepackage{catchfile}
+\usepackage{xstring}
+\usepackage{comment}
+\immediate\write18{echo -n "$\string_BUSI4720_BOOK_CODE" > busi4720_book_code_tmp.txt}
+\CatchFileDef{\IncludeCode}{busi4720_book_code_tmp.txt}{\endlinechar=-1}
+\IfStrEqCase{\IncludeCode}{
+{Full}{   
+	\includecomment{withcode}
+	\includecomment{advanced}
+    \excludecomment{nocode}
+    \excludecomment{simplified}
+}
+{NoCode}{
+    \includecomment{nocode}
+    \includecomment{advanced}
+    \excludecomment{withcode}
+    \excludecomment{simplified}
+}
+{Simplified}{
+    \excludecomment{withcode}
+    \excludecomment{advanced}
+    \excludecomment{nocode}
+    \includecomment{simplified}
+}
+}
+
 \makeindex[intoc]
 \usepackage{hyperref}
 \hypersetup{

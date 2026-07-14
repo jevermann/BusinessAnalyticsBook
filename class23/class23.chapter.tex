@@ -17,6 +17,7 @@ After reading this chapter, you should be able to:
     \item Create policies to govern the MLOps lifecycle and manage and mitigate risk.
 \end{itemize}
 
+\newpage
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources. 
@@ -398,7 +399,7 @@ Consider deploying a machine learning model to a cloud platform like Amazon Web 
 Using internet resources (e.g., documentation, blog posts, articles related to MLOps on AWS or Azure), research the typical tasks and responsibilities of an ML Engineer or ML Architect during the deployment of a model to such a cloud environment. Describe one specific technical responsibility that an ML Engineer/Architect would likely have in ensuring the successful deployment and scalability of the model on the chosen cloud platform.
 \end{exercisebox}
 
-
+\begin{withcode}
 The remainder of this section illustrates two basic deployment methods for a neural network model developed using Keras. As a first step, the model is defined and trained. The following example uses a very simple linear regression model for the Boston housing price dataset. The focus here is not on the quality of the model but on how the trained model can be deployed. 
 
 \begin{resourcebox}
@@ -610,6 +611,7 @@ The following HTML code block\footnote{Complete file is available on \url{https:
 \end{htmlcode}
 
 To see this form in action, load the file \texttt{tjfs\_demo.html} from the cloned GitHub repository with any web browser.
+\end{withcode}
 
 \subsection{Monitoring and Feedback}
 
@@ -652,6 +654,7 @@ The second approach is called the ''\emph{domain classifier approach}''. Concept
 
 The monitoring and feedback phase of the MLOps lifecycle requires software tools for logging of inputs, predictions, model explanations, and actions taken by the consumer of the prediction (e.g. the customer). This phase also requires access to model stores and online evaluation support. The latter tools allow for A/B testing or shadow testing, that is, to have two or more models in production and learn which one performs better based on live data. 
 
+\begin{withcode}
 To illustrate basic logging\index{Logging} in Python, the following code blocks extend the Flask microservice application introduced above\footnote{Complete file is available on \url{https://github.com/jevermann/busi4720-mlops/blob/main/flask_deploy_logging.py}.}. This example can illustrate only the most basic notions of logging events to a log file for later analysis. It uses the built-in, default \texttt{logging} package for Python.
 
 The first code fragment sets up a logger to log the web requests to a file. A logger is characterized by its name and log level. Typical log levels, across many logging frameworks in most programming languages, are \texttt{DEBUG}, \texttt{INFO}, \texttt{WARN}, \texttt{ERROR} and \texttt{CRITICAL}, which are ordered in increasing order of severity. For example, \texttt{DEBUG} logging can be used to log a multitude of events that are useful to know about when creating a software application. However, DEBUG logging is generally not needed for applications in production. \texttt{INFO} logging captures events that are useful to determine the normal functioning of an application whereas \texttt{WARN} events in a log indicate conditions that are abnormal, but have not led to errors. Finally, \texttt{ERROR} events indicate errors in a software application but the application continues to work, while \texttt{CRITICAL} log events indicate errors that have led to the halting of a software application. The code below sets the logging level to \texttt{INFO} as routine events are to be captured. 
@@ -710,6 +713,7 @@ def predict_form():
 \end{itemize}
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{ML Governance}
 

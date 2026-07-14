@@ -11,13 +11,20 @@ After reading this chapter, you should be able to:
     \item Explain the operation of a distributed HDFS file system and the functions played by name nodes and data nodes. 
     \item Use basic file and folder operations to organize data on HDFS.
     \item Explain the map and reduce functions in a MapReduce algorithm, including their inputs and outputs.
+\begin{advanced}
     \item Design map and reduce functions for basic big data analytics. 
     \item Explain the lazy execution principles of Apache Spark and the roles of transformations and actions.
+\end{advanced}
+\begin{withcode}
     \item Perform basic data analytics in Apache Spark, including the use of Spark schemata to read data sets.
+\end{withcode}
+\begin{advanced}
     \item Explain the purpose of transformers and estimators in Spark ML pipelines.
     \item Explain the purpose and basic principles of stream analytics, including different trigger and output modes in Apache Spark.
+\end{advanced}
 \end{itemize}
 
+\newpage
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources.
@@ -46,6 +53,7 @@ Jules Damji et al. (2020) \emph{Learning Spark -- Lightning-Fast Data Analytics}
 
 This book, while not quite as comprehensive as the one by Chambers \& Zaharia, is newer and targets Spark 3.0. It also covers all aspects of Spark, from installation and configuration, to programming the SQL, streaming, and machine learning components of Spark. The book provides most examples in both Scala and Python.
 
+\begin{withcode}
 \begin{resourcebox}
 Complete implementations of all examples in this chapter are available in the following GitHub repos.\\
 
@@ -65,6 +73,7 @@ The project can be cloned from this URL:
 
 \small\url{https://github.com/jevermann/busi4720-pyspark.git}\normalsize \\
 \end{resourcebox}
+\end{withcode}
 
 \section{Introduction}
 
@@ -169,6 +178,7 @@ Figure~\ref{fig:hdfsarchitecture} shows the architecture of HDFS. An HDFS cluste
 
 Datanodes\index{Data node (in Spark)} manage the storage attached to the computers they run on and serve read/write requests from the file system's client applications. HDFS splits large files into blocks (the default block size is 128MB) and distributes them across nodes in a cluster to enable high throughput access to data. The file system also replicates each data block multiple times (by default 3 times) across different nodes to ensure reliability and fault tolerance. Datanodes store and retrieve blocks when they are told to (by client applications or the NameNode), and they report back to the Namenode periodically with a list of blocks that they are storing.
 
+\begin{withcode}
 Working with HDFS is very similar to working with the local file system on a desktop machine. In other words, the cluster is transparent. HDFS file commands are based on the standard Unix/Linux file commands to manipulate files and directories. The set of basic HDFS commands is shown in Table~\ref{tab:hdfscommands}. Because HDFS emphasizes throughput over latency, file operations that only involve small amounts of data, tend to be much slower than on a local file system.
 
 In addition to the command line interface, the Hadoop Namenode also typically provides web-based access. For example, the Namenode overview can be accessed at \url{http://localhost:9870} (substitute another URL or host name if necessary) and will show the status of the datanodes in the cluster as well. This also allows browsing the file system and performing file operations, including uploading and downloading of files from and to the local filesystem through the HDFS explorer at \url{http://localhost:9870/explorer.html#/} (substitute another host name if necessary). Figure~\ref{fig:hdfswebaccess} shows a screenshot of the HDFS explorer.
@@ -249,7 +259,7 @@ hdfs dfs -ls
 \begin{enumerate}
   \item View the list of files on the HDFS file system.
   \item Create a new directory in the HDFS named ''testdir''.
-  \item Verify that 'testdir' has been created by listing all files.
+  \item Verify that ''testdir'' has been created by listing all files.
 \end{enumerate}
 
 \paragraph*{Exercise 2: Manipulating Files in HDFS}
@@ -271,6 +281,7 @@ hdfs dfs -ls
 \end{enumerate}
 
 \end{exercisebox}
+\end{withcode}
 
 \subsection{Map-Reduce}
 
@@ -324,6 +335,7 @@ Running a MapReduce application on a Hadoop cluster involves submitting the appl
 
 For a typical MapReduce application, the user specifies an input directory, possibly with multiple data files, to be processed. Recall that data files are distributed in blocks across the cluster node. A separate Map instance is executed for each input data block, on the node where the input data block is located. This means that any necessary program files are sent to a node as required. The shuffle phase sorts the output by key and moves data with the same key to the same node. While every instance of Reduce ''sees'' all values for the same key, a Reduce instance may process the values for multiple keys, depending on the number of unique key values and the number of nodes available in the cluster. 
 
+\begin{withcode}
 \subsubsection*{Example}
 
 While Hadoop MapReduce is natively programmed in Java, Hadoop Streaming allows Map and Reduce functions as executable programs, for example using Python. This example shows the basic operation of the Map and Reduce functions. The aim is to count the number of distinct words in a large text document. Both the Map and Reduce functions are implemented in Python. 
@@ -427,9 +439,12 @@ Modify the \texttt{map.py} and \texttt{reduce.py} python code from above to coun
    \item The reduce function will use numerical keys, convert the keys it reads appropriately.
 \end{itemize}
 \end{exercisebox}
+\end{withcode}
 
-\newpage
+%\newpage
 \subsubsection*{Case Study}
+
+This case study illustrates the scalability of Hadoop in real business use case\footnote{Source: Evermann, J. (2016) Scalable Process Discovery using Map-Reduce. \emph{IEEE TSC}, 9 (3), 469-481. \url{https://doi.org/10.1109/TSC.2014.2367525}}. One aspect of business process mining is the discovery of process models from event logs. Event logs are generated by process-aware information systems and can grow to significant size. Event logs may be stored in a distributed way, either on those systems where they are generated, or in a dedicated business analytics Hadoop cluster. This suggests that a distributed implementation of process discovery algorithms using the MapReduce framework could provide significant scalability and performance advantages. 
 
 \begin{wrapfigure}{l}{.2\textwidth}
 \begin{center}
@@ -437,8 +452,6 @@ Modify the \texttt{map.py} and \texttt{reduce.py} python code from above to coun
 \scriptsize \url{Source: IEEE}
 \end{center}
 \end{wrapfigure}
-This case study illustrates the scalability of Hadoop in real business use case\footnote{Source: Evermann, J. (2016) Scalable Process Discovery using Map-Reduce. \emph{IEEE TSC}, 9 (3), 469-481. \url{https://doi.org/10.1109/TSC.2014.2367525}}. One aspect of business process mining is the discovery of process models from event logs. Event logs are generated by process-aware information systems and can grow to significant size. Event logs may be stored in a distributed way, either on those systems where they are generated, or in a dedicated business analytics Hadoop cluster. This suggests that a distributed implementation of process discovery algorithms using the MapReduce framework could provide significant scalability and performance advantages. 
-
 The $\alpha$ miner and the Flexible Heuristics Minder (FHM) were implemented in MapReduce, the $\alpha$ miner requiring 2 Map--Reduce phases, while the FHM required 5 Map--Reduce phases. Expriments were conducted on a randomly generated process with 47 different types of activities. From this process, 5 million traces were simulated, yielding an event log of 80GB. To examine the effect of cluster size on performance, a single node cluster with 2 CPUs was chosen as a baseline and compared to a 10-node cluster with 2 CPUs on each node, and a 10-node cluster with 10 CPUs on each node. 
 
 While the above word count example used simple data types for the keys and values, the data can be arbitrarily complex, as long as a function to compare keys is provided so that the shuffle phase can decide when two keys are the same and send values to the same Reduce instance. For example, the MapReduce implementation of the FHM used tuples of two elements for some keys and sets of multiple elements for some values:
@@ -566,6 +579,8 @@ GROUP BY word
 ORDER BY word;
 \end{sqlcode}
 
+\begin{advanced}
+
 \section{Apache Spark}
 
 \begin{wrapfigure}{l}{.25\textwidth}
@@ -596,7 +611,9 @@ Figure~\ref{fig:sparkcomponents} shows the components of Spark. Despite its name
 \caption{Apache Spark components}
 \label{fig:sparkcomponents}
 \end{figure}
+\end{advanced}
 
+\begin{withcode}
 \begin{resourcebox}
 The Apache Spark web site provides a wealth of information, both at the introductory, conceptual level and the advanced, detailed level. The following sections are useful for learning more about Apache Spark:
 
@@ -607,7 +624,9 @@ The Apache Spark web site provides a wealth of information, both at the introduc
 \item \href{https://spark.apache.org/docs/latest/ml-guide.html}{Machine Learning}
 \end{itemize}
 \end{resourcebox}
+\end{withcode}
 
+\begin{advanced}
 \subsubsection*{Cluster Management}
 
 Apache Spark provides its own cluster management, shown in Figure~\ref{fig:sparkcluster}. An analytics application (''driver program'') uses a Spark context to communicate with the Spark cluster manager. The cluster manager in turn coordinates and controls the worker nodes. Worker nodes run on each computer in the cluster to manage the local resources and execute tasks. When a client application requests execution of a Spark job via the Spark context, the cluster manager assigns worker nodes and their executors to the different tasks in the job. The executors execute the assigned tasks and communicate with the Spark context of the client application for status updates and results.
@@ -681,7 +700,9 @@ Apache Spark's core programming model for DataFrames and Datasets revolves aroun
 \caption{Common Spark DataFrame actions}
 \label{tab:sparkactions}
 \end{table}
+\end{advanced}
 
+\begin{withcode}
 \subsubsection*{Basic Examples}
 
 The examples in this section are intended to illustrate the basic usage of Spark on a Hadoop cluster. They assume that Spark is running on a Hadoop cluster with HDFS storage. They use Python and the PySpark interactive console.
@@ -751,7 +772,9 @@ wordCounts = textFile \
     .orderBy("count")
 wordCounts.collect()
 \end{pythoncode}
+\end{withcode}
 
+\begin{withcode}
 \subsubsection*{Spark Schemas}
 
 In Apache Spark, a schema\index{Schema!in Spark} is a structured definition of the columns and their data types in a DataFrame. Schemas serve several important purposes when creating or reading a DataFrame. First, schemas are used to validate the data, ensuring that the data matches the expected format and types. Second, knowing the schema avoids the overhead of inferring data types and enables better optimization techniques. 
@@ -789,7 +812,9 @@ data.count()
 data.show(5)
 data.summary().show()
 \end{pythoncode}
+\end{withcode}
 
+\begin{withcode}
 \subsubsection*{Spark SQL}
 
 The word count example above used DataFrame operations similar to those in R or Pandas on Spark DataFrames. Another way to work with DataFrames is to treat them as a table and use SQL queries.
@@ -851,7 +876,9 @@ wget https://evermann.ca/busi4720/spark_dfg.py
 spark-submit --master yarn spark_dfg.py \
  hdfs://localhost:9000/user/busi4720/eventlog.short.log
 \end{bashcode}
+\end{withcode}
 
+\begin{advanced}
 \subsection{Spark Machine Learning}
 
 Apache Spark provides support for machine learning through its MLlib and Spark ML libraries. Both libraries offer common learning algorithms like classification (logistic regression, decision trees, support vector machines, random forests, etc.), regression (generalized linear regression, regression trees, etc.), and clustering (for example, k-means). Utilities for feature extraction, transformation, dimensionality reduction (for example, PCA), and feature selection are provided to prepare data for machine learning models. MLlib and Spark ML support the concept of pipelines, which simplify the process of transforming data and tuning parameters. Models and algorithms can be saved to and loaded from storage, facilitating the reuse and application of models across different applications and frameworks. Spark ML provides a higher-level programming interface built on DataFrames for constructing ML pipelines, whereas MLlib is the original machine learning library for Spark and is based on RDDs. Spark ML is the primary focus of development; while still supported, MLlib receives less attention in terms of new features or performance improvements.
@@ -879,7 +906,9 @@ Figure~\ref{fig:sparkpipelines} illustrates the use of Spark ML pipelines\index{
 \caption{Pipelines in Spark ML}
 \label{fig:sparkpipelines}
 \end{figure}
+\end{advanced}
 
+\begin{withcode}
 The following example illustrates the use of Spark ML for binary classification. The example requires some feature transformation to illustrate the use of the pipelines. The full example is available to run as self-contained application\footnote{\url{https://evermann.ca/busi4720/spark_ml.py}} using \texttt{spark-submit} on a Spark cluster. Remember that the Hadoop job tracker\footnote{\url{https://localhost:8080}} is available to track the status of the submitted Spark job. The data set for this example is a public dataset originally from the UCI mchine learning laboratory\footnote{Source: \url{https://archive.ics.uci.edu/dataset/848/secondary+mushroom+dataset}, CC-BY 4.0 license}.
 
 \begin{bashcode}
@@ -1069,7 +1098,7 @@ pipelineModel.write().overwrite().save('myFirstModel')
 # Load a saved model:
 savedModel = PipelineModel.load('myFirstModel')
 \end{pythoncode}
-
+\end{withcode}
 
 \section{Stream Analytics}
 
@@ -1106,6 +1135,9 @@ Running on 5 compute nodes, the system is able to process over 5 million events 
 \end{figure}
 
 \FloatBarrier
+
+\begin{advanced}
+
 \section{Spark Streaming}
 
 Apache Spark Streaming enables scalable, high-throughput, fault-tolerant stream processing of live data streams. It can ingest data from various sources like Kafka, Flume, Kinesis, or network sockets, and process it using algorithms expressed with high-level functions like map, reduce, join, and window. Spark Streaming can provide output to a number of destinations, such as distributed file systems, databases, and visual dashboards (Figure~\ref{fig:sparkstreaming1}).
@@ -1169,7 +1201,9 @@ Apache Spark Streaming provides various options for controlling the timing of st
 \end{itemize}
 
 Spark Streaming is integrated with Spark ML machine learning. It provides streaming implementations of basic machine learning models (linear regression, logistic regression, k-means clustering) that can be trained on continuous data streams. Spark Streaming also offers the ability to predict from data stream for models that were trained off-line, for models created by Spark ML.
+\end{advanced}
 
+\begin{withcode}
 \subsubsection*{Example}
 
 To illustrate Spark Streaming, the following PySpark example implements a real-time word count system that ingests data from a network connection (''socket'')\footnote{Source: \url{https://spark.apache.org}}.
@@ -1284,6 +1318,8 @@ counts = words \
 \caption{Spark Streaming time windowing}
 \label{fig:streamingtimewindow}
 \end{figure}
+\end{withcode}
+
 
 \FloatBarrier
 \section{Review Questions}
@@ -1338,6 +1374,7 @@ counts = words \
 	\item What are the benefits of Hive transforming HiveQL queries into MapReduce jobs?
 	\item How do Hive and Pig differ in terms of their approach to handling data on Hadoop? Consider aspects such as ease of use, flexibility, and the type of abstraction they provide.
 \end{enumerate}
+\begin{advanced}
 \paragraph*{Apache Spark}
 \begin{enumerate}[nosep,resume*]
     \item What is Apache Spark and why is it considered a unified analytics system?
@@ -1372,3 +1409,4 @@ counts = words \
 	\item What are the output modes available in Spark Streaming and how do they differ? Provide scenarios in which each would be used.
 	\item Analyze the benefits and limitations of using continuous processing mode in Spark Streaming. What types of applications benefit most from this mode?
 \end{enumerate}
+\end{advanced}

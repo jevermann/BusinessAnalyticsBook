@@ -8,12 +8,13 @@
 After reading this chapter, you should be able to:
 \begin{itemize}
   \item List and describe the primitive data types of numbers, characters and strings, dates and times, and the standards and options for their representation or serialization.
+\begin{withcode}
   \item Characterize and differentiate among structured data types in R and Python, such as lists, vectors, sets, etc. 
+\end{withcode}
   \item List and describe structured data, such as tables, documents, and graphs, including standardized serialization and exchange formats.
   \item List and describe unstructured data formats and identify use cases in business analytics. For text data, be able to apply regular expressions and string edit distances for basic text analysis.
   \item Identify relevant questions to ask with respect to the quality of a data set. Describe the importance of data provenance in ensuring data quality.
   \item Describe the process and different activities for data cleaning, that is, for improving data quality.
-  \item Identify useful external data sources. 
 \end{itemize}
 
 \section{Introduction}
@@ -58,6 +59,7 @@ Additionally, it is important in statistics and analytics to indicate the lack o
 
 As Table~\ref{tab:primitive} indicates, decimal numbers can be represented using different numbers of bytes with different precisions. Integer numbers are relatively straightforward\index{Integer}. Here, a number is simply represented as its equivalent \emph{binary number}\index{Binary number} (base 2, with digits 0 to 1), often with the first bit indicating the sign (positive/negative).
 
+\begin{advanced}
 To represent decimal numbers, computers use the floating point representation\index{Floating point number} defined by the IEEE 754 standard\footnote{\url{https://en.wikipedia.org/wiki/IEEE_754}}. Figure~\ref{fig:ieee754} shows how decimal numbers are represented in binary form. A \texttt{float}, or single precision number occupies 4 bytes (32 bits): 1 bit for the sign, 8 bits for an exponent, and 23 bits for the fraction (also called ''significand'' or ''mantissa''). With this, a \texttt{float} has a precision of approximately 6 to 7 decimal digits and a range at full precision between $\pm 1.18 \times 10^{-38}$ \ldots $\pm 3.4 \times 10^{38}$. 
 
 \begin{figure}[h]
@@ -90,6 +92,7 @@ A \texttt{double}, i.e. a double precision number, occupies 8 bytes (64 bits): 1
 \end{enumerate}
 
 Combining these components as shown in Fig.~\ref{fig:ieee754} leads to the number ''01011111 00010000 00000000 00000000'', written in 4 bytes of 8 bits each.
+\end{advanced}
 
 While the IEEE 754 standard defines how computers store decimal numbers internally, when exchanging information, numbers are printed as plain text. Such ''printing as plain text'' is called ''\emph{serialization}'', because the data are written as a series of characters or bytes. Writing out decimal numbers is fraught with complexities due to different idiosyncratic styles of writing or formatting numbers, depending on the application or the locale (that is, the dominant rules in the location of the user). 
 
@@ -137,7 +140,7 @@ UTF-8 (Unicode Transformation Format -- 8-bit)\index{UTF-8}\index{Unicode transf
 
 The corresponding decimal (base 10, with digits from 0 to 9) Unicode character numbers are 5123, 5316, 5251, 5198, 5200, 5222. These are used when the text is written for web content in HTML as HTML entities, such as ''\&amp;\#5123; \&amp;\#5316; \&amp;\#5251; \&amp;\#5198; \&amp;\#5200; \&amp;\#5222;''.
 
-Using UTF-8, each of these six characters can be encoded in 3 bytes. These are usually written in hexadecimal form, indicated by the ''0x'' prefix. Hexademical form is a base 16 system and uses ''numbers'' between 0 and F, that is, it uses 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, and F as numbers. For example, 0xE1 is 14 (the ''E'') times 16 (the first digit) + 1 times 1 (the second digit), yielding 225. 0x. 
+Using UTF-8, each of these six characters can be encoded in 3 bytes. These are usually written in hexadecimal form, indicated by the ''0x'' prefix. Hexademical form is a base 16 system and uses ''numbers'' between 0 and F, that is, it uses 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, and F as numbers. For example, 0xE1 is 14 (the ''E'') times 16 (the first digit) + 1 times 1 (the second digit), yielding 225. 
 
 The sequence of Unicode characters for the word ''Inuktitut'' becomes 0xE1 0x90 0x83 (first symbol) 0xE1 0x93 0x84 (second symbol) 0xE1 0x92 0x83 (third symbol) 0xE1 0x91 0x8E (fourth symbol) 0xE1 0x91 0x90 (fifth symbol) 0xE1 0x91 0xA6 (sixth symbol). 
 
@@ -208,6 +211,7 @@ A year is a leap year if it can be divided by four and (cannot be divided by 100
 \end{itemize}
 \end{exercisebox}
 
+\begin{withcode}
 \subsubsection*{Collections}
 
 Collections\index{Collection (data type)} can store multiple instances of primitive data, often heterogeneous. Different collection types have different characteristics in terms of whether they are 
@@ -242,6 +246,7 @@ array\index{Array (in R)} & \texttt{array(c(1, 2, 3), c(4, 5, 6))} \\ \hline
 \caption{Structured data types (''collection types'') in Python and R}
 \label{tab:structured}
 \end{table}
+\end{withcode}
 
 \FloatBarrier
 \subsection{Structured Data}
@@ -604,7 +609,9 @@ Source: Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typic
 
 Prominent examples of graph database management systems are JanusGraph\footnote{\url{https://janusgraph.org/}}, a fully open-source system for on-premises installation; ArangodDB\footnote{\url{https://arangodb.com/}}, Neo4J\footnote{\url{https://neo4j.com/}}, and OrientDB\footnote{\url{https://orientdb.org/}} which are partially open-source for on-premises installation; AWS Neptune\footnote{\url{https://aws.amazon.com/neptune/}} on the Amazon AWS cloud, and CosmosDB\footnote{\url{https://azure.microsoft.com/en-ca/products/cosmos-db}} on Microsoft Azure cloud. 
 
-While there does not exist a standardized serialization format for property graph data interchange, PG-JSON and GraphSON are two recent proposals to describe property graphs in a JSON object, shown in Figure~\ref{fig:pgjson} and Figure~\ref{fig:graphson}.
+While there does not exist a standardized serialization format for property graph data interchange, PG-JSON and GraphSON are two recent proposals to describe property graphs in a JSON object. 
+\begin{advanced}
+These are shown in Figure~\ref{fig:pgjson} and Figure~\ref{fig:graphson}.
 
 \begin{figure}[h]
 \begin{jsoncode}
@@ -712,6 +719,7 @@ While there does not exist a standardized serialization format for property grap
 \caption{GraphSON Example}
 \label{fig:graphson}
 \end{figure}
+\end{advanced}
 \FloatBarrier
 
 In contrast, multiple standardized RDF graph serializations are defined\footnote{Examples taken from \url{https://en.wikipedia.org/wiki/Resource_Description_Framework}}. The ''Turtles'' format (Terse RDF Triples)\index{Terse RDF Triples}\index{Turtles|see{Terse RDF Triples}} is the most compact representation and most easy to read for humans. The following example describes the RDF graph in Figure~\ref{fig:rdfgraph}. It defines three prefixes of URIs to identify resources. These resources form the subjects, predicates, and objects of the RDF triples.
@@ -811,6 +819,7 @@ The 2010s marked a revolution in text mining with the advent of deep learning an
 \end{enumerate}
 \end{exercisebox}
 
+\begin{advanced}
 \subsubsection*{Regular Expressions (RegEx)}
 
 Regular expressions (often abbreviated as regex or regexp) are a tool for pattern matching within text\index{Regular expression}\index{Regex|see{Regular expression}}. They enable the specification of complex search patterns in a concise and flexible manner. Regular expressions are widely used for searching, editing, or manipulating text and data. For example, the following regular expression matches any number, including one in scientific notation\footnote{Source: \url{https://en.wikipedia.org/wiki/Regular\_expression}}:
@@ -972,7 +981,7 @@ Determine the Levenshtein distances between the following:
   \item The words ''Mikak'' and ''Micock''
 \end{enumerate}
 \end{exercisebox}
-
+\end{advanced}
 
 \subsection*{Images}
 
@@ -1218,6 +1227,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 
 \section{Review Questions}
 
+\begin{withcode}
 \paragraph*{Data Types}
 \begin{enumerate}[nosep]
 	\item What is the equivalent of R's \texttt{numeric} data type in Python?
@@ -1232,6 +1242,8 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 	\item In a dataset, you find that some entries are marked as \texttt{NA} in R, \texttt{None} in Python, and \texttt{Null} in SQL. How would you interpret these values?
 	\item What steps could you take to handle missing values before performing any statistical analysis?
 \end{enumerate}
+\end{withcode}
+
 \paragraph*{Number Formats}
 \begin{enumerate}[nosep,resume*]
 	\item Describe how integer numbers are represented in binary form. What does the first bit indicate?
@@ -1257,6 +1269,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Explain the challenges involved in performing arithmetic operations with years, months, and days due to their different lengths and conventions.
     \item Discuss the implications of not universally accepting standards like ISO 8601 and RFC 3339 in data management and analytics.
 \end{enumerate}
+\begin{withcode}
 \paragraph*{Collection Types}
 \begin{enumerate}[nosep,resume*]
     \item Define what a collection data type is and explain how it differs from primitive data types.
@@ -1265,6 +1278,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Describe the properties of a vector in R and how it differs from a list.
     \item Discuss the significance of mutable and immutable data types, providing examples from Python and R.
 \end{enumerate}
+\end{withcode}
 \paragraph*{Tabular Formats}
 \begin{enumerate}[nosep,resume*]
     \item Explain the CSV (Comma-Separated Values) file format. What are its key characteristics?
@@ -1296,6 +1310,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Compare and contrast the symbolic, statistical, and deep learning approaches in text mining.
     \item Discuss the impact of deep learning and neural networks on the field of text analytics, specifically mentioning models like RNNs, LSTMs, and transformers.
 \end{enumerate}
+\begin{advanced}
 \paragraph*{Regular Expressions}
 \begin{enumerate}[nosep,resume*]
     \item Define regular expressions and explain their primary purpose in text processing.
@@ -1306,6 +1321,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Provide an example of a regular expression pattern and explain what it matches.
     \item Discuss the challenges or limitations associated with using regular expressions.
 \end{enumerate}
+\end{advanced}
 \paragraph*{Image Data}
 \begin{enumerate}[nosep,resume*]
     \item What are the two primary types of image formats? Describe the main characteristics of each.
@@ -1399,6 +1415,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 \end{enumerate}
 \end{exercisebox}
 
+\begin{withcode}
 \begin{exercisebox}
 \subsubsection*{Structured Data}
 \begin{enumerate}
@@ -1411,6 +1428,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Convert one structured data type into another in both Python and R.
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \begin{exercisebox}
 \subsubsection*{Tabular Formats}
@@ -1432,6 +1450,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 \end{enumerate}
 \end{exercisebox}
 
+\begin{advanced}
 \begin{exercisebox}
 \subsubsection*{Regular Expressions}
 \begin{enumerate}
@@ -1452,6 +1471,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Given a list of words, ["apple", "apply", "apology", "propel"], find the word with the smallest Levenshtein distance to "aply".
 \end{enumerate}
 \end{exercisebox}
+\end{advanced}
 
 \begin{exercisebox}
 \subsubsection*{Data Sources}

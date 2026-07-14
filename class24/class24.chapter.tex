@@ -86,6 +86,7 @@ In the context of business analytics, questions may arise with respect to what i
 
 A particular issue where copyright law may be unclear is the use of data for the training of predictive models. In particular, the question of whether the ingestion of data into model training without making a local copy of that data constitutes reproduction, adaptation, or translation is not yet settled in Canada. Consider text data that is immediately submitted to a tokenizer, converted to integers, and then processed by an embedding layer, all without a copy of the original text being retained. Moreover, the copyright act allows temporary reproductions for technological processes, given that ''the reproduction's only purpose is to facilitate a use that is not an infringement of copyright, and the reproduction exists only for the duration of the technological process'' (Canada Copyright Act, 30.71).
 
+\begin{withcode}
 \section{Web Site Data Collection}
 
 Web sites provide a lot of information that is useful for business analytics. Assuming that the data presented on a web site is eligible for copyright protection, the rights holder can limit or prohibit its use by issuing (or withholding) licenses. Typically, web sites provides ''terms of use'' for this purposes. These terms are human-readable documents that specify what rights are given to persons accessing the web site. Terms of use are typically considered valid if clear and reasonable notice is given to them, e.g. by requiring explicit acknowledgment or by providing a conspicuous link to them on a web site. 
@@ -130,6 +131,7 @@ Identify the robots.txt file of your university web site.
   \item Are there limits on crawl frequency?
 \end{itemize}
 \end{exercisebox}
+\end{withcode}
 
 \section{Information Protection and Privacy Legislation\\ in Canada}
 \label{sec:privacy}
@@ -414,7 +416,10 @@ While this section has focused on the Canadian context and the Canadian informat
 
 \section{Artificial Intelligence and Data Act}
 
-This section examines the proposed Artificial Intelligence and Data Act (AIDA). This act is part of the Digital Charter Implementation Act 2022 which combines the Consumer Privacy Protection Act (an update to PIPEDA), the Personal Information and Data Protection Tribunal Act, and the Artificial Intelligence and Data Act (AIDA)\index{Artificial Intelligence and Data Act}\index{AIDA!see{Artificial Intelligence and Data Act}}. The Digital Charter Act was introduced in the House of Commons of the Parliament of Canada as bill C-27\index{Bill C-27}, sponsored by the Minister of Innovation, Science, and Industry, in June 2022. It received a second reading in April of 2023 and, at the time of writing (Sep 2024), is being considered by the House of Commons Standing Committee on Industry and Technology. 
+This section examines the proposed Artificial Intelligence and Data Act (AIDA). This act was part of the Digital Charter Implementation Act 2022 which combined the Consumer Privacy Protection Act (an update to PIPEDA), the Personal Information and Data Protection Tribunal Act, and the Artificial Intelligence and Data Act (AIDA)\index{Artificial Intelligence and Data Act}\index{AIDA!see{Artificial Intelligence and Data Act}}. 
+
+\begin{infobox}
+The Digital Charter Act was introduced in the House of Commons of the Parliament of Canada as bill C-27\index{Bill C-27}, sponsored by the Minister of Innovation, Science, and Industry, in June 2022. It received a second reading in April of 2023. With the resignation of prime minister Justin Trudeau and prorogation of parliament, this bill died on the order of papers. \end{infobox}
 
 \begin{resourcebox}
 
@@ -425,64 +430,64 @@ Information in this section is based on and adapted from that provided by the Ho
 \end{itemize}
 \end{resourcebox}
 
-The intent of the proposed legislation is to prohibit reckless and malicious use of AI systems, and to ensure accountability of risks associated with the use of AI systems. The act defines AI as:
+While the bill died on the order of papers, it is still instructive to examine the proposed legislation. It shows the increasing awareness of governments of the potential risks presented by AI systems and the willingness of governments to regulate the development, use and offering of such systems. The intent of the proposed legislation was to prohibit reckless and malicious use of AI systems, and to ensure accountability of risks associated with the use of AI systems. The act defined AI as:
 
 \begin{quote}''Artificial intelligence system means a technological system that, autonomously or partly autonomously, processes data related to human activities through the use of a genetic algorithm, a neural network, machine learning or another technique in order to generate content or make decisions, recommendations or predictions.'' \footnotesize Source: \href{https://www.parl.ca/legisinfo/en/bill/44-1/c-27}{Parliament of Canada} \normalsize \end{quote}
 
-However, the proposed AIDA applies only to ''high-impact systems''. When considering whether an AI system has a high impact, the government would consider factors such as the potential to inflict serious harm, whether intended or unintended, the scale of use of the system, whether there is evidence of risk to health or safety or of a negative impact on human rights (e.g. discrimination or differentiation based on prohibited factors, such as ethnicity, gender, etc.), whether harm or adverse impact has already occured, whether there is an imbalance of economic or social circumstances, and whether the risks are adequately regulated under another law. 
+However, the proposed AIDA applied only to ''high-impact systems''. When considering whether an AI system has a high impact, the government would have considered factors such as the potential to inflict serious harm, whether intended or unintended, the scale of use of the system, whether there is evidence of risk to health or safety or of a negative impact on human rights (e.g. discrimination or differentiation based on prohibited factors, such as ethnicity, gender, etc.), whether harm or adverse impact has already occured, whether there is an imbalance of economic or social circumstances, and whether the risks are adequately regulated under another law. 
 
-Examples of high-impact systems are screening systems that make decisions, recommendations, or predictions that affect an individual's access to services, benefits, or employment (e.g. credit scoring systems). These systems are argued to pose risk due to the potential for discriminatory outcomes and economic harm to individuals. 
+Examples of high-impact systems are screening systems that make decisions, recommendations, or predictions that affect an individual's access to services, benefits, or employment (e.g. credit scoring systems). These systems were argued to pose risk due to the potential for discriminatory outcomes and economic harm to individuals. 
 
-Another example of high-impact systems are biometric systems that identify people remotely in order to make predictions about their behaviour, their characteristics, or their psychology. These are argued to have a potential negative impact on mental health and autonomy. 
+Another example of high-impact systems are biometric systems that identify people remotely in order to make predictions about their behaviour, their characteristics, or their psychology. These were argued to have a potential negative impact on mental health and autonomy. 
 
-Systems that influence behaviour at scale, such as content recommendation systems found on social media platforms, with their potential impacts on psychological and physical health would also be considered high-impact AI systems. 
+Systems that influence behaviour at scale, such as content recommendation systems found on social media platforms, with their potential impacts on psychological and physical health would have also been considered high-impact AI systems. 
 
-AI systems that are integrated in health and safety functions or in critical infrastructure may also be classified as high-impact AI systems. Examples are autonomous driving systems and triage decision making systems in health care settings. Such systems are argued to have the potential to cause physical harm. 
+AI systems that are integrated in health and safety functions or in critical infrastructure might also have been classified as high-impact AI systems. Examples are autonomous driving systems and triage decision making systems in health care settings. Such systems were argued to have the potential to cause physical harm. 
 
-AIDA is concerned with individual harms, collective harms (e.g. human rights impacts, or impacts on historically marginalized communities) as well as biased output. The proposed act defines biased output as follows:
+AIDA was concerned with individual harms, collective harms (e.g. human rights impacts, or impacts on historically marginalized communities) as well as biased output. The proposed act defined biased output as follows:
 
 \begin{quote}''Biased output means content that is generated, or a decision, recommendation or prediction that is made, by an artificial intelligence system and that adversely differentiates, directly or indirectly and without justification, in relation to an individual on one or more of the prohibited grounds of discrimination set out in section 3 of the Canadian Human Rights Act \ldots'' \footnotesize Source: \href{https://www.parl.ca/legisinfo/en/bill/44-1/c-27}{Parliament of Canada} \normalsize \end{quote} 
 
 \subsection*{Requirements under AIDA}
 
-AIDA would require organizations to implement measures to identify, evaluate, and mitigate or reduce the risk of harm or biased output. Specifically, AIDA's requirements are guided by following six principles.
+AIDA would have required organizations to implement measures to identify, evaluate, and mitigate or reduce the risk of harm or biased output. Specifically, AIDA's requirements were guided by following six principles.
 
-\emph{Human Oversight and Monitoring:} This principle would require organizations to exercise meaningful human oversight over decisions or recommendations made by an AI system. It may requires a ''human-in-the-loop'' when operating such systems, and it would require systems to be designed to allow such oversight. Effective human oversight would require the behaviour of the AI system to be interpretable, with the specific level of interpretability dependent on the context and purpose of the system. Monitoring of input and output (predictions, recommendations, decisions) of an AI system would be required so that human oversight can be performed after the fact. 
+\emph{Human Oversight and Monitoring:} This principle would have required organizations to exercise meaningful human oversight over decisions or recommendations made by an AI system. It may have required a ''human-in-the-loop'' when operating such systems, and it would have required systems to be designed to allow such oversight. Effective human oversight would have required the behaviour of the AI system to be interpretable, with the specific level of interpretability dependent on the context and purpose of the system. Monitoring of input and output (predictions, recommendations, decisions) of an AI system would have been required so that human oversight could have been performed after the fact. 
 
-\emph{Transparency:} This principle would require organizations to provide information to individuals and the regulator about how a high-impact AI system is used, and what its capabilities, limitations, and potential impacts are. 
+\emph{Transparency:} This principle would have required organizations to provide information to individuals and the regulator about how a high-impact AI system is used, and what its capabilities, limitations, and potential impacts are. 
 
-\emph{Fairness and Equity:} This principle would require organizations to demonstrate awareness of potential discriminatory outcomes and to take actions to mitigate such outcomes.
+\emph{Fairness and Equity:} This principle would have required organizations to demonstrate awareness of potential discriminatory outcomes and to have taken actions to mitigate such outcomes.
 
-\emph{Safety:} The safety principle would require organizations to pro-actively evaluate potential harms stemming from the development or use of a high-impact AI system and to take measures to reduce the risk of harm.
+\emph{Safety:} The safety principle would have required organizations to pro-actively evaluate potential harms stemming from the development or use of a high-impact AI system and to have taken measures to reduce the risk of harm.
 
-\emph{Accountability:} The accountability principle would require organizations to implement governance mechanisms to ensure compliance with AIDA. This would take the form of documentation of policies, processes, and any measures for risk reduction, bias reduction, and safety improvements. 
+\emph{Accountability:} The accountability principle would have required organizations to implement governance mechanisms to ensure compliance with AIDA. This would have taken the form of documentation of policies, processes, and any measures for risk reduction, bias reduction, and safety improvements. 
 
-\emph{Validity and Robustness:} This principle would require organizations to ensure that high-impact AI systems operate in a valid way, that is, consistent with the intended objectives, and reliably, that is, they are resilient and stable in a variety of different circumstances. 
+\emph{Validity and Robustness:} This principle would have required organizations to ensure that high-impact AI systems operate in a valid way, that is, consistent with the intended objectives, and reliably, that is, they are resilient and stable in a variety of different circumstances. 
 
 \subsection*{Regulated Activities under AIDA}
 
-AIDA would regulate four types of activities throughout the life-cycle of a high-impact AI system.
+AIDA would have regulated four types of activities throughout the life-cycle of a high-impact AI system.
 
-\emph{System Design:} Organizations that design high-impact AI systems would have to take measures to identify and reduce risks and bias during system design, and to document appropriate use and the limitations of the system. Specific examples are risk assessment during initial system design, during training data set selection, and when determining the level of interpretability of the output that is required and provided by the system.
+\emph{System Design:} Organizations that design high-impact AI systems would have had to take measures to identify and reduce risks and bias during system design, and to document appropriate use and the limitations of the system. Specific examples are risk assessment during initial system design, during training data set selection, and when determining the level of interpretability of the output that is required and provided by the system.
 
-\emph{System Development:} During development of a high-impact AI system, including its training, organizations would be required to document the training data and the models themselves. They would need to evaluate the performance of the model in different situations and to retrain the model as needed in order to minimize risk and bias of the output. Organizations would also be required to build mechanisms to allow human oversight and monitoring.
+\emph{System Development:} During development of a high-impact AI system, including its training, organizations would have been required to document the training data and the models themselves. They would have needed to evaluate the performance of the model in different situations and to retrain the model as needed in order to minimize risk and bias of the output. Organizations would have also been required to build mechanisms to allow human oversight and monitoring.
 
-\emph{Make System Available for Use:} When making a high-impact AI system available for use, organizations would be required to document how the system meets its requirements for a safe and unbiased design. They would also have to provide documentation to users of the system with information about the data sets that were used for training, information on the limitations of the system, and on the appropriate uses of the system. Organizations would be required to continuously review their risk assessment as the system is operated.
+\emph{Make System Available for Use:} When making a high-impact AI system available for use, organizations would have been required to document how the system meets its requirements for a safe and unbiased design. They would also have had to provide documentation to users of the system with information about the data sets that were used for training, information on the limitations of the system, and on the appropriate uses of the system. Organizations would have been required to continuously review their risk assessment as the system is operated.
 
-\emph{Manage Operations of a System}: Organizations that manage the operation of a high-impact AI system would be required to maintain records of the inputs and outputs of a system and monitor its performance. They would have to ensure adequate monitoring and human oversight over recommendations and decisions made by the system. Organizations would be required to intervene in the operation of a system if its behaviour falls outside of established operational parameters or expected performance parameters. 
+\emph{Manage Operations of a System}: Organizations that manage the operation of a high-impact AI system would have been required to maintain records of the inputs and outputs of a system and monitor its performance. They would have had to ensure adequate monitoring and human oversight over recommendations and decisions made by the system. Organizations would have been required to intervene in the operation of a system if its behaviour fell outside of established operational parameters or expected performance parameters. 
 
 \subsection*{Enforcement of AIDA}
 
-The proposed act includes the establishment of an AI and Data Commissioner, analogous to the role of the Privacy Commissioner established by PIPEDA. Also analogous to PIPEDA, AIDA contains a notification requirement in case of harm of potential material harm. However, in contrast to PIPEDA, the Minister of Industry, Science, and Economic Development would have enforcement powers in the form of the right to request demonstration of compliance, the right to order an independent audit, the ability to levy administrative monetary penalties, and the right to stop the use of a high-impact AI system. 
+The proposed act included the establishment of an AI and Data Commissioner, analogous to the role of the Privacy Commissioner established by PIPEDA. Also analogous to PIPEDA, AIDA contained a notification requirement in case of harm of potential material harm. However, in contrast to PIPEDA, the Minister of Industry, Science, and Economic Development would have had enforcement powers in the form of the right to request demonstration of compliance, the right to order an independent audit, the ability to levy administrative monetary penalties, and the right to stop the use of a high-impact AI system. 
 
-Additionally, the proposed act would establish three new criminal offences\footnote{\href{https://www.parl.ca/DocumentViewer/en/44-1/bill/C-27/first-reading}{Bill C-27, House of Commons}}. Note that the first of the following proposed offences also applies to data collected by third parties outside of Canada.
+Additionally, the proposed act would have established three new criminal offences\footnote{\href{https://www.parl.ca/DocumentViewer/en/44-1/bill/C-27/first-reading}{Bill C-27, House of Commons}}. Note that the first of the following proposed offences would also have applied to data collected by third parties outside of Canada.
 \begin{itemize}
   \item ''Every person commits an offence if, for the purpose of designing, developing, using or making available for use an artificial intelligence system, the person possesses \ldots or uses personal information, knowing or believing that the information is obtained or derived, directly or indirectly, as a result of (a) the commission in Canada of an offence \ldots or (b) an act or omission anywhere that, if it had occurred in Canada, would have constituted such an offence.''
   \item ''Every person commits an offence if the person without lawful excuse and knowing that or being reckless as to whether the use of an artificial intelligence system is likely to cause serious physical or psychological harm to an individual or substantial damage to an individual's property, makes the artificial intelligence system available for use and the use of the system causes such harm or damage''
   \item ''Every person commits an offence if the person with the intent to defraud the public and to cause substantial economic loss to an individual, makes an artificial intelligence available for use and its use causes that loss.''
 \end{itemize}
 
-The proposed act leaves concrete details unspecified, to be defined through subsequent regulation after the act receives royal assent (that is, after it becomes law). At the time of writing (Sep 2024), the further progress of this act through the House of Commons and Senate is uncertain, but it shows the increasing awareness of governments of the potential risks presented by AI systems and the willingness of governments to regulate the development, use and offering of such systems. 
+The proposed act left concrete details unspecified, to be defined through subsequent regulation after the act had received royal assent (that is, after it became law). 
 
 \section{European Union Artificial Intelligence Act}
 

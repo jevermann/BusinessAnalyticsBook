@@ -8,8 +8,10 @@
 After reading this chapter, you should be able to:
 \begin{itemize}
    \item Explain different statistical models for time series data and create time series for each model.
+\begin{withcode}
    \item Perform basic operations on time series data.
    \item Perform time series smoothing using different smoothing methods.
+\end{withcode}
    \item Understand the importance of stationarity for time series analysis and how to assess time series data for stationarity.
    \item Address non-stationary time series data using differencing and detrending.
    \item Explain the different components of an ARIMA model and fit an ARIMA model to time series data and evaluate its fit. 
@@ -35,6 +37,7 @@ Rob J. Hyndman and George Athanasopoulos (2018) \emph{Forecasting: Principles an
 \url{https://otexts.com/fpp2/} 
 \end{resourcebox}
 
+\begin{withcode}
 The book by Hyndman and Athanasopoulos is somewhat less technical in nature than the book by Shumway and Stoffer and also provides R code. The coverage of the two books also differs somewhat, but it this more accessible than Shumway and Stoffer for undergraduate students.
 
 \begin{resourcebox}
@@ -49,6 +52,7 @@ In addition to these books, there are a number of very useful tutorials availabl
 \normalsize
 \end{itemize}
 \end{resourcebox}
+\end{withcode}
 
 \section{Introduction}
 
@@ -78,7 +82,7 @@ Time series statistical models are essential tools used to analyze and forecast 
 
 \subsubsection*{Moving Average Model}
 
-The \emph{Moving Average}\index{Moving average} model is a fundamental time series model that expresses the current value of the time series as a function of past errors or deviations, with the assumption that these errors are white noise, that is, random. An example model is given by: 
+The \emph{Moving Average}\index{Moving average} model is a fundamental time series model that expresses the current value of the time series as a function of past errors or deviations, with the assumption that these errors are white noise, that is, random (Figure~\ref{fig:figure2}). An example model is given by: 
 
 \begin{align*}v_t = \frac{1}{3} ( w_{t-1} + w_t + w_{t+1})
 \end{align*}
@@ -87,6 +91,7 @@ The \emph{Moving Average}\index{Moving average} model is a fundamental time seri
 
 MA models are particularly useful in smoothing out noise and forecasting when the series exhibits a random behavior with no trend or seasonality.
 
+\begin{withcode}
 The following R code block uses the \texttt{filter} function to generate the example model. The filter operates on the white noise, extending to both sides of the current time step, and creates a weighted sum of the closest three value in \texttt{w}, specified by the \texttt{mode='convolution'} argument. The resulting plots are shown in Figure~\ref{fig:figure2}. 
 
 \begin{Rcode}
@@ -104,6 +109,7 @@ par(mfrow=c(2,1))
 tsplot(w, main="white noise", col=3, gg=T)
 tsplot(v, ylim=c(-3,3), main="moving average", col=4, gg=T)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -115,7 +121,7 @@ tsplot(v, ylim=c(-3,3), main="moving average", col=4, gg=T)
 
 \subsubsection*{Autoregressive Model}
 
-The \emph{Autoregressive (AR) model}\index{Autoregression} is based on the concept that current values of a series can be forecasted from previous values. An example model is:
+The \emph{Autoregressive (AR) model}\index{Autoregression} is based on the concept that current values of a series can be forecasted from previous values (Figure~\ref{fig:figure3}). An example model is:
 
 \begin{align*}x_t = x_{t-1} - 0.9 x_{t-2} + w_t\end{align*}
 
@@ -124,6 +130,7 @@ The \emph{Autoregressive (AR) model}\index{Autoregression} is based on the conce
 
 AR models are widely used in economic and financial time series where data points are influenced significantly by their previous values.
 
+\begin{withcode}
 The following R code uses the \texttt{filter} function in ''recursive'' mode with parameters \texttt{1} and \texttt{-.9} to create the time series corresponding to the example model\footnote{The R code for this and following examples are based on material Shumway \& Stoffer}. The resulting plot is shown in Figure~\ref{fig:figure3}.
 
 \begin{Rcode}
@@ -139,6 +146,7 @@ x = x[-(1:50)]
 # Plot time series
 tsplot(x, main="autoregression", col=4)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -150,7 +158,7 @@ tsplot(x, main="autoregression", col=4)
 
 \subsubsection*{Random Walk with Drift}
 
-A \emph{random walk with drift}\index{Random walk} adds a constant to the standard random walk, allowing the series to drift upwards or downwards over time. An example model is given by:
+A \emph{random walk with drift}\index{Random walk} adds a constant to the standard random walk, allowing the series to drift upwards or downwards over time (Figure~\ref{fig:figure4}). An example model is given by:
 
 \begin{align*}x_t &= \delta + x_{t-1} + w_t \\
 &= \delta t + \sum_{j=1}^t w_j
@@ -160,6 +168,7 @@ A \emph{random walk with drift}\index{Random walk} adds a constant to the standa
 
 This model is commonly applied in financial markets to model stock prices or other investments, reflecting that prices are serially correlated and can trend over time.
 
+\begin{withcode}
 The following R code block uses the the \texttt{cumsum()} function to calculate the cumulative sum. The resulting time series are shown in Figure~\ref{fig:figure4} and show the random walk and the drift component that is added to it.
 
 \begin{Rcode}
@@ -180,6 +189,7 @@ abline(a=0, b=drift, lty=2, col=3)
 lines(x, col=4)
 abline(a=0, b=0, lty=2, col=4)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -190,7 +200,7 @@ abline(a=0, b=0, lty=2, col=4)
 
 \subsubsection*{Signal in Noise Model}
 
-The \emph{Signal in noise}\index{Signal-in-noise} model views the time series as a combination of a true signal and random noise. An example model with a sinusoidal signal characterized by its amplitude, frequency and phase shift is:
+The \emph{Signal in noise}\index{Signal-in-noise} model views the time series as a combination of a true signal and random noise (Figure~\ref{fig:figure5}). An example model with a sinusoidal signal characterized by its amplitude, frequency and phase shift is:
 
 \begin{align*}
 x_t &= A \cos (2 \pi \omega t + \phi) 
@@ -202,6 +212,7 @@ A &= 2 &\qquad \text{amplitude} \\
 
 This model is fundamental in signal processing and is used to understand underlying trends in the presence of noisy observations. Techniques like filtering and smoothing are often applied to extract the signal from $x_t$.
 
+\begin{withcode}
 The following R code block creates a sinusoidal signal and overlays it with different amounts of white (Gaussian) noise. The resulting time series are shown in Figure~\ref{fig:figure5}.
 
 \begin{Rcode}
@@ -217,6 +228,7 @@ tsplot(cs, main='Signal', col=2, gg=T)
 tsplot(cs+w, main='Signal and N(0,1) noise', col=3, gg=T)
 tsplot(cs+5*w, main='Signal and N(0,25) noise', col=4, gg=T)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -225,6 +237,7 @@ tsplot(cs+5*w, main='Signal and N(0,25) noise', col=4, gg=T)
 \label{fig:figure5}
 \end{figure}
 
+\begin{withcode}
 \section{Basic Time Series Operations in R}
 
 A time series can be constructed from an ordinary data set using the \texttt{ts()} function in R and supplying a start time stamp and a sampling frequency. For example, the following R code creates a time series of montly observations, beginning in January 2020 with the values 1 through 24. R will try to sensibly interpret the \texttt{start} and \texttt{frequency} arguments: Frequencies of 4 are interpreted as quarters of the year, 7 is interpreted as days of a week, 12 is interpreted as months of the year.
@@ -284,6 +297,7 @@ lag_ts <- lag(ts_data, 2)
 # Negative k shifts forwards in time
 lag_ts <- lag(ts_data, 3)
 \end{Rcode}
+\end{withcode}
 
 \section{Smoothing a Time Series}
 
@@ -291,7 +305,7 @@ Time series smoothing is a technique used to remove noise and reveal signals or 
 
 \subsubsection*{Moving Average Smoothing}
 
-\emph{Moving average smoothing}\index{Time series smoothing!Moving average} is one of the simplest and most widely used methods for smoothing time series data. It involves calculating the weighted mean of the consecutive data points within a specified window that moves along with the data:
+\emph{Moving average smoothing}\index{Time series smoothing!Moving average} is one of the simplest and most widely used methods for smoothing time series data (Figure~\ref{fig:figure14}). It involves calculating the weighted mean of the consecutive data points within a specified window that moves along with the data:
 
 \begin{align*}m_t = \sum_{j=-k}^k a_j x_{t-j} \quad \text{where} \quad
 \sum_{j=-k}^k a_j = 1
@@ -299,6 +313,7 @@ Time series smoothing is a technique used to remove noise and reveal signals or 
 
 \noindent where $a$ are the weights that sum to one. A simple filter uses uniform weights, but other shapes are possible.
 
+\begin{withcode}
 This model can be implemented using the \texttt{filter} function in R. The filter in the example below is two-sided and is centered on the current time stamp, that is, it uses data before and after the current time point. When the \texttt{sides=1} argument is used, the filter is over past values only. The \texttt{filter} argument specifies the weights for the moving average. The results for an example time series are shown in Figure~\ref{fig:figure14}.
 
 \begin{Rcode}
@@ -309,6 +324,7 @@ library(astsa)
 f = 1/12 * c(0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.5)
 filter(soi, sides=2, filter=f)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -319,7 +335,7 @@ filter(soi, sides=2, filter=f)
 
 \subsubsection*{Kernel Smoothing or Kernel Regression}
 
-Instead of a filter with simple weights as in moving average smoothing, \emph{kernel smoothing}\index{Time series smoothing!Kernel smoothing}\index{Kernel smoothing|see{Time series smoothing!Kernel smoothing}} uses a weighted average of neighbouring points where the weights are determined by a function known as the \emph{kernel}. A common choice is a Gaussian kernel\index{Gaussian kernel} that uses the normal distribution density function, which produces a weighted average with a bell-shaped curve of weights around each data point. The weights for averaging the time series values are determined as follows:
+Instead of a filter with simple weights as in moving average smoothing, \emph{kernel smoothing}\index{Time series smoothing!Kernel smoothing}\index{Kernel smoothing|see{Time series smoothing!Kernel smoothing}} uses a weighted average of neighbouring points where the weights are determined by a function known as the \emph{kernel} (Figure~\ref{fig:figure15}). A common choice is a Gaussian kernel\index{Gaussian kernel} that uses the normal distribution density function, which produces a weighted average with a bell-shaped curve of weights around each data point. The weights for averaging the time series values are determined as follows:
 
 \begin{align*}
 a_i(t) &= \frac{K\left(\frac{t-i}{b}\right)}{\sum_{j=1}^n K \left(\frac{t-j}{b}\right) }
@@ -336,13 +352,14 @@ s_t &= \sum_{i=1}^n a_i(t) x_t \\
  &= \frac{\sum_{i=1}^n K\left(\frac{t-i}{b}\right) x_t}{\sum_{j=1}^n K \left(\frac{t-j}{b}\right) }
 \end{align*}
 
-
+\begin{withcode}
 \noindent The R function \texttt{ksmooth()} with the \texttt{normal} kernel argument provides exponential smoothing. The \texttt{bandwidth} parameter determines the ''width'' of the kernel by specifying the distance from the quartiles to the mean of the normal distribution function. Example smoothing results for various bandwidth values are shown in Figure~\ref{fig:figure15}.
 
 \begin{Rcode}
 # Apply gaussian kernel smoothing
 ksmooth(time(soi), soi, kernel='normal', bandwidth=1)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -353,14 +370,16 @@ ksmooth(time(soi), soi, kernel='normal', bandwidth=1)
 
 \subsubsection*{Lowess Regression}
 
-\emph{Lowess Regression}\index{Time series smoothing!Lowess smoothing}\index{Lowess smoothing|see{Time series smoothing!Lowess smoothing}} (locally weighted scatterplot smoothing) combines a multiple regression model with a k-nearest-neighbour-based model. Each point on the smoothed time series is estimated by a weighted least squares regression over a local neighbourhood of $f$ observations that are closest in time to the target point. The weights decrease with distance from the target observation, thereby providing robustness against outliers and yielding a smooth curve that closely follows the data. 
+\emph{Lowess Regression}\index{Time series smoothing!Lowess smoothing}\index{Lowess smoothing|see{Time series smoothing!Lowess smoothing}} (locally weighted scatterplot smoothing) combines a multiple regression model with a k-nearest-neighbour-based model (Figure~\ref{fig:figure16}). Each point on the smoothed time series is estimated by a weighted least squares regression over a local neighbourhood of $f$ observations that are closest in time to the target point. The weights decrease with distance from the target observation, thereby providing robustness against outliers and yielding a smooth curve that closely follows the data. 
 
+\begin{withcode}
 The R function \texttt{lowess()} uses the \texttt{f} parameter for specifying the proportion of observations used for the regressions. An example result is shown in Figure~\ref{fig:figure16}.
 
 \begin{Rcode}
 # Apply lowess smoothing
 lowess(soi, f=0.1)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -371,7 +390,7 @@ lowess(soi, f=0.1)
 
 \subsubsection*{Smoothing Splines}
 
-\emph{Smoothing splines}\index{Time series smoothing!Smoothing splines}\index{Smoothing splines|see{Time series smoothing!Smoothing splines}} are a method that fits a smooth, flexible ''spline'' function to the data. Smoothing splines balance the fit of the spline to the data against the smoothness of the spline curve and are essentially penalized polynomial regression models that fit the model:
+\emph{Smoothing splines}\index{Time series smoothing!Smoothing splines}\index{Smoothing splines|see{Time series smoothing!Smoothing splines}} are a method that fits a smooth, flexible ''spline'' function to the data (Figure~\ref{fig:figure17}). Smoothing splines balance the fit of the spline to the data against the smoothness of the spline curve and are essentially penalized polynomial regression models that fit the model:
 
 \begin{align*}
 m_t = \beta_0 + \beta_1 t + \beta_2 t^2 + \beta_3 t^3
@@ -379,13 +398,14 @@ m_t = \beta_0 + \beta_1 t + \beta_2 t^2 + \beta_3 t^3
 \sum_{t=1}^n (x_t - m_t)^2 + \lambda \int \left( \dv[2]{m}{t} \right)^2 \, dt
 \end{align*}
 
+\begin{withcode}
 The \texttt{smooth.spline()} function uses cubic splines, that is polynomials of degree $3$. The smoothing parameter \texttt{spar} controls the regression penalty $\lambda$ in the equation above and thereby the degree of smoothing. The result for this example is shown in Figure~\ref{fig:figure17}.
 
 \begin{Rcode}
 # Apply smoothing splines
 smooth.spline(time(soi), soi, spar=0.5)
 \end{Rcode}
-
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -394,6 +414,7 @@ smooth.spline(time(soi), soi, spar=0.5)
 \label{fig:figure17}
 \end{figure}
 
+\begin{withcode}
 \begin{exercisebox}
 \begin{enumerate}
 \item Generate 100 observations from the autoregression model $x_t = -.9x_{t-2} + w_t$ with $\sigma^2_w = 1$
@@ -407,6 +428,7 @@ smooth.spline(time(soi), soi, spar=0.5)
 \item Generate 100 observations from the sinusoidal series $x_t = \cos(2 \pi t / 4)$ and add $N(0,1)$ noise. Repeat the four smoothing exercises. Compare and contrast the results of these exercises. Which smoothing is more appropriate for which type of time series data?
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{Time Series Regression}
 
@@ -421,7 +443,10 @@ Consider an epidemiological example with three weekly time series, one expressin
 \label{fig:figure11}
 \end{figure}
 
-Time series regression uses ordinary least squares (OLS) regression models where each series is a predictor variable. It essentially neglects the time aspect of the time series data. The following R code block shows examples of time series regression to predict or explain mortality. Note the use of the \texttt{time()} function extract the timestamps from the time series data.
+Time series regression uses ordinary least squares (OLS) regression models where each series is a predictor variable. It essentially neglects the time aspect of the time series data. 
+
+\begin{withcode}
+The following R code block shows examples of time series regression to predict or explain mortality. Note the use of the \texttt{time()} function extract the timestamps from the time series data.
 
 \begin{Rcode}
 # Use data from the astsa library
@@ -442,8 +467,11 @@ summary(lm(cmort ~ time(cmort) + temp))
 summary(lm(cmort ~ time(cmort) + temp + temp.2))
 summary(lm(cmort ~ time(cmort) + temp + temp.2 + part))
 \end{Rcode}
+\end{withcode}
 
-Time series regression can also use lagged time series data, that is, data of the same series that is shifted backward in time. This is somewhat similar to the autoregressive models defined below. The following R code block lags the temeratur by two weeks and by four weeks. It then uses \texttt{ts.intersect()} to combine the time series in a data frame for the times where they intersect. The data frame is then be used in an OLS regression; different models could be fitted to identify the best explanation of mortality.
+Time series regression can also use lagged time series data, that is, data of the same series that is shifted backward in time. This is somewhat similar to the autoregressive models defined below. 
+\begin{withcode}
+The following R code block lags the temeratur by two weeks and by four weeks. It then uses \texttt{ts.intersect()} to combine the time series in a data frame for the times where they intersect. The data frame is then be used in an OLS regression; different models could be fitted to identify the best explanation of mortality.
 
 \begin{Rcode}
 # Lag the temperature
@@ -459,6 +487,7 @@ temp.df <- ts.intersect(cmort, time(cmort), part,
 summary(lm(cmort ~ time.cmort. + temp + temp.2 + 
                    temp.l.2 + temp.l.4 + part, data=temp.df))
 \end{Rcode}
+\end{withcode}
 
 \section{Stationarity}
 
@@ -526,7 +555,28 @@ Similar to the sample autocovariance, the sample ACF for lag $h$ is defined as\i
 \hat\rho_x(h) = \frac{\hat\gamma(h)}{\sqrt{\hat\gamma(h) \hat\gamma(0)}} = \frac{\hat\gamma(h)}{\hat\gamma(0)} \quad \text{\small (weak stationarity)}
 \end{align*}
 
-\noindent where the last step again assumes weak stationarity.
+\noindent where the last step again assumes weak stationarity. See Figure~\ref{fig:figure8a} for an example of ACF at different lags.
+
+\begin{withcode}
+The following example in R uses the \texttt{soi} data set and the \texttt{lag1.plot()} from the \texttt{astsa} library to provide also a graphical display of the autocorrelations at various lags, as shown in Figure~\ref{fig:figure8a}.
+
+\begin{Rcode}
+library(astsa)
+
+# Compute and plot the ACF for different lags
+acf1(soi, gg=T, co=3, lwd=2)
+
+# Scatterplot of original versus or lags up to 6, with ACF values
+lag1.plot(soi, max.lag = 6, gg=T, col=4, lwl=3)
+\end{Rcode}
+\end{withcode}
+
+\begin{figure}
+\centering
+\includegraphics[height=3.75in]{figure8a.pdf}
+\caption{Autocorrelations at six different lags}
+\label{fig:figure8a}
+\end{figure}
 
 To test whether the ACF of any sequence for lag $h$ is statistically different from $0$, note that the large-sample distribution of $\hat{\rho}_{x}(h)$ is normal with mean $0$ and standard deviation
 \begin{align*}
@@ -538,9 +588,11 @@ To test whether the ACF of any sequence for lag $h$ is statistically different f
 -\frac{1}{n} \pm \frac{2}{\sqrt{n}}
 \end{align*}
 
-If the sample ACF of $n$ values of a time series for a given lag exceeds the lower or upper bounds of the confidence interval, the ACF is statistically significantly different from $0$, and the time series is unlikely to be white noise.
+If the sample ACF of $n$ values of a time series for a given lag exceeds the lower or upper bounds of the confidence interval, the ACF is statistically significantly different from $0$, and the time series is unlikely to be white noise (Figure~\ref{fig:figure7a}).
 
+\begin{withcode}
 The following R code block illustrates the autocorrelation function using the standard \texttt{cor()} function to compute the correlations at different lags and the \texttt{acf1()} function of the \texttt{astsa} library that will automatically lag the time series and output and optionally plot the ACF values at different lags, creating a plot as in Figure~\ref{fig:figure7a}.
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -549,6 +601,7 @@ The following R code block illustrates the autocorrelation function using the st
 \label{fig:figure7a}
 \end{figure}
 
+\begin{withcode}
 \begin{Rcode}
 library(astsa)
 # Create Gaussian white noise
@@ -565,25 +618,7 @@ acf <- acf1(t, plot=FALSE)
 # With plot
 acf1(t, gg=T, col=7, lwd=3)
 \end{Rcode}
-
-The following example in R uses the \texttt{soi} data set and the \texttt{lag1.plot()} from the \texttt{astsa} library to provide also a graphical display of the autocorrelations at various lags, as shown in Figure~\ref{fig:figure8a}.
-
-\begin{Rcode}
-library(astsa)
-
-# Compute and plot the ACF for different lags
-acf1(soi, gg=T, co=3, lwd=2)
-
-# Scatterplot of original versus or lags up to 6, with ACF values
-lag1.plot(soi, max.lag = 6, gg=T, col=4, lwl=3)
-\end{Rcode}
-
-\begin{figure}
-\centering
-\includegraphics[height=3.75in]{figure8a.pdf}
-\caption{Autocorrelations at six different lags}
-\label{fig:figure8a}
-\end{figure}
+\end{withcode}
 
 The \emph{partial autocorrelation function} (PACF)\index{Autocorrelation function!partial}\index{PACF|see{Autocorrelation function!partial}} of a time series is a measure of the correlation between observations at two points in time, accounting for the correlations of the observations at all shorter intervals. Essentially, it reflects the direct effect of past data points on the future data point, after removing the effects of intermediate data points. PACF can be thought of as the correlation between a variable and its lag $h$ that is not explained by correlations at all lower-order lags. It is formally defined as the correlation between $x_{t+h}$ and $x_t$ with the linear dependence of $\{x_{t+1}, \ldots, x_{t+h-1}\}$ on each removed:
 
@@ -593,6 +628,7 @@ The \emph{partial autocorrelation function} (PACF)\index{Autocorrelation functio
  \end{cases}
 \end{align*}
 
+\begin{withcode}
 The following R code block illustrates the use of the partial autocorrelation function of a time series, first using the standard \texttt{cor()} function for a lag of $3$ and then the \texttt{acf1()} function of the \texttt{astsa} library that automatically computes the PACF for different lags.
 
 \begin{Rcode}
@@ -617,6 +653,7 @@ pacf_lag3 <- cor(residuals(final_model), data$t3)
 # The easy way
 acf1(t, plot=F, pacf=T)
 \end{Rcode}
+\end{withcode}
 
 \section{Dealing with Non-Stationarity}
 
@@ -635,7 +672,7 @@ Popular \emph{time series transformations} are the log transformation, the squar
 
 \subsubsection*{Detrending}
 
-\emph{Detrending}\index{Detrending} a time series involves removing the trend component from the data, thereby isolating the non-trend components such as seasonality and irregular fluctuations. This is particularly useful in time series analysis because many statistical methods assume stationarity (constant mean and variance), and a trend violates these assumptions.
+\emph{Detrending}\index{Detrending} a time series involves removing the trend component from the data, thereby isolating the non-trend components such as seasonality and irregular fluctuations (Figure~\ref{fig:figure39a}). This is particularly useful in time series analysis because many statistical methods assume stationarity (constant mean and variance), and a trend violates these assumptions.
 
 A common detrending method is to fit a regression model to the trend component and then subtract the fitted values, that is, the trend, from the original series. Linear regression is widely used for linear trends, but polynomial or more complex models can be fitted depending on the nature of the trend.
 
@@ -651,6 +688,7 @@ where $\mu_t$ is the trend and $y_t$ a stationary series. Then detrending compri
   \item Work with residuals, e.g. $\hat y_t = x_t - \hat \mu_t = x_t - \hat\beta_0 - \hat\beta_1 t$
 \end{enumerate}
 
+\begin{withcode}
 The following R code block shows how to detrend a time series using linear regression, producing the graphs shown in Figure~\ref{fig:figure39a}.
 
 \begin{Rcode}
@@ -667,6 +705,7 @@ par(mfrow=c(2,1))
 tsplot(t, type="l", main="original", col=3)
 tsplot(detrended, type="l", main="detrend", col=2)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -677,7 +716,7 @@ tsplot(detrended, type="l", main="detrend", col=2)
 
 \subsubsection*{Differencing}
 
-\emph{Differencing}\index{Differencing} involves computing the differences between consecutive observations in the original time series. The primary goal of differencing is to remove trends and seasonality in order to stabilize the mean of the time series by reducing changes in the level of a time series over time. Assume again that 
+\emph{Differencing}\index{Differencing} involves computing the differences between consecutive observations in the original time series (Figure~\ref{fig:figure40a}). The primary goal of differencing is to remove trends and seasonality in order to stabilize the mean of the time series by reducing changes in the level of a time series over time. Assume again that 
 
 \begin{align*}x_t = \mu_t + y_t\end{align*}
 
@@ -694,7 +733,9 @@ x_t - x_{t-1} &= (\mu_t + y_t) - (\mu_{t-1} + y_{t-1}) \\
 
 As seen above, the first difference can remove a linear trend. However, sometimes the first difference is not enough to achieve stationarity. In such cases, the second difference can be used to remove a quadratic trend and higher-order differences can be computed if the series still shows non-stationary behavior after the second differencing.
 
+\begin{withcode}
 The following R code shows the effect of differencing on a simulated time series. Differencing uses the \texttt{diff()} function. The resulting plots are shown in Figure~\ref{fig:figure40a}.
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -703,6 +744,7 @@ The following R code shows the effect of differencing on a simulated time series
 \label{fig:figure40a}
 \end{figure}
 
+\begin{withcode}
 \begin{Rcode}
 set.seed(42)
 # Simulating a time series with trend
@@ -719,9 +761,11 @@ tsplot(diff(t, differences = 1), type="l",
 tsplot(diff(t, differences = 2), type="l", 
     main="second difference", col=5)
 \end{Rcode}
+\end{withcode}
 
 To see illustrate the effects of detrending and differencing on the ACF for a real time series, consider the chicken price data set \texttt{chicken} in the \texttt{astsa} library. Figure~\ref{fig:figure41} shows the ACF for the original, the detrended, and the differenced series (first and second differences). While the original time series is clearly non-stationary with large ACF values (top left panel), the detrended series improves this somewhat, but still shows large ACF (top right panel). First differencing reduces the ACF values and shows a cyclical trend with a cycle of 6 months, with significant ACF values (bottom left panel). The second difference in the bottom right panel of Figure~\ref{fig:figure41} still shows significant ACF values at the 6 month and 12 month lags but non-significant ACF for most other lags. 
 
+\begin{withcode}
 \begin{Rcode}
 acf1(chicken, max.lag=48, main="original", col=1, gg=T)
 
@@ -733,6 +777,7 @@ acf1(diff(chicken), max.lag=48,
 acf1(diff(chicken, differences=2), max.lag=48, 
     main="sec diff", col=4, gg=T)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -741,6 +786,7 @@ acf1(diff(chicken, differences=2), max.lag=48,
 \label{fig:figure41}
 \end{figure}
 
+\begin{withcode}
 \begin{exercisebox}
 \begin{enumerate}
   \item Extend the mortality, temperature and pollution/particulate model by adding another component to the regression that accounts to the particulate four weeks prior; that is, add the lagged pressure $P_{t-4}$ to the regression.
@@ -772,6 +818,7 @@ Consider the two weekly time series \texttt{oil} and \texttt{gas} in the  \textt
 
 {\footnotesize \vspace{\baselineskip} Source: Shumway \& Stoffer, Chapter 2}
 \end{exercisebox}
+\end{withcode}
 
 \section{ARIMA Models}
 
@@ -816,8 +863,13 @@ The \emph{autoregressive operator} $\phi (B)$ is defined using the backshift ope
 \phi (B) x_t &= w_t
 \end{align*}
 
-The theoretical ACF of a given AR(p) model can be calculated analytically. In R, the \texttt{ARMAacf()} function can be used for this by spacifying the autoregressive coefficients $\phi$. The following R code block simulates 200 observations of an AR(2) time series and plots the simulated (blue) versus theoretical (red) ACF values, shown in Figure~\ref{fig:figure18}. The theoretical values can be used to determine whether a specific time series conforms to a particular AR(p) model. The ACF of an AR(p) model is characterized by a slow decline of its values past a lag of $p$, as shown in Figure~\ref{fig:figure18}.
+The theoretical ACF of a given AR(p) model can be calculated analytically. 
+\begin{withcode}
+In R, the \texttt{ARMAacf()} function can be used for this by spacifying the autoregressive coefficients $\phi$. The following R code block simulates 200 observations of an AR(2) time series and plots the simulated (blue) versus theoretical (red) ACF values, shown in Figure~\ref{fig:figure18}. 
+\end{withcode}
+The theoretical values can be used to determine whether a specific time series conforms to a particular AR(p) model. The ACF of an AR(p) model is characterized by a slow decline of its values past a lag of $p$, as shown in Figure~\ref{fig:figure18}.
 
+\begin{withcode}
 \begin{Rcode}
 # Theoretical ACF of an AR(2) model
 ARMAacf(ar=c(1.5, -.75), lag.max=10)
@@ -828,6 +880,7 @@ acf1(t.ar, max.lag=25, gg=T, lwd=2, col=4)
 # Add the theoretical values for comparison
 lines(ARMAacf(ar=c(1.5, -.75), lag.max=26)[-1], lwd=2, col=2)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -860,8 +913,13 @@ x_t &= \theta(B) w_t
 %\end{align*}
 %\end{frame}
 
-The theoretical ACF of a given MA(q) model can be calculated analytically. In R, the \texttt{ARMAacf()} function can be used for this, by specifying the moving average coefficients $\theta$. Similar to the previous example, the following R code simulates 200 observations of an MA(2) model and plots the simulated (blue) versus theoretical (red) ACF values, shown in Figure~\ref{fig:figure19}. In contrast to an AR(2) model, the ACF does not gradually diminish, but becomes 0 after lag $q$. The simulated values in Figure~\ref{fig:figure19} confirm this as they are largely stastistically non-significant past a lag of 2.
+The theoretical ACF of a given MA(q) model can be calculated analytically. 
+\begin{withcode}
+In R, the \texttt{ARMAacf()} function can be used for this, by specifying the moving average coefficients $\theta$. Similar to the previous example, the following R code simulates 200 observations of an MA(2) model and plots the simulated (blue) versus theoretical (red) ACF values, shown in Figure~\ref{fig:figure19}.
+\end{withcode} 
+In contrast to an AR(2) model, the ACF does not gradually diminish, but becomes 0 after lag $q$. The simulated values in Figure~\ref{fig:figure19} confirm this as they are largely stastistically non-significant past a lag of 2.
 
+\begin{withcode}
 \begin{Rcode}
 # Theoretical ACF of an MA(2) model
 ARMAacf(ma=c(1.5, -.75), lag.max=10)
@@ -872,6 +930,7 @@ acf1(t.ma, gg=T, lwd=2, col=4)
 # Add the theoretical values for comparison
 lines(ARMAacf(ma=c(1.5, -.75), lag.max=26)[-1], lwd=2, col=2)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -894,6 +953,7 @@ It turns out that every ARMA model has an equivalent MA only model. However, thi
 
 Moreover, many ARMA models (the class of invertible ones) have an equivalent AR models. Again, this equivalent model has an infinite number of AR terms and again, in practice, reasonable approximations can be achieved by retaining a limited number of AR terms.
 
+\begin{withcode}
 Equivalent models can be found using the \texttt{ARMAtoMA()} and \texttt{ARMAtoAR()} functions in the \texttt{astsa} library, which return the MA and AR coefficients of the equivalent models, as shows in the following R code example:
 
 \begin{Rcode}
@@ -905,6 +965,7 @@ ARMAtoMA(ar = c(-.5), ma = c(-.9), lag.max=10)
 ARMAtoAR(ma = c(1.5, -.75), lag.max=10)
 ARMAtoAR(ar = c(-.5), ma = c(-.9), lag.max=10)
 \end{Rcode}
+\end{withcode}
 
 As shown in Figures~\ref{fig:figure18} and \ref{fig:figure19}, the ACF of AR and MA models behave differently. Similarly, the PACF behaves differently for the two types of models. Figure~\ref{fig:figure20} shows the ACF and the PACF for an AR(2) model. While the ACF diminishes gradually, the PACF is zero immediately after lag $2$. These properties of the ACF and PACF can be used to select a suitable statistical model to fit a given time series, as shown in Table~\ref{tab:modelselection}. When a AR gradually diminishes and the PACF cuts off suddenly after a lag $p$, this is an indication that an AR(p) model is suitable. Conversely, when the ACF cuts off suddenly after lag $q$ and the PACF diminishes gradually, this is an indication for an MA(q) model. When neither ACF nor PACF cut off suddenly, a mixed ARMA(p, q) model should be fitted.
 
@@ -961,8 +1022,9 @@ Fitting an ARIMA model to time series data involves the following steps, from in
 
 Plotting the data is useful as an initial visual assessment of stationarity, trends, or seasonality. A number of transformations have been discussed earlier that may be useful to ''stabilize'' a time series. If the series after transformation is still not stationary, differencing can remove trends and seasonal components. Determining the order of differencing needed to achieve stationarity is often done by trial and error, reassessing stationarity after each difference. A slow decay in the sample ACF $\hat\rho(h)$ typically indicates a need for differencing. However, over-differencing can introduce dependence where non actually exists. Typically, differencing should be done in small steps, beginning with a first difference, and then repeatedly checked with the ACF.
 
-Identifying the initial ARMA order $p$ and $q$ should be done based on the ACF and PACF functions, using Table~\ref{tab:modelselection} as a basis. Often, multiple model may need to be tried, altering the AR and MA orders $p$ and $q$ in small steps. 
+Identifying the initial ARMA order $p$ and $q$ should be done based on the ACF and PACF functions, using Table~\ref{tab:modelselection} as a basis. Often, multiple model may need to be tried, altering the AR and MA orders $p$ and $q$ in small steps (Figure~\ref{fig:figure22}). 
 
+\begin{withcode}
 The following R code example uses a quarterly time series of the US gross national product (\texttt{gnp}) from the \texttt{astsa} library as an example. The \texttt{acf2()} function of the \texttt{astsa} library produces simultaneous plots of ACF and PACF for ease-of-use. The time series is then log-transformed and differenced once. The results are shown in Figure~\ref{fig:figure22}.
 
 \begin{Rcode}
@@ -977,6 +1039,7 @@ plot(gnpgr)
 # Plot ACF of transformed and differenced data
 acf2(gnpgr, 24)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -986,7 +1049,9 @@ acf2(gnpgr, 24)
 \label{fig:figure22}
 \end{figure}
 
-Note how the ACF of the original series diminishes very gradually, indicating the need for differencing. The sample ACF of the transformed and differenced series shows a gradual decline after a lag of $2$, while the sample PACF of the transformed and differenced series cuts off to non-significance after a lag of $1$. Together, this indicates that the time series may be appropriately modeled using an AR(1) model or an MA(2) model. Converting the AR(1) model to an equivalent MA model shows that the two initial models are approximately equivalent. Note that the following R code block uses the \texttt{sarima()} function from the \texttt{astsa} library because this function also produces the diagnostic plots shown in Figures~\ref{fig:figure24} and \ref{fig:figure25}. This function can fit ARIMA models, as in the following example, but can also fit seasonal ARIMA, or SARIMA, models.
+Note how the ACF of the original series diminishes very gradually, indicating the need for differencing. The sample ACF of the transformed and differenced series shows a gradual decline after a lag of $2$, while the sample PACF of the transformed and differenced series cuts off to non-significance after a lag of $1$. Together, this indicates that the time series may be appropriately modeled using an AR(1) model or an MA(2) model. Converting the AR(1) model to an equivalent MA model shows that the two initial models are approximately equivalent. 
+\begin{withcode}
+Note that the following R code block uses the \texttt{sarima()} function from the \texttt{astsa} library because this function also produces the diagnostic plots shown in Figures~\ref{fig:figure24} and \ref{fig:figure25}. This function can fit ARIMA models, as in the following example, but can also fit seasonal ARIMA, or SARIMA, models.
 
 \begin{Rcode}
 # Fit an AR(1) model
@@ -996,6 +1061,7 @@ sarima(gnpgr, 0, 0, 2)
 # Models are roughly equivalent
 ARMAtoMA(ar=0.35, ma=0, 10)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -1033,6 +1099,7 @@ Because fitting a model typically uses maximum-likelihood estimation (MLE), the 
 \operatorname{BIC} &= -2 \log L + k \log n \qquad \text{\footnotesize Bayesian Information Criterion}\index{Bayesian information criterion}\index{BIC|see{Bayesian information criterion}}
 \end{align*}
 
+\begin{withcode}
 \noindent The R output of the \texttt{sarima()} function shows very similar model fit values:
 
 \begin{textcode}
@@ -1046,14 +1113,17 @@ AIC = -6.44694  AICc = -6.446693  BIC = -6.400958
 
 AIC = -6.450133  AICc = -6.449637  BIC = -6.388823 
 \end{textcode}
+\end{withcode}
 
-Once the analyst has selected the final model and is satisfied that it fits well, future values of the time series can be forecasted from the fitted model. An important property of ARIMA predictions is that they quickly settle to the mean, with a constant prediction error, reflecting the stationarity of the differenced and transformed time series.
+Once the analyst has selected the final model and is satisfied that it fits well, future values of the time series can be forecasted from the fitted model. An important property of ARIMA predictions is that they quickly settle to the mean, with a constant prediction error, reflecting the stationarity of the differenced and transformed time series (Figure~\ref{fig:figure21}).
 
+\begin{withcode}
 The following R code example shows forecasting from using the \texttt{sarima.for()} function in the \texttt{astsa} library. The results are shown visually in Figure~\ref{fig:figure21}, where the prediction error is indicated by the gray shading.
 
 \begin{Rcode}
 forecasts <- sarima.for(gnpgr, n.ahead=10, p=1,d=0,q=0)
 \end{Rcode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -1100,7 +1170,8 @@ ARCH models can be combined with ARIMA models so that the ARCH model describes t
 x_t = \phi_0 + \phi_1 x_{t-1} + \sigma_t \epsilon_t \quad \text{where} \quad \sigma_t = \alpha_0 + \alpha_1 x_{t-1}^2
 \end{align*} 
 
-As an example, consider the US gross national product quarterly time series from the \texttt{astsa} library. An initial AR(1) model shows that the squared residuals have some dependence. This dependence can be accounted for by explicitly modeling the residuals as ARCH(1). The \texttt{fGarch} library for R provides the \texttt{garchFit()} function to these kinds of models. The squared residuals of the final model are shown in Figure~\ref{fig:figure35}.
+\begin{withcode}
+As an example, consider the US gross national product quarterly time seriess. An initial AR(1) model shows that the squared residuals have some dependence. This dependence can be accounted for by explicitly modeling the residuals as ARCH(1). The \texttt{fGarch} library for R provides the \texttt{garchFit()} function to these kinds of models. The squared residuals of the final model are shown in Figure~\ref{fig:figure35}.
 
 \begin{figure}
 \centering
@@ -1122,6 +1193,7 @@ library(fGarch)
 # series and show the summary
 summary(garchFit(~arma(1,0)+garch(1,0), diff(log(gnp))))
 \end{Rcode}
+\end{withcode}
 
 An extension to ARCH is to model the variance not only as a function of previous returns, but also as a function of the $p$ prior variances. In other words, the variance is modelled as an autoregressive model in addition to the ARCH(q) terms. This leads to a Generalized ARCH model, that is, a GARCH(p, q) model:
 
@@ -1131,6 +1203,7 @@ An extension to ARCH is to model the variance not only as a function of previous
            &= \omega + \sum_{j=1}^q \alpha_j r_{t-j}^2 + \sum_{j=1}^p \beta_j \sigma_{t-j}^2
 \end{align*}
 
+\begin{withcode}
 The following R example models the Dow Jones Industrial Average stock market time series values (data set \texttt{djiar} in library \texttt{astsa}) using an AR(1)+GARCH(1,1) model. Parameter estimates are shown below. Various diagnostic plots are available using the \texttt{plot()} function for the resulting \texttt{garchFit} object and are shown in Figure~\ref{fig:figure38a}. 
 
 \begin{Rcode}
@@ -1166,6 +1239,9 @@ shape   5.979e+00   7.917e-01    7.551 4.31e-14 ***
 Log Likelihood:
  8249.619    normalized:  3.27756 
 \end{textcode}
+\end{withcode}
+
+\begin{withcode}
 
 \section*{Appendix -- Basic Time Series Functions in R}
 
@@ -1194,6 +1270,8 @@ Log Likelihood:
 \texttt{sarima} & Fit seasonal ARIMA models (and nice diagnostic plots) \\
 \texttt{lag1.plot} & Scatterplot of lagged values \\ \hline
 \end{tabularx}
+
+\end{withcode}
 
 \FloatBarrier
 \section{Review Questions}

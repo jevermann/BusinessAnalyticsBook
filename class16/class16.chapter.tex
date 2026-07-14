@@ -10,8 +10,12 @@ After reading this chapter, you should be able to:
    \item Explain and calculate basic one-dimensional and two-dimensional convolutions, including padding and striding.
    \item Explain the purpose of different pooling methods for convolutional networks and calculate basic pooling in one and two dimensions.
    \item Explain the building blocks of a ConvNet for classification, their purpose, and the concept of a feature map.
-   \item  Build convolutional networks for image and text classification using popular neural network software tools.
+\begin{withcode}
+   \item Build convolutional networks for image and text classification using popular neural network software tools.
+\end{withcode}
+\begin{advanced}
    \item Explain the concept of a word embedding and its use in neural networks.
+\end{advanced}
 \end{itemize}
 
 \section*{Sources and Further Reading}
@@ -28,6 +32,7 @@ Chapter 13, 14, 15
 
 The book by Murphy is freely available and provides three chapters on neural networks, one for structured data, one for images, and one for sequences. It provides significant depth on convolutional and recurrent network architectures, fitting the models, and problems that the data analyst may encounter. 
 
+\begin{withcode}
 \begin{resourcebox}
 Tensorflow Guides: \\
 
@@ -37,6 +42,7 @@ Tensorflow Guides: \\
 \end{resourcebox}
 
 This course uses the Tensorflow programming framework for neural network applications. The Tensorflow website has a multitude of introductory and advanced guides and tutorial that cover all aspects of machine learning with neural networks. 
+\end{withcode}
 
 \section{Introduction}
 
@@ -288,7 +294,7 @@ Finally, layers 4 and 5 have learned to extract specific objects or object parts
 
 \FloatBarrier
 
-\section{Image Classification Example using Tensorflow}
+\section{Example -- Image Classification}
 
 This section illustrates how to implement convolutional neural networks in Tensorflow/Keras\footnote{Python code for this example is taken from \href{https://www.tensorflow.org/tutorials/images/cnn}{TensorFlow.org} that is made available under a \href{https://www.apache.org/licenses/LICENSE-2.0}{Apache 2.0 license}.}. This example uses the CIFAR10 data set, a standard data set used to benchmark image classification methods. The data set consists of 60,000 images with resolution of $32 \times 32$ pixels and 3 RGB channels. Figure~\ref{fig:cifar10sample} shows the first 25 training images. There are ten classes of images in this data set. The latest classification error rates on this data set are less then 0.5\%, showing that it is no longer useful as a realistic or competitive benchmark --- it is essentially a solved problem. However, due to the small image size and data set size, it is computationally easy to analyze and useful as an illustrative example. 
 
@@ -307,6 +313,7 @@ Complete implementations for this and the other examples in this chapter are ava
 The project can be cloned from this URL: \small\url{https://github.com/jevermann/busi4720-ml.git}\normalsize
 \end{resourcebox}
 
+\begin{withcode}
 The data set is part fo the Keras Python package, making import easy. The function \texttt{load\_data()} provides separated training and testing images and labels:
 
 \begin{pythoncode}
@@ -441,6 +448,7 @@ In particular, explore the trade-offs between using a large number of smaller fi
 
 Explore how does the choice of pooling strategy (max vs average) affects the features extracted by a convolutional neural network and the predictive performance of the model.\\
 \end{exercisebox}
+\end{withcode}
 
 \section{Other Computer Vision Tasks for CNNs}
 
@@ -463,7 +471,6 @@ Figure~\ref{fig:screen10_chap16} illustrates the problem for the input image in 
 \begin{align*}
 f_\theta: R^{H\times W \times K} \rightarrow [0,1]^{A \times A} \times \{1, \ldots, C\}^{A \times A} \times (R^4)^{A \times A}
 \end{align*}
-
 
 Early approaches like R-CNN (Regions with CNN features) generated potential bounding boxes in an image and then ran a classifier on these regions to detect objects. More advanced models like YOLO (You Only Look Once) and SSD (Single Shot Detector) view this as a single regression problem, straight from image pixels to bounding box coordinates and class probabilities.
 
@@ -492,14 +499,17 @@ For some applications, object detection and semantic segmentation must be combin
 \label{fig:street}
 \end{figure}
 
+\begin{withcode}
 \begin{resourcebox}
 The Keras web site has a large number of Keras tutorials on all kinds of computer vision problems, including object detection and semantic segmentation. See this site for more information: \small\url{https://keras.io/examples/vision/}\normalsize.
 \end{resourcebox}
+\end{withcode}
 
-\section{Text Classification Example using Tensorflow}
+\section{Example -- Text Classification}
 
 Convolutional neural networks, while originally developed and most widely used for image and video processing, have also been adapted to text classification tasks. This adaptation builds on the hierarchical structure of text, much like the hierarchical features in images, to effectively classify text into predefined categories. Common applications include sentiment analysis, topic labeling, spam detection, and others. CNNs have emerged as an alternative to RNNs (recurrent neural networks).
 
+\begin{withcode}
 The two examples in this section use the StackOverflow 16k data set\footnote{Python code for this example is taken from \href{https://www.tensorflow.org/tutorials/load_data/text}{TensorFlow.org} that is made available under a \href{https://www.apache.org/licenses/LICENSE-2.0}{Apache 2.0 license}.}. This data set consists of 16,000 user-generated questions about programming problems from the StackOverflow web site. The task is to classify the questions by programming language. Four classes are defined: CSharp, Java, JavaScript, and Python. The data set can be downloaded directly from the Tensorflow website.
 
 First, import the required packages:
@@ -560,6 +570,7 @@ raw_val_ds=utils.text_dataset_from_directory(
 
 raw_test_ds=utils.text_dataset_from_directory(test_dir, batch_size=32)
 \end{pythoncode}
+\end{withcode}
 
 The first step in applying neural networks to text data is to pre-process and standardize the text representation itself. This includes at least the following activities:
 
@@ -569,7 +580,9 @@ The first step in applying neural networks to text data is to pre-process and st
    \item \emph{Vectorization}\index{Vectorization (of text)} converts tokens into numberical values for input to the neural network. It uses methods such as one-hot encoding, word embeddings, or relative word frequencies.
 \end{itemize}
 
-\subsection[Bag-ofWord encoding]{Text classification using Bag-of-Word encoding without a CNN}
+\begin{advanced}
+
+\subsection[Bag-ofWord encoding]{Bag-of-Word encoding}
 
 This example uses the ''Bag-of-Words'' \index{Bag-of-words model} word frequency model that encodes the input as the number of times that a word occurs. Consider the following example where the input sentence is represented as a dictionary of word counts. 
 
@@ -578,7 +591,12 @@ John likes to watch movies. Mary likes movies too.
 {"John":1,"likes":2,"to":1,"watch":1, "movies":2,"Mary":1,"too":1}
 \end{textcode}
 
-This is a simple encoding that may suffice for the classification task, but it does neglect word order which could be important for other tasks. The second example below will use a different encoding that respects word order and is therefore suitable for the use with CNNs. This first, simple example serves as a baseline to compare the later example to.
+This is a simple encoding that may suffice for the classification task, but it does neglect word order which could be important for other tasks. 
+
+\end{advanced}
+
+\begin{withcode}
+The example below uses a different encoding that respects word order and is therefore suitable for the use with CNNs. This first, simple example serves as a baseline to compare the later example to.
 
 Keras provides an easy way to preprocess text using the \texttt{TextVectorization} layer. The following Python code block creates such a layer for a maximum of 10,000 different tokens (approximately the first 10,000 unique words). It standardizes the input by converting all words to lower-case and removing punctuation. Tokenization then splits the input on whitespace into separate words. The words are not stemmed or processed further. Finally, vectorization produces ''multi-hot'' output, that is, the frequency of words for each input as seen in the above example. The \texttt{TextVectorization} layer is then adapted to the training set. Essentially, adaptation creates the list of 10,000 unique words to count when the actual input is processed.
 
@@ -655,9 +673,15 @@ Adapt the network architecture to identify the impact on training and validation
    \end{enumerate}
 Comment on your findings and identify the best model.
 \end{exercisebox}
+\end{withcode}
 
-\subsection[Word Embedding]{Text classification using word embedding with a CNN}
+\begin{advanced}
 
+\subsection[Word Embedding]{Word Embeddings}
+
+\end{advanced}
+
+\begin{withcode}
 The example in this section illustrates a different way to encode words that is more space efficient while also accounting for the word sequence in a text. Instead of counting the number of times a word appears in the input, each word is first represented by a unique integer number. 
 
 The Keras \texttt{TextVectorization} layer can perform this, with a small change from the above example: Instead of the \texttt{multi\_hot} output mode, the following code block specifies the \texttt{int} output model for the layer:
@@ -703,7 +727,11 @@ shape=(), dtype=string)
 
 \paragraph*{Word Embeddings}
 
-However, these word numbers should not be treated as numerical data; they are categorical with no implicit ordering. Each word number is entirely abitrary and the numbers could be permuted in any way. So rather than operate on token numbers this example uses \emph{word embeddings}\index{Embedding}\index{Word embedding|see{Embedding}} to generate an \emph{embedding vector}\index{Embedding vector|see{Embedding}} of numbers of length $k$ that maps each word to a point in a $k$ dimensional space. That is, the set of numbers in the embedding vector characterizes or describes each word. The dimensionality of the space $k$ can be chosen arbitrarily. Larger $k$ can provide a better separation of many different unique words in the vector space, but require more computation, more memory, and may be more prone to overfitting. Smaller $k$ may provide a poorer separation of words in the vector space, that is, multiple words are close together and difficult to differentiate. Essentially, word embeddings function as a \emph{lookup table} where each row represents one word and the data in that row forms the embedding vector. Figure~\ref{fig:embedding} shows a simple example of a word embedding table with $k=4$ dimensions, that is, each word is represented by an embedding vector of length $4$. In practice, dimensionality is often chosen as $\operatorname{log}_{10}$ or a similar function of the input vocabulary size. 
+However, these word numbers should not be treated as numerical data; they are categorical with no implicit ordering. Each word number is entirely abitrary and the numbers could be permuted in any way. 
+\end{withcode}
+
+\begin{advanced}
+Rather than operate on token numbers \emph{word embeddings}\index{Embedding}\index{Word embedding|see{Embedding}} generate an \emph{embedding vector}\index{Embedding vector|see{Embedding}} of numbers of length $k$ that maps each word to a point in a $k$ dimensional space. That is, the set of numbers in the embedding vector characterizes or describes each word. The dimensionality of the space $k$ can be chosen arbitrarily. Larger $k$ can provide a better separation of many different unique words in the vector space, but require more computation, more memory, and may be more prone to overfitting. Smaller $k$ may provide a poorer separation of words in the vector space, that is, multiple words are close together and difficult to differentiate. Essentially, word embeddings function as a \emph{lookup table} where each row represents one word and the data in that row forms the embedding vector. Figure~\ref{fig:embedding} shows a simple example of a word embedding table with $k=4$ dimensions, that is, each word is represented by an embedding vector of length $4$. In practice, dimensionality is often chosen as $\operatorname{log}_{10}$ or a similar function of the input vocabulary size. 
 
 \begin{figure}
 \centering
@@ -715,6 +743,9 @@ However, these word numbers should not be treated as numerical data; they are ca
 \label{fig:embedding}
 \end{figure}
 
+\end{advanced}
+
+\begin{withcode}
 This example uses a sequential model beginning with the integer vectorization layer. An embedding layer with embedding size of 64 follows this. The input to the embedding layer is the output of the vectorization layer, that is, an integer for each token in the preprocessed input text. The embedding layer converts each word into a vector of 64 numeric values. The embedding layer is defined with a vocabulary size of 10,001 so that unknown tokens can be represented, that is, tokens not in the maximum 10,000 unique tokens of the vectorization layer. In effect, the embedding layer is a large lookup table with 10,001 rows and 64 columns. Hence, it contains 64,064 trainable parameters. The \texttt{mask\_zero} parameter for the embedding layer instructs the layer to treat the number $0$ as a padding value, rather than as the number for a specific word. Because the length of the word sequence can vary with the length of the input text, padding inputs with $0$ ensures that all inputs in batches are of the same size.
 
 A dropout layer with a dropout rate of $0.5$ is added to the sequential model for regularization. This is followed by a 1-dimensional convolution layer with kernel length of 5. The Conv1D layer uses 64 separate filters to produce 64 output channels from an input depth of 64. The global max pooling layer reduces the input to the maximum value along each convolution output channel.
@@ -797,6 +828,10 @@ In particular, explore the trade-offs between using a large number of smaller fi
 Explore how does the choice of pooling strategy (max vs average) affects the features extracted by a convolutional neural network and the predictive performance of the model.\\
 \end{exercisebox}
 
+\end{withcode}
+
+
+\FloatBarrier
 %\clearpage
 
 \section{Review Questions}
@@ -851,6 +886,7 @@ Explore how does the choice of pooling strategy (max vs average) affects the fea
     \item Discuss the computational trade-offs involved in running both object detection and semantic segmentation in real-time applications such as video surveillance.
     \item Consider the ethical implications of deploying CNN-based object detection and semantic segmentation technologies in public spaces. What privacy concerns arise, and how can they be mitigated?
 \end{enumerate}
+\begin{advanced}
 \paragraph*{Word Embeddings}
 \begin{enumerate}[nosep,resume*]
     \item Discuss the advantages of using word embeddings over traditional one-hot encoding in natural language processing.
@@ -861,3 +897,4 @@ Explore how does the choice of pooling strategy (max vs average) affects the fea
     \item How can embeddings be shared across different tasks or models in machine learning? Discuss the advantages and potential issues with this approach.
     \item Consider the ethical implications of using word embeddings in text processing. What biases might be inherent in pretrained embeddings, and how can they affect the outcomes of NLP applications?
 \end{enumerate}
+\end{advanced}

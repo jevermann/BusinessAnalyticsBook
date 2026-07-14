@@ -1,6 +1,14 @@
-.PHONY: book
+.PHONY: full
 book:
-	pdflatex --shell-escape --file-line-error-style busi4720.book.tex
+	export _BUSI4720_BOOK_CODE="Full"; pdflatex --shell-escape --file-line-error-style busi4720.book.tex
+
+.PHONY: NoCode
+book:
+	export _BUSI4720_BOOK_CODE="NoCode"; pdflatex --shell-escape --file-line-error-style busi4720.book.tex
+
+.PHONY: Simplified
+book:
+	export _BUSI4720_BOOK_CODE="Simplified"; pdflatex --shell-escape --file-line-error-style busi4720.book.tex
 
 .PHONY: zip
 zip:
@@ -23,16 +31,18 @@ clean:
 	find . -name "*.idx" -exec rm {} \;
 	find . -name "*.ilg" -exec rm {} \;
 	find . -name "*.ind" -exec rm {} \;
+	find . -name "comment.cut" -exec rm {} \;
+	find . -name "busi4720_book_code_tmp.txt" -exec rm {} \;
 
 squeaky: clean
 	find . -name "*.tex.bak" -exec rm {} \;
-	find . -name "*.tex~" -exec rm {} \;	
+	find . -name "*.tex~" -exec rm {} \;
 	
 .PHONY: all
-all: class1 class2 class3 class4 class5 class6 class7 class8 class9 class11 class12 class13 class14 class15 class16 class17 class18 class19 class20 class21 class22 class23 class24 vm book
+all: class1 class2 class3 class4 class5 class6 class7 class8 class9 class11 class12 class13 class14 class15 class16 class17 class18 class19 class20 class21 class22 class23 class24 math software commandline vm full
 
 .PHONY: chapters
-chapters: class1chapter class2chapter class3chapter class4chapter class5chapter class6chapter class7chapter class9chapter class11chapter class12chapter class13chapter class14chapter class15chapter class16chapter class17chapter class18chapter class19chapter class20chapter class21chapter class22chapter class23chapter class24chapter vmchapter
+chapters: class1chapter class2chapter class3chapter class4chapter class5chapter class6chapter class7chapter class9chapter class11chapter class12chapter class13chapter class14chapter class15chapter class16chapter class17chapter class18chapter class19chapter class20chapter class21chapter class22chapter class23chapter class24chapter mathchapter softwarechapter commandlinechapter vmchapter
 
 .PHONY: slides
 slides: class1slides class2slides class3slides class4slides class5slides class6slides class7slides class8slides class9slides class11slides class12slides class13slides class14slides class15slides class16slides class17slides class18slides class19slides class20slides class21slides class22slides class23slides class24slides
@@ -133,6 +143,18 @@ class24:
 vm:
 	${MAKE} -C vm all
 
+.PHONY: math
+vm:
+	${MAKE} -C math all
+
+.PHONY: software
+vm:
+	${MAKE} -C software all
+
+.PHONY: commandline
+vm:
+	${MAKE} -C commandline all
+
 class1chapter:
 	${MAKE} -C class01 chapter
 
@@ -201,6 +223,15 @@ class24chapter:
 
 vmchapter:
 	${MAKE} -C vm chapter
+
+mathchapter:
+	${MAKE} -C math chapter
+
+softwarechapter:
+	${MAKE} -C software chapter
+
+commandlinechapter:
+	${MAKE} -C commandline chapter
 
 class1slides:
 	${MAKE} -C class01 slides

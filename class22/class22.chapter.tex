@@ -14,7 +14,7 @@ After reading this chapter, you should be able to:
     \item Explain the motivation and principles behind policy gradient methods.
 \end{itemize}
 
-
+\newpage
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources. 
@@ -40,7 +40,7 @@ Chapters 9--11
 
 The book by Ravichandiran is practically oriented with plenty of Python code. It discusses some of the theoretical background, but does not go into depth. It should be used after reading the Sutton \& Barto chapters on function approximation and policy-based methods.
 
-
+\begin{withcode}
 \begin{resourcebox}
 Complete implementations of all examples in this chapter are available on the following GitHub repo:
 
@@ -50,7 +50,7 @@ The project can be cloned from this URL:
 
 \small\url{https://github.com/jevermann/busi4720-rl.git}\normalsize
 \end{resourcebox}
-
+\end{withcode}
 
 \section{Introduction}
 
@@ -198,6 +198,7 @@ r_j + \gamma \operatorname*{max}_{A'} \hat{q}_T(S_{j+1}, A'; \theta_T) & \qquad 
 
 In practice, the state $S$ is a function $\phi(X)$ of some raw inputs $X$ through feature-extraction and pre-processing. To further stabilize learning, in practice the update $[y_j - \hat{q}_M (S_j, A_j, \theta_M)]$ in Figure~\ref{fig:dqn} is clipped to $[-1, 1]$.
 
+\begin{withcode}
 \subsubsection*{Example}
 
 To illustrate a simple DQN example, consider the ''Cart Pole'' problem, shown in Figure~\ref{fig:screen1_chap22}. The goal is to balance an upright pole on a cart that can move left or right (but not remain still). The pole obeys a simplified physics and can tip over to the left or right.
@@ -349,6 +350,7 @@ for episode in range(max_episodes):
         if t % C == 0:
             Q_t.set_weights(Q_m.get_weights())
 \end{pythoncode}
+\end{withcode}
 
 \subsubsection*{Double DQN}
 
@@ -359,12 +361,14 @@ An extension to the DQN algorithm is the Double DQN (DDQN)\index{Double DQN} \in
 r_j + \gamma \hat{q}_T (S_{j+1}, \operatorname*{argmax}_{A'} \hat{q}_M (S_{j+1}, A') ) & \qquad \text{otherwise}\end{cases} \hspace{1in}
 \end{align*}
 
+\begin{withcode}
 In Python, this is a also a simple change:
 
 \begin{pythoncode}
 def target_DDQN(Q_m, Q_t, a, r, sprime):
     return r + gamma * getQ(Q_t, sprime, maxQ(Q_m, sprime, False))
 \end{pythoncode}
+\end{withcode}
 
 \subsubsection*{Prioritized Replay}
 
@@ -452,6 +456,7 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 \label{fig:reinforce}
 \end{figure}
 
+\begin{withcode}
 The pseudocode in Figure~\ref{fig:reinforce} is easily implemented in Python. The following Python code block defines a policy function as a neural network. This policy function is defined for discrete actions with as many outputs as there are actions. The final layer has a softmax activation function so it produces probabilities $\pi$ for each action.
 
 \begin{infobox}
@@ -529,7 +534,7 @@ Note that while the code uses the term ''loss'', this is not a loss in the usual
         grads = tape.gradient(loss, p_net.trainable_variables)
         optimizer.apply_gradients(zip(grads, p_net.trainable_variables))
 \end{pythoncode}
-
+\end{withcode}
 
 \subsubsection*{REINFORCE with Baseline}
 
@@ -570,6 +575,7 @@ A complete implementation is shown in Figure~\ref{fig:reinforcebaseline}. Note t
 \label{fig:reinforcebaseline}
 \end{figure}
 
+\begin{withcode}
 The implementation of REINFORCE with Baseline in Python is very similar to the Python code for REINFORCE as the only differences are in the learning portion of the code. A value function/network is defined analogous to the policy network, although it need not be identical or even have the same architecture. The following code block shows how losses for policy and value networks are computed, as well as gradients for both, and the parameters for both are updated:
 
 \begin{pythoncode}
@@ -599,7 +605,7 @@ for t in range(len(returns)):
     v_optimizer.apply_gradients(zip(v_grads, 
         v_network.trainable_variables))
 \end{pythoncode}
-
+\end{withcode}
 
 \subsubsection*{Actor-Critic Methods}
 
@@ -652,6 +658,7 @@ A(s, a) &\approx r + \gamma V(s') - V(s)
 
 Thus, the TD error $\delta$ is computed using the advantage function.
 
+\begin{withcode}
 
 \section{Additional Information}
 
@@ -744,6 +751,8 @@ The award-winning full-length documentary ''AlphaGo'' (Figure~\ref{fig:alphago})
 \end{resourcebox}
 
 The introductory paper on AlphaGo by David Silver and others in the journal Nature should be easy to understand: ''\href{https://www.nature.com/articles/nature24270}{Mastering the game of Go without human knowledge}''. Nature. 550 (7676): 354--359
+
+\end{withcode}
 
 \section{Additional Learning Materials}
 
@@ -866,7 +875,7 @@ OpenAI (makers of ChatGPT and Dall-E) post regularly on their blog, on all thing
 \paragraph*{Introduction}
 \begin{enumerate}[nosep]
 	\item Explain the concept of function approximation in the context of reinforcement learning. How does it address the scalability issues faced by tabular methods?
-    \item How does function approximation help in generalizing from seen to unseen states?
+    \item How does function approximation help generalize from seen to unseen states?
     \item Can decision trees be used as function approximators in RL? Discuss their potential advantages and limitations if used.
     \item Describe how function approximation can be applied to state values, action values, and policies. Provide the mathematical representation used for each.
     \item How does function approximation contribute to the flexibility and efficiency of reinforcement learning models?
@@ -880,7 +889,7 @@ OpenAI (makers of ChatGPT and Dall-E) post regularly on their blog, on all thing
 \paragraph*{Value-Based Methods and Stochastic Gradient Descent}
 
 \begin{enumerate}[nosep,resume*]
-	\item What is the formula for the value error (VE) in the context of action values and how is it computed?
+	\item What is the formula for the value error (VE) in the context of action values?
     \item Derive the gradient of the MSE loss function used in the context of function approximation for reinforcement learning.
 	\item Describe the parameter update rule in stochastic gradient methods for function approximation. What does each term in the update equation represent?
     \item What is bootstrapping in the context of reinforcement learning? How is it implemented in SGD updates?
@@ -898,7 +907,7 @@ OpenAI (makers of ChatGPT and Dall-E) post regularly on their blog, on all thing
 
 \begin{enumerate}[nosep,resume*]
 
-	\item Describe how policy gradient methods optimize the policy parameters directly. What is the significance of this approach in environments with continuous action spaces?
+	\item Describe how policy gradient methods optimize the policy parameters directly. What is the significance of this approach for continuous action spaces?
     \item Explain the typical representation of a policy in policy gradient methods and how it relates to the probability of selecting actions.
     \item Define the objective function $J(\theta)$ used in policy gradient methods. What does this function represent?
     \item List and describe the main advantages of using policy gradient methods over value-based methods in reinforcement learning.

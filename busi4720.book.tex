@@ -7,7 +7,19 @@
 
 \input{common.preamble.tex}
 
-\title{Business Analytics}
+\begin{withcode}
+\title{Business Analytics
+\\ \vspace{\baselineskip} \large Theory and Applications Edition}
+\end{withcode}
+\begin{nocode}
+\title{Business Analytics
+\\ \vspace{\baselineskip} \large Theory and Concepts Edition}
+\end{nocode}
+\begin{simplified}
+\title{Business Analytics
+\\ \vspace{\baselineskip} \large Simplified Edition}
+\end{simplified}
+
 \author{Joerg Evermann\\
 Memorial University of Newfoundland}
 \titlepic{\includegraphics[width=\textwidth]{cover1a.png}}
@@ -48,10 +60,14 @@ Unless otherwise indicated, the copyright in this material is owned by Joerg Eve
 \chapter{Managing Tabular Data with Relational Databases}
 \input{class03/class03.chapter.tex}
 
+\IfStrEq{\IncludeCode}{Simplified}{}
+{  
 \graphicspath{{class04/}}
 \chapter{Managing Graph Data with Graph Databases}
 \input{class04/class04.chapter.tex}
+}
 
+\begin{withcode}
 \graphicspath{{class05/}}
 \chapter{Introduction to Data Management with R}
 \input{class05/class05.chapter.tex}
@@ -59,9 +75,10 @@ Unless otherwise indicated, the copyright in this material is owned by Joerg Eve
 \graphicspath{{class06/}}
 \chapter{Introduction to Data Management with Python}
 \input{class06/class06.chapter.tex}
+\end{withcode}
 
 \graphicspath{{class07/}}
-\chapter{Data Visualization in R and Python}
+\chapter{Data Visualization}
 \input{class07/class07.chapter.tex}
 
 \graphicspath{{class09/}}
@@ -80,9 +97,12 @@ Unless otherwise indicated, the copyright in this material is owned by Joerg Eve
 \chapter{Introduction to Unsupervised Machine Learning}
 \input{class13/class13.chapter.tex}
 
+\IfStrEq{\IncludeCode}{Simplified}{}
+{  
 \graphicspath{{class14/}}
 \chapter{Time Series Analysis}
 \input{class14/class14.chapter.tex}
+}
 
 \graphicspath{{class15/}}
 \chapter{Introduction to Neural Networks and Deep Learning}
@@ -96,9 +116,12 @@ Unless otherwise indicated, the copyright in this material is owned by Joerg Eve
 \chapter{Recurrent Neural Networks}
 \input{class17/class17.chapter.tex}
 
+\IfStrEq{\IncludeCode}{Simplified}{}
+{  
 \graphicspath{{class18/}}
 \chapter{Advanced AI Techniques*}
 \input{class18/class18.chapter.tex}
+}
 
 \graphicspath{{class19/}}
 \chapter{Intepretable Machine Learning}
@@ -112,9 +135,12 @@ Unless otherwise indicated, the copyright in this material is owned by Joerg Eve
 \chapter{Reinforcement Learning -- Tabular Methods}
 \input{class21/class21.chapter.tex}
 
+\IfStrEq{\IncludeCode}{Simplified}{}
+{  
 \graphicspath{{class22/}}
 \chapter{Reinforcement Learning -- Function Approximation}
 \input{class22/class22.chapter.tex}
+}
 
 \graphicspath{{class23/}}
 \chapter{Managing Machine Learning Operations (MLOps)}
@@ -130,6 +156,7 @@ Unless otherwise indicated, the copyright in this material is owned by Joerg Eve
 \chapter{Some Useful Mathematical Concepts}
 \input{math/math.chapter.tex}
 
+\begin{withcode}
 \graphicspath{{software/}}
 \chapter{Installing Required Software}
 \input{software/software.chapter.tex}
@@ -141,6 +168,7 @@ Unless otherwise indicated, the copyright in this material is owned by Joerg Eve
 \graphicspath{{vm/}}
 \chapter{Installing and Using a Virtual Machine}
 \input{vm/vm.chapter.tex}
+\end{withcode}
 
 \backmatter
 

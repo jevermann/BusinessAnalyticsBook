@@ -32,6 +32,7 @@ Chapters 2--7 \\
 
 The Sutton \& Barto book is a standard introductory textbook on reinforcement learning and widely used. It is very approachable, but at the same time also detailed and thorough in its exposition. Its focus is on RL prior to the use of neural networks for function approximation, so up to about 2015. While it does not provide Python code itself, the pseudo-code in the book is easily implemented.
 
+\begin{withcode}
 \begin{resourcebox}
 Complete implementations of all examples in this chapter are available in the following GitHub repo:
 
@@ -41,7 +42,7 @@ The project can be cloned from this URL:
 
 \url{https://github.com/jevermann/busi4720-rl.git}
 \end{resourcebox}
-
+\end{withcode}
 
 \section{Introduction}
 
@@ -175,7 +176,9 @@ Where $\left[ Target - OldEstimate \right]$ is the \emph{error} in the estimate.
 \label{fig:karmedbandit}
 \end{figure}
 
-A complete k-armed bandit algorithm is shown in peusdocode in Figure~\ref{fig:karmedbandit}. The corresponding implementation in Python is straightforward\footnote{Complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/bandits.py}}. The following code block defines a class \texttt{k\_bandit\_agent} that represents an agent. Initialization specifies the number of bandits $k$ in the environment, the parameter $\epsilon$ for the $\epsilon$-greedy policy and the initial value of the action value function, which may be 0 as in the pseudocode in Figure~\ref{fig:karmedbandit}. The method \texttt{determine\_action} is simply the $\epsilon$-greedy policy. The \texttt{train} method for each step determines the action to take, then takes that action in the environment and receives a reward. The agent then updates the action value function as in Equation~\ref{eq:2}.
+A complete k-armed bandit algorithm is shown in peusdocode in Figure~\ref{fig:karmedbandit}.
+\begin{withcode}
+The corresponding implementation in Python is straightforward\footnote{Complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/bandits.py}}. The following code block defines a class \texttt{k\_bandit\_agent} that represents an agent. Initialization specifies the number of bandits $k$ in the environment, the parameter $\epsilon$ for the $\epsilon$-greedy policy and the initial value of the action value function, which may be 0 as in the pseudocode in Figure~\ref{fig:karmedbandit}. The method \texttt{determine\_action} is simply the $\epsilon$-greedy policy. The \texttt{train} method for each step determines the action to take, then takes that action in the environment and receives a reward. The agent then updates the action value function as in Equation~\ref{eq:2}.
 
 \begin{pythoncode}
 class k_bandit_agent:
@@ -223,6 +226,7 @@ class k_bandit_env:
         reward = random.normalvariate(mean, 1)
         return reward
 \end{pythoncode}
+\end{withcode}
 
 Figure~\ref{fig:banditresults} shows a comparison of learning behaviour for agents with different parameters $\epsilon$. The horizontal axis shows the index of 1000 steps in the environment and the vertical axis shows the reward received at each step (mean over 1000 runs of the algorithm). The agent with $\epsilon=0$ (blue line) shows the worst learning behaviour. That agent only exploits and never explores. In other words, it never finds any better or more valuable actions to take, once it has found a good action. In contrast, the agent with $\epsilon=0.01$ (red line) learns slower in the beginning as it explores more but after 1000 steps has achieved a better mean reward. Finally, the purple line represents an agent with $\epsilon=0$ but whose action value function has been ''optimistically'' initialized with values of 5 instead of 0, that is, above the expected reward. This prevents it from assuming the first good action is the best one, which leads to high initial learning. However, with an $\epsilon$ of 0, that agent is not capable of further learning later in the sequence of actions taken. 
 
@@ -313,7 +317,6 @@ The state values for this problem under the random policy are shown in the right
 
 The Bellman equation (Equation~\ref{eq:bellman} and its equivalent for the action value function) express the fact that the value of a state (or state-action pair) is a function of the values of all other states (or state-action pairs). This suggests an intuitive way to compute the state values iteratively. Beginning with random values for each state, calculate updated values for all states using Equation~\ref{eq:bellman}. Then, consider the updated values as the current values, and calculate updated values based on these\footnote{In fact, it is not even necessary to wait until all states have been iterated over and updated before using updated state values as current ones.}. Iterate like this until the values do not change any more. It can be proven that this procedure converges to the correct solution and terminates. 
 
-
 \begin{figure}
 \small
 \begin{pseudocodebox}
@@ -332,7 +335,9 @@ The Bellman equation (Equation~\ref{eq:bellman} and its equivalent for the actio
 \label{fig:policyiteration}
 \end{figure}
 
-This process is called \emph{iterative policy evaluation}\index{Iterative policy evaluation}. Figure~\ref{fig:policyiteration} shows this in pseudocode and the following Python code block shows the straightforward implementation, beginning with initial values of $0$ for each state.
+This process is called \emph{iterative policy evaluation}\index{Iterative policy evaluation}.
+\begin{withcode}
+Figure~\ref{fig:policyiteration} shows this in pseudocode and the following Python code block shows the straightforward implementation, beginning with initial values of $0$ for each state.
 
 \begin{pythoncode}
 # Define actions for gridworld
@@ -357,7 +362,7 @@ def evaluate_policy():
         if Delta < theta:
             break
 \end{pythoncode}
-
+\end{withcode}
 
 \subsection{Bellman Optimality and Iterative Policy Improvement}
 
@@ -410,7 +415,10 @@ A simple, intuitive way of finding the optimal policy is to find the optimal sta
 \label{fig:policyimprovement}
 \end{figure}
 
-Because the state value computation was already demonstrated using iterative policy evaluation above, the procedure for \emph{iterative policy improvement}\index{Iterative policy improvement} is simple, expressed in Figure~\ref{fig:policyimprovement}. The following Python code block illustrates the straightforward implementation:
+Because the state value computation was already demonstrated using iterative policy evaluation above, the procedure for \emph{iterative policy improvement}\index{Iterative policy improvement} is simple, expressed in Figure~\ref{fig:policyimprovement}. 
+
+\begin{withcode}
+The following Python code block illustrates the straightforward implementation:
 
 \begin{pythoncode}
 def improve_policy():
@@ -441,13 +449,15 @@ while not stable:
 print("Optimal Policy:")
 print(pi)
 \end{pythoncode}
+\end{withcode}
 
 The procedures of \emph{iterative policy evaluation} and \emph{iterative policy improvement} are an example of the more general approach to optimization called \emph{dynamic programming}.
 
 Consider the example of ''Jack's Car Rental'' (example 4.2 in SB). Jack rents cars at 2 locations. Each location can store 20 cars. The number of daily rental requests and rental returns are Poisson distributed. Jack can move a maximum of 5 cars between the two locations overnight. Each move incurs a reward (cost) of $-2$ and each satisfied rental request receives a reward of $+10$. Jack is looking for the optimal policy that specifies how many cars to move from location 1 to location 2 every night. 
 
-The states in this problem are defined as the number of cars in location 1 and 2, for a total of $20 \times 20 = 400$ possible states and 2 actions, defined in the following Python code block\footnote{Complete implementation available at \url{https://github.com/jevermann/busi4720-rl/blob/main/jacks.py}}:
+The states in this problem are defined as the number of cars in location 1 and 2, for a total of $20 \times 20 = 400$ possible states and 2 actions\footnote{Complete implementation available at \url{https://github.com/jevermann/busi4720-rl/blob/main/jacks.py}}.
 
+\begin{withcode}
 \begin{pythoncode}
 States = []
 for cars1 in range(21):
@@ -456,6 +466,7 @@ for cars1 in range(21):
         
 Actions = range(-5, 5+1)
 \end{pythoncode}
+\end{withcode}
 
 Figure~\ref{fig:jackscars} shows the policies after each iteration of the iterative policy improvement algorithm in Figure~\ref{fig:policyimprovement}, beginning with the random policy in the top left panel of Figure~\ref{fig:jackscars}. Positive values for the policy indicate cars to move from location 2 to location 1, negative values indicate cars to move from location 1 to location 2. The policy improvement converges to the optimal policy after 4 iterations, with the final state value function shown in the bottom right panel of Figure~\ref{fig:jackscars}.
 
@@ -540,7 +551,9 @@ There is one additional difference between Figures~\ref{fig:firstvisitmc} and \r
 As an example of an episodic RL problem that can be usefully learned with MC methods, consider the game of Blackjack (example 5.3 in SB)\footnote{A complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/blackjack_es.py}}. In this game,
 cards have values A, 2, 3, \ldots, 10 where A is the ace and 10 includes face cards. An ace can count as 1 point or 11 points. An ace that is counted as 11 is called a ''usable ace''. The dealer's initial card is shown. The player can take two possible actions: take another card (''hit'') or do not take a card (''stick''). Once the player sticks, the dealer takes cards. The dealer sticks on a sum of 17 or more. When the player's or the dealer's sum of cards is over 21 they are ''bust'', that is, they lose the game. The dealer's policy is deterministic, they stick on 17 points or more. 
 
-For Blackjack, the states are defined as a combination of the player's current sum of cards, the initial card the dealer is showing, and whether the player has a usable ace (one that can be converted from an 11 to a 1). Actions are to hit or stick. The following Python code block shows how this can be readily implemented:
+For Blackjack, the states are defined as a combination of the player's current sum of cards, the initial card the dealer is showing, and whether the player has a usable ace (one that can be converted from an 11 to a 1). Actions are to hit or stick. 
+\begin{withcode}
+The following Python code block shows how this can be readily implemented:
 
 \begin{pythoncode}
 gamma = 1.0
@@ -618,6 +631,7 @@ for e in range(0, 1000000+1):
             else:
                 pi[S[t]] = 0
 \end{pythoncode}
+\end{withcode}
 
 Figure~\ref{fig:blackjack} shows the resulting policy (left panels) and state value function (right panels) after 1,000,000 learning episodes. The top two plots in Figure~\ref{fig:blackjack} are with a usable ace, the bottom two plots without a usable ace. An action of 1 means to hit, and action 0 is to stand. 
 
@@ -634,7 +648,9 @@ Figure~\ref{fig:blackjack} shows the resulting policy (left panels) and state va
 \label{fig:blackjack}
 \end{figure}
 
-For the game of Blackjack, exploring starts with a deterministic policy is a good way to ensure exploration. However, exploring starts are not always possible or realistic. Instead of using a greedy policy, in those cases an $\epsilon$-soft policy\index{Policy!Epsilon-soft} can be used to ensure exploration. The policy $\pi$ now represents not the action to be taken (greedily, deterministically) but the probability with which each action should be chosen. Consequently, $\pi$ is updated with $\epsilon$-soft probabilities, as shown in the following Python code fragment\footnote{An implementation of the Blackjack problem with an $\epsilon$-soft policy is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/blackjack_eps.py}.}:
+For the game of Blackjack, exploring starts with a deterministic policy is a good way to ensure exploration. However, exploring starts are not always possible or realistic. Instead of using a greedy policy, in those cases an $\epsilon$-soft policy\index{Policy!Epsilon-soft} can be used to ensure exploration. The policy $\pi$ now represents not the action to be taken (greedily, deterministically) but the probability with which each action should be chosen. Consequently, $\pi$ is updated with $\epsilon$-soft probabilities. 
+\begin{withcode}
+This is shown in the following Python code fragment\footnote{An implementation of the Blackjack problem with an $\epsilon$-soft policy is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/blackjack_eps.py}.}:
 
 \begin{pythoncode}
 Q[(S[t], A[t])] = mean(Returns[(S[t], A[t])])
@@ -647,6 +663,7 @@ for a in Actions:
     else:
         pi[(S[t],a)] = epsilon/len(Actions)
 \end{pythoncode}
+\end{withcode}
 
 An example where exploring starts are not realistic is the Racetrack problem (exercise 5.12 in SB). Cars have to follow the right curve of a racetrack, from the starting line to the finish line, as shown in two examples in Figure~\ref{fig:racetrack}.
 
@@ -660,6 +677,7 @@ An example where exploring starts are not realistic is the Racetrack problem (ex
 
 The states are defined by the car's position and velocity on the race track, each in two dimensions, horizontally and vertically. The possible actions are to accelerate, coast, or brake in each direction. The rewards are -1 for each step taken and +1 for crossing the finish line, when the episode terminates. When a car moves off the racetrack, it is reset to a random position on the starting line and the episode continues. The environment is stochastic: With a small probability, the actions of the agents are ignored, that is, they have no effect.
 
+\begin{withcode}
 The following Python code block defines the actions, the action value function and the $\epsilon$-soft policy that samples from the probability distribution over actions in a state\footnote{Complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/racetrack.py}.}
 . 
 
@@ -719,6 +737,7 @@ for e in range(0, 10000+1):
                 else:
                     pi[(S[t],a)]=eps/len(Actions)
 \end{pythoncode}
+\end{withcode}
 
 Figure~\ref{fig:racetrackresults} shows visualizations of the trajectory of a car (green line) on the racetrack after 0, 100, 200, and 10,000 episodes. It is clear from these trajectories that the number of steps is reduced as training progresses.
 
@@ -771,6 +790,7 @@ Figure~\ref{fig:offpolicymc} shows pseudocode for off-policy MC control. In this
 \label{fig:offpolicymc}
 \end{figure}
 
+\begin{withcode}
 The following Python code blocks show how off-policy MC control can be implemented. The first block defines the two policies, the $\epsilon$-soft behaviour policy \texttt{b} and the greedy deterministic policy \texttt{pi}.
 
 \begin{pythoncode}
@@ -827,6 +847,7 @@ for e in range(0, 10000+1):
         else:
             W = W * 1/bprob(A[t], S[t])
 \end{pythoncode}
+\end{withcode}
 
 \section{Temporal-Difference (TD) Learning}
 
@@ -867,6 +888,7 @@ Figure~\ref{fig:sarsa} shows the pseudocode of a method called ''\emph{SARSA}''\
 \label{fig:sarsa}
 \end{figure}
 
+\begin{withcode}
 To illustrate the use of SARSA, consider the ''Windyworld'' example environment (example 6.5 in SB), shown in Figure~\ref{fig:windyworld}. An agent has to move from start state $S$ to terminal goal state $G$ in this gridworld. However, there is a wind on some columns of the grid that pushes the agent towards the top (indicated below the columns in Figure~\ref{fig:windyworld}). Rewards are $-1$ for every step until termination, so that the agent is encouraged to find the path requiring the least number of actions. There are no penalties for moving off the world (the action is simply ignored) and the problem is not discounted ($\gamma=1$).
 
 
@@ -919,6 +941,7 @@ for e in range(0, 100):
         S = Sprime
         A = Aprime
 \end{pythoncode}
+\end{withcode}
 
 In summary, Temporal Difference learning and Monte Carlo methods differ primarily in when and how the updates to value estimates are made:
 \begin{itemize}
@@ -927,6 +950,7 @@ In summary, Temporal Difference learning and Monte Carlo methods differ primaril
 \item \emph{Convergence Properties:} Due to its incremental nature and frequent updates, TD learning can converge faster in practical applications than Monte Carlo methods, which require longer trajectories and may suffer from higher variance in their estimates due to the complete reliance on actual returns.
 \end{itemize}
 
+\begin{advanced}
 \subsubsection*{Generalizing TD Learning to N Steps}
 
 In developing the SARSA method (Equation~\ref{eq:sarsaupdate}), the recursive definition of the return (Equation~\ref{eq:return}) and the definition of the action value as the expected return (Equation~\ref{eq:actionvalue}) were applied once. Hence the SARSA update target $R_{t+1} + Q(S_{t+1}, a_{t+1})$ ''looks ahead'' by one step to the next reward $R_{t=1}$ and then approximates the remaining portion of $G_{t+1}$ by $Q(S_{t+1}, a_{t+1})$. This is therefore called the ''1-step'' target, and the update error $\delta$ is called the ''1-step error'':
@@ -961,7 +985,7 @@ Source: SB Figure 7.4
 \caption{SARSA versus n-Step TD Learning (n-step SARSA)}
 \label{fig:sarsa10step}
 \end{figure}
-
+\end{advanced}
 
 \section{Off-Policy TD Learning}
 
@@ -1001,6 +1025,7 @@ A minor change is sufficient to change on-policy SARSA to off-policy Q-learning,
 \end{align*}
 \end{pseudocodebox}
 
+\begin{withcode}
 The corresponding Python implementation for the Windyworld example is also straightforward from the above box\footnote{A complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/windyworld_q_learning.py}.}:
 
 \begin{pythoncode}
@@ -1028,6 +1053,7 @@ Figure~\ref{fig:sarsaqlearning} shows the difference in learning behaviour betwe
 \caption{SARSA and Q-Learning Results on Windyworld}
 \label{fig:sarsaqlearning}
 \end{figure}
+\end{withcode}
 
 \section{Review Questions}
 
@@ -1114,7 +1140,7 @@ $Q_{t+1}(a) = Q_t(a) + \frac{1}{t} [R_t(a)-Q_t(a)]$. How does this formula ensur
 \paragraph*{Questions on Temporal-Difference (TD) Learning}
 
 \begin{enumerate}[nosep,resume*]
-\item What is temporal-difference (TD) learning and how does it differ from Monte Carlo methods?
+\item What is temporal-difference (TD) learning and how does it differ from MC?
 \item Explain the concept of bootstrapping in the context of TD learning.
 \item Discuss the advantages of TD learning in terms of update frequency and applicability to different types of environments.
 \item Describe the SARSA algorithm and explain how it uses the TD update formula.
@@ -1134,5 +1160,4 @@ $Q_{t+1}(a) = Q_t(a) + \frac{1}{t} [R_t(a)-Q_t(a)]$. How does this formula ensur
 \item Explain how the Q-learning update rule ensures that the learning is directed towards the optimal policy.
 \item What are the implications of using the $\operatorname*{max}_a Q(S', A')$ term in the Q-learning update rule? Discuss how this term influences the policy improvement process.
 \item How does Q-learning handle the exploration-exploitation trade-off differently compared to SARSA?
-\item How does the initial setting of Q-values influence the learning process and eventual performance in Q-learning? Discuss the impact of optimistic versus pessimistic initialization.
 \end{enumerate}

@@ -10,10 +10,14 @@ After reading this chapter, you should be able to:
    \item Explain the importance of visually assessing data before predictive modelling.
    \item Build a linear regression model, including interaction effects and categorical predictors, and be able to assess its quality using cross-validation methods.
    \item Explain the goals and the differences between ridge regression, LASSO and Elasticnet
+\begin{withcode}
    \item Build regression models using different penalized linear regressions and evaluate their quality using cross-validation methods.
+\end{withcode}
    \item Explain logistic regression and the purpose of the link function, including the concepts of log-odds or logits.
+\begin{withcode}
    \item Build a classification model using logistic regression and evaluate its quality using common metrics such as accuracy, and the ROC and AUC.
    \item Build a classification model using the KNN method and evaluate its quality using common metrics such as accuracy, and the ROC and AUC.
+\end{withcode}
 \end{itemize}
 
 \section*{Sources and Further Reading}
@@ -206,6 +210,7 @@ An example of polynomial predictors like $X^2$, $X^3$ or higher degrees is shown
 
 
 \FloatBarrier
+\begin{withcode}
 \section{Linear Regression in R}
 
 Linear regression is part of the basic R system, no libraries need to be installed. The function \texttt{lm()} requires a formula representing the regression model and a data frame, and returns a linear model. 
@@ -343,7 +348,9 @@ summary(lm(Sales ~ . , data=Carseats))
 
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 3.7}
 \end{exercisebox}
+\end{withcode}
 
+\begin{withcode}
 \section{Cross-Validation in R}
 
 The previous chapter already introduced the concepts of cross-validation. Recall that the appropriate way to judge the predictive performance of a model is not to evaluate it on its training data, but to evaluate it on unseen test data. This section illustrates three different cross-validation approaches in R, beginning with the validation set or holdout sample approach, which splits the data set randomly into training and test data. 
@@ -427,6 +434,7 @@ print(cv.err)
   \item Calculate the test error estimate using 10-fold cross-validation. Compare the estimate to the mean that you computed in step 4
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{Shrinkage Methods}
 
@@ -513,7 +521,7 @@ The Elactic Net\index{Elastic net} is a combination of rigde regression and LASS
 
 When $\alpha=0$ the Elastic Net reduces to a ridge regression, and for $\alpha=1$ the Elastic Net reduces to the LASSO. The optimal combination of $\alpha$ and $\lambda$ is found through cross-validation as described above.
 
-
+\begin{withcode}
 \section{Shrinkage Methods in R}
 
 The \texttt{glmnet} library for R implements the Elastic Net which can be used for both ridge regression and LASSO as well, simply by choosing the appropriate value for the parameter $\alpha$.
@@ -694,6 +702,7 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
 
 \footnotesize Source: ISLR2, Section 6.6 \normalsize
 \end{exercisebox}
+\end{withcode}
 
 \section{Classification}
 
@@ -747,6 +756,7 @@ Once estimates of the model parameters $\beta_0$ and $\beta_1$ have been calcula
 
 From there, a \emph{threshold value} can be used to predict class membership, for example based on the decision that $\hat{p}(X) > 0.5$, but other decision rules and threshold values may be used, depending on the desired proportion or cost of false positives and true positives.
 
+\begin{advanced}
 The binary logistic regression can be extended to \emph{mutinomial logistic regression}\index{Logistic regression!multinomial}, where there are more than two classes for the output or target. The form of the equations is similar for $K$ classes, starting from the log-odds. In this derivation, the last class $K$ plays the role of reference class. As classes are not ordered, this choice is arbitrary.
 
 \begin{align}
@@ -784,7 +794,9 @@ Another example is shown in Figure~\ref{fig:nonlinearboundary2} where the linear
 \caption{Transforming linear decision boundaries using polynomials}
 \label{fig:nonlinearboundary2}
 \end{figure}
+\end{advanced}
 
+\begin{withcode}
 \subsection{Logistic Regression in R}
 
 The following illustration of logistic regression in R uses the \texttt{Smarket} data set of the \texttt{ISLR2} library. The data set contains stock market information and is used in this example to predict the direction of the movement of the market, either ''up'' or ''down'', based on previous day's (''lagged'') data and other variables\footnote{The R code for this example is based on material in Section 4.7.2 of ISLR2}. 
@@ -893,7 +905,9 @@ performance(pred.obj, 'auc')@y.values[[1]]
 \caption{ROC and precision/recall curves for a logistic regression classifier}
 \label{fig:logregplot}
 \end{figure}
+\end{withcode}
 
+\begin{advanced}
 \subsection{Naive Bayes Classifier}
 
 The naive Bayes classifier is based on \emph{Bayes' theorem} of conditional probabilities. The probability that an observation described by a vector of inputs $X$ is a member of class $c$ can be described as the probability of observing inputs $X$ given that the class is $c$, multiplied by the unconditional probability of an observation being in class $c$, divided by the unconditional observation of observing inputs $X$. Formally:
@@ -918,7 +932,9 @@ p(Y=c|X) &= \frac{\left(\prod_{d=1}^D p(x_d | Y=c)\right) \, p(Y=c)}{\left(\sum_
 \end{align*}
 
 The probabilities in the product of Equation~\ref{eq:bayes2} can be trivially estimated from the data, simply as the proportion of each $x_d$ for each class $c$. However, the assumption of independence is violated when features are correlated. In other words, the naive Bayes classifier can be expected to perform best for independent features\index{Naive Bayes classifier}.
+\end{advanced}
 
+\begin{withcode}
 \subsection{Naive Bayes Classifier in R}
 
 The \texttt{e1071} library for R provides the \texttt{naiveBayes(.)} function that implements the naive Bayes classifier. The following illustration uses the same \texttt{Smarket} data from the \texttt{ISLR2} library that was used in the above example on logistic regression\footnote{The R code for this example is based on material in Section 4.7.5 of ISLR2}:
@@ -966,6 +982,7 @@ performance(nb.pred.obj, 'auc')@y.values[[1]]
 \caption{ROC curve of a naive Bayes classifier}
 \label{fig:naiveBayesROC}
 \end{figure}
+\end{withcode}
 
 \subsection{KNN Classification}
 
@@ -973,6 +990,7 @@ K-Nearest Neighbour classification\index{k-nearest neighbour}\index{kNN|see{k-ne
 
 One important requirement in KNN classification is \emph{scaling of inputs} to have similar standard deviations or variance to avoid the distance metric being dominated by the input on the largest scale. For example, if one input ranges between 1 and 10 million, while another input ranges between 1 and 10, the first input is clearly most important in determining the distance between two observations.
 
+\begin{withcode}
 \subsection{KNN Classification in R}
 
 The \texttt{class} library for R provides the \texttt{knn(.)} function, as illustrated in the following example R code block that uses the same \texttt{Smarket} stock market data set as the above examples for logistic regression and naive Bayes\footnote{The R code for this example is based on material in Section 4.7.6 of ISLR2}.
@@ -1067,6 +1085,7 @@ Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classifica
 \end{enumerate}
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 4.8}
 \end{exercisebox}
+\end{withcode}
 
 \section{Review Questions}
 
@@ -1111,6 +1130,7 @@ Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classifica
   \item Explain the concept of multinomial logistic regression and how it extends the binary logistic regression model to multiple classes.
   \item Discuss how incorporating polynomial terms of input variables into a logistic regression model can help in transforming non-linear decision boundaries into linear ones.
 \end{enumerate}
+\begin{advanced}
 \paragraph*{Naive Bayes classification}
 \begin{enumerate}[nosep,resume*]
   \item What is Bayes' theorem and how is it applied in the naive Bayes classifier to compute class probabilities?
@@ -1119,6 +1139,7 @@ Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classifica
   \item Explain the role of prior probabilities $p(Y=c)$ in the naive Bayes classifier. How do these influence the final classification?
   \item What is the effect of having highly correlated features on the performance of the naive Bayes classifier?
 \end{enumerate}
+\end{advanced}
 \paragraph*{KNN classification}
 \begin{enumerate}[nosep,resume*]
   \item Define K-Nearest Neighbor (KNN) classification. Why is it classified as a non-parametric technique?

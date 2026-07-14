@@ -12,7 +12,9 @@ After reading this chapter, you should be able to:
    \item Understand different types of color palettes and be able to choose a color palette for a given visualization purpose.
    \item Understand the impact of color vision deficiency and its implications for creating meaningful visualization.
    \item Select a type of plot that is appropriate for a given purpose.
+\begin{withcode}
    \item Create different types of plots in R and Python, including customization of colors, axes, labels, and titles.
+\end{withcode}
 \end{itemize}
 
 \section{Introduction}
@@ -567,6 +569,7 @@ Shape, Style (of points and lines) \\ \hline
 \label{tab:elements}
 \end{table}
 
+\begin{withcode}
 \section{Visualization in R using ggplot2}
 
 This section provides an introduction to data visualization using the ggplot2 library in R. The example dataset for this section is the Fuel Consumption Ratings for battery electric vehicles, provided the Government of Canada through its Open Government Portal\footnote{\scriptsize\url{https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64}}. At the time of writing, the dataset was last updated on October 10, 2023. The dataset contains the variables shown in Table~\ref{tab:fueldata}.
@@ -1270,8 +1273,10 @@ Using the Pagila database files from the previous chapter on data analysis with 
 \end{enumerate}
 \end{exercisebox}
 
+\end{withcode}
 \FloatBarrier
 
+\begin{withcode}
 \section{Visualization in Python using Plotly Express}
 
 This section demonstrates visualization in Python using Plotly Express. Plotly Express by default produces web-based, i.e. JavaScript based, interactive plots. On the Python side, the diagram is expressed in more primitive graphical descriptions, serialized in a JSON document, which is sent to the web browser, where the Plotly JavaScript library renders them. Interactivity includes the ability to zoom and pan the plot, and to hover over plot elements to get tooltip overlays, e.g. specific values of points or lines in the plots. Figures can also be saved in a variety of image file formats.
@@ -1642,7 +1647,7 @@ Use the Pagila film rentals data from \small\url{https://evermann.ca/busi4720/re
    \item Use the \texttt{mean()} function to find the mean for a data frame column
 \end{itemize}
 \end{exercisebox}
-
+\end{withcode}
 
 \section{Dashboards}
 
@@ -1660,6 +1665,7 @@ The first plot is a line plot that spans the entire width of the dashboard. This
   \label{fig:dashboard}
 \end{figure}
 
+\begin{withcode}
 This section briefly describes how interactive dashboards can be built using the Plotly Dash package for Python. Because Plotly Express figures are interactive, browser-based already, they lend themselves to being included in dashboards. 
 
 The first step is to import the required packages and components. The \texttt{dash} package provides core elements, dash bootstrap components provide the visual layout of the dashboard, and plotly express provides the figures or graphs that are part of the dashboard.
@@ -1753,6 +1759,8 @@ The final step is to run the dashboard app. This is accomplished with the follow
 \begin{pythoncode}
 app.run()
 \end{pythoncode}
+
+\end{withcode}
 
 \begin{resourcebox}
 Complete implementation of the dashboard example is available at

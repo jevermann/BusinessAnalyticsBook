@@ -8,12 +8,18 @@
 After reading this chapter, you should be able to:
 \begin{itemize}
    \item Explain the aims principal components analysis, the importance of scaling data before the analysis, the concept of a principal component and how to choose an appropriate number of components.
+\begin{withcode}
    \item Carry out a principal component analysis and justify the number of components retained.
+\end{withcode}
    \item Explain the process of k-means clustering, including the importance of the distance function and of scaling data before clustering.
+\begin{withcode}
    \item Carry out a k-means clustering and evaluate its quality.
+\end{withcode}
    \item Explain hierarchical clustering, and the distance and linkage functions involved in clustering.
    \item Choose an appropriate clustering solution from a dendrogram.
+\begin{withcode}
    \item Carry out a hierarchical clustering and evaluate its quality.
+\end{withcode}
 \end{itemize}
 
 \section*{Sources and Further Reading}
@@ -174,6 +180,7 @@ There are different criteria for selecting the number of principal components to
   \item There may be a theoretical reason, especially in an explanation context, to retain a specific number of principal components
   \item The analyst retains those principal components that have an intuitive and relevant interpretation, as in the above example. 
   \item The analyst retains those principal components whose eigenvalue $\lambda > 1$
+  \item The analyst retains principal components as long as their eigenvalues are above the corresponding eigenvalues of random data (''parallel analysis'')
   \item The analyst retains principal components until the cumulative proportion of variance explained by the components surpasses a given threshold, e.g. 80\%. For example, the right panel in Figure~\ref{fig:pca3} shows a plot of the cumulative variance explained. The first two principal components are necessary to explain 80\% or more of the total variance in the original data.
   \item When used in subsequent regression or classification models, cross-validation may be used to identify the optimal $K$ that shows the lowest test error.
   \item The analyst examines the ''\emph{scree plot}''\index{Scree plot}, that is, the plot of the eigenvalues or proportion of variance explained by each component. Oftentimes, there will be a clear point of inflection in this plot, indicating a useful cutoff. The left panel in Figure~\ref{fig:pca3} shows such a scree plot. The proportion of variance explained diminishes for each additional principal component.
@@ -190,6 +197,7 @@ In practice, the number of principal components to retain is often subjective, a
 \label{fig:pca3}
 \end{figure}
 
+\begin{withcode}
 \section{Principal Components Analysis in R}
 
 The \texttt{USArrests} in the \texttt{ISLR2} library contains data on the arrests (per 100,000 residents) for various violent crimes as well as the percentage of urban population in the 50 states of the US\footnote{The R code for this example is based on material in Section 12.5 of ISLR2}. First, examine the data and the correlation between variables. In the correlation matrix, one can already see that ''UrbanPop'' is not highly correlated with the other three variables, an indication that it will not load on the same principal component as those.
@@ -296,6 +304,7 @@ The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary o
    \item Plot the training and validation error agains the number of components. Describe and discuss your results.
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{Clustering}
 
@@ -361,6 +370,7 @@ The k-means algorithm should be run multiple times and the optimal solution, tha
 
 This effect is shown in Figure~\ref{fig:kmeans2}. The data from the previous example was clustered six different times with different random initial cluster assignments. Each final solution is different, and may also have a different \emph{within-cluster variability} as shown at the top of each panel. Note that some solutions are identical but permute the cluster assignments/colours. For example, the top middle and top right panels in Figure~\ref{fig:kmeans2} are identical and also identical with the bottom left and bottom middle solution, except for the permutation of cluster assignments, indicated by the colours. 
 
+\begin{withcode}
 \subsection{K-Means Clustering in R}
 
 To illustrate k-means clustering in R, consider the following simulated example, which uses the \texttt{kmeans()} function\footnote{The R code for this example is based on material in Section 12.5 of ISLR2}. Data is simulated as 50 observations on two normally distributed variables. One half of the data is shifted by $+3$ on the first variables and by $-4$ on the second variable. With a standard deviation of $1$, this constitutes a large separation and should lead to clearly identifiable clusters.
@@ -435,6 +445,7 @@ The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary o
    \item Repeat the cluster analysis with the best value of $k$ and compare results.
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \subsection{Hierarchical Clustering}
 
@@ -540,7 +551,7 @@ The final question concerns the choice of the number of clusters. The answer to 
 \label{fig:dendro3}
 \end{figure}
 
-
+\begin{withcode}
 \subsection{Hierarchical Clustering in R}
 
 This example uses the same simulated data as the example for k-means clustering\footnote{The R code for this example is based on material in Section 12.5 of ISLR2}. First, generate 50 observations on two variables from a normal distribution. One half of the observations are shifted on both variables to provide a known cluster structure.
@@ -641,6 +652,7 @@ The \texttt{Auto} dataset in the \texttt{ISLR2} library contains information on 
    \item Using this value for $k$, perform a k-means Clustering and compare the results. Remember that k-means clustering uses the Euclidean distance.
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{Review Questions}
 

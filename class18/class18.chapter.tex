@@ -28,6 +28,7 @@ Chapters 15, 19, 20
 
 The book by Murphy is freely available and provides three chapters on neural networks, one for structured data, one for images, and one for sequences. It provides significant depth on convolutional and recurrent network architectures, fitting the models, and problems the data analyst may encounter. 
 
+\begin{withcode}
 \begin{resourcebox}
 Foster, D: \emph{Generative Deep Learning}, 2nd edition. O'Reilly Media 2022. \\
 
@@ -54,7 +55,7 @@ pip install imblearn
 pip install tensorflow_datasets
 \end{bashcode}
 \end{infobox}
-
+\end{withcode}
 
 
 \section{Data Augmentation}
@@ -99,6 +100,7 @@ Data augmentation for textual data uses techniques such as character, word, or s
 
 Data augmentation for tabular data, that is, numeric data uses techniques such as SMOTE\index{Synthetic Minority Oversampling Technique}\index{SMOTE|see{Synthetic Minority Oversampling Technique}} and SMOTE-NC. As its name implies, SMOTE (''synthetic minority oversampling technique'') is designed for class balancing, that is to create additional instances of a minority class in classification model training. Originally developed for The idea of SMOTE is simple and intuitive. Consider Figure~\ref{fig:smote}. The left panel shows observations for two classes in a two-dimensional continuous feature space. When generating an additional observation for the green class, SMOTE first determines the $k$ nearest neighbours of one observation for some value of $k$ (center panel in Figure~\ref{fig:smote}). Then, one of the neighbours is chosen at random, and an additional observation is created at some random distance between the focal observation and the chosen neighbour (right panel in Figure~\ref{fig:smote}). SMOTE-NC is the generalization of SMOTE to categorical features.
 
+\begin{withcode}
 Performing oversampling using SMOTE in Python is made simple using the Python package ''imblearn'' that provides a range of oversampling methods. The following code example uses a simple classification data set of wine data for three classes. First, the example data is loaded, the class distribution and summary statistics are provided.
 
 \begin{pythoncode}
@@ -138,7 +140,7 @@ A variational auto-encoder is described in Section~\ref{sec:vae} below. The main
   \item Compare the data summary statistics of the original and the balanced dataset. Are there significant differences?
 \end{enumerate}
 \end{exercisebox}
-
+\end{withcode}
 
 \section{Transfer Learning}
 
@@ -177,6 +179,7 @@ In panel (b) of Figure~\ref{fig:murphy_19_03} $\alpha$ indicates a $1 \times 1$ 
 
 \FloatBarrier
 
+\begin{withcode}
 \section{Data Augmentation and Transfer Learning in Python}
 
 The example in this section illustrates both data augmentation and transfer learning in the context of image classification. The example uses a data set provided as part of the TensorFlow/Keras packages and a pre-trained image classification models, also part of the TensorFlow/Keras packages for Python. 
@@ -348,6 +351,7 @@ model.compile(
 model.fit(train_ds.batch(64), epochs=2, 
           validation_data=test_ds.batch(64))
 \end{pythoncode}
+\end{withcode}
 
 \section{Attention}
 
@@ -484,6 +488,7 @@ The positional embeddings $P$ are combined with embeddings $X$ through addition:
 
 Figure~\ref{fig:positional_encoding} illustrates such a positional encoding graphically. Each row in the diagram represents one numerical position that is encoded as the row vector of numbers in that row. It is evident that each row is a unique row vector. The advantage over using sine and cosine functions, rather than binary numbers or integers is that they can be easily added to word embeddings, and, in contrast to integers or boolean numbers, can be immediately provided as input to a neural network. 
 
+\begin{withcode}
 Positional encoding using the sine/cosine scheme in Equation~\ref{eq:pos_encoding} is implemented  in Tensorflow/Keras as an embedding layer with fixed weights, that is, the weights are determined by the sine and cosine functions of their position. The following Python code block defines a function that returns the embedding/encoding matrix according to Equation~\ref{eq:pos_encoding}:
 
 \begin{pythoncode}
@@ -526,6 +531,7 @@ class TokenAndPositionEmbedding(layers.Layer):
         # Return token plus position embedding
         return self.token_emb(x) + self.pos_emb(positions)
 \end{pythoncode}
+\end{withcode}
 
 \section{Transformers}
 
@@ -603,6 +609,7 @@ One of the key advantages of the transformer over other RNN is the fact that it 
 \label{fig:transformer}
 \end{figure}
 
+\begin{withcode}
 A transformer encoder block is easily implemented in Python, as shown in the following code block that defines a transformer as a custom Keras layer. In contrast to the diagram and schematic description, the code below adds dropout layers for regularization and includes the additive ResNet like architecture in the transformer:
 
 \begin{pythoncode}
@@ -626,13 +633,13 @@ class TransformerBlock(layers.Layer):
         ffn_out = self.dropout2(ffn_out)
         return self.norm2(out1 + ffn_out)
 \end{pythoncode}
+\end{withcode}
 
 \FloatBarrier
 
 \subsection*{ELMo}
 
 Word representation models assign a vector of real values to each word. However, rather than simply using a learned embedding matrix that results from a specific task, word representation models such as ELMo and BERT use the hidden state of an RNN as the representation of a word. This allows the word representation to be learned in the context of prior and, if a bidirectional architecture is used, also of following words. The advantage of computing word representations in this way is that they can be trained in an unsupervised way on a large corpus of text (that is, the word/token sequence is both input and target). Such a pre-trained model of word representations can later be fine-tuned for specific tasks with specific vocabulary.
-
 
 \begin{figure}
 \centering
@@ -727,7 +734,7 @@ After pre-training, the BERT model can be fine-tuned for specific language tasks
 
 \FloatBarrier
 
-
+\begin{withcode}
 \begin{resourcebox}
 The TensorFlow and Keras websites have a multitude of guides and tutorials on language processing and generation with transformers. The ones recommended below illustrate the main topics covered in this section on Transformer architectures.
 
@@ -746,6 +753,7 @@ The TensorFlow and Keras websites have a multitude of guides and tutorials on la
 \item \href{https://www.tensorflow.org/tfmodels/nlp/fine_tune_bert}{Fine-tuning a BERT model} 
 \end{itemize}
 \end{resourcebox}
+\end{withcode}
 
 \section{Auto-Encoders}
 
@@ -807,7 +815,7 @@ Auto-encoders find applications for example in face recognition, feature detecti
 \label{fig:murphy_20_19}
 \end{figure}
 
-
+\begin{withcode}
 \begin{resourcebox}
 Complete implementations of the following auto-encoder examples are available on the following GitHub repo:
 
@@ -928,6 +936,7 @@ While the encoder and decoder in the examples here have the same architecture, t
 \end{enumerate}
 \end{exercisebox}
 
+\end{withcode}
 
 \FloatBarrier
 
@@ -980,6 +989,7 @@ VAEs generally outperform deterministic auto-encoders, as shown in Figure~\ref{f
 \label{fig:murphy_20_25}
 \end{figure}
 
+\begin{withcode}
 The following example shows how to implement a simple VAE in Python. It uses the same fashion MNIST data set as the auto-encoder example in the previous section and data loading and pre-processing is not shown here again. 
 
 When defining a VAE in Python, the first step is to create a sampling layer\index{Sampling layers} that can be added after other neural network layers in the encoder. The following code block defines this as a type of Keras layer. Inputs to the layer are a vector of means and (log of) variances. The layer outputs a point in the latent space that is sampled from a normal distribution with those means and variances. Note that the layer actually samples from a normal Gaussian and the sampled point is then transformed by multiplying with the variance and adding the means, that is, using the re-parameterization described above and shown in Figure~\ref{fig:murphy_20_25}.
@@ -1105,7 +1115,7 @@ The project can be cloned from this URL:
   \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
 \end{enumerate}
 \end{exercisebox}
-
+\end{withcode}
 
 \FloatBarrier
 
@@ -1133,6 +1143,7 @@ A generative adversarial network\index{GAN|see {Generative adversarial network}}
 \label{fig:gancat}
 \end{figure}
 
+\begin{withcode}
 In practice, a GAN implementation closely follows the principles shown in Figure~\ref{fig:gan}. The following Python example implements a simple GAN for generating images. It is based on the same fashion MNIST data set as the auto-encoder and VAE examples in the previous sections so that loading and pre-processing of the data set are not shown.
 
 \begin{resourcebox}{GAN in Python}
@@ -1278,6 +1289,7 @@ Epoch 10/10
 \end{textcode}
 
 Other problems may occur when the discriminator becomes so good that it ''overpowers'' the generator. These issues can be addressed by reducing the learning rate for the discriminator, by reducing the number of CNN filters or removing entire CNN layers to make the discriminator less powerful, by adding noise to the labels when training the discriminator, or by adding more dropout layers or increasing the dropout rate in the discriminator. The inverse problem, that of the generator overpowering the discriminator can be addressed by making the discriminator more powerful using suggestions opposite the earlier ones for reducing the discriminator strength.
+\end{withcode}
 
 \FloatBarrier
 

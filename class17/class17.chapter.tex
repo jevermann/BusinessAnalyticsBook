@@ -11,7 +11,9 @@ After reading this chapter, you should be able to:
    \item Explain the concept of unrolling or unfolding a recurrent neural network.
    \item Describe the functioning of an LSTM and GRU cell in a recurrent neural network and their main differences. 
    \item Explain the concept of stateful recurrent neural networks and identify use cases when they are appropriate.
+\begin{withcode}
    \item Build classification and regression models using recurrent neural networks with popular neural network software tools, fit them to sequence data, and evaluate their performance.
+\end{withcode}
 \end{itemize}
 
 \section*{Sources and Further Reading}
@@ -26,6 +28,7 @@ Chapter 15
 
 The book by Murphy is freely available and provides three chapters on neural networks, one for structured data, one for images, and one for sequences. It provides significant depth on convolutional and recurrent network architectures, fitting the models, and problems the data analyst may encounter. 
 
+\begin{withcode}
 \begin{resourcebox}
 \subsubsection*{Guides and examples on the Tensorflow and Keras web sites:}
 
@@ -38,6 +41,7 @@ The book by Murphy is freely available and provides three chapters on neural net
 \end{resourcebox}
 
 This course uses the Tensorflow programming framework for neural network applications. The Tensorflow website has a multitude of introductory and advanced guides and tutorial that cover all aspects of machine learning with neural networks. 
+\end{withcode}
 
 \begin{resourcebox}
 \subsubsection*{Introductory tutorials:}
@@ -321,6 +325,7 @@ Complete implementations for this and the other examples in this chapter are ava
 The project can be cloned from this URL: \small\url{https://github.com/jevermann/busi4720-ml.git}\normalsize
 \end{resourcebox}
 
+\begin{withcode}
 First, load all required packages, specify parameters for the network architecture and training, and then read the data file:
 
 \begin{pythoncode}
@@ -685,8 +690,9 @@ Total params: 88449 (345.50 KB)
 Trainable params: 88449 (345.50 KB)
 Non-trainable params: 0 (0.00 Byte)
 \end{textcode}
+\end{withcode}
 
-\section{Next Activity Prediction in Business Processes}
+\section{Example -- Next Activity Prediction in Business Processes}
 
 As another example of a sequence data problem, consider predicting the next activity in a running instance of a business process. In particular, train a model to predict the next activity from a prefix sequence of 5 activities that have already occurred. This is a classification problem, where the class of the next activity is to be predicted. 
 
@@ -701,6 +707,7 @@ https://doi.org/10.4121/uuid:3926db30-f712-4394-aebc-75976070e91f}{4TU repositor
 }: \url{https://evermann.ca/busi4720/BPI_Challenge_2012.xes.gz}
 \end{resourcebox}
 
+\begin{withcode}
 First, import the required libraries and use PM4Py to read the event log:
 
 \begin{pythoncode}
@@ -956,6 +963,7 @@ Adapt the network architecture to identify the impact on training and validation
    \end{enumerate}
 Comment on your findings and identify the best model. \\
 \end{exercisebox}
+\end{withcode}
 
 \section{Review Questions}
 \paragraph*{Introduction}
