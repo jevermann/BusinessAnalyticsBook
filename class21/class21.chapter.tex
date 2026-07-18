@@ -336,6 +336,29 @@ The Bellman equation (Equation~\ref{eq:bellman} and its equivalent for the actio
 \end{figure}
 
 This process is called \emph{iterative policy evaluation}\index{Iterative policy evaluation}.
+
+\begin{exercisebox}
+{\bf States}: $A$, $B$, and $T$. $T$ is a terminal state \\
+{\bf Policy}: If in A, always move to B; if in B, always move to T \\
+{\bf Discount factor}: $\gamma = 0.9$ \\
+{\bf Initial values}: $V(A) = V(B) = V(T) = 0$ \\
+
+State transition and reward model:
+
+\vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c}
+{\bf Current State S} & {\bf Next State S'} & {\bf Reward R} & {\bf Probability p} \\ \hline
+A & B & +4 & 1.0 \\
+B & T & +2 & 0.8 \\
+B & A & -1 & 0.2 \\ 
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+
+Find the state values $V(A)$ and $V(B)$.
+\end{exercisebox}
+
 \begin{withcode}
 Figure~\ref{fig:policyiteration} shows this in pseudocode and the following Python code block shows the straightforward implementation, beginning with initial values of $0$ for each state.
 
@@ -547,6 +570,53 @@ There is one additional difference between Figures~\ref{fig:firstvisitmc} and \r
 \caption[First visit MC control with exploring starts]{First visit MC control with exploring starts (Source: SB)}
 \label{fig:firstvisitcontrol}
 \end{figure}
+
+\begin{exercisebox}
+Consider the following MC control problem. Note the exploring starts (i.e. different start states) for each episode. 
+
+\begin{itemize}
+    \item {\bf States}: $A$, $B$, and $T$. ($T$ is a terminal state)
+    \item {\bf Actions}: Left, Right
+    \item {\bf Discount}: $\gamma=1$
+\end{itemize}
+
+\vspace{0.5\baselineskip}
+
+\textbf{Episode 1}
+
+\vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c}
+{\bf Time} & {\bf State} & {\bf Action} & {\bf Reward} \\ \hline
+0 & A & R & 3 \\
+1 & B & L & 2 \\
+2 & A & L & 5 \\
+3 & T & - & - \\
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+
+\textbf{Episode 2}
+
+\vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c}
+{\bf Time} & {\bf State} & {\bf Action} & {\bf Reward} \\ \hline
+0 & B & R & 4 \\
+1 & A & R & 1 \\
+2 & T & - & - \\
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+    
+\begin{enumerate}
+   \item Find $G_t$ for every step in episode 1
+   \item Update $Returns(S_t, R_t)$ and $Q(S_t, A_t)$ for each step of episode 1. Be careful to only update first occurrences. You may assume that initially $Q(S, A)=0$.
+   \item Find $G_t$ for every step in episode 2
+   \item Update $Returns(S_t, R_t)$ and $Q(S_t, A_t)$ for each step of episode 2. Be careful to only update first occurrences.
+   \item Specify the final optimal greedy policy
+\end{enumerate}
+\end{exercisebox}
 
 As an example of an episodic RL problem that can be usefully learned with MC methods, consider the game of Blackjack (example 5.3 in SB)\footnote{A complete implementation is available at \url{https://github.com/jevermann/busi4720-rl/blob/main/blackjack_es.py}}. In this game,
 cards have values A, 2, 3, \ldots, 10 where A is the ace and 10 includes face cards. An ace can count as 1 point or 11 points. An ace that is counted as 11 is called a ''usable ace''. The dealer's initial card is shown. The player can take two possible actions: take another card (''hit'') or do not take a card (''stick''). Once the player sticks, the dealer takes cards. The dealer sticks on a sum of 17 or more. When the player's or the dealer's sum of cards is over 21 they are ''bust'', that is, they lose the game. The dealer's policy is deterministic, they stick on 17 points or more. 
@@ -887,6 +957,47 @@ Figure~\ref{fig:sarsa} shows the pseudocode of a method called ''\emph{SARSA}''\
 \caption[TD-control with SARSA]{TD-control with the SARSA method (Source: SB)}
 \label{fig:sarsa}
 \end{figure}
+
+\begin{exercisebox}
+Consider the following TD learning agent. 
+\begin{itemize}
+    \item {\bf States}: $A$, $B$, and $T$. ($T$ is a terminal state)
+    \item {\bf Actions}: Left, Right
+    \item {\bf Discount}: $\gamma=1$
+    \item {\bf Learning Rate}: $\alpha=0.5$
+\end{itemize}
+
+\vspace{0.5\baselineskip}
+
+\textbf{Episode 1:}
+\vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c|c}
+{\bf State} & {\bf Action} & {\bf Reward} & {\bf Next State} & {\bf Next Action}\\ \hline
+A & R & 3 & B & L \\
+B & L & 2 & A & L \\
+A & L & 5 & T & - \\
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+
+\textbf{Episode 2:}
+
+\vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c|c}
+{\bf State} & {\bf Action} & {\bf Reward} & {\bf Next State} & {\bf Next Action}\\ \hline
+B & R & 4 & A & R \\
+A & R & 1 & T & - \\
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+
+\begin{enumerate}
+   \item From initial $Q(s, a) = 0$ update $Q(S_t, A_t)$ for every step of every episode
+   \item What is the final optimal greedy policy?
+\end{enumerate}
+\end{exercisebox}
 
 \begin{withcode}
 To illustrate the use of SARSA, consider the ''Windyworld'' example environment (example 6.5 in SB), shown in Figure~\ref{fig:windyworld}. An agent has to move from start state $S$ to terminal goal state $G$ in this gridworld. However, there is a wind on some columns of the grid that pushes the agent towards the top (indicated below the columns in Figure~\ref{fig:windyworld}). Rewards are $-1$ for every step until termination, so that the agent is encouraged to find the path requiring the least number of actions. There are no penalties for moving off the world (the action is simply ignored) and the problem is not discounted ($\gamma=1$).

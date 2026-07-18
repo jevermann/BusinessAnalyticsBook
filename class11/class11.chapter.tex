@@ -719,6 +719,19 @@ k-fold cross-validation is computationally less expensive and less stable than L
 \label{fig:kfold}
 \end{figure}
 
+
+\begin{exercisebox}
+Assume you have a dataset with 1000 observations and you wish to develop a predictive model using linear regression. \\
+
+For each of the following cross-validation methods, describe the number of linear regression models you fit, the size of each training set, and the size of the validation set.
+
+\begin{itemize}
+  \item Train/Test split: 80/20
+  \item 5-fold cross-validation
+  \item LOOCV
+\end{itemize}
+\end{exercisebox}
+
 One important consideration in splitting the data is preventing \emph{information leakage}\index{Information leakage} from training to test or validation data set, in order to ensure that the test and validation data sets are truly independent of the training data. One way in which information could be leaked is when selection of input variables or predictors is done based on characteristics of the entire data set, for example the variance of a variable or the correlation between variables in the entire data set. This selection affects both the training and the test data, essentially leaking some information from the training data to the test data, and thereby making the test data set not truly independent. Another way in which information can leak is by pre-processing variables, like centering around the mean or scaling them to have unit variance. When this is based on the mean or variance of the full data set, information from the training set leaks to the test or validation set, making those data sets not fully independent. As a general rule, any predictor or feature selection and data pre-processing must be done independently for each training set, \emph{after} the split or splits (in the case of k-fold CV) have been made. 
 
 \section{Review Questions}

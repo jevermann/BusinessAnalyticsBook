@@ -43,6 +43,18 @@ In contrast to visual discovery, declarative visualization\index{Declarative vis
 
 In operational visualization, graphs and charts are used for supervision or monitoring of the operation of a system\index{Operational visualization}. They provide supervisors or controllers with a real-time view of the state of key system properties and are used to spot situations or trends that require intervention in the system's operation, that is, operational decision making. 
 
+\begin{exercisebox}
+For each scenario, identify whether it is an example of visual Discovery, declarative Visualization, or operational Visualization.
+
+\begin{enumerate}
+\item A scientist explores climate data looking for unknown patterns.
+\item A CEO presents quarterly financial results to investors.
+\item A network administrator monitors server activity in real time.
+\item A marketing analyst experiments with different charts while exploring data.
+\item A dashboard displays factory temperatures every second.
+\end{enumerate}
+\end{exercisebox}
+
 \subsection*{Quantitative Messages} 
 
 Good visualizations are focused on the quantitative message they are intended to convey. For example, to present information about a time-series, that is, time-dependent behaviour of one or more variables, a line chart is a good type of visualization. However, that line chart would not be as useful to convey relative rankings of items or objects. For this purpose, a bar chart may be better suited. On the other hand, to describe part-whole relationships, a pie chart may be useful to show what part of the whole is contributed by its parts. Deviations from a mean or other standard, whether positive or negative, can be easily understood from a bar chart as well. To understand frequency distributions, one might use boxplots or histograms. Boxplots show median values, and measures of the ''spread'' or variability of the data. Histograms can show a one or two dimensional frequency distribution of values. To understand correlations of variables, a scatterplot is useful, where individual data points are plotted in a two or three dimensional coordinate system, often augmented with statistical information about their relationship. Finally, geographic information may use map data for visualization. This is sometimes called a ''cartogram''. Points may be overlaid on a map, or areas of a map may be colored or otherwise highlighted. In summary, it is important to consider the message to convey or the insight to be gained from a visualization when selecting the type of graph or chart.
@@ -187,6 +199,20 @@ In summary, misleading charts and visualizations can be particularly problematic
 \end{figure}
 
 
+
+\begin{exercisebox}
+For each situation explain why the visualization is misleading and describe how you would improve it.
+
+\begin{enumerate}
+\item A bar chart starts its vertical axis at 95 instead of 0.
+\item A pie chart compares the sales of twelve different products.
+\item A graph uses large three-dimensional bars.
+\item Only data from one unusually good month is shown.
+\item Two variables are plotted using differently scaled vertical axes so that their lines appear highly correlated.
+\end{enumerate}
+\end{exercisebox}
+
+
 \section{Special Types of Data and Visual Analytics}
 
 \subsection*{Streaming Data}
@@ -305,6 +331,227 @@ A common type of layout for directed and acyclic graphs is the layered graph, ty
   %\item \emph{Shape homogeneity}. A particular problem when using node labels, e.g. for names or node attributes, is the size of the node shape in the graph visualization. It is preferrable to maintain equal size, despite differences in label length. Lines should have the lowest or an equal number of bends.
   %\item \emph{Angular resolution}. In graphs with many edges from nodes, it is important to draw lines in such a way that the edges can be clearly differentiated. This is very important in circular layouts, but also plays a large role in other types of graph layouts.
 %\end{itemize}
+
+
+\section{Mapping Data to Plot Elements}
+
+Creating a basic visualization in two dimensions, such as  bar chart, a line chart, or a bubble chart, means that data variables or data series must be mapped to visualization elements. This is the core of the visualization task, and the most fundamental choice the data analyst has to make. Table~\ref{tab:elements} shows plot elements that data variables can be mapped to. In principle, a different data variable can be mapped to each of these, resulting in potentially being able to represent more than a dozen variables in one diagram. However, in practice, the number of concurrent variables to represent should be limited to no more than 3, in order for the visualization to remain interpretable and not to require too much cognitive effort on the part of the reader. The next sections show examples of mapping different variables to different plot element. 
+
+\begin{table}[h]
+\centering
+\renewcommand{\arraystretch}{1.25}
+
+\begin{tabular}{l} \hline
+X, Y, Z axes \\
+Colour (of points, lines, areas, shapes) \\ 
+Transparency (''alpha'') \\
+Patterns (within areas, shapes) \\
+Size, Weight/Width (of points and lines) \\
+Shape, Style (of points and lines) \\ \hline
+\end{tabular}
+\caption{Plot elements that can be mapped to data variables}
+\label{tab:elements}
+\end{table}
+
+\begin{exercisebox}
+Suppose you are visualizing information about cities.
+
+Variables:
+
+\begin{itemize}
+\item Population
+\item Average income
+\item Region
+\item Annual rainfall
+\end{itemize}
+
+Available visual properties:
+
+\begin{itemize}
+\item X position
+\item Y position
+\item Color
+\item Size
+\item Shape
+\end{itemize}
+
+Assign each variable to a visual property and explain your choices.
+\end{exercisebox}
+
+
+\section{Common Types of Plots}
+
+Depending on the number of variables to visualize, whether they are discrete or continuous, and the quantitative message to convey, different types of plots may be chosen. While the list of plot types presented here is not comprehensive, and new ways of visualizing data are constantly being invented, these are widely used plot types that are available in most visualization software packages and can be created with little effort.
+
+\begin{itemize}
+   \item Plots for One Variable
+   \begin{itemize}
+      \item Continuous 
+      \begin{itemize}
+		\item {\bf Area}: Degree of change over time, or relationship of parts to aggregate
+		\item {\bf Density, Dot, Frequency, Histogram}: Show frequency distribution of data
+	  \end{itemize}
+	  \item Discrete
+		\begin{itemize}
+		  \item {\bf Bar}: Connections among individual things, compare items of different groups
+		  \item {\bf Pie}: Relationships of parts to aggregate
+		\end{itemize}
+    \end{itemize}
+    \item Plots for Two Variables
+    \begin{itemize}
+       \item Both Continuous
+			\begin{itemize}
+			  \item {\bf Point}: Connections among numeric values, show multiple groups of data
+			  \item {\bf Lines, Local Regression}: Relationships/correlations among multiple data series or over time
+			  \item {\bf Text / Label}: Frequency of labels in content/document
+			\end{itemize}
+	   \item One Discrete, One Continuous
+			\begin{itemize}
+			  \item {\bf Column}: Correlations among things or information changes over time
+			  \item {\bf Box, Dot, Violin}: Compare distributions between many groups, display spread and skew of data
+			\end{itemize}
+	   \item Both Discrete
+			\begin{itemize}
+				\item {\bf Points/Counts}: Magnitude of counts
+				\item {\bf Jitter}: Plots of data points
+			\end{itemize}
+		\item Distributions of Two Variables
+			\begin{itemize}
+				\item {\bf Bin2D, Density2D, Hex}: Shows frequency of values over two continuous variables
+			\end{itemize}
+	\end{itemize}
+	\item Plots for Three Variables
+	\begin{itemize}
+		\item Continuous
+			\begin{itemize}
+				\item {\bf Contour, Raster and Tile}: Shows relationships among three data series
+			\end{itemize}
+	\end{itemize}
+	\item Visualizing Errors and Uncertainty
+	\begin{itemize}
+		\item Give a general idea of how precise a value is, or how far a value might be from the true value
+		\item Typically used to augment a given visualization
+		\item Common Visualization Styles:
+			\begin{itemize}
+			  \item Crossbar
+			  \item Errorbar
+			  \item Range (line, point)
+			\end{itemize}  
+	\end{itemize}
+\end{itemize}
+
+
+\begin{exercisebox}
+For each scenario, choose the most appropriate type of plot and explain your choice.
+
+\begin{itemize}
+\item Monthly sales over five years
+\item Market share of five companies
+\item Distribution of employee salaries
+\item Relationship between advertising spending and sales
+\item Customer satisfaction by department
+\item Number of accidents by weekday
+\item Population density across provinces
+\end{itemize}
+
+Possible plot types to consider are bar charts, line chart, pie chart, histogram, scatterplot, box plot, maps
+\end{exercisebox}
+
+
+\begin{exercisebox}
+Consider the following data.
+
+\begin{center}
+\begin{tabular}{ccc}
+Student & Hours Studied & Grade\\
+\hline
+A & 2 & 60\\
+B & 4 & 70\\
+C & 5 & 75\\
+D & 7 & 90\\
+E & 8 & 95 \\ \hline
+\end{tabular}
+\end{center}
+
+Answer the following:
+
+\begin{enumerate}
+\item Which visualization would you choose?
+\item Sketch the visualization.
+\item What conclusion would you draw?
+\end{enumerate}
+\end{exercisebox}
+
+
+\begin{exercisebox}
+Sketch an appropriate visualization for each dataset.
+
+\textbf{Dataset A}
+
+\begin{center}
+\begin{tabular}{cc}
+Month & Sales \\
+\hline
+Jan & 15\\
+Feb & 18\\
+Mar & 20\\
+Apr & 24\\
+May & 23
+\end{tabular}
+\end{center}
+
+\vspace{\baselineskip}
+
+\textbf{Dataset B}
+
+\begin{center}
+\begin{tabular}{cc}
+Department & Employees\\
+\hline
+HR & 12\\
+Finance & 18\\
+IT & 35\\
+Sales & 25
+\end{tabular}
+\end{center}
+
+\vspace{\baselineskip}
+
+\textbf{Dataset C}
+
+\[
+(2,3),\ (3,5),\ (4,4),\ (5,7),\ (6,8),\ (7,9)
+\]
+
+Then answer:
+
+\begin{enumerate}
+\item Which graph best shows a trend?
+\item Which graph best compares categories?
+\item Which graph best shows a relationship?
+\end{enumerate}
+\end{exercisebox}
+
+\begin{exercisebox}
+A local coffee shop wants to present the following information:
+
+\begin{itemize}
+\item Monthly revenue
+\item Customer age groups
+\item Drinks sold by category
+\item Busiest hour of the day
+\item Average customer rating
+\end{itemize}
+
+For each item:
+
+\begin{enumerate}
+\item Choose an appropriate type of visualization.
+\item Explain why it is appropriate.
+\item Sketch the visualization.
+\end{enumerate}
+\end{exercisebox}
+
 
 \section{Color Palettes}
 
@@ -438,68 +685,46 @@ Realizing the prevalence and the effects of CVD means that the color palette tha
 
 In summary, the thoughtful application of color in data visualization is not merely an artistic decision but a strategic one. It influences how effectively the data is communicated and understood, ensuring that visualizations are not only informative and accurate, but also inclusive and engaging to a diverse audience.
 
+
+\begin{exercisebox}
+A graph distinguishes two categories using only red and green.
+
+Answer the following questions:
+
+\begin{enumerate}
+\item Why could this be problematic?
+\item Suggest two alternative color choices.
+\item Suggest one additional visual feature that could distinguish the categories without relying only on color.
+\end{enumerate}
+\end{exercisebox}
+
+
+\begin{exercisebox}
+For each situation, choose the most appropriate color palette from among sequential, diverging, and spectral palettes.
+
+\begin{enumerate}
+\item Temperature above or below average
+\item Election winners by political party
+\item Income from lowest to highest
+\item Risk levels (Low--Medium--High)
+\item Species of birds
+\end{enumerate}
+\end{exercisebox}
+
+
+\begin{exercisebox}
+Consider the following description:
+
+\begin{quote}
+''A rainbow-colored three-dimensional pie chart with 18 slices compares monthly expenses.''
+\end{quote}
+
+List at least five changes that would improve this visualization.
+\end{exercisebox}
+
+
 \FloatBarrier
 
-\section{Common Types of Plots}
-
-Depending on the number of variables to visualize, whether they are discrete or continuous, and the quantitative message to convey, different types of plots may be chosen. While the list of plot types presented here is not comprehensive, and new ways of visualizing data are constantly being invented, these are widely used plot types that are available in most visualization software packages and can be created with little effort.
-
-\begin{itemize}
-   \item Plots for One Variable
-   \begin{itemize}
-      \item Continuous 
-      \begin{itemize}
-		\item {\bf Area}: Degree of change over time, or relationship of parts to aggregate
-		\item {\bf Density, Dot, Frequency, Histogram}: Show frequency distribution of data
-	  \end{itemize}
-	  \item Discrete
-		\begin{itemize}
-		  \item {\bf Bar}: Connections among individual things, compare items of different groups
-		  \item {\bf Pie}: Relationships of parts to aggregate
-		\end{itemize}
-    \end{itemize}
-    \item Plots for Two Variables
-    \begin{itemize}
-       \item Both Continuous
-			\begin{itemize}
-			  \item {\bf Point}: Connections among numeric values, show multiple groups of data
-			  \item {\bf Lines, Local Regression}: Relationships/correlations among multiple data series or over time
-			  \item {\bf Text / Label}: Frequency of labels in content/document
-			\end{itemize}
-	   \item One Discrete, One Continuous
-			\begin{itemize}
-			  \item {\bf Column}: Correlations among things or information changes over time
-			  \item {\bf Box, Dot, Violin}: Compare distributions between many groups, display spread and skew of data
-			\end{itemize}
-	   \item Both Discrete
-			\begin{itemize}
-				\item {\bf Points/Counts}: Magnitude of counts
-				\item {\bf Jitter}: Plots of data points
-			\end{itemize}
-		\item Distributions of Two Variables
-			\begin{itemize}
-				\item {\bf Bin2D, Density2D, Hex}: Shows frequency of values over two continuous variables
-			\end{itemize}
-	\end{itemize}
-	\item Plots for Three Variables
-	\begin{itemize}
-		\item Continuous
-			\begin{itemize}
-				\item {\bf Contour, Raster and Tile}: Shows relationships among three data series
-			\end{itemize}
-	\end{itemize}
-	\item Visualizing Errors and Uncertainty
-	\begin{itemize}
-		\item Give a general idea of how precise a value is, or how far a value might be from the true value
-		\item Typically used to augment a given visualization
-		\item Common Visualization Styles:
-			\begin{itemize}
-			  \item Crossbar
-			  \item Errorbar
-			  \item Range (line, point)
-			\end{itemize}  
-	\end{itemize}
-\end{itemize}
 
 \section{Graphics Libraries and Frameworks}
 
@@ -548,26 +773,6 @@ JavaScript, being the standard language of web development, boasts several power
 \emph{Google Charts} provides an even simpler way of incorporating charts into web pages. It offers a wide array of chart types and is particularly known for its integration with other Google services, like Google Spreadsheets. Google Charts is designed to be easy to use, and it handles a lot of the heavy lifting behind the scenes, such as drawing the charts, which makes it an appealing option for users who prefer a more straightforward and less code-intensive approach. The downside is that it offers less customization compared to D3.js and is reliant on external Google services, which might raise privacy concerns or issues with data control.
 
 Each of these libraries serves different needs within the web development and data visualization community. D3.js is ideal for creating complex, interactive visualizations where control and customization are paramount. Chart.js offers a balance between simplicity and functionality, suitable for standard web-based charts. Google Charts, with its ease of use and integration with Google products, is excellent for straightforward visualizations where ease of implementation is a priority. The choice among these libraries largely depends on the specific requirements of the project, the complexity of the visualizations needed, and the developer's proficiency with JavaScript and web technologies.
-
-\section{Mapping Data to Plot Elements}
-
-Creating a basic visualization in two dimensions, such as  bar chart, a line chart, or a bubble chart, means that data variables or data series must be mapped to visualization elements. This is the core of the visualization task, and the most fundamental choice the data analyst has to make. Table~\ref{tab:elements} shows plot elements that data variables can be mapped to. In principle, a different data variable can be mapped to each of these, resulting in potentially being able to represent more than a dozen variables in one diagram. However, in practice, the number of concurrent variables to represent should be limited to no more than 3, in order for the visualization to remain interpretable and not to require too much cognitive effort on the part of the reader. The next sections show examples of mapping different variables to different plot element. 
-
-\begin{table}[h]
-\centering
-\renewcommand{\arraystretch}{1.25}
-
-\begin{tabular}{l} \hline
-X, Y, Z axes \\
-Colour (of points, lines, areas, shapes) \\ 
-Transparency (''alpha'') \\
-Patterns (within areas, shapes) \\
-Size, Weight/Width (of points and lines) \\
-Shape, Style (of points and lines) \\ \hline
-\end{tabular}
-\caption{Plot elements that can be mapped to data variables}
-\label{tab:elements}
-\end{table}
 
 \begin{withcode}
 \section{Visualization in R using ggplot2}
@@ -1665,6 +1870,21 @@ The first plot is a line plot that spans the entire width of the dashboard. This
   \label{fig:dashboard}
 \end{figure}
 
+
+\begin{exercisebox}
+Imagine yourself in each of the following roles. For each role, describe at least three related charts/plots on your dashboard and the type of plot that you would choose. 
+
+\begin{enumerate}
+\item Machine controller for a CNC mill
+\item Warehouse manager in a logistics company
+\item Marketing vice-president for Canada
+\item Chief financial officer
+\item Chief risk officer
+\item CEO
+\end{enumerate}
+\end{exercisebox}
+
+
 \begin{withcode}
 This section briefly describes how interactive dashboards can be built using the Plotly Dash package for Python. Because Plotly Express figures are interactive, browser-based already, they lend themselves to being included in dashboards. 
 
@@ -1767,6 +1987,7 @@ Complete implementation of the dashboard example is available at
 \url{https://evermann.ca/busi4720/dashboard.py} \\
 \end{resourcebox}
 
+\FloatBarrier
 
 \section{Review Questions}
 

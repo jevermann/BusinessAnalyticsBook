@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -29,7 +29,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \begin{block}{}
 Richard S. Sutton and Andrew G. Barto (2018) \emph{Reinforcement Learning -- An Introduction}. 2nd edition, The MIT Press, Cambridge, MA. (SB) \\
 \vspace{0.5\baselineskip}
@@ -46,7 +46,7 @@ Chapters 9--11
 
 \end{frame}
 
-\begin{frame}{Resources}
+\begin{frame}[label=full]{Resources}
 Implementations are available on the following GitHub repo:
 
 \url{https://github.com/jevermann/busi4720-rl} \\
@@ -58,7 +58,7 @@ The project can be cloned from this URL:
 \end{frame}
 
 
-\begin{frame}{Function Approximation}
+\begin{frame}[label=full]{Function Approximation}
 \begin{block}{Previously}
 \begin{itemize}
 \item Tabular methods only suitable for small state space and discrete actions
@@ -82,7 +82,7 @@ $\hat{\pi}(a | s) = \hat{\pi}(a | s, \theta) \approx \pi(a | s)$
 \end{block}
 \end{frame}
 
-\begin{frame}{Function Approximation}
+\begin{frame}[label=full]{Function Approximation}
 \begin{block}{Advantages}
 \begin{itemize}
 \item Continuous states and/or actions
@@ -100,7 +100,7 @@ $\hat{\pi}(a | s) = \hat{\pi}(a | s, \theta) \approx \pi(a | s)$
 \end{block}
 \end{frame}
 
-\begin{frame}{Stochastic Gradient Methods}
+\begin{frame}[label=full]{Stochastic Gradient Methods}
 Assume a MSE value error:
 \begin{align*}
 \bar{VE} = \sum_{s \in \mathcal{S}} \mu(s) \left[ q_\pi(s, a) - \hat{q}(s, a, \theta) \right]^2
@@ -120,7 +120,7 @@ True value $q_\pi(S_t, A_t)$ generally unknown; use an unbiased estimate $U_t = 
 \end{block}
 \end{frame}
 
-\begin{frame}{Example -- Semi-gradient SARSA}
+\begin{frame}[label=full]{Example -- Semi-gradient SARSA}
 \begin{block}{}
 \begin{align*}
 & \text{Initialize}\; \theta \in \mathbbm{R}^d \; \text{arbitrarily} \\
@@ -138,7 +138,35 @@ True value $q_\pi(S_t, A_t)$ generally unknown; use an unbiased estimate $U_t = 
 \end{block}
 \end{frame}
 
-%\begin{frame}{Off-Policy TD Learning -- Q-Learning}
+\begin{frame}[label=full]{Hands-On Exercise -- Semi-Gradient SARSA} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+\begin{itemize}
+    \item {\bf Action-value function}: $\hat{q}(S, A) = \theta_1 x_1 + \theta_2 x_2$ where $x_1, x_2$ are features describing the state-action pair.
+    \item {\bf Discount}: $\gamma=0.9$; {\bf Learning Rate}: $\alpha=0.5$
+    \item {\bf Gradient}: $\nabla \hat{q}(S, A, \theta) = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$
+    \item {\bf Initial parameters}: $\theta = \begin{bmatrix} 0.5 \\ 0.5 \end{bmatrix}$
+\end{itemize}
+
+Consider the observed transition: 
+\begin{itemize}
+   \item {\bf Current features}: $x(S, A) = (2, 1)$
+   \item {\bf Reward}: $R=4$
+   \item {\bf Next features}: $x(S', A') = (1, 3)$
+\end{itemize}
+
+Update the parameter $\theta$ using the Semi-Gradient SARSA update rule.
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+%\begin{frame}[label=full]{Off-Policy TD Learning -- Q-Learning}
 %\begin{block}{}
 %\begin{align*}
 %& \text{Initialize}\; Q(s, a) \; \text{for all} \; s \in \mathcal{S}^+ \; \text{, arbitrarily} \\
@@ -155,7 +183,7 @@ True value $q_\pi(S_t, A_t)$ generally unknown; use an unbiased estimate $U_t = 
 %\end{frame}
 
 
-\begin{frame}{''The Deadly Triad''}
+\begin{frame}[label=full]{''The Deadly Triad''}
 \textbf{Instability} and \textbf{Divergence} arise when combining all three elements:
 \begin{itemize}
 \item \textbf{Function approximation}: Generalizing from a state space using linear functions or neural networks
@@ -164,7 +192,7 @@ True value $q_\pi(S_t, A_t)$ generally unknown; use an unbiased estimate $U_t = 
 \end{itemize}
 \end{frame}
 
-\begin{frame}{DQN -- Double Q Network}
+\begin{frame}[label=full]{DQN -- Double Q Network}
 \begin{block}{Experience Replay}
 \begin{itemize}
   \item Store sequences $S, A, R, S', A'$ in \emph{replay buffer}
@@ -182,7 +210,7 @@ True value $q_\pi(S_t, A_t)$ generally unknown; use an unbiased estimate $U_t = 
 \end{block}
 \end{frame}
 
-\begin{frame}{DQN -- Algorithm}
+\begin{frame}[label=full]{DQN -- Algorithm}
 \footnotesize
 \begin{block}{}
 \vspace{-\baselineskip}
@@ -207,19 +235,19 @@ r_j + \gamma \max_{A'} \hat{q}_T(S_{j+1}, A'; \theta_T) & \qquad \quad \text{oth
 \end{block}
 \end{frame}
 
-\begin{frame}{DQN -- Algorithm}
+\begin{frame}[label=full]{DQN -- Algorithm}
 \begin{itemize}
    \item In practice, $S$ is a function $\phi(X)$ of inputs $X$ through feature-extraction and pre-processing
    \item In practice, the update $y_j - Q(S_j, a_j, \theta)$ is clipped to $[-1, 1]$
    \end{itemize}
 \end{frame}
 
-\begin{frame}{DQN Example -- Cart Pole}
+\begin{frame}[label=withcode]{DQN Example -- Cart Pole}
 \centering
 \includegraphics[height=2.5in]{screen1.png}
 \end{frame}
 
-\begin{frame}{DQN Example -- Cart Pole}
+\begin{frame}[label=withcode]{DQN Example -- Cart Pole}
 \small
 \textbf{Action Space}:
 \begin{center}
@@ -252,7 +280,7 @@ r_j + \gamma \max_{A'} \hat{q}_T(S_{j+1}, A'; \theta_T) & \qquad \quad \text{oth
 \end{frame}
 
 
-\begin{frame}[fragile]{DQN in Python}
+\begin{frame}[label=withcode,fragile]{DQN in Python}
 Use the ''CartPole'' environment from \url{https://gymnasium.farama.org/}:
 \begin{pythoncode}
 import math
@@ -272,7 +300,7 @@ Ssize = env.observation_space.shape[0]
 \end{frame}
 
 
-\begin{frame}[fragile]{DQN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{DQN in Python \small [cont'd]}
 Neural network and RL hyperparameters:
 \begin{pythoncode}
 # Neural net parameters
@@ -290,7 +318,7 @@ D = collections.deque(maxlen=5000)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{DQN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{DQN in Python \small [cont'd]}
 Define the neural networks:
 \begin{pythoncode}
 # Main network, used to select actions
@@ -313,7 +341,7 @@ Qhat.set_weights(Q.get_weights())
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{DQN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{DQN in Python \small [cont'd]}
 Getting a $Q(s, a)$ value involves predicting from the neural net:
 \begin{pythoncode}
 def getQ(Q, s, a):
@@ -334,7 +362,7 @@ def maxQ(Q, s, arg):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{DQN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{DQN in Python \small [cont'd]}
 $\epsilon$-greedy policy $pi_\epsilon(s)$
 \begin{pythoncode}
 def pi(s, epsilon):
@@ -356,7 +384,7 @@ def target_DDQN(Q, Qhat, a, r, sprime):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{DQN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{DQN in Python \small [cont'd]}
 Creating x and y data for training:
 \begin{pythoncode}
 def training_xy(batch, ddqn=False):
@@ -375,7 +403,7 @@ def training_xy(batch, ddqn=False):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{DQN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{DQN in Python \small [cont'd]}
 DQN/DDQN code:
 \begin{pythoncode}
 for t in range(max_steps):
@@ -397,7 +425,7 @@ for t in range(max_steps):
 Complete code at \url{https://evermann.ca/busi4720/DDQN_tuples.py}
 \end{frame}
 
-\begin{frame}{DQN Extensions}
+\begin{frame}[label=full]{DQN Extensions}
 \begin{block}{Prioritized Experience Replay (PEX)}
 \begin{itemize}
    \item Important actions are sampled with higher probability
@@ -415,7 +443,7 @@ Complete code at \url{https://evermann.ca/busi4720/DDQN_tuples.py}
 \end{block}
 \end{frame}
 
-\begin{frame}{Advantage Function}
+\begin{frame}[label=full]{Advantage Function}
 \begin{align*}
 A(s, a) = Q(s, a) - V(s)
 \end{align*}
@@ -427,7 +455,7 @@ Q(s, a) = V(s) + A(s, a)
 \end{align*}
 \end{frame}
 
-\begin{frame}{Dueling DQN}
+\begin{frame}[label=full]{Dueling DQN}
 \begin{itemize}
    \item Neural network from features $x$ for value function $V(s)$ (''value stream'')
    \item Neural network from features $x$ for advantage function $A(s, a)$ (''advantage stream'')
@@ -440,7 +468,7 @@ Q(s, a, \theta, \alpha, \beta) = V(s, \theta, \beta) + \left( A(s, a, \theta, \a
 Where $\theta$ are shared neural-network parameters, $\beta$ are parameters only for the ''value-stream'' neural network, and $\alpha$ are parameters only for the ''advantage-stream'' neural network
 \end{frame}
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 \begin{block}{Idea}
 Learn a parameterized policy :
 \begin{align*}
@@ -453,7 +481,7 @@ J(\theta) = v_{\pi_\theta}(s_o)
 \end{block}
 \end{frame}
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 \begin{block}{Advantages}
 \begin{itemize}
    \item Simpler to approximate than action-value function
@@ -464,7 +492,7 @@ J(\theta) = v_{\pi_\theta}(s_o)
 \end{block}
 \end{frame}
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 REINFORCE update:
 \begin{align*}
 \theta_{t+1} = \theta_t + \alpha G_t \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)}
@@ -475,7 +503,7 @@ REINFORCE update:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 \begin{block}{REINFORCE: Monte-Carlo Control (episodic)}
 \begin{align*}
 & \text{Input: A differentiable policy}\;\pi(a | s, \theta);\;\text{step size}\; \alpha > 0 \\
@@ -489,7 +517,52 @@ REINFORCE update:
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{REINFORCE in Python}
+\begin{frame}[label=full]{Hands-On Exercise -- REINFORCE} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Consider a policy with two actions: Left ($p=0.7$), Right ($p=0.3$). Suppose the agent selected \emph{Right} as the first action in the episode. For this state:
+
+\begin{align*}
+\nabla \ln \pi(\text{Right} | s, \theta) = \begin{bmatrix}0.8 \\ -0.4\end{bmatrix}
+\end{align*}
+\end{column}
+\end{columns}
+
+Initially, $\theta = \begin{bmatrix}0.5 \\ 0.2\end{bmatrix}$. The learning rate is $\alpha=0.1$ and the discount factor $\gamma = 1$.
+
+\begin{columns}
+\begin{column}{0.3\textwidth}
+
+\vspace{\baselineskip}
+
+{\bf Episode rewards}:
+
+\vspace{,5\baselineskip}
+
+\begin{tabular}{c|c}
+{\bf Time} & {\bf Reward} \\ \hline
+1 & 3 \\
+2 & 2 \\
+3 & 1 \\
+\end{tabular}
+\end{column}
+\begin{column}{0.6\textwidth}
+\begin{itemize}
+   \item Calculate the return $G$
+   \item Calculate the update vector $\alpha G \nabla \ln \pi$
+   \item Calculate the updated parameter vector
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[label=withcode,fragile]{REINFORCE in Python}
 Policy function/network for discrete actions:
 \begin{pythoncode}
 # Batch size of 1 as we update after every action
@@ -512,7 +585,7 @@ def select_action(state):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{REINFORCE in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{REINFORCE in Python \small [cont'd]}
 Generate an episode:
 \begin{pythoncode}
 # Do this for each episode
@@ -540,7 +613,7 @@ for e in range(neps):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{REINFORCE in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{REINFORCE in Python \small [cont'd]}
 Learning from episode:
 \begin{pythoncode}
     # Learn for each step of the episode
@@ -566,7 +639,7 @@ Learning from episode:
 \end{frame}
 
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 REINFORCE with a baseline $b(S_t)$:
 \begin{align*}
 \theta_{t+1} = \theta_t + \alpha(G_t - b(S_t)) \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)}
@@ -582,7 +655,7 @@ Choose $b(S_t) = \hat{v}(S_t)$ the state-value function:
 \end{itemize} 
 \end{frame}
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 \begin{block}{REINFORCE with Baseline (episodic)}
 \vspace{-.5\baselineskip}
 \begin{align*}
@@ -601,7 +674,7 @@ Choose $b(S_t) = \hat{v}(S_t)$ the state-value function:
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{REINFORCE with Baseline in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{REINFORCE with Baseline in Python}
 Learning from episode:
 \begin{pythoncode}
 for t in range(len(returns)):
@@ -630,7 +703,7 @@ for t in range(len(returns)):
 \end{frame}
 
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 \textbf{One-Step Actor-Critic}:
 \begin{align*}
 \theta_{t+1} &= \theta_t + \alpha (G_{t} - \hat{v}(S_t)) \frac{\nabla \pi(A_t | S_t, \theta)}{\pi(A_t | S_t, \theta_t)} \\
@@ -644,7 +717,7 @@ for t in range(len(returns)):
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Policy Gradient Methods}
+\begin{frame}[label=full]{Policy Gradient Methods}
 \small
 \begin{block}{One-Step Actor-Critic}
 \vspace{-.5\baselineskip}
@@ -666,7 +739,7 @@ for t in range(len(returns)):
 \end{block}
 \end{frame}
 
-\begin{frame}{Reference Implementations}
+\begin{frame}[label=withcode]{Reference Implementations}
 \small
 \begin{block}{Stable Baselines}
 \begin{itemize}
@@ -689,7 +762,7 @@ for t in range(len(returns)):
 \end{block}
 \end{frame}
 
-\begin{frame}{AlphaGo}
+\begin{frame}[label=full]{AlphaGo}
 \footnotesize
 \begin{columns}
 \begin{column}{0.45\textwidth}
@@ -710,7 +783,7 @@ The introductory paper by David Silver and others in Nature should be easy to un
 \end{frame}
 
 
-\begin{frame}[allowframebreaks]{Additional Materials}
+\begin{frame}[label=full]{Additional Materials}
 \footnotesize
 \begin{block}{David Silver, UCL and Google DeepMind}
 Dr. Silver (\url{https://www.davidsilver.uk/}) of University College London has an excellent introductory course on reinforcement learning with class materials (from 2015) and lectures in a YouTube playlist. Updated courses (2018, 2021) are available on the DeepMind YouTube channel. The 2021 course include topics on deep reinforcement learning. \\
@@ -721,7 +794,10 @@ Dr. Silver (\url{https://www.davidsilver.uk/}) of University College London has 
 \vspace{.5\baselineskip}
 \url{https://www.youtube.com/@Google_DeepMind/playlists}.
 \end{block}
+\end{frame}
 
+\begin{frame}[label=full]{Additional Materials \small [cont'd]}
+\footnotesize
 \begin{block}{UC Berkeley}
 UC Berkeley hosted a Deep RL Bootcamp in 2017 with slides and lecture videos available online. Additionally, UC Berkeley's course on Deep RL is available online, with lecture slides and videos of past years.
 \vspace{\baselineskip}
@@ -737,7 +813,10 @@ Formerly at the Google AI team, Denny Britz applied RL algorithms to financial m
 \vspace{\baselineskip}
 \url{https://github.com/dennybritz/reinforcement-learning}
 \end{block}
+\end{frame}
 
+\begin{frame}[label=full]{Additional Materials \small [cont'd]}
+\footnotesize
 \begin{block}{Massimiliano Patacchiola, Cambridge University} 
 Dr. Patacchiola is a postdoc at Cambridge University. He has written a series of excellent blog posts on reinforcement based on the book ''Artificial Intelligence -- A Modern Approach'' by Russell and Norvig. There are lots of illustrations and pointers to implementation and code in multiple languages. \\
 \vspace{\baselineskip}
@@ -751,7 +830,10 @@ Dr. Poupart has made available videos and all course materials for all lectures 
 \vspace{.5\baselineskip}
 \url{https://cs.uwaterloo.ca/~ppoupart/teaching/cs885-spring18/schedule.html}
 \end{block}
+\end{frame}
 
+\begin{frame}[label=full]{Additional Materials \small [cont'd]}
+\footnotesize
 \begin{block}{Andrew Ng, Stanford University}
 Dr. Ng (\url{https://www.andrewng.org/}) has taught an introductory class on reinforcement learning, as part of a broader course on machine learning. \\
 \vspace{\baselineskip}
@@ -765,7 +847,10 @@ Andrei Karpathy (\url{https://karpathy.ai/} was a founding member of OpenAI (mak
 \vspace{.5\baselineskip}
 \url{https://karpathy.github.io/2016/05/31/rl/}
 \end{block}
+\end{frame}
 
+\begin{frame}[label=full]{Additional Materials \small [cont'd]}
+\footnotesize
 \begin{block}{Lilian Weng, OpenAI}
 Dr. Weng (\url{https://lilianweng.github.io/}) is a lead researchers at OpenAI (makers of ChatGPT and Dall-E). She has written an early blog post on RL and another one on policy gradient algorithms. \\
 \vspace{.5\baselineskip}
@@ -773,7 +858,10 @@ Dr. Weng (\url{https://lilianweng.github.io/}) is a lead researchers at OpenAI (
 \vspace{.5\baselineskip}
 \url{https://lilianweng.github.io/posts/2018-04-08-policy-gradient/}
 \end{block}
+\end{frame}
 
+\begin{frame}[label=full]{Additional Materials \small [cont'd]}
+\footnotesize
 \begin{block}{OpenAI}
 OpenAI (\url{https://openai.com}; makers of ChatGPT and Dall-E) post regularly on their blog, on all things deep learning and also reinforcement learning. The blog posts are easy introduction to a variety of analytics topics. \\
 \vspace{.5\baselineskip}
@@ -785,11 +873,6 @@ OpenAI (\url{https://openai.com}; makers of ChatGPT and Dall-E) post regularly o
 \end{block}
 
 \end{frame}
-
-
-
-
-
 
 \end{document}
 

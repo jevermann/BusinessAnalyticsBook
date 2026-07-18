@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -31,7 +31,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \begin{block}{}
 Richard S. Sutton and Andrew G. Barto (2018) \emph{Reinforcement Learning -- An Introduction}. 2nd edition, The MIT Press, Cambridge, MA. (SB) \\
 \vspace{0.5\baselineskip}
@@ -43,7 +43,7 @@ Chapters 2--7 \\
 \end{block}
 \end{frame}
 
-\begin{frame}{Resources}
+\begin{frame}[label=withcode]{Resources}
 Implementations are available on the following GitHub repo:
 
 \url{https://github.com/jevermann/busi4720-rl} \\
@@ -54,7 +54,7 @@ The project can be cloned from this URL:
 \url{https://github.com/jevermann/busi4720-rl.git}
 \end{frame}
 
-\begin{frame}{Reinforcement Learning}
+\begin{frame}[label=full]{Reinforcement Learning}
 \centering  \textbf{Online Learning by Acting in an Environment}
 \vspace{\baselineskip}  
 \begin{block}{Ideas}
@@ -70,7 +70,7 @@ The project can be cloned from this URL:
 \emph{Problem cannot be tackled by optimization (e.g. dynamic programming), because of incomplete knowledge of environment.}
 \end{frame}
 
-\begin{frame}{Reinforcement Learning}
+\begin{frame}[label=full]{Reinforcement Learning}
 \begin{block}{Core Concepts}
 \begin{itemize}
     \item \textbf{Policy} $\pi$ (probability of taking action $a$ in state $s$)
@@ -83,7 +83,7 @@ The project can be cloned from this URL:
 \end{block}
 \end{frame}
 
-\begin{frame}{Introductory Example -- Tic-Tac-Toe \small(Naughts and Crosses)}
+\begin{frame}[label=full]{Introductory Example -- Tic-Tac-Toe \small(Naughts and Crosses)}
 \begin{columns}
 \begin{column}{0.25\textwidth}
 \includegraphics[width=\textwidth]{Tic_tac_toe.png} \\
@@ -101,7 +101,7 @@ The project can be cloned from this URL:
 \end{columns}
 \end{frame}
 
-\begin{frame}{Introductory Example -- Tic-Tac-Toe \small [cont'd]}
+\begin{frame}[label=full]{Introductory Example -- Tic-Tac-Toe \small [cont'd]}
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \includegraphics[width=1.1\textwidth]{screen1.png} \\
@@ -123,7 +123,7 @@ The project can be cloned from this URL:
   \end{align*}
 \end{frame}
 
-\begin{frame}{Example Applications in Business and Management}
+\begin{frame}[label=full]{Example Applications in Business and Management}
 \begin{itemize}
   \item \textbf{Marketing}: Learn which online ads to show to which site visitor
   \item \textbf{HR}: Learn which employee to assign to which task
@@ -133,7 +133,7 @@ The project can be cloned from this URL:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{K-armed Bandits}
+\begin{frame}[label=full]{K-armed Bandits}
 \begin{columns}
 \begin{column}{.2\textwidth}
 \includegraphics[width=1.2\textwidth]{one-armed_bandit.jpg}\\
@@ -161,7 +161,7 @@ The project can be cloned from this URL:
 \end{columns}
 \end{frame}
 
-\begin{frame}{General Update Rule for Estimates}
+\begin{frame}[label=full]{General Update Rule for Estimates}
 \begin{align*}
 NewEstimate \leftarrow OldEstimate + StepSize \left[ Target - OldEstimate \right]
 \end{align*}
@@ -170,7 +170,7 @@ NewEstimate \leftarrow OldEstimate + StepSize \left[ Target - OldEstimate \right
 $\left[ Target - OldEstimate \right]$ is the \emph{error} in the estimate
 \end{frame}
 
-\begin{frame}{K-armed Bandits -- Example}
+\begin{frame}[label=full]{K-armed Bandits -- Example}
 \begin{block}{A simple bandit algorithm}
 Initialize, for $a=1$ to $k$:
 \begin{align*}
@@ -190,7 +190,7 @@ Loop forever:
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{K-armed Bandits -- Python}
+\begin{frame}[label=withcode,fragile]{K-armed Bandits -- Python}
 Environment:
 \begin{pythoncode}
 class k_bandit_env:
@@ -209,7 +209,7 @@ class k_bandit_env:
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{K-armed Bandits -- Python}
+\begin{frame}[label=withcode,fragile]{K-armed Bandits -- Python}
 Agent:
 \begin{pythoncode}
 class k_bandit_agent:
@@ -232,7 +232,7 @@ class k_bandit_agent:
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{K-armed Bandits -- Python}
+\begin{frame}[label=withcode,fragile]{K-armed Bandits -- Python}
 Agent (continued):
 \begin{pythoncode}
     def train(self, steps):
@@ -253,13 +253,13 @@ Complete implementation at \\
 \end{center}
 \end{frame}
 
-\begin{frame}{K-armed Bandits -- Policy Comparison}
+\begin{frame}[label=full]{K-armed Bandits -- Policy Comparison}
 Values for $\epsilon$ and the initial $Q$ value affect learning behaviour:
 
 \includegraphics[width=\textwidth]{bandits.pdf}
 \end{frame}
 
-\begin{frame}{Markov Decision Processes}
+\begin{frame}[label=full]{Markov Decision Processes}
 \begin{center}
 \includegraphics[width=0.75\textwidth]{screen3.png} \\
 
@@ -275,31 +275,26 @@ Values for $\epsilon$ and the initial $Q$ value affect learning behaviour:
 \end{itemize}
 \end{frame}
 
-%\begin{frame}{Markov Decision Processes \small [cont'd]}
-%\begin{itemize}
-   %\item \textbf{State-transition probabilities}: 
-%\begin{align*}
-%p(s' | s, a) = Pr\{S_t = s' | S_{t-1} =s , A_{t-1} = a \} = \sum_{r \in \mathcal{R}} p(s', r|s, a)
-%\end{align*}
-   %\item \textbf{Expected reward}: 
-%\begin{align*}
-%r(s, a) = \mathbbm{E}[R_t | S_{t-1} =s , A_{t-1}=a] = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r|s, a)
-%\end{align*}
-   %\item \textbf{Discounted return}:
-%\begin{align*}
-%G_t &= R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \\
-    %&= R_{t+1} + \gamma G_{t+1}
-%\end{align*}
-%\end{itemize}
-%\end{frame}
-
-\begin{frame}{Markov Decision Processes \small [cont'd]}
+\begin{frame}[label=full]{Markov Decision Processes \small [cont'd]}
 \begin{itemize}
-   \item \textbf{Discounted future return}:
+   \item \textbf{State-transition probabilities}: 
+\begin{align*}
+p(s' | s, a) = Pr\{S_t = s' | S_{t-1} =s , A_{t-1} = a \} = \sum_{r \in \mathcal{R}} p(s', r|s, a)
+\end{align*}
+   \item \textbf{Expected reward}: 
+\begin{align*}
+r(s, a) = \mathbbm{E}[R_t | S_{t-1} =s , A_{t-1}=a] = \sum_{r \in \mathcal{R}} r \sum_{s' \in \mathcal{S}} p(s', r|s, a)
+\end{align*}
+   \item \textbf{Discounted return}:
 \begin{align*}
 G_t &= R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \cdots = \sum_{k=0}^{\infty} \gamma^k R_{t+k+1} \\
     &= R_{t+1} + \gamma G_{t+1}
 \end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label=full]{Markov Decision Processes \small [cont'd]}
+\begin{itemize}
   \item \textbf{State value function} of state $s$ under a policy $\pi$:
 \begin{align*}
 v_\pi(s) = \mathbbm{E}_\pi [ G_t | S_t = s] = \mathbbm{E}_\pi \left[ \sum_{k=0}^\infty \gamma^k R_{t + k + 1} | S_t = s \right]
@@ -312,7 +307,7 @@ q_\pi(s, a) &= \mathbbm{E}_\pi [ G_t | S_t = s, A_t = a] \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Bellman Equation}
+\begin{frame}[label=full]{Bellman Equation}
 The value function $v$ for policy $\pi$ is the unique solution to the \textbf{Bellman equation}:
 \begin{align*}
 v_\pi(s) &= \mathbbm{E}_\pi [ G_t | S_t = s] \\
@@ -324,7 +319,7 @@ v_\pi(s) &= \mathbbm{E}_\pi [ G_t | S_t = s] \\
 \footnotesize{(Recall: Expected value is sum weighted by probabilities)}
 \end{frame}
 
-\begin{frame}{MDP -- Gridworld State Value Function}
+\begin{frame}[label=full]{MDP -- Gridworld State Value Function}
 \begin{itemize}
    \item Actions: Up, Down, Left, Right
    \item Falling off the world results in reward of $-1$ 
@@ -339,15 +334,12 @@ v_\pi(s) &= \mathbbm{E}_\pi [ G_t | S_t = s] \\
 \end{center}
 \end{frame}
 
-\begin{frame}{MDP -- Optimal Policies}
+\begin{frame}[label=full]{MDP -- Optimal Policies}
 Maximizing the state value function $v$ or action value function $q$ is finding an optimal policy $\pi$:
 \begin{align*}
 v_*(s) &= \operatorname*{max}_\pi v_\pi(s) \\
 q_*(s, a) &= \operatorname*{max}_\pi q_\pi(s, a)
 \end{align*}
-%\intertext{$q_*$ can be expressed in terms of $v_*$:}
-%q_*(s, a) &= \mathbb{E} [ R_{t+1} + \gamma v_* (S_{t+1}) | S_t =s , A_t =a ]
-%\end{align*}
 Intuitively, the value of a state under an optimal policy $\pi_*$ is equal to the expected return for the the best action from that state:
 \begin{align*}
 v_*(s) &= \max_{a \in \mathcal{A}(s)} q_{\pi_*} (s, a) \\
@@ -355,7 +347,7 @@ v_*(s) &= \max_{a \in \mathcal{A}(s)} q_{\pi_*} (s, a) \\
 \end{frame}
 
 
-\begin{frame}{MDP -- Bellman Optimality}
+\begin{frame}[label=full]{MDP -- Bellman Optimality}
 \begin{align*}
 v_*(s) &= \max_{a \in \mathcal{A}(s)} q_{\pi_*} (s, a) \\
 &= \max_a \mathbb{E}_{\pi_*} [ G_t | S_t =s , A_t = a ] \\
@@ -370,7 +362,7 @@ q_*(s, a) &= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') | S_t
 \end{align*}
 \end{frame}
 
-\begin{frame}{Dynamic Programming}
+\begin{frame}[label=full]{Dynamic Programming}
 \begin{block}{Intuition:}
   \begin{enumerate}
      \item Start from random value function and policy
@@ -381,7 +373,7 @@ q_*(s, a) &= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') | S_t
 \end{block}
 \end{frame}
 
-\begin{frame}{Dynamic Programming}
+\begin{frame}[label=full]{Dynamic Programming}
 \begin{block}{Iterative Policy Evaluation}
 \begin{align*}
 &\text{Loop:} \\
@@ -395,7 +387,42 @@ q_*(s, a) &= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') | S_t
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Iterative Policy Evaluation in Python}
+\begin{frame}[label=full]{Hands-On Exercise -- Iterative Policy Evaluation} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+\begin{itemize}
+    \item {\bf States}: $A$, $B$, and $T$. $T$ is a terminal state
+    \item {\bf Policy}: If in A, always move to B; if in B, always move to T
+\end{itemize}
+
+\end{column}
+\end{columns}
+\small
+\begin{itemize}
+    \item State transition and reward model:
+    \vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c}
+{\bf Current State} & {\bf Next State} & {\bf Reward} & {\bf Probability} \\
+{\bf S} & {\bf S'} & {\bf R} & {\bf p} \\ \hline
+A & B & +4 & 1.0 \\
+B & T & +2 & 0.8 \\
+B & A & -1 & 0.2 \\ 
+\end{tabular}
+
+\vspace{0.5\baselineskip}
+   \item {\bf Discount factor}: $\gamma = 0.9$
+   \item {\bf Initial values}: $V(A) = V(B) = V(T) = 0$
+\end{itemize}
+\emph{Find the state values $V(A)$ and $V(B)$.}
+\end{frame}
+
+
+\begin{frame}[label=withcode,fragile]{Iterative Policy Evaluation in Python}
 \begin{pythoncode}
 # Initialize value function V
 V = dict()
@@ -419,7 +446,7 @@ def evaluate_policy():
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Dynamic Programming}
+\begin{frame}[label=full]{Dynamic Programming}
 \begin{block}{Iterative Policy Improvement}
 \begin{align*}
 &\text{Loop:} \\
@@ -436,7 +463,7 @@ def evaluate_policy():
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Iterative Policy Improvement in Python}
+\begin{frame}[label=withcode,fragile]{Iterative Policy Improvement in Python}
 \begin{pythoncode}
 def improve_policy():
     stable = True
@@ -456,7 +483,7 @@ def improve_policy():
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Iterative Policy Improvement in Python}
+\begin{frame}[label=withcode,fragile]{Iterative Policy Improvement in Python}
 \begin{pythoncode}
 stable = False
 while not stable:
@@ -473,7 +500,7 @@ Complete implementation at \\
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Example -- Jack's Car Rental}
+\begin{frame}[label=full,fragile]{Example -- Jack's Car Rental}
 \begin{itemize}
    \item Jack rents cars at 2 locations with capacity of 20 cars
    \item Daily rental requests and returns are Poisson distributed
@@ -491,7 +518,7 @@ Actions = range(-5, 5+1)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Example -- Policies and Final Value Function}
+\begin{frame}[label=full]{Example -- Policies and Final Value Function}
 Policies after each improvement, starting with random initial policy. Final state value function at bottom right. \\
 
 \vspace{.5\baselineskip}
@@ -506,7 +533,7 @@ Policies after each improvement, starting with random initial policy. Final stat
 \end{frame}
 
 
-\begin{frame}{Monte Carlo Methods}
+\begin{frame}[label=full]{Monte Carlo Methods}
 \begin{itemize}
    \item In practice, dynamics of the environment are not known, i.e. $p(s', r | s, a)$ is unknown; there is \emph{no model} of the environment
    \item Learning $V$ and $Q$ from \emph{experience}, ie. sample sequences of states, actions, and rewards. 
@@ -516,7 +543,7 @@ Policies after each improvement, starting with random initial policy. Final stat
 \end{itemize}
 \end{frame}
 
-\begin{frame}{First-visit MC Prediction}
+\begin{frame}[label=full]{First-visit MC Prediction}
 \begin{itemize}
    \item Estimate $V \approx v_{\pi}$
    \item Return assigned to state is that of first visit of state
@@ -541,7 +568,7 @@ Policies after each improvement, starting with random initial policy. Final stat
 \end{block}
 \end{frame}
 
-\begin{frame}{MC Control}
+\begin{frame}[label=full]{MC Control}
 \begin{itemize}
    \item State-value function $V$ not useful without model
    \item Estimate action-value function $Q$ and $\pi \approx \pi_*$ directly
@@ -549,7 +576,7 @@ Policies after each improvement, starting with random initial policy. Final stat
 \end{itemize}
 \end{frame}
 
-\begin{frame}{MC Control (ES)}
+\begin{frame}[label=full]{First-visit MC Control (Exploring Starts)}
 \begin{block}{}
 \footnotesize
 \begin{align*}
@@ -571,7 +598,58 @@ Policies after each improvement, starting with random initial policy. Final stat
 \end{block}
 \end{frame}
 
-\begin{frame}{MC (ES) Control Example -- Black Jack}
+\begin{frame}[label=full]{Hands-On Exercise -- First Visit MC Control (ES)} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+\begin{itemize}
+    \item {\bf States}: $A$, $B$, and $T$. ($T$ is a terminal state)
+    \item {\bf Actions}: Left, Right
+    \item {\bf Discount}: $\gamma=1$
+\end{itemize}
+
+\end{column}
+\end{columns}
+\small
+\begin{columns}
+\begin{column}{0.5\textwidth}
+Episode 1
+    \vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c}
+{\bf Time} & {\bf State} & {\bf Action} & {\bf Reward} \\ \hline
+0 & A & R & 3 \\
+1 & B & L & 2 \\
+2 & A & L & 5 \\
+3 & T & - & - \\
+\end{tabular}
+\end{column}
+\begin{column}{0.5\textwidth}
+Episode 2
+    \vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c}
+{\bf Time} & {\bf State} & {\bf Action} & {\bf Reward} \\ \hline
+0 & B & R & 4 \\
+1 & A & R & 1 \\
+2 & T & - & - \\
+\end{tabular}
+\end{column}
+\end{columns}
+\begin{enumerate}
+   \item Find $G_t$ for every step in each episode
+   \item Update $Returns(S_t, R_t)$ for episode 1
+   \item From initial $Q(s, a) = 0$ update $Q(S_t, A_t)$ for episode 1
+   \item Update $Returns(S_t, R_t)$ for episode 2
+   \item Update $Q(S_t, A_t)$ for episode 2
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[label=full]{MC (ES) Control Example -- Black Jack}
 \begin{itemize}
    \item Card values A, 2, 3, \ldots, 10
    \item Ace can be 1 or 11 (''usable ace'')
@@ -581,7 +659,7 @@ Policies after each improvement, starting with random initial policy. Final stat
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{MC (ES) Control Example -- Black Jack}
+\begin{frame}[label=withcode,fragile]{MC (ES) Control Example -- Black Jack}
 Define states $\mathcal{S}$ and actions $\mathcal{A}$:
 \begin{pythoncode}
 gamma = 1.0
@@ -597,7 +675,7 @@ Actions = (0, 1)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{MC (ES) Control Example -- Black Jack}
+\begin{frame}[label=withcode,fragile]{MC (ES) Control Example -- Black Jack}
 Initialize policy $\pi$, action-value function $Q$, and returns:
 \begin{pythoncode}
 # Initialize policy
@@ -620,7 +698,7 @@ for s in States:
 \end{frame}
 
 
-\begin{frame}[fragile]{MC (ES) Control Example -- Black Jack}
+\begin{frame}[label=withcode,fragile]{MC (ES) Control Example -- Black Jack}
 Generate an episode using policy $\pi$ from initial state $S_0$ and initial action $A_0$:
 \begin{pythoncode}
 def generate_episode(pi, s0, a0):
@@ -644,7 +722,7 @@ def generate_episode(pi, s0, a0):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{MC (ES) Control Example -- Black Jack}
+\begin{frame}[label=withcode,fragile]{MC (ES) Control Example -- Black Jack}
 Learn the $Q$ function:
 \begin{pythoncode}
 for e in range(0, 1000000+1):
@@ -668,7 +746,7 @@ for e in range(0, 1000000+1):
 Full example available at \url{https://evermann.ca/busi4720/blackjack_es.py}
 \end{frame}
 
-\begin{frame}{MC (ES) Control Example -- Black Jack}
+\begin{frame}[label=full]{MC (ES) Control Example -- Black Jack}
 Policies and state value function after 1,000,000 episodes. Usable ace on top, no usable ace at bottom:
 \vspace{.5\baselineskip}
 
@@ -682,14 +760,16 @@ Policies and state value function after 1,000,000 episodes. Usable ace on top, n
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{MC Control Example -- Epsilon-Soft Policy}
+\begin{frame}[label=full]{MC Control Example -- Epsilon-Soft Policy}
 \begin{itemize}
 \item Exploring starts not always feasible
 \item Use $\epsilon$-soft policy to ensure exploration (instead of greedy policy)
 \item Policy $\pi$ is now the probability of taking action $a$ in state $s$
 \item Update $\pi$ with epsilon-soft probabilities, instead of greedy deterministic action
 \end{itemize}
+\end{frame}
 
+\begin{frame}[label=withcode,fragile]{MC Control Example -- Epsilon-Soft Policy \small [cont'd]}
 \begin{pythoncode}
 Q[(S[t], A[t])] = mean(Returns[(S[t], A[t])])
 # Optimal policy (for two actions)
@@ -703,7 +783,7 @@ for a in Actions:
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{MC Control Example -- Racetrack}
+\begin{frame}[label=full,fragile]{MC Control Example -- Racetrack}
 \begin{center}
 \includegraphics[width=.75\textwidth]{screen5.png} \\
 \scriptsize Source: SB Figure 5.5 \normalsize
@@ -716,7 +796,7 @@ for a in Actions:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{MC Control Example -- Racetrack}
+\begin{frame}[label=withcode,fragile]{MC Control Example -- Racetrack}
 \begin{pythoncode}
 Actions = []
 for y in range(-1, 2):
@@ -740,7 +820,7 @@ def get_action(s):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{MC Control Example -- Racetrack}
+\begin{frame}[label=withcode,fragile]{MC Control Example -- Racetrack}
 \begin{pythoncode}
 Returns = dict()
 def getReturns(s, a):
@@ -756,7 +836,7 @@ def appendReturn(s, a, r):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{MC Control Example -- Racetrack}
+\begin{frame}[label=withcode,fragile]{MC Control Example -- Racetrack}
 \begin{pythoncode}
 for e in range(0, 10000+1):
     S, A, R, T = env.generate_episode()
@@ -778,7 +858,7 @@ for e in range(0, 10000+1):
 Full example at \url{https://evermann.ca/busi4720/racetrack.py}
 \end{frame}
 
-\begin{frame}[fragile]{MC Control Example -- Racetrack}
+\begin{frame}[label=full,fragile]{MC Control Example -- Racetrack}
 Racetrack trajectory after 0, 100, 200, and 10000 learning episodes:
 \vspace{.5\baselineskip}
 
@@ -792,7 +872,7 @@ Racetrack trajectory after 0, 100, 200, and 10000 learning episodes:
 \end{center}
 \end{frame}
 
-\begin{frame}{On-Policy and Off-Policy Learning}
+\begin{frame}[label=full]{On-Policy and Off-Policy Learning}
 \begin{block}{On-Policy Learning}
 \begin{itemize}
    \item Trying to learn action values for optimal behaviour
@@ -810,7 +890,7 @@ Racetrack trajectory after 0, 100, 200, and 10000 learning episodes:
 \end{block}
 \end{frame}
 
-%\begin{frame}{Importance Sampling}
+%\begin{frame}[label=full]{Importance Sampling}
 %\begin{itemize}
     %\item Estimate expected values under one probability distribution given samples from another
     %\item Weight returns according to relative probabilities of occuring under $\pi$ and $b$
@@ -827,7 +907,7 @@ Racetrack trajectory after 0, 100, 200, and 10000 learning episodes:
 %where $\mathcal{T}(s)$ is the set of time steps in which $s$ is visited, and $T(t)$ is the first time of termination of an episode following time $t$.
 %\end{frame}
 
-%\begin{frame}{Importance Sampling}
+%\begin{frame}[label=full]{Importance Sampling}
 %Incremental Implementation: \\
  
 %Let $W_i = \rho_{t_i:T-1}$, then
@@ -840,7 +920,7 @@ Racetrack trajectory after 0, 100, 200, and 10000 learning episodes:
 %\end{align*}
 %\end{frame}
 
-\begin{frame}{Off-Policy MC Control}
+\begin{frame}[label=full]{Off-Policy MC Control}
 \begin{block}{}
 \footnotesize
 \begin{align*}
@@ -862,7 +942,7 @@ Racetrack trajectory after 0, 100, 200, and 10000 learning episodes:
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Off-Policy MC Control in Python -- Policies}{Racetrack example revisited}
+\begin{frame}[label=withcode,fragile]{Off-Policy MC Control in Python -- Policies}{Racetrack example revisited}
 \begin{pythoncode}
 def b(s):
     weights = []
@@ -885,7 +965,7 @@ def pi(s):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Off-Policy MC Control in Python -- Policies}{Racetrack example revisited}
+\begin{frame}[label=withcode,fragile]{Off-Policy MC Control in Python -- Policies}{Racetrack example revisited}
 \begin{pythoncode}
 def bprob(a, s):
     if (s, a) not in Q:
@@ -903,7 +983,7 @@ def bprob(a, s):
 
 
 
-\begin{frame}[fragile]{Off-Policy MC Control in Python -- Learning}{Racetrack example revisited}
+\begin{frame}[label=withcode,fragile]{Off-Policy MC Control in Python -- Learning}{Racetrack example revisited}
 \begin{pythoncode}
 for e in range(0, 10000+1):
     S, A, R, T = env.generate_episode_b()
@@ -924,7 +1004,7 @@ for e in range(0, 10000+1):
 Full example at \url{https://evermann.ca/busi4720/racetrack_off_policy.py}
 \end{frame}
 
-\begin{frame}{Temporal-Difference Learning}
+\begin{frame}[label=full]{Temporal-Difference Learning}
 \begin{block}{MC Control}
 \begin{itemize}
    \item Waits until end of episode before updating $Q$
@@ -946,7 +1026,7 @@ Full example at \url{https://evermann.ca/busi4720/racetrack_off_policy.py}
 \end{block}
 \end{frame}
 
-%\begin{frame}{Temporal-Difference Learning}
+%\begin{frame}[label=full]{Temporal-Difference Learning}
 %\textbf{MC Error}:
 %\begin{align*}
 %\delta_{MC} = G - Q(S_t, a) 
@@ -963,7 +1043,7 @@ Full example at \url{https://evermann.ca/busi4720/racetrack_off_policy.py}
 %\end{align*}
 %\end{frame}
 
-\begin{frame}{On-Policy TD Learning -- SARSA}
+\begin{frame}[label=full]{On-Policy TD Learning -- SARSA}
 \begin{block}{}
 \begin{align*}
 & \text{Initialize}\; Q(s, a) \; \text{for all} \; s \in \mathcal{S}^+ \; \text{, arbitrarily} \\
@@ -980,7 +1060,58 @@ Full example at \url{https://evermann.ca/busi4720/racetrack_off_policy.py}
 \end{block}
 \end{frame}
 
-\begin{frame}{SARSA Example -- Windyworld}
+\begin{frame}[label=full]{Hands-On Exercise -- SARSA} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+\begin{itemize}
+    \item {\bf States}: $A$, $B$, and $T$. ($T$ is a terminal state)
+    \item {\bf Actions}: Left, Right
+    \item {\bf Discount}: $\gamma=1$; {\bf Learning Rate}: $\alpha=0.5$
+\end{itemize}
+
+\end{column}
+\end{columns}
+\small
+\begin{columns}
+\begin{column}{0.7\textwidth}
+Episode 1
+    \vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c|c}
+{\bf State} & {\bf Action} & {\bf Reward} & {\bf Next} & {\bf Next}\\
+ & & & {\bf State} & {\bf Action}\\ \hline
+A & R & 3 & B & L \\
+B & L & 2 & A & L \\
+A & L & 5 & T & - \\
+\end{tabular}
+\vspace{0.5\baselineskip}
+
+Episode 2
+    \vspace{0.5\baselineskip}
+    
+\begin{tabular}{c|c|c|c|c}
+{\bf State} & {\bf Action} & {\bf Reward} & {\bf Next} & {\bf Next}\\
+ & & & {\bf State} & {\bf Action}\\ \hline
+B & R & 4 & A & R \\
+A & R & 1 & T & - \\
+\end{tabular}
+\end{column}
+\begin{column}{0.4\textwidth}
+\begin{enumerate}
+   \item From initial $Q(s, a) = 0$ update $Q(S_t, A_t)$ for every step of every episode
+   \item What is the final optimal greedy policy?
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[label=withcode]{SARSA Example -- Windyworld}
 \begin{center}
 \includegraphics[height=1.5in]{screen6} \\
 \scriptsize Source: SB Chapter 6 \normalsize 
@@ -992,7 +1123,7 @@ Full example at \url{https://evermann.ca/busi4720/racetrack_off_policy.py}
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{SARSA Example -- Windyworld}
+\begin{frame}[label=withcode,fragile]{SARSA Example -- Windyworld}
 \begin{pythoncode}
 # Define states
 States = []
@@ -1016,7 +1147,7 @@ def pi(s):
 \end{frame}
 
 
-\begin{frame}[fragile]{SARSA Example -- Windyworld}
+\begin{frame}[label=withcode,fragile]{SARSA Example -- Windyworld}
 \begin{pythoncode}
 for e in range(0, 100):
     terminal = False
@@ -1036,7 +1167,7 @@ Complete example at \url{https://evermann.ca/busi4720/windyworld_sarsa.py}
 
 \end{frame}
 
-\begin{frame}{Generalizing SARSA to n-Step TD Control}
+\begin{frame}[label=advanced]{Generalizing SARSA to n-Step TD Control}
 \textbf{TD Error (1-Step Error)}:
 \begin{align*}
 \delta_{TD} = R_{t+1} + Q(S_{t+1}, a_{t+1}) - Q(S_t, a)
@@ -1056,7 +1187,7 @@ Q(S_t, A_t) = \mathbbm{E}[G_t | S_t, A_t] \qquad \text{and} \qquad G_t = R_{t+1}
 \end{align*}
 \end{frame}
 
-\begin{frame}{Generalizing SARSA to n-Step TD Control}
+\begin{frame}[label=advanced]{Generalizing SARSA to n-Step TD Control}
 \includegraphics[width=\textwidth]{screen7.png}
 \centering
 
@@ -1065,7 +1196,7 @@ Source: SB Figure 7.4
 \end{frame}
 
 
-\begin{frame}{Off-Policy TD Learning -- Q-Learning}
+\begin{frame}[label=advanced]{Off-Policy TD Learning -- Q-Learning}
 \begin{block}{}
 \begin{align*}
 & \text{Initialize}\; Q(s, a) \; \text{for all} \; s \in \mathcal{S}^+ \; \text{, arbitrarily} \\
@@ -1081,7 +1212,7 @@ Source: SB Figure 7.4
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Q-Learning Example -- Windyworld}
+\begin{frame}[label=withcode,fragile]{Q-Learning Example -- Windyworld}
 \begin{pythoncode}
 for e in range(0, 1000):
     terminal = False
@@ -1098,7 +1229,7 @@ for e in range(0, 1000):
 Complete example at \url{https://evermann.ca/busi4720/windyworld_q_learning.py}
 \end{frame}
 
-\begin{frame}{SARSA and Q-Learning Results on Windyworld}
+\begin{frame}[label=advanced]{SARSA and Q-Learning Results on Windyworld}
 Steps per episode to termination:\\
 
 \begin{tabular}{cc}
@@ -1108,65 +1239,65 @@ Steps per episode to termination:\\
 \end{tabular}
 \end{frame}
 
-%\begin{frame}{Double Q-Learning}
-%\begin{block}{Maximization Bias}
-%\begin{itemize}
-   %\item SARSA and Q-Learning involve maximization operations
-   %\item Maximum over estimated values is used as estimate of maximum values
-   %\item Leads to positive bias in estimated values
-%\end{itemize}
-%\end{block}
-%\begin{block}{Solution}
-%\begin{itemize}
-   %\item Maintain two estimates of values
-   %\item Use one estimate to determine action
-   %\item Use the other estimate to estimate value
-%\end{itemize}
-%\end{block}
-%\end{frame}
+\begin{frame}[label=advanced]{Double Q-Learning}
+\begin{block}{Maximization Bias}
+\begin{itemize}
+   \item SARSA and Q-Learning involve maximization operations
+   \item Maximum over estimated values is used as estimate of maximum values
+   \item Leads to positive bias in estimated values
+\end{itemize}
+\end{block}
+\begin{block}{Solution}
+\begin{itemize}
+   \item Maintain two estimates of values
+   \item Use one estimate to determine action
+   \item Use the other estimate to estimate value
+\end{itemize}
+\end{block}
+\end{frame}
 
-%\begin{frame}{Double Q-Learning}
-%\begin{block}{}
-%\footnotesize
-%\begin{align*}
-%& \text{Initialize}\; Q_1(s, a), Q_2(s, a) \; \text{for all} \; s \in \mathcal{S}^+ \; \text{, arbitrarily} \\
-%& \text{Loop for each episode:} \\
-%& \quad \text{Initialize}\; S \\
-%& \quad \text{Loop for each step of episode:} \\
-%& \quad \quad \text{Choose} \, A \, \text{from}\, S \, \text{using policy derived from} \, Q_1, Q_2 \\
-%& \quad \quad \text{Take action}\, A, \, \text{observe} \, R, S' \\
-%& \quad \quad \text{With 0.5 probability:} \\
-%& \quad \quad \quad Q_1(S, A) \leftarrow Q_1(S, A) + \alpha \left[ R + \gamma Q_2(S', \operatorname*{arg max}_a Q_1(S', A')) - Q_1(S, A) \right] \\
-%& \quad \quad \text{else:} \\
-%& \quad \quad \quad Q_2(S, A) \leftarrow Q_2(S, A) + \alpha \left[ R + \gamma Q_1(S',  \operatorname*{arg max}_a Q_2(S', A')) - Q_1(S, A) \right] \\
-%& \quad \quad S \leftarrow S' \\
-%& \quad \text{until}\, S\, \text{is terminal}
-%\end{align*}
-%\end{block}
-%\end{frame}
+\begin{frame}[label=advanced]{Double Q-Learning}
+\begin{block}{}
+\footnotesize
+\begin{align*}
+& \text{Initialize}\; Q_1(s, a), Q_2(s, a) \; \text{for all} \; s \in \mathcal{S}^+ \; \text{, arbitrarily} \\
+& \text{Loop for each episode:} \\
+& \quad \text{Initialize}\; S \\
+& \quad \text{Loop for each step of episode:} \\
+& \quad \quad \text{Choose} \, A \, \text{from}\, S \, \text{using policy derived from} \, Q_1, Q_2 \\
+& \quad \quad \text{Take action}\, A, \, \text{observe} \, R, S' \\
+& \quad \quad \text{With 0.5 probability:} \\
+& \quad \quad \quad Q_1(S, A) \leftarrow Q_1(S, A) + \alpha \left[ R + \gamma Q_2(S', \operatorname*{arg max}_a Q_1(S', A')) - Q_1(S, A) \right] \\
+& \quad \quad \text{else:} \\
+& \quad \quad \quad Q_2(S, A) \leftarrow Q_2(S, A) + \alpha \left[ R + \gamma Q_1(S',  \operatorname*{arg max}_a Q_2(S', A')) - Q_1(S, A) \right] \\
+& \quad \quad S \leftarrow S' \\
+& \quad \text{until}\, S\, \text{is terminal}
+\end{align*}
+\end{block}
+\end{frame}
 
-%\begin{frame}[fragile]{Double Q-Learning Example -- Windyworld}
-%\begin{pythoncode}
-%if random.random() < .5:
-    %Q1[(S,A)] = Q1[(S,A)] + alpha*(R + \
-        %gamma * Q2[(Sprime, argmax(Q1, Sprime))] \
-        %- Q1[(S, A)])
-%else:
-    %Q2[(S,A)] = Q2[(S,A)] + alpha*(R + \
-        %gamma * Q1[(Sprime, argmax(Q2, Sprime))] \
-        %- Q2[(S, A)])
-%\end{pythoncode}
-%\vspace{-1.5\baselineskip}
-%\begin{columns}
-%\begin{column}{0.6\textwidth}
-%\includegraphics[width=\textwidth]{rl_into/windyworld_double_q_learning.png}
-%\end{column}
-%\begin{column}{0.4\textwidth}
-%\small
-%Full example at \url{https://evermann.ca/busi4720/windyworld_double_q_learning.py}
-%\end{column}
-%\end{columns}
-%\end{frame}
+\begin{frame}[label=withcode,fragile]{Double Q-Learning Example -- Windyworld}
+\begin{pythoncode}
+if random.random() < .5:
+    Q1[(S,A)] = Q1[(S,A)] + alpha*(R + \
+        gamma * Q2[(Sprime, argmax(Q1, Sprime))] \
+        - Q1[(S, A)])
+else:
+    Q2[(S,A)] = Q2[(S,A)] + alpha*(R + \
+        gamma * Q1[(Sprime, argmax(Q2, Sprime))] \
+        - Q2[(S, A)])
+\end{pythoncode}
+\vspace{-1.5\baselineskip}
+\begin{columns}
+\begin{column}{0.6\textwidth}
+\includegraphics[width=\textwidth]{rl_into/windyworld_double_q_learning.png}
+\end{column}
+\begin{column}{0.4\textwidth}
+\small
+Full example at \url{https://evermann.ca/busi4720/windyworld_double_q_learning.py}
+\end{column}
+\end{columns}
+\end{frame}
 
 \end{document}
 

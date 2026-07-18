@@ -320,6 +320,37 @@ Reduce: &\quad(key2, list(value2)) \rightarrow list(key3, value3)
 \end{itemize}
 \end{enumerate}
 
+
+\begin{exercisebox}
+A company's sales data are stored distributed in each branch. They use Map-Reduce to find totals by product category.
+
+\vspace{.5\baselineskip}
+
+\begin{tabular}{|c|l|l|r|}
+\hline
+\textbf{Transaction} & \textbf{Store} & \textbf{Category} & \textbf{Amount (\$)} \\
+\hline
+1 & Store\_A & Electronics & 500 \\
+2 & Store\_B & Clothing    & 200 \\
+3 & Store\_A & Electronics & 300 \\
+4 & Store\_C & Grocery     & 150 \\
+5 & Store\_B & Clothing    & 400 \\
+\hline
+\end{tabular}
+
+\vspace{.5\baselineskip}
+
+Define Map and Reduce phases to calculate how much total revenue each product category generated across all stores. 
+
+\vspace{.5\baselineskip}
+
+\begin{enumerate}
+   \item What are the inputs and the output keys and values of the Map phase? 
+   \item What are the keys and values of the output of the Shuffle phase?
+   \item What does the Reduce phase do? What are the keys and values of its output?
+\end{enumerate}
+\end{exercisebox}
+
 YARN is the resource management layer of Hadoop. YARN\index{YARN resource manager} consists of a central Resource Manager, which manages the use of resources across the cluster, and NodeManager agents, which monitor the processing of operations on individual cluster nodes. 
 
 Running a MapReduce application on a Hadoop cluster involves submitting the application to the YARN resource manager. The YARN resource manager creates an application master process for each MapReduce application that is submitted to it. The application master process tracks the status of the tasks, that is, the Map and Reduce instances, within an application. The application master requests resources from the resource manager and then distributes task to nodes in the cluster. The node managers manage the local resources and report their status to the resource manager. They execute the tasks assigned by the application master in containers on each node. Figure~\ref{fig:yarnhadoop} shows the interplay between these components.

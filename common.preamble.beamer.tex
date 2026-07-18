@@ -41,7 +41,7 @@
   \setbeamertemplate{enumerate item}[square]
   \setbeamertemplate{blocks}[rounded][shadow=true]
   \setbeamertemplate{navigation symbols}{}
-  \setbeamertemplate{footline}[frame number]
+  \setbeamertemplate{footline}[page number]
 }
 \usepackage{tcolorbox}
 \usepackage{amsmath}
@@ -60,33 +60,55 @@
 \usepackage{alltt}
 
 % Conditional compilation with or without code
-% based on BASH variable _BUSI4720_BEAMER_CODE
+% based on BASH variable _BUSI4720_EDITION
 \usepackage{catchfile}
 \usepackage{xstring}
 \usepackage{comment}
-\immediate\write18{echo -n "$\string_BUSI4720_BEAMER_CODE" > busi4720_beamer_code_tmp.txt}
-\CatchFileDef{\IncludeCode}{busi4720_beamer_code_tmp.txt}{\endlinechar=-1}
-\IfStrEqCase{\IncludeCode}{
-{Full}{   
-	\includecomment{withcode}
-	\includecomment{advanced}
-    \excludecomment{nocode}
-    \excludecomment{simplified}
-}
-{NoCode}{
-    \includecomment{nocode}
-    \includecomment{advanced}
-    \excludecomment{withcode}
-    \excludecomment{simplified}
-}
-{Simplified}{
-    \excludecomment{withcode}
-    \excludecomment{advanced}
-    \excludecomment{nocode}
-    \includecomment{simplified}
-}
-}
+\immediate\write18{echo -n "$\string_BUSI4720_EDITION" > busi4720_edition_tmp.txt}
+\CatchFileDef{\IncludeCode}{busi4720_edition_tmp.txt}{\endlinechar=-1}
+%\IfStrEqCase{\IncludeCode}{
+%{Full}{   
+	%\includecomment{withcode}
+	%\includecomment{advanced}
+    %\excludecomment{nocode}
+    %\excludecomment{simplified}
+%}
+%{NoCode}{
+    %\includecomment{nocode}
+    %\includecomment{advanced}
+    %\excludecomment{withcode}
+    %\excludecomment{simplified}
+%}
+%{Simplified}{
+    %\excludecomment{withcode}
+    %\excludecomment{advanced}
+    %\excludecomment{nocode}
+    %\includecomment{simplified}
+%}
+%}
 
+% Native LaTeX3 logic loop to process tokens safely without xstring crashes
+% Based on Google Gemini AI suggestion
+\ExplSyntaxOn
+\str_case_e:nnF { \IncludeCode }
+  {
+    {Full}
+    {
+      \includeonlyframes{full,withcode,advanced}
+    }
+    {NoCode}
+    {
+      \includeonlyframes{full,advanced}
+    }
+    {Simplified}
+    {
+      \includeonlyframes{full}
+    }
+  }
+  { % Fallback Default Case (If the BASH environment variable is missing or empty)
+      \includeonlyframes{full,withcode,advanced}
+  }
+\ExplSyntaxOff
 
 \usepackage{hyperref}
 \hypersetup{

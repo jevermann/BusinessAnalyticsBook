@@ -133,6 +133,20 @@ The basic neural network units are typically arranged in \emph{sequential layers
 
 Recall the definition of a neural network unit in terms of its weights and biases in Equation~\ref{eq:neuron}. In the model in Figure~\ref{fig:screen1_chap15}, each connection from an input to a neural unit receives a weight $w$, and each neural unit adds a bias term $b$ to the sum of its inputs. Counting the arrows and the units in Figure~\ref{fig:screen1_chap15}, the network has 25 weights (20 in the fully-connected hidden layer and 5 in the output layer) and 6 biases (5 in the fully-connected hidden layer and 1 in the output layer) for a total of 31 trainable or learnable parameters.
 
+\begin{exercisebox}
+Consider the following network architecture for classification into 5 classes.
+
+\begin{itemize}
+   \item Input layer with 10 inputs
+   \item Fully-connected (dense) hidden layer with 20 units
+   \item Fully-connected (dense) hidden layer with 10 units
+   \item Fully-connected (dense) hidden layer with 5 units
+   \item Fully-connected (dense) output layer
+\end{itemize}
+
+Calculate the total number of trainable parameters for this network.
+\end{exercisebox}
+
 The basic network architecture of Figure~\ref{fig:screen1_chap15} can be readily extended to multiple hidden layers and multiple output units in the output layer, as shown in Figure~\ref{fig:screen2_chap15}. This network has $p$ inputs, $K_1$ units in the first hidden layer, $K_2$ units in the second hidden layer, and 10 units in the output layer. Again counting the connections and the units, this network has $p \times K_1 + K_1 \times K_2 + K_2 \times 10$ weights and $K_1 + K_2 + 10$ biases as trainable or learnable parameters\index{Trainable parameter}. 
 
 
@@ -209,6 +223,20 @@ Figure~\ref{fig:gradientdescent} shows an image of such a process. Beginning wit
 \label{fig:gradientdescent}
 \end{figure}
 
+\begin{exercisebox}
+Assume optimizing your neural network for a single parameter $\theta$ and your loss function is of the form $\theta^2$ (that means your gradient function is of the form $2\theta$). 
+
+\begin{enumerate}
+   \item Sketch your loss function and its gradient against $\theta$
+   \item What is the optimal (minimal) loss?
+   \item Starting at $\theta=2$ Using $\lambda = 0.25$, calculate successive values for $\theta$. How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+   \item Starting at $\theta=2$ Using $\lambda = 0.1$, calculate successive values for $\theta$. How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{exercisebox}
+
+
 Numerical optimization via gradient descent is prone to a number of potential problems, among them slow convergence, no convergence (oscillations) and premature convergence to a local optimum rather than the global optimum. The first two are illustrated in Figure~\ref{fig:screen4_chap15}.
 
 \begin{figure}
@@ -242,6 +270,18 @@ Because each gradient update step (Equation~\ref{eq:gradientupdate}) is evaluate
 
 In order to tackle the convergence issues in SGD, a number of solutions have been proposed. The simplest of these is to use an \emph{adaptive learning rate}, where the learning rate is large in early training and then decreases. The idea is to accelerate early training and prevent oscillations or ''overshooting'' the optimum later in training. Figure~\ref{fig:screen5_chap15} shows three examples of adaptive learning rates. The left panel shows a piece-wise contant learning rate that is periodically decreased, the center panel shows an exponential decay of the learning curve, and the right panel shows a polynomial decay in the learning curve. Which approach is best depends on the specifics of the problem. It is not unusual for a business analyst to use small subsamples of the training data to try different methods and evaluate their convergence behaviour before training on the full training data set.
 
+
+\begin{exercisebox}
+Assume optimizing your neural network for a single parameter $\theta$ and your loss function is of the form $\theta^2$ (that means your gradient function is of the form $2\theta$). 
+
+\begin{enumerate}
+   \item Starting at $\theta=2$ Using $\lambda = 0.25$, calculate successive values for $\theta$. Reduce $\lambda$ by half at every step. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{exercisebox}
+
 \begin{figure}
 \includegraphics[width=\textwidth]{screen5.png} \\
 
@@ -257,11 +297,33 @@ A more sophisticated way is the \emph{AdaGrad} method (''adaptive gradients'') t
 s_t &= \sum_{\tau=1}^t \left( \nabla L(\theta)\rvert_{\theta_\tau, X}\right)^2 \quad \text{Sum of all prior squared gradients} \label{eq:adagrads}
 \end{align}
 
+\begin{exercisebox}
+Assume optimizing your neural network for a single parameter $\theta$ and your loss function is of the form $\theta^2$ (that means your gradient function is of the form $2\theta$). 
+
+\begin{enumerate}
+   \item Starting at $\theta=2$ Using a constant $\lambda = 0.1$ and $\epsilon=0.1$, calculate successive values for $\theta$ and $s$. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{exercisebox}
+
 The \emph{RMSProp} (''Root Mean Square Propagation'') modifies AdaGrad to overcome its monotonically decreasing learning rate and to prevent a learning reduction that is too quick. Instead of accumulating all past squared gradients, RMSProp uses an exponential moving average that emphasizes recent gradients and makes it more robust to large changes in gradients. Note how the square of previous gradients is propagated by the term $s_t$ on the right hand side of Equation~\ref{eq:rmsprops}. Equation~\ref{eq:rmsprops} is used in place of Equation~\ref{eq:adagrads} in the update equation (Equation~\ref{eq:adagrad}).
 
 \begin{align}
 s_{t+1} &= \beta s_t + (1-\beta) \left( \nabla L(\theta)\rvert_{\theta_t, X}\right)^2 \label{eq:rmsprops}
 \end{align}
+
+\begin{exercisebox}
+Assume optimizing your neural network for a single parameter $x$ and your loss function is of the form $x^2$ (that means your gradient function is of the form $2x$). 
+
+\begin{enumerate}
+   \item Starting at $x=2$ Using a constant $\lambda = 0.1$ and $\beta=0.75, \epsilon=0.1$, calculate successive values for $x$ and $s$. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{exercisebox}
 
 The \emph{AdaDelta} method is an extension of RMSProp that seeks to reduce its dependence on a global learning rate $\lambda$. Instead of using $\lambda$, AdaDelta uses the ratio of the root mean square of previous parameter updates to the root mean square of the current gradient. This method adapts learning rates based on parameter update history, represented by $\Delta\theta_t$ (Equation~\ref{eq:adadelta}), providing a more stable and responsive adjustment mechanism. The term $s_t$ in Equation~\ref{eq:adadelta} is that of Equation~\ref{eq:rmsprops}.
 
@@ -296,6 +358,17 @@ m_t &= \beta_1 m_{t-1} + (1-\beta_1) \nabla L(\theta)\rvert_{\theta_t, X}  \labe
 s_t &= \beta_2 s_{t-1} + (1-\beta_2) \left( \nabla L(\theta)\vert_{\theta_t, x} \right)^2 \label{eq:adam2} \\
 \theta_{t+1} &= \theta_t - \lambda_t \frac{1}{\sqrt{s_t}+\epsilon} m_t \label{eq:adam3} 
 \end{align}
+
+\begin{exercisebox}
+Assume optimizing your neural network for a single parameter $x$ and your loss function is of the form $x^2$ (that means your gradient function is of the form $2x$). 
+
+\begin{enumerate}
+   \item Starting at $x=2$ Using a constant $\lambda = 0.1$ and $\beta_1=0.5, \beta_2=0.5, \epsilon=0.1$, calculate successive values for $x$ and $s$ and $m$. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{exercisebox}
 
 \FloatBarrier
 \subsection{Gradient Problems}

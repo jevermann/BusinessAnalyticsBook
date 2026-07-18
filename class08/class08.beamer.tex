@@ -8,13 +8,13 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
 \end{frame}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -24,7 +24,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Example Dataset}
+\begin{frame}[label=withcode]{Example Dataset}
 \begin{itemize}
   \item Government of Canada, Open Government Portal
   \item Fuel Consumption Ratings -- Battery-electric vehicles -- 2012--2023; last updated Oct 10, 2023
@@ -46,7 +46,7 @@
 	\end{tabular}
 \end{frame}
 
-\begin{frame}[fragile]{Data Preparation}
+\begin{frame}[label=withcode,fragile]{Data Preparation}
 
 Import required packages:
 
@@ -63,7 +63,7 @@ data = pd.read_csv('https://evermann.ca/busi4720/fuel.csv')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Histogram}
+\begin{frame}[label=withcode,fragile]{Histogram}
 \begin{pythoncode}
 # Create histogram
 fig = px.histogram(data, x='Range', nbins=50)
@@ -79,7 +79,7 @@ fig.write_image("px.histogram.pdf", height=500, width=750)
 \end{center}
 \end{frame}
 
-%\begin{frame}[fragile]{Histogram with Summary Information}
+%\begin{frame}[label=withcode,fragile]{Histogram with Summary Information}
 %Prepare some summary statistics:
 
 %\footnotesize
@@ -96,7 +96,7 @@ fig.write_image("px.histogram.pdf", height=500, width=750)
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}[fragile]{Histogram with Summary Information \small [cont'd]}
+%\begin{frame}[label=withcode,fragile]{Histogram with Summary Information \small [cont'd]}
 %\footnotesize
 %\begin{pythoncode}
 %# Adding vertical lines and annotations
@@ -120,12 +120,12 @@ fig.write_image("px.histogram.pdf", height=500, width=750)
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}{Histogram with Summary Information}
+%\begin{frame}[label=full]{Histogram with Summary Information}
     %\includegraphics[width=\textwidth]{px.histogram2.pdf}
 %\end{frame}
 
 
-\begin{frame}[fragile]{Column Chart}
+\begin{frame}[label=withcode,fragile]{Column Chart}
 Prepare data in ''long'' format using \texttt{pd.melt()}:
 \begin{columns}
 \begin{column}{.55\textwidth}
@@ -169,7 +169,7 @@ data_long = \
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Column Chart \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Column Chart \small [cont'd]}
 
 \begin{pythoncode}
 fig = px.bar(data_long, 
@@ -190,7 +190,7 @@ fig = px.bar(data_long,
 \end{frame}
 
 
-\begin{frame}[fragile]{Labelling}
+\begin{frame}[label=withcode,fragile]{Labelling}
 \begin{pythoncode}
 fig = px.bar(data_long,
   x='Year', y='consumption', color='metric', barmode='group',
@@ -215,7 +215,7 @@ fig = px.bar(data_long,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Column Chart (with Patterns)}
+\begin{frame}[label=withcode,fragile]{Column Chart (with Patterns)}
 \begin{pythoncode}
 fig = px.bar(data_long, 
    x='Year', y='consumption', 
@@ -236,7 +236,7 @@ fig = px.bar(data_long,
 \end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
 \begin{block}{}
 \begin{enumerate}
     \item Read the EV fuel efficiency data set into a Pandas data frame.
@@ -257,7 +257,7 @@ fig = px.bar(data_long,
 \end{frame}
 
 
-\begin{frame}[fragile]{Box Plot}
+\begin{frame}[label=withcode,fragile]{Box Plot}
 \begin{pythoncode}
 data_long = pd.melt(data, 
     id_vars=['Year'], value_vars=['City', 'Hwy'], 
@@ -287,7 +287,7 @@ fig = px.box(data_long,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Violin Plot}
+\begin{frame}[label=withcode,fragile]{Violin Plot}
 \footnotesize
 \begin{pythoncode}
 data_long = pd.melt(data, 
@@ -310,7 +310,7 @@ fig = px.violin(data_long,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Count Plot}
+\begin{frame}[label=withcode,fragile]{Count Plot}
 \footnotesize
 \begin{pythoncode}
 count_data = data \
@@ -325,7 +325,7 @@ fig = px.scatter(count_data, x='Year', y='Category', size='counts')
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Points Plot}
+\begin{frame}[label=withcode,fragile]{Points Plot}
 \footnotesize
 \begin{pythoncode}
 grouped_data = data \
@@ -351,7 +351,7 @@ fig = px.scatter(grouped_data,
 \end{frame}
 
 
-\begin{frame}[fragile]{Lines and Points Plot}
+\begin{frame}[label=withcode,fragile]{Lines and Points Plot}
 \footnotesize
 \begin{pythoncode}
 filtered_data = 
@@ -377,7 +377,7 @@ fig = px.line(filtered_data,
 \end{frame}
 
 
-\begin{frame}[fragile]{Pie/Donut Chart}
+\begin{frame}[label=withcode,fragile]{Pie/Donut Chart}
 \begin{columns}
 \begin{column}{.6\textwidth}
 \begin{pythoncode}
@@ -400,7 +400,7 @@ fig = px.pie(data_pie,
 \end{columns}
 \end{frame}
 
-%\begin{frame}[fragile]{Donut Chart}
+%\begin{frame}[label=withcode,fragile]{Donut Chart}
 %\footnotesize
 %\begin{pythoncode}
 %fig = px.pie(fuel_grouped, 
@@ -410,13 +410,13 @@ fig = px.pie(data_pie,
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}{Pie Chart}
+%\begin{frame}[label=full]{Pie Chart}
 %\centering
   %\includegraphics[width=.8\textwidth]{px.fuel.donut.pdf}
 %\end{frame}
 
 
-\begin{frame}[fragile]{Radar Plot}
+\begin{frame}[label=withcode,fragile]{Radar Plot}
 \begin{columns}
 \begin{column}{.67\textwidth}
 \begin{pythoncode}
@@ -451,7 +451,7 @@ fig = px.line_polar(melted,
 \end{frame}
 
 
-\begin{frame}[fragile]{Local Regression Smoothing Plot}
+\begin{frame}[label=withcode,fragile]{Local Regression Smoothing Plot}
 \begin{pythoncode}
 fig = px.scatter(data, 
     x='City', y='Hwy', 
@@ -472,7 +472,7 @@ fig = px.scatter(data,
 \end{frame}
 
 
-\begin{frame}[fragile]{2D Histogram Plot}
+\begin{frame}[label=withcode,fragile]{2D Histogram Plot}
 \footnotesize
 \begin{pythoncode}
 import plotly.graph_objects as go
@@ -495,7 +495,7 @@ fig.add_trace(
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Density Heatmap with Marginals}
+\begin{frame}[label=withcode,fragile]{Density Heatmap with Marginals}
 \scriptsize
 \begin{pythoncode}
 fig = px.density_heatmap(data,
@@ -519,7 +519,7 @@ fig = px.density_heatmap(data,
 \end{columns}
 \end{frame}
 
-\begin{frame}{Dashboards}
+\begin{frame}[label=full]{Dashboards}
 \begin{columns}
 \begin{column}{.35\textwidth}
 \footnotesize
@@ -537,7 +537,29 @@ fig = px.density_heatmap(data,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Step 1 -- Import Packages}
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Imagine yourself in each of the following roles. For each role, describe at least three related charts/plots on your dashboard and the type of plot that you would choose. 
+
+\begin{enumerate}
+\item Machine controller for a CNC mill
+\item Warehouse manager in a logistics company
+\item Marketing vice-president for Canada
+\item Chief financial officer
+\item Chief risk officer
+\item CEO
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=withcode,fragile]{Step 1 -- Import Packages}
 
 \begin{pythoncode}
 from dash import Dash, html, dcc, callback, Output, Input
@@ -547,7 +569,7 @@ import plotly.express as px
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2 -- Visual Layout}
+\begin{frame}[label=withcode,fragile]{Step 2 -- Visual Layout}
 \begin{itemize}
   \item Container element with multiple Row elements
   \item Row elements contain Column elements, HTML elements, Label elements, Selection elements, Radio button elements, etc.
@@ -562,7 +584,7 @@ import plotly.express as px
 \end{frame}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2 -- Visual Layout \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Step 2 -- Visual Layout \small [cont'd]}
 \begin{pythoncode}
 app.layout = dbc.Container([
   dbc.Row([
@@ -589,7 +611,7 @@ app.layout = dbc.Container([
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Step 2 -- Visual Layout \small [cont'd]}
+\begin{frame}[label=full]{Dashboard Visual Layout \small [cont'd]}
 \begin{center}
   \includegraphics[width=.6\textwidth]{dashboard2.png}
 \end{center}
@@ -601,7 +623,7 @@ app.layout = dbc.Container([
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Step 2 -- Visual Layout \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Step 2 -- Visual Layout \small [cont'd]}
 \begin{pythoncode}
 # Continued from previous snippet
    dbc.Row([
@@ -628,7 +650,7 @@ app.layout = dbc.Container([
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Step 3 -- Create the Figures}
+\begin{frame}[label=withcode,fragile]{Step 3 -- Create the Figures}
 \begin{pythoncode}
 @callback(
     Output(component_id='line', component_property='figure'),
@@ -656,14 +678,14 @@ def update_line(year_chosen, value_chosen):
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Step 4 -- Run the App}
+\begin{frame}[label=withcode,fragile]{Step 4 -- Run the App}
 
 \begin{pythoncode}
 app.run()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
 \footnotesize
 Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.csv}
 \begin{enumerate}
@@ -676,7 +698,7 @@ Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
 
 \footnotesize
 Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.csv}
@@ -695,7 +717,7 @@ Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
 
 \footnotesize
 Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.csv}

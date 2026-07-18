@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -29,7 +29,7 @@
 
 \section{Data Types}
 
-\begin{frame}{Primitive Data Types}
+\begin{frame}[label=full]{Primitive Data Types}
 \small
 \renewcommand{\arraystretch}{1.25}
 
@@ -48,7 +48,7 @@ boolean			& Logical, true/false, 1 or 0 \\ \hline
 Not all tools use the same names, and not all tools make the same distinctions. For example, the R system uses \texttt{numeric} (which is actually a double type) and \texttt{integer} (which is a 32 bit integer).
 \end{frame}
 
-\begin{frame}{Missing Values}
+\begin{frame}[label=full]{Missing Values}
 \begin{itemize}
 	\item Depends on software tool
 	\item Different meanings (such as not applicable, not available)
@@ -65,7 +65,7 @@ SQL & Null \\ \hline
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Floating Point Numbers (IEEE 754 Standard)}
+\begin{frame}[label=advanced]{Floating Point Numbers (IEEE 754 Standard)}
 \includegraphics[width=\textwidth]{IEEE754.png}
 \tiny
 \url{https://commons.wikimedia.org/wiki/File:IEEE_754_Double_Floating_Point_Format.svg}
@@ -85,7 +85,7 @@ double			& 8 bytes, 1 bit for sign, 11 bits for exponent, 52 bits for significan
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Floating Point Serialization to Text}
+\begin{frame}[label=full]{Floating Point Serialization to Text}
 \begin{block}{Idiosyncrasies}
 \begin{itemize}
 	\item Thousands separator, grouping
@@ -112,7 +112,7 @@ $\ldots$ & \\ \hline
 \end{tabular}
 \end{frame}
 
-\begin{frame}[fragile]{Characters (Unicode ISO/IEC 8859)}
+\begin{frame}[label=full,fragile]{Characters (Unicode ISO/IEC 8859)}
 \begin{itemize}
 	\item Covers all major alphabets and writing systems
 	\item 149,813 symbols (V15.1), incl 3782 emojis, for 161 scripts
@@ -140,22 +140,30 @@ UTF-8 Encoding: 0xE1 0x90 0x83 0xE1 0x93 0x84
 
 \end{frame}
 
-\begin{frame}{Unicode}
+\begin{frame}[label=full]{Unicode}
 \centering
 
 \includegraphics[height=3.25in]{weird_unicode_math_symbols.png} \scriptsize Source: \url{https://xkcd.com} (CC license)
 
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{itemize}
 	\item Choose your favourite emoji
 	\item Determine its Unicode number (''codepage'')
 	\item Determine its UTF-8 encoding
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Dates and Times}
+\begin{frame}[label=full]{Dates and Times}
 \begin{block}{Complexities}
 \begin{itemize}
    \item Calendar formats (written)
@@ -175,14 +183,14 @@ UTF-8 Encoding: 0xE1 0x90 0x83 0xE1 0x93 0x84
 \end{block}
 \end{frame}
 
-\begin{frame}{Dates and Times}
+\begin{frame}[label=full]{Dates and Times}
 \centering
 \includegraphics[width=\textwidth]{datetime.png} 
 
 \scriptsize Source: \url{https://xkcd.com} (CC license)
 \end{frame}
 
-\begin{frame}{ISO 8601 and RFC 3339 Date Format} 
+\begin{frame}[label=full]{ISO 8601 and RFC 3339 Date Format} 
 \footnotesize
 \renewcommand{\arraystretch}{1.25}
 
@@ -205,8 +213,13 @@ UTF-8 Encoding: 0xE1 0x90 0x83 0xE1 0x93 0x84
 \end{block}
 \end{frame}
 
-\begin{frame}{Hands-On-Exercises}
+\begin{frame}[label=full]{Hands-On-Exercises}
 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{tcolorbox}[colback=code]
 The territory of Nunavut was created on April 1st, 1999.
 \end{tcolorbox}
@@ -217,9 +230,11 @@ The territory of Nunavut was created on April 1st, 1999.
 	\item Assume that a ceremony took place at 3PM that day in Iqaluit and express this date-time in RFC 3339
 	\item Assume the ceremony lasted for 125 minutes and express this duration in RFC 3339
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Complex/Structured Data Types}
+\begin{frame}[label=withcode]{Complex/Structured Data Types}
 \small
 \begin{block}{Python}
 	\begin{itemize}
@@ -242,7 +257,7 @@ The territory of Nunavut was created on April 1st, 1999.
 
 \section{Structured Data Types}
 
-\begin{frame}{Data Types in Analytics}
+\begin{frame}[label=full]{Data Types in Analytics}
 \begin{block}{Structured Data}
 \begin{itemize}
 	\item Tables
@@ -260,7 +275,7 @@ The territory of Nunavut was created on April 1st, 1999.
 \end{block}
 \end{frame}
 
-\begin{frame}{Tables}
+\begin{frame}[label=full]{Tables}
 \begin{itemize}
 	\item Columns, represent different variables
 		\begin{itemize}
@@ -281,7 +296,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{tabular}
 \end{frame}
 
-\begin{frame}[fragile]{Table Interchange/Serialization}
+\begin{frame}[label=full,fragile]{Table Interchange/Serialization}
 \begin{block}{CSV format (RFC 4180)}
 \begin{itemize}
 	\item Plain text, Ascii or UTF-8 Unicode
@@ -301,7 +316,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{minted}
 \end{frame}
 
-\begin{frame}{Table Interchange/Serialization \small [cont'd]}
+\begin{frame}[label=full]{Table Interchange/Serialization \small [cont'd]}
 \begin{block}{Potential Problems with CSV Files}
 \begin{itemize}
 	\item Different delimiters ('','', ''tab'', '';'', ''{ }\^{} '', etc.)
@@ -313,10 +328,15 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{block}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{itemize}
-	\item Search the internet for a CSV file of the population and areas of all countries of the world
-	\item Examine the CSV file and answer the following questions:
+	\item Search the web for a CSV file of the population of all countries of the world
+	\item Examine the CSV file with a text editor:
 	\begin{itemize}
 		\item What is the delimiter?
 		\item Which fields are quoted, and how?
@@ -324,18 +344,20 @@ Germany & 357,600 & 83,294,633 \\ \hline
 		\item What is the number format?
 		\item What is the date format (if there are dates)?
 	\end{itemize}
-	\item Import the CSV file into your favourite spreadsheet tool
+	\item Import the CSV file into a spreadsheet app
 	\begin{itemize}
 		\item Does it recognize all information correctly? If not, what is not imported well?
 	\end{itemize}
-	\item Export the CSV file from your tool under a different name.
+	\item Export the spreadsheet as a CSV file
 	\begin{itemize}
 		\item Do you get an identical file to the one you imported? If not, what has changed?
 	\end{itemize}
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Relational Databases}
+\begin{frame}[label=full]{Relational Databases}
 \begin{block}{Characteristics}
 \begin{itemize}
 	\item Records (''rows'') in tables (''relations'')
@@ -349,7 +371,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \tiny{\url{https://commons.wikimedia.org/wiki/File:Relational_key_SVG.svg}}
 \end{frame}
 
-\begin{frame}{Relational Databases \small [cont'd]}
+\begin{frame}[label=full]{Relational Databases \small [cont'd]}
 \begin{block}{Advantages}
 \begin{itemize}
 	\item Normalization reduces redundancy, increases data integrity
@@ -367,7 +389,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{block}
 \end{frame}
 
-\begin{frame}{Key-Value Data Stores}
+\begin{frame}[label=full]{Key-Value Data Stores}
 \begin{block}{Characteristics}
 \begin{itemize}
 	\item Records are sets of key-value pairs
@@ -380,7 +402,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \tiny{\url{https://commons.wikimedia.org/wiki/File:KeyValue.PNG}}
 \end{frame}
 
-\begin{frame}{Key-Value Data Stores \small [cont'd]}
+\begin{frame}[label=full]{Key-Value Data Stores \small [cont'd]}
 \begin{block}{Advantages}
 \begin{itemize}
 	\item Fast retrieval/insertion/updating
@@ -398,7 +420,35 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{block}
 \end{frame}
 
-\begin{frame}{Documents (JSON)}
+\begin{frame}[label=full]{Document Databases}
+\begin{block}{What makes them special}
+\begin{itemize}
+	\item \emph{Nested} key-value data store
+	\item All keys are \emph{strings}
+	\item No fixed schema, increases flexibility
+\end{itemize}
+\end{block}
+
+\begin{block}{Applications}
+\begin{itemize}
+	\item Content management
+	\item Catalogs and product data
+	\item Log and event data (IoT, sensors)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label=full]{Document Databases \small [cont'd]}
+\begin{block}{Prominent Examples}
+\begin{itemize}
+	\item \emph{On-premises}: MongoDB, ArangoDB
+	\item \emph{Open source}: Apache CouchDB
+	\item \emph{Cloud}: AWS DocumentDB, Azure CosmosDB
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[label=full]{Documents (JSON)}
 \begin{block}{JavaScript Object Notation (RFC 8259)}
 \begin{itemize}
 	\item Plain text, UTF-8 
@@ -426,7 +476,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{JSON Example -- Complex Object}
+\begin{frame}[label=full,fragile]{JSON Example -- Complex Object}
 \footnotesize
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt]{json}
 {
@@ -447,7 +497,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{JSON Example -- List of Objects}
+\begin{frame}[label=full,fragile]{JSON Example -- List of Objects}
 \footnotesize
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt]{json}
 [
@@ -471,7 +521,12 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{minted}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{block}{Document yourself in a JSON object}
 \begin{itemize}
 	\item Identify information about yourself, such as names, addresses, dates, relationships (work, school, uni), etc.
@@ -479,35 +534,11 @@ Germany & 357,600 & 83,294,633 \\ \hline
 	\item Use nested structures, e.g. objects in arrays, or arrays in objects, or objects in objects, etc.
 \end{itemize}
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Document Databases}
-\begin{block}{What makes them special}
-\begin{itemize}
-	\item \emph{Nested} key-value data store
-	\item All keys are \emph{strings}
-	\item No fixed schema, increases flexibility
-\end{itemize}
-\end{block}
-
-\begin{block}{Applications}
-\begin{itemize}
-	\item Content management
-	\item Catalogs and product data
-	\item Log and event data (IoT, sensors)
-\end{itemize}
-\end{block}
-
-\begin{block}{Prominent Examples}
-\begin{itemize}
-	\item \emph{On-premises}: MongoDB, ArangoDB
-	\item \emph{Open source}: Apache CouchDB
-	\item \emph{Cloud}: AWS DocumentDB, Azure CosmosDB
-\end{itemize}
-\end{block}
-\end{frame}
-
-\begin{frame}{Extensible Markup Language -- XML}
+\begin{frame}[label=full]{Extensible Markup Language -- XML}
 \begin{itemize}
    \item Document serialization format for structured data
    \item Nested \textbf{elements}
@@ -519,7 +550,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{XML Example}
+\begin{frame}[label=full,fragile]{XML Example}
 \begin{xmlcode}
 <People
       xmlns="https://www.example.com/peoples"
@@ -540,7 +571,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{xmlcode}
 \end{frame}
 
-\begin{frame}[fragile]{XML Example \small [cont'd]}
+\begin{frame}[label=full,fragile]{XML Example \small [cont'd]}
 \begin{xmlcode}
         <hist:Period hist:era="Post-Colonial">
             <Description>
@@ -564,7 +595,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{xmlcode}
 \end{frame}
 
-\begin{frame}[fragile]{XML Example \small [cont'd]}
+\begin{frame}[label=full,fragile]{XML Example \small [cont'd]}
 \begin{xmlcode}
         <Art>
             <Form>Drum making</Form>
@@ -579,7 +610,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{xmlcode}
 \end{frame}
 
-\begin{frame}{XML Example -- Key Points}
+\begin{frame}[label=full]{XML Example -- Key Points}
 \small
 \begin{itemize}
 \item The \texttt{xmlns:geo} and \texttt{xmlns:hist} are namespace declarations. They are used to distinguish between geographical (geo) and historical (hist) data. Notice how element and attribute names may be prefixed by a namespace. 
@@ -592,7 +623,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Equivalent JSON Example}
+\begin{frame}[label=full,fragile]{Equivalent JSON Example}
 \footnotesize
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt]{json}
 { "Innu": {
@@ -618,7 +649,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{XML --- JSON}
+\begin{frame}[label=full,fragile]{XML --- JSON}
 \begin{itemize}
    \item Both are human and machine readable
    \item Both are system/language independent
@@ -634,7 +665,12 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{block}{Document yourself in an XML document}
 \begin{itemize}
 	\item Identify information about yourself, such as names, addresses, dates, relationships (work, school, uni), etc.
@@ -642,9 +678,11 @@ Germany & 357,600 & 83,294,633 \\ \hline
 	\item Use nested elements where appropriate
 \end{itemize}
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Graphs}
+\begin{frame}[label=full]{Graphs}
 \begin{block}{Characteristics}
 \begin{itemize}
 	\item Nodes (also called ''vertices'')
@@ -666,7 +704,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \end{block}
 \end{frame}
 
-\begin{frame}{Property Graphs}
+\begin{frame}[label=full]{Property Graphs}
 \begin{itemize}
 	\item Vertices and Edges may have properties (e.g. key/value pairs of simple or complex data types, e.g. JSON objects)
 \end{itemize}
@@ -676,7 +714,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \tiny{\url{https://commons.wikimedia.org/wiki/File:GraphDatabase_PropertyGraph.png}}
 \end{frame}
 
-\begin{frame}{RDF Graphs}
+\begin{frame}[label=full]{RDF Graphs}
 \begin{itemize}
 	\item Resource Description Framework
 	\item Subject -- Verb/Predicate -- Object triples
@@ -687,7 +725,7 @@ Germany & 357,600 & 83,294,633 \\ \hline
 \tiny{\url{https://commons.wikimedia.org/wiki/File:Rdf_graph_for_Eric_Miller.png}}
 \end{frame}
 
-\begin{frame}{Graphs}
+\begin{frame}[label=full]{Graphs}
 \begin{block}{Graph Queries}
 \begin{itemize}
 	\item Path queries: Reachability, shortest-path, regular path
@@ -701,13 +739,13 @@ Germany & 357,600 & 83,294,633 \\ \hline
 Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typical attributed graph queries. World Wide Web, 24, 297-346.
 \end{frame}
 
-\begin{frame}{Graph Queries}
+\begin{frame}[label=full]{Graph Queries}
 \includegraphics[width=\textwidth]{screen3.png}
 \scriptsize
 Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typical attributed graph queries. World Wide Web, 24, 297-346.
 \end{frame}
 
-\begin{frame}{Graph Databases}
+\begin{frame}[label=full]{Graph Databases}
 \begin{block}{Prominent Examples}
 \begin{itemize}
 	\item \emph{On-premises}: ArangoDB, Neo4J, OrientDB
@@ -718,7 +756,7 @@ Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typical attri
 \end{frame}
 
 
-\begin{frame}[fragile]{PG-JSON Example}
+\begin{frame}[label=withcode,fragile]{PG-JSON Example}
 \tiny
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt]{json}
 {
@@ -753,7 +791,7 @@ Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typical attri
 \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{GraphSON Example}
+\begin{frame}[label=withcode,fragile]{GraphSON Example}
 \tiny
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt,escapeinside=||]{json}
 { 
@@ -787,7 +825,7 @@ Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typical attri
 |\ldots|
 \end{minted}
 \end{frame}
-\begin{frame}[fragile]{GraphSON Example \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{GraphSON Example \small [cont'd]}
 \tiny
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt,escapeinside=||]{json}
   "edges": [
@@ -819,7 +857,7 @@ Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typical attri
 \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{N-Triples}
+\begin{frame}[label=full,fragile]{N-Triples}
 \scriptsize
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt,escapeinside=||]{html}
 <http://www.w3.org/People/EM/contact#me> 
@@ -840,7 +878,7 @@ Wang, Y., Li, Y., Fan, J., Ye, C., \& Chai, M. (2021). A survey of typical attri
 \end{minted}
 \end{frame}
 
-\begin{frame}[fragile]{Turtle Example (Terse RDF Triples)}
+\begin{frame}[label=full,fragile]{Turtle Example (Terse RDF Triples)}
 \tiny
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt,escapeinside=||]{text}
 @prefix eric:    <http://www.w3.org/People/EM/contact#> .
@@ -854,17 +892,25 @@ eric:me rdf:type contact:Person .
 \end{minted}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{block}{Document yourself in a Turtle}
 \begin{itemize}
 	\item Identify information about yourself, such as names, addresses, dates, relationships (work, school, uni), etc.
-	\item Structure the information in Turtle triples
-	\item Make up approppriate prefixes and appropriate verbs/predicates
+	\item Draw a corresponding graph linking these pieces of information as subjects, objects, and verbs
+	\item Turn the graph into a set of Terse XML Triples (''turtles'')
+	\item \emph{Tip:} Do not worry about XML prefixes
 \end{itemize}
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{RDF/XML}
+\begin{frame}[label=full,fragile]{RDF/XML}
 \tiny
 \begin{minted}[bgcolor=code,frame=single,framesep=10pt,escapeinside=||]{xml}
 <?xml version="1.0" encoding="utf-8"?>
@@ -887,7 +933,7 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 \end{minted}
 \end{frame}
 
-\begin{frame}[allowframebreaks]{Text Mining}
+\begin{frame}[label=full]{Text Mining}
 \begin{block}{Example Text Analysis Tasks}
 \begin{itemize}
 	\item Named entity recognition
@@ -904,6 +950,9 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	\item Neural networks (present)
 \end{itemize}
 \end{block}
+\end{frame}
+
+\begin{frame}[label=full]{Text Mining \small [cont'd]}
 \begin{block}{Business Applications}
 \begin{itemize}
 	\item Marketing
@@ -912,17 +961,25 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 	\item \ldots
 \end{itemize}
 \end{block}
+
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.7\textwidth}
 \begin{block}{Hands-On Exercise}
 \begin{enumerate}
 	\item Identify a specific business problem that can be addressed by analyzing text data
 	\item What text data would you need to address the problem?
-	\item What would you wish to do with the text data?
+	\item How would you use this text data?
 	\item Where might you get this text data?
 \end{enumerate}
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Regular Expressions (RegEx)}
+\begin{frame}[label=advanced,fragile]{Regular Expressions (RegEx)}
 \begin{itemize}
 	\item Important tool in analyzing text
 	\item Sequence of characters specifying a match pattern in text
@@ -934,7 +991,7 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 \tiny{\url{https://en.wikipedia.org/wiki/Regular\_expression}}
 \end{frame}
 
-\begin{frame}{Basic RegEx}
+\begin{frame}[label=advanced]{Basic RegEx}
 \footnotesize
 \renewcommand{\arraystretch}{1.5}
 \begin{tabularx}{\textwidth}{c|X} \hline
@@ -953,7 +1010,7 @@ $[$\^{ } $]$ & Matches any character not in the brackets \\ \hline
 All others are treated as literals
 \end{frame}
 
-\begin{frame}{Basic RegEx Examples}
+\begin{frame}[label=advanced]{Basic RegEx Examples}
 \footnotesize
 \renewcommand{\arraystretch}{1.5}
 
@@ -970,7 +1027,7 @@ s.* & character ''s'' followed by zero or more characters, e.g. ''s'', ''saw'', 
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Extended RegEx}
+\begin{frame}[label=advanced]{Extended RegEx}
 \footnotesize
 \renewcommand{\arraystretch}{1.5}
 \begin{tabularx}{\textwidth}{c|X} \hline
@@ -981,7 +1038,7 @@ s.* & character ''s'' followed by zero or more characters, e.g. ''s'', ''saw'', 
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Extended RegEx Examples}
+\begin{frame}[label=advanced]{Extended RegEx Examples}
 \footnotesize
 \renewcommand{\arraystretch}{1.5}
 
@@ -994,7 +1051,7 @@ cat|dog & ''cat'' or ''dog'' \\ \hline
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Different Types of RegEx}
+\begin{frame}[label=advanced]{Different Types of RegEx}
 \begin{block}{Differences}
 \begin{itemize}
   \item Posix BRE requires ( ) \{ \} to be escaped, ERE does not
@@ -1019,7 +1076,7 @@ Non-whitespace    & \textbackslash S & [\textasciicircum{ } \textbackslash t\tex
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=advanced]{Hands-On Exercises}
 \begin{enumerate}
 	\item Specify a RegEx to match Canadian postal codes
 \end{enumerate}
@@ -1031,7 +1088,7 @@ Non-whitespace    & \textbackslash S & [\textasciicircum{ } \textbackslash t\tex
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Levenshtein Distance}
+\begin{frame}[label=advanced]{Levenshtein Distance}
 
 \begin{itemize}
   \item Text similarity
@@ -1046,7 +1103,7 @@ Non-whitespace    & \textbackslash S & [\textasciicircum{ } \textbackslash t\tex
 \url{https://en.wikipedia.org/wiki/Levenshtein_distance}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=advanced]{Hands-On Exercise}
 Determine the Levenshtein distances between the following:
 \begin{enumerate}
   \item Last five digits of your student number and ''12345''
@@ -1056,7 +1113,7 @@ Determine the Levenshtein distances between the following:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Image Data}
+\begin{frame}[label=full]{Image Data}
 \begin{block}{Vector Formats}
 \begin{itemize}
 	\item Examples are SVG, EPS, PDF
@@ -1075,7 +1132,7 @@ Determine the Levenshtein distances between the following:
 \end{block}
 \end{frame}
 
-\begin{frame}{Image Analysis}
+\begin{frame}[label=full]{Image Analysis}
 \centering
 \includegraphics[height=1.75in]{Persian_sand_CAT.jpg} \\
 
@@ -1092,10 +1149,9 @@ Determine the Levenshtein distances between the following:
 \end{block}
 \end{frame}
 
-\begin{frame}{Image Analysis}
+\begin{frame}[label=full]{Image Analysis}
 \begin{block}{Applications}
 \begin{itemize}
-	\item Robotics
 	\item Character and handwriting recognition (process automation)
 	\item Security (identity verification, fraud detection, etc.)
 	\item Manufacturing (defect detection, etc.)
@@ -1103,17 +1159,24 @@ Determine the Levenshtein distances between the following:
 \end{itemize}
 \end{block}
 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.7\textwidth}
 \begin{block}{Hands-On Exercise}
 \begin{enumerate}
-	\item Identify a specific business problem that can be addressed by analyzing image data
-	\item What image data would you need to address the problem?
-	\item What would you wish to do with the image data?
+	\item Identify a specific business problem that can be solved by analyzing image data
+	\item What image data would you need?
+	\item How would you use the image data?
 	\item Where might you get this image data?
 \end{enumerate}
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 	
-\begin{frame}{Video Data}
+\begin{frame}[label=full]{Video Data}
 \begin{block}{Codecs and Container Formats}
 \begin{itemize}
 	\item Conceptually a series of image \emph{frames} in raster image format, i.e. a $T \times 3 \times X \times Y$ array of RGB values between 0\ldots255 (or 0\ldots1)
@@ -1123,28 +1186,34 @@ Determine the Levenshtein distances between the following:
 \end{block}
 \end{frame}
 
-\begin{frame}{Video Analytics}
+\begin{frame}[label=full]{Video Analytics}
 \begin{block}{Typical Tasks}
 \begin{itemize}
-	\item Object detection
-	\item Object recognition
+	\item Object detection and object recognition
 	\item Object motion detection
 	\item Object or background dynamic masking/blurring
 	\item Event detection and classification (errors, exceptions) 
 	\item Activity detection and classification
 \end{itemize}
 \end{block}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.7\textwidth}
 \begin{block}{Hands-On Exercise}
 \begin{enumerate}
-	\item Identify a specific business problem that can be addressed by analyzing video data
-	\item What video data would you need to address the problem?
-	\item What would you wish to do with the video data?
+	\item Identify a specific business problem that can be solved by analyzing video data
+	\item What video data would you need?
+	\item How would you use the video data?
 	\item Where might you get this video data?
 \end{enumerate}
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 	
-\begin{frame}{Metadata}
+\begin{frame}[label=full]{Metadata}
 \begin{itemize}
 	\item Data about data
 	\item Embedded in data or external
@@ -1159,16 +1228,24 @@ Determine the Levenshtein distances between the following:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{enumerate}
 	\item With your cell phone camera, take a selfie
 	\item Identify the meta-data for this photo
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
+
 
 \section{Data Quality and Provenance}
 
-\begin{frame}{Data Quality}
+\begin{frame}[label=full]{Data Quality}
 \begin{block}{Dimensions}
 \begin{itemize}
 	\item Accuracy (error rate)
@@ -1187,21 +1264,47 @@ Determine the Levenshtein distances between the following:
 \tiny{Based in part on Richard Y. Wang \& Diane M. Strong (1996) Beyond Accuracy: What Data Quality Means \\ to Data Consumers, Journal of Management Information Systems, 12:4, 5-33, \\ DOI: 10.1080/07421222.1996.11518099 }
 \end{frame}
 
-\begin{frame}{Data Provenance and Validity}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Evaluate the data quality of the following information for a company that you are researching to decide whether to offer discounts on sales to this company. \\
+\vspace{\baselineskip}
+
+\begin{tabular}{l|l} 
+{\bf Year} & {\bf Sales} \\ \hline 
+2010 & 1,053,123 \\ \hline
+2011 & 1.100,000 \\ \hline
+2012 & 1,187,835 \\ \hline
+2014 & 5,097,651 \\ \hline
+2015 & 1,286,837 \\ \hline 
+{\bf Total} & {\bf 8,573,909} \\ 
+\end{tabular} \\
+
+\vspace{\baselineskip}
+The data was found on an anonymous web blog
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Data Provenance and Validity}
 \centering
 \includegraphics[height=2.5in]{Prov_dm-essentials.png}
 
 \tiny{\url{https://commons.wikimedia.org/wiki/File:Prov_dm-essentials.png}}
 \end{frame}
 
-\begin{frame}{Data Provenance and Validity \small [cont'd]}
+\begin{frame}[label=full]{Data Provenance and Validity \small [cont'd]}
 \centering
 \includegraphics[width=.8\textwidth]{screen5.png}
 
 \tiny{url{https://www.w3.org/TR/prov-dm/\#dfn-provenance}}
 \end{frame}
 
-\begin{frame}{Data Provenance and Validity \small [cont'd]}
+\begin{frame}[label=full]{Data Provenance and Validity \small [cont'd]}
 \begin{block}{Collection}
 \begin{itemize}
 	\item How was the data collected? What errors could have happened?
@@ -1222,7 +1325,7 @@ Determine the Levenshtein distances between the following:
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Provenance and Validity \small [cont'd]}
+\begin{frame}[label=full]{Data Provenance and Validity \small [cont'd]}
 \begin{itemize}
 	\item What do different data fields mean? 
 	\item What are the units of measure? 
@@ -1236,7 +1339,12 @@ Determine the Levenshtein distances between the following:
 \end{frame}
 
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{enumerate}
 	\item Identify data on the consumer price index (excluding living and transportation expenses) for Newfoundland \& Labrador for the last 10 years
 	\begin{itemize}
@@ -1254,10 +1362,11 @@ Determine the Levenshtein distances between the following:
 		\item How would you assess the quality of the data?
 	\end{itemize}
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-
-\begin{frame}{Data Cleaning}
+\begin{frame}[label=full]{Data Cleaning}
 
 \begin{block}{Overview}
 \begin{itemize}
@@ -1268,7 +1377,7 @@ Determine the Levenshtein distances between the following:
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Cleaning}
+\begin{frame}[label=full]{Data Cleaning}
 \begin{itemize}
   \item Critical step in the data analysis process
   \item Identify and ''fix'' errors and inconsistencies
@@ -1294,7 +1403,7 @@ Determine the Levenshtein distances between the following:
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Validation}
+\begin{frame}[label=full]{Data Validation}
 \begin{itemize}
  \item Coding/serialization rules, e.g. with Regex 
  \begin{itemize}
@@ -1320,7 +1429,7 @@ Determine the Levenshtein distances between the following:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Data Validation \small [cont'd]}
+\begin{frame}[label=full]{Data Validation \small [cont'd]}
 \begin{itemize}
  \item Uniqueness constraints
  \begin{itemize}
@@ -1335,7 +1444,7 @@ Determine the Levenshtein distances between the following:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Data cleaning}
+\begin{frame}[label=full]{Data cleaning}
 \begin{itemize}
 	\item \textbf{Data Transformation,} into proper format or structure.
 	\begin{itemize}
@@ -1355,7 +1464,7 @@ Determine the Levenshtein distances between the following:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Data Cleaning}
+\begin{frame}[label=full]{Data Cleaning}
 \begin{block}{Important}
 Cleaning, transformation, and correction of data is \emph{subjective} and requires \emph{expert knowledge} of the data, the validation rules, the metadata, and the application domain.
 \end{block}

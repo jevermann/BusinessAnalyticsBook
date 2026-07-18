@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -27,7 +27,7 @@
 
 \section{Graph Databases}
 
-\begin{frame}{Use Cases}
+\begin{frame}[label=full]{Use Cases}
 \begin{itemize}
   \item Fraud detection
   \item IT infrastructure monitoring
@@ -42,7 +42,7 @@
 \end{frame}
 
 
-\begin{frame}{Graph Query Languages}
+\begin{frame}[label=full]{Graph Query Languages}
 
 \begin{itemize}
   \item SPARQL SPARQL Protocol and RDF Query Language (W3C, 2008, 2013)
@@ -54,7 +54,7 @@
 
 \end{frame}
 
-\begin{frame}{Graph Analytics with Neo4J and Cypher}
+\begin{frame}[label=withcode]{Graph Analytics with Neo4J and Cypher}
 \begin{itemize}
   \item Neo4J Community Edition installed in course virtual machine
   \item Browse to \url{http://localhost:7474}
@@ -65,7 +65,7 @@
 \end{frame}
 
 
-\begin{frame}{Neo4J Property Graphs}
+\begin{frame}[label=full]{Neo4J Property Graphs}
 
 \begin{block}{Nodes}
 \begin{itemize}
@@ -92,7 +92,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{The Cypher Language}
+\begin{frame}[label=full]{The Cypher Language}
 
 \begin{block}{Basic Ideas}
 \begin{itemize}
@@ -105,7 +105,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Cyper and Graph Concepts}
+\begin{frame}[label=full,fragile]{Cyper and Graph Concepts}
 \centering
 \includegraphics[width=\textwidth]{graph_simple-arr.png}
 \tiny{\url{https://neo4j.com/docs/getting-started/_images/graph_simple-arr.svg}} \\
@@ -120,14 +120,14 @@ CREATE (:Person:Actor)
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}{Cypher and Graph Concepts}
+\begin{frame}[label=full]{Cypher and Graph Concepts}
 \centering
 \includegraphics[width=\textwidth]{sample-cypher.png}
 \tiny{\url{https://neo4j.com/docs/getting-started/_images/sample-cypher.svg}}
 \end{frame}
 
 
-\begin{frame}[fragile]{Cypher Syntax}
+\begin{frame}[label=full,fragile]{Cypher Syntax}
 \begin{block}{Graph Nodes}
 \centering
 
@@ -156,7 +156,7 @@ CREATE (:Person:Actor)
 
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Syntax \small [cont'd]}
+\begin{frame}[label=full,fragile]{Cypher Syntax \small [cont'd]}
 \small
 \begin{block}{Node Properties}
 \centering
@@ -181,13 +181,13 @@ CREATE (:Person:Actor)
 \end{block}
 \end{frame}
 
-\begin{frame}{Defining Graphs in Cypher}
+\begin{frame}[label=full]{Defining Graphs in Cypher}
 \centering
 \includegraphics[width=\textwidth]{screen4.png}
 \tiny{\url{https://neo4j.com/docs/getting-started/_images/modeling_johnsally_properties-arr.svg}}
 \end{frame}
 
-\begin{frame}[fragile]{Defining Graphs in Cypher}
+\begin{frame}[label=full,fragile]{Defining Graphs in Cypher}
 
 \scriptsize
 \begin{cyphercode}
@@ -215,12 +215,37 @@ MATCH (n) RETURN n
 MATCH searches the graph for a pattern
 \end{frame}
 
-\begin{frame}{Defining Graphs in Cypher}
+\begin{frame}[label=full]{Defining Graphs in Cypher}
 \includegraphics[width=\textwidth]{screen2.png}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Define a graph in Cypher that represents the following statement:\\
 
+\begin{quote}
+Jane has purchased a Corolla vehicle with VIN (vehicle identification number) 101010. The Corolla is manufactured by Toyota in Cambridge, ON. The vehicle was sold to Jane by the dealer ''St. John's Toyota'' for a price of \$35,000.00.
+\end{quote}
+
+\begin{enumerate}
+  \item Identify nodes, relationships, and properties of nodes and relationships
+  \item Use CREATE or MERGE statements to create nodes first, then relationships
+  \item Use MATCH to verify your graph is correct.
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 Define a graph in Cypher that represents the following statement:\\
 
 \begin{quote}
@@ -232,9 +257,12 @@ You are completing the course BUSI 4720 in this semester with a final grade of 1
   \item Use CREATE or MERGE statements to create nodes first, then relationships
   \item Use MATCH to verify your graph is correct.
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Clean-Up}
+
+\begin{frame}[label=full,fragile]{Clean-Up}
 To remove Persons and Books and relationships between them:
 \footnotesize
 \begin{cyphercode}
@@ -253,7 +281,7 @@ MATCH (node) DELETE node;
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{Property or Relationship?}
+\begin{frame}[label=full,fragile]{Property or Relationship?}
 \begin{columns}
 \begin{column}{.35\textwidth}
 \includegraphics[width=\columnwidth]{screen5.png}
@@ -278,7 +306,7 @@ RETURN m1, m2;
 \tiny{\url{https://neo4j.com/docs/getting-started/\_images/modeling\_genre\_property-arr.svg}}
 \end{frame}
 
-\begin{frame}[fragile]{Property or Relationship?}
+\begin{frame}[label=full,fragile]{Property or Relationship?}
 \begin{columns}
 \begin{column}{.35\textwidth}
 \includegraphics[width=\columnwidth]{screen6.png}
@@ -302,7 +330,7 @@ RETURN m1, m2, g
 \tiny{\url{https://neo4j.com/docs/getting-started/\_images/modeling\_genre\_node-arr.svg}}
 \end{frame}
 
-\begin{frame}{Flexible Data Modeling}
+\begin{frame}[label=full]{Flexible Data Modeling}
 \centering
 \includegraphics[height=1in]{screen7.png}
 \tiny{\url{https://neo4j.com/docs/getting-started/_images/modeling_airport_flights-arr.svg}} \hrule
@@ -310,7 +338,7 @@ RETURN m1, m2, g
 \tiny{\url{https://neo4j.com/docs/getting-started/_images/modeling_airport_flight_dates-arr.svg}}
 \end{frame}
 
-\begin{frame}{Graph Data versus Relational Data}
+\begin{frame}[label=full]{Graph Data versus Relational Data}
 \centering
 \includegraphics[height=1.2in]{screen9.png}
 \tiny{\url{https://neo4j.com/docs/getting-started/_images/relational_model.svg}} \hrule
@@ -318,7 +346,7 @@ RETURN m1, m2, g
 \tiny{\url{https://neo4j.com/docs/getting-started/_images/relational_graph_model-arr.svg}}
 \end{frame}
 
-\begin{frame}{Graph Data versus Relational Data}
+\begin{frame}[label=full]{Graph Data versus Relational Data}
 \begin{block}{Conversion}
 \begin{itemize}
   \item Tables to Node Labels
@@ -331,7 +359,54 @@ RETURN m1, m2, g
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{The Pagila Database for Neo4J}
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\footnotesize
+Define a graph in Cypher that represents the following relational data: \\ \vspace{\baselineskip}
+
+\begin{columns}
+\begin{column}{0.5\textwidth}
+\begin{tabular}{l|l} \hline
+\multicolumn{2}{c}{\bf Customer} \\ \hline
+{\bf CNumber} & {\bf Name} \\ \hline
+1 & Jane \\
+2 & John \\ \hline
+\end{tabular}
+
+\begin{tabular}{l|l} \hline
+\multicolumn{2}{c}{\bf Product} \\ \hline
+{\bf PNumber} & {\bf Name} \\ \hline
+10 & Hammer \\
+11 & Saw \\ \hline
+\end{tabular}
+
+\begin{tabular}{l|l|l} \hline
+\multicolumn{3}{c}{\bf Sales} \\ \hline
+{\bf CNumber} & {\bf PNumber} & {\bf Price} \\ \hline
+1 & 11 & \$10 \\ 
+2 & 10 & \$12 \\
+2 & 11 & \$10 \\ \hline
+\end{tabular}
+\end{column}
+\begin{column}{0.5\textwidth}
+\footnotesize
+\begin{enumerate}
+  \item Identify nodes, relationships, and properties of nodes and relationships
+  \item Use CREATE or MERGE statements to create nodes first, then relationships
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=withcode,fragile]{The Pagila Database for Neo4J}
 Import the Pagila Datase (This may take ten or more minutes; already done in the course Virtual Machine):
 \scriptsize
 \begin{cyphercode}
@@ -346,13 +421,13 @@ MATCH (n:Actor) RETURN n LIMIT 25
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}{Explore the Pagila Graph}
+\begin{frame}[label=withcode]{Explore the Pagila Graph}
 \centering
 
 \includegraphics[height=3in]{screen12.png}
 \end{frame}
 
-\begin{frame}[fragile]{Explore the Pagila Schema}
+\begin{frame}[label=withcode,fragile]{Explore the Pagila Schema}
 \small
 \begin{cyphercode}
 CALL db.schema.visualization()
@@ -362,7 +437,7 @@ CALL db.schema.visualization()
 \includegraphics[height=2.5in]{screen13.png}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples}
 Find actors by last name, limit to 10
 \footnotesize
 \begin{cyphercode}
@@ -382,7 +457,7 @@ ORDER BY f.title ASC LIMIT 10;
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 Find rental customers that live in India
 \footnotesize
 \begin{cyphercode}
@@ -395,7 +470,12 @@ RETURN c.firstName, c.lastName, r.rentalDate LIMIT 5
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=withcode]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \large
 Find all customers that have rented a film with rating ''PG''\\
 \normalsize
@@ -405,14 +485,16 @@ Find all customers that have rented a film with rating ''PG''\\
   \item Design a pattern that starts with a customer node and ends with a film node
   \item Define an appropriate WHERE clause of property restrictions in node patterns
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=withcode]{Hands-On Exercise}
 \includegraphics[width=\textwidth]{screen14.png}
 \end{frame}
 
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 \textbf{Aggregation}: Find the mean and standard deviation of rental payments by country
 \footnotesize
 \begin{cyphercode}
@@ -433,7 +515,7 @@ ORDER BY amountMean DESC LIMIT 5
 \url{https://neo4j.com/docs/cypher-manual/current/functions/aggregating/}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 \textbf{Collection}: Find the sets of last names of the movie cast, and the total number of actors
 \footnotesize
 \begin{cyphercode}
@@ -460,7 +542,7 @@ RETURN c.lastName,
 \end{frame}
 
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 \textbf{Collection}: Find the set of rental customers for each film and the rental count
 \footnotesize
 \begin{cyphercode}
@@ -475,7 +557,7 @@ RETURN DISTINCT f.title,
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 \textbf{Sub-Query}: Find the customers who rent films that are in inventory at multiple stores
 \footnotesize
 \begin{cyphercode}
@@ -499,7 +581,7 @@ RETURN DISTINCT
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 Christian Akroyd's co-actors
 \footnotesize
 \begin{cyphercode}
@@ -524,7 +606,7 @@ RETURN distinct others;
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 \textbf{Built-In Function}: The shortest path of an acts-in relationship between Christian Akroyd and Charlize Dench
 \footnotesize
 \begin{cyphercode}
@@ -538,7 +620,7 @@ RETURN path;
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 \textbf{Pattern in WHERE clause, multiple MATCH patterns} Find actors that Christian Akroyd hasn't yet worked with, but his co-actors have. Extend Christian Akroyd's co-actors, to find co-co-actors who haven't worked with him.
 \footnotesize
 \begin{cyphercode}
@@ -555,7 +637,7 @@ ORDER BY Strength DESC
 \end{cyphercode}
 \end{frame}
 
-\begin{frame}[fragile]{Cypher Query Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Cypher Query Examples \small [cont'd]}
 Find someone who can introduce Christian Akroyd to Susan Davis
 \footnotesize
 \begin{cyphercode}
@@ -570,7 +652,7 @@ RETURN a1, m, coActors, m2, a2
 \end{frame}
 
 
-\begin{frame}{Further Information}
+\begin{frame}[label=withcode]{Further Information}
 \renewcommand{\arraystretch}{1.5}
 \footnotesize
 \begin{tabularx}{\linewidth}{l|X} \hline
@@ -584,7 +666,12 @@ Resources & \url{https://neo4j.com/resources/} \\
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{enumerate}
 	\item Are there two customers that have the same address?
 	\item Which customers have rented the same set of films?
@@ -593,6 +680,8 @@ Resources & \url{https://neo4j.com/resources/} \\
 	\item Calculate the rental counts for each country of customer. Are there countries with no rentals?
 	\item Create a graph that represents a product hierarchy.
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 \end{document}

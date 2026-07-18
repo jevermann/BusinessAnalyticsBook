@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize 
   \input{../license.tex} 
@@ -16,7 +16,7 @@
 XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed under CC-BY-NC
 \end{frame}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -27,7 +27,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{frame}
 
 
-\begin{frame}{Why Visualize?}
+\begin{frame}[label=full]{Why Visualize?}
   \begin{quote} \large \centering
     ''A Picture is Worth 1000 Words''
   \end{quote}
@@ -41,7 +41,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Why Visualize?}
+\begin{frame}[label=full]{Why Visualize?}
 \begin{block}{Visual Discovery: Sense Making}
   \begin{itemize}
   \item \alert{Exploration}, confirmation, or verification
@@ -67,7 +67,26 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{Purpose of Visualization}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+For each scenario, identify whether it is an example of visual Discovery, declarative Visualization, or operational Visualization.
+
+\begin{enumerate}
+\item A scientist explores climate data looking for unknown patterns.
+\item A CEO presents quarterly financial results to investors.
+\item A network administrator monitors server activity in real time.
+\item A marketing analyst experiments with different charts while exploring data.
+\item A dashboard displays factory temperatures every second.
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Purpose of Visualization}
 \begin{itemize}
   \item Simplify, summarize \& abstract
   \item Compare
@@ -76,7 +95,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Quantitative Messages}
+\begin{frame}[label=full]{Quantitative Messages}
 \begin{enumerate}
    \item Time-series (e.g. line chart)
    \item Ranking (e.g. bar chart)
@@ -89,7 +108,148 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Honesty in Visualization}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+For each scenario, choose the most appropriate type of plot and explain your choice.
+
+\begin{itemize}
+\item Monthly sales over five years
+\item Market share of five companies
+\item Distribution of employee salaries
+\item Relationship between advertising spending and sales
+\item Customer satisfaction by department
+\item Number of accidents by weekday
+\item Population density across provinces
+\end{itemize}
+
+Possible plot types to consider are bar charts, line chart, pie chart, histogram, scatterplot, box plot, maps
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Plot Elements}
+	\begin{block}{Map Data to Plot Elements}
+	\begin{itemize}
+		\item X, Y axis
+		\item Colour (point, line, fill)
+		\item Transparency (''alpha'')
+		\begin{itemize}
+		   \item \alert{Be aware of print versus screen or color vision deficiency}
+		\end{itemize}
+		\item Pattern (fill)
+		\item Size, Weight/Width (point, line)
+		\item Shape, Style (point, line)
+	\end{itemize}
+	\end{block}
+	\begin{block}{Other Plot Elements}
+		\begin{itemize}
+			\item Title, sub-title, captions
+			\item Axis titles, axis labels and ''ticks''
+			\item Legend(s)
+		\end{itemize}
+	\end{block}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Suppose you are visualizing information about cities.
+
+Variables:
+
+\begin{itemize}
+\item Population
+\item Average income
+\item Region
+\item Annual rainfall
+\end{itemize}
+
+Available visual properties:
+
+\begin{itemize}
+\item X position
+\item Y position
+\item Color
+\item Size
+\item Shape
+\end{itemize}
+
+Assign each variable to a visual property and explain your choices.
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Consider the following data.
+
+\begin{center}
+\begin{tabular}{ccc}
+Student & Hours Studied & Grade\\
+\hline
+A & 2 & 60\\
+B & 4 & 70\\
+C & 5 & 75\\
+D & 7 & 90\\
+E & 8 & 95 \\ \hline
+\end{tabular}
+\end{center}
+
+Answer the following:
+
+\begin{enumerate}
+\item Which visualization would you choose?
+\item Sketch the visualization.
+\item What conclusion would you draw?
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+A local coffee shop wants to present the following information:
+
+\begin{itemize}
+\item Monthly revenue
+\item Customer age groups
+\item Drinks sold by category
+\item Busiest hour of the day
+\item Average customer rating
+\end{itemize}
+
+For each item:
+
+\begin{enumerate}
+\item Choose an appropriate type of visualization.
+\item Explain why it is appropriate.
+\item Sketch the visualization.
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[label=full]{Honesty in Visualization}
 \begin{block}{General Guidelines}
 	\begin{itemize}
 		\item Do not deceive your target audience
@@ -100,7 +260,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{Honesty in Visualization}
+\begin{frame}[label=full]{Honesty in Visualization}
 \begin{block}{Specific ''no-nos''}
 	\begin{itemize}
 		\item Graph unrelated data to suggest non-existent relationships
@@ -115,114 +275,114 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{Label your Axes (XKCD)}
+\begin{frame}[label=full]{Label your Axes (XKCD)}
   \includegraphics[width=\textwidth]{xkcd_convincing.png}
 \end{frame}
 
-\begin{frame}{Use Meaningful Data (XKCD)}
+\begin{frame}[label=full]{Use Meaningful Data (XKCD)}
   \includegraphics[width=\textwidth]{xkcd_self_description.png}
 \end{frame}
 
-\begin{frame}{Use Related Data (XKCD)}
+\begin{frame}[label=full]{Use Related Data (XKCD)}
   \includegraphics[width=\textwidth]{xkcd_coronavirus_charts.png}
 \end{frame}
 
-\begin{frame}{Do Not Mislead (XKCD)}
+\begin{frame}[label=full]{Do Not Mislead (XKCD)}
 \centering
   \includegraphics[height=3.5in]{xkcd_curve_fitting.png}
 \end{frame}
 
-\begin{frame}{Choose Your Axes Meaningfully}
+\begin{frame}[label=full]{Choose Your Axes Meaningfully}
 \centering
   \includegraphics[height=3.2in]{xkcd_y_axis_2x.png}
 \end{frame}
 
-\begin{frame}{Be Careful When Extrapolating (XKCD)}
+\begin{frame}[label=full]{Be Careful When Extrapolating (XKCD)}
 \centering
   \includegraphics[width=\textwidth]{xkcd_extrapolating.png}
 \end{frame}
 
-\begin{frame}{Verify Trends (XKCD)}
+\begin{frame}[label=full]{Verify Trends (XKCD)}
 \centering
   \includegraphics[width=\textwidth]{xkcd_linear_regression.png}
 \end{frame}
 
-\begin{frame}{Use Appropriate Scales (XKCD)}
+\begin{frame}[label=full]{Use Appropriate Scales (XKCD)}
 \centering
 
   \includegraphics[width=\textwidth]{xkcd_log_scale.png}
 \end{frame}
 
-\begin{frame}{Don't Lose Your Point}
+\begin{frame}[label=full]{Don't Lose Your Point}
 \centering
   \includegraphics[height=3.3in]{xkcd_tall_infographics.png}
 \end{frame}
 
-\begin{frame}{Dark Patterns -- Truncated Axes}
+\begin{frame}[label=full]{Dark Patterns -- Truncated Axes}
 \centering
 \includegraphics[width=\textwidth]{screen3.png}
 
 \scriptsize\url{https://en.wikipedia.org/wiki/Misleading_graph}
 \end{frame}
 
-\begin{frame}{Dark Patterns -- Omitted Data}
+\begin{frame}[label=full]{Dark Patterns -- Omitted Data}
 \centering
 \includegraphics[width=\textwidth]{screen5.png}
 
 \scriptsize\url{https://en.wikipedia.org/wiki/Misleading_graph}
 \end{frame}
 
-\begin{frame}{Dark Patterns -- 3D Pie Charts}
+\begin{frame}[label=full]{Dark Patterns -- 3D Pie Charts}
 \centering
 \includegraphics[width=\textwidth]{screen6.png}
 
 \scriptsize\url{https://en.wikipedia.org/wiki/Misleading_graph}
 \end{frame}
 
-\begin{frame}{Dark Patterns -- Comparing Pie Charts}
+\begin{frame}[label=full]{Dark Patterns -- Comparing Pie Charts}
 \centering
 \includegraphics[width=\textwidth]{screen7.png}
 
 \scriptsize\url{https://en.wikipedia.org/wiki/Misleading_graph}
 \end{frame}
 
-\begin{frame}{Dark Patterns -- Scaling Axes and Aspect Ratios}
+\begin{frame}[label=full]{Dark Patterns -- Scaling Axes and Aspect Ratios}
 \centering
 \includegraphics[width=\textwidth]{screen4.png}
 
 \scriptsize\url{https://en.wikipedia.org/wiki/Misleading_graph}
 \end{frame}
 
-\begin{frame}{Dark Patterns -- Scaling Multiple Dimensions}
+\begin{frame}[label=full]{Dark Patterns -- Scaling Multiple Dimensions}
 \centering
 \includegraphics[width=\textwidth]{screen1.png}
 
 \scriptsize\url{https://en.wikipedia.org/wiki/Misleading_graph}
 \end{frame}
 
-%\begin{frame}{Special Types of Data and Visual Analytics}
-	%\begin{itemize}
-		%\item Streaming data
-		%\begin{itemize}
-			%\item Continually changing
-			%\item Limited buffers/windows
-		%\end{itemize}
-		%\item Spatial, geographic, map data
-		%\begin{itemize}
-		   %\item Geo aware, irregular map boundaries, image overlays
-		%\end{itemize}
-		%\item Network data
-		%\begin{itemize}
-		   %\item Vertices and vertex types, edges and edge types
-		%\end{itemize}
-		%\item Text data
-		%\begin{itemize}
-		   %\item Unstructured text, e.g. from social media or web sites
-		%\end{itemize}
-	%\end{itemize}
-%\end{frame}
+\begin{frame}[label=advanced]{Special Types of Data and Visual Analytics}
+	\begin{itemize}
+		\item Streaming data
+		\begin{itemize}
+			\item Continually changing
+			\item Limited buffers/windows
+		\end{itemize}
+		\item Spatial, geographic, map data
+		\begin{itemize}
+		   \item Geo aware, irregular map boundaries, image overlays
+		\end{itemize}
+		\item Network data
+		\begin{itemize}
+		   \item Vertices and vertex types, edges and edge types
+		\end{itemize}
+		\item Text data
+		\begin{itemize}
+		   \item Unstructured text, e.g. from social media or web sites
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
-\begin{frame}{Colour Palettes}
+\begin{frame}[label=full]{Colour Palettes}
 \begin{itemize}
    \item Colour is an important visualization element
    \item A colour palette defines a set of colours for a graph/plot.
@@ -237,7 +397,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{Types of Colour Palettes}
+\begin{frame}[label=full]{Types of Colour Palettes}
 \begin{block}{Sequential/Monochrome}
 \begin{itemize}
   \item Varying hue, light to dark/deep
@@ -251,7 +411,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{Types of Colour Palettes \small [cont'd]}
+\begin{frame}[label=full]{Types of Colour Palettes \small [cont'd]}
 \begin{block}{Divergent}
 \begin{itemize}
   \item From one colour to another via white or black
@@ -265,7 +425,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{Types of Colour Palettes \small [cont'd]}
+\begin{frame}[label=full]{Types of Colour Palettes \small [cont'd]}
 \begin{block}{Spectral}
 \begin{itemize}
   \item Uses a number of different colours
@@ -279,7 +439,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{CVD (Colour Vision Deficiency)}
+\begin{frame}[label=full]{CVD (Colour Vision Deficiency)}
 \begin{itemize}
   \item Monochromatism
   \item Protanopia (missing ''S-cone'', blue)
@@ -293,14 +453,14 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 2.6 million Canadians are colour blind
 \end{frame}
 
-\begin{frame}{Original}
+\begin{frame}[label=full]{Original}
   \includegraphics[width=\textwidth]{photo.jpg}
   \centering
   MUN Faculty of Education Class Room \\
   {\tiny Copyright Memorial University of Newfoundland}
 \end{frame}
 
-\begin{frame}{Simulated Colour Vision Deficiencies}
+\begin{frame}[label=full]{Simulated Colour Vision Deficiencies}
 \begin{tabular}{cc} 
   \includegraphics[width=.48\textwidth]{desaturate\_photo.jpg} &
   \includegraphics[width=.48\textwidth]{protan\_photo.jpg} \\ 
@@ -311,16 +471,72 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{tabular}
 \end{frame}
     
-\begin{frame}{Example: Colourbrewer Palette ''Paired''}
+\begin{frame}[label=full]{Example: Colourbrewer Palette ''Paired''}
   \includegraphics[width=\textwidth]{brewer.paired.cvd.pdf}
 \end{frame}
 
-\begin{frame}{Viridis Colour Palette}
+\begin{frame}[label=full]{Viridis Colour Palette}
   \includegraphics[width=\textwidth]{viridis.plot.pdf}
 \end{frame}
 
 
-%\begin{frame}{Plots for One Variable}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+A graph distinguishes two categories using only red and green.
+
+\begin{enumerate}
+\item Why could this be problematic?
+\item Suggest two alternative color choices.
+\item Suggest one additional visual feature that could distinguish the categories without relying only on color.
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+For each situation, choose the most appropriate color palette from among sequential, diverging, and spectral palettes.
+
+\begin{enumerate}
+\item Temperature above or below average
+\item Election winners by political party
+\item Income from lowest to highest
+\item Risk levels (Low--Medium--High)
+\item Species of birds
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Consider the following description:
+
+\begin{quote}
+''A rainbow-colored three-dimensional pie chart with 18 slices compares monthly expenses.''
+\end{quote}
+
+List at least five changes that would improve this visualization.
+\end{column}
+\end{columns}
+\end{frame}
+
+
+%\begin{frame}[label=full]{Plots for One Variable}
 %\begin{block}{Continuous}
 %\begin{itemize}
   %\item {\bf Area}: Degree of change over time, or relationship of parts to aggregate
@@ -336,7 +552,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 %\end{block}
 %\end{frame}
 
-%\begin{frame}{Plots for Two Variables}
+%\begin{frame}[label=full]{Plots for Two Variables}
 %\begin{block}{Both Continuous}
 %\begin{itemize}
   %\item {\bf Point}: Connections among numeric values, show multiple groups of data
@@ -353,7 +569,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 %\end{block}
 %\end{frame}
 
-%\begin{frame}{Plots for Two Variables, cont'd}
+%\begin{frame}[label=full]{Plots for Two Variables, cont'd}
 	%\begin{block}{Both Discrete}
 		%\begin{itemize}
 			%\item {\bf Points/Counts}: Magnitude of counts
@@ -367,7 +583,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 	%\end{block}
 %\end{frame}
 
-%\begin{frame}{Plots for Three Variables}
+%\begin{frame}[label=full]{Plots for Three Variables}
 	%\begin{block}{Continuous}
 		%\begin{itemize}
 			%\item {\bf Contour, Raster and Tile}: Shows relationships among three data series
@@ -375,7 +591,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 	%\end{block}
 %\end{frame}
 
-%\begin{frame}{Visualizing Errors and Uncertainty}
+%\begin{frame}[label=full]{Visualizing Errors and Uncertainty}
 %\begin{block}{Purpose}
 	%\begin{itemize}
 		%\item Give a general idea of how precise a value is, or how far a value might be from the true value
@@ -391,7 +607,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 %\end{block}
 %\end{frame}
 
-\begin{frame}{Popular Graphics Libraries and Frameworks}
+\begin{frame}[label=withcode]{Popular Graphics Libraries and Frameworks}
 \begin{block}{R}
 \begin{itemize}
   \item GGPlot (and related libraries such as GGPattern)
@@ -416,30 +632,8 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 \end{block}
 \end{frame}
 
-\begin{frame}{Plot Elements}
-	\begin{block}{Map Data to Plot Elements}
-	\begin{itemize}
-		\item X, Y axis
-		\item Colour (point, line, fill)
-		\item Transparency (''alpha'')
-		\begin{itemize}
-		   \item \alert{Be aware of print versus screen or color vision deficiency}
-		\end{itemize}
-		\item Pattern (fill)
-		\item Size, Weight/Width (point, line)
-		\item Shape, Style (point, line)
-	\end{itemize}
-	\end{block}
-	\begin{block}{Other Plot Elements}
-		\begin{itemize}
-			\item Title, sub-title, captions
-			\item Axis titles, axis labels and ''ticks''
-			\item Legend(s)
-		\end{itemize}
-	\end{block}
-\end{frame}
 
-\begin{frame}{Example Dataset}
+\begin{frame}[label=withcode]{Example Dataset}
 \begin{itemize}
   \item Government of Canada, Open Government Portal
   \item Fuel Consumption Ratings -- Battery-electric vehicles -- 2012--2023; last updated Oct 10, 2023
@@ -461,7 +655,7 @@ XKCD comics are copyright by their creator (\url{www.xkcd.com}) and licensed und
 	\end{tabular}
 \end{frame}
 
-\begin{frame}[fragile]{Example Dataset -- Read Data}
+\begin{frame}[label=withcode,fragile]{Example Dataset -- Read Data}
 \begin{Rcode}
 # Load tidyverse package
 library(tidyverse)
@@ -474,7 +668,7 @@ data$Fuel <- as.factor(data$Fuel)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Load Graphics Libraries}
+\begin{frame}[label=withcode,fragile]{Load Graphics Libraries}
 \small
 \begin{Rcode}
 library(ggplot2)
@@ -485,7 +679,7 @@ library(ggradar)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Histogram}
+\begin{frame}[label=withcode,fragile]{Histogram}
 
 \begin{Rcode}
 data |> 
@@ -508,7 +702,7 @@ ggsave("histogram.pdf", height=5, width=7.5, units='in')
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Histogram}
+\begin{frame}[label=withcode]{Histogram}
 \begin{columns}
 \begin{column}{.75\textwidth}
   \includegraphics[width=\textwidth]{histogram.pdf}
@@ -522,7 +716,7 @@ ggsave("histogram.pdf", height=5, width=7.5, units='in')
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Density Plot}
+\begin{frame}[label=withcode,fragile]{Density Plot}
 
 \begin{Rcode}
 data |> 
@@ -543,7 +737,7 @@ data |>
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Combining Geoms}
+\begin{frame}[label=withcode,fragile]{Combining Geoms}
 \begin{Rcode}
 data |> ggplot(aes(Range)) +
     geom_density(kernel='gaussian', 
@@ -564,7 +758,7 @@ data |> ggplot(aes(Range)) +
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Labelling}
+\begin{frame}[label=withcode,fragile]{Labelling}
 \begin{Rcode}
 data |>  ggplot(aes(x=Range)) + 
     geom_histogram(bins=50) +
@@ -579,81 +773,12 @@ data |>  ggplot(aes(x=Range)) +
 \end{center}
 \end{frame}
 
-%\begin{frame}[fragile]{Complex Example -- Multiple Geoms}
-%Prepare some summary statistics:
-
-%\small
-%\begin{Rcode}
-%# Calculate summary statistics for Range variable
-%mean_v <- data |>
-   %summarize(mean_v = mean(Range), 
-             %median_v = median(Range), 
-             %lower95=quantile(Range, .025), 
-             %upper95=quantile(Range, .975), 
-             %maxdensity = max(density(Range)$y))
-%\end{Rcode}
-%\end{frame}
-
-%\begin{frame}[fragile]{Complex Example -- Multiple Geoms \small [cont'd]}
-%\footnotesize
-%\begin{Rcode}
-%data |> 
-  %ggplot(aes(Range)) + 
-    %geom_density(fill='lightblue') + 
-    %labs(x = 'Range (km)', 
-         %y = 'Proportion of Vehicles', 
-         %title='Density Plot - Electric Vehicle Range', 
-         %subtitle='Years 2012 to 2024', 
-         %caption='95 percentile, median and mean') +
-    %geom_vline(data=mean_v, aes(xintercept=mean_v), 
-               %linetype='dashed') +
-    %geom_vline(data=mean_v, aes(xintercept=median_v), 
-               %linetype='dotdash') +
-    %geom_vline(data=mean_v, aes(xintercept=lower95), 
-               %linetype='dotted') +
-    %geom_vline(data=mean_v, aes(xintercept=upper95), 
-           %linetype='dotted') + 
-%\end{Rcode}
-%\end{frame}
-
-%\begin{frame}[fragile]{Complex Example -- Multiple Geoms \small [cont'd]}
-%\footnotesize
-%\begin{Rcode}
-%annotate('text', 
-   %label=paste(' L95=\n ',round(mean_v$lower95)), 
-   %x = mean_v$lower95, y = mean_v$maxdensity/2, 
-   %size=3.5, hjust=0) +
-%annotate('text', 
-   %label=paste(' Med=\n ',round(mean_v$median_v)), 
-   %x = mean_v$median_v, y = mean_v$maxdensity*3/4, 
-   %size=3.5, hjust=0) +
-%annotate('text',
-   %label=paste(' Mean=\n ',round(mean_v$mean_v)), 
-   %x = mean_v$mean_v, y = mean_v$maxdensity*5/8, 
-   %size=3.5, hjust=0) + 
-%annotate('text',
-   %label=paste(' U95=\n ',round(mean_v$upper95)), 
-   %x = mean_v$upper95, y = mean_v$maxdensity/2, 
-   %size=3.5, hjust=0)
-%\end{Rcode}
-%\end{frame}
-
-%\begin{frame}{Complex Example -- Multiple Geoms  [cont'd]}
-%\begin{columns}
-%\begin{column}{.75\textwidth}
-  %\includegraphics[width=\textwidth]{fuel.density.pdf}
-%\end{column}
-%\begin{column}{.35\textwidth}
-%\footnotesize
-%\begin{itemize}
-   %\item \texttt{geom\_vline} and \texttt{annotate} are geoms
-   %\item \texttt{geom\_vline} specifies \texttt{data=mean\_v} data frame
-%\end{itemize}
-%\end{column}
-%\end{columns}
-%\end{frame}
-
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{block}{}
 \begin{enumerate}
     \item Read the EV fuel efficiency data set into R .
@@ -672,10 +797,12 @@ data |>  ggplot(aes(x=Range)) +
        \item Use the \texttt{labs} geom for labels
     \end{itemize}
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}[fragile]{Area Plot}
+\begin{frame}[label=withcode,fragile]{Area Plot}
 \footnotesize
 \begin{Rcode}
 data %>% group_by(Year) %>%
@@ -696,7 +823,7 @@ data %>% group_by(Year) %>%
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Column Chart}
+\begin{frame}[label=withcode,fragile]{Column Chart}
 \begin{itemize}
    \item Data must have one variable mapped to Y axis
    \item Data must have one variable mapped to fill colour
@@ -739,7 +866,7 @@ col.data <- data %>%
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Column Chart \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Column Chart \small [cont'd]}
 \begin{Rcode}
 col.data |> 
    ggplot(aes(x=Year, y=consumption, fill=metric)) +
@@ -759,7 +886,7 @@ col.data |>
 \end{frame}
 
 
-\begin{frame}[fragile]{Column Chart with Patterns}
+\begin{frame}[label=withcode,fragile]{Column Chart with Patterns}
 \begin{Rcode}
 col.data |> ggplot(aes(x=Year, y=consumption)) +
     geom_col_pattern(aes(pattern_type=metric),
@@ -774,7 +901,7 @@ col.data |> ggplot(aes(x=Year, y=consumption)) +
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Box Plot}
+\begin{frame}[label=withcode,fragile]{Box Plot}
 
 \begin{Rcode}
 data |>
@@ -807,11 +934,11 @@ ggplot(aes(x=as.factor(Year), y=consumption, fill=metric)) +
 \end{frame}
 
 
-\begin{frame}{Boxplot (XKCD)}
+\begin{frame}[label=withcode]{Boxplot (XKCD)}
  \includegraphics[width=\textwidth]{xkcd_box_plot.png}
 \end{frame}
 
-\begin{frame}[fragile]{Violin Plot}
+\begin{frame}[label=withcode,fragile]{Violin Plot}
 \begin{Rcode}
 data |>
   pivot_longer(cols=c('City', 'Hwy'), 
@@ -835,7 +962,7 @@ data |>
 \end{columns}
 \end{frame}
 
-%\begin{frame}[fragile]{Dot Plot}
+%\begin{frame}[label=withcode,fragile]{Dot Plot}
 %\footnotesize
 %\begin{Rcode}
 %data %>% 
@@ -856,11 +983,11 @@ data |>
 %\end{Rcode}
 %\end{frame}
 
-%\begin{frame}{Dot Plot}
+%\begin{frame}[label=withcode]{Dot Plot}
   %\includegraphics[width=\textwidth]{fuel.dotplot.pdf}
 %\end{frame}
 
-%\begin{frame}[fragile]{Dot Plot (with Violin and Range Summary)}
+%\begin{frame}[label=withcode,fragile]{Dot Plot (with Violin and Range Summary)}
 %\footnotesize
 %\begin{Rcode}
 %data %>% 
@@ -885,11 +1012,11 @@ data |>
 %\end{Rcode}
 %\end{frame}
 
-%\begin{frame}{Dot Plot (with Violin and Range Summary)}
+%\begin{frame}[label=withcode]{Dot Plot (with Violin and Range Summary)}
   %\includegraphics[width=\textwidth]{fuel.dotplotjviolinsummary.pdf}
 %\end{frame}
 
-\begin{frame}[fragile]{Count Plot}
+\begin{frame}[label=withcode,fragile]{Count Plot}
 \begin{Rcode}
 data %>% 
 ggplot(aes(as.factor(Year), as.factor(Category))) +
@@ -912,7 +1039,7 @@ ggplot(aes(as.factor(Year), as.factor(Category))) +
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Jitter Plot}
+\begin{frame}[label=withcode,fragile]{Jitter Plot}
 \begin{Rcode}
 data |> 
   filter(Year >= 2020) |>
@@ -936,7 +1063,7 @@ data |>
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Points Plot}
+\begin{frame}[label=withcode,fragile]{Points Plot}
 \begin{Rcode}
 data |> 
   group_by(Year, Category) |>
@@ -961,7 +1088,7 @@ ggplot(aes(x=as.factor(Year), y=meanRange,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Lines and Points Plot}
+\begin{frame}[label=withcode,fragile]{Lines and Points Plot}
 \begin{Rcode}
 data |> 
   filter(Category %in% c('C','L','M','S','US','UL')) |>
@@ -987,7 +1114,7 @@ ggplot(aes(x=Year, y=meanRange,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Pie Chart}
+\begin{frame}[label=withcode,fragile]{Pie Chart}
 \begin{columns}
 \begin{column}{.55\textwidth}
 \begin{Rcode}
@@ -1020,11 +1147,11 @@ ggplot(aes(x='', y=totalcount,
 \end{frame}
 
 
-\begin{frame}{Pie Charts (XKCD)}
+\begin{frame}[label=withcode]{Pie Charts (XKCD)}
   \includegraphics[width=\textwidth]{xkcd_pie_charts.png}
 \end{frame}
 
-%\begin{frame}[fragile]{Donut Chart}
+%\begin{frame}[label=full,fragile]{Donut Chart}
 %\footnotesize
 %\begin{minted}{R}
 %holesize <- 2
@@ -1040,12 +1167,12 @@ ggplot(aes(x='', y=totalcount,
 %\end{minted}
 %\end{frame}
 
-%\begin{frame}{Donut Chart}
+%\begin{frame}[label=full]{Donut Chart}
 %\centering
   %\includegraphics[width=.8\textwidth]{fuel.donut.pdf}
 %\end{frame}
 
-\begin{frame}[fragile]{Radar Plot}
+\begin{frame}[label=withcode,fragile]{Radar Plot}
 Prepare data:
 \begin{Rcode}
 radardata <- data |>
@@ -1075,7 +1202,7 @@ radardata <- data |>
 \end{textcode}
 \end{frame}
 
-\begin{frame}[fragile]{Radar Plot}
+\begin{frame}[label=withcode,fragile]{Radar Plot}
 \begin{columns}
 \begin{column}{.45\textwidth}
 \begin{Rcode}
@@ -1104,7 +1231,7 @@ radardata |>
 
 
 
-\begin{frame}[fragile]{Lines with Multiple Axes}
+\begin{frame}[label=withcode,fragile]{Lines with Multiple Axes}
 \footnotesize
 \begin{Rcode}
 data |>
@@ -1130,7 +1257,7 @@ ggplot(aes(x=Year)) +
 \end{Rcode}
 \end{frame}
 
-\begin{frame}{Lines with Multiple Axes}
+\begin{frame}[label=withcode]{Lines with Multiple Axes}
 \begin{columns}
 \begin{column}{.75\textwidth}
   \includegraphics[width=\textwidth]{fuel.linesTwoScales.pdf}
@@ -1147,7 +1274,7 @@ ggplot(aes(x=Year)) +
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Local Regression Smoothing Plot}
+\begin{frame}[label=withcode,fragile]{Local Regression Smoothing Plot}
 \footnotesize
 \begin{Rcode}
 data |>
@@ -1169,7 +1296,7 @@ data |>
 \end{columns}
 \end{frame}
 
-%\begin{frame}[fragile]{Local Regression Smoothing Plot (with error bars)}
+%\begin{frame}[label=withcode,fragile]{Local Regression Smoothing Plot (with error bars)}
 %\footnotesize
 %\begin{Rcode}
 %data %>% 
@@ -1188,11 +1315,11 @@ data |>
 %\end{Rcode}
 %\end{frame}
 
-%\begin{frame}{Local Regression Smoothing Plot (with error bars)}
+%\begin{frame}[label=withcode]{Local Regression Smoothing Plot (with error bars)}
   %\includegraphics[width=\textwidth]{fuel.linesSmoothErrorBar.pdf}
 %\end{frame}
 
-%\begin{frame}[fragile]{Local Regression Smoothing Plot (with cross bars)}
+%\begin{frame}[label=full,fragile]{Local Regression Smoothing Plot (with cross bars)}
 %\footnotesize
 %\begin{Rcode}
 %data %>% 
@@ -1212,11 +1339,11 @@ data |>
 %\end{Rcode}
 %\end{frame}
 
-%\begin{frame}{Local Regression Smoothing Plot (with cross bars)}
+%\begin{frame}[label=withcode]{Local Regression Smoothing Plot (with cross bars)}
   %\includegraphics[width=\textwidth]{fuel.linesSmoothCrossBar.pdf}
 %\end{frame}
 
-\begin{frame}[fragile]{2D Density Plot}
+\begin{frame}[label=withcode,fragile]{2D Density Plot}
 \begin{Rcode}
 data |>
   ggplot(aes(x=Hwy, y=City)) + 
@@ -1239,7 +1366,7 @@ data |>
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{2D Bin Plot}
+\begin{frame}[label=withcode,fragile]{2D Bin Plot}
 \begin{Rcode}
 data %>% 
   ggplot(aes(x=Hwy, y=City)) + 
@@ -1259,50 +1386,7 @@ data %>%
 \end{columns}
 \end{frame}
 
-%\begin{frame}[fragile]{2D Bin Plot}
-%\footnotesize
-%\begin{Rcode}
-%data %>% 
-  %ggplot(aes(x=Hwy, y=City)) + 
-    %geom_point(color="black", size=1, 
-               %position='jitter') +
-    %geom_bin2d(alpha=0.5, bins=5) + 
-    %scale_x_continuous(labels=scales::comma) +
-    %labs(x = 'Highway Consumption\n(l/100km equiv)', 
-         %y = 'City Consumption\n(l/100km equiv)', 
-         %fill='Count', 
-         %title='Density Plot-Fuel Consumption Ratings', 
-         %subtitle='Years 2012 to 2024') 
-%\end{Rcode}
-%\end{frame}
-
-%\begin{frame}{2D Bin Plot}
-  %\includegraphics[width=\textwidth]{fuel.bin2d.pdf}
-%\end{frame}
-
-%\begin{frame}[fragile]{2D Hex Plot}
-%\footnotesize
-%\begin{Rcode}
-%data %>% 
-  %ggplot(aes(x=Hwy, y=City)) + 
-    %geom_point(color="black", size=1, 
-               %position='jitter') +
-    %geom_hex(alpha=0.5, bins=5) + 
-    %scale_fill_distiller(palette=4, direction=-1) +
-    %scale_x_continuous(labels=scales::comma) +
-    %labs(x = 'Highway Consumption\n(l/100km equiv)', 
-         %y = 'City Consumption\n(l/100km equiv)', 
-         %fill='Count', 
-         %title='Density Plot-Fuel Consumption Ratings', 
-         %subtitle='Years 2012 to 2024') 
-%\end{Rcode}
-%\end{frame}
-
-%\begin{frame}{2D Hex Plot}
-  %\includegraphics[width=\textwidth]{fuel.hex2d.pdf}
-%\end{frame}
-
-\begin{frame}[fragile]{3D Raster/Tile Plot}
+\begin{frame}[label=withcode,fragile]{3D Raster/Tile Plot}
 \footnotesize
 \begin{Rcode}
 data |>
@@ -1321,7 +1405,7 @@ data |>
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Complex Example -- 3D Raster Plot with Rug}
+\begin{frame}[label=withcode,fragile]{Complex Example -- 3D Raster Plot with Rug}
 \begin{Rcode}
 data |>
   ggplot(aes(x=Hwy, y=City, fill=Range)) + 
@@ -1345,7 +1429,12 @@ data |>
 \end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \footnotesize
 Using the Pagila database data from \url{https://evermann.ca/busi4720/rentals.csv}, create
 \begin{enumerate}
@@ -1364,6 +1453,8 @@ Using the Pagila database data from \url{https://evermann.ca/busi4720/rentals.cs
 \item The data is de-normalized, use the \texttt{unique()} function to get accurate film counts
 \item Use the \texttt{year()} and \texttt{week()} functions from the \texttt{lubridate} package (another package of the Tidyverse set)
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 

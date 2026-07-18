@@ -235,6 +235,28 @@ For the total LSTM cell, the number of trainable parameters is therefore $4 \tim
 Verifying the shape/dimensions of inputs, cell memory and hidden state, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
 \end{alertbox}
 
+\begin{exercisebox}
+\begin{itemize}
+  \item Assume input $x_t = 1$, prior state $h_{t-1}=0.5$ and cell memory $c_{t-1} = 0.7$
+  \item Assume weights and biases as follows:
+  \begin{itemize}
+     \item {\bf Forget gate:} $W_f = [0.5, 0.2], \quad b_f = 0.1$
+     \item {\bf Input gate:} $W_i = [0.4, 0.3], \quad b_i = 0.2$
+     \item {\bf Output gate:} $W_o = [0.6, 0.1], \quad b_o = 0$
+     \item {\bf Candidate cell state:} $W_c = [0.7, 0.4], \quad b_c = 0$
+  \end{itemize}
+\end{itemize}
+\begin{enumerate}
+  \item Calculate $F_t$
+  \item Calculate $I_t$
+  \item Calculate $\tilde{c}_t$
+  \item Calculate $c_t$
+  \item Calculate $O_t$
+  \item Calculate $h_t$
+\end{enumerate}
+\begin{align*}\text{{\bf Recall}: }\quad\sigma(a)=\frac{1}{1+e^{-a}}\end{align*}
+\end{exercisebox}
+
 \section{GRU Cells}
 
 Gated Recurrent Unit (GRU)\index{Gated recurrent unit}\index{GRU cell|see{Gated recurrent unit}} cells are a type of recurrent neural network (RNN) architecture introduced as an alternative to Long Short-Term Memory (LSTM) cells. The motivation behind the development of GRUs was to simplify the LSTM architecture, which, although powerful, is also quite complex due to its multiple gates and states. By reducing the number of gates from three to two, GRUs aim to offer a model that can train faster and require fewer computational resources, while still capturing long-range dependencies within the data. GRUs also do not have an internal memory unit separate from the hidden state. While GRUs tend to train faster due to their simpler structure, in some cases LSTMs outperform GRUs in predictive performance, if the additional complexity of LSTMs are appropriate to the data set and task.
@@ -279,6 +301,25 @@ The number of trainable parameters for a GRU layer is determined analogously to 
 \begin{alertbox}
 Verifying the shape/dimensions of inputs, cell memory, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
 \end{alertbox}
+
+\begin{exercisebox}
+\begin{itemize}
+  \item Assume input $x_t = 1$ and prior state $h_{t-1}=0.5$
+  \item Assume weights and biases as follows:
+  \begin{itemize}
+     \item {\bf Update gate:} $W_z = [0.4, 0.2], \quad b_z = 0.1$
+     \item {\bf Reset gate:} $W_r = [0.3, 0.4], \quad b_r = 0$
+     \item {\bf Candidate cell state:} $W_h = [0.5, 0.3], \quad b_h = 0$
+  \end{itemize}
+\end{itemize}
+\begin{enumerate}
+  \item Calculate $Z_t$ \hspace{2cm}
+  \item Calculate $R_t$
+  \item Calculate $\hat{h}_t$
+  \item Calculate $h_t$
+\end{enumerate}
+\begin{align*}\text{{\bf Recall}: }\quad\sigma(a)=\frac{1}{1+e^{-a}}\end{align*}
+\end{exercisebox}
 
 
 \begin{exercisebox}

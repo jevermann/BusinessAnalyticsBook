@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,16 +16,16 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
-  \item Linear Regression Models in R
+  \item Linear Regression Models
   \begin{itemize}
      \item Linear regression
      \item Lasso and Ridge regression
   \end{itemize}
-  \item Classification Models in R
+  \item Classification Models
   \begin{itemize}
     \item Logistic Regression
     \item K-NN
@@ -34,7 +34,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \small
 \begin{block}{}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
@@ -61,7 +61,7 @@ Chapters 4, 6, 9, 10, 11
 \end{block}
 \end{frame}
 
-\begin{frame}{Linear Regression}
+\begin{frame}[label=full]{Linear Regression}
 
 \begin{align*}
 Y = \beta_0 + \beta_1 X + \epsilon
@@ -74,7 +74,7 @@ Y = \beta_0 + \beta_1 X + \epsilon
 \scriptsize Source: ISLR2 Figure 3.1
 \end{frame}
 
-\begin{frame}{Ensure a Linear Model is Sensible}
+\begin{frame}[label=full]{Ensure a Linear Model is Sensible}
 \centering
 \includegraphics[width=.85\textwidth]{screen1.png} \\
 
@@ -83,7 +83,7 @@ Y = \beta_0 + \beta_1 X + \epsilon
 The ''Datasaurus Dozen'': All datasets have the same correlation between the two variables!
 \end{frame}
 
-\begin{frame}{Correlation versus Regression}
+\begin{frame}[label=full]{Correlation versus Regression}
 \centering
 \includegraphics[width=.9\textwidth]{screen2.png} \\
 
@@ -93,7 +93,7 @@ Datasets with the same correlation (as indicated above each dataset) between two
 \end{frame}
 
 
-\begin{frame}{Estimating Linear Regression \small [cont'd]}
+\begin{frame}[label=full]{Estimating Linear Regression \small [cont'd]}
 \begin{itemize}
   \item Estimate $\hat{\beta}_0$ and $\hat{\beta}_1$ to minimize the mean squared error (MSE) or residual sum of square (RSS)
 \begin{align*}
@@ -111,7 +111,34 @@ where $\bar{x}$ and $\bar{y}$ are the sample means
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Evaluating Linear Regression Models \small [cont'd]}
+
+\begin{frame}[label=full]{Hands-On Exercise -- Linear Regression with OLS}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Calculate the slope and intercept of the best fitting curve for the following data points:\\
+
+\vspace{\baselineskip}
+\begin{center}
+\begin{tabular}{c|c} \hline
+{\bf x} & {\bf y} \\ \hline
+1 & 2 \\
+2 & 2 \\
+2 & 3 \\
+3 & 3 \\ 
+4 & 5 \\
+4 & 6 \\
+5 & 7 \\ \hline
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Evaluating Linear Regression Models \small [cont'd]}
 %\begin{itemize}
   %\item Estimates have \emph{standard errors} that indicate uncertainty of the estimates
   %\item A \emph{t-test} can be used to determine if a parameter is statistically significant from a value $V$ (typically $V=0$) using the test statistic
@@ -135,7 +162,34 @@ where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares
 %\end{itemize}
 \end{frame}
 
-\begin{frame}{Generalization to Multiple Predictors}
+\begin{frame}[label=full]{Hands-On Exercise -- Linear Regression with OLS}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Using the slope and intercept of the best fitting curve from the previous exercise, determine the predicted or fitted values. Then, determine the RSS, the TSS, and the $R^2$ value.\\
+
+\vspace{\baselineskip}
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c} \hline
+{\bf x} & {\bf y} & $\hat{y}$ & $(y - \hat{y})^2$ & $\bar{y}$ & $(y - \bar{y})^2$ \\ \hline
+1 & 2 & & & &\\
+2 & 2 & & & & \\
+2 & 3 & & & & \\
+3 & 3 & & & & \\ 
+4 & 5 & & & & \\
+4 & 6 & & & & \\
+5 & 7 & & & & \\ \hline
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[label=full]{Generalization to Multiple Predictors}
 \begin{columns}
 \begin{column}{0.65\textwidth}
 \includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_4.pdf}  \\
@@ -150,7 +204,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \\
 \end{columns}
 \end{frame}
 
-\begin{frame}{Regression with Qualitative Predictors}
+\begin{frame}[label=full]{Regression with Qualitative Predictors}
 \begin{itemize}
   \item Qualitative/categorical predictors (\emph{factors} with multiple, exclusive \emph{levels}) can be used in linear regression models using \textbf{dummy variables}:
 \begin{align*}
@@ -172,7 +226,7 @@ x_{i3} = \begin{cases}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Inputs, Predictors, and Polynomials}
+\begin{frame}[label=full]{Inputs, Predictors, and Polynomials}
 
 Example:
 \begin{align*}
@@ -188,7 +242,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \eps
 \end{itemize}
 \end{frame}
 
-%\begin{frame}{Interactions}
+%\begin{frame}[label=full]{Interactions}
 %\centering
 
 %\includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter3/3_7.pdf}  \\
@@ -196,7 +250,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \eps
 %\scriptsize Source: ISLR2 Figure 3.7
 %\end{frame}
 
-\begin{frame}{Multiple Regression with Polynomials}
+\begin{frame}[label=full]{Multiple Regression with Polynomials}
 \begin{columns}
 \begin{column}{.7\textwidth}
 \begin{center}
@@ -216,7 +270,7 @@ Y = \beta_0 + \beta_1 X_1 + \beta_2 X_1^2 + \beta_3 X_2 + \beta_4 X_1 X_2 + \eps
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression in R}
+\begin{frame}[label=withcode,fragile]{Linear Regression in R}
 \small
 Load libraries for data sets:
 \begin{Rcode}
@@ -244,7 +298,7 @@ plot(Boston)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Linear Regression in R \small [cont'd]}
 \small
 Fit a simple model, examine and plot the results:
 \begin{Rcode}
@@ -262,7 +316,7 @@ abline(fitted.model, lwd=3, col='red')
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Linear Regression in R \small [cont'd]}
 \small
 The \texttt{predict()} function calculates $\hat{y}_i$:
 
@@ -282,7 +336,7 @@ plot(predict(fitted.model), residuals(fitted.model))
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Linear Regression in R \small [cont'd]}
 \small
 Build more complex models:
 \begin{Rcode}
@@ -301,7 +355,7 @@ summary(fitted.model)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Linear Regression in R \small [cont'd]}
 \small
 Add polynomial terms:
 \begin{Rcode}
@@ -319,7 +373,7 @@ summary(fitted.model)
 \end{Rcode}
 \end{frame}
 
-%\begin{frame}[fragile]{Linear Regression in R \small [cont'd]}
+%\begin{frame}[label=withcode,fragile]{Linear Regression in R \small [cont'd]}
 %Categorical predictors (''factors'') using dummy variables:
 %\begin{Rcode}
 %?Carseats
@@ -343,10 +397,15 @@ summary(fitted.model)
 %\end{frame}
 
 
-\begin{frame}{Hands-On Exercises}
-{\small (Source: ISLR2 Chapter 3)}
+\begin{frame}[label=withcode]{Hands-On Exercises \small (Source: ISLR2 Chapter 3)}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
+
 \small
-Use the \texttt{Auto} data set from the ISLR2 library with \texttt{mpg} as the target.
+Use the \texttt{Auto} data from the ISLR2 library with \texttt{mpg} as target.
   \begin{enumerate}
      \item Perform a linear regression with \texttt{horsepower} as predictor
      \item Is there a relationship between the predictor and target? What form and how strong?
@@ -357,9 +416,11 @@ Use the \texttt{Auto} data set from the ISLR2 library with \texttt{mpg} as the t
      \item Use the \texttt{*} and \texttt{:} symbols to add interaction effects.
      \item Add transformations of the predictors (using the \texttt{I(.)} function) such as $\log(X)$, $\sqrt{X}$, $X^2$.
   \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-%\begin{frame}{Hands-On Exercises}
+%\begin{frame}[label=full]{Hands-On Exercises}
 %{\small (Source: ISLR2 Chapter 3)}
 %\small
 %Use the \texttt{Carseats} data set from the ISLR2 library with \texttt{Sales} as the target.
@@ -371,7 +432,7 @@ Use the \texttt{Auto} data set from the ISLR2 library with \texttt{mpg} as the t
   %\end{enumerate}
 %\end{frame}
 
-\begin{frame}[fragile]{Cross-Validation in R -- Holdout Sample}
+\begin{frame}[label=withcode,fragile]{Cross-Validation in R -- Holdout Sample}
 Validation set approach:
 \begin{Rcode}
 # Randomly use half the Auto data as training sample
@@ -390,7 +451,7 @@ mean((test.data$mpg - predict(fitted.model, test.data))^2)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Cross-Validation in R}
+\begin{frame}[label=withcode,fragile]{Cross-Validation in R}
 K-Fold Cross-Validation with $K=5$:
 \begin{Rcode}
 library(boot)
@@ -416,7 +477,7 @@ cv.err$delta[1]
 \end{frame}
 
 
-%\begin{frame}[fragile]{Cross-Validation in R -- K-Fold CV}
+%\begin{frame}[label=full,fragile]{Cross-Validation in R -- K-Fold CV}
 
 %\textbf{Example:} Use cross-validation to compare different models:
 
@@ -432,7 +493,12 @@ cv.err$delta[1]
 %\end{frame}
 
 
-\begin{frame}{Hands-On Exercises -- Cross-Validation}
+\begin{frame}[label=withcode]{Hands-On Exercises -- Cross-Validation}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
 Consider the Boston housing data set \texttt{Boston}.
 \begin{enumerate}
   \item Fit a regression model using \texttt{medv} as target, and \texttt{age}, \texttt{lstat}, and \texttt{ptratio} as predictors
@@ -445,12 +511,14 @@ Consider the Boston housing data set \texttt{Boston}.
   \end{enumerate}
   \item Repeat the previous step 2 times, using different splits. How do the results change?
   \item Average the test error of the four splits. 
-  \item Calculate the test error estimate using LOOCV. Compare your result to that of step 4.
-  \item Calculate the test error estimate using 10-fold cross-validation. Compare the estimate to that of step 4
+  \item Calculate the test error estimate using LOOCV. 
+  \item Calculate the test error estimate using 10-fold cross-validation. 
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Shrinkage Methods}
+\begin{frame}[label=full]{Shrinkage Methods}
 \begin{block}{Goals}
 \begin{itemize}
    \item Avoid overfitting
@@ -463,7 +531,7 @@ Consider the Boston housing data set \texttt{Boston}.
 \end{frame}
 
 
-\begin{frame}{Ridge Regression}{a.k.a Tikhonov Regularization}
+\begin{frame}[label=full]{Ridge Regression}{a.k.a Tikhonov Regularization}
 \begin{align*}
 \text{Minimize} \quad RSS + \lambda \sum_{j=1}^p \beta_j^2 = RSS + \lambda ||\beta||_2^2
 \end{align*}
@@ -475,7 +543,7 @@ Consider the Boston housing data set \texttt{Boston}.
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Ridge Regression}{a.k.a Tikhonov Regularization}
+\begin{frame}[label=full]{Ridge Regression}{a.k.a Tikhonov Regularization}
 \includegraphics[width=\textwidth]{../class11/Figures_Chapters_1-6/Chapter6/6_5.pdf}
 
 \scriptsize Source: ISLR2 Figure 6.5 \normalsize \\
@@ -488,13 +556,13 @@ Consider the Boston housing data set \texttt{Boston}.
 
 \end{frame}
 
-\begin{frame}{Ridge Regression Example }{Fitting a Degree 14 Polynomial}
+\begin{frame}[label=full]{Ridge Regression Example }{Fitting a Degree 14 Polynomial}
 \centering
 \includegraphics[width=0.9\textwidth]{screen4.png}\\
 \scriptsize Source: Murphy Figure 4.5
 \end{frame}
 
-\begin{frame}{Lasso regression}{''Least Absolute Shrinkage and Selection Operator''}
+\begin{frame}[label=full]{Lasso regression}{''Least Absolute Shrinkage and Selection Operator''}
 \begin{align*}
 \text{Minimize} \quad RSS + \lambda \sum_{j=1}^p |\beta_j| = RSS + \lambda ||\beta||_1
 \end{align*}
@@ -514,7 +582,7 @@ Consider the Boston housing data set \texttt{Boston}.
 \end{frame}
 
 
-\begin{frame}{Elastic Net}
+\begin{frame}[label=full]{Elastic Net}
 The Elastic Net penalty is a mix of L1-norm $||\beta||_1$ and L2-norm $||\beta||_2^2$ penalties, defined by $\alpha$:
 \begin{align*}
 \lambda \left( \alpha ||\beta||_1  + (1-\alpha)||\beta||_2^2 \right)
@@ -528,7 +596,30 @@ The Elastic Net penalty is a mix of L1-norm $||\beta||_1$ and L2-norm $||\beta||
 \vspace{.5\baselineskip}
 The \texttt{glmnet()} function in the \texttt{glmnet} library for R uses the Elastic Net regularization method.\end{frame}
 
-\begin{frame}[fragile]{Ridge Regression in R}
+\begin{frame}[label=full]{Hands-On Exercise -- Shrinkage Methods}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Assuming the following polynomial regression model:
+\begin{align*}
+\hat{y} = 15 x^4 - 10 x^3 + 20 x^2 - 40 x + 50
+\end{align*}
+
+and a residual sum of squares (RSS) of 20, what are the values of the optimization criteria for: 
+\begin{enumerate}
+   \item Ridge regression with $\lambda=0.1$
+   \item Lasso with $\lambda=0.1$
+   \item Elastic net with $\lambda=0.1, \alpha=0.5, \beta=0.5$
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[label=withcode,fragile]{Ridge Regression in R}
 \small
 
 Use the \texttt{Hitters} data set to model \texttt{Salary} as outcome and other variables as predictors.
@@ -550,7 +641,7 @@ y <- Hitters$Salary
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Ridge Regression in R \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Ridge Regression in R \small [cont'd]}
 Example for $\lambda=10$ using \texttt{glmnet()} with $\alpha=0$:
 \begin{Rcode}
 ridge.model <- glmnet(x, y, alpha=0, lambda=10)
@@ -569,7 +660,7 @@ mean((y-predict(ridge.model, x))^2)
 \end{Rcode}
 \end{frame}
 
-%\begin{frame}[fragile]{Ridge Regression in R \small [cont'd]}
+%\begin{frame}[label=withcode,fragile]{Ridge Regression in R \small [cont'd]}
 %\small
 %Set up a sequence of $\lambda$ to try and fit the model for each $\lambda$:
 %\begin{Rcode}
@@ -592,7 +683,7 @@ mean((y-predict(ridge.model, x))^2)
 %\end{Rcode}
 %\end{frame}
 
-\begin{frame}{Selecting the Tuning Parameter}
+\begin{frame}[label=full]{Selecting the Tuning Parameter}
 \begin{block}{Grid Search}
 \begin{itemize} 
    \item Define a set/range of possible values for $\lambda$
@@ -608,7 +699,7 @@ mean((y-predict(ridge.model, x))^2)
 \scriptsize Source: ISLR2 Figure 6.13
 \end{frame}
 
-\begin{frame}[fragile]{Ridge Regression in R -- Optimal Lambda}
+\begin{frame}[label=withcode,fragile]{Ridge Regression in R -- Optimal Lambda}
 \small
 Create holdout test data set:
 \begin{Rcode}
@@ -628,7 +719,7 @@ cv.out <- cv.glmnet(x.train, y.train, alpha=0,
 \end{frame}
 
 
-\begin{frame}[fragile]{Ridge Regression in R  -- Optimal Lambda \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Ridge Regression in R  -- Optimal Lambda \small [cont'd]}
 \small
 Show the optimal lambda, the MSE and its standard error, and the number of non-zero coefficients.
 \begin{columns}
@@ -652,7 +743,7 @@ min  461.6    68  102536 13016      19
 \includegraphics[width=\textwidth]{crossvalidated_ridge.pdf}
 \end{frame}
 
-\begin{frame}[fragile]{Ridge Regression in R -- Optimal Lambda \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Ridge Regression in R -- Optimal Lambda \small [cont'd]}
 \small
 Fit test data using optimal $\lambda$:
 \begin{Rcode}
@@ -666,7 +757,7 @@ coef(lm(y.test ~ x.test + 1))
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Ridge Regression in R -- Prediction}
+\begin{frame}[label=withcode,fragile]{Ridge Regression in R -- Prediction}
 \small
 Predict values for the test data set:
 \begin{Rcode}
@@ -680,7 +771,7 @@ mean((y.hat.test - y.test)^2)
 Recall, the CV cross-validated error on the training set is an estimate/approximation of the real test error.
 \end{frame}
 
-\begin{frame}[fragile]{The Lasso in R \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{The Lasso in R \small [cont'd]}
 \small
 Example for $\lambda=10$ using \texttt{glmnet()} with $\alpha=1$:
 \begin{Rcode}
@@ -707,7 +798,7 @@ cv.out <- cv.glmnet(x.train, y.train, alpha=1,
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{The Lasso in R -- Optimal Lambda}
+\begin{frame}[label=withcode,fragile]{The Lasso in R -- Optimal Lambda}
 \small
 Show the optimal lambda, the MSE and its standard error, and the number of non-zero coefficients.
 \begin{columns}
@@ -734,7 +825,7 @@ Note the number of non-zero coefficients in the result:
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{The Lasso in R -- Prediction}
+\begin{frame}[label=withcode,fragile]{The Lasso in R -- Prediction}
 Fit test data using optimal $\lambda$:
 \begin{Rcode}
 lasso.model <- glmnet(x.test, y.test, 
@@ -753,7 +844,13 @@ mean((y.hat.test - y.test)^2)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises -- Shrinkage Methods}{Source: ISLR2, Chapter 6}
+\begin{frame}[label=withcode]{Hands-On Exercises -- Shrinkage Methods}{Source: ISLR2, Chapter 6}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+
 Predict the number of applications received using the other variables in the \texttt{College} dataset
   \begin{enumerate} 
       \item Split the data set into a training and a test set
@@ -762,9 +859,16 @@ Predict the number of applications received using the other variables in the \te
       \item Fit a lasso model on the training set, with $\lambda$ chosen by cross-validation. Report the test error.
       \item Compare and contrast the results
   \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises -- Shrinkage Methods}{Source: ISLR2, Chapter 6}
+\begin{frame}[label=withcode]{Hands-On Exercises -- Shrinkage Methods}{Source: ISLR2, Chapter 6}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 Predict the per-capita crime rate in the \texttt{Boston} data set using the other variables.
   \begin{enumerate}
       \item Split the data set into a training and a test set
@@ -773,30 +877,32 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
       \item Fit a lasso model on the training set, with $\lambda$ chosen by cross-validation. Report the test error.
       \item Compare and conrast the results
   \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-%\begin{frame}{Robust Regression}
-%\begin{block}{Problem}
-%\begin{itemize}
-   %\item MSE loss function susceptible to outliers (quadratic error)
-%\end{itemize}
-%\end{block}
-%\begin{block}{Huber loss}
-%\begin{align*}
-   %L_{\text{huber}}(r, \delta) = \begin{cases}
-   %r^2/2 \quad &\text{if} |r| \leq \delta \\
-   %\delta |r| - \delta^2/2 \quad &\text{if} |r| > \delta
-%\end{cases}
-%\end{align*}
-%\begin{itemize}
-   %\item L2 error (MSE) for small errors $\leq \delta$
-   %\item L1 error (MAE) for large errors $> \delta$
-   %\item Identify optimal $\delta$ through cross-validation
-%\end{itemize}
-%\end{block}
-%\end{frame}
+\begin{frame}[label=advanced]{Robust Regression}
+\begin{block}{Problem}
+\begin{itemize}
+   \item MSE loss function susceptible to outliers (quadratic error)
+\end{itemize}
+\end{block}
+\begin{block}{Huber loss}
+\begin{align*}
+   L_{\text{huber}}(r, \delta) = \begin{cases}
+   r^2/2 \quad &\text{if} |r| \leq \delta \\
+   \delta |r| - \delta^2/2 \quad &\text{if} |r| > \delta
+\end{cases}
+\end{align*}
+\begin{itemize}
+   \item L2 error (MSE) for small errors $\leq \delta$
+   \item L1 error (MAE) for large errors $> \delta$
+   \item Identify optimal $\delta$ through cross-validation
+\end{itemize}
+\end{block}
+\end{frame}
 
-\begin{frame}{Classification}
+\begin{frame}[label=full]{Classification}
   \begin{itemize}
      \item Qualitative (categorical) outcome
      \item Estimate or predict probabilities of class membership
@@ -807,7 +913,7 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
 \scriptsize Source: ISLR2 Figure 4.2
 \end{frame}
 
-\begin{frame}{Logistic Regression}
+\begin{frame}[label=full]{Logistic Regression}
 \begin{block}{Logistic / Sigmoid Function}
 \begin{columns}
 \begin{column}{0.6\textwidth}
@@ -833,7 +939,33 @@ where the linear predictor $\beta_0 + \beta_1 X$ are the \textbf{logits}
 \end{block}
 \end{frame}
 
-\begin{frame}{Logistic Regression \small [cont'd]}
+
+\begin{frame}[label=full]{Hands-On Exercise -- Logistic Regression}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+The slope and intercept of the best fitting curve for the following data points are $1.333$ and $0$ respectively. Calculate the predicted probability for each $x$ value.
+
+\vspace{\baselineskip}
+\begin{center}
+\begin{tabular}{c|c|c} \hline
+{\bf x} & {\bf y} & {\bf p(y)}\\ \hline
+-2 & -2 & \\
+-1 & -2 & \\
+-1 & -1 & \\
+0 & -1 & \\ 
+1 & 1 & \\
+1 & 2 & \\
+2 & 3 & \\ \hline
+\end{tabular}
+\end{center}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Logistic Regression \small [cont'd]}
 \begin{block}{Predictions}
 Given estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, use the link function to predict class/outcome probabilities for observation $X$:
 \begin{align*}
@@ -851,7 +983,7 @@ Given estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, use the link function to pr
 \end{block}
 \end{frame}
 
-%\begin{frame}{Logistic Regression \small [cont'd]}
+%\begin{frame}[label=full]{Logistic Regression \small [cont'd]}
 %\begin{itemize}
    %\item Multiple $p$ predictors: \textbf{Multiple Linear Regression}
    %\item Multiple $K$ classes: \textbf{Multinomial Logistic Regression}
@@ -859,21 +991,21 @@ Given estimates $\hat{\beta}_0$ and $\hat{\beta}_1$, use the link function to pr
 %\end{itemize}
 %\end{frame}
 
-%\begin{frame}{Multinomial Logistic Regression}
-%\small
-%\begin{align*}
-%\log \left( \frac{\Pr(Y=k | X=x)}{\Pr(Y=K | X=x)}\right) &= \beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p \; , k<K \\
-%\intertext{Exponentiating and rearranging:}
-%\Pr(Y=k | X=x) &= \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \;, k<K\\
-%\intertext{Because probabilities must sum to 1:}
-%\Pr(Y=K | X=x) &= 1 - \sum_{l=1}^{K-1} \Pr(Y=l | X=x) \\
-%&= 1 - \sum_{l=1}^{K-1} \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \\
-%\Rightarrow \Pr(Y=K | X = x) &= \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}} \\
-%\Rightarrow \Pr(Y=k|X=x) &= \frac{e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}x_1 + \cdots + \beta_{lp}x_p}} \;, \; k < K
-%\end{align*}
-%\end{frame}
+\begin{frame}[label=advanced]{Multinomial Logistic Regression}
+\small
+\begin{align*}
+\log \left( \frac{\Pr(Y=k | X=x)}{\Pr(Y=K | X=x)}\right) &= \beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p \; , k<K \\
+\intertext{Exponentiating and rearranging:}
+\Pr(Y=k | X=x) &= \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \;, k<K\\
+\intertext{Because probabilities must sum to 1:}
+\Pr(Y=K | X=x) &= 1 - \sum_{l=1}^{K-1} \Pr(Y=l | X=x) \\
+&= 1 - \sum_{l=1}^{K-1} \Pr(Y=K | X=x) e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p} \\
+\Rightarrow \Pr(Y=K | X = x) &= \frac{1}{1 + \sum_{l=1}^{K-1} e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}} \\
+\Rightarrow \Pr(Y=k|X=x) &= \frac{e^{\beta_{k0}+\beta_{k1}x_1 + \cdots + \beta_{kp}x_p}}{1 + \sum_{l=1}^{K-1} e^{\beta_{l0}+\beta_{l1}x_1 + \cdots + \beta_{lp}x_p}} \;, \; k < K
+\end{align*}
+\end{frame}
 
-\begin{frame}{Logistic Regression with Polynomials}
+\begin{frame}[label=advanced]{Logistic Regression with Polynomials}
 Transforming decision boundaries:
 \begin{center}
 \includegraphics[width=\textwidth]{Figure_10.3.png} \\
@@ -881,7 +1013,7 @@ Transforming decision boundaries:
 \end{center}
 \end{frame}
 
-\begin{frame}{Logistic Regression with Polynomials \small [cont'd]}
+\begin{frame}[label=advanced]{Logistic Regression with Polynomials \small [cont'd]}
 But beware of overfitting:
 \begin{center}
 \includegraphics[width=.8\textwidth]{screen3.png} \\
@@ -889,7 +1021,7 @@ But beware of overfitting:
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Logistic Regression in R}
+\begin{frame}[label=withcode,fragile]{Logistic Regression in R}
 \small
 Use the stock market data set \texttt{Smarket} to predict the binary outcome \texttt{Direction} (the direction of market changes, up or down) using prior returns as predictors:
 \begin{Rcode}
@@ -911,7 +1043,7 @@ summary(logreg.fitted)
 \end{frame}
 
 
-\begin{frame}[fragile]{Logistic Regression in R}
+\begin{frame}[label=withcode,fragile]{Logistic Regression in R}
 \small
 Use \texttt{predict()} to predict logits for data set:
 \begin{Rcode}
@@ -933,7 +1065,7 @@ pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Logistic Regression in R}
+\begin{frame}[label=withcode,fragile]{Logistic Regression in R}
 \small
 Compute confusion matrix:
 \begin{Rcode}
@@ -948,7 +1080,7 @@ mean(pred.direction == Smarket$Direction)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Logistic Regression in R -- Holdout Set} 
+\begin{frame}[label=withcode,fragile]{Logistic Regression in R -- Holdout Set} 
 \small
 Split data to train and test set. Because this is time-dependent data, split by time to avoid mixing past and future data:
 \begin{Rcode}
@@ -974,7 +1106,7 @@ pred.direction[logreg.probs <= .5] <- 'Down'
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Logistic Regression in R -- Holdout Set} 
+\begin{frame}[label=withcode,fragile]{Logistic Regression in R -- Holdout Set} 
 \small
 Compute confusion matrix for test data:
 \begin{Rcode}
@@ -987,7 +1119,7 @@ mean(pred.direction == test.data$Direction)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Logistic Regression in R -- Evaluation}
+\begin{frame}[label=withcode,fragile]{Logistic Regression in R -- Evaluation}
 \small
 Using the \texttt{ROCR} library for classifier evaluation:
 \begin{Rcode}
@@ -1008,7 +1140,7 @@ performance(pred.obj, 'auc')@y.values[[1]]
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Logistic Regression in R -- Evaluation}
+\begin{frame}[label=withcode,fragile]{Logistic Regression in R -- Evaluation}
 \small
 continued \ldots
 \begin{Rcode}
@@ -1031,7 +1163,7 @@ plot(performance(pred.obj, 'prec', 'rec'), colorize=T)
 \end{frame}
 
 
-\begin{frame}{Naive Bayes Classifier}
+\begin{frame}[label=advanced]{Naive Bayes Classifier}
 \small \vspace{-3mm}
 \begin{itemize}
 \item \textbf{Bayes Theorem}:
@@ -1052,7 +1184,7 @@ p(Y=c|X) &= \frac{\left(\prod_{d=1}^D p(x_d | Y=c)\right) \, p(Y=c)}{\left(\sum_
 \end{frame}
 
 
-\begin{frame}[fragile]{Naive Bayes Classifier in R}
+\begin{frame}[label=withcode,fragile]{Naive Bayes Classifier in R}
 \small
 Naive Bayes using the \texttt{naiveBayes} function in the \texttt{e1071} library:
 \begin{Rcode}
@@ -1072,7 +1204,7 @@ print(nb.cm)
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{Naive Bayes Classifier in R -- Evaluation}
+\begin{frame}[label=withcode,fragile]{Naive Bayes Classifier in R -- Evaluation}
 \small
 Evaluate the classifier:
 \begin{Rcode}
@@ -1094,12 +1226,12 @@ performance(nb.pred.obj, 'auc')@y.values[[1]]
 \end{Rcode}
 \end{frame}
 
-\begin{frame}{Naive Bayes Classifier in R -- Evaluation}
+\begin{frame}[label=withcode]{Naive Bayes Classifier in R -- Evaluation}
 \centering
 \includegraphics[height=2.5in]{nb_roc.pdf}
 \end{frame}
 
-\begin{frame}[fragile]{KNN Classification in R}
+\begin{frame}[label=withcode,fragile]{KNN Classification in R}
 \small
 Using the \texttt{knn()} function from the \texttt{class} library:
 \begin{Rcode}
@@ -1119,7 +1251,7 @@ knn.pred <- knn(train.x, test.x, train.y, k=3, prob=T)
 \end{frame}
 
 
-\begin{frame}[fragile]{KNN Classification in R}
+\begin{frame}[label=withcode,fragile]{KNN Classification in R}
 \small
 Evaluate the classifier against test data:
 \begin{Rcode}
@@ -1140,7 +1272,7 @@ knn.class.probs[knn.pred=='Down'] <-
 \end{Rcode}
 \end{frame}
 
-\begin{frame}[fragile]{KNN Classification in R \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{KNN Classification in R \small [cont'd]}
 \small 
 Use ROCR functions to evaluate classifier:
 \begin{Rcode}
@@ -1158,7 +1290,12 @@ performance(knn.pred.obj, 'auc')@y.values[[1]]
 \end{center}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}{Source: ISLR2, Chapter 4}
+\begin{frame}[label=withcode]{Hands-On Exercises}{Source: ISLR2, Chapter 4}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
 \begin{enumerate}
    \item Use the full data set to perform a logistic regression with \texttt{Direction} as target. Which predictors are statistically significant?
@@ -1168,9 +1305,16 @@ Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
    \item Repeat (3) using KNN with $K=1$
    \item Which model provides the best results on this data?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}{Source: ISLR2, Chapter 4}
+\begin{frame}[label=withcode]{Hands-On Exercises}{Source: ISLR2, Chapter 4}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
 \begin{enumerate}
    \item Create a binary variable, \texttt{mpg01} that contains a 1 if \texttt{mpg} is above its median, 0 otherwise. \emph{Tip}: Use the \texttt{median()} function. Add the new variable to the data frame.
@@ -1179,9 +1323,16 @@ Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
    \item Repeat (3) using Naive Bayes
    \item Repeat (3) using KNN with different values of $K$. What value of $K$ performs best?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}{Source: ISLR2, Chapter 4}
+\begin{frame}[label=withcode]{Hands-On Exercises}{Source: ISLR2, Chapter 4}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classification models to predict whether a given census tract has a crime rate above or below the median.
 \begin{enumerate}
    \item Create a new binary variable \texttt{crime01} that is $1$ is \texttt{crime} is above its median, and $0$ otherwise. Combine this variable with the data frame. \emph{Tip}: Use the \texttt{median()} function for this.
@@ -1189,6 +1340,8 @@ Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classifica
    \item Fit logistic regression, Naive Bayes, and KNN (with different $K$)
    \item Describe your findings in terms of prediction error, precision, recall, F1 and AUC
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 

@@ -130,6 +130,13 @@ The \emph{Autoregressive (AR) model}\index{Autoregression} is based on the conce
 
 AR models are widely used in economic and financial time series where data points are influenced significantly by their previous values.
 
+\begin{exercisebox}
+Use the following white noise (''error'') data to construct the elements of the time series:
+\begin{align*}x_t = x_{t-1} - 0.9 x_{t-2} + w_t \end{align*}
+
+0.819, .088, -0.171, 1.302, 0.888, -1.160, -1.345, 0.195, 0.226, 2.275
+\end{exercisebox}
+
 \begin{withcode}
 The following R code uses the \texttt{filter} function in ''recursive'' mode with parameters \texttt{1} and \texttt{-.9} to create the time series corresponding to the example model\footnote{The R code for this and following examples are based on material Shumway \& Stoffer}. The resulting plot is shown in Figure~\ref{fig:figure3}.
 
@@ -332,6 +339,17 @@ filter(soi, sides=2, filter=f)
 \caption{Moving average smoothing}
 \label{fig:figure14}
 \end{figure}
+
+
+\begin{exercisebox}
+\begin{enumerate}
+\item Use the Moving Average Smoothing on the following time series data of company profits (in millions of dollars) with $a_{j-1} = a_j = a_{j+1} = 1/3$: \\
+
+-0.052, -1.788,  0.609,  1.824,  0.101,  1.443,  1.210, -0.916,  0.278, -0.211 \\
+
+\item Sketch the original and the smoothed time series
+\end{enumerate}
+\end{exercisebox}
 
 \subsubsection*{Kernel Smoothing or Kernel Regression}
 
@@ -733,6 +751,17 @@ x_t - x_{t-1} &= (\mu_t + y_t) - (\mu_{t-1} + y_{t-1}) \\
 
 As seen above, the first difference can remove a linear trend. However, sometimes the first difference is not enough to achieve stationarity. In such cases, the second difference can be used to remove a quadratic trend and higher-order differences can be computed if the series still shows non-stationary behavior after the second differencing.
 
+\begin{exercisebox}
+\begin{enumerate}
+\item Calculate the first and second differences for the following time series data of quarterly company sales (in millions of dollars):\\
+
+2.937,  1.515,  6.513, 10.984, 15.170, 21.143, 27.979, 34.566, 43.591, 53.414 \\
+
+\item Sketch the original time series, the first difference, and the second difference
+\end{enumerate}
+\end{exercisebox}
+
+
 \begin{withcode}
 The following R code shows the effect of differencing on a simulated time series. Differencing uses the \texttt{diff()} function. The resulting plots are shown in Figure~\ref{fig:figure40a}.
 \end{withcode}
@@ -992,6 +1021,16 @@ As shown in Figures~\ref{fig:figure18} and \ref{fig:figure19}, the ACF of AR and
 \caption{Properties of the ACF and PACF for AR and MA models}
 \label{tab:modelselection}
 \end{table}
+
+\begin{exercisebox}
+Sketch the shape of the ACF and PACF functions for lags up to 10 that you expect of the following ARMA models:\\
+
+\begin{itemize}
+   \item ARMA(3, 0)
+   \item ARMA(0, 5)
+   \item ARMA(4, 4)
+\end{itemize}
+\end{exercisebox}
 
 A full \emph{autoregressive integrated moving average} ARIMA(p, d, q) model adds a differencing term to the ARMA(p,q) model to achieve weak stationarity of the time series. The AR operator can be factorized by $(1-B)$, so that:
 \begin{align*}

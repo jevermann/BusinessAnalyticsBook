@@ -197,6 +197,29 @@ In practice, the number of principal components to retain is often subjective, a
 \label{fig:pca3}
 \end{figure}
 
+\begin{exercisebox}
+A dataset with 14 variables (Holzinger Swineford 1939) was input to a principal component analysis. The results are reported as follows:
+
+\small
+\begin{textcode}
+Standard deviations:
+     Comp.1      Comp.2      Comp.3 
+105.4591293   3.4644213   2.0153651 
+     Comp.4      Comp.5      Comp.6
+  1.4649669   1.3245455   0.9590910 
+     Comp.7      Comp.8      Comp.9 
+  0.9163258   0.8293599   0.7707158
+    Comp.10     Comp.11     Comp.12 
+  0.7110467   0.6031490   0.5891680 
+    Comp.13     Comp.14 
+  0.4592334   0.3143720 
+\end{textcode}
+\normalsize
+
+Sketch the screeplot, find the cumulative variance explained for each component, and explain how many components you would retain.
+\end{exercisebox}
+
+
 \begin{withcode}
 \section{Principal Components Analysis in R}
 
@@ -369,6 +392,43 @@ The k-means algorithm should be run multiple times and the optimal solution, tha
 \end{figure}
 
 This effect is shown in Figure~\ref{fig:kmeans2}. The data from the previous example was clustered six different times with different random initial cluster assignments. Each final solution is different, and may also have a different \emph{within-cluster variability} as shown at the top of each panel. Note that some solutions are identical but permute the cluster assignments/colours. For example, the top middle and top right panels in Figure~\ref{fig:kmeans2} are identical and also identical with the bottom left and bottom middle solution, except for the permutation of cluster assignments, indicated by the colours. 
+
+\begin{exercisebox}
+Manually cluster the following three-dimensional dataset into three clusters. Show all work.
+
+\vspace{\baselineskip}
+\begin{tabular}{c|c|c} \hline
+{\bf Income} & {\bf Spending} & {\bf Debt} \\ \hline
+1 & 1 & 1 \\
+2 & -1 & 1 \\
+1 & 3 & 3 \\
+2 & 4 & 4 \\
+4 & 5 & 6 \\
+3 & 3 & 7 \\ \hline
+\end{tabular}
+
+\vspace{\baselineskip}
+\begin{itemize}
+   \item Use Euclidean distances $d = \sqrt{(x_i - x_m)^2 + (y_i - y_m)^2 + (z_i - z_m)^2}$
+   \item You do not need to standardize the data
+\end{itemize}
+\end{exercisebox}
+
+
+% Data for exercise generated using the following R script
+%> library(MASS)
+%> mu <- c(2, 2, 2)
+%> sigma <- diag(1, nrow=3)
+%> cluster1 <- mvrnorm(n=3, mu, sigma)
+%> mu <- c(2, 4, 4)
+%> cluster2 <- mvrnorm(n=3, mu, sigma)
+%> mu <- c(4, 4, 6)
+%> cluster3 <- mvrnorm(n=3, mu, sigma)
+%> cluster3 <- round(cluster3)
+%> cluster2 <- round(cluster2)
+%> cluster1 <- round(cluster1)
+%> d <- rbind(cluster1, cluster2, cluster3)
+
 
 \begin{withcode}
 \subsection{K-Means Clustering in R}
@@ -550,6 +610,28 @@ The final question concerns the choice of the number of clusters. The answer to 
 \caption{Cutting a dendrogram to determine the number of clusters}
 \label{fig:dendro3}
 \end{figure}
+
+\begin{exercisebox}
+Use agglomerative hierarchical clustering on the following three-dimensional dataset. Show all work.
+
+\vspace{\baselineskip}
+\begin{tabular}{c|c|c} \hline
+{\bf Income} & {\bf Spending} & {\bf Debt} \\ \hline
+1 & 1 & 1 \\
+2 & -1 & 1 \\
+1 & 3 & 3 \\
+2 & 4 & 4 \\
+4 & 5 & 6 \\
+3 & 3 & 7 \\ \hline
+\end{tabular}
+
+\vspace{\baselineskip}
+\begin{itemize}
+   \item Use Euclidean distances $d = \sqrt{(x_i - x_m)^2 + (y_i - y_m)^2 + (z_i - z_m)^2}$.
+   \item Use Complete linkage
+   \item You do not need to standardize the data
+\end{itemize}
+\end{exercisebox}
 
 \begin{withcode}
 \subsection{Hierarchical Clustering in R}

@@ -146,6 +146,29 @@ While tabular methods update the value of $Q$ for a state--action pair directly,
 
 Figure~\ref{fig:gradientsarsa} shows how the tabular SARSA method can be readily adapted to function approxmation using SGD. \emph{The only change to the tabular SARSA algorithm is the update step}. Whereas tabular SARSA updates $q(s, a)$, semi-gradient SARSA updates the parameters $\theta$ of $\hat{q}$\index{SARSA!semi-gradient}. 
 
+
+\begin{exercisebox}
+Consider the following Semi-Gradient SARSA agent:
+
+\begin{itemize}
+    \item {\bf Action-value function}: $$\hat{q}(S, A) = \theta_1 x_1 + \theta_2 x_2$$ where $x_1, x_2$ are features describing the state-action pair.
+    \item {\bf Discount}: $\gamma=0.9$; {\bf Learning Rate}: $\alpha=0.5$
+    \item {\bf Gradient}: $$\nabla \hat{q}(S, A, \theta) = \begin{bmatrix} x_1 \\ x_2 \end{bmatrix}$$
+    \item {\bf Initial parameters}: $$\theta = \begin{bmatrix} 0.5 \\ 0.5 \end{bmatrix}$$
+\end{itemize}
+
+Consider the observed transition: 
+\begin{itemize}
+   \item {\bf Current features}: $x(S, A) = (2, 1)$
+   \item {\bf Reward}: $R=4$
+   \item {\bf Next features}: $x(S', A') = (1, 3)$
+\end{itemize}
+\vspace{.5\baselineskip}
+
+Update the parameter $\theta$ using the Semi-Gradient SARSA update rule.
+\end{exercisebox}
+
+
 \section{Deep Q Network (DQN)}
 
 While conceptually sound, simple function approximation implementations like SARSA in Figure~\ref{fig:gradientsarsa} have some problems in practice. In particular, \emph{instability} and \emph{divergence} of learning arise when combining the following three elements in an RL method. These are colloquially known as the ''\emph{deadly triad}'' of reinforcement learning.
@@ -455,6 +478,41 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 \caption[REINFORCE: Monte-Carlso Control]{REINFORCE: Monte-Carlo Control (episodic) (Source: SB)}
 \label{fig:reinforce}
 \end{figure}
+
+
+\begin{exercisebox}
+Consider a policy with two actions: Left ($p=0.7$), Right ($p=0.3$). Suppose the agent selected \emph{Right} as the first action in the episode. For this state:
+
+\begin{align*}
+\nabla \ln \pi(\text{Right} | s, \theta) = \begin{bmatrix}0.8 \\ -0.4\end{bmatrix}
+\end{align*}
+
+Initially, $$\theta = \begin{bmatrix}0.5 \\ 0.2\end{bmatrix}$$
+
+The learning rate is $\alpha=0.1$ and the discount factor $\gamma = 1$.
+
+\vspace{\baselineskip}
+
+Consider the following episode rewards:
+
+\begin{center}
+\vspace{.5\baselineskip}
+
+\begin{tabular}{c|c}
+{\bf Time} & {\bf Reward} \\ \hline
+1 & 3 \\
+2 & 2 \\
+3 & 1 \\
+\end{tabular}
+\end{center}
+
+\vspace{.5\baselineskip}
+\begin{enumerate}
+   \item Calculate the return $G$
+   \item Calculate the update vector $\alpha G \nabla \ln \pi$
+   \item Calculate the updated parameter vector
+\end{enumerate}
+\end{exercisebox}
 
 \begin{withcode}
 The pseudocode in Figure~\ref{fig:reinforce} is easily implemented in Python. The following Python code block defines a policy function as a neural network. This policy function is defined for discrete actions with as many outputs as there are actions. The final layer has a softmax activation function so it produces probabilities $\pi$ for each action.

@@ -238,7 +238,6 @@ MATCH (n1)-[r]-(n2) RETURN n1, r, n2
 \end{figure}
 
 \begin{exercisebox}
-\subsubsection*{Hands-On Exercise}
 
 Consider the following description:
 
@@ -247,6 +246,24 @@ Consider the following description:
 \end{quote}
 
 Define a graph in Cypher that represents this description:
+\begin{enumerate}
+  \item Identify nodes, relationships, and properties of nodes and relationships
+  \item Use CREATE or MERGE statements to create nodes first, then relationships
+  \item Use MATCH to verify your graph is correct.
+\end{enumerate}
+\end{exercisebox}
+
+
+\begin{exercisebox}
+
+Consider the following description:
+
+\begin{quote}
+Jane has purchased a Corolla vehicle with VIN (vehicle identification number) 101010. The Corolla is manufactured by Toyota in Cambridge, ON. The vehicle was sold to Jane by the dealer ''St. John's Toyota'' for a price of \$35,000.00.
+\end{quote}
+
+Define a graph in Cypher that represents this description:
+
 \begin{enumerate}
   \item Identify nodes, relationships, and properties of nodes and relationships
   \item Use CREATE or MERGE statements to create nodes first, then relationships
@@ -403,6 +420,35 @@ The relational data model consists of tables, their columns, and foreign key rel
 Applying these heuristics to the example in Figure~\ref{fig:relationalgraph1} leads to the graph model in Figure~\ref{fig:relationalgraph2}. The table names ''Employee'' and ''Department'' have become node labels for two different categories of nodes. Each row in the employee table (for example, employee 815 with name Alice) is represented as a node with label \texttt{Person}, and each department (for example, department 111 with name 4Future) is a node with label \texttt{Department}. The column names, the ''name'' column in the Employees table and the ''deptName'' column in the Departments table, have become properties of the corresponding nodes. The ''Dept\_Members'' table joins employees and departments and has been transformed into the relationship with label \texttt{BELONGS\_TO} between \texttt{Person} and \texttt{Department} nodes. The ''Dept\_Members'' table had no columns other than those participating in the foreign key relations, but if it had, those columns would be attributes on the \texttt{BELONGS\_TO} relationship.
 
 Applying these heuristics should only be considered as an initial translation. As seen above, some or all properties may well be represented as nodes in their own right (Figure~\ref{fig:equivalentmodels}) or be modelled as relationship labels (Figure~\ref{fig:airportmodels}), depending on the type of queries expected to be run against the graph data.
+
+\begin{exercisebox}
+Define a graph in Cypher that represents the following relational data: \\ 
+
+\begin{tabular}{l|l} \hline
+\multicolumn{2}{c}{\bf Customer} \\ \hline
+{\bf CNumber} & {\bf Name} \\ \hline
+1 & Jane \\
+2 & John \\ \hline
+\end{tabular}
+
+\vspace{.5\baselineskip}
+\begin{tabular}{l|l} \hline
+\multicolumn{2}{c}{\bf Product} \\ \hline
+{\bf PNumber} & {\bf Name} \\ \hline
+10 & Hammer \\
+11 & Saw \\ \hline
+\end{tabular}
+
+\vspace{.5\baselineskip}
+\begin{tabular}{l|l|l} \hline
+\multicolumn{3}{c}{\bf Sales} \\ \hline
+{\bf CNumber} & {\bf PNumber} & {\bf Price} \\ \hline
+1 & 11 & \$10 \\ 
+2 & 10 & \$12 \\
+2 & 11 & \$10 \\ \hline
+\end{tabular}
+\end{exercisebox}
+
 
 \begin{withcode}
 \paragraph*{Pagila Database Example} As an example, each table of the Pagila relational database from the previous chapter was exported from PostgreSQL to a CSV file. These CSV files can be imported into Neo4j with the following set of Cypher expressions. Note that not all data is imported in this example, and a more compact representation of the statements is possible. 
@@ -619,7 +665,6 @@ This example introduces matching of paths that contain multiple nodes and multip
 
 
 \begin{exercisebox}
-\subsubsection*{Hands-On Exercise}
 
 Write a Cypher query to find all customers that have rented a film with rating ''PG'':
 
@@ -770,7 +815,6 @@ RETURN a1, m, coActors, m2, a2
 The example is similar to the one above with its use of multiple path patterns in the \texttt{MATCH} clause. The query finds common co-actors of two named actors. Note the traversal directions of the relationships.
 
 \begin{exercisebox}
-\subsubsection*{Hands-On Exercises}
 
 The following hands-on exercises are designed to familiarize you with the Cypher language and use the Pagila database.
 

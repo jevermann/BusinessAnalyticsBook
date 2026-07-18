@@ -135,6 +135,23 @@ The linear regression model is simple enough that an optimal solution can be der
 
 %The statistic $t$ is a random variable whose values are distributed according to a student-t probability distribution. This allows one to calculate the probability of observing a value of $t$ or larger under the assumption that $\hat{\beta} = V$, that is, there is no difference between $V$ and the estimate of the parameter $\hat{\beta}$. If the calculated probabily is very small, it is unlikely that this assumption holds and one might conclude that $\hat{\beta} \neq V$. This procedure is called the \emph{t-test}. In most applications of this test to regression model parameters, $V$ is set to $0$. Because for large sample sizes the student-t distribution approaches the normal (Gaussian) probability distribution, the probability is sometimes calculated from this distribution, the statistic is called the $z$ statistic and the test is then called a \emph{z-test}.
 
+\begin{exercisebox}
+Calculate the slope and intercept of the best fitting curve for the following data points:\\
+
+\begin{center}
+\begin{tabular}{c|c} \hline
+{\bf x} & {\bf y} \\ \hline
+1 & 2 \\
+2 & 2 \\
+2 & 3 \\
+3 & 3 \\ 
+4 & 5 \\
+4 & 6 \\
+5 & 7 \\ \hline
+\end{tabular}
+\end{center}
+\end{exercisebox}
+
 An important statistic in linear regression analysis is the proportion of explained variance, designated as $R^2$. It is defined as:
 
 \begin{align*}
@@ -142,6 +159,23 @@ R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
 \end{align*}
 
 \noindent where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares. An $R^2$ value close to $1$ indicates that the fitted regression model explains a large proportion of the variability in the data set, that is, it explains the data well. In contrast, a value close to $0$ indicates that the fitted regression model explains very little of the observed variability, it does not explain the observed data well. Another important interpretation of the $R^2$ is as the squared correlation between the true $Y$ and the fitted or predicted values $\hat{Y}$. In this interpretation too, a value close to one indicates predicted values closely correlated with the true values, that is, a good model, whereas a low value indicates they are not closely correlated, that is, a bad model.
+
+\begin{exercisebox}
+Using the slope and intercept of the best fitting curve from the previous exercise, determine the predicted or fitted values. Then, determine the RSS, the TSS, and the $R^2$ value.\\
+
+\begin{center}
+\begin{tabular}{c|c|c|c|c|c} \hline
+{\bf x} & {\bf y} & $\hat{y}$ & $(y - \hat{y})^2$ & $\bar{y}$ & $(y - \bar{y})^2$ \\ \hline
+1 & 2 & & & &\\
+2 & 2 & & & & \\
+2 & 3 & & & & \\
+3 & 3 & & & & \\ 
+4 & 5 & & & & \\
+4 & 6 & & & & \\
+5 & 7 & & & & \\ \hline
+\end{tabular}
+\end{center}
+\end{exercisebox}
 
 Adding additional predictors into the linear regression model is straightforward, as is the inclusion of qualitative or categorical predictors. For example, a model with two predictors $X_1$ and $X_2$ assumes the true form
 
@@ -521,6 +555,20 @@ The Elactic Net\index{Elastic net} is a combination of rigde regression and LASS
 
 When $\alpha=0$ the Elastic Net reduces to a ridge regression, and for $\alpha=1$ the Elastic Net reduces to the LASSO. The optimal combination of $\alpha$ and $\lambda$ is found through cross-validation as described above.
 
+\begin{exercisebox}
+Assuming the following polynomial regression model:
+\begin{align*}
+\hat{y} = 15 x^4 - 10 x^3 + 20 x^2 - 40 x + 50
+\end{align*}
+
+and a residual sum of squares (RSS) of 20, what are the values of the optimization criteria for: 
+\begin{enumerate}
+   \item Ridge regression with $\lambda=0.1$
+   \item Lasso with $\lambda=0.1$
+   \item Elastic net with $\lambda=0.1, \alpha=0.5, \beta=0.5$
+\end{enumerate}
+\end{exercisebox}
+
 \begin{withcode}
 \section{Shrinkage Methods in R}
 
@@ -755,6 +803,23 @@ Once estimates of the model parameters $\beta_0$ and $\beta_1$ have been calcula
 \end{align*}
 
 From there, a \emph{threshold value} can be used to predict class membership, for example based on the decision that $\hat{p}(X) > 0.5$, but other decision rules and threshold values may be used, depending on the desired proportion or cost of false positives and true positives.
+
+\begin{exercisebox}
+The slope and intercept of the best fitting curve for the following data points are $1.333$ and $0$ respectively. Calculate the predicted probability for each $x$ value.
+
+\begin{center}
+\begin{tabular}{c|c|c} \hline
+{\bf x} & {\bf y} & {\bf p(y)}\\ \hline
+-2 & -2 & \\
+-1 & -2 & \\
+-1 & -1 & \\
+0 & -1 & \\ 
+1 & 1 & \\
+1 & 2 & \\
+2 & 3 & \\ \hline
+\end{tabular}
+\end{center}
+\end{exercisebox}
 
 \begin{advanced}
 The binary logistic regression can be extended to \emph{mutinomial logistic regression}\index{Logistic regression!multinomial}, where there are more than two classes for the output or target. The form of the equations is similar for $K$ classes, starting from the log-odds. In this derivation, the last class $K$ plays the role of reference class. As classes are not ordered, this choice is arbitrary.

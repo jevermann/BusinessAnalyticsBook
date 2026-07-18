@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -33,7 +33,7 @@
 
 \section{BPMN}
 
-\begin{frame}{Business Processes}
+\begin{frame}[label=full]{Business Processes}
 \begin{itemize}
    \item Sequence of activities in a defined order
    \item Models describe processes
@@ -58,12 +58,12 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{BPMN Example Process Model}
+\begin{frame}[label=full]{BPMN Example Process Model}
 \centering
 \includegraphics[width=1.15\textwidth]{Figure3.12.pdf}
 \end{frame}
 
-\begin{frame}{Business Process Instances and Process Data}
+\begin{frame}[label=full]{Business Process Instances and Process Data}
 \begin{block}{Case}
 \begin{itemize}
    \item One instance of a business process
@@ -86,7 +86,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Activity Lifecycle -- Example}
+\begin{frame}[label=full]{Activity Lifecycle -- Example}
 \centering
 
 \includegraphics[height=2.25in]{screen1.png}
@@ -95,7 +95,7 @@
 \normalsize
 \end{frame}
 
-\begin{frame}{Event Log Data}
+\begin{frame}[label=full]{Event Log Data}
 \begin{block}{Sources}
 \begin{itemize}
   \item Process aware information systems
@@ -125,14 +125,14 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Process Analytics}
+\begin{frame}[label=full]{Process Analytics}
 \centering
 \includegraphics[width=.9\textwidth]{Chapter-11-Figure-03.pdf}\\
 \vspace{3mm}\hrule\vspace{2mm}
 \scriptsize{Source: Marlon Dumas, Marcello La Rosa, Jan Mendling, Hajo A. Reijers (2018) ''Fundamentals of Business Process Management'', 2nd edition, Springer Verlag, Germany}
 \end{frame}
 
-\begin{frame}{Process Analytics}
+\begin{frame}[label=full]{Process Analytics}
 \begin{block}{Purpose}
 \begin{itemize}
    \item Discover actual operations
@@ -145,7 +145,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Process Analytics in R}
+\begin{frame}[label=withcode]{Process Analytics in R}
 \begin{block}{BupaR}
 \begin{itemize}
    \item Hasselt University
@@ -167,7 +167,7 @@
 
 \end{frame}
 
-\begin{frame}{Process Analytics in Python}
+\begin{frame}[label=withcode]{Process Analytics in Python}
 \begin{block}{PM4PY}
 \begin{itemize}
    \item Fraunhofer Institute for Applied Information Technology
@@ -195,7 +195,7 @@
 
 \end{frame}
 
-\begin{frame}[fragile]{PM4PY Basics}
+\begin{frame}[label=withcode,fragile]{PM4PY Basics}
 Read a CSV dataset:
 \footnotesize
 \begin{pythoncode}
@@ -219,7 +219,7 @@ log['org:resource']=log['Resource']
 
 \end{frame}
 
-\begin{frame}[fragile]{PM4PY Basics}
+\begin{frame}[label=withcode,fragile]{PM4PY Basics}
 %Continued from previous slide \ldots
 %\footnotesize
 %\begin{pythoncode}
@@ -239,7 +239,7 @@ log2 = pm4py.read_xes('BPI_Challenge_2012.xes.gz')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{PM4PY Basic Statistics}
+\begin{frame}[label=withcode,fragile]{PM4PY Basic Statistics}
 \footnotesize
 \begin{pythoncode}
 num_cases = len(log['Case ID'].unique())
@@ -256,7 +256,7 @@ pm4py.get_trace_attributes(log)
 \end{pythoncode}
 \end{frame}
 
-%\begin{frame}[fragile]{PM4PY Statistics on Dataframes}
+%\begin{frame}[label=full,fragile]{PM4PY Statistics on Dataframes}
 %\footnotesize
 %\begin{pythoncode}
 %log['activity_duration']= \
@@ -280,7 +280,7 @@ pm4py.get_trace_attributes(log)
 %\end{pythoncode}
 %\end{frame}
 
-\begin{frame}[fragile]{PM4PY Basic Statistics}
+\begin{frame}[label=withcode,fragile]{PM4PY Basic Statistics}
 \begin{itemize}
    \item Variants are sets of traces with the same sequence of events
 \end{itemize}
@@ -298,7 +298,7 @@ for variant, subdf in pm4py.split_by_process_variant(log):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Process Discovery -- DFG}
+\begin{frame}[label=withcode,fragile]{Process Discovery -- DFG}
 \begin{block}{Directly-Follows Graph \\ (Dependency Graph) (Process Map)}
 \begin{itemize}
    \item Shows how often one activity directly follows another
@@ -317,12 +317,34 @@ pm4py.save_vis_dfg(dfg=dfg,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Process Discovery}
+\begin{frame}[label=full]{Process Discovery -- DFG}
 \centering
 \includegraphics[width=\textwidth]{dfg.png}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+Draw a DFG graph for the following traces in an event log: \\ \vspace{\baselineskip}
+
+\begin{tabular}{l} \hline
+A B D E F G \\ \hline
+A D E F G \\ \hline
+A B E D F G \\ \hline
+A B E D G \\ \hline
+A E D F G \\ \hline
+A B D E G \\ \hline
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=withcode]{Hands-On Exercises}
 
 \footnotesize
 Use the event log from \url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}
@@ -335,7 +357,7 @@ Use the event log from \url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}
 \end{frame}
 
 
-\begin{frame}{Process Discovery -- Inductive Miner}
+\begin{frame}[label=full]{Process Discovery -- Inductive Miner}
 \begin{block}{Principles}
 \begin{itemize}
    \item Identifies subsets of activities by repeatedly ''cutting'' the DFG
@@ -345,13 +367,13 @@ Use the event log from \url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}
 \end{block}
 \end{frame}
 
-\begin{frame}{Process Discovery -- Inductive Miner}
+\begin{frame}[label=full]{Process Discovery -- Inductive Miner}
 \includegraphics[width=\textwidth]{screen2.png}
 \tiny 
 Source: Leemans, S.J.J., Fahland, D., van der Aalst, W.M.P. (2013). Discovering Block-Structured Process Models from Event Logs - A Constructive Approach. In: Colom, JM., Desel, J. (eds) Application and Theory of Petri Nets and Concurrency. PETRI NETS 2013. Lecture Notes in Computer Science, vol 7927. Springer, Berlin, Heidelberg.
 \end{frame}
 
-\begin{frame}[fragile]{Process Discovery -- Inductive Miner}
+\begin{frame}[label=withcode,fragile]{Process Discovery -- Inductive Miner}
 \footnotesize
 \begin{pythoncode}
 bpmn_model = \
@@ -364,12 +386,12 @@ pm4py.save_vis_bpmn(bpmn_model,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Process Discovery -- Inductive Miner}
+\begin{frame}[label=full]{Process Discovery -- Inductive Miner}
 \centering
 \includegraphics[width=.8\textwidth]{bpmn.png}
 \end{frame}
 
-\begin{frame}{Process Discovery -- Heuristics Net}
+\begin{frame}[label=full]{Process Discovery -- Heuristics Net}
 \begin{block}{Principles}
 \begin{itemize}
    \item Remove noise by frequency threshold on dependency graph
@@ -388,7 +410,7 @@ a \Rightarrow b = \left( \frac{
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Process Discovery -- Heuristics Net}
+\begin{frame}[label=withcode,fragile]{Process Discovery -- Heuristics Net}
 \footnotesize
 \begin{pythoncode}
 petri_net, initial_marking, final_marking = \
@@ -407,12 +429,12 @@ pm4py.save_vis_bpmn(bpmn_model2, 'bpmn2.png', rankdir='TB')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Process Discovery -- Heuristics net}
+\begin{frame}[label=full]{Process Discovery -- Heuristics net}
 \centering
 \includegraphics[width=.8\textwidth]{bpmn2.png}
 \end{frame}
 
-\begin{frame}{Process Discovery}
+\begin{frame}[label=full]{Process Discovery}
 \begin{block}{Quality of Discovered Models}
 \begin{itemize}
    \item \textbf{Fitness}: Can the model generate all traces in log?
@@ -423,7 +445,7 @@ pm4py.save_vis_bpmn(bpmn_model2, 'bpmn2.png', rankdir='TB')
 \end{block}
 \end{frame}
 
-\begin{frame}{Fitness \& Precision}
+\begin{frame}[label=advanced]{Fitness \& Precision}
 \begin{block}{Token-Based Replay}
 \begin{itemize}
    \item Replays each trace of an event log on a process model
@@ -442,7 +464,7 @@ pm4py.save_vis_bpmn(bpmn_model2, 'bpmn2.png', rankdir='TB')
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Fitness}
+\begin{frame}[label=withcode,fragile]{Fitness}
 \footnotesize
 \begin{pythoncode}
 petri_net, initial_marking, final_marking = \
@@ -459,7 +481,7 @@ print(fitness_tbr)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Precision}
+\begin{frame}[label=withcode,fragile]{Precision}
 \footnotesize
 \begin{pythoncode}
 precision_alignments = pm4py.precision_alignments(log,
@@ -472,7 +494,7 @@ print(precision_tbr)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Log Filtering}
+\begin{frame}[label=full]{Log Filtering}
 \begin{itemize}
     \item Focus on subsets of logs
     \item Identify differences
@@ -480,7 +502,7 @@ print(precision_tbr)
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Example Filters}
+\begin{frame}[label=withcode]{Example Filters}
 \scriptsize
 \renewcommand{\arraystretch}{1.25}
 \begin{tabularx}{\textwidth}{l|X} \hline 
@@ -497,7 +519,7 @@ print(precision_tbr)
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
 \footnotesize
 Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} and answer the following questions:
 \begin{enumerate}
@@ -523,7 +545,7 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises \small [cont'd]}
+\begin{frame}[label=withcode]{Hands-On Exercises \small [cont'd]}
 \begin{enumerate}
     \setcounter{enumi}{4}
     \item What is the mean case duration? 
@@ -539,7 +561,7 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
 \begin{enumerate}
    \setcounter{enumi}{8}
    \item What is the activity with the longest mean time?
@@ -556,7 +578,7 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
 \begin{enumerate}
    \setcounter{enumi}{10}
    \item Which activities are carried out more than once for some case
@@ -572,7 +594,7 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
 \end{enumerate}
 \end{frame}
    
-\begin{frame}[fragile]{Performance Mining --- DFG}
+\begin{frame}[label=withcode,fragile]{Performance Mining --- DFG}
 \begin{itemize}
    \item Identify median (mean, min, max, sum, stdev) waiting times
 \end{itemize}
@@ -590,17 +612,54 @@ pm4py.save_vis_performance_dfg(perf_dfg,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Performance Mining --- DFG}
+\begin{frame}[label=full,fragile]{Performance Mining --- Annotated DFG}
 \centering
 \includegraphics[width=.8\textwidth]{perfdfg.png}
 \end{frame}
 
-\begin{frame}[fragile]{Performance Mining --- Dotted Chart}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\footnotesize
+Draw an annotated DFG for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
+
+\begin{tabular}{l|l|r} \hline
+{\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
+1 & A & 0 \\
+1 & B & 2 \\
+1 & D & 3 \\ 
+1 & E & 6 \\ 
+1 & F & 7 \\ 
+2 & A & 10 \\
+2 & D & 11 \\
+1 & G & 12 \\ 
+2 & E & 13 \\ 
+3 & A & 15 \\
+3 & B & 16 \\
+2 & F & 18 \\ 
+3 & E & 18 \\
+3 & D & 19 \\
+2 & G & 20 \\
+3 & G & 24 \\
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Performance Mining --- Dotted Chart}
 \begin{itemize}
    \item Identify batching of activities
    \item Identify different variants
    \item Case arrival and case finishing rates
 \end{itemize}
+\end{frame}
+
+\begin{withcode}
+\begin{frame}[label=withcode,fragile]{Performance Mining --- Dotted Chart}
 \footnotesize
 \begin{pythoncode}
 pm4py.view_dotted_chart(log, show_legend=False)
@@ -609,12 +668,45 @@ pm4py.save_vis_dotted_chart(log,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Performance Mining --- Dotted Chart}
+\begin{frame}[label=full]{Performance Mining --- Dotted Chart}
 \centering
 \includegraphics[width=.8\textwidth]{dottedchart.png}
 \end{frame}
 
-\begin{frame}[fragile]{Performance Mining --- Performance Spectrum}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\footnotesize
+Draw a dotted chart for the following an event log. Use different colours or different symbols for the different activities. \\ \vspace{\baselineskip}
+
+\begin{tabular}{l|l|r} \hline
+{\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
+1 & A & 0 \\
+1 & B & 2 \\
+1 & D & 3 \\ 
+1 & E & 6 \\ 
+1 & F & 7 \\ 
+2 & A & 10 \\
+2 & D & 11 \\
+1 & G & 12 \\ 
+2 & E & 13 \\ 
+3 & A & 15 \\
+3 & B & 16 \\
+2 & F & 18 \\ 
+3 & E & 18 \\
+3 & D & 19 \\
+2 & G & 20 \\
+3 & G & 24 \\
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=withcode,fragile]{Performance Mining --- Performance Spectrum}
 \begin{itemize}
    \item Identify variations in wait times
 \end{itemize}
@@ -628,11 +720,11 @@ pm4py.save_vis_performance_spectrum(log,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Performance Mining --- Performance Spectrum}
+\begin{frame}[label=withcode]{Performance Mining --- Performance Spectrum}
 \includegraphics[width=\textwidth]{perfspectrum.png}
 \end{frame}
-    
-\begin{frame}[fragile]{Performance Mining --- Event Distribution}
+
+\begin{frame}[label=withcode,fragile]{Performance Mining --- Event Distribution}
 \begin{itemize}
    \item Identify distribution of when events/activities occur
 \end{itemize}
@@ -645,12 +737,12 @@ pm4py.view_events_distribution_graph(log, 'weeks')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Performance Mining --- Event Distribution}
+\begin{frame}[label=withcode]{Performance Mining --- Event Distribution}
 \centering
 \includegraphics[width=.8\textwidth]{eventsdistribution.png}
 \end{frame}
 
-\begin{frame}[fragile]{Performance Mining --- Events per Time}
+\begin{frame}[label=withcode,fragile]{Performance Mining --- Events per Time}
 \footnotesize
 \begin{pythoncode}
 pm4py.view_events_per_time_graph(log)
@@ -658,13 +750,13 @@ pm4py.save_vis_events_per_time_graph(log, 'eventspertime.png')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Performance Mining --- Events per Time}
+\begin{frame}[label=withcode]{Performance Mining --- Events per Time}
 \centering
 \includegraphics[width=.8\textwidth]{eventspertime.png}
 \end{frame}
 
 
-\begin{frame}[fragile]{Organizational Mining}
+\begin{frame}[label=withcode,fragile]{Organizational Mining}
 \begin{block}{Activity-Based Resource Similarity}
 \begin{itemize}
    \item Identify similar resources based on the set of activities they perform
@@ -683,12 +775,12 @@ pm4py.save_vis_sna(sna_graph, 'ressimilarity.png',
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Organizational Mining \\ \small Activity-Based Resource Similarity}
+\begin{frame}[label=full]{Organizational Mining \\ \small Activity-Based Resource Similarity}
 \centering
 \includegraphics[width=.9\textwidth]{screen3.png}
 \end{frame}
 
-\begin{frame}[fragile]{Organizational Mining}
+\begin{frame}[label=withcode,fragile]{Organizational Mining}
 \begin{block}{Handover of Work Network}
 \begin{itemize}
    \item Identify resources that pass work from one to another
@@ -707,12 +799,12 @@ pm4py.save_vis_dfg(dfg=dfg,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Organizational Mining\\ \small Handover of Work Network}
+\begin{frame}[label=full]{Organizational Mining\\ \small Handover of Work Network}
 \centering
 \includegraphics[width=.7\textwidth]{handover.png}
 \end{frame}
 
-\begin{frame}[fragile]{Organizational Mining}
+\begin{frame}[label=withcode,fragile]{Organizational Mining}
 \begin{block}{Organizational Roles}
 \begin{itemize}
    \item Identify similar resources based on the set of activities they perform
@@ -725,7 +817,40 @@ print(roles)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Organizational Mining}
+\begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\footnotesize
+Draw a handover-of-work graph for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
+
+\begin{tabular}{l|l|l|r} \hline
+{\bf Case} & {\bf Activity} & {\bf Resource} & {\bf Time} \\ \hline
+1 & A & Jane & 0 \\
+1 & B & Peter & 2 \\
+1 & D & Dianne & 3 \\ 
+1 & E & Peter & 6 \\ 
+1 & F & John & 7 \\ 
+2 & A & Peter & 10 \\
+2 & D & Dianne & 11 \\
+1 & G & Jane & 12 \\ 
+2 & E & Peter & 13 \\ 
+3 & A & John & 15 \\
+3 & B & Jane & 16 \\
+2 & F & Jane & 18 \\ 
+3 & E & Dianne & 18 \\
+3 & D & Peter & 19 \\
+2 & G & Peter & 20 \\
+3 & G & John & 24 \\
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=withcode,fragile]{Organizational Mining}
 \begin{block}{Working-Together Network}
 \begin{itemize}
    \item Resources work together, if they collaborate on some trace
@@ -740,7 +865,7 @@ pm4py.view_sna(sna_graph, variant_str='networkx')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Oganizational Mining \\ \small Working-Together Network}
+\begin{frame}[label=full]{Oganizational Mining \\ \small Working-Together Network}
 \centering
 \includegraphics[width=.9\textwidth]{screen4.png}
 \end{frame}

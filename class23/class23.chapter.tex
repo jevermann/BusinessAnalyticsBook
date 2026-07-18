@@ -188,6 +188,37 @@ ML engineers require the ability to easily assess and to quickly adjust infrastr
 
 \paragraph*{Backend Engineers}\index{Backend engineer} provide and manage the computational infrastructure. They create and maintain on-premises or cloud-based computer clusters and distributed storage systems. They design and manage fast and efficient network connections between all components, provide backup and restore functionality, and are responsible for high availability of all infrastructure components. Backend engineers are not included in Figure~\ref{fig:mlopsroles} but are shown in Figure~\ref{fig:mlopsskills} which is taken from a different source.
 
+\begin{exercisebox}
+\small
+Match each responsibility with the most appropriate MLOps participant.
+
+\bigskip
+\begin{minipage}[t]{.35\textwidth}
+{\bf Participants}:
+\begin{itemize}
+    \item Subject Matter Expert
+    \item Data Scientist
+    \item Data Engineer
+    \item Software Engineer
+    \item DevOps Engineer
+    \item Model Risk Manager
+    \item ML Engineer
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{.64\textwidth}
+{\bf Responsibilities}
+\begin{itemize}
+   \item Defines business KPIs for the mode
+   \item Builds data pipelines
+   \item Integrates the model into a web application
+   \item Designs automated deployment pipelines
+   \item Evaluates fairness and regulatory compliance 
+   \item Develops predictive models
+   \item Ensures infrastructure can scale with demand 
+\end{itemize}
+\end{minipage}
+\end{exercisebox}
+
 \section{MLOps Tooling}
 
 Because of its heavy focus on automation, MLOps requires a variety of software tools to support it\index{Tooling}. This section describes important types of software tool and provides references to some popular examples.
@@ -330,6 +361,37 @@ Detailed and up-to-date documentation can help the risk manager in objectively e
 
 Automation tools used during the preparation for production include continuous integration and automated testing tools for quality assurance and model risk evaluation. Model registries are used during this phase to document all information about a model and document the findings of its quality assurance and risk evaluation, including input data sources and data provenance, model assumptions, required software packages, test results including explanations and bias or fairness evaluations, training and test logs, security test results, etc. 
 
+
+\begin{exercisebox}
+A hospital plans to deploy an ML model that predicts whether
+patients should receive additional medical screening. 
+For each risk, write one appropriate mitigation strategy.
+
+\bigskip
+\begin{minipage}[t]{.55\textwidth}
+{\bf Risks:}
+\begin{itemize}
+\item Training data no longer represents current patients
+\item Model unexpectedly stops responding 
+\item Incorrect predictions affect many patients
+\item An attacker attempts to manipulate model inputs
+\end{itemize}
+\end{minipage}
+\hfill
+\begin{minipage}[t]{.4\textwidth}
+{\bf Possible mitigations:}
+\begin{itemize}
+    \item Shadow testing
+    \item Progressive rollout
+    \item Continuous monitoring
+    \item Periodic retraining
+    \item Failover to a simpler model
+    \item Input validation
+\end{itemize}
+\end{minipage}
+\end{exercisebox}
+
+
 \begin{exercisebox}
 \paragraph*{Scenario:}
 Imagine a new machine learning model is being deployed to automate credit approval decisions at a Canadian financial institution.
@@ -389,6 +451,36 @@ Deployment includes considering the scalability and reliability of the model at 
 Deployment to production also includes defining and provisioning infrastructure for continuous monitoring\index{Continuous monitoring}. Three aspects should be monitored regularly. Resource monitoring measures the infrastructure resources consumed by the model in production. This includes CPU computation time, network traffic, database and file storage space, and many related metrics. Abnormally high or low values can indicate operational problems and must be investigated. Model health checking involves assuring that the model serving software does actually accept prediction requests and provides model predictions. That is, it ensures the software works. This is different from resource monitoring which can only measure whether the server computer is busy. Finally, ML metrics monitoring focuses on prediction metrics, such as input and output characteristics or their distributions, or prediction error rates or accuracy (if ground truth is available at that time or shortly after). 
 
 Automation tools required and used during this phase of the MLOps lifecycle include source code repositories such as GitHub and software integration tools such as Jenkins to build and test the model and related software applications. Also required are model registries such as MLFlow and model serving tools such as TensorFlow Serving or Flask. Finally, log data storage and log analysis software is required for monitoring. 
+
+
+\begin{exercisebox}
+The following steps of the CI/CD pipeline are out of order. Number them from \textbf{1 (first)} to \textbf{8 (last)}.
+
+\bigskip
+
+\begin{tabular}{|l|c|}
+\hline
+\textbf{Pipeline Step} & \textbf{Order} \\
+\hline
+Evaluate predictive performance & \\
+\hline
+Register model & \\
+\hline
+Full deployment & \\
+\hline
+Build model artifacts & \\
+\hline
+Basic automated checks & \\
+\hline
+Limited (canary) deployment & \\
+\hline
+Deploy to test environment & \\
+\hline
+Evaluate bias and interpretability & \\
+\hline
+\end{tabular}
+\end{exercisebox}
+
 
 \begin{exercisebox}
 
@@ -807,6 +899,21 @@ As noted, existing governance mechanisms, such as an IT use policy or an IT deve
    \item Evaluating MLOps process performance: The overall efficiency and effectiveness of the MLOps process must be evaluated. This asks question such as: ''how long does it take to move a new model to production?'', ''how long does it take to recover from a production model problem?'', ''how often are there significant problems when moving a candidate model through testing?''. Recall that governance mechanisms are not only intended to manage risk but also to ensure efficiency. When process performance does not meet expectations, processes and policies may need to be adapted.
 \end{itemize}
 \end{enumerate}
+
+\begin{exercisebox}
+A city government plans to deploy an AI system to prioritize road maintenance projects. For each of the following statements answer: ''YES'', ''NO'', or ''NEED MORE INFORMATION''
+
+\bigskip
+
+\begin{enumerate}
+   \item Are citizens affected by the model's decisions? 
+   \item Should the decisions be explainable? 
+   \item Is bias testing appropriate? 
+   \item Should predictions be monitored after deployment? 
+   \item Should the organization document the training data?
+   \item Is governance unnecessary because the model only makes recommendations? 
+\end{enumerate}
+\end{exercisebox}
 
 \section{Review Questions}
 \paragraph*{Introduction}

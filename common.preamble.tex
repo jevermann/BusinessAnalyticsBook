@@ -28,8 +28,8 @@
 \usepackage{catchfile}
 \usepackage{xstring}
 \usepackage{comment}
-\immediate\write18{echo -n "$\string_BUSI4720_BOOK_CODE" > busi4720_book_code_tmp.txt}
-\CatchFileDef{\IncludeCode}{busi4720_book_code_tmp.txt}{\endlinechar=-1}
+\immediate\write18{echo -n "$\string_BUSI4720_EDITION" > busi4720_edition_tmp.txt}
+\CatchFileDef{\IncludeCode}{busi4720_edition_tmp.txt}{\endlinechar=-1}
 \IfStrEqCase{\IncludeCode}{
 {Full}{   
 	\includecomment{withcode}

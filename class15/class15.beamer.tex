@@ -4,11 +4,11 @@
 
 \title{Business 4720 - Class 15}
 
-\subtitle{Neural Networks using Python}
+\subtitle{Neural Networks}
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -38,7 +38,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \small
 \begin{block}{}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
@@ -61,7 +61,7 @@ Chapter 13, 14, 15
 \end{block}
 \end{frame}
 
-\begin{frame}{Resources}
+\begin{frame}[label=full]{Resources}
 Implementations are available on the following GitHub repo:
 
 \url{https://github.com/jevermann/busi4720-ml} \\
@@ -72,7 +72,7 @@ The project can be cloned from this URL:
 \url{https://github.com/jevermann/busi4720-ml.git}
 \end{frame}
 
-\begin{frame}{Resources}
+\begin{frame}[label=full]{Resources}
 \small
 
 Tensorflow Playground: \url{https://playground.tensorflow.org}
@@ -85,7 +85,7 @@ Tensorflow Playground: \url{https://playground.tensorflow.org}
 \end{frame}
 
 
-\begin{frame}{Biological Neuron}
+\begin{frame}[label=full]{Biological Neuron}
 \begin{itemize}
   \item Brain cell
   \item Connected to other brain cells
@@ -96,7 +96,7 @@ Tensorflow Playground: \url{https://playground.tensorflow.org}
 \scriptsize \url{https://commons.wikimedia.org/wiki/File:Blausen_0657_MultipolarNeuron.png}
 \end{frame}
 
-\begin{frame}{Artificial Neuron}
+\begin{frame}[label=full]{Artificial Neuron}
 \begin{align*}
 y = \psi( b + \sum_i w_i x_i )
 \end{align*}
@@ -108,7 +108,7 @@ y = \psi( b + \sum_i w_i x_i )
 \end{itemize}
 \end{frame}
 
-%\begin{frame}{Popular Activation Functions}
+%\begin{frame}[label=full]{Popular Activation Functions}
 %\footnotesize
 %\centering
 %\begin{tabular}{m{.8in}|m{1.5in}|m{1in}} \hline
@@ -132,7 +132,7 @@ y = \psi( b + \sum_i w_i x_i )
 %\url{https://commons.wikimedia.org/wiki/File:Activation_prelu.svg}
 %\end{frame}
 
-\begin{frame}{Popular Activation Functions}
+\begin{frame}[label=full]{Popular Activation Functions}
 \footnotesize
 \renewcommand{\arraystretch}{1.5}
 
@@ -159,14 +159,14 @@ Gaussian error linear unit & $\operatorname{GeLU}(z) = z \Phi(z)$ \\
 
 
 
-\begin{frame}{Fully Connected Hidden Layer}
+\begin{frame}[label=full]{Fully Connected Hidden Layer}
 \centering
 \includegraphics[height=2.75in]{screen1.png} \\
 
 \scriptsize Source: ISLR2 Figure 10.1
 \end{frame}
 
-\begin{frame}{Counting Parameters}
+\begin{frame}[label=full]{Counting Parameters}
 In a fully-connected network, for a hidden or output layer of size $n$, that is, with $n$ cells/neurons and $k$ inputs, that is $k$ cells on the previous layer:
 \begin{itemize}
    \item Each of the $n$ cells has as many weights as inputs $k$
@@ -181,7 +181,7 @@ In a fully-connected network, for a hidden or output layer of size $n$, that is,
 \end{frame}
 
 
-\begin{frame}{Fully Connected Multilayer Network}
+\begin{frame}[label=full]{Fully Connected Multilayer Network}
 \begin{columns}
 \begin{column}{.66\textwidth}
 \centering
@@ -205,8 +205,13 @@ Multiple Outputs either
 \end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
-
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 Consider the following network architecture for classification into 5 classes.
 
 \begin{itemize}
@@ -217,11 +222,13 @@ Consider the following network architecture for classification into 5 classes.
    \item Fully-connected (dense) output layer
 \end{itemize}
 
-Calculate the total number of learnable parameters for this network.
+Calculate the total number of trainable parameters for this network.
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Estimating Parameters}
+\begin{frame}[label=full]{Estimating Parameters}
 \footnotesize
 \begin{block}{Typical Loss Functions}
 \begin{itemize}  
@@ -248,7 +255,7 @@ Calculate the total number of learnable parameters for this network.
 \end{block}
 \end{frame}
 
-\begin{frame}{Gradient Descent}
+\begin{frame}[label=full]{Gradient Descent}
 \begin{enumerate}
    \item Begin with initial parameter values
    \item Repeat until convergence
@@ -275,7 +282,27 @@ Consider the loss $L$ at a certain input $X$ as a function of parameter values $
 \scriptsize \url{https://commons.wikimedia.org/wiki/File:Gradient_descent.svg}
 \end{frame}
 
-\begin{frame}{Optimization Problems}
+\begin{frame}[label=full]{Hands-On Exercise --- Gradient Descent}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Assume optimizing your neural network for a single parameter $\theta$ and your loss function is of the form $\theta^2$ (that means your gradient function is of the form $2\theta$). 
+\begin{enumerate}
+   \item Sketch your loss function and its gradient against $\theta$
+   \item What is the optimal (minimal) loss?
+   \item Starting at $\theta=2$ Using $\lambda = 0.25$, calculate successive values for $\theta$. How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+   \item Starting at $\theta=2$ Using $\lambda = 0.1$, calculate successive values for $\theta$. How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Optimization Problems}
 \begin{itemize}
    \item Slow convergence
    \item No convergence (oscillations)
@@ -287,7 +314,7 @@ Consider the loss $L$ at a certain input $X$ as a function of parameter values $
 \scriptsize Murphy, Figure 8.11
 \end{frame}
 
-\begin{frame}{Optimization Options}
+\begin{frame}[label=full]{Optimization Options}
 \begin{block}{Learning Rate}
 \begin{itemize}
    \item Fixed step size
@@ -298,7 +325,7 @@ Consider the loss $L$ at a certain input $X$ as a function of parameter values $
 \end{block}
 \end{frame}
 
-\begin{frame}{Training Neural Networks -- Epochs and Minibatches}
+\begin{frame}[label=full]{Training Neural Networks -- Epochs and Minibatches}
 \begin{itemize}
   \item Using the full training set for every update step is expensive (or impossible)
   \item Approximate true gradient by using a small sample of the training set for each step, the \textbf{minibatch}
@@ -315,8 +342,7 @@ Consider the loss $L$ at a certain input $X$ as a function of parameter values $
 \end{itemize}
 \end{frame}
 
-
-\begin{frame}{Optimization Options -- Stochastic Gradient Descent}
+\begin{frame}[label=full]{Optimization Options -- Stochastic Gradient Descent}
 \begin{itemize}
    \item Random inputs $X$ to gradients by random draws from training set
 \begin{align*}
@@ -331,8 +357,25 @@ Consider the loss $L$ at a certain input $X$ as a function of parameter values $
 \scriptsize Source: Murphy Figure 8.18
 \end{frame}
 
+\begin{frame}[label=full]{Hands-On Exercise --- Adaptive Learning Rates}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Assume optimizing your neural network for a single parameter $\theta$ and your loss function is of the form $\theta^2$ (that means your gradient function is of the form $2\theta$). 
+\begin{enumerate}
+   \item Starting at $\theta=2$ Using $\lambda = 0.25$, calculate successive values for $\theta$. Reduce $\lambda$ by half at every step. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{column}
+\end{columns}
+\end{frame}
 
-\begin{frame}{Optimization Options -- AdaGrad}{Adaptive Gradient}
+
+\begin{frame}[label=full]{Optimization Options -- AdaGrad}{Adaptive Gradient}
 \begin{itemize}
   \item Originally developed for sparse gradient vectors
   \item Adapt by previous squared gradients
@@ -345,7 +388,25 @@ s_t &= \sum_{\tau=1}^t \left( \nabla L(\theta)\rvert_{\theta_\tau, X}\right)^2 \
 \end{align*}
 \end{frame}
 
-\begin{frame}{Optimization Options -- RMSProp}
+\begin{frame}[label=full]{Hands-On Exercise --- AdaGrad}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Assume optimizing your neural network for a single parameter $\theta$ and your loss function is of the form $\theta^2$ (that means your gradient function is of the form $2\theta$). 
+\begin{enumerate}
+   \item Starting at $\theta=2$ Using a constant $\lambda = 0.1$ and $\epsilon=0.1$, calculate successive values for $\theta$ and $s$. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Optimization Options -- RMSProp}
 \begin{itemize}
    \item Exponentially weighted moving average of the past (instead of the sum as in AdaGrad)
    \item Prevents too early learning rate reduction
@@ -355,7 +416,25 @@ s_{t+1} &= \beta s_t + (1-\beta) \left( \nabla L(\theta)\rvert_{\theta_t, X}\rig
 \end{align*}
 \end{frame}
 
-\begin{frame}{Optimization Options -- AdaDelta}
+\begin{frame}[label=full]{Hands-On Exercise --- RMSProp}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Assume optimizing your neural network for a single parameter $x$ and your loss function is of the form $x^2$ (that means your gradient function is of the form $2x$). 
+\begin{enumerate}
+   \item Starting at $x=2$ Using a constant $\lambda = 0.1$ and $\beta=0.75, \epsilon=0.1$, calculate successive values for $x$ and $s$. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Optimization Options -- AdaDelta}
 \begin{itemize}
   \item Maintains exponentially weighted average of previous updates $\delta$
 \end{itemize}
@@ -366,7 +445,7 @@ s_{t+1} &= \beta s_t + (1-\beta) \left( \nabla L(\theta)\rvert_{\theta_t, X}\rig
 \end{align*}
 \end{frame}
 
-\begin{frame}{Optimization Options -- Momentum Methods}
+\begin{frame}[label=full]{Optimization Options -- Momentum Methods}
 \begin{itemize}
   \item \emph{Intuition}: Keep going in the direction that was previously good, avoid ''sharp turns''
   \item Standard momentum:
@@ -384,7 +463,7 @@ m_{t+1} &= \beta m_{t} - \lambda_t \nabla L(\theta) \rvert_{\theta_{t}+\beta m_{
 \end{frame}
 
 
-\begin{frame}{Optimization Options -- AdaM}{Adaptive Moment Estimation}
+\begin{frame}[label=full]{Optimization Options -- AdaM}{Adaptive Moment Estimation}
 \begin{itemize}
   \item Combine adaptive learning rate with momentum
 \end{itemize}
@@ -395,8 +474,26 @@ s_t &= \beta_2 s_{t-1} + (1-\beta_2) \left( \nabla L(\theta)\vert_{\theta_t, x} 
 \end{align*}
 \end{frame}
 
+\begin{frame}[label=full]{Hands-On Exercise --- AdaM}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Assume optimizing your neural network for a single parameter $x$ and your loss function is of the form $x^2$ (that means your gradient function is of the form $2x$). 
+\begin{enumerate}
+   \item Starting at $x=2$ Using a constant $\lambda = 0.1$ and $\beta_1=0.5, \beta_2=0.5, \epsilon=0.1$, calculate successive values for $x$ and $s$ and $m$. 
+   \item How many steps do you require to reach the optimal loss? What criterion have you used to stop?
+\end{enumerate}
 
-\begin{frame}{Training Neural Networks -- Vanishing Gradients }
+\emph{Note:} For this illustration exercise, assume that $\theta$ and its gradient are independent of data values $x$.
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Training Neural Networks -- Vanishing Gradients }
 \begin{block}{Problem}
 \begin{itemize}
   \item Sigmoid and tanh functions are bounded for large positive or negative pre-activation values (''saturating activation functions'')
@@ -414,7 +511,7 @@ s_t &= \beta_2 s_{t-1} + (1-\beta_2) \left( \nabla L(\theta)\vert_{\theta_t, x} 
 \end{frame}
 
 
-\begin{frame}{Training Neural Networks -- ResNet Architecture}
+\begin{frame}[label=full]{Training Neural Networks -- ResNet Architecture}
 \begin{itemize}
   \item Allows gradients to bypass a layer that suffers from lack of learning (vanishing gradient, saturated activation)
 \end{itemize}
@@ -425,7 +522,7 @@ s_t &= \beta_2 s_{t-1} + (1-\beta_2) \left( \nabla L(\theta)\vert_{\theta_t, x} 
 \end{frame}
 
 
-\begin{frame}{Training Neural Networks -- Exploding Gradients }
+\begin{frame}[label=full]{Training Neural Networks -- Exploding Gradients }
 \begin{block}{Problem}
 \begin{itemize}
    \item Long chains of neurons can vastly increase the error
@@ -441,7 +538,7 @@ g' = min(1, \frac{1}{||c||_2}) g
 \end{block}
 \end{frame}
 
-\begin{frame}{Training Neural Networks -- Parameter Initialization Heuristics}
+\begin{frame}[label=full]{Training Neural Networks -- Parameter Initialization Heuristics}
 \begin{itemize}
   \item Random values from normal distribution: $\theta \sim N(0, \sigma^2)$
   \item ''Xavier Initialization''/''Glorot Initialization''
@@ -461,7 +558,7 @@ g' = min(1, \frac{1}{||c||_2}) g
 \end{frame}
 
 
-\begin{frame}{Regularization -- Dropout}
+\begin{frame}[label=full]{Regularization -- Dropout}
 \begin{itemize}
    \item Randomly (per observation) remove a fraction of units in a layer, or equivalently,
    \item Randomly set the output of a fraction of units to 0
@@ -473,7 +570,7 @@ g' = min(1, \frac{1}{||c||_2}) g
 \scriptsize Source: Murphy, Figure 1.318
 \end{frame}
 
-\begin{frame}{Tensorflow}
+\begin{frame}[label=withcode]{Tensorflow}
 \begin{columns}
 \begin{column}{0.3\textwidth}
 \includegraphics[width=\textwidth]{tflogo.png}
@@ -492,7 +589,7 @@ g' = min(1, \frac{1}{||c||_2}) g
 \end{columns}
 \end{frame}
 
-\begin{frame}{Keras}
+\begin{frame}[label=withcode]{Keras}
 \begin{columns}
 \begin{column}{0.3\textwidth}
 \includegraphics[width=.75\textwidth]{keraslogo.png}
@@ -508,7 +605,7 @@ g' = min(1, \frac{1}{||c||_2}) g
 \end{frame}
 
 
-\begin{frame}[fragile]{Regression using Keras}
+\begin{frame}[label=withcode,fragile]{Regression using Keras}
 Import required packages:
 \begin{pythoncode}
 import pandas as pd
@@ -530,7 +627,7 @@ boston_labels = boston_features.pop('medv')
 \end{frame}
 
 
-\begin{frame}[fragile]{Regression using Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Regression using Keras \small [cont'd]}
 Define the NN model with one hidden fully-connected layer (64 neurons) and one fully-connected output layer (1 neuron) in sequence. No activation function is given, so this is a linear regression model:
 \begin{pythoncode}
 boston_model = tf.keras.Sequential([
@@ -552,7 +649,7 @@ boston_model.summary()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Regression in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Regression in Keras \small [cont'd]}
 The \texttt{Normalization} layer normalizes numeric features:
 \begin{pythoncode}
 norm_layer = layers.Normalization()
@@ -571,7 +668,7 @@ norm_boston_model = tf.keras.Sequential([
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Regression in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Regression in Keras \small [cont'd]}
 Set loss and optimizer and ask Keras to keep track of the MSE and MAE metrics.
 \begin{pythoncode}
 norm_boston_model.compile(
@@ -591,7 +688,7 @@ train_hist = \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Regression in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Regression in Keras \small [cont'd]}
 Plot the training history using Plotly Express
 \begin{pythoncode}
 import plotly.express as px
@@ -610,16 +707,23 @@ fig.show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{itemize}
   \item Modify the above code to include different activation functions, e.g. \texttt{"tanh"}, \texttt{"sigmoid"}, or \texttt{"elu"}. Comment on the learning progress and loss function values.
   \item Modify the above code to change the number of neurons in the \texttt{"Dense"} layer. Comment on the learning progress and loss function values.
   \item Modify the architecture to add one or more \texttt{"Dense"} layers with different numbers of units. Comment on the learning progress and loss function values.
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}[fragile]{Classification in Keras}
+\begin{frame}[label=withcode,fragile]{Classification in Keras}
 
 The \texttt{Wage} dataset from the ISLR2 library for R has been adapted to include a column \texttt{wagequart}, the quartile of the wage. Many features are categorical.
 
@@ -633,7 +737,7 @@ wage_labels = wage_features.pop('wagequart') - 1
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 
 Treat each categorical string feature and convert to \textbf{one-hot encoding}. \\
 
@@ -646,7 +750,7 @@ preproc_inputs = []
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 \begin{pythoncode}
 for cat_feature in ['maritl', 'race', 'education', \
                'jobclass', 'health', 'health_ins']:
@@ -670,7 +774,7 @@ for cat_feature in ['maritl', 'race', 'education', \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Define and input and a \texttt{Normalizaton} layer for the numerical variable \texttt{age}:
 \begin{pythoncode}
 age_input = tf.keras.Input(shape=(1,), 
@@ -685,7 +789,7 @@ preproc_inputs.append(age_norm)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Define and input and a one-hot encoding \texttt{IntegerLookup} layer for the numeric variable \texttt{year}:
 \begin{pythoncode}
 year_input = tf.keras.Input(shape=(1,), 
@@ -701,7 +805,7 @@ preproc_inputs.append(year_onehot)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Concatenate the pre-processing outputs to one long vector with a \texttt{Concatenate} layer. Call this layer with the list of prec-processed inputs:
 \begin{pythoncode}
 preprocessed_inputs = \
@@ -716,7 +820,7 @@ preproc_model.summary()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Build the classification model as a \texttt{Sequential} model:
 \begin{pythoncode}
 class_model = tf.keras.Sequential(name="classification")
@@ -732,7 +836,7 @@ class_model.add(layers.Dense(4, activation="softmax"))
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 The output of the pre-processing model is the input to the classification model:
 \begin{pythoncode}
 class_results = class_model(preproc_model(inputs))
@@ -746,7 +850,7 @@ wage_model.summary()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Compile the model with loss function, optimizer and request training metrics:
 \begin{pythoncode}
 wage_model.compile(
@@ -764,7 +868,7 @@ wage_model.compile(
 Note: Specifying \texttt{from\_logits=True} for the loss can save the softmax activation or layer at the bottom of the sequential classification model.
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Create the input data as a dict of numpy arrays to match the \texttt{Input} variables:
 \begin{pythoncode}
 import numpy as np
@@ -783,7 +887,7 @@ tensorboard_callback = \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{TensorBoard}
+\begin{frame}[label=withcode]{TensorBoard}
 TensorBoard is a tool to visualize neural network models and their trainging and validation data/performance.
 
 \vspace{\baselineskip}
@@ -794,7 +898,7 @@ TensorBoard is a tool to visualize neural network models and their trainging and
 
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Train the model for 25 epochs:
 \begin{pythoncode}
 wage_hist = wage_model.fit(
@@ -807,7 +911,7 @@ wage_hist = wage_model.fit(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Plot the training history using Plotly Express
 \begin{pythoncode}
 import plotly.express as px
@@ -828,7 +932,7 @@ fig.show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Classification in Keras \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification in Keras \small [cont'd]}
 Call TensorBoard from the terminal, providing the log directory
 \begin{bashcode}
 tensorboard --logdir tensorboard_logs
@@ -840,14 +944,14 @@ Then go to \url{http://localhost:6006} in your web browser.
 \end{center}
 \end{frame}
 
-\begin{frame}{TensorBoard}
+\begin{frame}[label=withcode]{TensorBoard}
 \centering
 \includegraphics[width=.8\textwidth]{screen10.png} \\
 \vspace{\baselineskip}
 \includegraphics[height=2in]{screen9.png}
 \end{frame}
 
-\begin{frame}[fragile]{Early Stopping}
+\begin{frame}[label=withcode,fragile]{Early Stopping}
 Another useful callback function:
 
 \begin{pythoncode}
@@ -861,7 +965,13 @@ earlystop_callback = tf.keras.callbacks.EarlyStopping(
 \end{frame}
 
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\footnotesize
 \begin{itemize}
    \item Examine the model summaries for the pre-processing, the classification, and the complete wage model. Explain the number of trainable and total parameters, and also explain the output shapes of each layer.
    \item Make the ''wage'' prediction a binary classification problem:
@@ -878,6 +988,8 @@ earlystop_callback = tf.keras.callbacks.EarlyStopping(
       \item Plot the metrics after training
    \end{enumerate}
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 \end{document}

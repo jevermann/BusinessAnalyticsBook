@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -29,7 +29,7 @@
 
 \section{R}
 
-\begin{frame}{Intro to Python}
+\begin{frame}[label=full]{Intro to Python}
 \begin{block}{What is Python?}
 \begin{itemize}
     \item Readability and simplicity
@@ -48,7 +48,7 @@
 \end{frame}
 
 
-\begin{frame}{Running Python}
+\begin{frame}[label=full]{Running Python}
 \begin{enumerate}
     \item Interactive Python Shell (command line)
     \item Jupyter Notebooks
@@ -56,7 +56,7 @@
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Interactive Python Shell}
+\begin{frame}[label=full]{Interactive Python Shell}
 \begin{itemize}
     \item Similar to the R shell
     \item Type ''python'' to launch Python interpreter
@@ -69,12 +69,12 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Interactive Python Shell}
+\begin{frame}[label=full]{Interactive Python Shell}
 \centering
 \includegraphics[width=\textwidth]{screen3.png}
 \end{frame}
 
-\begin{frame}{Jupyter Notebooks}
+\begin{frame}[label=full]{Jupyter Notebooks}
 \begin{itemize}
     \item Interactive computing environment
     \item Notebook Interface
@@ -85,15 +85,15 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{JupyterLabs Desktop}
+\begin{frame}[label=full]{JupyterLabs Desktop}
 \includegraphics[width=\textwidth]{screen1.png}
 \end{frame}
 
-\begin{frame}{JupyterLabs Desktop}
+\begin{frame}[label=full]{JupyterLabs Desktop}
 \includegraphics[width=\textwidth]{screen2.png}
 \end{frame}
 
-\begin{frame}{Jupyter Notebooks}
+\begin{frame}[label=full]{Jupyter Notebooks}
 \begin{itemize}
   \item ''Kernel'' is the Python interpreter and environment that runs your code
   \item Enter code into empty cell
@@ -103,7 +103,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{PyCharm IDE}
+\begin{frame}[label=full]{PyCharm IDE}
 \begin{itemize}
    \item When working with multiple Python files in your project
    \item Useful for \emph{programming} (defining functions, classes; using control structures, etc.) rather than just \emph{scripting} (executing a few Python commands one after the other)
@@ -111,12 +111,12 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{PyCharm IDE}
+\begin{frame}[label=full]{PyCharm IDE}
 \centering
 \includegraphics[height=2.5in]{screen4.png}
 \end{frame}
 
-\begin{frame}[fragile]{Basic Python}
+\begin{frame}[label=full,fragile]{Basic Python}
 Python knows math:
 \footnotesize
 \begin{pythoncode}
@@ -141,7 +141,7 @@ Python knows math:
 \end{frame}
 
 
-\begin{frame}[fragile]{Basic Python}
+\begin{frame}[label=full,fragile]{Basic Python}
 String formatting methods:
 \footnotesize
 \begin{pythoncode}
@@ -159,7 +159,7 @@ print(name+' is '+str(age)+' years old')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Basic Python}
+\begin{frame}[label=full,fragile]{Basic Python}
 Backslashes split and continue lines:
 \footnotesize
 \begin{pythoncode}
@@ -171,7 +171,7 @@ print(i)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Python Strings}
+\begin{frame}[label=full,fragile]{Python Strings}
 Python knows strings:
 
 \begin{pythoncode}
@@ -194,7 +194,7 @@ if language.find('nuk') != -1:
 Note the colon and the indent of exactly 4 significant spaces!
 \end{frame}
 
-\begin{frame}[fragile]{Python Strings}
+\begin{frame}[label=full,fragile]{Python Strings}
 
 Joining and splitting strings with a delimiter:
 
@@ -211,7 +211,7 @@ print(thelist)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Lists}
+\begin{frame}[label=full,fragile]{Lists}
 Lists are ordered collections of items:
 \begin{pythoncode}
 # Define list (Inuit deities)
@@ -237,7 +237,7 @@ Note the colon and the indent of exactly 4 significant spaces!
 
 \end{frame}
 
-\begin{frame}[fragile]{Tuples}
+\begin{frame}[label=full,fragile]{Tuples}
 Tuples are immutable:
 
 \begin{pythoncode}
@@ -255,7 +255,7 @@ more_regions[2][1]
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Dictionaries}
+\begin{frame}[label=full,fragile]{Dictionaries}
 \begin{itemize}
   \item Key--value pairs
   \item Associative arrays
@@ -280,7 +280,7 @@ len(c)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Dictionaries \small [cont'd]}
+\begin{frame}[label=full,fragile]{Dictionaries \small [cont'd]}
 \begin{pythoncode}
 # Retrieve a value for a key:
 c['Nunavik']
@@ -297,7 +297,7 @@ if 'Nunavut' in c:
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Structured Data Types}
+\begin{frame}[label=full]{Structured Data Types}
 \begin{block}{Important}
 \begin{itemize}
   \item Indexing begins at 0 (different from R!)
@@ -314,7 +314,7 @@ if 'Nunavut' in c:
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Slicing}
+\begin{frame}[label=full,fragile]{Slicing}
 \footnotesize
 \begin{pythoncode}
 regions = ('Inuvialuit', 'Nunavut', 
@@ -335,7 +335,7 @@ regions[::-1]
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}
 \begin{block}{Lists}
 \begin{enumerate}
     \item Create a list containing the numbers 1 to 10. Use list slicing to create a sublist with only the even numbers.
@@ -345,7 +345,7 @@ regions[::-1]
 \end{enumerate}
 \end{block}
 \end{frame}
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}
 \begin{block}{Tuples}
 \begin{enumerate}
     \item Create a tuple with different data types (string, int, float).
@@ -360,7 +360,7 @@ regions[::-1]
 \end{block}
 \end{frame}
 
-\begin{frame}{Numerical Data in Python with NumPy}
+\begin{frame}[label=full]{Numerical Data in Python with NumPy}
 \begin{block}{What is Numpy?}
 \begin{itemize}
     \item High-performance scientific computing and data analysis.    
@@ -379,7 +379,7 @@ regions[::-1]
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{NumPy Array}
+\begin{frame}[label=full,fragile]{NumPy Array}
 N-Dimensional Array, type ''\texttt{ndarray}'' \\
 
 \begin{pythoncode}
@@ -397,7 +397,7 @@ a.size
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{NumPy Basics}
+\begin{frame}[label=full,fragile]{NumPy Basics}
 
 \begin{pythoncode}
 # Create an array from Python lists and tuples
@@ -426,7 +426,7 @@ np.cov(np.transpose(b))
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{NumPy Basics \small [cont'd]}
+\begin{frame}[label=full,fragile]{NumPy Basics \small [cont'd]}
 
 \begin{pythoncode}
 # Create an array of zeros with shape (3,4)
@@ -439,7 +439,7 @@ print(y)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Array Slicing}
+\begin{frame}[label=full,fragile]{Array Slicing}
 \begin{itemize}
     \item Each axis can be sliced using \texttt{[:]} or \texttt{[::]}
 \end{itemize}
@@ -468,7 +468,7 @@ b[:,-1]
 \end{pythoncode}
 \end{frame}
 
-%\begin{frame}[fragile]{Array Slicing \& Iterators}
+%\begin{frame}[label=full,fragile]{Array Slicing \& Iterators}
 %\footnotesize
 %\begin{pythoncode}
 %c = np.array([[[  0,  1,  2],
@@ -486,7 +486,7 @@ b[:,-1]
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Array Reshaping}
+\begin{frame}[label=full,fragile]{Array Reshaping}
 
 \begin{pythoncode}
 # Create 3x4 array of random numbers
@@ -515,7 +515,7 @@ for element in b.flat:
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Array Indexing with Boolean Arrays}
+\begin{frame}[label=full,fragile]{Array Indexing with Boolean Arrays}
 
 \begin{pythoncode}
 a = np.array([[1,  2,  3,  4], 
@@ -534,7 +534,7 @@ a[a%2 == 0]
 \end{pythoncode}
 \end{frame}              
 
-%\begin{frame}[fragile]{Unique Elements and Counts}
+%\begin{frame}[label=full,fragile]{Unique Elements and Counts}
 %\footnotesize
 %\begin{pythoncode}
 %a = np.array([11, 11, 12, 13, 14, 15, 16, 
@@ -550,7 +550,7 @@ a[a%2 == 0]
 %\end{pythoncode}
 %\end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}
 \begin{enumerate}
    \item Create a four-dimensional array with random numbers in the shape indicated by the last four digits of your student number (if your student number contains a 0, use a 1 instead)
    \item Construct a new array by swapping the first half of rows (axis 0) with the second half of rows (axis 0)
@@ -562,7 +562,7 @@ a[a%2 == 0]
 \end{frame}
 
 
-\begin{frame}{Data Management with Pandas}
+\begin{frame}[label=full]{Data Management with Pandas}
 \begin{block}{What is Pandas?}
 \begin{itemize}
     \item Open-source library for data analysis
@@ -577,7 +577,7 @@ a[a%2 == 0]
 \textbf{Intro Tutorial}: \href{http://pandas.pydata.org/docs/user_guide/10min.html}{10 Minutes to Pandas}
 \end{frame}
 
-%\begin{frame}[fragile]{Pandas Series}
+%\begin{frame}[label=full,fragile]{Pandas Series}
 %\begin{itemize}
     %\item 1-Dimensional \emph{labelled} array
     %\item Axis labels are called \emph{index}
@@ -606,7 +606,7 @@ a[a%2 == 0]
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}[fragile]{Pandas Series \small [cont'd]}
+%\begin{frame}[label=full,fragile]{Pandas Series \small [cont'd]}
 %\footnotesize
 %\begin{pythoncode}
 %# Series behave like an ndarray
@@ -624,7 +624,7 @@ a[a%2 == 0]
 %\end{pythoncode}
 %\end{frame}
 
-\begin{frame}[fragile]{Pandas Dataframe}
+\begin{frame}[label=full,fragile]{Pandas Dataframe}
 \begin{itemize}
    \item 2-dimensional
    \item Row labels are called \emph{index}
@@ -646,7 +646,7 @@ df = pd.DataFrame(d)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Pandas Dataframe -- Basic Information}
+\begin{frame}[label=full,fragile]{Pandas Dataframe -- Basic Information}
 \footnotesize
 \begin{pythoncode}
 # Dimensions (rows, columns)
@@ -670,7 +670,7 @@ df.describe()
 \end{pythoncode}
 \end{frame}
 
-%\begin{frame}[fragile]{Pandas Dataframe Columns}
+%\begin{frame}[label=full,fragile]{Pandas Dataframe Columns}
 %\footnotesize
 %\begin{pythoncode}
 %# Access a column
@@ -684,7 +684,7 @@ df.describe()
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}[fragile]{Dataframe Indexing}
+%\begin{frame}[label=full,fragile]{Dataframe Indexing}
 %\renewcommand{\arraystretch}{1.5}
 %\centering
 %\small
@@ -698,7 +698,7 @@ df.describe()
 %\end{tabular}
 %\end{frame}
 
-\begin{frame}[fragile]{Pandas Dataframe -- Indexing}
+\begin{frame}[label=full,fragile]{Pandas Dataframe -- Indexing}
 \begin{pythoncode}
 # Select one column
 df['col1']
@@ -727,7 +727,7 @@ df[df['col1'] > 2]
 
 \end{frame}
 
-\begin{frame}[fragile]{Pandas Dataframe -- Operations}
+\begin{frame}[label=full,fragile]{Pandas Dataframe -- Operations}
 %\begin{itemize}
     %\item Data is aligned on column labels and row indices
 %\end{itemize}
@@ -753,7 +753,7 @@ np.sum(df[['col1', 'col2']], axis=1)
 \end{pythoncode}
 \end{frame}
 
-%\begin{frame}[fragile]{Pandas Dataframe}
+%\begin{frame}[label=full,fragile]{Pandas Dataframe}
 %\footnotesize
 %\begin{pythoncode}
 %# Boolean reductions
@@ -768,7 +768,7 @@ np.sum(df[['col1', 'col2']], axis=1)
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}[fragile]{Descriptive Statistics, Aggregation, \& Strings}
+%\begin{frame}[label=full,fragile]{Descriptive Statistics, Aggregation, \& Strings}
 
 %\begin{pythoncode}
 %# Descriptive statistics
@@ -789,7 +789,7 @@ np.sum(df[['col1', 'col2']], axis=1)
 %\end{pythoncode}
 %\end{frame}
 
-\begin{frame}[fragile]{Pandas Dataframe -- Selection with Query}
+\begin{frame}[label=full,fragile]{Pandas Dataframe -- Selection with Query}
 
 \begin{pythoncode}
 df = pd.DataFrame(np.random.rand(10, 3), 
@@ -806,7 +806,7 @@ df.query('a < b < c')
 \end{pythoncode}
 \end{frame}
 
-%\begin{frame}[fragile]{Selection with Query \small [cont'd]}
+%\begin{frame}[label=full,fragile]{Selection with Query \small [cont'd]}
 %\footnotesize
 %\begin{pythoncode}
 %df = pd.DataFrame({'a': list('aabbccddeeff'), 
@@ -832,7 +832,7 @@ df.query('a < b < c')
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}[fragile]{Duplicate Data}
+%\begin{frame}[label=full,fragile]{Duplicate Data}
 %\footnotesize
 %\begin{pythoncode}
 %df2 = df.copy()
@@ -843,14 +843,14 @@ df.query('a < b < c')
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}[fragile]{Reading Data into Pandas}
+%\begin{frame}[label=full,fragile]{Reading Data into Pandas}
 %\begin{itemize}
     %\item Wide variety of format: CSV, JSON, Excel, SQL, \ldots
     %\item \url{https://pandas.pydata.org/docs/user_guide/io.html#}
 %\end{itemize}
 %\end{frame}
 
-\begin{frame}{Easy Pandas -- Example Dataset}
+\begin{frame}[label=full]{Easy Pandas -- Example Dataset}
 \begin{itemize}
   \item Government of Canada, Open Government Portal
   \item Fuel Consumption Ratings -- Battery-electric vehicles -- 2012--2023
@@ -874,7 +874,7 @@ df.query('a < b < c')
 	\end{tabular}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Reading CSV Files}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Reading CSV Files}
 \begin{pythoncode}
 # Import pandas 
 import pandas as pd
@@ -890,7 +890,7 @@ data.describe()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Filtering}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Filtering}
 \begin{pythoncode}
 # Filter values
 data.query('Make=="Ford" & Year==2023')
@@ -919,7 +919,7 @@ SELECT *
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Selecting Columns}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Selecting Columns}
 
 \begin{pythoncode}
 # Filter values and select columns
@@ -954,7 +954,7 @@ SELECT Model, Category, Range
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Create New Columns}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Create New Columns}
 
 \begin{pythoncode}
 # Filter values, create new calculated column and select cols
@@ -993,7 +993,7 @@ SELECT Model, Category, Range,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Renaming Columns}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Renaming Columns}
 
 \begin{pythoncode}
 # Filter values, create two new calculated columns,
@@ -1043,7 +1043,7 @@ SELECT Model, Category,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Distinct Values}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Distinct Values}
 \begin{pythoncode}
 # Find distinct values
 data[['Make', 'Model']].drop_duplicates()
@@ -1071,7 +1071,7 @@ SELECT DISTINCT Make, Model
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Ordering}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Ordering}
 \begin{pythoncode}
 # Filter values, order by values of two columns
 # and select columns
@@ -1111,7 +1111,7 @@ SELECT Model, Category, Range
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Easy Pandas -- Grouping and Summarizing}
+\begin{frame}[label=full,fragile]{Easy Pandas -- Grouping and Summarizing}
 \begin{pythoncode}
 # Filter values, group the data,
 # calculate aggregates of multiple columns
@@ -1132,7 +1132,7 @@ data.query('Year==2023') \
 \end{pythoncode}
 
 \end{frame}
-\begin{frame}[fragile]{Grouping and Summarizing \small [cont'd]}
+\begin{frame}[label=full,fragile]{Grouping and Summarizing \small [cont'd]}
 \begin{columns}
 \begin{column}{.5\textwidth}
 Equivalent in R:
@@ -1174,7 +1174,7 @@ SELECT Category,
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Advanced Pandas with the Pagila Database}
+\begin{frame}[label=full,fragile]{Advanced Pandas with the Pagila Database}
 \begin{pythoncode}
 rentals = pd.read_csv(
      'http://evermann.ca/busi4720/rentals.csv')
@@ -1187,7 +1187,7 @@ addresses = pd.read_csv(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Advanced Pandas with the Pagila Database  \small [cont'd]}
+\begin{frame}[label=full,fragile]{Advanced Pandas with the Pagila Database  \small [cont'd]}
 Find all films and the actors that appeared in them, ordered by film category and year, for those films that are rated PG:
 
 \scriptsize
@@ -1208,7 +1208,7 @@ data.query('rating == "PG"') \
 \end{frame}
 
 
-\begin{frame}[fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
+\begin{frame}[label=full,fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
 
 Find the most popular actors in the rentals in each city:
 
@@ -1237,7 +1237,7 @@ full_data \
 
 \end{frame}
 
-\begin{frame}[fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
+\begin{frame}[label=full,fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
 
 Find the customers who spend the most on rentals, and the number of rentals with the higest total rental payments for each category grouped by rental duration.
 
@@ -1261,7 +1261,7 @@ full_data \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
+\begin{frame}[label=full,fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
 Get the top 5 and the bottom 5 grossing customers for each quarter.
 
 \footnotesize
@@ -1290,7 +1290,7 @@ full_data \
 \end{frame}
 
 
-\begin{frame}[fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
+\begin{frame}[label=full,fragile]{Advanced Pandas with the Pagila Database \small [cont'd]}
 
 Find the set of film titles by rental customer and the total number rentals for each customer
 
@@ -1313,7 +1313,7 @@ full_data \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}
 \begin{enumerate}
   \item Find all films with a rating of 'PG'
   \item List all customers who live in Canada (with their address)

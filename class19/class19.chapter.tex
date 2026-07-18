@@ -319,7 +319,7 @@ For binary decision trees, the choice on which feature to split on next and whic
    This is simple for binary feature but requires dichotomization or discretization (for example, using equal interval bins or equal frequency bins) for numerical features and can potentially result in a large number of possible split points $s$.
    \item Use one of the following criteria to choose $j$ and $s$:
    \begin{itemize}
-      \item \emph{Minimize the total variance of the two regions (regression trees)}:
+      \item \emph{Minimize the sum of variance of the two regions (regression trees)}:
       \begin{align*}
        \sum_{i: x_i \in R_1(j,s)} (y_i - \bar{y}_{R_1})^2 &+ \sum_{i: x_i \in R_2(j,s)} (y_i - \bar{y}_{R_2})^2
        \end{align*}
@@ -347,6 +347,32 @@ where $p(y)$ is the probability of an observation being classified to a particul
 \end{advanced}
 
 The feature space is recursively split or divided, resulting in a tree that is growing new leaf nodes and gaining depth. Without any stopping, the tree will grow, that is, nodes will be split, until every leaf node contains only a single observations. It is clear that such a fully-grown tree is overfitted to the training data set, and not easily interpretable. 
+
+
+\begin{exercisebox}
+Consider the following data of customer spend (predictor) and customer value (target): \\
+
+\begin{tabular}{c | c | c | c | c}
+\textbf{ID} & \textbf{Spend} & \textbf{Value} \\
+\hline
+A & 1 & 50 \\
+B & 2 & 65 \\
+C & 3 & 65 \\
+D & 4 & 70 \\
+E & 5 & 85 \\
+F & 6 & 90 \\
+\end{tabular}
+
+\vspace{\baselineskip}
+Build a regression tree by successively splitting the regions based on the Sum of Variance criterion. At every step:
+\begin{enumerate}
+   \item Identify possible split points
+   \item Calculate the variance for each candidate region and the total variance
+   \item Identify the split with the minimum total variance
+   \item Repeat to a depth of two, that is, the root split and one more split for each region
+   \item What is the prediction for each leaf node?
+\end{enumerate}
+\end{exercisebox}
 
 In practice, to prevent overfitting and ensure the tree remains interpretable, the splitting process is stopped using one many options for \emph{stopping criteria}:
 
@@ -901,6 +927,48 @@ where $v(.)$ is the value function that describes the payout received in a game\
 The binomial coefficient $\binom{n-1}{|S|}$ represents the number of possible ways to form a coalition of size $|S|$ of the set $N \setminus \{i\}$ of $n-1$ players (set $N$ without player $i$). The marginal contribution is divided by this term. 
 
 The sum is taken over all all possible coalitions of the set $N$ of players minus the player $i$. The sum is then divided by the number of players $n$.
+
+
+\begin{exercisebox}
+A company has three departments Marketing (A), Engineering (B), Design (C) that can work together on a project:
+\begin{align*}
+N=\{A,B,C\}
+\end{align*}
+The value created by each possible coalition is given by:
+\begin{align*}
+\begin{array}{c|c}
+\text{Coalition } S & v(S) \\
+\hline
+\emptyset & 0 \\
+\{A\} & 10 \\
+\{B\} & 20 \\
+\{C\} & 15 \\
+\{A,B\} & 50 \\
+\{A,C\} & 35 \\
+\{B,C\} & 45 \\
+\{A,B,C\} & 90
+\end{array}
+\end{align*}
+
+\begin{enumerate}
+    \item Compute the Shapley values $\phi_A,\phi_B,\phi_C $ for each department:
+
+    \begin{align*}
+       \phi_i
+    =
+    \sum_{S\subseteq N\setminus\{i\}}
+    \frac{|S|!(n-|S|-1)!}{n!}
+    \left[v(S\cup\{i\})-v(S)\right]
+	\end{align*}
+	
+	Write out each coalition $S$ in the sum!
+    \item Verify that the Shapley values satisfy the efficiency property:
+\begin{align*}
+    \phi_A+\phi_B+\phi_C=v(\{A,B,C\})
+\end{align*}
+
+\end{enumerate}
+\end{exercisebox}
 
 Shapley values have some key theoretical properties that together ensure they describe a fair allocation of value or contribution to each player:
 

@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -28,7 +28,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 
 \begin{block}{}
 Molnar, Christoph: \emph{Interpretable Machine Learning} (2023) \\
@@ -61,7 +61,7 @@ Chapter 18
 \end{block}
 \end{frame}
 
-\begin{frame}{Additional Materials}
+\begin{frame}[label=full]{Additional Materials}
 \small
 \begin{block}{SciKit Learn}
 A machine learning framework for Python that also provides some interpretable ML functions.
@@ -81,7 +81,7 @@ A Python package to compute Shapley Additive Explanations (a local model-agnosti
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Tools}
+\begin{frame}[label=withcode,fragile]{Tools}
 Install required Python packages:
 \begin{bashcode}
 pip install statsmodels matplotlib scikit-learn \
@@ -90,7 +90,7 @@ pip install statsmodels matplotlib scikit-learn \
 \end{frame}
 
 
-\begin{frame}{Importance of Interpretability}
+\begin{frame}[label=full]{Importance of Interpretability}
 
 \begin{quote} \large
 Human understanding of how the AI works and arrives at its results (decisions, predictions, \ldots)
@@ -113,7 +113,7 @@ Human understanding of how the AI works and arrives at its results (decisions, p
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Model Interpretability}
+\begin{frame}[label=full]{Model Interpretability}
 \begin{block}{Distinctions}
 \begin{itemize}
    \item Intrinsic $\leftrightarrow$ Post-hoc
@@ -129,7 +129,7 @@ Human understanding of how the AI works and arrives at its results (decisions, p
 %\end{block}
 \end{frame}
 
-%\begin{frame}{Scope of Interpretability}
+%\begin{frame}[label=full]{Scope of Interpretability}
 %\small
 %\begin{itemize}
    %\item Model and design transparency \\
@@ -147,7 +147,7 @@ Human understanding of how the AI works and arrives at its results (decisions, p
 %\end{itemize}
 %\end{frame}
 
-%\begin{frame}{Evaluating Interpretability}
+%\begin{frame}[label=full]{Evaluating Interpretability}
 %\begin{itemize}
    %\item Application level (real task)
    %\item Human level (simple tasks)
@@ -155,7 +155,7 @@ Human understanding of how the AI works and arrives at its results (decisions, p
 %\end{itemize}
 %\end{frame}
 
-%\begin{frame}{Properties of Explanations}
+%\begin{frame}[label=full]{Properties of Explanations}
 %Good explanations have:
 %\begin{itemize}
    %\item Accuracy
@@ -169,7 +169,7 @@ Human understanding of how the AI works and arrives at its results (decisions, p
 %\end{itemize}
 %\end{frame}
 
-%\begin{frame}{Comprehensible Explanations}
+%\begin{frame}[label=full]{Comprehensible Explanations}
 %Humand-understandable explanations are:
 %\begin{itemize}
    %\item Contrastive
@@ -182,7 +182,7 @@ Human understanding of how the AI works and arrives at its results (decisions, p
 %\end{itemize}
 %\end{frame}
 
-\begin{frame}{Intrinsically Interpretable Models}
+\begin{frame}[label=full]{Intrinsically Interpretable Models}
 
 \centering
 \renewcommand{\arraystretch}{1.1}
@@ -200,7 +200,7 @@ k-NN & No & No & No  \\ \hline
 \scriptsize Source: \url{https://christophm.github.io/interpretable-ml-book/simple.html}\normalsize
 \end{frame}
 
-\begin{frame}[fragile]{Linear Regression}
+\begin{frame}[label=withcode,fragile]{Linear Regression}
 Using R:
 \begin{Rcode}
 # Load the bike rental data set
@@ -223,7 +223,7 @@ Multiple R-squared: 0.4558, Adjusted R-squared: 0.4528
 \end{textcode}
 \end{frame}
 
-\begin{frame}{Linear Regression}
+\begin{frame}[label=full]{Linear Regression}
 \begin{itemize}
    \item \textbf{Algorithmic transparency}: The ordinary least squares loss function is clear and intuitive; provides optimality guarantees
    \item \textbf{Coefficients $\beta$}
@@ -237,7 +237,7 @@ Multiple R-squared: 0.4558, Adjusted R-squared: 0.4528
 \end{itemize}
 \end{frame}
 
-%\begin{frame}{Linear Regression}
+%\begin{frame}[label=full]{Linear Regression}
 %\begin{block}{Effects Plot}
 %\begin{align*}
 %\operatorname{effect}_j^{(i)} = \beta_j x_j^{(i)}
@@ -247,7 +247,7 @@ Multiple R-squared: 0.4558, Adjusted R-squared: 0.4528
 %\end{block}
 %\end{frame}
 
-%\begin{frame}[fragile]{Linear Regression}
+%\begin{frame}[label=full,fragile]{Linear Regression}
 %\begin{Rcode}
 %> bike$cnt[6]
 %[1] 1606
@@ -264,7 +264,7 @@ Multiple R-squared: 0.4558, Adjusted R-squared: 0.4528
 %\end{center}
 %\end{frame}
 
-\begin{frame}[fragile]{Linear Regression}
+\begin{frame}[label=full,fragile]{Linear Regression}
 \textbf{Dimension reduction} to improve interpretability:
 \begin{itemize}
    \item Manual feature selection, e.g. based on effect size
@@ -286,7 +286,7 @@ Be aware of bias-variance trade-off with all of these. \\
 \end{frame}
 
 
-\begin{frame}{Decision Trees}
+\begin{frame}[label=full]{Decision Trees}
 
 \begin{block}{Decision Tree Types}
 \begin{itemize}
@@ -314,7 +314,7 @@ Be aware of bias-variance trade-off with all of these. \\
 
 \end{frame}
 
-\begin{frame}{Regression Trees}
+\begin{frame}[label=full]{Regression Trees}
 \begin{columns}
 \begin{column}{.8\textwidth}
 \includegraphics[height=3.25in]{../class11/Figures_Chapters_7-13/Chapter8/8_3.pdf} 
@@ -325,7 +325,7 @@ Be aware of bias-variance trade-off with all of these. \\
 \end{columns}
 \end{frame}
 
-\begin{frame}{Regression Trees}
+\begin{frame}[label=full]{Regression Trees}
 \begin{enumerate}
    \item Recursively divide the predictor space into $J$ distinct and non-overlapping regions $R_1, R_2, \ldots, R_j$
    \begin{itemize}
@@ -334,7 +334,7 @@ Be aware of bias-variance trade-off with all of these. \\
        \begin{align*}
        R_1(j,s) = \{X | X_j < s\} \quad &\text{and} \quad R_2(j, s) = \{X | X_j \geq s\}
        \end{align*}
-       \item Choose $j$ and $s$ to minimize variance in each region:
+       \item Choose $j$ and $s$ to minimize total variance:
        \begin{align*}
        \sum_{i: x_i \in R_1(j,s)} (y_i - \bar{y}_{R_1})^2 &+ \sum_{i: x_i \in R_2(j,s)} (y_i - \bar{y}_{R_2})^2
        \end{align*}
@@ -343,7 +343,40 @@ Be aware of bias-variance trade-off with all of these. \\
 \end{enumerate}
 \end{frame}
 
-\begin{frame}[fragile]{Regression Trees -- Python}
+\begin{frame}[label=full]{Hands-On Exercise --- Regression Trees}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
+\small
+
+\begin{tabular}{c | c | c }
+\textbf{ID} & \textbf{Customer Spend} & \textbf{Customer Value} \\
+\hline
+A & 1 & 50 \\
+B & 2 & 65 \\
+C & 3 & 65 \\
+D & 4 & 70 \\
+E & 5 & 85 \\
+F & 6 & 90 \\
+\end{tabular}
+\end{column}
+\end{columns}
+\small 
+
+\vspace{\baselineskip}
+Build a regression tree by successively splitting the regions based on the Sum of Variance criterion. At every step:
+\begin{enumerate}
+   \item Identify possible split points
+   \item Calculate the variance for each candidate region and their sum
+   \item Identify the split with the minimum total variance
+   \item Repeat to a depth of two, that is, the root split and one more for each region
+   \item What is the prediction for each leaf node?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[label=withcode,fragile]{Regression Trees -- Python}
 Prepare data:
 \begin{pythoncode}
 import matplotlib.pyplot as plt
@@ -360,7 +393,7 @@ regr.fit(x, y)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Regression Trees -- Python}
+\begin{frame}[label=withcode,fragile]{Regression Trees -- Python}
 Print the MSE:
 \begin{pythoncode}
 from sklearn.metrics import mean_squared_error
@@ -373,7 +406,7 @@ print (export_text(regr,feature_names=x.columns))
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Regression Trees -- Python}
+\begin{frame}[label=full,fragile]{Regression Trees -- Python}
 Early stopping can prevent overfitting and maintain interpretability. \\
 
 \vspace{\baselineskip}
@@ -393,13 +426,13 @@ regr = DecisionTreeRegressor(max_leaf_nodes=8).fit(x, y)
 \end{pythoncode}
 \end{frame}
 
-%\begin{frame}{Regression Trees -- Python}
+%\begin{frame}[label=full]{Regression Trees -- Python}
 %\centering
 %%\hspace{-.5in}
 %\includegraphics[width=\textwidth]{reg_tree.png}
 %\end{frame}
 
-\begin{frame}[fragile]{Regression Trees -- Python}
+\begin{frame}[label=withcode,fragile]{Regression Trees -- Python}
 Plot fitted versus true values:
 \begin{pythoncode}
 import plotly.express as px
@@ -410,14 +443,19 @@ px.scatter(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Regression Trees -- Python}
+\begin{frame}[label=full]{Regression Trees -- Fitted vs Actual Values}
 
 \centering
 
 \includegraphics[height=3.25in]{tree_fitted_true.png}
 \end{frame}
 
-\begin{frame}[fragile]{Hands-On Exercises}
+\begin{frame}[label=withcode,fragile]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
 \begin{enumerate}
 \item Fit regression trees to the \emph{entire bike rental dataset} on the previous slides. Calculate the MSE as you vary:
 \begin{itemize}
@@ -425,16 +463,18 @@ px.scatter(
    \item \textbf{min\_samples\_leaf}: choose values 1, 5, 10, 20
    \item \textbf{max\_leaf\_nodes}: choose values 2, 8, 16, 32
 \end{itemize}
-\item Split the data into a test and training data set, like this:
+\item Split the data into a test and training data set, like:
 \begin{pythoncode}
 train=df.sample(frac=0.8)
 test=df.drop(train.index)
 \end{pythoncode}
 \item Repeat exercise (1) by fitting the tree to the \emph{training data} and calculate the MSE for the \emph{test data}.
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-%\begin{frame}{Regression Trees -- Pruning}
+%\begin{frame}[label=full]{Regression Trees -- Pruning}
 %\textbf{Cost Complexity Pruning}
 %\begin{itemize}
 %\item Regularization (prevent overfitting)
@@ -452,7 +492,7 @@ test=df.drop(train.index)
 %\end{itemize}
 %\end{frame}
 
-%\begin{frame}[fragile]{Regression Trees -- Pruning}
+%\begin{frame}[label=full,fragile]{Regression Trees -- Pruning}
 %Prune the tree using cost-complexity and cross-validation:
 %\begin{pythoncode}
 %from sklearn.model_selection import train_test_split
@@ -472,14 +512,14 @@ test=df.drop(train.index)
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}{Regression Tree -- Pruning}
+%\begin{frame}[label=full]{Regression Tree -- Pruning}
 %MSE versus $\alpha$: \\
 %\begin{center}
 %\includegraphics[width=.75\textwidth]{tree_mse_alpha.png}
 %\end{center}
 %\end{frame}
 
-%\begin{frame}[fragile]{Regression Trees -- Pruning}
+%\begin{frame}[label=full,fragile]{Regression Trees -- Pruning}
 %Fit trees for possible alphas:
 %\begin{pythoncode}
 %regrs = []
@@ -495,13 +535,13 @@ test=df.drop(train.index)
 %\end{pythoncode}
 %\end{frame}
 
-%\begin{frame}{Regression Trees -- Pruning}
+%\begin{frame}[label=full]{Regression Trees -- Pruning}
 %\begin{center}
 %\includegraphics[width=.8\textwidth]{tree_nodes_alpha.png}
 %\end{center}
 %\end{frame}
 
-%\begin{frame}[fragile]{Regression Trees}
+%\begin{frame}[label=full,fragile]{Regression Trees}
 %Compute train and test MSEs for all regression trees:
 %\begin{pythoncode}
 %train_mses = [sum((regr.predict(x_train)-y_train)**2) \
@@ -516,7 +556,7 @@ test=df.drop(train.index)
 %\end{center}
 %\end{frame}
 
-\begin{frame}{Classification Trees}
+\begin{frame}[label=full]{Classification Trees}
 \begin{itemize}
 
    \item Proportion of observations of class $k$ in leaf node $m$:
@@ -531,7 +571,7 @@ test=df.drop(train.index)
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Classification Trees \small [cont'd]}
+\begin{frame}[label=advanced]{Classification Trees \small [cont'd]}
 \begin{itemize}
    \item Use \textbf{Gini impurity} $G$ (node purity) for node $m$ to determine splits:
    \begin{align*}
@@ -547,7 +587,7 @@ test=df.drop(train.index)
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Classification Trees \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Classification Trees \small [cont'd]}
 Stock market data (from R ISLR2 package):
 \begin{pythoncode}
 d=pd.read_csv('https://evermann.ca/busi4720/Smarket.csv')
@@ -569,7 +609,12 @@ accuracy_score(clf.predict(x), y)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Hands-On Exercises}
+\begin{frame}[label=withcode,fragile]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
 \begin{enumerate}
 \item Fit classification trees to the \emph{entire stock market dataset} on the previous slides. Calculate the accuracy as you vary:
 \begin{itemize}
@@ -577,16 +622,18 @@ accuracy_score(clf.predict(x), y)
    \item \textbf{min\_samples\_leaf}: choose values 1, 5, 10, 20
    \item \textbf{max\_leaf\_nodes}: choose values 2, 8, 16, 32
 \end{itemize}
-\item Split the data into a test and training data set, like this:
+\item Split the data into a test and training data set, like:
 \begin{pythoncode}
 train = d.iloc[:3*d.shape[0]//4,:]
 test = d.iloc[3*d.shape[0]//4:,:]
 \end{pythoncode}
 \item Repeat exercise (1) by fitting the tree to the \emph{training data} and calculate the accuracy for the \emph{test data}.
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Tree Ensemble Methods}
+\begin{frame}[label=advanced]{Tree Ensemble Methods}
 
 \textbf{Problem:} Trees are unstable, have high variance, prone to overfitting \\
 
@@ -603,7 +650,7 @@ f(y | x) = \frac{1}{|M|} \sum_{m \in M} f_m(y|x)
 \end{block}
 \end{frame}
 
-\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=advanced]{Tree Ensemble Methods \small [cont'd]}
 \begin{block}{Stacking:}
 \begin{align*}
 f(y | x) = \frac{1}{|M|} \sum_{m \in M} w_m f_m(y|x)
@@ -614,7 +661,7 @@ f(y | x) = \frac{1}{|M|} \sum_{m \in M} w_m f_m(y|x)
 \end{block}
 \end{frame}
 
-\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=advanced]{Tree Ensemble Methods \small [cont'd]}
 \begin{block}{Bagging:}
 \begin{itemize}
   \item ''Bootstrap Aggregating''
@@ -632,7 +679,7 @@ f(y | x) = \frac{1}{|M|} \sum_{m \in M} w_m f_m(y|x)
 \end{block}
 \end{frame}
 
-\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=advanced]{Tree Ensemble Methods \small [cont'd]}
 \centering
 
 \includegraphics[height=2.75in]{murphy_18_04.png} \\
@@ -640,7 +687,7 @@ f(y | x) = \frac{1}{|M|} \sum_{m \in M} w_m f_m(y|x)
 \scriptsize Source: Murphy Figure 18.4 \normalsize
 \end{frame}
 
-\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=full]{Tree Ensemble Methods \small [cont'd]}
 \textbf{Example:} Impact of $m$ on test error:
 
 \centering
@@ -650,7 +697,7 @@ f(y | x) = \frac{1}{|M|} \sum_{m \in M} w_m f_m(y|x)
 \scriptsize Source: ISLR 2, Figure 8.10 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=advanced,fragile]{Tree Ensemble Methods \small [cont'd]}
 Bagging in Python:
 \begin{pythoncode}
 from sklearn.ensemble import BaggingClassifier
@@ -665,7 +712,7 @@ accuracy_score(bagging.predict(x), y)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Tree Ensemble Methods \small [cont'd]}
 Random forest regression in Python:
 
 \begin{pythoncode}
@@ -684,7 +731,7 @@ mean_squared_error(regr.predict(x), y)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Tree Ensemble Methods \small [cont'd]}
 Random forest classification in Python:
 
 \begin{pythoncode}
@@ -703,19 +750,26 @@ accuracy_score(clf.predict(x), y)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Hands-On Exercise}
+\begin{frame}[label=withcode,fragile]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
 \begin{itemize}
 \item Using the random forest regressor and classifier in Python, vary the number of estimators and the maximum number of features to determine their impact on the \emph{training performance} (MSE or accuracy).
-\item Split the data into a test and training data set, like this:
+\item Split the data into a test and training data set, like:
 \begin{pythoncode}
 train=df.sample(frac=0.8)
 test=df.drop(train.index)
 \end{pythoncode}
 \item Using the random forest regressor and classifier in Python, vary the number of estimators and the maximum number of features to determine their impact on the \emph{test performance} (MSE or accuracy).
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=advanced]{Tree Ensemble Methods \small [cont'd]}
 \begin{block}{Boosting:}
 \begin{itemize}
     \item Iteratively build $B$ simple (''weak'') trees using residuals
@@ -742,7 +796,7 @@ test=df.drop(train.index)
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=advanced]{Tree Ensemble Methods \small [cont'd]}
 \textbf{Example:} Impact of $d$ on test error:
 
 \centering
@@ -753,7 +807,7 @@ test=df.drop(train.index)
 \end{frame}
 
 
-\begin{frame}{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=advanced]{Tree Ensemble Methods \small [cont'd]}
 \textbf{Example:} Comparison of Bagging, Random Forest, and Boosting:
 
 \centering
@@ -763,7 +817,7 @@ test=df.drop(train.index)
 \scriptsize Source: Murphy Figure 18.5 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{Tree Ensemble Methods \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Tree Ensemble Methods \small [cont'd]}
 Boosting classification in Python:
 
 \begin{pythoncode}
@@ -785,7 +839,12 @@ accuracy_score(clf.predict(x), y)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Hands-On Exercise}
+\begin{frame}[label=withcode,fragile]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
 \begin{itemize}
 \item Using the gradient boosting regressor and classifier in Python, vary the learning rate and the maximum tree depth to determine their impact on the \emph{training performance} (MSE or accuracy).
 \item Split the data into a test and training data set, like this:
@@ -795,10 +854,12 @@ test=df.drop(train.index)
 \end{pythoncode}
 \item Using the gradient boosting regressor and classifier in Python, vary the learning rate and the maximum tree depth to determine their impact on the \emph{test performance} (MSE or accuracy).
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Decision Trees}
+\begin{frame}[label=withcode]{Decision Trees}
 \textbf{Further reading:} \\
 
 \small
@@ -812,17 +873,7 @@ test=df.drop(train.index)
 \end{frame}
 
 
-%\begin{frame}{Model Agnostic Methods}
-%\begin{block}{Advantages}
-%\begin{itemize}
-   %\item Model flexibility
-   %\item Explanation flexibility
-   %\item Representation flexibility
-%\end{itemize}
-%\end{block}
-%\end{frame}
-
-\begin{frame}{Global Model Agnostic Methods}
+\begin{frame}[label=full]{Global Model Agnostic Methods}
 \begin{itemize}
     \item \textbf{Partial dependence plot (PDP)}
     \item \textbf{Individual conditional expectation (ICE) curves} 
@@ -835,7 +886,7 @@ test=df.drop(train.index)
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Partial Dependence Plot (PDP)}
+\begin{frame}[label=full,fragile]{Partial Dependence Plot (PDP)}
 Marginal effect of one (or a few) features $X_S$ on the outcome, marginalized (i.e. sum weighted by probability) over all other (complement) features $X_C$.
 \begin{align*}
 \hat{f}_S(X_S) &= \mathbbm{E}_{X_C} \left[ \hat{f}(X_S, X_C)) \right] = \int \hat{f}(X_S, X_C) p(X_C) dX_c 
@@ -847,7 +898,7 @@ Shows how the \emph{average} prediction changes when the focal predictor is chan
 
 \end{frame}
 
-\begin{frame}[fragile]{Partial Dependence Plot (PDP)}
+\begin{frame}[label=withcode,fragile]{Partial Dependence Plot (PDP)}
 Read the data set:
 \begin{pythoncode}
 import pandas as pd
@@ -871,13 +922,13 @@ plt.show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Partial Dependence Plot (PDP)}
+\begin{frame}[label=full]{Partial Dependence Plot (PDP)}
 \begin{center}
 \includegraphics[width=\textwidth]{pdp_dtr.png}
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Individual Conditional Expectation (ICE) Plot}
+\begin{frame}[label=full,fragile]{Individual Conditional Expectation (ICE) Plot}
 \begin{itemize}
 \item Instead of the average effect of a feature, shows PDP for individual samples
 \item Identify individual \textbf{outlier} cases or \textbf{heterogeneous data}
@@ -893,7 +944,7 @@ PartialDependenceDisplay \
 \footnotesize (Individual samples overlaid due to piece-wise constant regression)
 \end{frame}
 
-\begin{frame}[fragile]{Accumulated Local Effects (ALE) Plot}
+\begin{frame}[label=full,fragile]{Accumulated Local Effects (ALE) Plot}
 \begin{itemize}
    \item Effects computed for a grid of intervals (a ''local window'') (instead of the entire domain, as in PDP)
    \item Does not construct unrealistic feature combinations
@@ -913,14 +964,14 @@ Centering the effects to mean 0:
 \end{align*}
 \end{frame}
 
-\begin{frame}{ALE Plots}
+\begin{frame}[label=full]{ALE Plots}
 \centering
 \includegraphics[height=3in]{molnar-8-7.jpeg} \\
 
 \scriptsize Source: Molnar, Fig. 8.7
 \end{frame}
 
-\begin{frame}[fragile]{Accumulated Local Effects (ALE) Plot}
+\begin{frame}[label=withcode,fragile]{Accumulated Local Effects (ALE) Plot}
 Train model:
 \begin{pythoncode}
 from sklearn.tree import DecisionTreeRegressor
@@ -942,7 +993,7 @@ plt.show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Accumulated Local Effects (ALE) Plot}
+\begin{frame}[label=full]{Accumulated Local Effects (ALE) Plot}
 \centering 
 
 \includegraphics[height=1.5in]{ale_dtr.png} 
@@ -952,7 +1003,7 @@ plt.show()
 \end{frame}
 
 
-\begin{frame}{Permutation Feature Importance}
+\begin{frame}[label=full]{Permutation Feature Importance}
 
 \begin{block}{Intuition}
 Calculate the increase in a model's prediction error when permuting a feature
@@ -975,7 +1026,7 @@ Calculate Permutation Feature Importance on \emph{test} data
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Permutation Feature Importance}
+\begin{frame}[label=withcode,fragile]{Permutation Feature Importance}
 Prepare data:
 \begin{pythoncode}
 import pandas as pd
@@ -996,7 +1047,7 @@ r_idx = r.importances_mean.argsort()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Permutation Feature Importance}
+\begin{frame}[label=withcode,fragile]{Permutation Feature Importance}
 Produce a nice plot of sorted feature importance:
 \begin{pythoncode}
 import matplotlib.pyplot as plt
@@ -1010,13 +1061,13 @@ plt.show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Permutation Feature Importance}
+\begin{frame}[label=full]{Permutation Feature Importance}
 \includegraphics[width=\textwidth]{pfi_tree.png} \\
 
 \footnotesize Uncertainty due to multiple permutations (parameter \texttt{n\_repeats})
 \end{frame}
 
-\begin{frame}[fragile]{Global Surrogate Models}
+\begin{frame}[label=full,fragile]{Global Surrogate Models}
 \begin{block}{Intuition}
 Predict the predictions of a complex ''black box'' model using an intrinsically interpretable model.
 \end{block}
@@ -1034,7 +1085,7 @@ OLS(preds, x.astype(float)).fit().summary()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Global Model Agnostic Methods -- Summary}
+\begin{frame}[label=full]{Global Model Agnostic Methods -- Summary}
 \footnotesize
 \renewcommand{\arraystretch}{1.1}
 \begin{tabular}{l|l} \hline
@@ -1059,7 +1110,7 @@ R-squared measure for fit & \\ \hline
 \end{tabular}
 \end{frame}
 
-\begin{frame}{Local Interpretable Model-Agnostic Explanations}
+\begin{frame}[label=full]{Local Interpretable Model-Agnostic Explanations}
 \small
 \begin{block}{Idea}
 \begin{enumerate}
@@ -1073,7 +1124,7 @@ R-squared measure for fit & \\ \hline
 
 \end{frame}
 
-\begin{frame}{LIME -- Example}
+\begin{frame}[label=full]{LIME -- Example}
 \begin{columns}
 \begin{column}{.8\textwidth}
 \includegraphics[height=3.25in]{molnar-9-5.jpeg} 
@@ -1084,7 +1135,7 @@ R-squared measure for fit & \\ \hline
 \end{columns}
 \end{frame}
 
-\begin{frame}{LIME -- Example}
+\begin{frame}[label=advanced]{LIME -- Example}
 \begin{itemize}
    \item Weight function $\pi$ is often an exponential smoothing kernel
    \item Kernel width is critical determinant of explanation
@@ -1099,7 +1150,7 @@ R-squared measure for fit & \\ \hline
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{LIME -- Example}
+\begin{frame}[label=withcode,fragile]{LIME -- Example}
 Using a deep decision tree as ''black box'':
 \begin{pythoncode}
 import sklearn.tree
@@ -1120,7 +1171,7 @@ explainer = lime.lime_tabular.LimeTabularExplainer(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{LIME -- Example}
+\begin{frame}[label=withcode,fragile]{LIME -- Example}
 Explain instance number 5:
 \begin{pythoncode}
 exp = explainer.explain_instance( 
@@ -1132,28 +1183,29 @@ exp = explainer.explain_instance(
 exp.as_list()
 exp.as_pyplot_figure().show()
 \end{pythoncode}
-%\end{frame}
+\end{frame}
 
-%\begin{frame}{LIME -- Example}
+\begin{frame}[label=full]{LIME -- Example}
+Explanation diagram:
 \includegraphics[width=\textwidth]{lime_dt.png}
 \end{frame}
 
-%\begin{frame}[fragile]{LIME -- Example}
-%Key defaults in Python LIME:
-%\begin{pythoncode}
-%if kernel_width is None:
-    %kernel_width=np.sqrt(training_data.shape[1])*.75
+\begin{frame}[label=withcode,fragile]{LIME -- Example}
+Key defaults in Python LIME:
+\begin{pythoncode}
+if kernel_width is None:
+    kernel_width=np.sqrt(training_data.shape[1])*.75
 
-%if kernel is None:
-    %def kernel(d, kernel_width):
-        %return np.sqrt(np.exp(-(d**2)/kernel_width**2))
+if kernel is None:
+    def kernel(d, kernel_width):
+        return np.sqrt(np.exp(-(d**2)/kernel_width**2))
         
-%if model_regressor is None:
-    %model_regressor = Ridge(alpha=1,fit_intercept=True)
-%\end{pythoncode}
-%\end{frame}
+if model_regressor is None:
+    model_regressor = Ridge(alpha=1,fit_intercept=True)
+\end{pythoncode}
+\end{frame}
 
-\begin{frame}{LIME for Images}
+\begin{frame}[label=full]{LIME for Images}
 LIME explanations for label ''bagel'' and ''strawberries'':
 \begin{center}
 \includegraphics[width=\textwidth]{molnar-9-8.png} \\
@@ -1170,7 +1222,7 @@ LIME explanations for label ''bagel'' and ''strawberries'':
 \end{frame}
 
 
-\begin{frame}{Shapley Values}
+\begin{frame}[label=full]{Shapley Values}
 \begin{block}{Motivation}
 How much does \emph{feature value} $x_j$ contribute to the overall prediction compared to the average prediction?
 \end{block}
@@ -1184,7 +1236,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 
 \end{frame}
 
-\begin{frame}{Shapley Values}
+\begin{frame}[label=full]{Shapley Values}
 \begin{align*}
 \phi_i(v) = \frac{1}{n} \sum_{S \subseteq N \setminus \{i\}} \binom{n-1}{|S|}^{-1} \left[ v(S \cup \{i\}) - v(S)\right]
 \end{align*}
@@ -1195,7 +1247,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Shapley Value}
+\begin{frame}[label=full]{Shapley Value}
 \begin{block}{Fairness Properties}
 \begin{itemize}
    \item \textbf{Efficiency}: Contributions add up to total value
@@ -1206,7 +1258,70 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 \end{block}
 \end{frame}
 
-\begin{frame}{Shapley Values in Interpretable ML}
+\begin{frame}[label=full]{Hands-On Exercise --- Shapley Values}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
+\footnotesize
+A company has three departments Marketing (A), Engineering (B), Design (C) that can work together on a project:
+\begin{align*}
+N=\{A,B,C\}
+\end{align*}
+The value created by each possible coalition is given by:
+\begin{columns}
+\begin{column}{.5\textwidth}
+\begin{align*}
+\begin{array}{c|c}
+\text{Coalition } S & v(S) \\
+\hline
+\emptyset & 0 \\
+\{A\} & 10 \\
+\{B\} & 20 \\
+\{C\} & 15 \\
+\end{array}
+\end{align*}
+\end{column}
+\begin{column}{.5\textwidth}
+\begin{align*}
+\begin{array}{c|c}
+\text{Coalition } S & v(S) \\
+\hline
+\{A,B\} & 50 \\
+\{A,C\} & 35 \\
+\{B,C\} & 45 \\
+\{A,B,C\} & 90
+\end{array}
+\end{align*}
+\end{column}
+\end{columns}
+\end{column}
+\end{columns}
+\footnotesize
+
+\begin{enumerate}
+    \item Compute the Shapley values $\phi_A,\phi_B,\phi_C $ for each department:
+
+    \begin{align*}
+       \phi_i
+    =
+    \sum_{S\subseteq N\setminus\{i\}}
+    \frac{|S|!(n-|S|-1)!}{n!}
+    \left[v(S\cup\{i\})-v(S)\right]
+	\end{align*}
+	
+	Write out each coalition $S$ in the sum!
+    \item Verify that the Shapley values satisfy the efficiency property:
+\begin{align*}
+    \phi_A+\phi_B+\phi_C=v(\{A,B,C\})
+\end{align*}
+
+\end{enumerate}
+\end{frame}
+
+
+\begin{frame}[label=full]{Shapley Values in Interpretable ML}
 \begin{itemize}
    \item Players are feature values
    \item Coalitions are combinations of feature values
@@ -1219,7 +1334,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Shapley Additive Explanations (SHAP)}
+\begin{frame}[label=full]{Shapley Additive Explanations (SHAP)}
 \small
 \begin{columns}
 \begin{column}{0.25\textwidth}
@@ -1247,7 +1362,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 
 \end{frame}
 
-%\begin{frame}{SHAP}
+%\begin{frame}[label=full]{SHAP}
 %\begin{itemize}
    %\item \textbf{Simplified inputs} $x'$ map to original inputs $x$ through a mapping function $x=h_x(x')$
    %\item \textbf{Local explanation methods} try to ensure that $g(z') \approx f(h_x(z'))$ whenever $z' \approx x'$
@@ -1259,7 +1374,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 %\end{itemize}
 %\end{frame}
 
-%\begin{frame}{SHAP}
+%\begin{frame}[label=full]{SHAP}
 %\begin{block}{Properties}
 %\begin{itemize}
    %\item \textbf{Local accuracy}: The explanation model $g(x')$ matches the original model $f(x)$ when $x = h_x(x')$
@@ -1272,7 +1387,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 %Shapley values are the only additive feature attribution method satisfying these properties.
 %\end{frame}
 
-%\begin{frame}{SHAP}
+%\begin{frame}[label=full]{SHAP}
 %\textbf{Shapley kernel}: Shapley values can be recovered by LIME under the following assumptions:
 %\begin{align*}
 %\Omega(g) &= 0 \\
@@ -1281,7 +1396,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 %\end{align*}
 %\end{frame}
 
-\begin{frame}[fragile]{SHAP Example}
+\begin{frame}[label=withcode,fragile]{SHAP Example}
 Fit a simple regression model to the California housing dataset:
 \begin{pythoncode}
 import sklearn
@@ -1299,7 +1414,7 @@ shap_values = explainer(X)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{SHAP Example}
+\begin{frame}[label=full,fragile]{SHAP Example}
 The \textbf{barplot} shows the importance of feature values for an individual prediction:
 \begin{pythoncode}
 shap.plots.bar(shap_values[20])
@@ -1309,7 +1424,7 @@ shap.plots.bar(shap_values[20])
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{SHAP Example}
+\begin{frame}[label=full,fragile]{SHAP Example}
 The \textbf{barplot} can also show the importance of a feature by averaging over all instances (and their feature values):
 \begin{pythoncode}
 shap.plots.bar(shap_values)
@@ -1319,7 +1434,7 @@ shap.plots.bar(shap_values)
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{SHAP Example}
+\begin{frame}[label=full,fragile]{SHAP Example}
 \textbf{Waterfall plots} explain how feature values combine to produce an individual prediction:
 \begin{pythoncode}
 sha.plots.waterfall(shap_values[20], max_display=14)
@@ -1329,7 +1444,7 @@ sha.plots.waterfall(shap_values[20], max_display=14)
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{SHAP Example}
+\begin{frame}[label=full,fragile]{SHAP Example}
 \textbf{Beeswarm plots} explain all feature values for all instances (represented by a dot):
 \begin{pythoncode}
 shap.plots.beeswarm(shap_values)
@@ -1339,7 +1454,7 @@ shap.plots.beeswarm(shap_values)
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{SHAP Example}
+\begin{frame}[label=full,fragile]{SHAP Example}
 The \textbf{heatmap} shows SHAP values of feature values for all instances, and shows model prediction and global feature importance in rugs:
 \begin{pythoncode}
 shap.plots.heatmap(shap_values)
@@ -1349,7 +1464,7 @@ shap.plots.heatmap(shap_values)
 \end{center}
 \end{frame}
 
-\begin{frame}{SHAP for Image Classification}
+\begin{frame}[label=full]{SHAP for Image Classification}
 \begin{itemize}
 \item Presence/absence of features/pixels by masking parts of an image:
 \end{itemize}
@@ -1359,13 +1474,13 @@ shap.plots.heatmap(shap_values)
 \scriptsize Source: \url{https://github.com/shap} (MIT License)
 \end{frame}
 
-\begin{frame}{SHAP for Text Classification}
+\begin{frame}[label=full]{SHAP for Text Classification}
 \includegraphics[width=\textwidth]{shap_text.png} \\
 
 \scriptsize Source: \url{https://shap.readthedocs.io/en/latest/text_examples.html} (MIT License)
 \end{frame}
 
-\begin{frame}[fragile]{Fixes for Matplotlib}
+\begin{frame}[label=withcode,fragile]{Fixes for Matplotlib}
 \begin{bashcode}
 sudo apt-get install -y qt6-base-dev xcb libxcb-cursor-dev
 sudo ln -sf /usr/lib/x86_64-linux-gnu/qt6/plugins/platforms/ \

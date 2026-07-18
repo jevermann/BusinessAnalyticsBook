@@ -1,14 +1,14 @@
-.PHONY: full
-book:
-	export _BUSI4720_BOOK_CODE="Full"; pdflatex --shell-escape --file-line-error-style busi4720.book.tex
+.PHONY: Full
+Full:
+	export _BUSI4720_EDITION="Full"; pdflatex --shell-escape --file-line-error-style -jobname=Busi4720_Full busi4720.book.tex
 
 .PHONY: NoCode
-book:
-	export _BUSI4720_BOOK_CODE="NoCode"; pdflatex --shell-escape --file-line-error-style busi4720.book.tex
+NoCode:
+	export _BUSI4720_EDITION="NoCode"; pdflatex --shell-escape --file-line-error-style -jobname=Busi4720_NoCode busi4720.book.tex
 
 .PHONY: Simplified
-book:
-	export _BUSI4720_BOOK_CODE="Simplified"; pdflatex --shell-escape --file-line-error-style busi4720.book.tex
+Simplified:
+	export _BUSI4720_EDITION="Simplified"; pdflatex --shell-escape --file-line-error-style -jobname=Busi4720_Simplified busi4720.book.tex
 
 .PHONY: zip
 zip:
@@ -32,7 +32,7 @@ clean:
 	find . -name "*.ilg" -exec rm {} \;
 	find . -name "*.ind" -exec rm {} \;
 	find . -name "comment.cut" -exec rm {} \;
-	find . -name "busi4720_book_code_tmp.txt" -exec rm {} \;
+	find . -name "busi4720_edition_tmp.txt" -exec rm {} \;
 
 squeaky: clean
 	find . -name "*.tex.bak" -exec rm {} \;
@@ -144,15 +144,15 @@ vm:
 	${MAKE} -C vm all
 
 .PHONY: math
-vm:
+math:
 	${MAKE} -C math all
 
 .PHONY: software
-vm:
+software:
 	${MAKE} -C software all
 
 .PHONY: commandline
-vm:
+commandline:
 	${MAKE} -C commandline all
 
 class1chapter:

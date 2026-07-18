@@ -4,11 +4,11 @@
 
 \title{Business 4720 - Class 16}
 
-\subtitle{Convolutional Neural Networks using Python}
+\subtitle{Convolutional Neural Networks}
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -29,7 +29,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \small
 \begin{block}{}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
@@ -53,7 +53,7 @@ Chapter 13, 14, 15
 \end{block}
 \end{frame}
 
-\begin{frame}{Convolutional Neural Networks}
+\begin{frame}[label=full]{Convolutional Neural Networks}
 \begin{block}{Task}
 \begin{itemize}
    \item Image classification
@@ -71,7 +71,7 @@ Chapter 13, 14, 15
 \end{block}
 \end{frame}
 
-\begin{frame}{Convolution}
+\begin{frame}[label=full]{Convolution}
 \begin{block}{1-Dimensional}
 \centering
 \includegraphics[width=\textwidth]{screen1.png} \\
@@ -86,7 +86,7 @@ Chapter 13, 14, 15
 \end{block}
 \end{frame}
 
-\begin{frame}{Convolution \small [cont'd]}
+\begin{frame}[label=full]{Convolution \small [cont'd]}
 \begin{block}{Multi-channel 2D Convolution}
 \centering
 \includegraphics[width=.8\textwidth]{screen3.png} \\
@@ -97,7 +97,7 @@ Chapter 13, 14, 15
 \emph{In a convolutional neural net layer, the convolution kernels are \textbf{trainable parameters}}.
 \end{frame}
 
-\begin{frame}{CNN Parameters}
+\begin{frame}[label=full]{CNN Parameters}
 \small
 \begin{itemize}
   \item Let the kernel be of size $k \times l$
@@ -111,7 +111,12 @@ Chapter 13, 14, 15
 \end{frame}
 
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+
 Calculate the number of trainable parameters for the following CNN layers:
 \begin{enumerate}
 \item A kernel of size $4 \times 4$ operating on an input with 3 channels and an output of 8 channels.
@@ -120,10 +125,12 @@ Calculate the number of trainable parameters for the following CNN layers:
 \item A kernel of size $5 \times 5$ operating on an input with 4 channels and an output with 4 channels.
 \end{enumerate}
 Assume the previous four layers are part of the same neural network, what is the total number of trainable parameters?
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Convolution \small [cont'd]}{Striding and Padding}
+\begin{frame}[label=full]{Convolution \small [cont'd]}{Striding and Padding}
 \begin{block}{Striding}
    \begin{itemize} 
        \item Take ''larger steps'' moving the kernel
@@ -140,26 +147,19 @@ Assume the previous four layers are part of the same neural network, what is the
 \end{block}
 \end{frame}
 
-\begin{frame}{Convolution \small [cont'd]}{Striding and Padding}
+\begin{frame}[label=full]{Convolution \small [cont'd]}{Striding and Padding}
 \centering
 \includegraphics[width=.8\textwidth]{screen4.png} \\
 
 \scriptsize Source: Murphy Fig. 14.8(b)
 \end{frame}
 
-\begin{frame}{Pooling}
-\begin{itemize}
-   \item Recognize location independent features
-   \item Max pooling or average pooling
-   \item Pooling layers have no trainable parameters
-\end{itemize}
-\centering
-\includegraphics[width=.8\textwidth]{screen5.png} \\
-
-\scriptsize Source: Murphy Fig. 14.12
-\end{frame}
-
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \small
 \begin{enumerate}
 \item Assume the following $5 \times 5$ input matrix:
@@ -177,16 +177,53 @@ and the following $3 \times 3$ convolution kernel:
                 2 & 4 & 2 \\
                 1 & 2 & 1 \end{bmatrix}
 \end{align*}
-Zero-pad the matrix with two zeros on all sides and using stride 2, calculate the convolution result. What are the dimensions of the convolution output?
-
-\item Apply a $2 \times 2$ max pooling layer to the result of the previous exercise. 
+\item Zero-pad the matrix with \emph{two} zeros on all sides
+\item Using stride 2, calculate the convolution result. 
+\item What are the dimensions of the output?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 
+\begin{frame}[label=full]{Pooling}
+\begin{itemize}
+   \item Recognize location independent features
+   \item Max pooling or average pooling
+   \item Pooling layers have no trainable parameters
+\end{itemize}
+\centering
+\includegraphics[width=.8\textwidth]{screen5.png} \\
+
+\scriptsize Source: Murphy Fig. 14.12
+\end{frame}
 
 
-\begin{frame}{CNN}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+\begin{enumerate}
+\item Assume the following $4 \times 4$ input matrix:
+\begin{align*}
+\begin{bmatrix} 1 & 8 & 8 & 1 \\ 
+                8 & 36 & 31 & 8 \\ 
+                8 & 31 & 32 & 7 \\
+                1 & 9 & 7 & 3
+\end{bmatrix}
+\end{align*}
+\item Apply a $2 \times 2$ max pooling layer. 
+\item What are the dimensions of the convolution output?
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{CNN}
 \begin{itemize}
    \item Multiple convolution and pooling (subsampling) layers
    \item Flatten final feature maps
@@ -200,7 +237,7 @@ Zero-pad the matrix with two zeros on all sides and using stride 2, calculate th
 \scriptsize Source: Murphy Fig. 14.13
 \end{frame}
 
-\begin{frame}{CNN}
+\begin{frame}[label=full]{CNN}
 \begin{itemize}
    \item Multiple convolutional kernels applied in parallel to the same image (''channels'')
 \end{itemize} 
@@ -217,7 +254,7 @@ Zero-pad the matrix with two zeros on all sides and using stride 2, calculate th
 \scriptsize Source: Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}
 \end{frame}
 
-\begin{frame}{CNN -- Feature Maps}
+\begin{frame}[label=full]{CNN -- Feature Maps}
 \begin{columns}
 \begin{column}{0.5\textwidth}
 \begin{itemize}
@@ -237,35 +274,35 @@ Zero-pad the matrix with two zeros on all sides and using stride 2, calculate th
 \end{columns}
 \end{frame}
 
-\begin{frame}{CNN -- Feature Maps}
+\begin{frame}[label=full]{CNN -- Feature Maps}
 \centering
 \includegraphics[height=2in]{layer1.png} \\
 \vspace{\baselineskip}
 \scriptsize Source: Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}
 \end{frame}
 
-\begin{frame}{CNN -- Feature Maps}
+\begin{frame}[label=full]{CNN -- Feature Maps}
 \centering
 \includegraphics[height=2in]{layer2.png} \\
 \vspace{\baselineskip}
 \scriptsize Source: Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}
 \end{frame}
 
-\begin{frame}{CNN -- Feature Maps}
+\begin{frame}[label=full]{CNN -- Feature Maps}
 \centering
 \includegraphics[width=\textwidth]{layer3.png} \\
 \vspace{\baselineskip}
 \scriptsize Source: Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}
 \end{frame}
 
-\begin{frame}{CNN -- Feature Maps}
+\begin{frame}[label=full]{CNN -- Feature Maps}
 \centering
 \includegraphics[height=2.75in]{layers45.png} \\
 \vspace{0.5\baselineskip}
 \scriptsize Source: Matthew D. Zeiler and Rob Fergus (2013) Visualizing and Understanding Convolutional Networks. \url{https://doi.org/10.48550/arXiv.1311.2901}
 \end{frame}
 
-\begin{frame}{CNN in Keras}
+\begin{frame}[label=withcode]{CNN in Keras}
 \centering
 \includegraphics[height=2in]{cifar10.png}
 \begin{itemize}
@@ -275,7 +312,7 @@ Zero-pad the matrix with two zeros on all sides and using stride 2, calculate th
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{CNN in Keras}
+\begin{frame}[label=withcode,fragile]{CNN in Keras}
 Import the data:
 \begin{pythoncode}
 import tensorflow as tf
@@ -304,7 +341,7 @@ fig.show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{CNN in Keras}
+\begin{frame}[label=withcode,fragile]{CNN in Keras}
 Create a simple convolutional model:
 \begin{pythoncode}
 model = models.Sequential()
@@ -328,7 +365,7 @@ model.summary()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{CNN in Keras}
+\begin{frame}[label=withcode,fragile]{CNN in Keras}
 Compile and train the model:
 \begin{pythoncode}
 model.compile(
@@ -343,7 +380,7 @@ model.fit(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Other Computer Vision Tasks for CNNs}{Object Detection}
+\begin{frame}[label=full]{Other Computer Vision Tasks for CNNs}{Object Detection}
 \includegraphics[width=\textwidth]{screen10.png} \\
 
 \scriptsize Source: Murphy Fig. 14.27
@@ -354,7 +391,7 @@ f_\theta: R^{H\times W \times K} \rightarrow [0,1]^{A \times A} \times \{1, \ldo
 For each anchor box, learn the object presence probability, the object category and two offset vectors to be added to the center of the box to the top left and bottom right corners.
 \end{frame}
 
-\begin{frame}{Other Computer Vision Tasks for CNNs}{Semantic Segmentation}
+\begin{frame}[label=full]{Other Computer Vision Tasks for CNNs}{Semantic Segmentation}
 \includegraphics[width=\textwidth]{screen11.png} \\
 
 \scriptsize Source: Murphy Fig. 14.29
@@ -364,7 +401,7 @@ For each anchor box, learn the object presence probability, the object category 
 Using an \textbf{encoder-decoder} or \textbf{U-net} network to identify the class of each pixel in an image.
 \end{frame}
 
-\begin{frame}{Other Computer Vision Tasks for CNNs}
+\begin{frame}[label=full]{Other Computer Vision Tasks for CNNs}
 \begin{center}
 \includegraphics[width=.5\textwidth]{street.png} \\
 
@@ -376,7 +413,7 @@ Perform semantic segmentation within each anchor box from object detection to id
 \end{frame}
 
 
-\begin{frame}[fragile]{Text Classification using CNN}
+\begin{frame}[label=withcode,fragile]{Text Classification using CNN}
 Import packages:
 \begin{pythoncode}
 import collections
@@ -391,7 +428,7 @@ from tensorflow.keras.layers import TextVectorization
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Text Classification using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification using NN \small [cont'd]}
 Download the Stack Overflow dataset:
 \begin{pythoncode}
 data_url = \
@@ -414,13 +451,13 @@ with open(sample_file) as f:
 \end{frame}
 
 
-\begin{frame}[fragile]{Text Classification using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification using NN \small [cont'd]}
 \centering
 
 \includegraphics[width=.8\textwidth]{screen9.png}
 \end{frame}
 
-\begin{frame}[fragile]{Text Classification using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification using NN \small [cont'd]}
 Read the training data portion and split into training and validation set
 \begin{pythoncode}
 raw_train_ds = \
@@ -442,7 +479,7 @@ raw_test_ds = utils.text_dataset_from_directory(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Text Classification using NN \small [cont'd]}
+\begin{frame}[label=full,fragile]{Text Preprocessing}
 \begin{block}{Pre-Processing}
 \begin{itemize}
    \item \textbf{Standardization}: Remove punction, remove HTML elements, etc.
@@ -464,7 +501,7 @@ John likes to watch movies. Mary likes movies too.
 \end{frame}
 
 
-\begin{frame}[fragile]{Text Classification Using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using NN \small [cont'd]}
 Use the Keras \texttt{TextVectorization} pre-processing layer:
 \begin{pythoncode}
 multi_hot_vectorize_layer = TextVectorization(
@@ -480,7 +517,7 @@ multi_hot_vectorize_layer.adapt(train_text)
 \end{frame}
 
 
-\begin{frame}[fragile]{Text Classification Using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using NN \small [cont'd]}
 \begin{itemize}
    \item The ''multi-hot'' vectorization layer outputs a single integer array per mini-batch, containing 1s in all elements where the token mapped to that index exists at least once in the mini-batch item. 
 \end{itemize}
@@ -496,7 +533,7 @@ print(list(multi_hot_vectorize_layer(text_batch[0]).numpy()))
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Text Classification Using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using NN \small [cont'd]}
 Define a simple model, set loss function, optimizer and a metric to collect:
 \begin{pythoncode}
 multi_hot_model = tf.keras.Sequential([
@@ -511,7 +548,7 @@ multi_hot_model.compile(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Text Classification Using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using NN \small [cont'd]}
 Train the model for 25 epochs, showing validation set accuracy after each epoch:
 \begin{pythoncode}
 multi_hot_model.fit(raw_train_ds, 
@@ -520,17 +557,24 @@ multi_hot_model.fit(raw_train_ds,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
       \item Vocabulary size (originally 10 000)
       \item Number of layers (originally 1)
    \end{enumerate}
 Comment on your findings and identify the best model.
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}[fragile]{Text Classification Using CNN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using CNN \small [cont'd]}
 Use the Keras \texttt{TextVectorization} pre-processing layer, this time with integer outputs:
 \begin{pythoncode}
 int_vectorize_layer = TextVectorization(
@@ -547,7 +591,7 @@ int_vectorize_layer.adapt(train_text)
 \end{frame}
 
 
-\begin{frame}[fragile]{Text Classification Using CNN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using CNN \small [cont'd]}
 \begin{itemize}
    \item The ''int'' vectorization layer outputs integer indices, one integer index per split string token. 
 \end{itemize}
@@ -563,7 +607,7 @@ print(list(int_vectorize_layer(text_batch[0]).numpy()))
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Word Embeddings}
+\begin{frame}[label=full]{Word Embeddings}
 \begin{columns}
 \begin{column}{.5\textwidth}
 \includegraphics[width=\textwidth]{one-hot.png}
@@ -585,7 +629,7 @@ print(list(int_vectorize_layer(text_batch[0]).numpy()))
 \end{frame}
 
 
-\begin{frame}[fragile]{Text Classification Using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using NN \small [cont'd]}
 Define a 1D-CNN model, set loss function, optimizer and a metric to collect:
 \begin{pythoncode}
 int_model = tf.keras.Sequential([
@@ -606,7 +650,7 @@ losses.SparseCategoricalCrossentropy(from_logits=True),
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Text Classification Using NN \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Text Classification Using NN \small [cont'd]}
 Train the model for 25 epochs:
 
 \begin{pythoncode}
@@ -616,7 +660,12 @@ int_model.fit(raw_train_ds,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
       \item Vocabulary size (originally 10 000)
@@ -628,6 +677,8 @@ Adapt the network architecture to identify the impact on training and validation
       \item Number of 1D-Conv layers (originally 1)
    \end{enumerate}
 Comment on your findings and identify the best model.
+\end{column}
+\end{columns}
 \end{frame}
 
 \end{document}

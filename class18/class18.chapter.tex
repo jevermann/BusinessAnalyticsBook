@@ -100,6 +100,35 @@ Data augmentation for textual data uses techniques such as character, word, or s
 
 Data augmentation for tabular data, that is, numeric data uses techniques such as SMOTE\index{Synthetic Minority Oversampling Technique}\index{SMOTE|see{Synthetic Minority Oversampling Technique}} and SMOTE-NC. As its name implies, SMOTE (''synthetic minority oversampling technique'') is designed for class balancing, that is to create additional instances of a minority class in classification model training. Originally developed for The idea of SMOTE is simple and intuitive. Consider Figure~\ref{fig:smote}. The left panel shows observations for two classes in a two-dimensional continuous feature space. When generating an additional observation for the green class, SMOTE first determines the $k$ nearest neighbours of one observation for some value of $k$ (center panel in Figure~\ref{fig:smote}). Then, one of the neighbours is chosen at random, and an additional observation is created at some random distance between the focal observation and the chosen neighbour (right panel in Figure~\ref{fig:smote}). SMOTE-NC is the generalization of SMOTE to categorical features.
 
+\begin{exercisebox}
+Consider the following unbalanced data set: \\
+
+\begin{tabular}{c | c | c | c | c}
+\textbf{ID} & \textbf{Income} & \textbf{Assets} & \textbf{Debt} & \textbf{VIP} \\
+\hline
+A & 1.0 & 2.0 & 1.0 & 0 \\
+B & 2.0 & 1.0 & 2.0 & 0 \\
+C & 2.0 & 3.0 & 1.0 & 0 \\
+D & 3.0 & 2.0 & 2.0 & 0 \\
+E & 4.0 & 3.0 & 3.0 & 0 \\
+F & 5.0 & 2.0 & 4.0 & 0 \\
+G & 9.0 & 7.0 & 8.0 & 1 \\
+H & 6.0 & 6.0 & 5.0 & 1 \\
+I & 7.0 & 7.0 & 6.0 & 1 \\
+J & 6.5 & 7.5 & 5.5 & 1 \\
+\end{tabular}
+
+\vspace{\baselineskip}
+\begin{enumerate}
+   \item Select at random one of the minority observations ($O_1$)
+   \item Identify the 3 closest minority class observations to $O_1$ (use Euclidean distances)
+   \item Select at random one of the 3 closest minority class observations ($O_2$)
+   \item Compute the difference vector between ($O_2 - O_1$)
+   \item Select at random an interpolation factor $[0, 1]$
+   \item Calculate the new synthetic data point
+\end{enumerate}
+\end{exercisebox}
+
 \begin{withcode}
 Performing oversampling using SMOTE in Python is made simple using the Python package ''imblearn'' that provides a range of oversampling methods. The following code example uses a simple classification data set of wine data for three classes. First, the example data is loaded, the class distribution and summary statistics are provided.
 

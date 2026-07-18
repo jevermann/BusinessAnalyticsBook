@@ -137,7 +137,6 @@ As with general neural networks, it is instructive to examine and verify the num
 
 
 \begin{exercisebox}
-
 Calculate the number of trainable parameters for the following CNN layers:
 \begin{enumerate}
 \item A kernel of size $4 \times 4$ operating on an input with 3 channels and an output of 8 channels.
@@ -147,7 +146,6 @@ Calculate the number of trainable parameters for the following CNN layers:
 \end{enumerate}
 Assume the previous four layers are part of the same neural network, what is the total number of trainable parameters?
 \end{exercisebox}
-
 
 
 \section{Pooling Layers}
@@ -170,9 +168,8 @@ Figure~\ref{fig:screen5_chap16} shows an example of $2 \times 2$ max pooling on 
 In image processing in particular, pooling helps the network become invariant to small translations, rotations, and scalings of an image. Max pooling in particular helps in detecting features like edges, textures, and shapes, even if they appear in different areas of the image in different instances. Although pooling reduces the resolution of the feature map, important features (like the presence of certain edges or textures) are retained due to the nature of max or average operations within localized regions of the input.
 
 \begin{exercisebox}
-
 \begin{enumerate}
-\item Assume the following $5 \times 5$ input matrix:
+    \item Assume the following $5 \times 5$ input matrix:
 \begin{align*}
 \begin{bmatrix} 1 & 2 & 3 & 2 & 1 \\ 
                 2 & 3 & 2 & 1 & 3 \\ 
@@ -187,12 +184,28 @@ and the following $3 \times 3$ convolution kernel:
                 2 & 4 & 2 \\
                 1 & 2 & 1 \end{bmatrix}
 \end{align*}
-Zero-pad the matrix with \emph{two} zeros on all sides and using stride 2, calculate the convolution result. What are the dimensions of the convolution output?
-
-\item Apply a $2 \times 2$ max pooling layer to the result of the previous exercise. 
+    \item Zero-pad the matrix with \emph{two} zeros on all sides
+    \item Using stride 2, calculate the convolution result. 
+    \item What are the dimensions of the convolution output?
 \end{enumerate}
 \end{exercisebox}
 
+\begin{exercisebox}
+\begin{enumerate}
+\item Assume the following $4 \times 4$ input matrix:
+\begin{align*}
+\begin{bmatrix} 1 & 8 & 8 & 1 \\ 
+                8 & 36 & 31 & 8 \\ 
+                8 & 31 & 32 & 7 \\
+                1 & 9 & 7 & 3
+\end{bmatrix}
+\end{align*}
+\item Apply a $2 \times 2$ max pooling layer. 
+\item What are the dimensions of the pooling output?
+\end{enumerate}
+\end{exercisebox}
+
+\FloatBarrier
 
 \section{Understanding ConvNets}
 

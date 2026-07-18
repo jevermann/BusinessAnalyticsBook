@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -29,7 +29,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \begin{block}{}
 Treveil, M. and the Dataiku Team (2020) \emph{Introducing MLOps}, O'Reilly Media, Sebastopol, CA (T) \\
 \end{block}
@@ -39,7 +39,7 @@ Gift, N. and Deza, Al. (2021) \emph{Practical MLOps}, O'Reilly Media, Sebastopol
 \end{block}
 \end{frame}
 
-\begin{frame}{Resources}
+\begin{frame}[label=withcode]{Resources}
 Implementations are available on the following GitHub repo:
 
 \small\url{https://github.com/jevermann/busi4720-mlops}\normalsize \\
@@ -50,7 +50,7 @@ The project can be cloned from this URL:
 \small\url{https://github.com/jevermann/busi4720-mlops.git}\normalsize
 \end{frame}
 
-\begin{frame}{MLOps Purpose}
+\begin{frame}[label=full]{MLOps Purpose}
 \begin{itemize}
 \item Improve Operational Efficiency
     \begin{itemize}
@@ -69,7 +69,7 @@ The project can be cloned from this URL:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{ML Challenges}
+\begin{frame}[label=full]{ML Challenges}
 
 \begin{itemize}
   \item Increasing number of machine learning models and applications
@@ -80,7 +80,7 @@ The project can be cloned from this URL:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{MLOps Principles}
+\begin{frame}[label=full]{MLOps Principles}
 \begin{enumerate}
   \item Reliability \& Reproducability
   \item Robust automation
@@ -90,7 +90,7 @@ The project can be cloned from this URL:
 \end{enumerate}
 \end{frame}
 
-\begin{frame}{MLOps -- Relationship to other disciplines}
+\begin{frame}[label=full]{MLOps -- Relationship to other disciplines}
 \begin{columns}
 \begin{column}{.9\textwidth}
 \centering
@@ -103,24 +103,24 @@ The project can be cloned from this URL:
 \end{frame}
 
 
-\begin{frame}{Model Development Lifecycle}
+\begin{frame}[label=full]{Model Development Lifecycle}
 \includegraphics[width=\textwidth]{mlmodel.jpeg}
 \end{frame}
 
-\begin{frame}{Software Development Lifecycle}
+\begin{frame}[label=full]{Software Development Lifecycle}
 \includegraphics[width=\textwidth]{devopsmodel.jpeg}
 \end{frame}
 
-%\begin{frame}{ML Lifecycle}
+%\begin{frame}[label=full]{ML Lifecycle}
 %\includegraphics[width=\textwidth]{mlops.jpeg}
 %\end{frame}
 
-\begin{frame}{MLOps Lifecycle}
+\begin{frame}[label=full]{MLOps Lifecycle}
 \includegraphics[width=\textwidth]{mlops2.jpeg}
 \end{frame}
 
 
-\begin{frame}{MLOps Participants}
+\begin{frame}[label=full]{MLOps Participants}
 \begin{itemize}
   \item Subject matter experts
   \begin{itemize}
@@ -163,7 +163,7 @@ The project can be cloned from this URL:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{MLOps Participants -- Overlapping Roles}
+\begin{frame}[label=full]{MLOps Participants -- Overlapping Roles}
 \begin{columns}
 \begin{column}{.9\textwidth}
 \centering
@@ -175,7 +175,7 @@ The project can be cloned from this URL:
 \end{columns}
 \end{frame}
 
-\begin{frame}{MLOps Participants -- Roles in MLOps lifecycle}
+\begin{frame}[label=full]{MLOps Participants -- Roles in MLOps lifecycle}
 \begin{columns}
 \begin{column}{.8\textwidth}
 \centering
@@ -188,7 +188,7 @@ The project can be cloned from this URL:
 \end{frame}
 
 
-\begin{frame}{MLOps -- Requirements}
+\begin{frame}[label=full]{MLOps -- Requirements}
 \begin{itemize}
    \item Subject matter experts:
    \begin{itemize}
@@ -218,7 +218,7 @@ The project can be cloned from this URL:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{MLOps Requirements \small [cont'd]}
+\begin{frame}[label=full]{MLOps Requirements \small [cont'd]}
 \begin{itemize}
    \item Model risk managers and model auditors:
    \begin{itemize}
@@ -233,7 +233,81 @@ The project can be cloned from this URL:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{MLOps -- Tooling}
+
+\begin{frame}[label=full]{Hands-On Exercise} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+For each scenario, identify the \textbf{primary stage of the MLOps lifecycle}. Choose from:
+
+\begin{itemize}
+    \item Develop Models
+    \item Prepare for Production
+    \item Deploy to Production
+    \item Monitoring \& Feedback
+    \item Governance
+\end{itemize}
+\end{column}
+\end{columns}
+\small
+
+\bigskip
+
+\begin{enumerate}
+\item A data scientist evaluates several models using historical data.
+\item Engineers deploy a model to 10\% of users before a full rollout. 
+\item Customer behaviour changes and model accuracy decreases. 
+\item The legal department reviews fairness and explainability requirements. 
+\item The operations team configures health checks and failover.
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Match each responsibility with the most appropriate MLOps participant.
+\end{column}
+\end{columns}
+
+\begin{columns}
+\begin{column}{.4\textwidth}
+\small
+{\bf Participants}:
+\begin{itemize}
+    \item Subject Matter Expert
+    \item Data Scientist
+    \item Data Engineer
+    \item Software Engineer
+    \item DevOps Engineer
+    \item Model Risk Manager
+    \item ML Engineer
+\end{itemize}
+\end{column}
+\begin{column}{.7\textwidth}
+\small
+{\bf Responsibilities}
+\begin{itemize}
+   \item Defines business KPIs for the mode
+   \item Builds data pipelines
+   \item Integrates the model into a web application
+   \item Designs automated deployment pipelines
+   \item Evaluates fairness and regulatory compliance 
+   \item Develops predictive models
+   \item Ensures infrastructure can scale with demand 
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{MLOps -- Tooling}
 \begin{itemize}
   \item Source Code Repository
   \begin{itemize}
@@ -269,7 +343,7 @@ The project can be cloned from this URL:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{MLOps -- Tooling \small [cont'd]}
+\begin{frame}[label=full]{MLOps -- Tooling \small [cont'd]}
 \begin{itemize}
   \item Model Registry
   \begin{itemize}
@@ -301,7 +375,7 @@ The project can be cloned from this URL:
 \end{frame}
 
 
-\begin{frame}{MLOps Tooling \small [cont'd]}
+\begin{frame}[label=full]{MLOps Tooling \small [cont'd]}
 \centering
 \large Commercial Offerings
 
@@ -311,8 +385,13 @@ The project can be cloned from this URL:
 \scriptsize Source: Turck, Matt. \textit{Red Hot -- The 2021 Machine Learning, AI and Data (MAD) Landscape}. September 28, 2021. \url{https://mattturck.com/data2021/} (last accessed July 22, 2024)
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
-
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 \begin{block}{Scenario}
 Your team is implementing an MLOps pipeline to automate the building, testing, and deployment of machine learning models
 \end{block}
@@ -320,21 +399,36 @@ Your team is implementing an MLOps pipeline to automate the building, testing, a
 \begin{block}{Question}
 Identify and list three different software tools, offered either as on-premises or on the AWS or Microsoft Azure clouds, that are commonly used for implementing Continuous Integration (CI) and Continuous Delivery (CD) pipelines in an MLOps context. For each tool, briefly mention its primary function in the CI/CD process.
 \end{block}
-\end{frame}
+\end{column}
+\end{columns}\end{frame}
 
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{block}{Scenario}
-our organization needs to manage and track different versions of your trained machine learning models, including their metadata, evaluation metrics, and training history.
+Your organization needs to manage and track different versions of your trained machine learning models, including their metadata, evaluation metrics, and training history.
 \end{block}
 
 \begin{block}{Question}
 Conduct an internet search for software tools, offered either as on-premises or on the AWS or Microsoft Azure clouds, that are specifically designed to serve as model registries in MLOps. Identify and list two different model registry tools, and for each, describe one key feature it offers for model versioning and management.
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{block}{Scenario}
 After deploying a machine learning model to production, your team needs to continuously monitor its performance, detect data drift, and identify potential issues.
@@ -343,10 +437,18 @@ After deploying a machine learning model to production, your team needs to conti
 \begin{block}{Question}
 Using internet resources, research software tools, offered either as on-premises or on the AWS or Microsoft Azure clouds, that provide model monitoring capabilities in a production MLOps environment. Identify and list two different model monitoring tools, and for each, specify one type of metric or issue it can typically monitor (e.g., prediction accuracy, input data drift, resource utilization).
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{block}{Scenario}
 Your MLOps pipeline involves multiple steps, including data extraction, preprocessing, model training, evaluation, and deployment, which need to be orchestrated and automated.
@@ -355,9 +457,17 @@ Your MLOps pipeline involves multiple steps, including data extraction, preproce
 \begin{block}{Question}
 Perform an internet search to find examples of workflow orchestration tools, offered either as on-premises or on the AWS or Microsoft Azure clouds, that are used in MLOps pipelines. Identify and list two different workflow orchestration tools, and for each, briefly describe how it helps manage the execution and dependencies between different steps in an ML pipeline.
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{block}{Scenario}
 Your organization is building multiple machine learning models that rely on a consistent set of features. You want a centralized system to store, manage, and serve these features for both training and inference.
@@ -366,17 +476,19 @@ Your organization is building multiple machine learning models that rely on a co
 \begin{block}{Question}
 Conduct an internet search to find software solutions known as feature stores. Identify and list two different feature store solutions, offered either as on-premises or on the AWS or Microsoft Azure clouds, and for each, briefly describe one benefit it provides for managing features in an MLOps environment (e.g., feature reuse, data consistency, point-in-time correctness).
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{MLOps Lifecycle}
+\begin{frame}[label=full]{MLOps Lifecycle}
 \centering
 
 \includegraphics[height=3.25in]{graphics2.png} \\
 \end{frame}
 
 
-\begin{frame}{Develop Models}
+\begin{frame}[label=full]{Develop Models}
 \centering
 \includegraphics[width=\textwidth]{imlo_0401.png} \\
 
@@ -384,7 +496,7 @@ Conduct an internet search to find software solutions known as feature stores. I
 \scriptsize Source: Treveil et al. (2020), Figure 4-1
 \end{frame}
 
-\begin{frame}{Develop Models \small [cont'd]}
+\begin{frame}[label=full]{Develop Models \small [cont'd]}
 \begin{block}{Data}
 \begin{itemize}
    \item What data are available? What is the quality of that data?
@@ -405,7 +517,7 @@ Conduct an internet search to find software solutions known as feature stores. I
 \end{block}
 \end{frame}
 
-\begin{frame}{Develop Models \small [cont'd]}
+\begin{frame}[label=full]{Develop Models \small [cont'd]}
 \begin{block}{Model Training}
 \begin{itemize}
    \item What are appropriate evaluation metrics?
@@ -423,7 +535,7 @@ Conduct an internet search to find software solutions known as feature stores. I
 \end{block}
 \end{frame}
 
-\begin{frame}{Prepare for Production}
+\begin{frame}[label=full]{Prepare for Production}
 \centering
 \includegraphics[width=\textwidth]{imlo_0501.png} \\
 
@@ -431,7 +543,7 @@ Conduct an internet search to find software solutions known as feature stores. I
 \scriptsize Source: Treveil et al. (2020), Figure 5-1
 \end{frame}
 
-\begin{frame}{Prepare for Production \small [cont'd]}
+\begin{frame}[label=full]{Prepare for Production \small [cont'd]}
 \begin{block}{Technical Questions}
 \begin{itemize}
    \item What is the runtime environment? (e.g. Flask containers, Tensorflow Serving, Kubernetes Clusters, Edge Devices, JavaScript)
@@ -448,7 +560,7 @@ Conduct an internet search to find software solutions known as feature stores. I
 \end{block}
 \end{frame}
 
-\begin{frame}{Prepare for Production \small [cont'd]}
+\begin{frame}[label=full]{Prepare for Production \small [cont'd]}
 \begin{block}{Sources of Risk}
 \begin{itemize}
    \item Errors in model design or training (incl. data prep)
@@ -463,7 +575,7 @@ Conduct an internet search to find software solutions known as feature stores. I
 \end{block}
 \end{frame}
 
-\begin{frame}{Prepare for Production \small [cont'd]}
+\begin{frame}[label=full]{Prepare for Production \small [cont'd]}
 \begin{block}{Risk Mitigation}
 \begin{itemize}
    \item Shadow testing
@@ -476,7 +588,7 @@ Conduct an internet search to find software solutions known as feature stores. I
 \end{block}
 \end{frame}
 
-\begin{frame}{Prepare for Production \small [cont'd]}
+\begin{frame}[label=full]{Prepare for Production \small [cont'd]}
 \begin{block}{Automation and Tools}
 \begin{itemize}
    \item Continuous integration and automated testing
@@ -492,7 +604,55 @@ Conduct an internet search to find software solutions known as feature stores. I
 \end{block}
 \end{frame}   
 
-\begin{frame}{Hands-On Exercise}
+
+\begin{frame}[label=full]{Hands-On Exercise} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+A hospital plans to deploy an ML model that predicts whether
+patients should receive additional medical screening. 
+For each risk, write one appropriate mitigation strategy.
+\end{column}
+\end{columns}
+\bigskip
+\begin{columns}
+\begin{column}{.6\textwidth}
+\small
+{\bf Risks:}
+\begin{itemize}
+\item Training data no longer represents current patients
+\item Model unexpectedly stops responding 
+\item Incorrect predictions affect many patients
+\item An attacker attempts to manipulate model inputs
+\end{itemize}
+\end{column}
+\begin{column}{.4\textwidth}
+\small
+{\bf Possible mitigations:}
+\begin{itemize}
+    \item Shadow testing
+    \item Progressive rollout
+    \item Continuous monitoring
+    \item Periodic retraining
+    \item Failover to a simpler model
+    \item Input validation
+\end{itemize}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{block}{Scenario}
 Imagine a new machine learning model is being deployed to automate credit approval decisions at a Canadian financial institution.
@@ -501,9 +661,17 @@ Imagine a new machine learning model is being deployed to automate credit approv
 \begin{block}{Question}
 Research the typical responsibilities and concerns of a Model Risk Manager or Model Auditor specifically within the financial services industry in Canada. Based on your research, list two specific concerns such a professional would likely have regarding the deployment of this credit approval model before it goes live.
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{block}{Scenario}
 An online Canadian retailer is enhancing its website with a machine learning model to provide highly personalized product recommendations to individual shoppers.
@@ -512,12 +680,12 @@ An online Canadian retailer is enhancing its website with a machine learning mod
 \begin{block}{Question}
 Research the ethical risks and challenges associated with personalized recommendation systems in e-commerce. Based on your findings, identify and briefly describe two distinct ethical risks that this Canadian retailer should consider regarding its new recommendation model.
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
 
-
-
-\begin{frame}{Deploy to Production}
+\begin{frame}[label=full]{Deploy to Production}
 \centering
 \includegraphics[width=\textwidth]{imlo_0601.png} \\
 
@@ -525,7 +693,7 @@ Research the ethical risks and challenges associated with personalized recommend
 \scriptsize Source: Treveil et al. (2020), Figure 6-1
 \end{frame}
 
-\begin{frame}{Deploy to Production \small [cont'd]}
+\begin{frame}[label=full]{Deploy to Production \small [cont'd]}
 \large Automated CI/CD Pipeline \normalsize \\
 
 \begin{enumerate}
@@ -552,7 +720,49 @@ Research the ethical risks and challenges associated with personalized recommend
 \tiny Adapted from Trevail et al. (2020) (pg. 74, 75)
 \end{frame}
 
-\begin{frame}{Deploy to Production}
+
+\begin{frame}[label=full]{Hands-On Exercise} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+The following steps of the CI/CD pipeline are out of order.
+
+\bigskip
+
+Number them from \textbf{1 (first)} to \textbf{8 (last)}.
+
+\bigskip
+
+\begin{tabular}{|p{6cm}|c|}
+\hline
+\textbf{Pipeline Step} & \textbf{Order} \\
+\hline
+Evaluate predictive performance & \\
+\hline
+Register model & \\
+\hline
+Full deployment & \\
+\hline
+Build model artifacts & \\
+\hline
+Basic automated checks & \\
+\hline
+Limited (canary) deployment & \\
+\hline
+Deploy to test environment & \\
+\hline
+Evaluate bias and interpretability & \\
+\hline
+\end{tabular}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+
+\begin{frame}[label=full]{Deploy to Production}
 \begin{block}{Scalability and Reliability} 
 \begin{itemize}
    \item Deployment targets (models to servers)
@@ -570,7 +780,7 @@ Research the ethical risks and challenges associated with personalized recommend
 \end{block}
 \end{frame}
 
-\begin{frame}{Deploy to Production}
+\begin{frame}[label=full]{Deploy to Production}
 \begin{block}{Automation and Tools}
 \begin{itemize}
    \item Source code repositories (e.g. GitHub)
@@ -582,7 +792,13 @@ Research the ethical risks and challenges associated with personalized recommend
 \end{block}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{block}{Scenario}
 Consider deploying a machine learning model to a cloud platform like Amazon Web Services (AWS) or Microsoft Azure.
@@ -591,11 +807,12 @@ Consider deploying a machine learning model to a cloud platform like Amazon Web 
 \begin{block}{Question}
 Using internet resources (e.g., documentation, blog posts, articles related to MLOps on AWS or Azure), research the typical tasks and responsibilities of an ML Engineer or ML Architect during the deployment of a model to such a cloud environment. Describe one specific technical responsibility that an ML Engineer/Architect would likely have in ensuring the successful deployment and scalability of the model on the chosen cloud platform.
 \end{block}
+\end{column}
+\end{columns}
 \end{frame}
 
 
-
-%\begin{frame}{Detailed ML Activities}
+%\begin{frame}[label=full]{Detailed ML Activities}
 %\begin{columns}
 %\begin{column}{.9\textwidth}
 %\centering
@@ -607,7 +824,7 @@ Using internet resources (e.g., documentation, blog posts, articles related to M
 %\end{columns}
 %\end{frame}
 
-\begin{frame}{Deployment Options}
+\begin{frame}[label=withcode]{Example Deployment Options}
 \begin{itemize}
    \item Microservice (e.g. Flask)
    \item Tensorflow TFX and Tensorflow Serving 
@@ -616,7 +833,7 @@ Using internet resources (e.g., documentation, blog posts, articles related to M
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Deployment Demo}
+\begin{frame}[label=withcode,fragile]{Flask Deployment Demo}
 
 Complete files are available on \href{https://github.com/jevermann/busi4720-mlops/blob/main/train_model.py}{GitHub}. \\
 
@@ -627,7 +844,7 @@ git clone https://github.com/jevermann/busi4720-mlops.git
 
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example -- Step 1: Create a Trained Model} 
+\begin{frame}[label=withcode,fragile]{Flask Example -- Step 1: Create a Trained Model} 
 
 Read the data:
 \begin{pythoncode}
@@ -646,7 +863,7 @@ boston_labels = boston_data['medv']
 
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Flask Example \small [cont'd]}
 Define the model:
 \begin{pythoncode}
 # Linear regression model
@@ -667,7 +884,7 @@ norm_boston_model.fit(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Flask Example \small [cont'd]}
 Save the model in different formats:
 \begin{pythoncode}
 # Save model for use in Keras
@@ -682,7 +899,7 @@ tfjs.converters.save_keras_model(norm_boston_model, \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example -- Step 2: Serve the Model}
+\begin{frame}[label=withcode,fragile]{Flask Example -- Step 2: Serve the Model}
 
 Load the model for prediction:
 \begin{pythoncode}
@@ -704,7 +921,7 @@ app = flask.Flask(__name__)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Flask Example \small [cont'd]}
 
 Define the URL handler and run app:
 \begin{pythoncode}
@@ -727,7 +944,7 @@ app.run()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example -- Step 3: Access the Service}
+\begin{frame}[label=withcode,fragile]{Flask Example -- Step 3: Access the Service}
 Access the prediction with JSON POST request:
 \begin{bashcode}
 #!/usr/bin/bash
@@ -738,16 +955,24 @@ curl -X POST \
 \end{bashcode}
 \end{frame}
 
-\begin{frame}[fragile]{Hands-On Exercise}
+\begin{frame}[label=withcode,fragile]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 
 \begin{itemize}
 \item Clone the GitHub repo to your local computer
 \item Start the Flask sevice using \texttt{python flask\_deploy.py}
 \item Use the JSON end point, find the predicted value for a house with 4 rooms, a property tax rate per $10,000$ of $300$ and a proportion of old buildings of $50$.
 \end{itemize}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example -- Web Forms}
+\begin{frame}[label=withcode,fragile]{Flask Example -- Web Forms}
 Complete file is available on \href{https://github.com/jevermann/busi4720-mlops/blob/main/predict_form_async.html}{GitHub}. \\
 
 Access using a JSON POST request from a Web Form:
@@ -771,7 +996,7 @@ Access using a JSON POST request from a Web Form:
 \end{htmlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Flask Example \small [cont'd]}
 \begin{htmlcode}
      // Make a POST request to the server
      const response = await fetch('/predict_json', {
@@ -792,7 +1017,7 @@ Access using a JSON POST request from a Web Form:
 \end{htmlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Flask Example \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Flask Example \small [cont'd]}
 \begin{htmlcode}
  <body>
   <h1>Boston Housing Data Inputs</h1>
@@ -817,7 +1042,7 @@ Access using a JSON POST request from a Web Form:
 \end{htmlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Tensorflow JS Example}
+\begin{frame}[label=withcode,fragile]{Tensorflow JS Example}
 Complete file is available on \href{https://github.com/jevermann/busi4720-mlops/blob/main/tjfs_demo.html}{GitHub}.
 \begin{htmlcode}
 <!DOCTYPE html>
@@ -840,7 +1065,7 @@ Complete file is available on \href{https://github.com/jevermann/busi4720-mlops/
      parseFloat(document.getElementById('age').value);
 \end{htmlcode}
 \end{frame}
-\begin{frame}[fragile]{Tensorflow JS Examples \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Tensorflow JS Examples \small [cont'd]}
 \begin{htmlcode}
     // Package the values into a Tensor
     const inputs = tf.tensor2d([rooms, tax, age],[1, 3]);
@@ -859,7 +1084,7 @@ open tfjs_demo.html
 \end{bashcode}
 \end{frame}
 
-\begin{frame}{Monitoring and Feedback}
+\begin{frame}[label=full]{Monitoring and Feedback}
 \centering
 \includegraphics[width=\textwidth]{imlo_0701.png} \\
 
@@ -867,7 +1092,7 @@ open tfjs_demo.html
 \scriptsize Source: Treveil et al. (2020), Figure 7-1
 \end{frame}
 
-\begin{frame}{Monitoring and Feedback \small [cont'd]}
+\begin{frame}[label=full]{Monitoring and Feedback \small [cont'd]}
 \begin{block}{Model Retraining Considerations}
 \begin{itemize}
    \item Domain changes
@@ -885,7 +1110,7 @@ open tfjs_demo.html
 \end{block}
 \end{frame}
 
-\begin{frame}{Monitoring and Feedback \small [cont'd]}
+\begin{frame}[label=full]{Monitoring and Feedback \small [cont'd]}
 \begin{block}{Input Drift Causes}
 \begin{itemize}
    \item Selection bias
@@ -900,7 +1125,7 @@ open tfjs_demo.html
 \end{block}
 \end{frame}
 
-\begin{frame}{Monitoring and Feedback \small [cont'd]}
+\begin{frame}[label=full]{Monitoring and Feedback \small [cont'd]}
 \begin{block}{Feedback Loop Requirements}
 \begin{itemize}
    \item Logging (metadata, inputs, outputs, actions taken, explanations)
@@ -911,7 +1136,7 @@ open tfjs_demo.html
 \end{frame}
 
 
-\begin{frame}[fragile]{Basic Python Logging}
+\begin{frame}[label=withcode,fragile]{Basic Python Logging}
 Complete file is available on \href{https://github.com/jevermann/busi4720-mlops/blob/main/flask_deploy_logging.py}{GitHub}. \\
 
 Set up the logger:
@@ -931,7 +1156,7 @@ req_logger.addHandler(
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Basic Python Logging \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Basic Python Logging \small [cont'd]}
 Use the logger:
 \begin{pythoncode}
 @app.route("/predict_json", methods=["POST"])
@@ -952,7 +1177,13 @@ def predict_form():
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=withcode]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 \begin{enumerate}
 \item Download the complete file from \href{https://github.com/jevermann/busi4720-mlops/blob/main/flask_deploy_logging.py}{GitHub}. \\
 \item Define a second logger that writes to a different log file
@@ -966,15 +1197,17 @@ def predict_form():
    \item To make the log easy to analyze, write the information in CSV format. Make sure you quote the fields that need quoting.
 \end{itemize}
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{MLOps Governance}
+\begin{frame}[label=full]{MLOps Governance}
 \centering
 
 \includegraphics[height=3.25in]{governancegraphics.png}
 \end{frame}
 
-\begin{frame}{MLOps Governance}
+\begin{frame}[label=full]{MLOps Governance}
 \footnotesize
 \begin{block}{1. Understand ML Uses}
 \begin{itemize}
@@ -988,7 +1221,7 @@ def predict_form():
 \end{block}
 %\end{frame}
 
-%\begin{frame}{MLOps Governance \small [cont'd]}
+%\begin{frame}[label=full]{MLOps Governance \small [cont'd]}
 %\small
 \begin{block}{2. Define Ethical Position}
 \begin{itemize}
@@ -1001,7 +1234,7 @@ def predict_form():
 \tiny Adapted from Treveil et al. (2020), Chapter 8
 \end{frame}
 
-\begin{frame}{MLOps Governance \small [cont'd]}
+\begin{frame}[label=full]{MLOps Governance \small [cont'd]}
 \footnotesize
 \begin{block}{3. Establish Responsibilities (''Who will do what?'')}
 \begin{itemize}
@@ -1022,7 +1255,7 @@ def predict_form():
 \end{block}
 \end{frame}
 
-\begin{frame}{MLOps Governance \small [cont'd]}
+\begin{frame}[label=full]{MLOps Governance \small [cont'd]}
 \footnotesize
 \begin{block}{4. Define Policies (''How will we do this?'')}
 Establish rules for:
@@ -1041,7 +1274,7 @@ Establish rules for:
 \tiny Adapted from Treveil et al. (2020), Chapter 8
 \end{frame}
 
-\begin{frame}{MLOps Governance \small [cont'd]}
+\begin{frame}[label=full]{MLOps Governance \small [cont'd]}
 \footnotesize
 \begin{block}{5. Integrate Policies into MLOps Process (''When will we do this?'')}
 \begin{itemize}
@@ -1061,7 +1294,7 @@ Establish rules for:
 \end{block}
 \end{frame}
 
-\begin{frame}{MLOps Governance \small [cont'd]}
+\begin{frame}[label=full]{MLOps Governance \small [cont'd]}
 \footnotesize
 \begin{block}{7. Engage and Educate}
 \begin{itemize}
@@ -1082,5 +1315,35 @@ Establish rules for:
 \end{itemize}
 \end{block}
 \end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise} 
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+A city government plans to deploy an AI system to prioritize
+road maintenance projects.
+
+\bigskip
+
+For each statement, answer: ''YES'', ''NO'', or ''NEED MORE INFORMATION''
+\end{column}
+\end{columns}
+
+\bigskip
+
+\begin{enumerate}
+   \item Are citizens affected by the model's decisions? 
+   \item Should the decisions be explainable? 
+   \item Is bias testing appropriate? 
+   \item Should predictions be monitored after deployment? 
+   \item Should the organization document the training data?
+   \item Is governance unnecessary because the model only makes recommendations? 
+\end{enumerate}
+\end{frame}
+
+
 
 \end{document}

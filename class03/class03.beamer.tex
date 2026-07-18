@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -29,7 +29,7 @@
 
 \section{The Relational Data Model}
 
-\begin{frame}{The Relational Data Model}
+\begin{frame}[label=full]{The Relational Data Model}
 
 \begin{block}{Basics}
 \begin{itemize}
@@ -52,7 +52,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Foreign Key Constraints}
+\begin{frame}[label=full]{Foreign Key Constraints}
 \begin{itemize}
 	\item Express relationships between tables
 	\item May reference the same table (''\emph{unary relationship}'') or another table (''\emph{binary relationship}'')
@@ -61,7 +61,7 @@
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Basic SQL Commands}
+\begin{frame}[label=full]{Basic SQL Commands}
 \renewcommand{\arraystretch}{1.5}
 
 \begin{tabularx}{\textwidth}{l|X} \hline
@@ -73,7 +73,7 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Basic SQL Commands}
+\begin{frame}[label=withcode]{Basic SQL Commands}
 \begin{block}{More Information}
   \begin{itemize}
     \item This course covers only basic information
@@ -92,7 +92,7 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 \end{tabularx}
 \end{frame}
 
-\begin{frame}{Let's Play with SQL}
+\begin{frame}[label=withcode]{Let's Play with SQL}
 \begin{columns}
 \begin{column}{.15\textwidth}
 \centering 
@@ -112,7 +112,7 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 \end{columns}
 \end{frame}
 
-\begin{frame}{PostgreSQL Database Management System}
+\begin{frame}[label=withcode]{PostgreSQL Database Management System}
 \begin{itemize}
   \item A DBMS is a background program without user interface
   \item Runs on one computer (''server'') or distributed across a cluster of multiple computers
@@ -137,7 +137,7 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 \end{frame}
 
 
-\begin{frame}{PSQL}
+\begin{frame}[label=withcode]{PSQL}
 \begin{itemize}
    \item Type \texttt{psql} in a terminal window
    \item The psql command \texttt{\textbackslash conninfo} shows connection info
@@ -149,7 +149,7 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 \includegraphics[width=\textwidth]{screen3.png}
 \end{frame}
 
-%\begin{frame}{DBeaver}
+%\begin{frame}[label=full]{DBeaver}
 %\begin{itemize}
    %\item Navigate to and select the ''busi4720'' database in the navigator on the left
    %\item In the toolbar, press the ''SQL'' button
@@ -159,26 +159,33 @@ SELECT & Retrieves data values from one or more tables \\ \hline
 %\includegraphics[width=.8\textwidth]{screen4.png}
 %\end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On with pgAdmin}
+\begin{frame}[label=withcode]{PostgreSQL Hands-On with pgAdmin}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{itemize}
   \item Navigate to and select the ''busi4720'' database in the object explorer on the left
   \item From the ''Tools'' menu, select the ''Query tool''
 \end{itemize}
+\end{column}
+\end{columns}
 \vspace{3mm}
 \centering
 \includegraphics[width=\textwidth]{screen2.png}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On}
-\begin{itemize}
-\item Enter the following query:
-\begin{itemize}
-    \item In psql, just press \colorbox{lightgray}{RETURN} to execute
-%    \item In DBeaver, press \colorbox{lightgray}{CTRL-RETURN} to execute
-    \item In pgadmin, press \colorbox{lightgray}{F5} to execute
-\end{itemize}
-\end{itemize}
-\footnotesize
+\begin{frame}[label=full,fragile]{SQL Data Definition}
+%\begin{itemize}
+%\item Enter the following query:
+%\begin{itemize}
+    %\item In psql, just press \colorbox{lightgray}{RETURN} to execute
+    %\item In DBeaver, press \colorbox{lightgray}{CTRL-RETURN} to execute
+    %\item In pgadmin, press \colorbox{lightgray}{F5} to execute
+%\end{itemize}
+%\end{itemize}
+%\footnotesize
 \begin{sqlcode}
 CREATE TABLE products (
   pcode integer,
@@ -196,7 +203,7 @@ CREATE TABLE products (
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On}
+\begin{frame}[label=full,fragile]{SQL Data Definition}
 \begin{itemize}
   \item Create a table for the suppliers as well:
 \end{itemize}
@@ -224,7 +231,28 @@ INSERT INTO suppliers
 \vspace{5mm}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\begin{enumerate}
+\item Create an SQL statement to create a table for information about students, including their
+\begin{itemize}
+\item Student number
+\item First name
+\item Last name
+\item and other information you may wish to collect.
+\end{itemize}
+\item Make sure you create a primary key for the table
+\item Create SQL statements to insert information about three students into this table
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full,fragile]{SQL Data Definition}
 \begin{itemize}
   \item Check that the data is there:
 \end{itemize}
@@ -246,7 +274,7 @@ DROP TABLE products;
 
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On}
+\begin{frame}[label=full,fragile]{SQL Foreign Keys}
 \begin{itemize}
   \item \textbf{Assumption}: Suppliers supply many products, a product may be supplied by only one supplier
 \end{itemize}
@@ -262,7 +290,7 @@ CREATE TABLE products (
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On}
+\begin{frame}[label=full,fragile]{SQL Foreign Keys}
 \begin{itemize}
   \item Insert some product data:
 \end{itemize}
@@ -282,7 +310,7 @@ INSERT INTO products
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On}
+\begin{frame}[label=full,fragile]{SQL Foreign Keys}
 \begin{itemize}
   \item Make sure that every product has a supplier:
 \end{itemize}
@@ -300,7 +328,24 @@ CREATE TABLE products (
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hands-On}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\begin{enumerate}
+\item Create an SQL statement to create tables for information about students and for information about courses. \emph{A course can be taken by multiple student and each student can take only one course.}
+\item Make sure you create primary keys and a foreign key
+\item Create SQL statements to insert information about courses and students
+\item Create an SQL statement that tries to insert information that \emph{violates the foreign key constraint}
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full,fragile]{SQL Foreign Keys}
 \begin{itemize}
   \item Can products be supplied by multiple suppliers?
   \item We need another table, representing the ''supplies'' relationship, a ''Many:Many'' relationship
@@ -317,7 +362,7 @@ DROP TABLE IF EXISTS suppliers;
   \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hand-On}
+\begin{frame}[label=full,fragile]{SQL Foreign Keys}
 \footnotesize
 \begin{sqlcode}
 CREATE TABLE products (
@@ -341,7 +386,7 @@ CREATE TABLE supplies (
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{PostgreSQL Hand-On}
+\begin{frame}[label=full,fragile]{SQL Foreign Keys}
 \footnotesize
 \begin{sqlcode}
 INSERT INTO products VALUES (1, 'Hex Bolt');
@@ -358,7 +403,7 @@ INSERT INTO supplies VALUES(2, 2, 1.79);
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}{Foreign Key Summary}
+\begin{frame}[label=full]{Foreign Key Summary}
 \small
 \begin{block}{1:Many Relationship}
 \begin{itemize}
@@ -377,7 +422,38 @@ INSERT INTO supplies VALUES(2, 2, 1.79);
 \end{block}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+\begin{enumerate}
+  \item Consider the following:
+	\begin{itemize}
+	  \item A student has a student number and a name. 
+	  \item A course has a course number and a title. 
+	  \item A student can take many courses; a course can be taken by many students. Students take courses in a certain year.
+	\end{itemize}
+  \item Write the CREATE TABLE statements with the necessary FOREIGN KEY statements
+  \begin{itemize}
+    \item Use appropriate datatypes for the columns
+    \item Create an appropriate PRIMARY KEY for all tables
+  \end{itemize}
+  \item Write INSERT statements to create example data
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \small
 \begin{enumerate}
   \item Consider the following:
@@ -386,17 +462,18 @@ INSERT INTO supplies VALUES(2, 2, 1.79);
 	  \item An author has a name and an address. 
 	  \item An author can write many books, and a book can be written by multiple authors. A book is written in a certain year.
 	\end{itemize}
-  \item Write the CREATE TABLE statements with the necessary FOREIGN KEY statements, and execute them on PostgreSQL
+  \item Write the CREATE TABLE statements with the necessary FOREIGN KEY statements
   \begin{itemize}
     \item Use appropriate datatypes for the columns
     \item Create an appropriate PRIMARY KEY for all tables
   \end{itemize}
-  \item Use INSERT statements to create some example data
-  \item Use SELECT statements to ensure your data exists
+  \item Write INSERT statements to create example data
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Querying Data with SQL}
+\begin{frame}[label=full]{Querying Data with SQL}
 \begin{block}{Parts of the SELECT statement}
   \begin{itemize}
      \item \textbf{SELECT}: which columns to query
@@ -411,7 +488,7 @@ INSERT INTO supplies VALUES(2, 2, 1.79);
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Querying -- Simple Example}
+\begin{frame}[label=full,fragile]{Querying -- Simple Example}
 Set up tables with 1:Many relationship:
 \footnotesize
 \begin{sqlcode}
@@ -434,7 +511,7 @@ FOREIGN KEY (scode) REFERENCES suppliers );
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying -- Simple Example}
+\begin{frame}[label=full,fragile]{Querying -- Simple Example}
 Insert some data:
 \footnotesize
 \begin{sqlcode}
@@ -450,7 +527,7 @@ INSERT INTO products VALUES(6, 'Square Bolt 7', 3.49, 2);
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying -- Simple Example}
+\begin{frame}[label=full,fragile]{Querying -- Simple Example}
 Select all columns from products table:
 \begin{sqlcode}
 SELECT * FROM products;
@@ -473,7 +550,7 @@ SELECT name FROM products ORDER BY price ASC LIMIT 3;
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying -- Join Tables}
+\begin{frame}[label=full,fragile]{Querying -- Join Tables}
 Select products and the names of their suppliers:
 \begin{sqlcode}
 SELECT * FROM products INNER JOIN suppliers USING (scode);
@@ -495,7 +572,7 @@ SELECT products.name AS "Product",
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}{Types of Joins}
+\begin{frame}[label=advanced]{Types of Joins}
 \renewcommand{\arraystretch}{1.5}
 Types of joins between tables T1 and T2: \\
 
@@ -509,7 +586,7 @@ FULL OUTER & Selects all rows from T1, T2. If the other table is missing corresp
 \end{frame}
 
 
-\begin{frame}[fragile]{Querying -- Groups and Aggregates}
+\begin{frame}[label=full,fragile]{Querying -- Groups and Aggregates}
 Select the number of products for each supplier:
 \begin{sqlcode}
 SELECT scode, count(*) from products GROUP BY scode;
@@ -536,7 +613,7 @@ SELECT suppliers.name, AVG(price)
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}{Frequently Used Aggregation Functions}
+\begin{frame}[label=full]{Frequently Used Aggregation Functions}
 \renewcommand{\arraystretch}{1.5}
 Standard SQL: \\
 
@@ -559,7 +636,76 @@ REGR\_R2() & RANK() & DENSE\_RANK() \\ \hline
 \end{frame}
 
 
-\begin{frame}{Relational Diagrams}
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Assume the following table of Sales:
+  \begin{tabular}{l|l|r} 
+    {\bf Country} & {\bf Year} & {\bf Amount} \\ \hline
+    Canada & 2023 & 1000 \\ 
+    Canada & 2024 & 1100 \\
+    Canada & 2025 & 1200 \\ 
+    Canada & 2026 & 1100 \\
+    UK & 2023 & 800 \\
+    UK & 2024 & 900 \\
+    UK & 2025 & 950 \\ 
+    UK & 2026 & 1000 \\ \hline
+  \end{tabular}
+\end{column}
+\end{columns}
+\footnotesize 
+
+Create SQL statements to find the following information and provide the correct/expected output:
+  \begin{enumerate}
+    \item Sales in Canada sorted by year
+    \item Sales in 2025, sorted by amount
+    \item Sales prior to 2026, sorted by country, then by amount
+    \item Sum of sales and average of sales by country
+    \item Countries whose average sales is greater than 900
+    \item Countries whose average sales is greater than 900, sorted by average sales
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Assume the following table of student grades:
+  \begin{tabular}{l|l|r} 
+    {\bf Course} & {\bf Student} & {\bf Grade} \\ \hline
+    BUSI2720 & 202301 & 75 \\ 
+    BUSI2720 & 202302 & 80 \\
+    BUSI2720 & 202303 & 90 \\ 
+    BUSI2720 & 202304 & 85 \\
+    BUSI4720 & 202301 & 85 \\
+    BUSI4720 & 202302 & 95 \\
+    BUSI4720 & 202303 & 90 \\ 
+    BUSI4720 & 202204 & 95 \\ \hline
+  \end{tabular}
+\end{column}
+\end{columns}
+\footnotesize 
+Create SQL statements to find the following information and provide the correct/expected output:
+  \begin{enumerate}
+    \item Grades for students in BUSI2720, sorted by grade
+    \item Average grade for each student, sorted by student
+    \item Average grade for each course, sorted by average grade
+    \item Average grades for students in BUSI4720
+    \item Maximum grades for each course, sorted by course
+    \item Courses for which the average grade is higher than 85
+  \end{enumerate}
+\end{frame}
+
+
+
+\begin{frame}[label=advanced]{Relational Diagrams}
 \begin{itemize}
   \item Graphically show the relationships in a database model
   \item Often called ''\emph{Entity-Relationship diagram}'' (but that is not quite correct)
@@ -573,12 +719,12 @@ REGR\_R2() & RANK() & DENSE\_RANK() \\ \hline
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Relational Diagram for the Pagila Database}
+\begin{frame}[label=advanced]{Relational Diagram for the Pagila Database}
 \centering
 \includegraphics[height=3in]{pagila2dbeaver.png}
 \end{frame}
 
-\begin{frame}{The Pagila Demo Database}
+\begin{frame}[label=withcode]{The Pagila Demo Database}
 
 \begin{itemize}
   \item Based on the Sakila database\footnote{\scriptsize\url{https://dev.mysql.com/doc/sakila/en/}, 
@@ -599,7 +745,7 @@ REGR\_R2() & RANK() & DENSE\_RANK() \\ \hline
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Querying Data with SQL}
+\begin{frame}[label=withcode,fragile]{Querying Data with SQL}
 Find all actors and the films they appeared in, ordered by film category and year, for those films that are rated PG:
 \footnotesize
 \begin{sqlcode}
@@ -622,7 +768,7 @@ SELECT concat(left(actor.first_name, 1),
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying Data with SQL}
+\begin{frame}[label=withcode,fragile]{Querying Data with SQL}
 Equivalent alternative without using JOIN:
 \footnotesize
 \begin{sqlcode}
@@ -645,7 +791,7 @@ SELECT concat(left(actor.first_name, 1),
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying Data with SQL}
+\begin{frame}[label=withcode,fragile]{Querying Data with SQL}
 Find the most popular actors in the rentals in each city:
 \footnotesize
 \begin{sqlcode}
@@ -670,7 +816,7 @@ SELECT city.city,
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying Data with SQL}
+\begin{frame}[label=withcode,fragile]{Querying Data with SQL}
 Find the customers who spent the most, with their phone numbers and cities, the cities their store is in, and the number of rentals with the highest total rental payments for each category grouped by city of the rental store:
 \scriptsize
 \begin{sqlcode}
@@ -694,7 +840,8 @@ SELECT category.name AS category_name,
  INNER JOIN category USING (category_id)
 \end{sqlcode}
 \end{frame}
-\begin{frame}[fragile]{Cont'd}
+
+\begin{frame}[label=withcode,fragile]{Cont'd}
 \scriptsize
 \begin{sqlcode}
  WHERE store.store_id = inventory.store_id
@@ -716,7 +863,8 @@ SELECT category.name AS category_name,
    INNER JOIN category AS inner_category USING (category_id)
 \end{sqlcode}
 \end{frame}
-\begin{frame}[fragile]{Cont'd}
+
+\begin{frame}[label=withcode,fragile]{Cont'd}
 \scriptsize
 \begin{sqlcode}
    WHERE inner_category.name = category.name AND
@@ -735,7 +883,7 @@ SELECT category.name AS category_name,
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying Data with SQL}
+\begin{frame}[label=withcode,fragile]{Querying Data with SQL}
 Get the total rental revenue and number of rentals for each store by month:
 \scriptsize
 \begin{sqlcode}
@@ -759,7 +907,7 @@ ORDER BY city.city,
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}[fragile]{Querying Data with SQL}
+\begin{frame}[label=withcode,fragile]{Querying Data with SQL}
 Get the top 5 and the bottom 5 grossing customers by year
 \scriptsize
 \begin{sqlcode}
@@ -786,7 +934,7 @@ ORDER BY dollars DESC;
 \end{sqlcode}
 \end{frame}
 
-\begin{frame}{Tips on Querying Data with SQL}
+\begin{frame}[label=withcode]{Tips on Querying Data with SQL}
 \begin{itemize}
   \item Subqueries are intuitive but not efficient
   \item Use set operations to combine results from multiple queries (UNION, INTERSECT, EXCEPT)
@@ -795,7 +943,12 @@ ORDER BY dollars DESC;
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{enumerate}
   \item Find the names and the rental numbers of the top 5 customers who rented the most films
   \begin{itemize}
@@ -810,9 +963,16 @@ ORDER BY dollars DESC;
     \item \textbf{Tip}: Join tables ''rental'', ''customer'', ''payment'', ''inventory'', use ''group by'' and the ''avg()'' function
   \end{itemize}
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Hands-On Exercises \small [cont'd]}
+\begin{frame}[label=withcode]{Hands-On Exercises \small [cont'd]}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{enumerate}
   \setcounter{enumi}{3}
   \item Calculate the rental counts for each country of customer. Are there countries with no rentals?
@@ -828,6 +988,230 @@ ORDER BY dollars DESC;
     \item \textbf{Tip}: You need only one table
   \end{itemize}
 \end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\textbf{Database Schema:} 
+\begin{itemize}
+    \item \textbf{Table:} Employees
+    \item \textbf{Columns:} EmployeeID, FirstName, LastName, Role, Department
+\end{itemize}
+\noindent \textbf{Task:} Write a SQL query to select the first and last names of all employees in the 'Sales' department. \\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Products
+    \item \textbf{Columns:} ProductID, ProductName, Price, Category, StockQuantity
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select the ProductName and Price for all products in the 'Electronics' category.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Books
+    \item \textbf{Columns:} BookID, Title, Author, PublishYear, Price
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select all columns from the Books table and sort the results by PublishYear in descending order.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Orders
+    \item \textbf{Columns:} OrderID, CustomerName, OrderDate, TotalAmount
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select the OrderID and TotalAmount for orders where the TotalAmount is greater than 100. Sort the results by TotalAmount in ascending order.
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Students
+    \item \textbf{Columns:} StudentID, Name, Major
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select all distinct majors from the Students table.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:} 
+\begin{itemize}
+    \item \textbf{Table:} Customers
+    \item \textbf{Columns:} CustomerID, FirstName, LastName, Email
+    \item \textbf{Table:} Orders
+    \item \textbf{Columns:} OrderID, CustomerID, OrderDate, TotalAmount
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select all orders with the corresponding customer's first and last name. Join the Customers and Orders tables on CustomerID.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Authors
+    \item \textbf{Columns:} AuthorID, Name
+    \item \textbf{Table:} Books
+    \item \textbf{Columns:} BookID, Title, AuthorID
+    \item \textbf{Table:} Publishers
+    \item \textbf{Columns:} PublisherID, Name
+    \item \textbf{Table:} BookPublishers
+    \item \textbf{Columns:} BookID, PublisherID
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select the title of the book, the name of the author, and the name of the publisher. This will require joining the Books, Authors, and BookPublishers tables, and then joining the resulting table with Publishers.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Employees
+    \item \textbf{Columns:} EmployeeID, FirstName, LastName, Department
+    \item \textbf{Table:} Sales
+    \item \textbf{Columns:} SaleID, EmployeeID, SaleAmount, SaleDate
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select each employee's first name, last name, and total sales amount. This requires a join between Employees and Sales tables and the use of the SUM aggregate function on SaleAmount.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Products
+    \item \textbf{Columns:} ProductID, ProductName, Price
+    \item \textbf{Table:} Orders
+    \item \textbf{Columns:} OrderID, ProductID, Quantity
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select all products, along with the quantity ordered for each product. Use a LEFT JOIN to ensure that all products are listed, even if they have not been ordered.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Students
+    \item \textbf{Columns:} StudentID, Name, Major
+    \item \textbf{Table:} Enrollments
+    \item \textbf{Columns:} CourseID, StudentID, Grade
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select the names of students and their grades who are enrolled in a specific course (e.g., 'Biology 101'). This requires a join between the Students and Enrollments tables and a WHERE clause to filter by the CourseID.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:} 
+\begin{itemize}
+    \item \textbf{Table:} Employees
+    \item \textbf{Columns:} EmployeeID, FirstName, LastName, Salary, DepartmentID
+    \item \textbf{Table:} Departments
+    \item \textbf{Columns:} DepartmentID, DepartmentName
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select the first name and last name of employees who earn more than the average salary in their respective departments. This will require a subquery in the WHERE clause to calculate the average salary per department.\\
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\noindent \textbf{Database Schema:}
+\begin{itemize}
+    \item \textbf{Table:} Movies
+    \item \textbf{Columns:} MovieID, Title, ReleaseYear, Genre
+    \item \textbf{Table:} Ratings
+    \item \textbf{Columns:} RatingID, MovieID, Reviewer, Stars
+\end{itemize}
+
+\noindent \textbf{Task:} Write a SQL query to select the title of movies that have an average rating higher than the overall average rating of all movies. This will require a complex subquery to first calculate the average rating for each movie, and another subquery to calculate the overall average rating.\\
+\end{column}
+\end{columns}
 \end{frame}
 
 

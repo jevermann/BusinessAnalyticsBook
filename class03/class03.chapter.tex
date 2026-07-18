@@ -170,6 +170,7 @@ CREATE TABLE products (
 );
 \end{sqlcode}
 
+\begin{withcode}
 \begin{infobox}
 To run this code, enter it into psql or the SQL code windows of pgAdmin or DBeaver. Then,
 \begin{itemize}
@@ -178,6 +179,7 @@ To run this code, enter it into psql or the SQL code windows of pgAdmin or DBeav
    \item in pgAdmin, press \colorbox{lightgray}{F5} to execute.
 \end{itemize}
 \end{infobox}
+\end{withcode}
 
 The table contains a column named ''pcode'' (to store the product code) that is of integer type, that is, it can contain whole numbers only. The table has a column called ''name'' of characters with a varying length and a maximum length of 100 characters to store product names. Additionally, a column NOT NULL constraint has been defined for this column, ensuring that a name always exists for a product. The table has a column named ''price'' that is of a single precision floating point type (4 bytes), that is, it can hold decimal point numbers to store product prices. The final line of the SQL command created a primary key constraint on the single column ''pcode'' to ensure that the product code must not be NULL and must be unique, ensuring that each row in the table represents a distinct product. Note that column ''price''may be NULL, that is, may not contain values, because no NOT NULL constraints have been specified. This may be useful for example when the price has not been decided on or will be calculated later.
 
@@ -280,6 +282,16 @@ CREATE TABLE products (
 );
 \end{sqlcode}
 
+\begin{exercisebox}
+\begin{enumerate}
+\item Create an SQL statement to create tables for information about students and for information about courses. \emph{A course can be taken by multiple student and each student can take only one course.}
+\item Make sure you create primary keys and a foreign key
+\item Create SQL statements to insert information about courses and students
+\item Create an SQL statement that tries to insert information that \emph{violates the foreign key constraint}
+\end{enumerate}
+\end{exercisebox}
+
+
 So far, the assumption was that each product can has one supplier. However, in many settings, products have multiple suppliers, and suppliers supply multiple products, that is, there is a \emph{many-to-many relationship} between the two. Expressing many-to-many relationships requires a third table that explicitly represents the relationship, here the ''supplies'' relatinship between products and suppliers. The following SQL code first removes the existing tables, then re-creates tables to express a many-to-many relationship instead.
 
 \begin{sqlcode}
@@ -349,7 +361,23 @@ In fact, this type of relationship can be extended in a straightforward way to t
     \item Create an appropriate PRIMARY KEY for all tables
   \end{itemize}
   \item Use INSERT statements to create some example data.
-  \item Use SELECT statements to ensure your data exists.
+\end{enumerate}
+\end{exercisebox}
+
+\begin{exercisebox}
+\begin{enumerate}
+  \item Consider the following:
+	\begin{itemize}
+	  \item A student has a student number and a name. 
+	  \item A course has a course number and a title. 
+	  \item A student can take many courses; a course can be taken by many students. Students take courses in a certain year.
+	\end{itemize}
+  \item Write the CREATE TABLE statements with the necessary FOREIGN KEY statements
+  \begin{itemize}
+    \item Use appropriate datatypes for the columns
+    \item Create an appropriate PRIMARY KEY for all tables
+  \end{itemize}
+  \item Write INSERT statements to create example data
 \end{enumerate}
 \end{exercisebox}
 
@@ -560,6 +588,59 @@ REGR\_R2() & RANK() & DENSE\_RANK() \\ \hline
 DROP TABLE products;
 DROP TABLE suppliers;
 \end{sqlcode}
+
+\begin{exercisebox}
+Assume the following table of Sales: \\
+
+  \begin{tabular}{l|l|r} 
+    {\bf Country} & {\bf Year} & {\bf Amount} \\ \hline
+    Canada & 2023 & 1000 \\ 
+    Canada & 2024 & 1100 \\
+    Canada & 2025 & 1200 \\ 
+    Canada & 2026 & 1100 \\
+    UK & 2023 & 800 \\
+    UK & 2024 & 900 \\
+    UK & 2025 & 950 \\ 
+    UK & 2026 & 1000 \\ \hline
+  \end{tabular} \\
+\vspace{.5\baselineskip}
+
+Create SQL statements to find the following information and provide the correct/expected output:
+  \begin{enumerate}
+    \item Sales in Canada sorted by year
+    \item Sales in 2025, sorted by amount
+    \item Sales prior to 2026, sorted by country, then by amount
+    \item Sum of sales and average of sales by country
+    \item Countries whose average sales is greater than 900
+  \end{enumerate}
+\end{exercisebox}
+
+\begin{exercisebox}
+Assume the following table of student grades: \\
+
+  \begin{tabular}{l|l|r} 
+    {\bf Course} & {\bf Student} & {\bf Grade} \\ \hline
+    BUSI2720 & 202301 & 75 \\ 
+    BUSI2720 & 202302 & 80 \\
+    BUSI2720 & 202303 & 90 \\ 
+    BUSI2720 & 202304 & 85 \\
+    BUSI4720 & 202301 & 85 \\
+    BUSI4720 & 202302 & 95 \\
+    BUSI4720 & 202303 & 90 \\ 
+    BUSI4720 & 202204 & 95 \\ \hline
+  \end{tabular} \\
+\vspace{.5\baselineskip}
+
+Create SQL statements to find the following information and provide the correct/expected output:
+  \begin{enumerate}
+    \item Grades for students in BUSI2720, sorted by grade
+    \item Average grade for each student, sorted by student
+    \item Average grade for each course, sorted by average grade
+    \item Average grades for students in BUSI4720
+    \item Maximum grades for each course, sorted by course
+    \item Courses for which the average grade is higher than 85
+  \end{enumerate}
+\end{exercisebox}
 
 \subsection*{Relational Diagrams}
 

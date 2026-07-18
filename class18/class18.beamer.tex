@@ -8,7 +8,7 @@
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -35,7 +35,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \begin{block}{}
 Kevin P. Murphy: \emph{Probabilistic Machine Learning -- An Introduction}. MIT Press 2022. \\
 \vspace{0.5\baselineskip}
@@ -57,7 +57,7 @@ Zhang, A., Lipton, Z.C., Li, M. and Smola, A.J.: \emph{Dive into Deep Learning (
 \end{block}
 \end{frame}
 
-\begin{frame}[fragile]{Requirements}
+\begin{frame}[label=withcode,fragile]{Requirements}
 
 Examples in this module require additional Python packages; install from the bash command line:
 
@@ -68,7 +68,7 @@ pip install tensorflow_datasets
 \end{frame}
 
 
-\begin{frame}{Data Augmentation}
+\begin{frame}[label=full]{Data Augmentation}
 
 \begin{block}{Purpose:}
 \begin{itemize}
@@ -89,7 +89,7 @@ pip install tensorflow_datasets
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Augmentation \small [cont'd]}
+\begin{frame}[label=full]{Data Augmentation \small [cont'd]}
 
 \centering 
 
@@ -120,7 +120,7 @@ pip install tensorflow_datasets
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Augmentation \small [cont'd]}
+\begin{frame}[label=full]{Data Augmentation \small [cont'd]}
 
 \begin{block}{Examples in Text}
 \begin{itemize}
@@ -133,7 +133,7 @@ pip install tensorflow_datasets
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Augmentation \small [cont'd]}
+\begin{frame}[label=full]{Data Augmentation \small [cont'd]}
 \begin{block}{Examples in Tabular Data}
 \begin{itemize}
    \item SMOTE, SMOTE-NC (''Synthetic Minority Oversampling Technique'')
@@ -157,7 +157,41 @@ pip install tensorflow_datasets
 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{SMOTE in Python}
+\begin{frame}[label=full]{Hands-On Exercise --- SMOTE}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
+\footnotesize
+
+\begin{tabular}{c | c | c | c | c}
+\textbf{ID} & \textbf{Income} & \textbf{Assets} & \textbf{Debt} & \textbf{VIP} \\
+\hline
+A & 1.0 & 2.0 & 1.0 & 0 \\
+B & 2.0 & 1.0 & 2.0 & 0 \\
+C & 2.0 & 3.0 & 1.0 & 0 \\
+D & 3.0 & 2.0 & 2.0 & 0 \\
+E & 4.0 & 3.0 & 3.0 & 0 \\
+F & 5.0 & 2.0 & 4.0 & 0 \\
+G & 9.0 & 7.0 & 8.0 & 1 \\
+H & 6.0 & 6.0 & 5.0 & 1 \\
+I & 7.0 & 7.0 & 6.0 & 1 \\
+J & 6.5 & 7.5 & 5.5 & 1 \\
+\end{tabular}
+\end{column}
+\end{columns}
+\begin{enumerate}
+   \item Select at random one of the minority observations ($O_1$)
+   \item Identify the 3 closest minority class observations to $O_1$ (use Euclidean distances)
+   \item Select at random one of the 3 closest minority class observations ($O_2$)
+   \item Compute the difference vector between ($O_2 - O_1$)
+   \item Select at random an interpolation factor $[0, 1]$
+   \item Calculate the new synthetic data point
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[label=withcode,fragile]{SMOTE in Python}
 
 Load example classification data:
 \begin{pythoncode}
@@ -184,7 +218,12 @@ pd.DataFrame(X_res).describe()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On}
+\begin{frame}[label=withcode]{Hands-On Exercise}\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
+
 \begin{enumerate}
   \item Load the telekom customer church dataset from\\
   \url{https://archive.ics.uci.edu/static/public/563/iranian+churn+dataset.zip}
@@ -195,9 +234,11 @@ pd.DataFrame(X_res).describe()
   \item How many synthetic observations are generated?
   \item Compare the data summary statistics of the original and the balanced dataset. Are there significant differences?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Transfer Learning}
+\begin{frame}[label=full]{Transfer Learning}
 
 \begin{block}{Ideas}
 \begin{itemize}
@@ -225,7 +266,7 @@ pd.DataFrame(X_res).describe()
 \end{block}
 \end{frame}
 
-\begin{frame}{Transfer Learning \small [cont'd]}
+\begin{frame}[label=full]{Transfer Learning \small [cont'd]}
 
 \begin{center}
 \includegraphics[width=0.8\textwidth]{murphy_19_02.png} \\
@@ -240,7 +281,7 @@ pd.DataFrame(X_res).describe()
 \end{block}   
 \end{frame}
 
-\begin{frame}[fragile]{Data Augmentation in Python}
+\begin{frame}[label=withcode,fragile]{Data Augmentation in Python}
 
 Load Tensorflow example data set:
 \begin{pythoncode}
@@ -266,7 +307,7 @@ test_ds = test_ds.map(lambda x, y: (resize_fn(x), y))
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Data Augmentation in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Data Augmentation in Python \small [cont'd]}
 Data augmentation using Keras layers:
 \begin{pythoncode}
 # Define a sequential model of random transformation layers
@@ -290,14 +331,14 @@ train_ds = train_ds.map(lambda x, y: (augmentation(x), y))
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Augmentation in Python \small [cont'd]}
+\begin{frame}[label=withcode]{Data Augmentation in Python \small [cont'd]}
 Before and after:
 
 \includegraphics[width=.49\textwidth]{catsdogs_sample.png}
 \includegraphics[width=.49\textwidth]{catsdogs_sample_transformed.png}
 \end{frame}
 
-\begin{frame}[fragile]{Transfer Learning in Python}
+\begin{frame}[label=withcode,fragile]{Transfer Learning in Python}
 Load an image classification model and its  pre-trained  weights from Keras applications \emph{without} the top classification layer:
 \begin{pythoncode}
 base_model = keras.applications.Xception(
@@ -312,7 +353,7 @@ base_model.trainable = False
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Transfer Learning in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Transfer Learning in Python \small [cont'd]}
 
 Create a new layer with specific input image shape:
 \begin{pythoncode}
@@ -338,7 +379,7 @@ model.summary(show_trainable=True)
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Transfer Learning in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Transfer Learning in Python \small [cont'd]}
 
 Compile and fit the new model (training only the classification layers) with default learning rate for optimizer:
 \begin{pythoncode}
@@ -356,7 +397,7 @@ Only a few epochs are needed
 
 \end{frame}
 
-\begin{frame}[fragile]{Transfer Learning in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Transfer Learning in Python \small [cont'd]}
 
 Fine-tune the base model with a very small learning rate:
 \begin{pythoncode}
@@ -380,7 +421,7 @@ Only a few epochs are needed
 \end{block}
 \end{frame}
 
-\begin{frame}{Data Augmentation and Transfer Learning in Python}
+\begin{frame}[label=withcode]{Data Augmentation and Transfer Learning in Python}
 
 Adapted from: 
 
@@ -395,7 +436,7 @@ The project can be cloned from this URL:
 \small\url{https://github.com/jevermann/busi4720-ai.git}\normalsize
 \end{frame}
 
-\begin{frame}{Adapters}
+\begin{frame}[label=full]{Adapters}
 
 \begin{block}{Fine-tuning problems:}
 \begin{itemize}
@@ -413,7 +454,7 @@ The project can be cloned from this URL:
 \end{block}
 \end{frame}
 
-\begin{frame}{Adapters \small [cont'd]}
+\begin{frame}[label=full]{Adapters \small [cont'd]}
 \begin{block}{Examples}
   \begin{enumerate}[(a)]
      \item Adapter in transformer layer
@@ -426,7 +467,7 @@ The project can be cloned from this URL:
 \scriptsize Source: Murphy Fig. 19.3 \normalsize
 \end{frame}
 
-\begin{frame}{Attention}
+\begin{frame}[label=full]{Attention}
 \begin{itemize}
   \item A set of $m$ key vectors $K$ and value vectors $V$
   \item A query vector $Q$
@@ -440,7 +481,7 @@ The project can be cloned from this URL:
 \scriptsize Source: Murphy, Fig. 15.16 \normalsize
 \end{frame}
 
-\begin{frame}{Attention \small [cont'd]}
+\begin{frame}[label=full]{Attention \small [cont'd]}
 \begin{block}{Scaled Dot-Product Attention}
 \begin{align*}
 \operatorname{Attn}(Q, K, V) = \operatorname{softmax}\left(\frac{Q K^T}{\sqrt{d_k}} \right) V
@@ -455,7 +496,7 @@ The project can be cloned from this URL:
 %\end{block}
 \end{frame}
 
-\begin{frame}{Attention in Seq2Seq Models}
+\begin{frame}[label=full]{Attention in Seq2Seq Models}
 
 \begin{itemize}
   \item Encoder -- Decoder network
@@ -468,7 +509,7 @@ The project can be cloned from this URL:
 \scriptsize Source: Murphy, Fig. 15.18 \normalsize
 \end{frame}
 
-\begin{frame}{Attention in Seq2Seq Models}
+\begin{frame}[label=full]{Attention in Seq2Seq Models}
 Instead of fixed context vector for decoder:
 \begin{align*}
 c &= h_T^e
@@ -479,7 +520,7 @@ c_t &= \operatorname{Attn}(Q = h_{t-1}^d, K = h^e, V = h^e)
 Query $Q$ is the hidden state of decoder, keys $K$ and values $V$ are hidden states from encoder
 \end{frame}
 
-\begin{frame}{Attention in Seq2Seq Models}
+\begin{frame}[label=full]{Attention in Seq2Seq Models}
 \textbf{Example:} Attention in English -- Spanish translation
 
 \begin{center}
@@ -489,7 +530,7 @@ Query $Q$ is the hidden state of decoder, keys $K$ and values $V$ are hidden sta
 \end{center}
 \end{frame}
 
-\begin{frame}{Multi-Headed Attention}
+\begin{frame}[label=full]{Multi-Headed Attention}
 \begin{align*}
 \operatorname{MultiHead}(Q, K, V) &= W_o \operatorname{Concat} (h_1, \ldots h_h) = W_o \begin{pmatrix} h_1 \\ \vdots \\ h_n \end{pmatrix} 
 \intertext{where each head $h_i$ is defined as:}
@@ -504,7 +545,7 @@ and $W_i^{(Q)}, W_i^{(K)}, W_i^{(V)},$ and $W^{(O)}$ are trainable weight matric
 \end{center}
 \end{frame}
 
-\begin{frame}{Self-Attention}
+\begin{frame}[label=full]{Self-Attention}
 Query, keys, and values come from the same model, i.e. from the encoder or decoder.
 \begin{align*}
 y_i = \operatorname{Attn}(x_i, X, X)
@@ -518,7 +559,7 @@ Where $y_1$ is output $i$, $x_i$ is input $i$, and the matrix $X$ is the matrix 
 \end{center}
 \end{frame}
 
-\begin{frame}{Positional Encoding}
+\begin{frame}[label=full]{Positional Encoding}
 Model must know the order words (tokens) occur in. Positional encodings provide this. 
 \begin{align*}
 &p_{i, 2j} = \sin \left( \frac{i}{C^{2j/d}} \right), \ p_{i, 2j+1} = \cos \left( \frac{i}{C^{2j/d}} \right) \ \forall j \in [1 \ldots d/2]
@@ -539,7 +580,7 @@ Combine with word embeddings $X$:
 \end{align*}
 \end{frame}
 
-\begin{frame}{Positional Encoding \small [cont'd]}
+\begin{frame}[label=full]{Positional Encoding \small [cont'd]}
 \begin{itemize}
 \item Example for 1000 positions (rows) and embedding dimension of 64. 
 \item Each row is a real-valued vector representing its location in the sequence:
@@ -551,7 +592,7 @@ Combine with word embeddings $X$:
 \end{center}
 \end{frame}
 
-\begin{frame}[fragile]{Positional Encoding in Python}
+\begin{frame}[label=withcode,fragile]{Positional Encoding in Python}
 Define weights:
 \begin{pythoncode}
 import numpy as np
@@ -567,7 +608,7 @@ def position_encoding_matrix(seq_len, d, C=10000):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Positional Encoding in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Positional Encoding in Python \small [cont'd]}
 Define Keras layer:
 \begin{pythoncode}
 class TokenAndPositionEmbedding(layers.Layer):
@@ -596,7 +637,7 @@ class TokenAndPositionEmbedding(layers.Layer):
 \end{frame}
 
 
-\begin{frame}[fragile]{Transformer}
+\begin{frame}[label=full,fragile]{Transformer}
 
 Encoder uses multi-headed self-attention:
 
@@ -625,7 +666,7 @@ def Encoder(X, N):
 \end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Transformer}
+\begin{frame}[label=full,fragile]{Transformer}
 
 Decoder uses multi-headed self-attention:
 
@@ -655,7 +696,7 @@ def Decoder(Y, E, N):
 \end{columns}
 \end{frame}
 
-\begin{frame}{Transformer \small [cont'd]}
+\begin{frame}[label=full]{Transformer \small [cont'd]}
 \centering
 
 \includegraphics[width=\textwidth]{murphy_15_26.png} \\
@@ -663,7 +704,7 @@ def Decoder(Y, E, N):
 \scriptsize Source: Murphy, Fig. 15.26 \normalsize
 \end{frame}
 
-\begin{frame}[fragile]{Transformer Encoder in Python}
+\begin{frame}[label=withcode,fragile]{Transformer Encoder in Python}
 
 \begin{pythoncode}
 class TransformerBlock(layers.Layer):
@@ -689,7 +730,7 @@ class TransformerBlock(layers.Layer):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{ELMo --''Embeddings from Language Model''}
+\begin{frame}[label=full]{ELMo --''Embeddings from Language Model''}
 
 \begin{itemize}
    \item Words learned in context of past and future words
@@ -708,7 +749,7 @@ class TransformerBlock(layers.Layer):
 \end{columns}
 \end{frame}
 
-\begin{frame}{BERT}
+\begin{frame}[label=full]{BERT}
 \begin{itemize}
 \item  ''Bidirectional Encoder Representations from Transformers''
 \item Encoder-only
@@ -724,7 +765,7 @@ class TransformerBlock(layers.Layer):
 \end{center}
 \end{frame}
 
-\begin{frame}{Comparison of BERT and GPT Architectures}
+\begin{frame}[label=full]{Comparison of BERT and GPT Architectures}
 \centering
 
 \includegraphics[width=\textwidth]{murphy_15_33.png} \\
@@ -732,7 +773,7 @@ class TransformerBlock(layers.Layer):
 \scriptsize Source: Murphy, Fig. 15.33 \normalsize
 \end{frame}
 
-\begin{frame}{BERT -- Pre-Training Tasks \small [cont'd]}
+\begin{frame}[label=full]{BERT -- Pre-Training Tasks \small [cont'd]}
 \begin{itemize}
    \item Masked Language Modelling
    \item Next sentence prediction
@@ -748,7 +789,7 @@ class TransformerBlock(layers.Layer):
 
 \end{frame}
 
-\begin{frame}{BERT -- Example Fine-Tuning Tasks}
+\begin{frame}[label=full]{BERT -- Example Fine-Tuning Tasks}
 \begin{itemize}
    \item Sentence classification
    \item Question answering
@@ -768,7 +809,7 @@ class TransformerBlock(layers.Layer):
 
 \end{frame}
 
-\begin{frame}{Tensorflow and Keras Tutorials}
+\begin{frame}[label=withcode]{Tensorflow and Keras Tutorials}
 
 \begin{block}{Keras}
 \begin{itemize}
@@ -788,7 +829,7 @@ class TransformerBlock(layers.Layer):
 \end{block}
 \end{frame}
 
-\begin{frame}{Auto-Encoder}
+\begin{frame}[label=full]{Auto-Encoder}
 
 Map input to \emph{point} in lower-dimensional latent space:
 
@@ -814,7 +855,7 @@ Map input to \emph{point} in lower-dimensional latent space:
 \end{frame}
    
 
-\begin{frame}{Auto-Encoder in Python}
+\begin{frame}[label=withcode]{Auto-Encoder in Python}
 
 Implementations are available on the following GitHub repo:
 
@@ -831,7 +872,7 @@ While the encoder and decoder in the following examples have the same architectu
 
 \end{frame}
 
-\begin{frame}[fragile]{Auto-Encoder in Python \small [cont']}
+\begin{frame}[label=withcode,fragile]{Auto-Encoder in Python \small [cont']}
 Encoder:
 \begin{pythoncode}
 from tensorflow.keras import layers
@@ -858,7 +899,7 @@ decoder = models.Sequential([
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Auto-Encoder in Python \small [cont']}
+\begin{frame}[label=withcode,fragile]{Auto-Encoder in Python \small [cont']}
 Complete auto-encoder model:
 
 \begin{pythoncode}
@@ -881,7 +922,7 @@ auto_encoder.fit(x_train, x_train,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Auto-Encoder in Python \small [cont']}
+\begin{frame}[label=withcode,fragile]{Auto-Encoder in Python \small [cont']}
 Visualize results:
 
 \begin{pythoncode}
@@ -907,7 +948,7 @@ fig.show()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{CNN Auto-Encoder in Python \small [cont']}
+\begin{frame}[label=withcode,fragile]{CNN Auto-Encoder in Python \small [cont']}
 
 Encoder:
 \begin{pythoncode}
@@ -937,7 +978,7 @@ decoder = models.Sequential([
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Auto-Encoder Examples}
+\begin{frame}[label=withcode]{Auto-Encoder Examples}
 \textbf{Fashion MNIST -- Original and Reconstruction}
 \begin{itemize}
    \item 3-layer densely connected network (decoder inverse)
@@ -954,7 +995,7 @@ decoder = models.Sequential([
 \end{center}
 \end{frame}
 
-\begin{frame}{Auto-Encoder Examples}
+\begin{frame}[label=full]{Auto-Encoder Examples}
 \textbf{Fashion MNIST -- First 2 Latent Dimensions}
 \begin{itemize}
    \item \emph{Left:} 3-layer densely connected network (decoder inverse)
@@ -968,16 +1009,23 @@ decoder = models.Sequential([
 \end{center}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=withcode]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
 \begin{enumerate}
   \item Download the complete Python code for the auto-encoder or clone the Git repo. That code includes visualization of original and decoded images.
   \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
   \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
   \item Generate some numbers in the latent space and decode them to new images, that is, use the auto-encoder in a generative way. What can you say about the results?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}{Auto-Encoder -- Denoising}
+\begin{frame}[label=full]{Auto-Encoder -- Denoising}
 \begin{itemize}
    \item Add noise to input
    \item Reconstruct clean output
@@ -992,7 +1040,7 @@ decoder = models.Sequential([
 \end{frame}
    
 
-\begin{frame}{VAE -- Variational Auto-Encoder}
+\begin{frame}[label=full]{VAE -- Variational Auto-Encoder}
 
 \begin{columns}
 \begin{column}{.5\textwidth}
@@ -1020,7 +1068,7 @@ decoder = models.Sequential([
 \end{frame}
 
    
-\begin{frame}{VAE -- Variational Auto-Encoder}
+\begin{frame}[label=full]{VAE -- Variational Auto-Encoder}
 
 \begin{itemize}
 
@@ -1038,7 +1086,7 @@ decoder = models.Sequential([
 
 \end{frame}
 
-\begin{frame}{VAE -- Variational Auto-Encoder}
+\begin{frame}[label=full]{VAE -- Variational Auto-Encoder}
 
 Reconstruction: VAE (a) --- AE (b) \\
 \begin{center}
@@ -1053,7 +1101,7 @@ Generation: VAE (a) --- AE (b) \\
 \end{center}
 \end{frame}
 
-\begin{frame}{VAE in Python}
+\begin{frame}[label=withcode]{VAE in Python}
 
 Adapted from: 
 
@@ -1069,7 +1117,7 @@ The project can be cloned from this URL:
 \end{frame}
 
 
-\begin{frame}[fragile]{VAE in Python \small [cont']}
+\begin{frame}[label=withcode,fragile]{VAE in Python \small [cont']}
 
 Sampling layer for sampling from a multi-variate Gaussian with given mean and log-variance vectors:
 \begin{pythoncode}
@@ -1087,7 +1135,7 @@ class Sampling(layers.Layer):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{VAE in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{VAE in Python \small [cont'd]}
 
 Encoder:
 
@@ -1116,7 +1164,7 @@ encoder = keras.Model(encoder_inputs, [z_mean, z_log_var, z])
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{VAE in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{VAE in Python \small [cont'd]}
 Loss function:
 
 \begin{pythoncode}
@@ -1138,17 +1186,24 @@ with tf.GradientTape() as tape:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise}
+\begin{frame}[label=withcode]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
 \begin{enumerate}
   \item Download the complete Python code for the VAE or clone the Git repo. That code includes visualization of original and decoded images.
   \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
   \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 
 
-\begin{frame}{GAN -- Generative Adversarial Networks}
+\begin{frame}[label=full]{GAN -- Generative Adversarial Networks}
 
 \begin{itemize}
 
@@ -1170,7 +1225,7 @@ with tf.GradientTape() as tape:
 
 \end{frame}
 
-\begin{frame}{GAN -- Generative Adversarial Networks \small [cont'd]}
+\begin{frame}[label=full]{GAN -- Generative Adversarial Networks \small [cont'd]}
 Image generated by a GAN:
 
 \begin{center}
@@ -1181,7 +1236,7 @@ Image generated by a GAN:
 
 \end{frame}
 
-%\begin{frame}[fragile]{GAN in Python}
+%\begin{frame}[label=full,fragile]{GAN in Python}
 
 %Load example data set:
 
@@ -1197,7 +1252,7 @@ Image generated by a GAN:
 %\end{pythoncode}
 %\end{frame}
 
-\begin{frame}{GAN in Python}
+\begin{frame}[label=withcode]{GAN in Python}
 
 Adapted from: 
 
@@ -1213,7 +1268,7 @@ The project can be cloned from this URL:
 \end{frame}
 
 
-\begin{frame}[fragile]{GAN in Python}
+\begin{frame}[label=withcode,fragile]{GAN in Python}
 Discriminator receives image to classify:
 
 \begin{pythoncode}
@@ -1239,7 +1294,7 @@ discriminator.summary()
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{GAN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{GAN in Python \small [cont'd]}
 Generator receives latent space vector to generate image from:
 
 \begin{pythoncode}
@@ -1264,7 +1319,7 @@ generator.summary()
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{GAN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{GAN in Python \small [cont'd]}
 Training step for a single batch of real images:
 \begin{pythoncode}
 class GAN(keras.Model):
@@ -1289,7 +1344,7 @@ class GAN(keras.Model):
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{GAN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{GAN in Python \small [cont'd]}
 Training the discriminator:
 \begin{pythoncode}
         # Train the discriminator
@@ -1305,7 +1360,7 @@ Training the discriminator:
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{GAN in Python \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{GAN in Python \small [cont'd]}
 Training the generator:
 \begin{pythoncode}
         # Sample random points in the latent space
@@ -1330,7 +1385,7 @@ Training the generator:
 \end{pythoncode}
 \end{frame}
 
-%\begin{frame}[fragile]{GAN in Python \small [cont'd]}
+%\begin{frame}[label=withcode,fragile]{GAN in Python \small [cont'd]}
 %Training the generator:
 %\begin{pythoncode}
         %# Update metrics
@@ -1343,7 +1398,7 @@ Training the generator:
 %\end{pythoncode}
 %\end{frame}
 
-\begin{frame}{GAN Training}
+\begin{frame}[label=full]{GAN Training}
 
 \begin{block}{Problems}
 

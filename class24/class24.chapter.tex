@@ -173,20 +173,53 @@ Personal information\index{Personal information} in PIPEDA means information abo
 
 Importantly, anonymous information is also considered personal if there is a serious possibility that an individual could be identified, based on that information alone or in combination with other information. This interpretation presents a serious challenge for anonymizing information when large data sets with multiple variables are stored.
 
+
+\begin{exercisebox}
+For each information item, indicate whether it is personal information:
+\begin{minipage}[t]{0.54\textwidth}
+\begin{itemize}
+\item Employee ID number
+\item Company annual revenue 
+\item Business email address 
+\item Anonymous survey results 
+\item IP address 
+\item Customer purchase history 
+\item Weather report 
+\item Vehicle license plate 
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{0.44\textwidth}
+\begin{itemize}
+\item Handwriting sample 
+\item Company logo 
+\item Home address 
+\item Job title only 
+\item Salary information 
+\item Medical diagnosis
+\item Voice recording 
+\end{itemize}
+\end{minipage}
+\bigskip
+\begin{enumerate}
+    \item Which items were the most difficult to classify?
+    \item Why does context affect whether information is personal?
+\end{enumerate}
+\end{exercisebox}
+
 \subsection*{Fair Information Principles}
 
 PIPEDA is structured around ten ''Fair Information Principles'' that govern the collection, use, disclosure, and retention of personal information, as well as the rights of individuals with respect to the organizations holding that data. 
 
 \begin{enumerate}
-   \item Be accountable
+   \item Accountability
    \item Identify the purpose
-   \item Obtain valid, informed consent
+   \item Consent
    \item Limit collection
    \item Limit use, disclosure and retention
-   \item Be accurate
-   \item Use appropriate safeguards
-   \item Be open
-   \item Give individuals access
+   \item Accuracy
+   \item Safeguards
+   \item Openness
+   \item Individual access
    \item Challenging compliance
 \end{enumerate}
 
@@ -261,6 +294,23 @@ Organizations may collect information by offering opt-out consent whereby consen
    \item The opt-out must be communicated to related businesses, subsidiaries, or third parties that use the collected data.
 \end{itemize}
 
+ 
+\begin{exercisebox}
+For each scenario, determine whether consent is:\\
+
+\begin{center}
+\textbf{Valid Consent \quad Invalid Consent \quad More Info Needed}
+\end{center}
+\bigskip
+\begin{enumerate}
+\item A retailer explains that an email address will only be used for receipts. The customer voluntarily provides the address.
+\item A website hides consent inside a 40-page Terms of Service agreement.
+\item A bank requests Social Insurance Number information when opening an account.
+\item A company uses customer emails collected for shipping notifications to send advertising without informing customers.
+\item A mobile application requests access to contacts but does not explain why.
+\end{enumerate}
+\end{exercisebox}
+
 \begin{exercisebox}
 
 Consider your bank or communications provider or other large organization you regularly deal with. 
@@ -289,6 +339,34 @@ Video data collection may play an important role in the context of business anal
    \item Organizations should periodically evaluate the need for continued video surveillance.
 \end{itemize}
 
+\begin{exercisebox}
+A gym creates a membership form. Decide whether each item is: \\
+
+\begin{center}
+\textbf{Necessary} \quad \textbf{Optional} \quad \textbf{Not Appropriate}
+\end{center}
+
+\bigskip
+\begin{minipage}[t]{.45\textwidth}
+\begin{itemize}
+\item Name 
+\item Home address
+\item Date of birth 
+\item Social Insurance Number
+\item Credit card number 
+\end{itemize}
+\end{minipage}
+\begin{minipage}[t]{.45\textwidth}
+\begin{itemize}
+\item Emergency contact 
+\item Occupation 
+\item Health conditions 
+\item Driver's licence number 
+\item Favourite colour 
+\end{itemize}
+\end{minipage}
+\end{exercisebox}
+
 \subsection*{PIPEDA Fair Information Principle 5: Limiting Use, Disclosure, and Retention}
 
 Organizations must limit the use, disclosure, and retention of data to identified purposes for which it has obtained consent from the individual\footnote{\href{https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/p_principle/principles/p_use/}{PIPEDA Fair Information Principle 5 -- Limiting use, Disclosure, and Retention (OPC)}}. Renewed consent is required when the data is to be used for a new purpose or is disclosed to a different set of third parties. Organizations should also identify the normal retention period for data and the circumstances that require an extension of the retention period. For example, financial regulations may specify minimum retention periods; when an individual has filed a complaint, information must be retained until resolution of the complaint. Organizations must also restrict access to only those employees that require access to fulfill the purpose for which the information is to be used. Organizations should have in place administrative, technological, and physical measures to authenticate and authorize individuals to access personal information.
@@ -307,6 +385,25 @@ Disposal of information should be governed by a policy and follow a process that
 \end{figure}
 
 Figure~\ref{fig:nist} shows guidelines for media sanitization by the United States National Institute for Standards and Technology (NIST). Depending on the sensitivity of the information and whether the medium leaves organizational control, three different types of disposal are used. ''Clearing'' information is the simple deletion of information. However, on most computer systems this means that the information remains on the storage medium, e.g. the hard drive, but the space is marked as available for overwriting with new data. In other words, the information can easily be recovered. ''Purging'' of information explicitly overwrites deleted information with zeros or random information or exposes magnetic storage media to strong magnets, so that the deleted information cannot normally be recovered. However, forensic laboratories with the right equipment may even in these circumstances be able to recover at least some of the information. ''Destroying'' storage media means physical destruction so that even forensic recovery techniques are unable to restore the information. This typically involves finely shredding hard drives or vaporizing them using extremely high temperatures. Important in the process shown in Figure~\ref{fig:nist} is the need to validate and document the disposal of information in all cases. 
+
+
+\begin{exercisebox}
+For each of the following records choose whether to: \\
+
+\begin{center}
+\textbf{Keep} \quad \textbf{Archive} \quad \textbf{Securely Destroy}
+\end{center}
+\bigskip
+\begin{enumerate}
+\item Customer who closed account 12 years ago
+\item Active employee file
+\item Duplicate printed report 
+\item Outdated mailing list 
+\item Tax records 
+\item Expired job applicant resumes 
+\item Temporary meeting notes 
+\end{enumerate}
+\end{exercisebox}
 
 \subsection*{PIPEDA Fair Information Principle 6: Ensure Accuracy}
 
@@ -375,6 +472,23 @@ Importantly, when individuals request correction or amendment of information, th
 Because of the complexity of handling a request for access to information and updating of information, organizations should have a policy and process in place and must provide employees with specific training with respect to this process\footnote{\href{https://www.priv.gc.ca/en/privacy-topics/privacy-laws-in-canada/the-personal-information-protection-and-electronic-documents-act-pipeda/pipeda-compliance-help/pipeda-interpretation-bulletins/interpretations_05_access/}{Interpretation Bulletin: Access to Personal Information (OPC)}}. 
 
 \begin{exercisebox}
+A customer states:\\
+\begin{quote}
+"I want to know everything your company has about me."
+\end{quote}
+\bigskip
+As Privacy Officer you must answer these questions:
+\bigskip
+\begin{itemize}
+    \item What information should be searched?
+    \item What timelines apply?
+    \item What information may be withheld?
+    \item How should the response be communicated?
+\end{itemize}
+\end{exercisebox}
+
+
+\begin{exercisebox}
 
 Consider your bank or communications provider or other large organization you regularly deal with. 
 \begin{itemize}
@@ -397,6 +511,16 @@ Consider your bank or communications provider or other large organization you re
 \end{itemize}
 \end{exercisebox}
 
+
+\begin{exercisebox}
+A marketing company stores customer files in unlocked filing cabinets. Employees share passwords. Old customer records from ten years ago are never deleted. Staff discuss customer complaints in public areas. Visitors can see computer screens displaying customer information. \\
+
+\begin{enumerate}
+\item Identify 5 privacy issues and the PIPEDA principles that are involved.
+\item Briefly describe recommendation for improvements for each issue.
+\end{enumerate}
+\end{exercisebox}
+
 \subsection*{Mandatory Breach Reporting}
 
 Privacy breaches, that is, unauthorized disclosure of information to third parties, must be reported to the OPC when there is a ''real risk of significant harm'', independent of the number of individuals affected\footnote{\href{https://www.priv.gc.ca/en/privacy-topics/business-privacy/safeguards-and-breaches/privacy-breaches/respond-to-a-privacy-breach-at-your-business/gd_pb_201810/}{What you need to know about mandatory reporting of breaches of security safeguards (OPC)}}. The OPC defines significant harm to include ''bodily harm, humiliation, damage to reputation or relationships, loss of employment, business or professional opportunities, financial loss, identity theft, negative effects on the credit record and damage to or loss of property.'' In determining the risk, organizations should take into account the sensitivity of the information and the probability of misuse by third parties. As noted earlier, health and financial information is more sensitive than other information, but other information, such as political opinions or sexual orientation is also considered sensitive. In assessing the probability of misuse, organizations should consider when, for how long, and to whom the information was disclosed, and whether the information was accidentally disclosed or whether there was malicious intent by an outside party (''hacking''), among other considerations.
@@ -414,6 +538,7 @@ PIPEDA requires organizations to also report privacy breaches to the affected in
 
 While this section has focused on the Canadian context and the Canadian information privacy legislation related to commercial activity, information protection or privacy legislation exists in many other jurisdictions with different requirements and obligations for organizations. For example, the European Union General Data Protection Regulations (GDPR) apply to all organizations that collect information about individuals located inside the EU. That is, the GDPR may also apply to Canadian businesses. In the United States, the Child Online Privacy Protection Act (COPPA) and the Health Insurance Portability and Accountability Act (HIPAA) are more limited in scope and govern information about children and health data in the US. California has its own California Consumer Protection Act (CCPA) that governs information about residents of California. In China, the Personal Information Protection Law (PIPL) governs the processing of personal information. As with the GDPR, these regulations apply also to Canadian organizations if they operate in these jurisdictions or process information about residents of these jurisdictions.
 
+\begin{advanced}
 \section{Artificial Intelligence and Data Act}
 
 This section examines the proposed Artificial Intelligence and Data Act (AIDA). This act was part of the Digital Charter Implementation Act 2022 which combined the Consumer Privacy Protection Act (an update to PIPEDA), the Personal Information and Data Protection Tribunal Act, and the Artificial Intelligence and Data Act (AIDA)\index{Artificial Intelligence and Data Act}\index{AIDA!see{Artificial Intelligence and Data Act}}. 
@@ -541,6 +666,7 @@ Organizations developing or deploying high-risk AI systems will need to undergo 
 
 In conclusion, the EU AI act is the first legislation that recognizes the risks posed by AI and machine learning systems, and is a first attempt to regulate these systems to reduce or prevent potential harms.
 
+\end{advanced}
 
 \FloatBarrier
 

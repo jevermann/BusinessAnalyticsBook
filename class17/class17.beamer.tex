@@ -4,11 +4,11 @@
 
 \title{Business 4720 - Class 17}
 
-\subtitle{Recurrent Neural Networks using Python}
+\subtitle{Recurrent Neural Networks}
 
 \begin{document}
 
-\begin{frame}{}
+\begin{frame}[label=full]{}
   \titlepage
   \footnotesize
   \input{../license.tex}
@@ -16,7 +16,7 @@
 
 \section{Introduction}
 
-\begin{frame}{This Class}
+\begin{frame}[label=full]{This Class}
 
 \begin{block}{What You Will Learn:}
 \begin{itemize}
@@ -32,7 +32,7 @@
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=full]{Based On}
 \begin{block}{}
 Gareth James, Daniel Witten, Trevor Hastie and Robert Tibshirani: \emph{An Introduction to Statistical Learning with Applications in R}. 2nd edition, corrected printing, June 2023. (ISLR2) \\
 \vspace{0.5\baselineskip}
@@ -50,7 +50,7 @@ Chapter 15
 \end{block}
 \end{frame}
 
-\begin{frame}{Based On}
+\begin{frame}[label=withcode]{Based On}
 \begin{block}{Tensorflow and Keras Tutorials}
 \begin{itemize}
 \item \url{https://www.tensorflow.org/tutorials/structured_data/time_series} \\
@@ -68,7 +68,7 @@ Chapter 15
 \end{block}
 \end{frame}
 
-\begin{frame}{Predictions from Sequences}
+\begin{frame}[label=full]{Predictions from Sequences}
 \begin{block}{Application Examples}
 \begin{itemize}
    \item Text classification
@@ -83,7 +83,7 @@ Chapter 15
 \end{block}
 \end{frame}
 
-\begin{frame}{RNN -- Seq2Vec}
+\begin{frame}[label=full]{RNN -- Seq2Vec}
 \begin{itemize}
     \item Predict (regression or classification) from a sequence
     \item Inputs $x$, output $y$ and hidden layers $h$
@@ -96,7 +96,7 @@ Chapter 15
 \scriptsize Source: Murphy Fig. 15.4
 \end{frame}
 
-\begin{frame}{RNN -- Vec2Seq}
+\begin{frame}[label=full]{RNN -- Vec2Seq}
 \begin{itemize}
    \item Generate a sequence from initial input
    \item Input $x$, outputs $y$ and hidden layers $h$
@@ -108,7 +108,7 @@ Chapter 15
 \scriptsize Source: Murphy Fig. 15.1
 \end{frame}
 
-\begin{frame}{RNN -- Seq2Seq}
+\begin{frame}[label=full]{RNN -- Seq2Seq}
 \begin{itemize}
     \item Predict sequence from a sequence
     \item Inputs $x$, outputs $y$ and hidden layers $h$
@@ -130,7 +130,7 @@ Chapter 15
 \scriptsize Source: Murphy Fig 15.5
 \end{frame}
 
-\begin{frame}{RNN -- Seq2Seq (Non-Aligned)}
+\begin{frame}[label=full]{RNN -- Seq2Seq (Non-Aligned)}
 
 \centering
 \includegraphics[width=\textwidth]{seq2seq_nonaligned.png} \\
@@ -138,7 +138,7 @@ Chapter 15
 \scriptsize Source: Murphy Fig. 15.7
 \end{frame}
 
-\begin{frame}{Recurrent Neural Networks (RNN)}
+\begin{frame}[label=full]{Recurrent Neural Networks (RNN)}
 \begin{itemize}
    \item A neural network block occurs multiple times in sequence
    \item \textbf{Input}: Sequence or single (initial) input
@@ -150,7 +150,7 @@ Chapter 15
 \scriptsize \url{https://commons.wikimedia.org/wiki/File:Recurrent_neural_network_unfold.svg}
 \end{frame}
 
-\begin{frame}{Backpropagation Through Time}
+\begin{frame}[label=full]{Backpropagation Through Time}
 \begin{align*}
 h_t &= \sigma ( W_{x} \cdot x_t + W_{h} \cdot h_{t-1} + B_{h}) \\
 o_t &= \sigma (W_{o} \cdot h_t + B_{o} ) 
@@ -170,7 +170,7 @@ o_t &= \sigma (W_{o} \cdot h_t + B_{o} )
 \end{block}
 \end{frame}
 
-\begin{frame}{Long-Short-Term Memory (LSTM) Cells}
+\begin{frame}[label=full]{Long-Short-Term Memory (LSTM) Cells}
 \begin{itemize}
    \item ''Input gate'' $I$, ''Forget gate'' $F$, ''Output gate'' $O$, candidate new memory $\tilde{c}_t$
    \item Hidden state $h$, Cell memory $c$
@@ -182,7 +182,7 @@ o_t &= \sigma (W_{o} \cdot h_t + B_{o} )
 \end{center}
 \end{frame}
 
-\begin{frame}{LSTM Cells}
+\begin{frame}[label=full]{LSTM Cells}
 \begin{align*}
 F_t &= \sigma (W_f \cdot [ x_t, h_{t-1}] + b_f) \\
 I_t &= \sigma (W_i \cdot [ x_t, h_{t-1}] + b_i) \\
@@ -196,7 +196,7 @@ h_t &= O_t \otimes \phi(c_t)
 Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise multiplication, and $[.]$ denotes vector concatenation. $\sigma$ is the sigmoid/logistic function and $\phi$ is the hyperbolic tangent.
 \end{frame}
 
-\begin{frame}{LSTM Cell Parameters}
+\begin{frame}[label=full]{LSTM Cell Parameters}
 \small
 \begin{itemize}
   \item Let $h_t$ and $c_t$ be vectors of size $n$ and $x_t$ be a vector of size $m$ and 
@@ -211,7 +211,36 @@ Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise mult
 \textbf{Example}: Let the unit size (state size) be 16 and the input size be 8. Then the total number of parameters for the LSTM cell is $4 \times (16 \times (8+16) + 16) = 1600$
 \end{frame}
 
-\begin{frame}{Gated Recurrent Unit (GRU) Cells}
+\begin{frame}[label=full]{Hands-On Exercise --- Simple LSTM}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
+\small
+\begin{itemize}
+  \item Assume input $x_t = 1$, prior state $h_{t-1}=0.5$ and cell memory $c_{t-1} = 0.7$
+  \item Assume weights and biases as follows:
+  \begin{itemize}
+     \item {\bf Forget gate:} $W_f = [0.5, 0.2], \quad b_f = 0.1$
+     \item {\bf Input gate:} $W_i = [0.4, 0.3], \quad b_i = 0.2$
+     \item {\bf Output gate:} $W_o = [0.6, 0.1], \quad b_o = 0$
+     \item {\bf Candidate cell state:} $W_c = [0.7, 0.4], \quad b_c = 0$
+  \end{itemize}
+\end{itemize}
+\begin{enumerate}
+  \item Calculate $F_t$ \hspace{2cm} {\bf Tip}: $\sigma(a)=\frac{1}{1+e^{-a}}$
+  \item Calculate $I_t$
+  \item Calculate $\tilde{c}_t$
+  \item Calculate $c_t$
+  \item Calculate $O_t$
+  \item Calculate $h_t$
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Gated Recurrent Unit (GRU) Cells}
 \begin{itemize}
    \item ''Update gate'' $Z$, ''Reset gate gate'' $R$, candidate new memory $\hat{h}_t$
    \item Hidden state $h$
@@ -225,7 +254,7 @@ Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise mult
 \end{itemize}
 \end{frame}
 
-\begin{frame}{GRU Cells}
+\begin{frame}[label=full]{GRU Cells}
 \begin{align*}
 Z_t &= \sigma (W_z \cdot [x_t, h_{t-1}] + b_z) \\
 R_t &= \sigma (W_r \cdot [x_t, h_{t-1}] + b_r) \\[.5\baselineskip]
@@ -237,7 +266,7 @@ h_t &= (1 - Z_t) \otimes h_{t-1} + Z_t \otimes \hat{h}_t
 Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise multiplication, and $[.]$ denotes vector concatenation.  $\sigma$ is the sigmoid/logistic function and $\phi$ is the hyperbolic tangent.
 \end{frame}
 
-\begin{frame}{GRU Cell Parameters}
+\begin{frame}[label=full]{GRU Cell Parameters}
 \small
 \begin{itemize}
   \item Let $h_t$ be a vector of size $n$ and $x_t$ be a vector of size $m$ and 
@@ -253,7 +282,66 @@ Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise mult
 {\tiny With Keras GRU layer option \texttt{reset\_after=False}.}
 \end{frame}
 
-\begin{frame}{Statefulness of RNN}
+\begin{frame}[label=full]{Hands-On Exercise --- Simple GRU}
+\begin{columns}
+\begin{column}{0.1\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.9\textwidth}
+\small
+\begin{itemize}
+  \item Assume input $x_t = 1$ and prior state $h_{t-1}=0.5$
+  \item Assume weights and biases as follows:
+  \begin{itemize}
+     \item {\bf Update gate:} $W_z = [0.4, 0.2], \quad b_z = 0.1$
+     \item {\bf Reset gate:} $W_r = [0.3, 0.4], \quad b_r = 0$
+     \item {\bf Candidate cell state:} $W_h = [0.5, 0.3], \quad b_h = 0$
+  \end{itemize}
+\end{itemize}
+\begin{enumerate}
+  \item Calculate $Z_t$ \hspace{2cm} {\bf Tip}: $\sigma(a)=\frac{1}{1+e^{-a}}$
+  \item Calculate $R_t$
+  \item Calculate $\hat{h}_t$
+  \item Calculate $h_t$
+\end{enumerate}
+\end{column}
+\end{columns}
+\end{frame}
+
+
+\begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
+Consider a neural network for regression with the following characteristics:
+
+\begin{itemize}
+   \item Layer 1: Embedding
+   \begin{itemize}
+      \item Embedding matrix: $10000 \times 10$
+   \end{itemize}
+   \item Layer 2: LSTM (seq2seq)
+   \begin{itemize}
+      \item Hidden state and cell memory size: 24
+      \item Number of unrolled steps: 10
+   \end{itemize}
+   \item Layer 3: GRU (seq2vec)
+   \begin{itemize}
+      \item Hidden state size: 16
+      \item Number of unrolled steps: 10
+   \end{itemize}
+   \item Layer 4: Dense layer
+\end{itemize}
+
+What is the number of trainable parameters for each layer and for the whole network?
+\end{column}
+\end{columns}
+\end{frame}
+
+\begin{frame}[label=full]{Statefulness of RNN}
 \small
 \begin{block}{Stateless LSTM/GRU}
 \begin{itemize}
@@ -272,32 +360,7 @@ Here $\cdot$ is the dot-product (vector product), $\otimes$ is element-wise mult
 \end{frame}
 
 
-\begin{frame}{Hands-On Exercise}
-
-Consider a neural network for regression with the following characteristics:
-
-\begin{itemize}
-   \item Layer 1: Embedding
-   \begin{itemize}
-      \item Embedding matrix: $10000 \times 10$
-   \end{itemize}
-   \item Layer 2: LSTM (seq2seq)
-   \begin{itemize}
-      \item Hidden state and cell memory size: 24
-      \item Number of unrolled steps: 10
-   \end{itemize}
-   \item Layer 3: GRU (seq2vec)
-   \begin{itemize}
-      \item Hidden state size: 16
-   \end{itemize}
-   \item Layer 4: Dense layer
-\end{itemize}
-
-What is the number of trainable parameters for each layer and for the whole network?
-\end{frame}
-
-
-\begin{frame}[fragile]{Stock Market Prediction}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction}
 Using historic stock market data, predict future performance.
 \begin{itemize}
    \item DJIA performance
@@ -308,7 +371,7 @@ Using historic stock market data, predict future performance.
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Load packages and read data file:
 \begin{pythoncode}
 import math
@@ -326,7 +389,7 @@ pd.read_csv('https://evermann.ca/busi4720/djia.data.csv')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Add useful features for timeseries models:
 \begin{itemize}
    \item Successive differences
@@ -341,7 +404,7 @@ data = pd.concat([
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 
 Split data to train and validation set (no random shuffling for time series):
 
@@ -360,7 +423,7 @@ valid = (valid - train_mean)/train_sd
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Create \texttt{tf.Dataset} objects for training and validation:
 \begin{pythoncode}
 dataset_train = keras.preprocessing \
@@ -383,7 +446,7 @@ dataset_valid = keras.preprocessing \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Interlude -- Dataset Objects}
+\begin{frame}[label=withcode,fragile]{Interlude -- Dataset Objects}
 Dataset objects feed inputs and targets to the \texttt{fit} function. \\
 
 See how this works with simple example data:
@@ -400,7 +463,7 @@ pd.DataFrame([inputs, targets])
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Interlude -- Dataset Objects}
+\begin{frame}[label=withcode,fragile]{Interlude -- Dataset Objects}
 Do not shuffle data:
 \begin{itemize}
     \item Each batch continues from the previous batch
@@ -429,7 +492,7 @@ for element in ds.as_numpy_iterator():
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Interlude -- Dataset Objects}
+\begin{frame}[label=withcode,fragile]{Interlude -- Dataset Objects}
 Shuffle data:
 \begin{itemize}
     \item Batches do not continue sequence
@@ -458,7 +521,7 @@ for element in ds.as_numpy_iterator():
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Interlude -- Dataset Objects}
+\begin{frame}[label=withcode,fragile]{Interlude -- Dataset Objects}
 Sequence stride:
 
 \begin{pythoncode}
@@ -480,7 +543,13 @@ for element in ds.as_numpy_iterator():
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}{Hands-On Exercise -- Dataset Objects}
+\begin{frame}[label=withcode]{Hands-On Exercise -- Dataset Objects}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 Using example data as in the previous slides,
 \begin{enumerate}
    \item Experiment with different values for \texttt{batch\_size},
@@ -488,9 +557,11 @@ Using example data as in the previous slides,
    \item Experiment with different values for \texttt{sequence\_stride}.
 \end{enumerate}
 Do the results match your expectations?
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Build a sequential model using an input layer, one LSTM layer and a dense (fully-connected) layer with a single output:
 \begin{itemize}
    \item Hidden state and cell memory size: \texttt{units=16}
@@ -512,7 +583,7 @@ model.summary()
 \end{pythoncode}
 \end{frame} 
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Compile the model:
 \begin{pythoncode}
 model.compile(loss='mean_squared_error', 
@@ -526,7 +597,7 @@ model.fit(dataset_train, epochs=n_epochs,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Results:
 \begin{textcode}
 Model: "sequential_4"
@@ -552,7 +623,13 @@ loss: 0.9916 - val_loss: 7.1444
 \end{frame}
 
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 \small
 Download the Python code from \url{https://evermann.ca/busi4720/ts_prediction_s2v_stateless.py}
 
@@ -568,9 +645,11 @@ Experiment with different model characteristics:
     \item Swap the LSTM layer for a GRU layer (\texttt{layers.GRU}). The GRU layer takes the same arguments as the LSTM layer.
     \item Comment on the model performance results.
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Can we do better with more layers?
 \begin{pythoncode}
 model = keras.Sequential()
@@ -593,7 +672,7 @@ model.summary()
 The first LSTM returns sequences, the second one does not.
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Results of more complex model:
 \begin{textcode}
 Model: "sequential"
@@ -617,7 +696,7 @@ Epoch 25/25
 \end{textcode}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Does a stateful LSTM perform better? \\
 
 Set batch size to 1 for a single batch of continuous sequence:
@@ -640,7 +719,7 @@ dataset_valid = keras.preprocessing \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 \begin{pythoncode}
 model = keras.Sequential()
 model.add(layers.InputLayer(
@@ -656,7 +735,7 @@ model.summary()
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Results of stateful model:
 
 \begin{textcode}
@@ -679,15 +758,23 @@ Epoch 25/25
 \end{textcode}
 \end{frame}
 
-\begin{frame}[fragile]{Hands-On Exercises}
+\begin{frame}[label=withcode,fragile]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\small
 \begin{enumerate}
     \item Download the stateful LSTM from \url{https://evermann.ca/busi4720/ts_prediction_s2v_stateful.py}
     \item Extend the stateful model to a multi-layer network and include dropout layers
     \item How does this change the predictive performance of the model?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 How does a ''Vec2Vec'' model perform?
 
 Treat the entire input as one large feature vector, without expressing any time-ordering in the model:
@@ -706,7 +793,7 @@ model.summary()
 The \texttt{Flatten} layer flattens its input tensor.
 \end{frame}
 
-\begin{frame}[fragile]{Stock Market Prediction \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Stock Market Prediction \small [cont'd]}
 Results of ''Vec2Vec'' model. Note the large number of parameters.
 
 \begin{textcode}
@@ -728,7 +815,7 @@ Epoch 25/25 - loss: 1.5864 - val_loss: 1.0902
 \end{textcode}
 \end{frame}
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process}
 \small
 Using an event log, train a model to predict the next activity from a prefix sequence of 5 activities that have already occured. \\
 
@@ -749,7 +836,7 @@ log = pm4py.read_xes('BPI_Challenge_2012.xes.gz')
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Fix the data types:
 \begin{pythoncode}
 log['time:timestamp'] = \
@@ -768,7 +855,7 @@ log = log[log['lifecycle:transition'] == 'COMPLETE']
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Filter and sort the log for sequences of length $k$:
 \begin{pythoncode}
 # Find the case start time as time of the 
@@ -793,7 +880,7 @@ log.sort_values(['case:start', 'time:timestamp'], \
 \end{frame}
 
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Identify feature to predict from:
 \begin{pythoncode}
 # This is the feature we predict (from)
@@ -811,7 +898,7 @@ features = log.groupby(['case:concept:name'])[f_name] \
 \end{frame}
 
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Add end-of-case marker and convert to numeric:
 \begin{pythoncode}
 sequences=[l+['EOC'] for l in list(features['features'])]
@@ -828,7 +915,7 @@ data = data.assign(**data[0] \
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Create training and validation sets:
 \begin{pythoncode}
 # Divide into train and test set
@@ -843,7 +930,7 @@ valid_y = valid.iloc[:,1]
 \end{frame}
 
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Define the model:
 \begin{pythoncode}
 model = keras.Sequential()
@@ -859,7 +946,7 @@ model.add(layers.Dense(v_size, activation='softmax'))
 Note: \texttt{units} specifies the size of the $h$ and $c$ vectors
 \end{frame}
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Compile and fit the model:
 \begin{pythoncode}
 # Compile with loss and optimizer
@@ -873,7 +960,7 @@ model.fit(train_x, train_y,
 \end{pythoncode}
 \end{frame}
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Results:
 \begin{textcode}
  Layer (type)           Output Shape    Param #   
@@ -892,7 +979,7 @@ Epoch 25/25
 \end{textcode}
 \end{frame}
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Predict activities from the model until end-of-case:
 \begin{pythoncode}
 input = train_x.iloc[2:3,:].copy()
@@ -914,7 +1001,7 @@ while int2f[pred] != 'EOC':
 \end{frame}
 
 
-\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+\begin{frame}[label=withcode,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 Results:
 \begin{textcode}
        index_0  index_1  index_2  index_3  index_4
@@ -937,7 +1024,7 @@ EOC
 \end{frame}
 
 
-%\begin{frame}[fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
+%\begin{frame}[label=full,fragile]{Next Activity Prediction of a Business Process \small [cont'd]}
 %Alternative model with stacked and bi-directional LSTM:
 %\begin{pythoncode}
 %model = keras.Sequential()
@@ -959,7 +1046,12 @@ EOC
 %\end{pythoncode}
 %\end{frame}
 
-\begin{frame}{Hands-On Exercises}
+\begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \small
 Download the complete Python file here: \url{https://evermann.ca/busi4720/process_prediction.py} \\
 Download the example event log here: \url{https://evermann.ca/busi4720/BPI_Challenge_2012.xes.gz} \\
@@ -971,7 +1063,9 @@ Adapt the network architecture to identify the impact on training and validation
       \item Embedding size (originally 16, note: vocabulary size is 23+1)
       \item Further training epochs (originally 25)
    \end{enumerate}
-Comment on your findings and identify the best model. \\
+Comment on your findings and identify the best model.
+\end{column}
+\end{columns}
 \end{frame}
 
 \end{document}

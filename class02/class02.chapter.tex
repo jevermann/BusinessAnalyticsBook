@@ -782,8 +782,9 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 Document yourself in a Turtle:
 \begin{itemize}
 	\item Identify information about yourself, such as names, addresses, dates, relationships (work, school, uni), etc.
-	\item Structure the information in Turtle triples
-	\item Make up appropriate prefixes and appropriate verbs/predicates
+	\item Draw a corresponding graph linking these pieces of information as subjects, objects, and verbs
+	\item Turn the graph into a set of Terse XML Triples (''turtles'')
+	\item \emph{Tip:} Do not worry about XML prefixes
 \end{itemize}
 \end{exercisebox}
 
@@ -1076,6 +1077,25 @@ Traceability & Auditable provenance, verifiable source \\ \hline
 
 \label{tab:dataquality}
 \end{table}
+
+\begin{exercisebox}
+Evaluate the data quality of the following information for a company that you are researching to decide whether to offer discounts on sales to this company. \\
+\vspace{.5\baselineskip}
+
+\begin{tabular}{l|l} 
+{\bf Year} & {\bf Sales} \\ \hline 
+2010 & 1,053,123 \\ \hline
+2011 & 1.100,000 \\ \hline
+2012 & 1,187,835 \\ \hline
+2014 & 5,097,651 \\ \hline
+2015 & 1,286,837 \\ \hline 
+{\bf Total} & {\bf 8,573,909} \\ 
+\end{tabular} \\
+
+\vspace{.5\baselineskip}
+The data was found on an anonymous web blog
+\end{exercisebox}
+
 
 \paragraph*{Data provenance}\index{Data provenance} refers to the documentation or tracing of the origins, lineage, and lifecycle of data. It encompasses recording information of the inputs, entities, systems, and processes that influence the data of interest, providing a record of the data and its origins. Data provenance is crucial for understanding the context, derivation, and rationale behind the data, making it an essential aspect of data management and an important prerequisite for data quality.
 

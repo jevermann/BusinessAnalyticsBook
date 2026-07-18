@@ -203,9 +203,9 @@ bupaR\footnote{\url{https://bupar.net/}} is an R-based open-source library speci
 \paragraph*{PM4Py}
 PM4Py\footnote{\url{https://processintelligence.solutions/pm4py}} is a Python library that offers a comprehensive suite of process mining tools, making it a powerful resource for performing process discovery, conformance checking, and process enhancement. Tailored for the Python ecosystem, PM4Py facilitates the analysis of complex process data by integrating seamlessly with popular data science tools such as pandas and numpy. Its capabilities extend to generating process models from event logs, analyzing process performance, and providing insights into workflow efficiencies and bottlenecks. Ideal for both academic research and practical applications, PM4Py is known in the process mining community for its accessibility, scalability, and the ease with which users can implement and customize process mining algorithms.
 
-\begin{withcode}
-\section{Process Mining in Python with PM4Py}
+\section{Process Mining Basics}
 
+\begin{withcode}
 This section illustrates process analytics using the PM4Py framework for Python. In a first step, we import an event log in CSV format into a Pandas data frame\footnote{The event log is originally taken from here: \url{http://files.fluxicon.com//Datasets/Purchasing-Example.csv}}. This event log is a fictitous log of a purchasing or procurement process. There are no case or event attributes other than the basic information aboutr activity names, resources, and timestamps.
 
 \begin{pythoncode}
@@ -254,10 +254,13 @@ pm4py.get_all_case_durations(log)
 pm4py.get_event_attributes(log)
 pm4py.get_trace_attributes(log)
 \end{pythoncode}
+\end{withcode}
 
 \subsection*{Variants}
 
-To perform a variant analysis, the log must be separated into sets of traces (''sub-logs'') for which every trace contains the same sequence of events, called a \emph{variant}\index{Variant}. The PM4Py function \texttt{split\_by\_process\_variant()} returns an iterator over the variants and their associated sub-logs, where each variant is the list of activity names in the order in which they were executed in that variant. Each sub-log can then be analyzed separately, for example in compliance analysis or performance mining, allowing deeper insights and also a comparative analysis of processes.
+To perform a variant analysis, the log must be separated into sets of traces (''sub-logs'') for which every trace contains the same sequence of events, called a \emph{variant}\index{Variant}. Each sub-log can then be analyzed separately, for example in compliance analysis or performance mining, allowing deeper insights and also a comparative analysis of processes. 
+\begin{withcode}
+The PM4Py function \texttt{split\_by\_process\_variant()} returns an iterator over the variants and their associated sub-logs, where each variant is the list of activity names in the order in which they were executed in that variant. 
 
 \begin{pythoncode}
 pm4py.get_variants(log)
@@ -270,10 +273,13 @@ for variant, subdf in pm4py.split_by_process_variant(log):
     print(variant)
     print(subdf)  
 \end{pythoncode}
+\end{withcode}
 
 \subsection*{Process Discovery}
 
-The basic output of process discovery is a dependency graph\index{Dependency graph}, also called a directly-follows graph\index{Directly-follows graph|see{Dependency graph}} (DFG)\index{DFG|see{Directly-follows graph}} or process map. This graph simply shows how often one activity is directly followed by another activity in the traces of the log. The PM4Py function \texttt{discovery\_dfg()} returns the directly-follows-graph and also the set of start and end events. This graph can then be visualized using the \texttt{view\_dfg()} function, as shown in Figure~\ref{fig:dfg}, and saved to a file using the \texttt{save\_vis\_dfg()} function. This is illustrated in the following Python code lbock.
+The basic output of process discovery is a dependency graph\index{Dependency graph}, also called a directly-follows graph\index{Directly-follows graph|see{Dependency graph}} (DFG)\index{DFG|see{Directly-follows graph}} or process map. This graph simply shows how often one activity is directly followed by another activity in the traces of the log (Figure~\ref{fig:dfg}). 
+\begin{withcode}
+The PM4Py function \texttt{discovery\_dfg()} returns the directly-follows-graph and also the set of start and end events. This graph can then be visualized using the \texttt{view\_dfg()} function, as shown in Figure~\ref{fig:dfg}, and saved to a file using the \texttt{save\_vis\_dfg()} function. This is illustrated in the following Python code lbock.
 
 \begin{pythoncode}
 dfg, start, end = pm4py.discover_dfg(log)
@@ -284,6 +290,7 @@ pm4py.save_vis_dfg(dfg=dfg,
     start_activities=start, end_activities=end, 
     file_path='dfg.png', rankdir='TB')
 \end{pythoncode}
+\end{withcode}
 
 To show the usefulness of even this basic process visualization, consider the following observations. First, the example DFG in Figure~\ref{fig:dfg} shows that all 608 traces in the log start with the same activity (''Create Purchase Requisition''). The activity ''Analyze Request for Quotation'' is carried out 1107 times, suggesting that some cases require this activity multiple times, as is also evident from the loops between this activity and the activities ''Amend Request for Quotation Requester'' and ''Amend Request for Quation Requester Manager''. This iteration suggests re-work to fix errors in the original quotation. Eliminating these errors may improve the overall process performance. 
 
@@ -298,8 +305,20 @@ Third, note that there are 10 cases where the activity ''Release Supplier's Invo
 \label{fig:dfg}
 \end{figure}
 
-A DFG is not a process model in the sense of the example BPMN model in Figure~\ref{fig:bpmn}, as it is missing gateways and decisions. A range of algorithms have been developed over the years to discover BPMN models from event logs. PM4Py provides the Inductive Miner and the Heuristics Net Miner. 
+\begin{exercisebox}
+Draw a DFG graph for the following traces in an event log: \\
 
+\begin{tabular}{l} 
+A B D E F G \\ \hline
+A D E F G \\ \hline
+A B E D F G \\ \hline
+A B E D G \\ \hline
+A E D F G \\ \hline
+A B D E G \\ 
+\end{tabular}
+\end{exercisebox}
+
+\begin{withcode}
 \begin{exercisebox}
 Use the event log from \small\url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}\normalsize
 \begin{enumerate}
@@ -309,8 +328,12 @@ Use the event log from \small\url{https://evermann.ca/busi4720/BPI_Challenge_201
    \item How many variants are there? What is the most frequent variant?
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
-The Inductive Miner\index{Inductive miner} works by repeatedly ''cutting'' the DFG for an event log to identify subsets of activities that represent exclusive choice, parallelism, sequence, or loops. For example, as Figure~\ref{fig:inductive} shows, when there are sets of activities that are not connected by each other, and have distinct pre- and post-sets of activities, then this may indicate an exclusive choice between these sets. Similarly, a sequence of activities is characterized by the absence of ''backwards'' connections in the DFG, and parallelism is indicated by a set of arrows that fully connects two sets of activities with a common post-set. 
+
+A DFG is not a process model in the sense of the example BPMN model in Figure~\ref{fig:bpmn}, as it is missing gateways and decisions. A range of algorithms have been developed over the years to discover BPMN models from event logs. PM4Py provides the Inductive Miner and the Heuristics Net Miner. 
+
+The Inductive Miner\index{Inductive miner} works by repeatedly ''cutting'' the DFG for an event log to identify subsets of activities that represent exclusive choice, parallelism, sequence, or loops. For example, as Figure~\ref{fig:inductive} shows, when there are sets of activities that are not connected by each other, and have distinct pre- and post-sets of activities, then this may indicate an exclusive choice between these sets. Similarly, a sequence of activities is characterized by the absence of ''backwards'' connections in the DFG, and parallelism is indicated by a set of arrows that fully connects two sets of activities with a common post-set. An example of a discovered process model is shown in Figure~\ref{fig:inductive_example}.
 
 \begin{figure}
 \includegraphics[width=\textwidth]{screen2.png}
@@ -320,7 +343,8 @@ Source: Leemans, S.J.J., Fahland, D., van der Aalst, W.M.P. (2013). Discovering 
 \label{fig:inductive}
 \end{figure}
 
-PM4Py provides the function \texttt{discover\_bpmn\_inductive} which produces a BPMN model that can be viewed and saved. An example is shown in Figure~\ref{fig:inductive_example}.
+\begin{withcode}
+PM4Py provides the function \texttt{discover\_bpmn\_inductive} which produces a BPMN model that can be viewed and saved. 
 
 \begin{pythoncode}
 bpmn_model = pm4py.discover_bpmn_inductive(log, noise_threshold=0.5)
@@ -329,6 +353,7 @@ pm4py.view_bpmn(bpmn_model, rankdir='LR')
 
 pm4py.save_vis_bpmn(bpmn_model, file_path='bpmn.png', rankdir='TB')
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -337,7 +362,7 @@ pm4py.save_vis_bpmn(bpmn_model, file_path='bpmn.png', rankdir='TB')
 \label{fig:inductive_example}
 \end{figure}
 
-In contrast, the Heuristics Net Miner \index{Heuristic net miner} focuses on frequencies in the DFG to identify sequences, parallelism, and loops. For example, a sequence between activities ''a'' and ''b'' by values larger than a threshold for the following proportion where the relation $a > b$ indicates the number of times $b$ follows $a$ in the DFG. Similar expressions exist to identify parallelism and loops. The thresholds are configurable; lower thresholds lead to the inclusion of more detail in the final model.
+In contrast, the Heuristics Net Miner \index{Heuristic net miner} focuses on frequencies in the DFG to identify sequences, parallelism, and loops. For example, a sequence between activities ''a'' and ''b'' by values larger than a threshold for the following proportion where the relation $a > b$ indicates the number of times $b$ follows $a$ in the DFG. Similar expressions exist to identify parallelism and loops. The thresholds are configurable; lower thresholds lead to the inclusion of more detail in the final model. An example of a discovered process model is shown in Figure~\ref{fig:heuristics_example}.
 
 \begin{align*}
 a \Rightarrow b = \left( \frac{
@@ -345,7 +370,8 @@ a \Rightarrow b = \left( \frac{
 | a > b| + |b > a| + 1}\right)
 \end{align*}
  
-The PM4Py function \texttt{discover\_petri\_net\_heuristics} provides the Heuristics Net Miner. It returns a Petri net (a type of process model) that can be converted to a BPMN model for viewing and saving. An example is shown in Figure~\ref{fig:heuristics_example}.
+ \begin{withcode}
+The PM4Py function \texttt{discover\_petri\_net\_heuristics} provides the Heuristics Net Miner. It returns a Petri net (a type of process model) that can be converted to a BPMN model for viewing and saving. 
 
 \begin{pythoncode}
 petri_net, initial_marking, final_marking = \
@@ -362,6 +388,7 @@ bpmn_model2 = pm4py.convert_to_bpmn(petri_net,
 pm4py.view_bpmn(bpmn_model2)
 pm4py.save_vis_bpmn(bpmn_model2, 'bpmn2.png', rankdir='TB')
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -379,6 +406,7 @@ Once a model is automatically discovered from a log, the analyst must assess its
    \item \textbf{Complexity}: Is the model too complex to understand?
 \end{itemize}
 
+\begin{advanced}
 Quality assessment often focuses mainly on the calculation of fitness and precision, and two different techniques have been developed for this.
 
 In \emph{token-based replay}\index{Token-based replay fitness}, each trace of an event log is replayed on the discovered process model using what is known as \emph{token semantics}. This discovers missing and surplus tokens, which represent model activities that cannot be executed, or model activities that are executed too often. Both cases indicate a mismatch between the model and the trace. The statistics of interest are the percentage of traces that fit the model perfectly, and the average fitness of all traces in the log.
@@ -386,7 +414,9 @@ In \emph{token-based replay}\index{Token-based replay fitness}, each trace of an
 \emph{Alignment-based fitness}\index{Alignment-based fitness} uses sequence alignment methods to align the model and each trace in an event log. It counts the the number of ''synchronous moves'' where an activity is both in a trace and the model, the number of ''move on log'' where an activity is in a trace but not in the model, and the number of ''move on model'' where an activity is in the model but not in the trace. The statistics of interest are also the percentage of traces that fit the model perfectly, and the average fitness of all traces.
 
 Note that the results of the two types of analysis are not necessarily the same for all models and for all event logs.
+\end{advanced}
 
+\begin{withcode}
 PM4Py provides functions to compute fitness and precision using both methods. For this, PM4Py uses the Petri net type of process model. As we noted above, this can be transformed into a BPMN model for visualization. 
 
 \begin{pythoncode}
@@ -409,6 +439,7 @@ precision_tbr = pm4py.precision_token_based_replay(log,
     petri_net, initial_marking, final_marking)
 print(precision_tbr)
 \end{pythoncode}
+\end{withcode}
 
 \subsection*{Log Filtering}
 
@@ -418,6 +449,7 @@ Second, filtering allows the analyst to split the event log in order to identify
 
 Third, filtering simplifies automatically discovered models. Many automatic discovery algorithms produce very complex models when the actual processes are complex or when there is a large amount of variation or noise in the event log. Noise does not necessarily mean invalid data, but data that appears infrequently or could be considered very atypical. Such noise, when included in the event log for process discovery, can ''clutter up'' the resulting model, making it difficult or impossible to understand.
 
+\begin{withcode}
 PM4Py provides a number of different filters, with a few examples shown in Table~\ref{tab:pm4py_filters}. Information on other filters can be found on the PM4Py website.
 
 \begin{table}
@@ -521,12 +553,14 @@ The following exercises are designed to be used with the event log in the runnin
    \end{itemize}
 \end{enumerate}
 \end{exercisebox}
+\end{withcode}
 
 \section{Performance Mining}
 
-Performance mining\index{Performance mining} is that aspect of process analytics that analyzes the temporal performance of a process. Information of interest are the durations of the activities (\emph{service time}\index{Service time}), the \emph{waiting times}\index{Waiting time} between activities, and the overall case durations. For each of those, different summary statistics are useful, such as the mean, median, standard deviation, maximum and minimum. 
+Performance mining\index{Performance mining} is that aspect of process analytics that analyzes the temporal performance of a process. Information of interest are the durations of the activities (\emph{service time}\index{Service time}), the \emph{waiting times}\index{Waiting time} between activities, and the overall case durations. For each of those, different summary statistics are useful, such as the mean, median, standard deviation, maximum and minimum. Typically, the easiest and most interpretable way to shows this information is via annotations on the DFG. An example of such an annotated DFG is shown in Figure~\ref{fig:performance_dfg}. 
 
-The easiest and most interpretable way to do this in PM4Py is to annotate the DFG with this information. For example, the following Python code block calculates the median waiting times between activities and shows them in the DFG. The annotated DFG is shown in Figure~\ref{fig:performance_dfg}. Because the example event log did not contain start and end times for each activity, it is not possible to show the service times on the DFG, that is, the duration of the activities.
+\begin{withcode}
+For example, the following Python code block calculates the median waiting times between activities and shows them in the DFG. Because the example event log did not contain start and end times for each activity, it is not possible to show the service times on the DFG, that is, the duration of the activities.
 
 \begin{pythoncode}
 perf_dfg, start_activities, end_activities = \
@@ -540,6 +574,7 @@ pm4py.save_vis_performance_dfg(perf_dfg,
     start_activities, end_activities, 
     file_path='perfdfg.png', rankdir='TB')
 \end{pythoncode}
+\end{withcode}
 
 This example shows a few problems with the process. For example, the median wait time between creating a request for quotation and analyzing it is 6 days. If the request needs to be amended, it then has to wait another 8 to 10 days to be analyzed again. These long wait times indicate performance problems in the process. This may stem from a lack of resources, or insufficient prioritization, or other process issues, that needs be investigated in detail by the process analyst. 
 
@@ -551,7 +586,33 @@ This example shows a few problems with the process. For example, the median wait
 \label{fig:performance_dfg}
 \end{figure}
 
-Another useful tool in process performance analysis is the \emph{dotted chart}\index{Dotted chart}. An example dotted chart is shown in Figure~\ref{fig:dotted_chart}. The horizontal axis represents the time stamp of each activity or event, while the vertical axis represents the case ID -- each row in the diagram contains the events of one trace. The colors correspond to different types of activities. The following Python code produces the example in Figure~\ref{fig:dotted_chart}.
+\begin{exercisebox}
+Draw an annotated DFG for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
+
+\begin{tabular}{l|l|r} \hline
+{\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
+1 & A & 0 \\
+1 & B & 2 \\
+1 & D & 3 \\ 
+1 & E & 6 \\ 
+1 & F & 7 \\ 
+2 & A & 10 \\
+2 & D & 11 \\
+1 & G & 12 \\ 
+2 & E & 13 \\ 
+3 & A & 15 \\
+3 & B & 16 \\
+2 & F & 18 \\ 
+3 & E & 18 \\
+3 & D & 19 \\
+2 & G & 20 \\
+3 & G & 24 \\
+\end{tabular}
+\end{exercisebox}
+
+Another useful tool in process performance analysis is the \emph{dotted chart}\index{Dotted chart}. An example dotted chart is shown in Figure~\ref{fig:dotted_chart}. The horizontal axis represents the time stamp of each activity or event, while the vertical axis represents the case ID -- each row in the diagram contains the events of one trace. The colors correspond to different types of activities. 
+\begin{withcode}
+The following Python code produces the example in Figure~\ref{fig:dotted_chart}.
 
 \begin{pythoncode}
 perf_dfg, start_activities, end_activities = \
@@ -565,6 +626,7 @@ pm4py.save_vis_performance_dfg(perf_dfg,
     start_activities, end_activities, 
     file_path='perfdfg.png', rankdir='TB')
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -577,7 +639,33 @@ A dotted chart can be used to show batching of activities, that is, activities i
 
 A dotted chart can also be useful to examine the case arrival rates. In the example in Figure~\ref{fig:dotted_chart} it is clear that early in time, cases arrive more frequently than later in time (the curve is steeper there). This may indicate a shift in the demand for a particular product or service. 
 
-A performance spectrum graph\index{Performance spectrum graph}, like the one in Figure~\ref{fig:perf_spectrum} shows the wating times between two activities, the one at the top and the one at the bottom. The horizontal axis represents time. Lines that are slanted or run diagonally at an angle indicate a long waiting time. A performance spectrum can also show when lines are ''bunched together'' or ''sparsely distributed'', indicating variations in the rate at which one activity finishes or the next activity begins. The following Python code block produces the graph in Figure~\ref{fig:dotted_chart}.
+\begin{exercisebox}
+Draw a dotted chart for the following an event log. Use different colours or different symbols for the different activities. \\ \vspace{\baselineskip}
+
+\begin{tabular}{l|l|r} \hline
+{\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
+1 & A & 0 \\
+1 & B & 2 \\
+1 & D & 3 \\ 
+1 & E & 6 \\ 
+1 & F & 7 \\ 
+2 & A & 10 \\
+2 & D & 11 \\
+1 & G & 12 \\ 
+2 & E & 13 \\ 
+3 & A & 15 \\
+3 & B & 16 \\
+2 & F & 18 \\ 
+3 & E & 18 \\
+3 & D & 19 \\
+2 & G & 20 \\
+3 & G & 24 \\
+\end{tabular}
+\end{exercisebox}
+
+A performance spectrum graph\index{Performance spectrum graph}, like the one in Figure~\ref{fig:perf_spectrum} shows the wating times between two activities, the one at the top and the one at the bottom. The horizontal axis represents time. Lines that are slanted or run diagonally at an angle indicate a long waiting time. A performance spectrum can also show when lines are ''bunched together'' or ''sparsely distributed'', indicating variations in the rate at which one activity finishes or the next activity begins. 
+\begin{withcode}
+The following Python code block produces the graph in Figure~\ref{fig:dotted_chart}.
 
 \begin{pythoncode}
 pm4py.view_performance_spectrum(log,
@@ -587,6 +675,7 @@ pm4py.save_vis_performance_spectrum(log,
     ['Send invoice', 'Pay invoice'],
     'perfspectrum.png') 
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -595,14 +684,16 @@ pm4py.save_vis_performance_spectrum(log,
 \label{fig:perf_spectrum}
 \end{figure}
 
-To indicate when a process that delivers a service is in high demand and requires high capacity, the distribution of events over time should be considered. This can be done by day-of-the-week, by month-of-the-year, or by week-of-the-year, as the following PM4Py functions show. An example of event distribution by week-of-the-year is shown in Figure~\ref{fig:event_distribution}.
+To indicate when a process that delivers a service is in high demand and requires high capacity, the distribution of events over time should be considered. This can be done by day-of-the-week, by month-of-the-year, or by week-of-the-year. An example of event distribution by week-of-the-year is shown in Figure~\ref{fig:event_distribution}.
 
+\begin{withcode}
 \begin{pythoncode}
 pm4py.view_events_distribution_graph(log, 'days_week')
 pm4py.view_events_distribution_graph(log, 'days_month')
 pm4py.view_events_distribution_graph(log, 'months')
 pm4py.view_events_distribution_graph(log, 'weeks')
 \end{pythoncode}
+\end{withcode}
 
 The example in Figure~\ref{fig:event_distribution} shows that this process is very busy early in the year, in approximately the first quarter, but not at all in the last quarter of the year, except for some activity in the final week of the year. This uneven demand requires adequate capacity planning over of the organization and an organization may decide to identify ways to smooth out the demand. 
 
@@ -613,6 +704,7 @@ The example in Figure~\ref{fig:event_distribution} shows that this process is ve
 \label{fig:event_distribution}
 \end{figure}
 
+\begin{withcode}
 Plotting the events over time for the entire log as a probability density shows similar characteristics. Figure~\ref{fig:events_per_time} plots the frequency (technically, a probability kernel density) of event occurrence, produced by the following Python code.
 
 \begin{pythoncode}
@@ -626,13 +718,16 @@ pm4py.save_vis_events_per_time_graph(log, 'eventspertime.png')
 \caption{Events per time graph}
 \label{fig:events_per_time}
 \end{figure}
+\end{withcode}
 
 \FloatBarrier
 \section{Organizational Mining}
 
 Organizational mining focuses on the resources and their roles in a process. It uses the data in an event log to identify how resources and roles work together to execute process instances. 
 
-A simple way to focus on organizational roles or resources is to construct a DFG, but using the resource or role information for the nodes of the graph, instead of the activity names. The DFG then expresses how often one resource or role follows another in the execution of the cases; in other words, how often one resource or role passes work to another (or to itself). The following Python code block produces the \emph{handover-of-work network}\index{Handover-of-work network} shown in Figure~\ref{fig:handover}. Notice how the same PM4Py function for the DFG discovery is used, but a different data frame column is specified for the ''activity\_key'' parameter.
+A simple way to focus on organizational roles or resources is to construct a DFG, but using the resource or role information for the nodes of the graph, instead of the activity names. The DFG then expresses how often one resource or role follows another in the execution of the cases; in other words, how often one resource or role passes work to another (or to itself). An example of such a \emph{handover-of-work network}\index{Handover-of-work network} is shown in Figure~\ref{fig:handover}
+\begin{withcode}
+The following Python code block produces the handover-of-work network shown in Figure~\ref{fig:handover}. Notice how the same PM4Py function for the DFG discovery is used, but a different data frame column is specified for the ''activity\_key'' parameter.
 
 \begin{pythoncode}
 dfg, start, end = pm4py.discover_dfg(log, activity_key='Role')
@@ -644,6 +739,7 @@ pm4py.save_vis_dfg(dfg=dfg,
     end_activities=end, 
     file_path='handover.png', rankdir='TB')
 \end{pythoncode}
+\end{withcode}
 
 \begin{figure}
 \centering
@@ -652,6 +748,31 @@ pm4py.save_vis_dfg(dfg=dfg,
 \label{fig:handover}
 \end{figure}
 
+\begin{exercisebox}
+Draw a handover-of-work graph for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
+
+\begin{tabular}{l|l|l|r} \hline
+{\bf Case} & {\bf Activity} & {\bf Resource} & {\bf Time} \\ \hline
+1 & A & Jane & 0 \\
+1 & B & Peter & 2 \\
+1 & D & Dianne & 3 \\ 
+1 & E & Peter & 6 \\ 
+1 & F & John & 7 \\ 
+2 & A & Peter & 10 \\
+2 & D & Dianne & 11 \\
+1 & G & Jane & 12 \\ 
+2 & E & Peter & 13 \\ 
+3 & A & John & 15 \\
+3 & B & Jane & 16 \\
+2 & F & Jane & 18 \\ 
+3 & E & Dianne & 18 \\
+3 & D & Peter & 19 \\
+2 & G & Peter & 20 \\
+3 & G & John & 24 \\
+\end{tabular}
+\end{exercisebox}
+
+\begin{withcode}
 A similar analysis can be performed using the PM4Py function \\ \texttt{discover\_working\_together\_network()}, as shown in the following Python code and in Figure~\ref{fig:workingtogether}. Note that this graph is normally interactive.
 
 \begin{pythoncode}
