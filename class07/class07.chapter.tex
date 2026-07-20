@@ -17,6 +17,15 @@ After reading this chapter, you should be able to:
 \end{withcode}
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=sOA0MirVq_w}
+\end{videobox}
+\end{advanced}
+
+
 \section{Introduction}
 
 Data visualization, the practice of transforming information into a visual context, has become an indispensable part of modern data analysis and communication. This field intersects art and science, requiring both creativity and analytical skills to convert complex data sets into comprehensible, insightful visual representations. The motivations for visualizing data are multifaceted. Primarily, it enhances understanding by simplifying complex information, making patterns, trends, and correlations more apparent than they would be in raw data. It also aids in storytelling, where data-driven narratives can be compellingly presented to a broad audience, regardless of their expertise in data analysis.
@@ -43,7 +52,7 @@ In contrast to visual discovery, declarative visualization\index{Declarative vis
 
 In operational visualization, graphs and charts are used for supervision or monitoring of the operation of a system\index{Operational visualization}. They provide supervisors or controllers with a real-time view of the state of key system properties and are used to spot situations or trends that require intervention in the system's operation, that is, operational decision making. 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 For each scenario, identify whether it is an example of visual Discovery, declarative Visualization, or operational Visualization.
 
 \begin{enumerate}
@@ -53,7 +62,7 @@ For each scenario, identify whether it is an example of visual Discovery, declar
 \item A marketing analyst experiments with different charts while exploring data.
 \item A dashboard displays factory temperatures every second.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \subsection*{Quantitative Messages} 
 
@@ -200,7 +209,7 @@ In summary, misleading charts and visualizations can be particularly problematic
 
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 For each situation explain why the visualization is misleading and describe how you would improve it.
 
 \begin{enumerate}
@@ -210,7 +219,7 @@ For each situation explain why the visualization is misleading and describe how 
 \item Only data from one unusually good month is shown.
 \item Two variables are plotted using differently scaled vertical axes so that their lines appear highly correlated.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \section{Special Types of Data and Visual Analytics}
@@ -353,7 +362,7 @@ Shape, Style (of points and lines) \\ \hline
 \label{tab:elements}
 \end{table}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Suppose you are visualizing information about cities.
 
 Variables:
@@ -376,7 +385,7 @@ Available visual properties:
 \end{itemize}
 
 Assign each variable to a visual property and explain your choices.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \section{Common Types of Plots}
@@ -441,7 +450,7 @@ Depending on the number of variables to visualize, whether they are discrete or 
 \end{itemize}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 For each scenario, choose the most appropriate type of plot and explain your choice.
 
 \begin{itemize}
@@ -455,13 +464,14 @@ For each scenario, choose the most appropriate type of plot and explain your cho
 \end{itemize}
 
 Possible plot types to consider are bar charts, line chart, pie chart, histogram, scatterplot, box plot, maps
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider the following data.
 
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{ccc}
 Student & Hours Studied & Grade\\
 \hline
@@ -480,15 +490,16 @@ Answer the following:
 \item Sketch the visualization.
 \item What conclusion would you draw?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Sketch an appropriate visualization for each dataset.
 
 \textbf{Dataset A}
 
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{cc}
 Month & Sales \\
 \hline
@@ -505,6 +516,7 @@ May & 23
 \textbf{Dataset B}
 
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{cc}
 Department & Employees\\
 \hline
@@ -530,9 +542,9 @@ Then answer:
 \item Which graph best compares categories?
 \item Which graph best shows a relationship?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 A local coffee shop wants to present the following information:
 
 \begin{itemize}
@@ -550,7 +562,7 @@ For each item:
 \item Explain why it is appropriate.
 \item Sketch the visualization.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \section{Color Palettes}
@@ -686,7 +698,7 @@ Realizing the prevalence and the effects of CVD means that the color palette tha
 In summary, the thoughtful application of color in data visualization is not merely an artistic decision but a strategic one. It influences how effectively the data is communicated and understood, ensuring that visualizations are not only informative and accurate, but also inclusive and engaging to a diverse audience.
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 A graph distinguishes two categories using only red and green.
 
 Answer the following questions:
@@ -696,10 +708,10 @@ Answer the following questions:
 \item Suggest two alternative color choices.
 \item Suggest one additional visual feature that could distinguish the categories without relying only on color.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 For each situation, choose the most appropriate color palette from among sequential, diverging, and spectral palettes.
 
 \begin{enumerate}
@@ -709,10 +721,10 @@ For each situation, choose the most appropriate color palette from among sequent
 \item Risk levels (Low--Medium--High)
 \item Species of birds
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider the following description:
 
 \begin{quote}
@@ -720,7 +732,7 @@ Consider the following description:
 \end{quote}
 
 List at least five changes that would improve this visualization.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \FloatBarrier
@@ -941,7 +953,7 @@ data |>  ggplot(aes(x=Range)) +
 
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
     \item Read the EV fuel efficiency data set into R
     \item Create a blue histogram of highway fuel efficiency with 10 bins.
@@ -957,7 +969,7 @@ data |>  ggplot(aes(x=Range)) +
        \item Use the \texttt{fill='\ldots'} option
        \item Use the \texttt{labs} geom for labels
     \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 An area plot\index{Plot!Area} is essentially a line plot where the area under the line is filled. The following example first uses dplyr functions to compute a summary statistic (the mean vehicle range by year), and then pipes that into the \texttt{ggplot()} function. The call to the \texttt{ggplot()} function is typically the last element in such a data processing pipeline. \texttt{geom\_text()} is a way to add annotations to the data. This geom uses its own \texttt{label} aesthetic, as shown in the example below. 
 
@@ -1464,7 +1476,7 @@ data |>
   \includegraphics[width=.8\textwidth]{fuel.raster.rug.pdf}
 \end{center}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Using the Pagila database files from the previous chapter on data analysis with R, create the following plots using ggplot2/R. Use the appropriate ggplot2 functions to add informative labels for axes, useful legends to the plots, and use suitable color palettes. 
 
 \begin{enumerate}
@@ -1476,7 +1488,7 @@ Using the Pagila database files from the previous chapter on data analysis with 
    \end{itemize}
    \item A pie or donut chart of rental counts by film rating
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \end{withcode}
 \FloatBarrier
@@ -1604,7 +1616,7 @@ fig = px.bar(data_long,
 \end{center}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
     \item Read the EV fuel efficiency data set into a Pandas data frame
     \item Create a histogram of highway fuel efficiency with 25 bins.
@@ -1619,7 +1631,7 @@ fig = px.bar(data_long,
        \item Use the \texttt{title=\ldots} option
        \item Use the \texttt{labels=[\ldots]} option
     \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 A box plot\index{Plot!Box} is created using the \texttt{px.box()} function. Box plots show the distribution of values of a variable, indicating the 1st quartile (Q1, 25th quantile) and the 3rd quartile (Q3, 75th quantile) by the extent of the box, with the median (50th quantile) shown as a line across the box. The whiskers extend to $1.5 \times IQR$ above and below the 1st and 3rd quartile, where $IQR = Q3-Q1$. Outliers beyond the whiskers are typically shown as individual points. 
 
@@ -1807,7 +1819,7 @@ fig = px.density_heatmap(data,
 \end{center}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.csv}
 \begin{enumerate}
    \item Read the data into a Pandas data frame using \texttt{read\_csv()}
@@ -1817,9 +1829,9 @@ Use the Pagila film rentals data from \url{https://evermann.ca/busi4720/rentals.
 \begin{itemize}
 \item Compare the information conveyed by a box plot and a violin plot. What are the commonalities and what are the differences?
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Use the Pagila film rentals data from \small\url{https://evermann.ca/busi4720/rentals.csv}\normalsize
 \begin{enumerate}
    \item Read the data into a Pandas data frame using \texttt{read\_csv()}
@@ -1834,9 +1846,9 @@ Use the Pagila film rentals data from \small\url{https://evermann.ca/busi4720/re
 \begin{itemize}
 \item Use the \texttt{columns} and \texttt{shape} properties or the \texttt{describe()} method of a data frame to examine it. 
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Use the Pagila film rentals data from \small\url{https://evermann.ca/busi4720/rentals.csv}\normalsize
 \begin{enumerate}
    \item Read the data into a Pandas data frame using \texttt{read\_csv()}
@@ -1851,7 +1863,7 @@ Use the Pagila film rentals data from \small\url{https://evermann.ca/busi4720/re
    \item Use the \texttt{groupby()} function to group the data
    \item Use the \texttt{mean()} function to find the mean for a data frame column
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Dashboards}
@@ -1871,7 +1883,7 @@ The first plot is a line plot that spans the entire width of the dashboard. This
 \end{figure}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Imagine yourself in each of the following roles. For each role, describe at least three related charts/plots on your dashboard and the type of plot that you would choose. 
 
 \begin{enumerate}
@@ -1882,7 +1894,7 @@ Imagine yourself in each of the following roles. For each role, describe at leas
 \item Chief risk officer
 \item CEO
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \begin{withcode}

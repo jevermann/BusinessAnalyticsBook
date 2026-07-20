@@ -326,11 +326,11 @@ pm4py.save_vis_dfg(dfg=dfg,
 \begin{frame}[label=full]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Draw a DFG graph for the following traces in an event log: \\ \vspace{\baselineskip}
-
+\renewcommand{\arraystretch}{1.5}
 \begin{tabular}{l} \hline
 A B D E F G \\ \hline
 A D E F G \\ \hline
@@ -345,15 +345,21 @@ A B D E G \\ \hline
 
 
 \begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 
-\footnotesize
 Use the event log from \url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}
 \begin{enumerate}
    \item Read the data into a Pandas data frame using \texttt{read\_csv()}. Parse the \texttt{Start Timestamp} and \texttt{Complete Timestamp} columns as dates.
    \item Create the \texttt{case:concept:name}, \texttt{concept:name}, \texttt{time:timestamp}, \texttt{org:resource} columns as in the example above.
-   \item Create and visualize a directly-follows-graph (DFG)
+   \item Create and visualize a directly-follows-graph
    \item How many variants are there? What is the most frequent variant?
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 
@@ -520,6 +526,12 @@ print(precision_tbr)
 \end{frame}
 
 \begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+
 \footnotesize
 Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} and answer the following questions:
 \begin{enumerate}
@@ -537,15 +549,23 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
     \end{itemize}
     \item Plot the case durations. What do you notice?
     \begin{itemize}
-       \item Use \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.stats.get_all_case_durations.html}{\texttt{pm4py.stats.get\_all\_case\_durations}}
+       \item \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.stats.get_all_case_durations.html}{\texttt{pm4py.stats.get\_all\_case\_durations}}
        \item Put case durations into a \texttt{pd.DataFrame}
        \item 1 day = 86400 seconds
-       \item Use \href{https://plotly.com/python/histograms/}{\texttt{px.histogram}} or \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.vis.view_case_duration_graph.html}{\texttt{pm4py.vis.view\_case\_duration\_graph}}
+       \item Use \href{https://plotly.com/python/histograms/}{\texttt{px.histogram}} 
     \end{itemize}
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[label=withcode]{Hands-On Exercises \small [cont'd]}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+
 \begin{enumerate}
     \setcounter{enumi}{4}
     \item What is the mean case duration? 
@@ -559,9 +579,16 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
     \item Create BPMN models for each partial log and compare them. How do they differ?
     \item Create a BPMN model for the total log. Compare the fitness and precision values compared to the partial logs.
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{enumerate}
    \setcounter{enumi}{8}
    \item What is the activity with the longest mean time?
@@ -576,9 +603,16 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
        \item Calculate the number of activities for each case using \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}} and \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.count.html}{\texttt{count()}} on the dataframe
    \end{itemize}
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[label=withcode]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
 \begin{enumerate}
    \setcounter{enumi}{10}
    \item Which activities are carried out more than once for some case
@@ -592,6 +626,8 @@ Use the log from \texttt{https://evermann.ca/busi4720/PurchasingExample.csv'} an
       \item Use \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.filtering.filter_eventually_follows_relation.html}{\texttt{pm4py.filtering.filter\_eventually\_follows\_relationship}}
    \end{itemize}
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
    
 \begin{frame}[label=withcode,fragile]{Performance Mining --- DFG}
@@ -620,11 +656,12 @@ pm4py.save_vis_performance_dfg(perf_dfg,
 \begin{frame}[label=full]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \footnotesize
 Draw an annotated DFG for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
+\renewcommand{\arraystretch}{1.05}
 
 \begin{tabular}{l|l|r} \hline
 {\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
@@ -676,12 +713,12 @@ pm4py.save_vis_dotted_chart(log,
 \begin{frame}[label=full]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \footnotesize
 Draw a dotted chart for the following an event log. Use different colours or different symbols for the different activities. \\ \vspace{\baselineskip}
-
+\renewcommand{\arraystretch}{1.05}
 \begin{tabular}{l|l|r} \hline
 {\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
 1 & A & 0 \\
@@ -820,12 +857,12 @@ print(roles)
 \begin{frame}[label=full]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \footnotesize
 Draw a handover-of-work graph for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
-
+\renewcommand{\arraystretch}{1.05}
 \begin{tabular}{l|l|l|r} \hline
 {\bf Case} & {\bf Activity} & {\bf Resource} & {\bf Time} \\ \hline
 1 & A & Jane & 0 \\

@@ -19,6 +19,14 @@ After reading this chapter, you should be able to:
    \item Explain GARCH models and fit a GARCH model to time series data.
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=-vqPyhyqGF4}
+\end{videobox}
+\end{advanced}
+
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources. Consult them for additional information and details.
@@ -130,12 +138,12 @@ The \emph{Autoregressive (AR) model}\index{Autoregression} is based on the conce
 
 AR models are widely used in economic and financial time series where data points are influenced significantly by their previous values.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Use the following white noise (''error'') data to construct the elements of the time series:
 \begin{align*}x_t = x_{t-1} - 0.9 x_{t-2} + w_t \end{align*}
 
 0.819, .088, -0.171, 1.302, 0.888, -1.160, -1.345, 0.195, 0.226, 2.275
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{withcode}
 The following R code uses the \texttt{filter} function in ''recursive'' mode with parameters \texttt{1} and \texttt{-.9} to create the time series corresponding to the example model\footnote{The R code for this and following examples are based on material Shumway \& Stoffer}. The resulting plot is shown in Figure~\ref{fig:figure3}.
@@ -341,7 +349,7 @@ filter(soi, sides=2, filter=f)
 \end{figure}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
 \item Use the Moving Average Smoothing on the following time series data of company profits (in millions of dollars) with $a_{j-1} = a_j = a_{j+1} = 1/3$: \\
 
@@ -349,7 +357,7 @@ filter(soi, sides=2, filter=f)
 
 \item Sketch the original and the smoothed time series
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \subsubsection*{Kernel Smoothing or Kernel Regression}
 
@@ -433,7 +441,7 @@ smooth.spline(time(soi), soi, spar=0.5)
 \end{figure}
 
 \begin{withcode}
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
 \item Generate 100 observations from the autoregression model $x_t = -.9x_{t-2} + w_t$ with $\sigma^2_w = 1$
 \begin{enumerate}
@@ -445,7 +453,7 @@ smooth.spline(time(soi), soi, spar=0.5)
 
 \item Generate 100 observations from the sinusoidal series $x_t = \cos(2 \pi t / 4)$ and add $N(0,1)$ noise. Repeat the four smoothing exercises. Compare and contrast the results of these exercises. Which smoothing is more appropriate for which type of time series data?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Time Series Regression}
@@ -751,7 +759,7 @@ x_t - x_{t-1} &= (\mu_t + y_t) - (\mu_{t-1} + y_{t-1}) \\
 
 As seen above, the first difference can remove a linear trend. However, sometimes the first difference is not enough to achieve stationarity. In such cases, the second difference can be used to remove a quadratic trend and higher-order differences can be computed if the series still shows non-stationary behavior after the second differencing.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
 \item Calculate the first and second differences for the following time series data of quarterly company sales (in millions of dollars):\\
 
@@ -759,7 +767,7 @@ As seen above, the first difference can remove a linear trend. However, sometime
 
 \item Sketch the original time series, the first difference, and the second difference
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \begin{withcode}
@@ -816,16 +824,16 @@ acf1(diff(chicken, differences=2), max.lag=48,
 \end{figure}
 
 \begin{withcode}
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Extend the mortality, temperature and pollution/particulate model by adding another component to the regression that accounts to the particulate four weeks prior; that is, add the lagged pressure $P_{t-4}$ to the regression.
   \item Draw a scatterplot matrix of of mortality $M_t$, temperate $T_t$, pressure $P_t$ and lagged pressure $P_{t-4}$, then calculate the pairwise correlations between them. Compare the relationship between $M_t$ and $P_t$ versus $M_t$ and $P_{t-4}$
 \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: Shumway \& Stoffer, Chapter 2}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 \begin{enumerate}
   \item Detrend the \texttt{soi} time series data by fitting a regression of $S_t$ on time $t$. Is there a significant trend in the surface pressure?
@@ -833,9 +841,9 @@ acf1(diff(chicken, differences=2), max.lag=48,
 \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: Shumway \& Stoffer, Chapter 2}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Consider the two weekly time series \texttt{oil} and \texttt{gas} in the  \texttt{astsa} library. The oil series is in dollars per barrel, while the gas series in in cents per gallon.
 \begin{enumerate}
@@ -846,7 +854,7 @@ Consider the two weekly time series \texttt{oil} and \texttt{gas} in the  \textt
 \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: Shumway \& Stoffer, Chapter 2}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{ARIMA Models}
@@ -1022,7 +1030,7 @@ As shown in Figures~\ref{fig:figure18} and \ref{fig:figure19}, the ACF of AR and
 \label{tab:modelselection}
 \end{table}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Sketch the shape of the ACF and PACF functions for lags up to 10 that you expect of the following ARMA models:\\
 
 \begin{itemize}
@@ -1030,7 +1038,7 @@ Sketch the shape of the ACF and PACF functions for lags up to 10 that you expect
    \item ARMA(0, 5)
    \item ARMA(4, 4)
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 A full \emph{autoregressive integrated moving average} ARIMA(p, d, q) model adds a differencing term to the ARMA(p,q) model to achieve weak stationarity of the time series. The AR operator can be factorized by $(1-B)$, so that:
 \begin{align*}

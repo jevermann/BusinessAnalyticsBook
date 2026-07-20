@@ -15,6 +15,15 @@ After reading this chapter, you should be able to:
    \item Retrieve information from a graph database using Cypher, including filtering and aggregation of information.
 \end{itemize}
 
+
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=h2LMvBZFEhM}
+\end{videobox}
+\end{advanced}
+
 \section{Introduction}
 
 Graph databases are one type of \emph{NoSQL} databases, an acronym for ''Not Only SQL''. NoSQL databases emerged as a response to the limitations of traditional relational database systems and the evolving needs of modern applications. The concept and the term ''NoSQL'' gained prominence in the late 2000s, but its roots can be traced back to earlier innovations in database technology.
@@ -237,7 +246,7 @@ MATCH (n1)-[r]-(n2) RETURN n1, r, n2
 \label{fig:neo4jgraphviz}
 \end{figure}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 
 Consider the following description:
 
@@ -251,10 +260,10 @@ Define a graph in Cypher that represents this description:
   \item Use CREATE or MERGE statements to create nodes first, then relationships
   \item Use MATCH to verify your graph is correct.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 
 Consider the following description:
 
@@ -269,7 +278,7 @@ Define a graph in Cypher that represents this description:
   \item Use CREATE or MERGE statements to create nodes first, then relationships
   \item Use MATCH to verify your graph is correct.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 To remove nodes and relationships from a graph, use the \texttt{MATCH} query clause together with a \texttt{DELETE} clause. For example, to clean and remove the Person and Book nodes and relationships between Person and Book nodes created in the previous exercise, use the following Cypher statements:
 
@@ -421,9 +430,10 @@ Applying these heuristics to the example in Figure~\ref{fig:relationalgraph1} le
 
 Applying these heuristics should only be considered as an initial translation. As seen above, some or all properties may well be represented as nodes in their own right (Figure~\ref{fig:equivalentmodels}) or be modelled as relationship labels (Figure~\ref{fig:airportmodels}), depending on the type of queries expected to be run against the graph data.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Define a graph in Cypher that represents the following relational data: \\ 
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l} \hline
 \multicolumn{2}{c}{\bf Customer} \\ \hline
 {\bf CNumber} & {\bf Name} \\ \hline
@@ -432,6 +442,7 @@ Define a graph in Cypher that represents the following relational data: \\
 \end{tabular}
 
 \vspace{.5\baselineskip}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l} \hline
 \multicolumn{2}{c}{\bf Product} \\ \hline
 {\bf PNumber} & {\bf Name} \\ \hline
@@ -440,6 +451,7 @@ Define a graph in Cypher that represents the following relational data: \\
 \end{tabular}
 
 \vspace{.5\baselineskip}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l|l} \hline
 \multicolumn{3}{c}{\bf Sales} \\ \hline
 {\bf CNumber} & {\bf PNumber} & {\bf Price} \\ \hline
@@ -447,7 +459,7 @@ Define a graph in Cypher that represents the following relational data: \\
 2 & 10 & \$12 \\
 2 & 11 & \$10 \\ \hline
 \end{tabular}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \begin{withcode}
@@ -664,7 +676,7 @@ RETURN c.firstName, c.lastName, r.rentalDate LIMIT 5
 This example introduces matching of paths that contain multiple nodes and multiple relationships. In the above query, the types or labels or nodes and relationships are specified, but because no properties of the intermediate nodes or relationships are to be returned, they do not need to be bound to query variables.
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Write a Cypher query to find all customers that have rented a film with rating ''PG'':
 
@@ -674,7 +686,7 @@ Write a Cypher query to find all customers that have rented a film with rating '
   \item Design a pattern that starts with a customer node and ends with a film node
   \item Define an appropriate \texttt{WHERE} clause of property restrictions in node patterns
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \begin{figure}
 \includegraphics[width=\textwidth]{screen14.png}
@@ -814,7 +826,7 @@ RETURN a1, m, coActors, m2, a2
 
 The example is similar to the one above with its use of multiple path patterns in the \texttt{MATCH} clause. The query finds common co-actors of two named actors. Note the traversal directions of the relationships.
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 The following hands-on exercises are designed to familiarize you with the Cypher language and use the Pagila database.
 
@@ -826,7 +838,7 @@ The following hands-on exercises are designed to familiarize you with the Cypher
 	\item Calculate the rental counts for each country of customer. Are there countries with no rentals?
 	\item Create a graph that represents a product hierarchy.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \end{withcode}
 

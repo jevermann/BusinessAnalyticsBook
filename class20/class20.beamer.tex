@@ -264,7 +264,7 @@ hdfs dfs -ls
 \begin{frame}[label=withcode]{Hands-On Exercise -- HDFS} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 
@@ -282,7 +282,7 @@ hdfs dfs -ls
 \begin{frame}[label=withcode]{Hands-On Exercise -- HDFS} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 
@@ -301,7 +301,7 @@ hdfs dfs -ls
 \begin{frame}[label=withcode]{Hands-On Exercise -- HDFS} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 
@@ -372,15 +372,14 @@ Reduce: &\quad(key2, list(value2)) \rightarrow list(key3, value3)
 \begin{frame}[label=full]{Hands-On Exercise --- Map-Reduce}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
-\small
+\footnotesize
 
-A company's sales data are stored in each branch. They use Map-Reduce to find totals by product category.
-
-\vspace{.5\baselineskip}
-
+A company's sales data are stored in each branch. They use Map-Reduce to find totals by product category. \\
+\bigskip
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{|c|l|l|r|}
 \hline
 \textbf{Transaction} & \textbf{Store} & \textbf{Category} & \textbf{Amount (\$)} \\
@@ -395,12 +394,11 @@ A company's sales data are stored in each branch. They use Map-Reduce to find to
 \end{column}
 \end{columns}
 
-\vspace{.5\baselineskip}
-
-
+\bigskip
+\footnotesize
 Define Map and Reduce phases to calculate how much revenue each product category generated (across all stores). 
 
-\vspace{.5\baselineskip}
+\smallskip
 
 \begin{enumerate}
    \item What are the inputs and the output keys and values of the Map phase? 
@@ -567,7 +565,7 @@ cat part-* | sort -k2 -rn | less
 \begin{frame}[label=withcode]{Hands-On Exercise -- Map Reduce}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 
@@ -655,6 +653,7 @@ Source: Evermann, J. (2016) Scalable Process Discovery using Map-Reduce. \emph{I
 \begin{columns}
 \begin{column}{.47\textwidth}
 \begin{block}{$\alpha$ Algorithm}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{lr} \hline
 Single node & 25:00 hours \\
 Medium cluster & 1:24 hours \\
@@ -665,6 +664,7 @@ Large cluster & 0:08 hours \\ \hline
 
 \begin{column}{.47\textwidth}
 \begin{block}{FHM}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{lr} \hline
 Single node & 22:21 hours\\
 Medium cluster & 2:01 hours \\

@@ -24,7 +24,14 @@ After reading this chapter, you should be able to:
 \end{advanced}
 \end{itemize}
 
-\newpage
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=TA4Y7E1E1k0&pp=0gcJCZkLAYcqIYzv}
+\end{videobox}
+\end{advanced}
+
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources.
@@ -253,7 +260,7 @@ hdfs dfs -ls
 \end{bashcode}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \paragraph*{Exercise 1: Accessing HDFS}
 
 \begin{enumerate}
@@ -280,7 +287,7 @@ hdfs dfs -ls
   \item Observe and note the number of blocks the file is split into and their locations.
 \end{enumerate}
 
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \subsection{Map-Reduce}
@@ -321,11 +328,11 @@ Reduce: &\quad(key2, list(value2)) \rightarrow list(key3, value3)
 \end{enumerate}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 A company's sales data are stored distributed in each branch. They use Map-Reduce to find totals by product category.
 
-\vspace{.5\baselineskip}
-
+\bigskip
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{|c|l|l|r|}
 \hline
 \textbf{Transaction} & \textbf{Store} & \textbf{Category} & \textbf{Amount (\$)} \\
@@ -349,7 +356,7 @@ Define Map and Reduce phases to calculate how much total revenue each product ca
    \item What are the keys and values of the output of the Shuffle phase?
    \item What does the Reduce phase do? What are the keys and values of its output?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 YARN is the resource management layer of Hadoop. YARN\index{YARN resource manager} consists of a central Resource Manager, which manages the use of resources across the cluster, and NodeManager agents, which monitor the processing of operations on individual cluster nodes. 
 
@@ -455,7 +462,7 @@ hdfs dfs -get hamlet.out/part-*
 cat part-* | sort -k2 -rn | less
 \end{bashcode}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 \subsubsection*{Map Reduce}
 
@@ -469,7 +476,7 @@ Modify the \texttt{map.py} and \texttt{reduce.py} python code from above to coun
    
    \item The reduce function will use numerical keys, convert the keys it reads appropriately.
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 %\newpage
@@ -518,6 +525,7 @@ Source: Evermann, J. (2016) Scalable Process Discovery using Map-Reduce. \emph{I
 \begin{table}
 \centering
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{lr} \hline
 \multicolumn{2}{c}{$\alpha$ Algorithm} \\
 Single node & 25:00 hours \\

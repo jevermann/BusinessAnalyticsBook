@@ -16,6 +16,16 @@ After reading this chapter, you should be able to:
 \end{withcode}
 \end{itemize}
 
+
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=wPlpNBPYnH0&pp=0gcJCZkLAYcqIYzv}
+\end{videobox}
+\end{advanced}
+
+
 \section*{Sources and Further Reading}
 
 \begin{resourcebox}
@@ -235,7 +245,7 @@ For the total LSTM cell, the number of trainable parameters is therefore $4 \tim
 Verifying the shape/dimensions of inputs, cell memory and hidden state, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
 \end{alertbox}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{itemize}
   \item Assume input $x_t = 1$, prior state $h_{t-1}=0.5$ and cell memory $c_{t-1} = 0.7$
   \item Assume weights and biases as follows:
@@ -255,7 +265,7 @@ Verifying the shape/dimensions of inputs, cell memory and hidden state, and outp
   \item Calculate $h_t$
 \end{enumerate}
 \begin{align*}\text{{\bf Recall}: }\quad\sigma(a)=\frac{1}{1+e^{-a}}\end{align*}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \section{GRU Cells}
 
@@ -302,7 +312,7 @@ The number of trainable parameters for a GRU layer is determined analogously to 
 Verifying the shape/dimensions of inputs, cell memory, and outputs, and understanding how they are related to each other is important to understand and to verify the correctness of the implemented model!
 \end{alertbox}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{itemize}
   \item Assume input $x_t = 1$ and prior state $h_{t-1}=0.5$
   \item Assume weights and biases as follows:
@@ -319,10 +329,10 @@ Verifying the shape/dimensions of inputs, cell memory, and outputs, and understa
   \item Calculate $h_t$
 \end{enumerate}
 \begin{align*}\text{{\bf Recall}: }\quad\sigma(a)=\frac{1}{1+e^{-a}}\end{align*}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider a Seq2Vec neural network model for regression with the following characteristics:
 
 \begin{itemize}
@@ -344,7 +354,7 @@ Consider a Seq2Vec neural network model for regression with the following charac
 \end{itemize}
 
 Calculate the number of trainable parameters for each layer and for the whole network.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \section{Statefulness}
@@ -527,7 +537,7 @@ for element in ds.as_numpy_iterator():
 In this small illustrative example, every step of the feature sequence is a single number, whereas in the stock market prediction example every step of the feature sequence is itself a vector of values.
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Using the simple example data from above to:
 \begin{enumerate}
@@ -535,7 +545,7 @@ Using the simple example data from above to:
    \item Experiment with different values for \texttt{sequence\_length},
    \item Experiment with different values for \texttt{sequence\_stride}.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 The stock market prediction example uses a sequential neural network model with an input layer to specify the shape of the features to be used for training, one LSTM layer and a dense (fully-connected) layer with a single output for regression. It has the following characteristics:
 
@@ -599,7 +609,7 @@ Epoch 25/25
  loss: 1.0028 - val_loss: 7.0621
 \end{textcode}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Download the Python code from \href{https://raw.githubusercontent.com/jevermann/busi4720-ml/main/lstm_example.py}{here}. Then:
 
@@ -615,7 +625,7 @@ Experiment with different model characteristics:
     \item Swap the LSTM layer for a GRU layer (\texttt{layers.GRU}). The Keras GRU layer construction function takes the same arguments as the Keras LSTM layer construction function.
     \item Comment on the model performance results.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 Given the poor performance of the single layer LSTM network, it is natural to ask whether more LSTM layers can make a difference. To illustrate the use of Seq2Seq models, the following model stacks two LSTM layers. Note that the first LSTM layer is a Seq2Seq type that returns an output for each step of the sequence. These outputs form the inputs for the second LSTM layer. That second layer is a Seq2Vec model that returns a single output. The model also adds a second fully-connected layer and droput layers to prevent overfitting. 
 
@@ -991,7 +1001,7 @@ EOC
 %\end{pythoncode}
 %\end{frame}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Download the \href{https://github.com/jevermann/busi4720-ml/blob/main/process_prediction.py}{complete Python file} and the \href{https://evermann.ca/busi4720/BPI_Challenge_2012.xes.gz}{example event log}. \\
 
@@ -1003,7 +1013,7 @@ Adapt the network architecture to identify the impact on training and validation
       \item Further training epochs (originally 25)
    \end{enumerate}
 Comment on your findings and identify the best model. \\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Review Questions}

@@ -124,6 +124,7 @@ z_{i1} = \phi_{11} x_{i1} + \phi_{21} x_{i2} + \cdots + \phi_{p1} x_{ip}
 \begin{columns}
 \begin{column}{0.3\textwidth}
 \footnotesize
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|r|r}
           &  PC1 & PC2 \\ \hline
 Murder    & .536  & -0.418 \\
@@ -183,7 +184,7 @@ F_k = \frac{\sum_{j=1}^k \lambda_j}{\sum_{j'=1}^p \lambda_{j'}}
 \begin{frame}[label=full,fragile]{Hands-On Exercise -- Principal Components Analysis}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 A dataset with 14 variables (Holzinger Swineford 1939) was input to a principal component analysis. The results are reported as follows:
@@ -265,7 +266,7 @@ head(pca.result$x)
 \begin{frame}[label=withcode]{Hands-On Exercises -- PCA}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small
@@ -285,7 +286,7 @@ The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices
 \begin{frame}[label=withcode]{Hands-On Exercises -- PCA}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small
@@ -306,7 +307,7 @@ Use PCA to reduce the number of dimensions for this dataset:
 \begin{frame}[label=withcode]{Hands-On Exercises -- PCA}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small
@@ -415,12 +416,13 @@ W(C_k) &= \frac{1}{|C_k|} \sum_{i,i' \in C_k} \sum_{j=1}^p (x_{ij} - x_{i'j})^2 
 \begin{frame}[label=full,fragile]{Hands-On Exercise -- K-Means Clustering}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Manually cluster the following three-dimensional dataset into three clusters. Show all work.
 
-\vspace{\baselineskip}
+\bigskip
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c|c} \hline
 {\bf Income} & {\bf Spending} & {\bf Debt} \\ \hline
 1 & 1 & 1 \\
@@ -502,7 +504,7 @@ plot(x, col=(km.result$cluster+1),
 \begin{frame}[label=withcode]{Hands-On Exercises -- K-Means Clustering}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small
@@ -521,7 +523,7 @@ The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices
 \begin{frame}[label=withcode]{Hands-On Exercises -- K-Means Clustering}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small
@@ -637,12 +639,13 @@ There are many other linkage functions: \url{https://en.wikipedia.org/wiki/Hiera
 \begin{frame}[label=full,fragile]{Hands-On Exercise -- Hierarchical Clustering}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Use agglomerative hierarchical clustering on the following three-dimensional dataset. Show all work.
 
-\vspace{\baselineskip}
+\bigskip
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c|c} \hline
 {\bf Income} & {\bf Spending} & {\bf Debt} \\ \hline
 1 & 1 & 1 \\
@@ -717,7 +720,7 @@ cutree(hc.complete, h=6)
 \begin{frame}[label=withcode]{Hands-On Exercises -- Hierarchical Clustering}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small
@@ -736,7 +739,7 @@ The \texttt{Boston} dataset in the \texttt{ISLR2} library describes house prices
 \begin{frame}[label=withcode]{Hands-On Exercises -- Hierarchical Clustering}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small
@@ -756,7 +759,7 @@ The \texttt{Hitters} dataset in the \texttt{ISLR2} library contains the salary o
 \begin{frame}[label=withcode]{Hands-On Exercises -- Hierarchical Clustering}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \small

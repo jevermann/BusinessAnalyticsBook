@@ -115,12 +115,13 @@ where $\bar{x}$ and $\bar{y}$ are the sample means
 \begin{frame}[label=full]{Hands-On Exercise -- Linear Regression with OLS}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Calculate the slope and intercept of the best fitting curve for the following data points:\\
+\bigskip
 
-\vspace{\baselineskip}
+\renewcommand{\arraystretch}{1.25}
 \begin{center}
 \begin{tabular}{c|c} \hline
 {\bf x} & {\bf y} \\ \hline
@@ -165,12 +166,13 @@ where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares
 \begin{frame}[label=full]{Hands-On Exercise -- Linear Regression with OLS}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\renewcommand{\arraystretch}{1.25}
 \end{column}
 \begin{column}{0.8\textwidth}
 Using the slope and intercept of the best fitting curve from the previous exercise, determine the predicted or fitted values. Then, determine the RSS, the TSS, and the $R^2$ value.\\
 
-\vspace{\baselineskip}
+\bigskip
+\renewcommand{\arraystretch}{1.25}
 \begin{center}
 \begin{tabular}{c|c|c|c|c|c} \hline
 {\bf x} & {\bf y} & $\hat{y}$ & $(y - \hat{y})^2$ & $\bar{y}$ & $(y - \bar{y})^2$ \\ \hline
@@ -400,7 +402,7 @@ summary(fitted.model)
 \begin{frame}[label=withcode]{Hands-On Exercises \small (Source: ISLR2 Chapter 3)}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 
@@ -496,7 +498,7 @@ cv.err$delta[1]
 \begin{frame}[label=withcode]{Hands-On Exercises -- Cross-Validation}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 Consider the Boston housing data set \texttt{Boston}.
@@ -599,7 +601,7 @@ The \texttt{glmnet()} function in the \texttt{glmnet} library for R uses the Ela
 \begin{frame}[label=full]{Hands-On Exercise -- Shrinkage Methods}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Assuming the following polynomial regression model:
@@ -847,7 +849,7 @@ mean((y.hat.test - y.test)^2)
 \begin{frame}[label=withcode]{Hands-On Exercises -- Shrinkage Methods}{Source: ISLR2, Chapter 6}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 
@@ -866,7 +868,7 @@ Predict the number of applications received using the other variables in the \te
 \begin{frame}[label=withcode]{Hands-On Exercises -- Shrinkage Methods}{Source: ISLR2, Chapter 6}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Predict the per-capita crime rate in the \texttt{Boston} data set using the other variables.
@@ -943,12 +945,13 @@ where the linear predictor $\beta_0 + \beta_1 X$ are the \textbf{logits}
 \begin{frame}[label=full]{Hands-On Exercise -- Logistic Regression}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 The slope and intercept of the best fitting curve for the following data points are $1.333$ and $0$ respectively. Calculate the predicted probability for each $x$ value.
 
-\vspace{\baselineskip}
+\bigskip
+\renewcommand{\arraystretch}{1.25}
 \begin{center}
 \begin{tabular}{c|c|c} \hline
 {\bf x} & {\bf y} & {\bf p(y)}\\ \hline
@@ -1293,7 +1296,7 @@ performance(knn.pred.obj, 'auc')@y.values[[1]]
 \begin{frame}[label=withcode]{Hands-On Exercises}{Source: ISLR2, Chapter 4}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
@@ -1312,7 +1315,7 @@ Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
 \begin{frame}[label=withcode]{Hands-On Exercises}{Source: ISLR2, Chapter 4}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
@@ -1330,13 +1333,13 @@ Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
 \begin{frame}[label=withcode]{Hands-On Exercises}{Source: ISLR2, Chapter 4}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classification models to predict whether a given census tract has a crime rate above or below the median.
 \begin{enumerate}
-   \item Create a new binary variable \texttt{crime01} that is $1$ is \texttt{crime} is above its median, and $0$ otherwise. Combine this variable with the data frame. \emph{Tip}: Use the \texttt{median()} function for this.
-   \item Split your data set into a training and test data set
+   \item Create a new binary variable \texttt{crime01} that is $1$ is \texttt{crime} is above its median, and $0$ otherwise. Combine this variable with the data frame. \emph{Tip}: Use the \texttt{median()} function.
+   \item Split your data set into a training and test set
    \item Fit logistic regression, Naive Bayes, and KNN (with different $K$)
    \item Describe your findings in terms of prediction error, precision, recall, F1 and AUC
 \end{enumerate}

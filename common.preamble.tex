@@ -82,9 +82,50 @@
 \definecolor{code}{gray}{0.95}
 \definecolor{alert}{RGB}{238,224,229} % LavenderBlush2 
 
-\newtcolorbox{exercisebox}{enhanced,colback=Gray0!25!white,colframe=Gray0!60!black,title={Hands-On Exercise},fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=1pt] at (frame.west) {\includegraphics[width=8mm]{../hand2.png}};}}
+%\newtcolorbox{exercisebox}{%
+ %enhanced,
+ %colback=Gray0!25!white,
+ %colframe=Gray0!60!black,
+ %title={Hands-On Exercise},
+ %fonttitle=\large,
+ %leftrule=10mm,
+ %overlay={
+   %\node[anchor=north west,outer sep=1pt] 
+     %at (frame.west) 
+     %{\includegraphics[width=8mm]{../hand2.png}};
+  %}}
+
+\newtcolorbox[auto counter, number within=chapter]{exerciseboxpaper}{%
+  enhanced,
+  title={Hands-On Exercise \thetcbcounter},
+  colback=Gray0!25!white,
+  colframe=Gray0!60!black,
+  fonttitle=\large,
+  leftrule=10mm,
+  overlay={
+    \node[anchor=north west,outer sep=1pt]
+      at (frame.west)
+      {\includegraphics[width=8mm]{../pencil.png}};
+  }
+}
+
+\newtcolorbox[use counter from=exerciseboxpaper]{exerciseboxcomputer}{%
+  enhanced,
+  title={Hands-On Exercise \thetcbcounter},
+  colback=Gray0!25!white,
+  colframe=Gray0!60!black,
+  fonttitle=\large,
+  leftrule=10mm,
+  overlay={
+    \node[anchor=north west,outer sep=1pt]
+      at (frame.west)
+      {\includegraphics[width=8mm]{../computer.png}};
+  }
+}
 
 \newtcolorbox{resourcebox}{enhanced,colback=LightSteelBlue1!25!white,colframe=LightSteelBlue1!60!black,title={Resources},fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=0.5pt] at (frame.west) {\includegraphics[width=8mm]{../book.png}};}}
+
+\newtcolorbox{videobox}{enhanced,colback=Chocolate1!25!white,colframe=Chocolate1!60!black,title={Video},fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=0.5pt] at (frame.west) {\includegraphics[width=8mm]{../videowhite.png}};}}
 
 \newtcolorbox{alertbox}{enhanced,colback=OrangeRed1!25!white,colframe=OrangeRed1!60!black,title=Important,fonttitle=\large,leftrule=10mm,overlay={\node[anchor=north west,outer sep=0.5pt] at (frame.west) {\includegraphics[width=8mm]{../attention2.png}};}}
 

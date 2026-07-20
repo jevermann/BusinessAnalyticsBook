@@ -18,6 +18,15 @@ After reading this chapter, you should be able to:
 \end{advanced}
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=rSI1hnrUDO4}
+\end{videobox}
+\end{advanced}
+
+
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources. 
@@ -136,7 +145,7 @@ As with general neural networks, it is instructive to examine and verify the num
 \textbf{Example}: Let the kernel size be $5 \times 5$ applied to an input with $3$ channels and an output of $32$ channels. Then, the CNN layer has $32 \times 3 \times 5 \times 5 + 32 = 2432$ parameters.
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Calculate the number of trainable parameters for the following CNN layers:
 \begin{enumerate}
 \item A kernel of size $4 \times 4$ operating on an input with 3 channels and an output of 8 channels.
@@ -145,7 +154,7 @@ Calculate the number of trainable parameters for the following CNN layers:
 \item A kernel of size $5 \times 5$ operating on an input with 4 channels and an output with 4 channels.
 \end{enumerate}
 Assume the previous four layers are part of the same neural network, what is the total number of trainable parameters?
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \section{Pooling Layers}
@@ -167,7 +176,7 @@ Figure~\ref{fig:screen5_chap16} shows an example of $2 \times 2$ max pooling on 
 
 In image processing in particular, pooling helps the network become invariant to small translations, rotations, and scalings of an image. Max pooling in particular helps in detecting features like edges, textures, and shapes, even if they appear in different areas of the image in different instances. Although pooling reduces the resolution of the feature map, important features (like the presence of certain edges or textures) are retained due to the nature of max or average operations within localized regions of the input.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
     \item Assume the following $5 \times 5$ input matrix:
 \begin{align*}
@@ -188,9 +197,9 @@ and the following $3 \times 3$ convolution kernel:
     \item Using stride 2, calculate the convolution result. 
     \item What are the dimensions of the convolution output?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
 \item Assume the following $4 \times 4$ input matrix:
 \begin{align*}
@@ -203,7 +212,7 @@ and the following $3 \times 3$ convolution kernel:
 \item Apply a $2 \times 2$ max pooling layer. 
 \item What are the dimensions of the pooling output?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \FloatBarrier
 
@@ -444,7 +453,7 @@ history = model.fit(train_images, train_labels,
 
 The training accuracy after 100 episodes is $\approx 75\%$ and the validation accuracy is $\approx 66\%$ showing relatively poor performance and some evidence of overfitting. However, noting that random performance should yield an accuracy of $0.1$ for 10 classes, it also shows that a relatively simple network with only a few thousand parameters is already quite capable at image classification. 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
       \item Convolution kernel size (originally $3 \times 3$)
@@ -460,7 +469,7 @@ Comment on your findings and identify the best model.\\
 In particular, explore the trade-offs between using a large number of smaller filters versus a smaller number of larger filters in the context of convolution followed by pooling. \\
 
 Explore how does the choice of pooling strategy (max vs average) affects the features extracted by a convolutional neural network and the predictive performance of the model.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Other Computer Vision Tasks for CNNs}
@@ -677,7 +686,7 @@ multi_hot_model.compile(
 
 The training accuracy of this model is $\approx 99\%$ and the validation accuracy is $\approx 83\%$ showing the power of a relatively simple network architecture, albeit with significant number of trainable parameters (with 10,000 inputs from the vectorization pre-processing layer and four outputs, the network has 400004 trainable parameters).
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
@@ -685,7 +694,7 @@ Adapt the network architecture to identify the impact on training and validation
       \item Number of layers (originally 1)
    \end{enumerate}
 Comment on your findings and identify the best model.
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \begin{advanced}
@@ -822,7 +831,7 @@ The Keras web site has a large number of Keras tutorials on all kinds of natural
 \end{resourcebox}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Adapt the network architecture to identify the impact on training and validation performance of the following:
    \begin{enumerate}
@@ -839,7 +848,7 @@ Comment on your findings and identify the best model.\\
 In particular, explore the trade-offs between using a large number of smaller filters versus a smaller number of larger filters in the context of convolution followed by pooling. \\
 
 Explore how does the choice of pooling strategy (max vs average) affects the features extracted by a convolutional neural network and the predictive performance of the model.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \end{withcode}
 

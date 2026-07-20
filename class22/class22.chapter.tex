@@ -14,6 +14,15 @@ After reading this chapter, you should be able to:
     \item Explain the motivation and principles behind policy gradient methods.
 \end{itemize}
 
+
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=w5tSxI8vEfQ}
+\end{videobox}
+\end{advanced}
+
 \newpage
 \section*{Sources and Further Reading}
 
@@ -147,7 +156,7 @@ While tabular methods update the value of $Q$ for a state--action pair directly,
 Figure~\ref{fig:gradientsarsa} shows how the tabular SARSA method can be readily adapted to function approxmation using SGD. \emph{The only change to the tabular SARSA algorithm is the update step}. Whereas tabular SARSA updates $q(s, a)$, semi-gradient SARSA updates the parameters $\theta$ of $\hat{q}$\index{SARSA!semi-gradient}. 
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider the following Semi-Gradient SARSA agent:
 
 \begin{itemize}
@@ -166,7 +175,7 @@ Consider the observed transition:
 \vspace{.5\baselineskip}
 
 Update the parameter $\theta$ using the Semi-Gradient SARSA update rule.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \section{Deep Q Network (DQN)}
@@ -480,7 +489,7 @@ A complete Monte Carlo based REINFORCE algorithm is shown in Figure~\ref{fig:rei
 \end{figure}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider a policy with two actions: Left ($p=0.7$), Right ($p=0.3$). Suppose the agent selected \emph{Right} as the first action in the episode. For this state:
 
 \begin{align*}
@@ -498,6 +507,7 @@ Consider the following episode rewards:
 \begin{center}
 \vspace{.5\baselineskip}
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c}
 {\bf Time} & {\bf Reward} \\ \hline
 1 & 3 \\
@@ -512,7 +522,7 @@ Consider the following episode rewards:
    \item Calculate the update vector $\alpha G \nabla \ln \pi$
    \item Calculate the updated parameter vector
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{withcode}
 The pseudocode in Figure~\ref{fig:reinforce} is easily implemented in Python. The following Python code block defines a policy function as a neural network. This policy function is defined for discrete actions with as many outputs as there are actions. The final layer has a softmax activation function so it produces probabilities $\pi$ for each action.

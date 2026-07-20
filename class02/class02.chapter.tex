@@ -17,6 +17,14 @@ After reading this chapter, you should be able to:
   \item Describe the process and different activities for data cleaning, that is, for improving data quality.
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=lrsr22rFmdo}
+\end{videobox}
+\end{advanced}
+
 \section{Introduction}
 
 Business analytics is the use of data for understanding, description, prediction, prescription and decision making. Hence, it is important to understand the different types of data and the variety of formats in which they can exist. 
@@ -146,13 +154,13 @@ The sequence of Unicode characters for the word ''Inuktitut'' becomes 0xE1 0x90 
 
 As a business analyst, you may come across data that contains Unicode characters either spelled out in the ''\textbackslash uXXXX'' form, or UTF-8 encoded in byte sequences, or in the HTML format. While you do not need to understand the technical details of Unicode and its different encodings, you should be aware that data in this format is common and you need to know how to deal with it when you encounter it. This includes using a Unicode-aware data storage and management system, using a Unicode-aware business analytics tool, and using a Unicode-aware visualization or report-writing tool.
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{itemize}
 	\item Choose your favourite emoji
 	\item Determine its Unicode number (''codepage'')
 	\item Determine its UTF-8 encoding
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \subsubsection*{Dates and Times}
 
@@ -199,7 +207,7 @@ A year is a leap year if it can be divided by four and (cannot be divided by 100
 \normalsize
 \end{infobox}
  
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 
 \textit{\textbf{\vspace{3mm} \\The territory of Nunavut was created on April 1st, 1999. \vspace{3mm}}}
 
@@ -209,7 +217,7 @@ A year is a leap year if it can be divided by four and (cannot be divided by 100
 	\item Assume that a ceremony took place at 3PM that day in Iqaluit and express this date-time in RFC 3339
 	\item Assume the ceremony lasted for 125 minutes and express this duration in RFC 3339
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{withcode}
 \subsubsection*{Collections}
@@ -288,7 +296,7 @@ CSV files are plain text files, typically encoded in ASCII or UTF-8. Every line 
 
 While the CSV format is standardized, not all data sets necessarily conform fully to the standard. You may encounter different field delimiters, such as semicolons, tabs, carets (''\^{}'') or others. Line breaks may not use the Microsoft Windows convention of \texttt{CR LF} but instead use only the \texttt{LF} character as is typical on MacOS and Linux/Unix systems. Not all fields may be quoted and you may encounter a mix of double quotes and single quotes even in the same CSV file. Additionally, the field contents themselves, such as numbers and dates, may themselves not be standards compliant and exhibit a range of different notations, as discussed above. For a business analyst, it is important to recognize these variations and be able to address them prior to further data analysis.
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 \begin{itemize}
 	\item Search the internet for a CSV file of the population and areas of all countries of the world
@@ -309,7 +317,7 @@ While the CSV format is standardized, not all data sets necessarily conform full
 		\item Do you get an identical file to the one you imported? If not, what has changed?
 	\end{itemize}
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \paragraph*{Relational Databases}
 
@@ -330,7 +338,7 @@ Data \emph{normalization}\index{Normalization (in a relational database manageme
 
 Prominent RDBMS examples are Oracle RDBMS\footnote{\url{https://www.oracle.com/ca-en/database/}}, a proprietary system for on-premises installation; the PostgreSQL\footnote{\url{https://www.postgresql.org/}} open-source RDBMS system for on-premises installation; and Amazon RDS\footnote{\url{https://aws.amazon.com/rds/}}, Google BigQuery\footnote{\url{https://cloud.google.com/bigquery}}, and Azure SQL\footnote{\url{https://azure.microsoft.com/en-ca/products/azure-sql/database}} which are cloud-based systems on AWS, Google Cloud, and Microsoft Azure, respectively.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \subsubsection*{Hands-On Exercise} 
 
 \begin{itemize}
@@ -341,7 +349,7 @@ Prominent RDBMS examples are Oracle RDBMS\footnote{\url{https://www.oracle.com/c
 
 \vspace{.5\baselineskip}
 Write example relations and identify foreign-key relationships for referential integrity, similar to Figure~\ref{fig:relationkeys}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \subsubsection*{Key-Value Data Stores}
@@ -413,7 +421,7 @@ JSON documents are plain text documents encoded in UTF-8 and consist of key-valu
 \label{fig:jason2}
 \end{figure}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 
 Describe yourself in a JSON object:
 \begin{itemize}
@@ -421,7 +429,7 @@ Describe yourself in a JSON object:
 	\item Structure the information in JSON Objects and Arrays 
 	\item Use nested structures, e.g. objects in arrays, or arrays in objects, or objects in objects, etc.
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \subsubsection*{Documents (XML)}
 
@@ -546,7 +554,7 @@ In comparing XML to JSON, it is evident that both formats are human as well as m
 
 While XML can be strictly defined using XML Schema there is not yet a well-adopted means for specifying JSON documents. This means that JSON documents cannot be validated against a set of rules or constraints, possibly leading to data quality issues, but, on the other hand, may be used more flexibly.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 
 Describe yourself in an XML document:
 \begin{itemize}
@@ -554,7 +562,7 @@ Describe yourself in an XML document:
 	\item Structure the information in Elements and Attributes 
 	\item Use nested elements where appropriate
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \paragraph*{Document Databases}
 
@@ -777,7 +785,7 @@ xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
 </rdf:RDF>
 \end{xmlcode}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 
 Document yourself in a Turtle:
 \begin{itemize}
@@ -786,7 +794,7 @@ Document yourself in a Turtle:
 	\item Turn the graph into a set of Terse XML Triples (''turtles'')
 	\item \emph{Tip:} Do not worry about XML prefixes
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \subsection{Unstructured Data}
 
@@ -810,7 +818,7 @@ The late 1980s and 1990s saw a shift towards statistical methods in text mining,
 
 The 2010s marked a revolution in text mining with the advent of deep learning and neural networks, which provided the ability to learn complex patterns in large datasets. Recurrent Neural Networks (RNNs) and variants like LSTMs became popular for handling sequential text data. The development of attention mechanisms and transformer models in the 2020s, such as Google's BERT or OpenAI's ChatGPT, represented yet another significant advancement.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
  
 \begin{enumerate}
 	\item Identify a specific business problem that can be addressed by analyzing text data
@@ -818,7 +826,7 @@ The 2010s marked a revolution in text mining with the advent of deep learning an
 	\item What would you wish to do with the text data?
 	\item Where might you get this text data?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{advanced}
 \subsubsection*{Regular Expressions (RegEx)}
@@ -944,7 +952,7 @@ Non-whitespace    & \textbackslash S & [\textasciicircum{ } \textbackslash t\tex
 
 Regular expressions are a fundamental tool in text processing and manipulation, offering a robust and efficient method for pattern matching and string analysis. Their versatility makes them an essential skill in many programming and data-related tasks. Regular expressions are available in all programming languages and statistics and analytics software tools and allow a basic level of text processing and manipulation.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
 	\item Specify a RegEx to match Canadian postal codes:
 \end{enumerate}
@@ -954,7 +962,7 @@ Regular expressions are a fundamental tool in text processing and manipulation, 
 	\item Specify a RegEx to match a full RFC 3339 date with timezone, such as ''2023-11-14T20:42:53-04:30''
 	\item \emph{Challenge}: Specify a RegEx that matches any ISO 8601 date-time format
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \subsubsection*{Levenshtein Distance}
 
@@ -973,7 +981,7 @@ As an example, consider the two strings ''kitten'' and ''sitting''. The (unweigh
 \end{figure}
 
 
-\begin{exercisebox} 
+\begin{exerciseboxpaper}
 Determine the Levenshtein distances between the following:
 \begin{enumerate}
   \item Last five digits of your student number and ''12345''
@@ -981,7 +989,7 @@ Determine the Levenshtein distances between the following:
   \item The words ''Inuktitut'' and ''Innuttitut''
   \item The words ''Mikak'' and ''Micock''
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 \end{advanced}
 
 \subsection*{Images}
@@ -1005,14 +1013,14 @@ Typical image analysis tasks include object detection and counting, object class
 
 Business applications of image analysis include robotics, character and handwriting recognition in documents for process automation, security (identity verification, fraud detection, etc.) and manufacturing (defect detection, etc.).
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
 	\item Identify a specific business problem that can be addressed by analyzing image data
 	\item What image data would you need to address the problem?
 	\item What would you wish to do with the image data?
 	\item Where might you get this image data?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \subsection*{Video}
 
@@ -1022,14 +1030,14 @@ However, in practice, video data is heavily compressed in video files as specifi
 
 Typical video analytics tasks include object detection, object recognition, object motion detection, object or background dynamic masking/blurring, event detection and classification (errors, exceptions), and activity detection and classification. Object detection in video involves identifying and locating objects within a frame or series of frames. This task typically recognizes and tracks multiple objects over time, often in real-time. Object recognition goes a step beyond detection to classify the detected objects into predefined categories, such as identifying specific types of vehicles, animals, or other objects within a video. Motion detection involves identifying moving objects in the video. It is crucial in surveillance systems to detect unusual or suspicious movements or to track the movement of specific objects or people over time. Dynamic masking or blurring is used to obscure or protect portions of the video image, such as faces or license plates, to maintain privacy or comply with regulations. Event detection involves identifying specific events within a video, such as errors, exceptions, accidents, or other significant incidents. Classification categorizes these events into predefined types to facilitate appropriate responses or further analysis.  Activity detection involves recognizing and categorizing the actions or behaviors of objects or people in the video, such as walking, running, or using machinery. This can be used in various settings, from analyzing customer behavior in retail to monitoring patient activities in healthcare.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
 	\item Identify a specific business problem that can be addressed by analyzing video data
 	\item What video data would you need to address the problem?
 	\item What would you wish to do with the video data?
 	\item Where might you get this video data?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \section{Metadata}
 
@@ -1039,12 +1047,12 @@ Metadata can describe authorship and ownership of the data, e.g. who created or 
 
 Some data formats allow meta-data to be embedded within them, such as popular image or video formats. For other data formats, such as CSV files, metadata may be provided as a separate document or simply as a text file.
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
 	\item With your cell phone camera, take a selfie
 	\item Identify the meta-data that your phone camera embedded in this photo
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \section{Data Quality and Data Provenance}
 
@@ -1078,10 +1086,11 @@ Traceability & Auditable provenance, verifiable source \\ \hline
 \label{tab:dataquality}
 \end{table}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Evaluate the data quality of the following information for a company that you are researching to decide whether to offer discounts on sales to this company. \\
 \vspace{.5\baselineskip}
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l} 
 {\bf Year} & {\bf Sales} \\ \hline 
 2010 & 1,053,123 \\ \hline
@@ -1094,7 +1103,7 @@ Evaluate the data quality of the following information for a company that you ar
 
 \vspace{.5\baselineskip}
 The data was found on an anonymous web blog
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 \paragraph*{Data provenance}\index{Data provenance} refers to the documentation or tracing of the origins, lineage, and lifecycle of data. It encompasses recording information of the inputs, entities, systems, and processes that influence the data of interest, providing a record of the data and its origins. Data provenance is crucial for understanding the context, derivation, and rationale behind the data, making it an essential aspect of data management and an important prerequisite for data quality.
@@ -1225,7 +1234,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 \end{infobox}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
 	\item Identify data on the consumer price index (excluding living and transportation expenses) for Newfoundland \& Labrador for the last 10 years
 	\begin{itemize}
@@ -1243,7 +1252,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 		\item How would you assess the quality of the data?
 	\end{itemize}
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \section{Review Questions}
 
@@ -1404,7 +1413,7 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 
 \section{Additional Hands-On Exercises}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Number Formats}
 \begin{enumerate}
 	\item Convert the decimal number 25 to its binary equivalent. Indicate the sign bit.
@@ -1414,17 +1423,17 @@ In practice, cleaning, transformation, and correction of data takes approximatel
 	\item Given a dataset with numbers in European format (comma as decimal separator), write a pseudo-code to convert them to the American format (dot as decimal separator).
 	\item Create a small program in a language of your choice to detect and convert scientific notation to standard decimal notation.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Character Formats}
 \begin{enumerate}
 	\item Use an online Unicode character table (like \url{https://www.unicode.org/charts/}) to find the Unicode characters for the letters in your name in a non-Latin script (e.g., Cyrillic, Greek, Arabic). Write the Unicode code points for these characters in both hexadecimal and decimal formats.
 	\item Choose a word in a language that uses non-ASCII characters. Find the Unicode code points for each character of the word. Convert these code points into UTF-8 encoded byte sequences. You can use online tools or write a simple program to do this.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Date Formats}
 \begin{enumerate}
     \item Research a non-Gregorian calendar system (e.g., Hebrew, Islamic, or Chinese calendar). Convert today's date from the Gregorian calendar to your chosen calendar system. Discuss the key differences and similarities between the two calendar systems.
@@ -1433,10 +1442,10 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Write the current date and time in the formats specified by both ISO 8601 and RFC 3339. Discuss why such standardizations are important in data management and international communications.
     \item Calculate the number of days between your birth date and today using a date arithmetic tool or programming library. Discuss the challenges you might face when calculating durations involving months and years due to their varying lengths.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \begin{withcode}
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Structured Data}
 \begin{enumerate}
     \item Create a list with different data types, append a new element, and modify an element. Perform similar operations with a list in R.
@@ -1447,10 +1456,10 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Create a matrix in R, access its elements, and perform matrix multiplication.
     \item Convert one structured data type into another in both Python and R.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Tabular Formats}
 \begin{enumerate}
     \item Manually create a CSV file using a text editor. Include a header row and at least 4 rows of data. Ensure that your CSV adheres to the RFC 4180 standard.
@@ -1458,9 +1467,9 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Modify your CSV file to include a non-standard delimiter (like a semicolon) and mixed quotes. Adjust your program or script to correctly parse this modified CSV file.
     \item Extend your CSV file by adding a column that includes complex data types (like lists or sets). Modify your parsing program to correctly interpret and display these complex data types.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Document Formats}
 \begin{enumerate}
     \item Create a JSON object that represents a book, including properties such as title, author, publication year, and genre. Validate the JSON object using an online JSON validator.
@@ -1468,10 +1477,10 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Create a JSON array representing a book series, containing several book objects. Validate the JSON array to ensure proper formatting.
     \item Take a simple dataset (e.g., a CSV file with student records) and convert it to a JSON format. Validate the converted JSON data.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \begin{advanced}
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Regular Expressions}
 \begin{enumerate}
     \item Write a regular expression to match email addresses in a text. Test your expression on a set of sample strings to check its accuracy.
@@ -1480,9 +1489,9 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Develop a RegEx to identify phone numbers in different formats (e.g., 123-456-7890, (123) 456-7890). Test the RegEx for various phone number formats to ensure its versatility.
     \item Choose a programming language and use its RegEx library to split a paragraph into sentences. Ensure that the RegEx correctly handles periods used in abbreviations.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Levenshtein Distance}
 \begin{enumerate}
     \item Determine the Levenshtein distance between "intention" and "execution".
@@ -1490,14 +1499,14 @@ In practice, cleaning, transformation, and correction of data takes approximatel
     \item Compute the distance between two identical strings, such as "database" and "database".
     \item Given a list of words, ["apple", "apply", "apology", "propel"], find the word with the smallest Levenshtein distance to "aply".
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{advanced}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Data Sources}
 \begin{enumerate}
     \item Identify various internal data sources within a hypothetical or real organization (e.g., sales, HR). Discuss the types of data each source provides and its potential use in analytics.
     \item Research and compare two different data licenses (e.g., a Creative Commons license and a proprietary license). Summarize the key permissions and restrictions of each license. Discuss the potential implications of these licenses on data usage in a business context.
     \item Study a real case where data licensing played a critical role in a project or product. Identify the licensing issues that were involved and how they were addressed. Reflect on the lessons learned and how they apply to data management practices.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}

@@ -20,6 +20,14 @@ After reading this chapter, you should be able to:
    \item Select and apply appropriate resampling methods to evaluate the prediction error of a trained model.
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=VwYkeQgrZrc}
+\end{videobox}
+\end{advanced}
+
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources. They are freely available. Consult them for additional information.
@@ -154,7 +162,7 @@ Bias & Variance \\ \hline
 \label{tab:predictexplain}
 \end{table}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 For each of the following problems, decide if it is a prediction or inference/explanation problem:
 \begin{enumerate}
    \item How do real estate prices vary with location and age?
@@ -164,7 +172,7 @@ For each of the following problems, decide if it is a prediction or inference/ex
    \item Calculate the difference in expected sales prices for the house at 310 Elizabeth Avenue when sold in August and February
    \item When should a house be sold to achieve the best price?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \section{Bias and Variance in Regression Analysis}
 
@@ -377,12 +385,12 @@ $\vcenter{\hbox{\includegraphics[width=.49\textwidth]{Figures_Chapters_1-6/Chapt
 
 In KNN classification (and also in KNN regression), the model with the lower value of $k$ is the more flexible model, and is more likely to lead to overfitting. As $k$ increases, the model becomes less flexible, less likely to overfit, and increasingly more likely to underfit and have a high bias. The left panel in Figure~\ref{fig:knn3} shows the training and test error rates for the KNN classifier for different values of $k$. Note the horizontal axis shows the inverse of $k$, that is $1/k$, larger $k$ are to the left, smaller $k$ are to the right in this panel. The right panel in Figure~\ref{fig:knn3} shows the classifications and decision boundary for $k=10$, which is close to optimal.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 The table below provides a training data set containing six observations, three predictors, and one qualitative response variable.\\ 
 \vspace{.5\baselineskip}
 \begin{center}
 \footnotesize
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|r|r|r|l} \hline
 Obs. & $X_1$ & $X_2$ & $X_3$ & $Y$ \\ \hline
 1 & 0 & 3 & 0 & Blue \\
@@ -404,7 +412,7 @@ Suppose we wish to use this data set to make a prediction for $Y$ when $X_1=X_2=
 \end{enumerate}
 
 \vspace{.5\baselineskip}\scriptsize Adapted from ISLR Exercise 2.7
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 In binary classification, the \emph{confusion matrix}\index{Confusion matrix} is a useful tool for summarizing the performance of a classifier. It tabulates the number of positive and negative predictions that match the true values. The following confusion matrix shows the results of a hypothetical binary classifier for credit card defaults that assigns classes by highest probability:
 
@@ -532,16 +540,16 @@ Because the ROC curve of a perfect classifier runs though the top-left corner of
 \label{fig:auc}
 \end{figure}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider the two confusion matrices above. 
   \begin{itemize}
      \item Compute precision and recall for the two confusion matrixes above
      \item Computer accuracy and F1 values for the two confusion matrixes above
      \item The two confusion matrixes above characterize two points on the ROC curve. Plot the two points for this classifier in an ROC space/diagram. Are they above or below the diagonal?
   \end{itemize}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider a medical testing scenario where 1000 individuals are tested for a disease. The results are:
   \begin{itemize}
     \item 100 people actually have the disease, and 900 do not.
@@ -550,9 +558,9 @@ Consider a medical testing scenario where 1000 individuals are tested for a dise
   \end{itemize}
   Calculate the precision, recall, sensitivity, and accuracy of the test. \\
   \emph{Tip}: Write down the confusion matrix first.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Given the following results from a machine learning model:
   \begin{itemize}
     \item Precision: 0.75
@@ -565,25 +573,24 @@ Answer the following questions:
     \item What percentage of actual positives are identified by the model?
     \item What percentage of the total classifications were correct?
   \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider a binary classification task with the following confusion matrix at a certain threshold:
   \begin{itemize}
     \item TP: 150, FP: 50
     \item FN: 30, TN: 200
   \end{itemize}
   Discuss how adjusting the classification threshold might affect precision, recall, and accuracy. What happens if the threshold is increased or decreased?
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{advanced}
 \section{Multinomial Classification}
 
 Multinomial or multi-class classification assigns each observation to one of more than two classes. In this setting, the confusion matrix becomes larger, as shown in the following example, where the overall accuracy is calculated as the sum of the diagonal element divided by the sum of all elements, i.e. sum(diag(.)) / sum(.) $=17/24=.71$.
 
 \begin{center}
 \vspace{\baselineskip}
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{1.25}
 
 \begin{tabular}{cc|ccc|l} \hline
      & & \multicolumn{3}{c|}{\emph{True class}} \\
@@ -604,14 +611,14 @@ In \emph{micro-averaging}\index{Micro averaging}, the TP, TN, FP, and FN values 
 
 In \emph{macro-averaging}\index{Macro averaging}, the TP, TN, FP, and FN values are counted for all classes, but instead of summing these values, precision and recall are calculated for each class. These precision and recall values are then averaged over all classes, optionally weighting each class by its true count of instances. Macro-averaging is appropriate when all classes are equally important. It is also appropriate for an imbalanced data set and ensures that all classes contribute equally. However, it may mask poor performance of important minority classes, and it may lower overall performance measures due to low classifier performance on small or unimportant classes that nonetheless contribute equally to larger or important classes. 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 For the multi-class confusion matrix above,
 \begin{enumerate}
   \item Compute precision and recall for each class.
   \item Compute the micro-averages of precision and recall and show that they equal the accuracy.
   \item Compute the macro-averages of precision and recall.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 While precision, recall, and accuracy are useful metrics for evaluating a binary or multinomial classifer, they do not lend themselves to be used directly as loss functions in fitting a model. This is because the assignment of an observation to a class is a function of the probability of its class membership and the actual class assignment may depend on the chosen threshold probability or other decision rule. Thus, a desirable loss function is a function that expresses how close or how different the predicted class membership probabilities are from the true class membership probabilities. 
 
@@ -631,7 +638,7 @@ D_{KL}(P || Q) &= \sum_i p_i \log \left( \frac{p_i}{q_i} \right) \qquad \text{Ku
   & = - H(p, p) + H(p, q)
 \end{align*}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider the two probability distributions $P$ and $Q$ in the following diagrams. \begin{center}
 \includegraphics[width=.5\textwidth]{kl.png}
 
@@ -648,33 +655,32 @@ Consider the two probability distributions $P$ and $Q$ in the following diagrams
 
 \vspace{\baselineskip}
 \emph{Tip}: Binomial distribution: $\Pr(P=k) = \frac{n!}{k!(n-k)!} p^k (1-p)^{n-k}$ \\
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Calculate the cross-entropy and KL-divergence for the multi-class confusion matrix above.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Given two probability distributions P and Q over a discrete set of events, where $P = [0.1, 0.4, 0.5]$ and $Q = [0.2, 0.3, 0.5]$, calculate the cross-entropy $H(P, Q)$ and the KL-divergence $D_{KL}(P || Q)$.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 In a binary classification task, you have the following probability distributions for the actual labels (P) and predicted labels (Q):
 \begin{itemize}
   \item P = [1, 0] (the actual class is positive)
   \item Q = [0.7, 0.3] (the model predicts a 70\% chance of being positive)
 \end{itemize}
 Calculate the cross-entropy loss for this scenario.
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Calculate the KL divergence between the following probability distributions:
   \begin{itemize}
      \item P = [0.1, 0.9]
      \item Q = [0.5, 0.5]
   \end{itemize}
-\end{exercisebox}
-\end{advanced}
+\end{exerciseboxpaper}
 
 \section{Crossvalidation Methods}
 \label{sec:crossvalidation}
@@ -720,7 +726,7 @@ k-fold cross-validation is computationally less expensive and less stable than L
 \end{figure}
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Assume you have a dataset with 1000 observations and you wish to develop a predictive model using linear regression. \\
 
 For each of the following cross-validation methods, describe the number of linear regression models you fit, the size of each training set, and the size of the validation set.
@@ -730,7 +736,7 @@ For each of the following cross-validation methods, describe the number of linea
   \item 5-fold cross-validation
   \item LOOCV
 \end{itemize}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 One important consideration in splitting the data is preventing \emph{information leakage}\index{Information leakage} from training to test or validation data set, in order to ensure that the test and validation data sets are truly independent of the training data. One way in which information could be leaked is when selection of input variables or predictors is done based on characteristics of the entire data set, for example the variance of a variable or the correlation between variables in the entire data set. This selection affects both the training and the test data, essentially leaking some information from the training data to the test data, and thereby making the test data set not truly independent. Another way in which information can leak is by pre-processing variables, like centering around the mean or scaling them to have unit variance. When this is based on the mean or variance of the full data set, information from the training set leaks to the test or validation set, making those data sets not fully independent. As a general rule, any predictor or feature selection and data pre-processing must be done independently for each training set, \emph{after} the split or splits (in the case of k-fold CV) have been made. 
 

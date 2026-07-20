@@ -16,6 +16,15 @@ After reading this chapter, you should be able to:
    \item Mine organizational characteristics from an event log.   
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=-pKckbWb3oM&pp=0gcJCZkLAYcqIYzv}
+\end{videobox}
+\end{advanced}
+
+
 \section{Introduction}
 
 Business process analytics is concerned with using event data to improve the \emph{operational efficiencies} of business processes. A business process is how an organization creates value for its customers. Improvements to operations may yield better customer service and increase customer satisfaction, it may also reduce the time it takes to complete a business process, it may reduce employee workload and improve employee satisfaction, it may reduce cost, or free up capacity. 
@@ -305,9 +314,10 @@ Third, note that there are 10 cases where the activity ''Release Supplier's Invo
 \label{fig:dfg}
 \end{figure}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Draw a DFG graph for the following traces in an event log: \\
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l} 
 A B D E F G \\ \hline
 A D E F G \\ \hline
@@ -316,10 +326,10 @@ A B E D G \\ \hline
 A E D F G \\ \hline
 A B D E G \\ 
 \end{tabular}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{withcode}
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Use the event log from \small\url{https://evermann.ca/busi4720/BPI_Challenge_2012.csv}\normalsize
 \begin{enumerate}
    \item Read the data into a Pandas data frame using \texttt{read\_csv()}. Parse the \texttt{Start Timestamp} and \texttt{Complete Timestamp} columns as dates.
@@ -327,7 +337,7 @@ Use the event log from \small\url{https://evermann.ca/busi4720/BPI_Challenge_201
    \item Create and visualize a directly-follows-graph (DFG)
    \item How many variants are there? What is the most frequent variant?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 
@@ -454,7 +464,7 @@ PM4Py provides a number of different filters, with a few examples shown in Table
 
 \begin{table}
 \small
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabularx}{\textwidth}{l|X} \hline 
 \texttt{filter\_activities\_rework} & Keep cases where the specified activity occurs at least $n$ times \\
 \texttt{filter\_case\_size} & Keep cases having a length between $n$ and $m$ events \\
@@ -474,7 +484,7 @@ PM4Py provides a number of different filters, with a few examples shown in Table
 
 The following exercises are designed to be used with the event log in the running examples above. Tips are provided to guide you and to provide links to the documentation for important functions to use.
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 \subsubsection*{Basic Log Information}
 
@@ -503,9 +513,9 @@ The following exercises are designed to be used with the event log in the runnin
        \item Use the Pandas \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.mean.html}{\texttt{mean()}} function on the result of the previous exercise
     \end{itemize}
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 \subsubsection*{Automatic Process Discovery}
 
@@ -518,9 +528,9 @@ The following exercises are designed to be used with the event log in the runnin
     \item Discover a BPMN model from the total log. How does it differ from the models discovered for the partial logs?
     \item Calculate and compare the fitness and precision values of the models discovered from the partial log and the total log.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 \subsubsection*{Performance Analysis}
 
@@ -539,9 +549,9 @@ The following exercises are designed to be used with the event log in the runnin
        \item Calculate the number of instances for each case for each activity using the Pandas \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html}{\texttt{groupby()}} and \href{https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.count.html}{\texttt{count()}} functions on the dataframe
    \end{itemize}
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \subsubsection*{Conformance Analysis}
 
 The following exercises are designed to be used with the event log in the running examples above. Tips are provided to guide you and to provide links to the documentation for important functions to use.
@@ -552,7 +562,7 @@ The following exercises are designed to be used with the event log in the runnin
       \item Use \href{https://processintelligence.solutions/static/api/2.7.11/generated/pm4py.filtering.filter_eventually_follows_relation.html}{\texttt{filter\_eventually\_follows\_relationship}}
    \end{itemize}
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Performance Mining}
@@ -586,9 +596,10 @@ This example shows a few problems with the process. For example, the median wait
 \label{fig:performance_dfg}
 \end{figure}
 
-\begin{exercisebox}
-Draw an annotated DFG for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
+\begin{exerciseboxpaper}
+Draw an annotated DFG for the following an event log showing the \emph{mean} time between activities: \\ \bigskip
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l|r} \hline
 {\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
 1 & A & 0 \\
@@ -608,7 +619,7 @@ Draw an annotated DFG for the following an event log showing the \emph{mean} tim
 2 & G & 20 \\
 3 & G & 24 \\
 \end{tabular}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 Another useful tool in process performance analysis is the \emph{dotted chart}\index{Dotted chart}. An example dotted chart is shown in Figure~\ref{fig:dotted_chart}. The horizontal axis represents the time stamp of each activity or event, while the vertical axis represents the case ID -- each row in the diagram contains the events of one trace. The colors correspond to different types of activities. 
 \begin{withcode}
@@ -639,9 +650,10 @@ A dotted chart can be used to show batching of activities, that is, activities i
 
 A dotted chart can also be useful to examine the case arrival rates. In the example in Figure~\ref{fig:dotted_chart} it is clear that early in time, cases arrive more frequently than later in time (the curve is steeper there). This may indicate a shift in the demand for a particular product or service. 
 
-\begin{exercisebox}
-Draw a dotted chart for the following an event log. Use different colours or different symbols for the different activities. \\ \vspace{\baselineskip}
+\begin{exerciseboxpaper}
+Draw a dotted chart for the following an event log. Use different colours or different symbols for the different activities. \\ \bigskip
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l|r} \hline
 {\bf Case} & {\bf Activity} & {\bf Time} \\ \hline
 1 & A & 0 \\
@@ -661,7 +673,7 @@ Draw a dotted chart for the following an event log. Use different colours or dif
 2 & G & 20 \\
 3 & G & 24 \\
 \end{tabular}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 A performance spectrum graph\index{Performance spectrum graph}, like the one in Figure~\ref{fig:perf_spectrum} shows the wating times between two activities, the one at the top and the one at the bottom. The horizontal axis represents time. Lines that are slanted or run diagonally at an angle indicate a long waiting time. A performance spectrum can also show when lines are ''bunched together'' or ''sparsely distributed'', indicating variations in the rate at which one activity finishes or the next activity begins. 
 \begin{withcode}
@@ -748,9 +760,10 @@ pm4py.save_vis_dfg(dfg=dfg,
 \label{fig:handover}
 \end{figure}
 
-\begin{exercisebox}
-Draw a handover-of-work graph for the following an event log showing the \emph{mean} time between activities: \\ \vspace{\baselineskip}
+\begin{exerciseboxpaper}
+Draw a handover-of-work graph for the following an event log showing the \emph{mean} time between activities: \\ \bigskip
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l|l|r} \hline
 {\bf Case} & {\bf Activity} & {\bf Resource} & {\bf Time} \\ \hline
 1 & A & Jane & 0 \\
@@ -770,7 +783,7 @@ Draw a handover-of-work graph for the following an event log showing the \emph{m
 2 & G & Peter & 20 \\
 3 & G & John & 24 \\
 \end{tabular}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{withcode}
 A similar analysis can be performed using the PM4Py function \\ \texttt{discover\_working\_together\_network()}, as shown in the following Python code and in Figure~\ref{fig:workingtogether}. Note that this graph is normally interactive.

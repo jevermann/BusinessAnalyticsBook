@@ -19,6 +19,14 @@ After reading this chapter, you should be able to:
 \end{withcode}
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=5lIdnG82olg}
+\end{videobox}
+\end{advanced}
+
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources.
@@ -184,7 +192,7 @@ Linearity, monotonicity, and interactions each play crucial roles in ensuring th
 
 \begin{table}
 \centering
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{1.25}
 
 \begin{tabular}{lccc} \hline
 Algorithm & Linear & Monotone & Interaction \\ \hline
@@ -349,9 +357,10 @@ where $p(y)$ is the probability of an observation being classified to a particul
 The feature space is recursively split or divided, resulting in a tree that is growing new leaf nodes and gaining depth. Without any stopping, the tree will grow, that is, nodes will be split, until every leaf node contains only a single observations. It is clear that such a fully-grown tree is overfitted to the training data set, and not easily interpretable. 
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider the following data of customer spend (predictor) and customer value (target): \\
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c | c | c | c | c}
 \textbf{ID} & \textbf{Spend} & \textbf{Value} \\
 \hline
@@ -363,7 +372,7 @@ E & 5 & 85 \\
 F & 6 & 90 \\
 \end{tabular}
 
-\vspace{\baselineskip}
+\bigskip
 Build a regression tree by successively splitting the regions based on the Sum of Variance criterion. At every step:
 \begin{enumerate}
    \item Identify possible split points
@@ -372,7 +381,7 @@ Build a regression tree by successively splitting the regions based on the Sum o
    \item Repeat to a depth of two, that is, the root split and one more split for each region
    \item What is the prediction for each leaf node?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 In practice, to prevent overfitting and ensure the tree remains interpretable, the splitting process is stopped using one many options for \emph{stopping criteria}:
 
@@ -480,7 +489,7 @@ px.scatter(pd.DataFrame([y, regr.predict(x)], \
 \label{fig:treescatter}
 \end{figure}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 \begin{enumerate}
 \item Fit regression trees to the bike dataset in the above examples. Calculate the MSE, print the decision rules, and plot predicted versus true values as you vary the following stopping rule criteria:
@@ -493,7 +502,7 @@ How does the training MSE change? What can you observe from the plots of predict
 
 \item Split the data set into a training and test sample. Repeat exercise (1) but now evaluate the test MSE. What is the optimal stopping criterion?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Global Model-Agnostic Methods}
@@ -733,7 +742,7 @@ OLS(preds, x.astype(float)).fit().summary()
 \begin{table}
 \centering
 %\footnotesize
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|l} \hline
 \multicolumn{2}{c}{\textbf{PDP/ICE}} \\ \hline
 Intuitive & Limited number of features \\
@@ -929,7 +938,7 @@ The binomial coefficient $\binom{n-1}{|S|}$ represents the number of possible wa
 The sum is taken over all all possible coalitions of the set $N$ of players minus the player $i$. The sum is then divided by the number of players $n$.
 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 A company has three departments Marketing (A), Engineering (B), Design (C) that can work together on a project:
 \begin{align*}
 N=\{A,B,C\}
@@ -968,7 +977,7 @@ The value created by each possible coalition is given by:
 \end{align*}
 
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 Shapley values have some key theoretical properties that together ensure they describe a fair allocation of value or contribution to each player:
 

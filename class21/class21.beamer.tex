@@ -390,10 +390,11 @@ q_*(s, a) &= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') | S_t
 \begin{frame}[label=full]{Hands-On Exercise -- Iterative Policy Evaluation} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \small
+\bigskip
 \begin{itemize}
     \item {\bf States}: $A$, $B$, and $T$. $T$ is a terminal state
     \item {\bf Policy}: If in A, always move to B; if in B, always move to T
@@ -404,8 +405,9 @@ q_*(s, a) &= \mathbb{E} \left[ R_{t+1} + \gamma \max_{a'} q_*(S_{t+1}, a') | S_t
 \small
 \begin{itemize}
     \item State transition and reward model:
-    \vspace{0.5\baselineskip}
-    
+
+\smallskip    
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c|c|c}
 {\bf Current State} & {\bf Next State} & {\bf Reward} & {\bf Probability} \\
 {\bf S} & {\bf S'} & {\bf R} & {\bf p} \\ \hline
@@ -414,7 +416,6 @@ B & T & +2 & 0.8 \\
 B & A & -1 & 0.2 \\ 
 \end{tabular}
 
-\vspace{0.5\baselineskip}
    \item {\bf Discount factor}: $\gamma = 0.9$
    \item {\bf Initial values}: $V(A) = V(B) = V(T) = 0$
 \end{itemize}
@@ -601,8 +602,7 @@ Policies after each improvement, starting with random initial policy. Final stat
 \begin{frame}[label=full]{Hands-On Exercise -- First Visit MC Control (ES)} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
-\end{column}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}\end{column}
 \begin{column}{0.8\textwidth}
 \small
 \begin{itemize}
@@ -610,15 +610,15 @@ Policies after each improvement, starting with random initial policy. Final stat
     \item {\bf Actions}: Left, Right
     \item {\bf Discount}: $\gamma=1$
 \end{itemize}
-
+\bigskip
 \end{column}
 \end{columns}
 \small
 \begin{columns}
 \begin{column}{0.5\textwidth}
-Episode 1
-    \vspace{0.5\baselineskip}
-    
+{\bf Episode 1}
+
+\bigskip
 \begin{tabular}{c|c|c|c}
 {\bf Time} & {\bf State} & {\bf Action} & {\bf Reward} \\ \hline
 0 & A & R & 3 \\
@@ -628,9 +628,9 @@ Episode 1
 \end{tabular}
 \end{column}
 \begin{column}{0.5\textwidth}
-Episode 2
-    \vspace{0.5\baselineskip}
-    
+{\bf Episode 2}
+
+\bigskip
 \begin{tabular}{c|c|c|c}
 {\bf Time} & {\bf State} & {\bf Action} & {\bf Reward} \\ \hline
 0 & B & R & 4 \\
@@ -1063,7 +1063,7 @@ Full example at \url{https://evermann.ca/busi4720/racetrack_off_policy.py}
 \begin{frame}[label=full]{Hands-On Exercise -- SARSA} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \small
@@ -1079,8 +1079,8 @@ Full example at \url{https://evermann.ca/busi4720/racetrack_off_policy.py}
 \begin{columns}
 \begin{column}{0.7\textwidth}
 Episode 1
-    \vspace{0.5\baselineskip}
-    
+\bigskip
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c|c|c|c}
 {\bf State} & {\bf Action} & {\bf Reward} & {\bf Next} & {\bf Next}\\
  & & & {\bf State} & {\bf Action}\\ \hline
@@ -1088,11 +1088,10 @@ A & R & 3 & B & L \\
 B & L & 2 & A & L \\
 A & L & 5 & T & - \\
 \end{tabular}
-\vspace{0.5\baselineskip}
-
+\bigskip
 Episode 2
-    \vspace{0.5\baselineskip}
-    
+\bigskip
+\renewcommand{\arraystretch}{1.25}    
 \begin{tabular}{c|c|c|c|c}
 {\bf State} & {\bf Action} & {\bf Reward} & {\bf Next} & {\bf Next}\\
  & & & {\bf State} & {\bf Action}\\ \hline

@@ -14,6 +14,15 @@ After reading this chapter, you should be able to:
    \item Use Pandas to retrieve information from multiple data frames, including filtering, grouping, and aggregation of information.
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=m5-tgawhBUU}
+\end{videobox}
+\end{advanced}
+
+
 \section*{Sources and Further Reading}
 
 The material in this chapter draws on the following sources that are valuable for additional information, extended examples, and further details.
@@ -356,30 +365,30 @@ print('characters start to end is', language[:])
 %\begin{infobox}To read and execute Python statements from a file, use the expression \texttt{exec(open('filename.py').read())}
 %\end{infobox}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
     \item Create a \emph{list} containing the numbers 1 to 10. Use list slicing to create a sublist with only the even numbers.
     \item Using a \texttt{for} loop, sum all the items in the list.
     \item Using a \texttt{for} loop, iterate over the list and print each number squared.
     \item Write a program to append the square of each number in the range [1:5] to a new list.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
     \item Create a \emph{tuple} with different data types (string, int, float).
     \item Demonstrate how tuples are immutable by attempting to change its first element.
     \item Write a program to convert the tuple into a list.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
     \item Create a \emph{dictionary} with at least three key-value pairs, where the keys are strings and the values are numbers.
     \item Write a Python script to add a new key-value pair to the dictionary and then print the updated dictionary.
     \item Create a nested dictionary, that is, a dictionary whose values are dictionaries, and demonstrate accessing elements at various levels.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \section{NumPy}
 
@@ -566,7 +575,7 @@ a[a%2 == 0]
 %print(list(zip(values, counts)))
 %\end{pythoncode}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
    \item Create a four-dimensional array with random numbers in the shape indicated by the last four digits of your student number (if your student number contains a 0, use a 1 instead)
    \item Construct a new array by swapping the first half of rows (axis 0) with the second half of rows (axis 0)
@@ -575,7 +584,7 @@ a[a%2 == 0]
    \item Select all elements that are greater than the overall mean
    \item Sort the selected elements from the previous step in ascending order
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \section{Data management with Pandas}
 
@@ -1368,7 +1377,7 @@ full_data \
    .sort_values(by='customer')
 \end{pythoncode}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Find all films with a rating of 'PG'
   \item List all customers who live in Canada (with their address)
@@ -1383,4 +1392,4 @@ full_data \
   \item List all films that have never been rented
   \item List the names of actors who have played in more than 15 films
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}

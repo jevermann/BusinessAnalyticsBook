@@ -20,6 +20,14 @@ After reading this chapter, you should be able to:
 \end{withcode}
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=BtNUGmMwt0E}
+\end{videobox}
+\end{advanced}
+
 \section*{Sources and Further Reading}
 
 The material in this chapter is based on the following sources. They are freely available. Consult them for additional information.
@@ -135,10 +143,11 @@ The linear regression model is simple enough that an optimal solution can be der
 
 %The statistic $t$ is a random variable whose values are distributed according to a student-t probability distribution. This allows one to calculate the probability of observing a value of $t$ or larger under the assumption that $\hat{\beta} = V$, that is, there is no difference between $V$ and the estimate of the parameter $\hat{\beta}$. If the calculated probabily is very small, it is unlikely that this assumption holds and one might conclude that $\hat{\beta} \neq V$. This procedure is called the \emph{t-test}. In most applications of this test to regression model parameters, $V$ is set to $0$. Because for large sample sizes the student-t distribution approaches the normal (Gaussian) probability distribution, the probability is sometimes calculated from this distribution, the statistic is called the $z$ statistic and the test is then called a \emph{z-test}.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Calculate the slope and intercept of the best fitting curve for the following data points:\\
 
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c} \hline
 {\bf x} & {\bf y} \\ \hline
 1 & 2 \\
@@ -150,7 +159,7 @@ Calculate the slope and intercept of the best fitting curve for the following da
 5 & 7 \\ \hline
 \end{tabular}
 \end{center}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 An important statistic in linear regression analysis is the proportion of explained variance, designated as $R^2$. It is defined as:
 
@@ -160,10 +169,11 @@ R^2 = \frac{TSS - RSS}{TSS} = 1 - \frac{RSS}{TSS}
 
 \noindent where $TSS = \sum_i(y_i - \bar{y})^2$ is the total sum of squares. An $R^2$ value close to $1$ indicates that the fitted regression model explains a large proportion of the variability in the data set, that is, it explains the data well. In contrast, a value close to $0$ indicates that the fitted regression model explains very little of the observed variability, it does not explain the observed data well. Another important interpretation of the $R^2$ is as the squared correlation between the true $Y$ and the fitted or predicted values $\hat{Y}$. In this interpretation too, a value close to one indicates predicted values closely correlated with the true values, that is, a good model, whereas a low value indicates they are not closely correlated, that is, a bad model.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Using the slope and intercept of the best fitting curve from the previous exercise, determine the predicted or fitted values. Then, determine the RSS, the TSS, and the $R^2$ value.\\
 
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c|c|c|c|c} \hline
 {\bf x} & {\bf y} & $\hat{y}$ & $(y - \hat{y})^2$ & $\bar{y}$ & $(y - \bar{y})^2$ \\ \hline
 1 & 2 & & & &\\
@@ -175,7 +185,7 @@ Using the slope and intercept of the best fitting curve from the previous exerci
 5 & 7 & & & & \\ \hline
 \end{tabular}
 \end{center}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 Adding additional predictors into the linear regression model is straightforward, as is the inclusion of qualitative or categorical predictors. For example, a model with two predictors $X_1$ and $X_2$ assumes the true form
 
@@ -355,7 +365,7 @@ contrasts(Carseats$US)
 summary(lm(Sales ~ . , data=Carseats))
 \end{Rcode}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent Use the \texttt{Auto} data set from the ISLR2 library with \texttt{mpg} as the target.
   \begin{enumerate}
      \item Perform a linear regression with \texttt{horsepower} as predictor
@@ -369,9 +379,9 @@ summary(lm(Sales ~ . , data=Carseats))
   \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 3.7}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent Use the \texttt{Carseats} data set from the ISLR2 library with \texttt{Sales} as the target.
   \begin{enumerate}
      \item Perform a linear regression with \texttt{Price}, \texttt{Urban} and \texttt{US} as predictors
@@ -381,7 +391,7 @@ summary(lm(Sales ~ . , data=Carseats))
   \end{enumerate}
 
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 3.7}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \begin{withcode}
@@ -452,7 +462,7 @@ for(i in 1:10) {
 print(cv.err)
 \end{Rcode}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Fit a regression model to the \texttt{Boston} data set with \texttt{medv} as target, and \texttt{age}, \texttt{lstat}, and \texttt{ptratio} as predictors
   \item Using the holdout approach, compute the test error of this model. Perform the following steps
@@ -467,7 +477,7 @@ print(cv.err)
   \item Calculate the test error estimate using LOOCV. Compare your result to the mean that you computed in step 4.
   \item Calculate the test error estimate using 10-fold cross-validation. Compare the estimate to the mean that you computed in step 4
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Shrinkage Methods}
@@ -555,7 +565,7 @@ The Elactic Net\index{Elastic net} is a combination of rigde regression and LASS
 
 When $\alpha=0$ the Elastic Net reduces to a ridge regression, and for $\alpha=1$ the Elastic Net reduces to the LASSO. The optimal combination of $\alpha$ and $\lambda$ is found through cross-validation as described above.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Assuming the following polynomial regression model:
 \begin{align*}
 \hat{y} = 15 x^4 - 10 x^3 + 20 x^2 - 40 x + 50
@@ -567,7 +577,7 @@ and a residual sum of squares (RSS) of 20, what are the values of the optimizati
    \item Lasso with $\lambda=0.1$
    \item Elastic net with $\lambda=0.1, \alpha=0.5, \beta=0.5$
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{withcode}
 \section{Shrinkage Methods in R}
@@ -723,7 +733,7 @@ coef(lm(y.test ~ 1 + x.test))
 
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Predict the number of applications received using the other variables in the \texttt{College} dataset
   \begin{enumerate} 
       \item Split the data set into a training and a test set
@@ -734,10 +744,10 @@ Predict the number of applications received using the other variables in the \te
   \end{enumerate}
 
 \footnotesize Source: ISLR2, Section 6.6 \normalsize
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 
 Predict the per-capita crime rate in the \texttt{Boston} data set using the other variables.
   \begin{enumerate}
@@ -749,7 +759,7 @@ Predict the per-capita crime rate in the \texttt{Boston} data set using the othe
   \end{enumerate}
 
 \footnotesize Source: ISLR2, Section 6.6 \normalsize
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Classification}
@@ -804,10 +814,11 @@ Once estimates of the model parameters $\beta_0$ and $\beta_1$ have been calcula
 
 From there, a \emph{threshold value} can be used to predict class membership, for example based on the decision that $\hat{p}(X) > 0.5$, but other decision rules and threshold values may be used, depending on the desired proportion or cost of false positives and true positives.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 The slope and intercept of the best fitting curve for the following data points are $1.333$ and $0$ respectively. Calculate the predicted probability for each $x$ value.
 
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c|c} \hline
 {\bf x} & {\bf y} & {\bf p(y)}\\ \hline
 -2 & -2 & \\
@@ -819,7 +830,7 @@ The slope and intercept of the best fitting curve for the following data points 
 2 & 3 & \\ \hline
 \end{tabular}
 \end{center}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{advanced}
 The binary logistic regression can be extended to \emph{mutinomial logistic regression}\index{Logistic regression!multinomial}, where there are more than two classes for the output or target. The form of the equations is similar for $K$ classes, starting from the log-odds. In this derivation, the last class $K$ plays the role of reference class. As classes are not ordered, this choice is arbitrary.
@@ -1115,7 +1126,7 @@ performance(knn.pred.obj, 'auc')@y.values[[1]]
 \end{figure}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
 \begin{enumerate}
    \item Use the full data set to perform a logisttic regression with \texttt{Direction} as target. Which predictors are statistically significant?
@@ -1126,9 +1137,9 @@ Use the \texttt{Weekly} data set in the \texttt{ISLR2} package.
    \item Which model provides the best results on this data?
 \end{enumerate}
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 4.8}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
 \begin{enumerate}
    \item Create a binary variable, \texttt{mpg01} that contains a 1 if \texttt{mpg} is above its median, 0 otherwise. \emph{Tip}: Use the \texttt{median()} function. Add the new variable to the data frame.
@@ -1138,9 +1149,9 @@ Use the \texttt{Auto} data set in the \texttt{ISLR2} package.
    \item Repeat (3) using KNN with different values of $K$. What value of $K$ performs best?
 \end{enumerate}
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 4.8}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classification models to predict whether a given census tract has a crime rate above or below the median.
 \begin{enumerate}
    \item Create a new binary variable \texttt{crime01} that is $1$ is \texttt{crime} is above its median, and $0$ otherwise. Combine this variable with the data frame. \emph{Tip}: Use the \texttt{median()} function for this.
@@ -1149,7 +1160,7 @@ Using the \texttt{Boston} data set in the \texttt{ISLR2} library, fit classifica
    \item Describe your findings in terms of prediction error, precision, recall, F1 and AUC
 \end{enumerate}
 {\footnotesize \vspace{\baselineskip} Source: ISLR2 Section 4.8}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Review Questions}

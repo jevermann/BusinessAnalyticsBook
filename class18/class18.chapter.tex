@@ -100,9 +100,10 @@ Data augmentation for textual data uses techniques such as character, word, or s
 
 Data augmentation for tabular data, that is, numeric data uses techniques such as SMOTE\index{Synthetic Minority Oversampling Technique}\index{SMOTE|see{Synthetic Minority Oversampling Technique}} and SMOTE-NC. As its name implies, SMOTE (''synthetic minority oversampling technique'') is designed for class balancing, that is to create additional instances of a minority class in classification model training. Originally developed for The idea of SMOTE is simple and intuitive. Consider Figure~\ref{fig:smote}. The left panel shows observations for two classes in a two-dimensional continuous feature space. When generating an additional observation for the green class, SMOTE first determines the $k$ nearest neighbours of one observation for some value of $k$ (center panel in Figure~\ref{fig:smote}). Then, one of the neighbours is chosen at random, and an additional observation is created at some random distance between the focal observation and the chosen neighbour (right panel in Figure~\ref{fig:smote}). SMOTE-NC is the generalization of SMOTE to categorical features.
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Consider the following unbalanced data set: \\
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c | c | c | c | c}
 \textbf{ID} & \textbf{Income} & \textbf{Assets} & \textbf{Debt} & \textbf{VIP} \\
 \hline
@@ -127,7 +128,7 @@ J & 6.5 & 7.5 & 5.5 & 1 \\
    \item Select at random an interpolation factor $[0, 1]$
    \item Calculate the new synthetic data point
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \begin{withcode}
 Performing oversampling using SMOTE in Python is made simple using the Python package ''imblearn'' that provides a range of oversampling methods. The following code example uses a simple classification data set of wine data for three classes. First, the example data is loaded, the class distribution and summary statistics are provided.
@@ -158,7 +159,7 @@ pd.DataFrame(X_res).describe()
 
 A variational auto-encoder is described in Section~\ref{sec:vae} below. The main idea is that input data is encoded into feature space that is a probability distribution, typically Gaussian or normal, characterized by a mean vector and a covariance matrix. To generate a new observation, one simply samples from a Gaussian and decodes the result. VAEs are popular with image data, underlying many popular generative AI image generators, but can also be used with tabular data for data augmentation purposes. In a broad sense, this could be seen as analogous to text data augmentation by ''jiggling'' the embedding (except text embeddings are not characterized by a probability distribution). 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Load the telekom customer church dataset from\\
   \url{https://archive.ics.uci.edu/static/public/563/iranian+churn+dataset.zip}
@@ -168,7 +169,7 @@ A variational auto-encoder is described in Section~\ref{sec:vae} below. The main
   \item How many synthetic observations are generated?
   \item Compare the data summary statistics of the original and the balanced dataset. Are there significant differences?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Transfer Learning}
@@ -306,12 +307,12 @@ fig.show(renderer='browser')
 \end{infobox}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Using the Keras documentation, identify different options for the \texttt{fill\_mode} attribute.
   \item Adapt the augmentation layer in the example above to use individual transformations and identify the effect of different fill modes.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 
 The following Python code loads an image classification model as a base model and a set of pre-trained weights for this model. Importantly, it does \emph{not} load the classification layer (\small\texttt{include\_top = False}\normalsize). The original data set the model was trained on has 1000 classes, but in this example application, the classification is only between cats and dogs, that is, two classes.
@@ -956,14 +957,14 @@ While the encoder and decoder in the examples here have the same architecture, t
 \end{infobox}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Download the complete Python code for the auto-encoder or clone the Git repo. That code includes visualization of original and decoded images.
   \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
   \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
   \item Generate some numbers in the latent space and decode them to new images, that is, use the auto-encoder in a generative way. What can you say about the results?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
 \end{withcode}
 
@@ -1137,13 +1138,13 @@ The project can be cloned from this URL:
 \end{resourcebox}
 
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Download the complete Python code for the VAE or clone the Git repo. That code includes visualization of original and decoded images.
   \item Vary the latent space dimensionality. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
   \item Adapt the encoder and decoder architectures to make them deeper/wider or combine different architectures for the encoder and decoder. What is the impact on reconstruction quality (visually and by MSE reconstruction loss)?
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \FloatBarrier

@@ -172,7 +172,7 @@ Bias & Variance \\ \hline
 \begin{frame}[label=full]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 For each of the following problems, decide if it is a prediction or inference/explanation problem:
@@ -483,15 +483,14 @@ where $\Ident(\cdot)$ is the identity function that is 1 if its argument is true
 \begin{frame}[label=full]{Hands-On Exercise -- KNN}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
-\end{column}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}\end{column}
 \begin{column}{0.8\textwidth}
 \small
 The table below provides a training data set containing six observations, three predictors, and one qualitative response variable
 
 \begin{center}
 \footnotesize
-%\renewcommand{\arraystretch}{1.25}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{l|r|r|r|l} \hline
 Obs. & $X_1$ & $X_2$ & $X_3$ & $Y$ \\ \hline
 1 & 0 & 3 & 0 & Blue \\
@@ -671,7 +670,7 @@ FOR = \frac{FN}{FN+TN} = 1 - NPV
 \begin{frame}[label=full]{Hands-On Exercise -- Basic Calculations}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \begin{enumerate}
@@ -686,7 +685,7 @@ FOR = \frac{FN}{FN+TN} = 1 - NPV
 \begin{frame}[label=full]{Hands-On Exercise -- Real World Scenario}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Consider a medical test where 1000 individuals are tested for a disease:
@@ -706,7 +705,7 @@ Consider a medical test where 1000 individuals are tested for a disease:
 \begin{frame}[label=full]{Hands-On Exercise -- Interpretation Challenge}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Given the following results from a machine learning model:
@@ -728,7 +727,7 @@ Given the following results from a machine learning model:
 \begin{frame}[label=full]{Hands-On Exercise -- Adjusting Thresholds}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Consider a binary classification task with the following confusion matrix at a certain threshold:
@@ -755,7 +754,7 @@ Consider a binary classification task with the following confusion matrix at a c
 %\end{enumerate}
 %\end{frame}
  
-\begin{frame}[label=advanced]{Multi-Class Classification Model Quality}
+\begin{frame}[label=full]{Multi-Class Classification Model Quality}
 \begin{block}{}
 \small
 \begin{center}
@@ -778,7 +777,7 @@ Consider a binary classification task with the following confusion matrix at a c
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label=advanced]{Multi-Class Classification Model Quality}
+\begin{frame}[label=full]{Multi-Class Classification Model Quality}
 \begin{block}{Reduction to Binary Classification}
 \begin{itemize}
   \item ''One vs. Rest'' (OvR), ''One vs. All'' (OvA), ''One against All'' (OaA)
@@ -787,7 +786,7 @@ Consider a binary classification task with the following confusion matrix at a c
 \end{block}
 \end{frame}
 
-\begin{frame}[label=advanced]{Multi-Class Classification Model Quality \small [cont'd]}
+\begin{frame}[label=full]{Multi-Class Classification Model Quality \small [cont'd]}
 \begin{block}{Micro-Averaging}
 \begin{itemize} 
   \item Count and sum TP, FP, FN over all classes
@@ -805,7 +804,7 @@ For multi-class classification, micro-average precision equals micro-average rec
 \end{quote}
 \end{frame}
 
-\begin{frame}[label=advanced]{Multi-Class Classification Model Quality \small [cont'd]}
+\begin{frame}[label=full]{Multi-Class Classification Model Quality \small [cont'd]}
 \begin{block}{Macro-Averaging}
 \begin{itemize} 
   \item Calculate precision and recall for each class (OvR)
@@ -821,10 +820,10 @@ For multi-class classification, micro-average precision equals micro-average rec
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label=advanced]{Hands-On Exercises}
+\begin{frame}[label=full]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 For the multi-class confusion matrix above,
@@ -837,7 +836,7 @@ For the multi-class confusion matrix above,
 \end{columns}
 \end{frame}
 
-\begin{frame}[label=advanced]{Multi-Class Classification Model Quality \small [cont'd]}
+\begin{frame}[label=full]{Multi-Class Classification Model Quality \small [cont'd]}
 \begin{itemize}
   \item Dissimilarity between two probability distributions (information theoretic motivation)
   \begin{itemize}
@@ -857,10 +856,10 @@ D_{KL}(P || Q) &= \sum_i p_i \log \left( \frac{p_i}{q_i} \right) \\
 \end{itemize}
 \end{frame}
 
-\begin{frame}[label=advanced]{Hands-On Exercises -- Cross-Entropy \& KL Divergence}
+\begin{frame}[label=full]{Hands-On Exercises -- Cross-Entropy \& KL Divergence}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \begin{center}
@@ -882,10 +881,10 @@ D_{KL}(P || Q) &= \sum_i p_i \log \left( \frac{p_i}{q_i} \right) \\
 \end{columns}
 \end{frame}
 
-\begin{frame}[label=advanced]{Hands-On Exercises -- Cross-Entropy}
+\begin{frame}[label=full]{Hands-On Exercises -- Cross-Entropy}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \begin{enumerate}
@@ -897,10 +896,10 @@ D_{KL}(P || Q) &= \sum_i p_i \log \left( \frac{p_i}{q_i} \right) \\
 \end{columns}
 \end{frame}
 
-\begin{frame}[label=advanced]{Hands-On Exercise -- Cross-Entropy in Binary Classification}
+\begin{frame}[label=full]{Hands-On Exercise -- Cross-Entropy in Binary Classification}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 In a binary classification task, you have the following probability distributions for the actual labels (P) and predicted labels (Q):
@@ -914,10 +913,10 @@ In a binary classification task, you have the following probability distribution
 \end{columns}
 \end{frame}
 
-\begin{frame}[label=advanced]{Hands-On Exercise -- KL Divergence in Practice}
+\begin{frame}[label=full]{Hands-On Exercise -- KL Divergence in Practice}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Consider a scenario where you are comparing two models predicting weather conditions (sunny, cloudy, rainy). The actual distribution of weather conditions (P) and the predictions made by two models (Q1 and Q2) over a week are as follows:
@@ -935,7 +934,7 @@ Consider a scenario where you are comparing two models predicting weather condit
 \end{columns}
 \end{frame}
 
-\begin{frame}[label=advanced]{Review Questions -- Cross-Entroy \& KL Divergence}
+\begin{frame}[label=full]{Review Questions -- Cross-Entroy \& KL Divergence}
 \begin{enumerate}
   \item Define cross-entropy and explain its significance in machine learning, especially in classification tasks.
   \item Discuss how cross-entropy can be used to evaluate the performance of a classification model.
@@ -1061,7 +1060,7 @@ To prevent ''information leakage'' from training to test or validation data:
 \begin{frame}[label=full]{Hands-On Exercise -- Crossvalidation Methods}
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 Assume you have a dataset with 1000 observations and you wish to develop a predictive model using linear regression. \\

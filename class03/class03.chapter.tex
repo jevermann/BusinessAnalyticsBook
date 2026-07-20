@@ -15,6 +15,15 @@ After reading this chapter, you should be able to:
    \item Use SQL to group information using the GROUP BY and HAVING clause with different aggregation functions.
 \end{itemize}
 
+\begin{advanced}
+\begin{videobox}
+A video introduction to this chapter is available on YouTube:\\
+
+\url{https://www.youtube.com/watch?v=8WZrFlMmv7U}
+\end{videobox}
+\end{advanced}
+
+
 \section{Introduction}
 
 The relational database model, developed by Edgar F. Codd in 1970, is a fundamental approach in data organization and management. It structures data in tables, or relations, comprising rows and columns, where each row signifies a record, and each column denotes a field within the record. This model is grounded in principles like tables, primary keys for unique record identification, foreign keys for inter-table relationships, and data integrity through constraints. The Structured Query Language (SQL) significantly improved the usability of data management with relational databases.
@@ -282,14 +291,14 @@ CREATE TABLE products (
 );
 \end{sqlcode}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
 \item Create an SQL statement to create tables for information about students and for information about courses. \emph{A course can be taken by multiple student and each student can take only one course.}
 \item Make sure you create primary keys and a foreign key
 \item Create SQL statements to insert information about courses and students
 \item Create an SQL statement that tries to insert information that \emph{violates the foreign key constraint}
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 
 So far, the assumption was that each product can has one supplier. However, in many settings, products have multiple suppliers, and suppliers supply multiple products, that is, there is a \emph{many-to-many relationship} between the two. Expressing many-to-many relationships requires a third table that explicitly represents the relationship, here the ''supplies'' relatinship between products and suppliers. The following SQL code first removes the existing tables, then re-creates tables to express a many-to-many relationship instead.
@@ -347,7 +356,7 @@ DROP TABLE suppliers;
 
 In fact, this type of relationship can be extended in a straightforward way to three or more tables. For example, a supplier supplies many products from many warehouses, a product may be supplied by many suppliers from many warehouses, and a warehouse may contain many products from many suppliers. 
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
   \item Consider the following information:
 	\begin{itemize}
@@ -362,9 +371,9 @@ In fact, this type of relationship can be extended in a straightforward way to t
   \end{itemize}
   \item Use INSERT statements to create some example data.
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 \begin{enumerate}
   \item Consider the following:
 	\begin{itemize}
@@ -379,7 +388,7 @@ In fact, this type of relationship can be extended in a straightforward way to t
   \end{itemize}
   \item Write INSERT statements to create example data
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \section{SQL Queries}
 
@@ -589,9 +598,10 @@ DROP TABLE products;
 DROP TABLE suppliers;
 \end{sqlcode}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Assume the following table of Sales: \\
 
+\renewcommand{\arraystretch}{1.25}
   \begin{tabular}{l|l|r} 
     {\bf Country} & {\bf Year} & {\bf Amount} \\ \hline
     Canada & 2023 & 1000 \\ 
@@ -613,11 +623,12 @@ Create SQL statements to find the following information and provide the correct/
     \item Sum of sales and average of sales by country
     \item Countries whose average sales is greater than 900
   \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
-\begin{exercisebox}
+\begin{exerciseboxpaper}
 Assume the following table of student grades: \\
 
+\renewcommand{\arraystretch}{1.25}
   \begin{tabular}{l|l|r} 
     {\bf Course} & {\bf Student} & {\bf Grade} \\ \hline
     BUSI2720 & 202301 & 75 \\ 
@@ -640,7 +651,7 @@ Create SQL statements to find the following information and provide the correct/
     \item Maximum grades for each course, sorted by course
     \item Courses for which the average grade is higher than 85
   \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxpaper}
 
 \subsection*{Relational Diagrams}
 
@@ -649,10 +660,10 @@ The previous section has presented the basics of the relational database model, 
 In many software tools the database developer can use relational diagrams to create tables, instead of writing CREATE TABLE statements. In the reverse, relational diagrams can also be automatically created from an existing database and its tables. An example relational diagram of a movie rental database is shown in Figure~\ref{fig:pagila} with the main tables and foreign key relationships.
 
 \begin{withcode}
-\begin{exercisebox}In the pgAdmin Object Explorer, right-click on the ''busi4720'' database, then select ''ERD for Database'' to create a relational diagram. \\
+\begin{exerciseboxcomputer}In the pgAdmin Object Explorer, right-click on the ''busi4720'' database, then select ''ERD for Database'' to create a relational diagram. \\
 
 % In the DBeaver Database Navigator, select the ''busi4720'' database, then right-click on its ''public'' schema and select ''View Diagram'' to create the diagram.
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \begin{figure}
@@ -918,7 +929,7 @@ COPY customer
 
 Addtionally, PostgreSQL can import and export JSON files; see the documentation for details.
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \begin{enumerate}
   \item Find the names and the rental numbers of the top 5 customers who rented the most films
   \begin{itemize}
@@ -945,7 +956,7 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
     \item \textbf{Tip}: You need only one table
   \end{itemize}
 \end{enumerate}
-\end{exercisebox}
+\end{exerciseboxcomputer}
 \end{withcode}
 
 \section{Review Questions}
@@ -978,7 +989,7 @@ Addtionally, PostgreSQL can import and export JSON files; see the documentation 
 
 This section contains additional exercises to practice writing SQL SELECT queries. Each exercise assumes a database schema of multiple tables with their columns. If you wish to try your queries, you will need to first write CREATE TABLE statements and create the tables in a database.
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \textbf{Database Schema:} 
 \begin{itemize}
     \item \textbf{Table:} Employees
@@ -986,9 +997,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the first and last names of all employees in the 'Sales' department. \\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Products
@@ -996,9 +1007,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the ProductName and Price for all products in the 'Electronics' category.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Books
@@ -1006,9 +1017,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all columns from the Books table and sort the results by PublishYear in descending order.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Orders
@@ -1016,9 +1027,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the OrderID and TotalAmount for orders where the TotalAmount is greater than 100. Sort the results by TotalAmount in ascending order.
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Students
@@ -1026,9 +1037,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all distinct majors from the Students table.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:} 
 \begin{itemize}
     \item \textbf{Table:} Customers
@@ -1038,9 +1049,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all orders with the corresponding customer's first and last name. Join the Customers and Orders tables on CustomerID.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Authors
@@ -1054,9 +1065,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the title of the book, the name of the author, and the name of the publisher. This will require joining the Books, Authors, and BookPublishers tables, and then joining the resulting table with Publishers.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Employees
@@ -1066,9 +1077,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select each employee's first name, last name, and total sales amount. This requires a join between Employees and Sales tables and the use of the SUM aggregate function on SaleAmount.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Products
@@ -1078,9 +1089,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select all products, along with the quantity ordered for each product. Use a LEFT JOIN to ensure that all products are listed, even if they have not been ordered.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Students
@@ -1090,9 +1101,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the names of students and their grades who are enrolled in a specific course (e.g., 'Biology 101'). This requires a join between the Students and Enrollments tables and a WHERE clause to filter by the CourseID.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:} 
 \begin{itemize}
     \item \textbf{Table:} Employees
@@ -1102,9 +1113,9 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the first name and last name of employees who earn more than the average salary in their respective departments. This will require a subquery in the WHERE clause to calculate the average salary per department.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}
 
-\begin{exercisebox}
+\begin{exerciseboxcomputer}
 \noindent \textbf{Database Schema:}
 \begin{itemize}
     \item \textbf{Table:} Movies
@@ -1114,4 +1125,4 @@ This section contains additional exercises to practice writing SQL SELECT querie
 \end{itemize}
 
 \noindent \textbf{Task:} Write a SQL query to select the title of movies that have an average rating higher than the overall average rating of all movies. This will require a complex subquery to first calculate the average rating for each movie, and another subquery to calculate the overall average rating.\\
-\end{exercisebox}
+\end{exerciseboxcomputer}

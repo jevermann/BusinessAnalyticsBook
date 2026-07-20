@@ -141,7 +141,7 @@ True value $q_\pi(S_t, A_t)$ generally unknown; use an unbiased estimate $U_t = 
 \begin{frame}[label=full]{Hands-On Exercise -- Semi-Gradient SARSA} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \small
@@ -251,6 +251,7 @@ r_j + \gamma \max_{A'} \hat{q}_T(S_{j+1}, A'; \theta_T) & \qquad \quad \text{oth
 \small
 \textbf{Action Space}:
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|l} \hline
 0 & Push cart to the left \\
 1 & Push cart to the right \\ \hline
@@ -260,6 +261,7 @@ r_j + \gamma \max_{A'} \hat{q}_T(S_{j+1}, A'; \theta_T) & \qquad \quad \text{oth
 
 \textbf{State/feature space}:
 \begin{center}
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|l|l|l} \hline
 \emph{Num} & \emph{Observation} & \emph{Min} & \emph{Max} \\ \hline
 0 & Cart position & -4.8 & 4.8 \\
@@ -520,7 +522,7 @@ REINFORCE update:
 \begin{frame}[label=full]{Hands-On Exercise -- REINFORCE} 
 \begin{columns}
 \begin{column}{0.2\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.8\textwidth}
 \small
@@ -537,12 +539,13 @@ Initially, $\theta = \begin{bmatrix}0.5 \\ 0.2\end{bmatrix}$. The learning rate 
 \begin{columns}
 \begin{column}{0.3\textwidth}
 
-\vspace{\baselineskip}
+\bigskip
 
 {\bf Episode rewards}:
 
-\vspace{,5\baselineskip}
+\smallskip
 
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c|c}
 {\bf Time} & {\bf Reward} \\ \hline
 1 & 3 \\

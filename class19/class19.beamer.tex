@@ -185,7 +185,7 @@ Human understanding of how the AI works and arrives at its results (decisions, p
 \begin{frame}[label=full]{Intrinsically Interpretable Models}
 
 \centering
-\renewcommand{\arraystretch}{1.1}
+\renewcommand{\arraystretch}{1.25}
 
 \begin{tabular}{lccc} \hline
 Algorithm & Linear & Monotone & Interaction \\ \hline
@@ -196,7 +196,7 @@ RuleFit & Yes & No & Yes  \\
 Naive Bayes & No & Yes & No \\
 k-NN & No & No & No  \\ \hline
 \end{tabular} \\
-
+\bigskip
 \scriptsize Source: \url{https://christophm.github.io/interpretable-ml-book/simple.html}\normalsize
 \end{frame}
 
@@ -346,11 +346,10 @@ Be aware of bias-variance trade-off with all of these. \\
 \begin{frame}[label=full]{Hands-On Exercise --- Regression Trees}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
-\end{column}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}\end{column}
 \begin{column}{0.9\textwidth}
 \small
-
+\renewcommand{\arraystretch}{1.25}
 \begin{tabular}{c | c | c }
 \textbf{ID} & \textbf{Customer Spend} & \textbf{Customer Value} \\
 \hline
@@ -453,7 +452,7 @@ px.scatter(
 \begin{frame}[label=withcode,fragile]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \begin{enumerate}
@@ -612,7 +611,7 @@ accuracy_score(clf.predict(x), y)
 \begin{frame}[label=withcode,fragile]{Hands-On Exercises}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \begin{enumerate}
@@ -753,7 +752,7 @@ accuracy_score(clf.predict(x), y)
 \begin{frame}[label=withcode,fragile]{Hands-On Exercise}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \begin{itemize}
@@ -842,7 +841,7 @@ accuracy_score(clf.predict(x), y)
 \begin{frame}[label=withcode,fragile]{Hands-On Exercise}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \begin{itemize}
@@ -1261,7 +1260,7 @@ How much does \emph{feature value} $x_j$ contribute to the overall prediction co
 \begin{frame}[label=full]{Hands-On Exercise --- Shapley Values}
 \begin{columns}
 \begin{column}{0.1\textwidth}
-\href{https://commons.wikimedia.org/wiki/File:Emojione_BW_1F44B.svg}{\includegraphics[width=\textwidth]{hand.png}}
+\href{https://commons.wikimedia.org/wiki/File:Paper_and_pencil_Pinhead_icon.svg}{\includegraphics[width=.75\textwidth]{../pencilblack.png}}
 \end{column}
 \begin{column}{0.9\textwidth}
 \footnotesize
@@ -1311,7 +1310,7 @@ The value created by each possible coalition is given by:
     \left[v(S\cup\{i\})-v(S)\right]
 	\end{align*}
 	
-	Write out each coalition $S$ in the sum!
+	Write out the set $S$ and the summand for each coalition $S$ in the sum!
     \item Verify that the Shapley values satisfy the efficiency property:
 \begin{align*}
     \phi_A+\phi_B+\phi_C=v(\{A,B,C\})

@@ -426,6 +426,12 @@ new.data <- read.csv('data.csv')
 \end{frame}
 
 \begin{frame}[label=full]{Hands-On Exercise}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\footnotesize
 \begin{enumerate}
    \item Create an array with $3$ columns and $50$ rows of random numbers with mean of $2$ and standard deviation of $4$ (use the \texttt{rnorm()} function)
    \item Create a dataframe from the array and name the columns as ''A'', ''B'', ''C''
@@ -435,6 +441,8 @@ new.data <- read.csv('data.csv')
    \item Find the square root of each of the diagonal entries of the covariance matrix, compare this to the standard deviation of 4. Tip: Use the \texttt{diag()} function.
    \item Save the data frame in a CSV file using your first name as file name (file ending '.csv')
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 \section{Tidyverse}
@@ -474,7 +482,7 @@ tidyr & Make data tidy \\ \hline
 \vspace{\baselineskip}
 \centering
 \footnotesize
-
+\renewcommand{\arraystretch}{1.25}
 	\begin{tabular}{|l|l|} \hline
 	  {\bf Column} & {\bf Data Type} \\ \hline \hline
 	  Make & Categorical (string) \\ 
@@ -983,6 +991,12 @@ full_data |>
 
 
 \begin{frame}[label=full]{Hands-On Exercises}
+\begin{columns}
+\begin{column}{0.2\textwidth}
+\href{https://commons.wikimedia.org/wiki/File:NotoSans_-_Keyboard_And_Mouse_-_1F5A6.svg}{\includegraphics[width=\textwidth]{../computerblack.png}}
+\end{column}
+\begin{column}{0.8\textwidth}
+\footnotesize
 \begin{enumerate}
   \item Find all films with a rating of 'PG'
   \item List all customers who live in Canada (with their address)
@@ -997,6 +1011,8 @@ full_data |>
   \item List all films that have never been rented
   \item List the names of actors who have played in more than 15 films
 \end{enumerate}
+\end{column}
+\end{columns}
 \end{frame}
 
 \begin{frame}[label=full,fragile]{R knows SQL}
