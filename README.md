@@ -5,9 +5,9 @@ This repo contains the textbook PDF files and sources for a book and a set of le
 * The "Theory and Concepts" edition (aka the "NoCode" version) omits all examples in Python and R. 
 * The "Simplified" edition focuses on the simple and essential content, also omitting all examples in Python and R.
 
-**Download the [Full version](https://joerg.evermann.ca/busi4720/busi4720.book.tex_Full.pdf).**
-**Download the [No Code version](https://joerg.evermann.ca/busi4720/busi4720.book.tex_NoCode.pdf).**
-**Download the [Simplified version](https://joerg.evermann.ca/busi4720/busi4720.book.tex_Simplified.pdf).**
+**Download the [Full version](https://joerg.evermann.ca/busi4720/Busi4720_Full.pdf).**
+**Download the [No Code version](https://joerg.evermann.ca/busi4720/Busi4720_NoCode.pdf).**
+**Download the [Simplified version](https://joerg.evermann.ca/busi4720/Busi4720_Simplified.pdf).**
 
 **Download the [slides archive](https://joerg.evermann.ca/busi4720/busi4720.slides.tar.gz).**
 
